@@ -6,7 +6,7 @@
   </head>
   <body>
     <?php
-    //  $output = shell_exec("git pull fastreed main");
+     $output = shell_exec("git pull fastreed main");
      echo "<pre>Hello</pre>";
      ?>
   </body>
