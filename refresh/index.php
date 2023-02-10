@@ -7,7 +7,7 @@
   <body>
     <?php
      $output = shell_exec("git pull fastreed main");
-     echo "<pre>Hello</pre>";
+     echo "<pre>$output</pre>";
      ?>
   </body>
 </html>
