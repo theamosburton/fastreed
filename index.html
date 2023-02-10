@@ -14,13 +14,14 @@
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Template CSS -->
-	<link href="assets/css/style.css" rel="stylesheet">
+	<link href="assets/css/style.css?V=1.1.0" rel="stylesheet">
 
 	<!--Fonts-->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
+	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container">
@@ -75,11 +76,11 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
 
-								<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent Posts</a></li>
+								<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
 
-								<li role="presentation"><a href="#popular-posts" aria-controls="popular-posts" role="tab" data-toggle="tab">Popular Posts</a></li>
+								<li role="presentation"><a href="#popular-posts" aria-controls="popular-posts" role="tab" data-toggle="tab">Popular</a></li>
 
-								<li role="presentation"><a href="about/index.html" >About</a></li>
+								<li role="presentation"><a href="about/" >About</a></li>
 							</ul>
 						</div>
 					</div>
@@ -93,10 +94,12 @@
 									<h1 class="section-title">Featured Post</h1>
 									<!--reward blocks-->
 									<div class="reward-block border-1 section-featured">
-										<h2>The perfect way to feed pigeons and take care of their health</h2>
+										<h2 class="update-title">We've started shipping!</h2>
+										<span class="update-date">Posted 2 days ago</span>
 										<div class="post-meta">
 											<a href=""><i class="fa fa-link"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
+											
 										</div>
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
@@ -213,7 +216,7 @@
 	</div>
 	<footer class="footer">
 	<div class="container text-center">
-			<div class="row">
+			<div class="row copyright-row">
 				<!--This template has been created under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using this template in your own project, thank you.-->
 				<span class="copyright"><a href="#" target="_blank">@ Copyright Fastreed.com | 2023</a></span>
 			</div>
