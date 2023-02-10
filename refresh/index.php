@@ -9,11 +9,8 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-
-    $h = "Hellow World";
-    echo $h;
-
-    $output = shell_exec("ls");
+    
+    $output = shell_exec("git pull fastreed main");
     echo "<pre>$output</pre>"
      ?>
   </body>
