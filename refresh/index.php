@@ -13,7 +13,7 @@
     $h = "Hellow World";
     echo $h;
 
-    $output = shell_exec("git pull fastreed main");
+    $output = shell_exec("ls");
     echo "<pre>$output</pre>"
      ?>
   </body>
