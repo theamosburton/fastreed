@@ -9,9 +9,7 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-
-
-
+     echo "Git Hub Refresh"
      $output = exec("git pull fastreed mai");
      echo "<pre>$output</pre>";
      ?>
