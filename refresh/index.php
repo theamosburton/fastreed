@@ -9,9 +9,9 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    
+
     $output = shell_exec("git pull fastreed main");
-    echo "<pre>$output</pre>"
+    echo "<pre>$output</pre>";
      ?>
   </body>
 </html>
