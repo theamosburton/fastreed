@@ -1,0 +1,1 @@
+cd /var/www/html/fastreed.com/public_html && git pull fastreed main

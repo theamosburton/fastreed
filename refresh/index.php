@@ -6,12 +6,13 @@
   </head>
   <body>
     <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    $output = shell_exec("git pull fastreed main");
-    echo "<pre>$output</pre>";
+    $old_path = getcwd();
+    chdir('/path/to/file');
+    //make sure to make the shell file executeable first before running the shell_exec function
+    $output = shell_exec('./shell-script.sh');
+    chdir($old_path);
+    
+    echo $output;
      ?>
   </body>
 </html>
