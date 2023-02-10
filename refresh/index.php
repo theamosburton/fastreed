@@ -20,7 +20,7 @@
       print("</pre>");
   }
   // Print the exec output inside of a pre element
-  execPrint("git pull fastreed main");
+  execPrint("git pull https://github.com/mdshafiqmalik/Fastreed-v1.0.0 main");
   execPrint("git status");
      ?>
   </body>
