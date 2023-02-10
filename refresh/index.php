@@ -10,7 +10,7 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    $output = shell_exec("git pull https://github.com/mdshafiqmalik/Fastreed-v1.0.0 main");
+    $output = shell_exec("git pull https://github.com/mdshafiqmalik/Fastreed-v1.0.0.git main");
     echo "<pre>$output</pre>"
      ?>
   </body>
