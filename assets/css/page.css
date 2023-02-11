@@ -1,0 +1,10 @@
+.sidebar-block, .main-block{
+    height: 100%;
+}
+
+.main-content{
+}
+
+.sidebar-block{
+    overflow: auto;
+}

@@ -14,29 +14,43 @@
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Template CSS -->
-	<link href="assets/css/style.css?V=1.1.0" rel="stylesheet">
+	<link href="assets/css/style.css?V=1.2.3" rel="stylesheet">
 
 	<!--Fonts-->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container">
 			<div class="row">
-
 				<div class="content col-12">
-					<div id="header-section" class="section-block ">
-						<h1 class=" text-center">Fastreed.com</h1>
+					<div id="header-section" class="section-block">
+						<h1> <a href="">Fastreed.com</a> </h1>
+						<!--tabs-->
+				        <div class="head-tabs">
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a href="#home">Home</a></li>
+								<li role="presentation"><a href="about/" >About</a></li>
+								<li role="presentation"><a href="terms-privacy/" >Privacy</a></li>
+							</ul>
+					    </div>
 					</div>
+					
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
 				  <div class="content col-md-4 col-sm-12 col-xs-12 order-2">
-					<div class="section-block">
-						<h1 class="section-title">Authors</h1>
+					<!-- <div class="section-block summary">
+						<div class="profile-contents">
+							<img src="assets/img/profile.webp" class="profile-image img responsive" alt="John Doe">
+							<a href="#" class="btn btn-contact"><i class="fa fa-user"></i>JAMES CAMERON</a>
+						</div>
+					</div> -->
+
+					<div class="section-block sidebar-block">
+						<h1 class="section-title ">Authors</h1>
 						<!--Authors block-->
 						<div class="credit-block sources">
 							<ul class="list-unstyled">
@@ -64,32 +78,33 @@
 						</div>
 					</div>
 					<!-- Collections -->
+
 				</div>
 				<!--/sidebar-->
 
 
 				<!-- Right Main Bar -->
 				<div class="content col-md-8 col-sm-12 col-xs-12 order-1">
-					<!--tabs-->
-					<div class="section-block">
-						<div class="section-tabs">
-							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-
-								<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
-
-								<li role="presentation"><a href="#popular-posts" aria-controls="popular-posts" role="tab" data-toggle="tab">Popular</a></li>
-
-								<li role="presentation"><a href="about/" >About</a></li>
-							</ul>
-						</div>
-					</div>
-					<!--/tabs-->
+					
 
 					<!--tab panes-->
-					<div class="section-block">
+					<div class="home-block section-block  ">
+						<div class="section-tabs">
+							<div class="home-tabs ">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">Featured</a></li>
+
+									<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
+
+									<li role="presentation"><a href="#popular-posts" aria-controls="popular-posts" role="tab" data-toggle="tab">Popular</a></li>
+
+								</ul>
+							</div>
+							
+						</div>
+
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="home">
+							<div role="tabpanel" class="tab-pane active" id="featured">
 								<div class="section-block featured-block">
 									<h1 class="section-title">Featured Post</h1>
 									<!--reward blocks-->
@@ -97,7 +112,7 @@
 										<h2 class="update-title">We've started shipping!</h2>
 										<span class="update-date">Posted 2 days ago</span>
 										<div class="post-meta">
-											<a href=""><i class="fa fa-link"></i> NASA</a>
+											<a href=""><i class="fa fa-tag"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
 										</div>
 										
@@ -111,104 +126,48 @@
 
 
 							<div role="tabpanel" class="tab-pane" id="recent-posts">
-								<div class="update-information">
-								<h1 class="section-title">Recent Posts</h1>
-									<!--update items-->
-									<div class="update-post">
-										<h4 class="update-title">We've started shipping!</h4>
+								<div class="section-block featured-block">
+									<h1 class="section-title">Recent Posts</h1>
+									<!--reward blocks-->
+									<div class="reward-block border-1 section-featured">
+										<h2 class="update-title">We've started shipping!</h2>
 										<span class="update-date">Posted 2 days ago</span>
 										<div class="post-meta">
-											<a href=""><i class="fa fa-link"></i> NASA</a>
+											<a href=""><i class="fa fa-tag"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
 										</div>
-										<p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
+										
+										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
+										
+										
+										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
 									</div>
 
-									<div class="update-post">
-										<h4 class="update-title">Launch begins manufacturing </h4>
-										<span class="update-date">Posted 9 days ago</span>
+									<div class="reward-block border-1 section-featured">
+										<h2 class="update-title">We've started shipping!</h2>
+										<span class="update-date">Posted 2 days ago</span>
 										<div class="post-meta">
-											<a href=""><i class="fa fa-link"></i> NASA</a>
+											<a href=""><i class="fa fa-tag"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
 										</div>
-										<p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
+										
+										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
+										
+										
+										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-
-
-					<!-- <div class="section-block">
-						<div class="funding-meta">
-							<h1>LAUNCH INTO SUCCESS</h1>
-							<span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
-							<span class="type-meta"><i class="fa fa-tag"></i> <a href="#">crowdfunding</a>, <a href="#">launch</a> </span>
-							img src="assets/img/image-heartbeat.jpg" class="img-responsive" alt="launch HTML5 Crowdfunding"
-							<div class="video-frame">
-								<iframe src="https://player.vimeo.com/video/67938315" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-							</div>
-							<p>Launch will enable you be in run  your own crowdfunding campaign, and be in complete control from concept to crowdfunding to launch.</p>
-							<h2>$10,350</h2>							
-							<span class="contribution">raised by <strong>5,234</strong> ready to launch</span>
-							<div class="progress">
-								<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-									<span class="sr-only">45% Complete</span>
-								</div>
-							</div>
-							<span class="goal-progress"><strong>45%</strong> of $23,000 raised</span>
-						</div>
-						<span class="count-down"><strong>27</strong>Days to go.</span>
-						<a href="#" class="btn btn-launch">HELP LAUNCH</a>
-					</div> -->
-				<!--/tabs-->
-				<!--/main content-->
-
-
-				
-				<!--sidebar-->
-				
-					<!--signup-->
-					<!-- <div class="section-block signup">
-						<div class="sign-up-form">
-							<form>
-								<p>Sign up now for updates and a chance to win a free version of launch!</p>
-								<input class="signup-input" type="text" name="email" placeholder="Email Address">
-							</form>
-						</div>
-					</div> -->
-					<!--/signup-->
-
-
-					<!-- <div class="section-block summary">
-						<h1 class="section-title">LAUNCH</h1>
-						<div class="profile-contents">
-							<h2 class="position">Sky Rocketing Your Funding Campaign</h2>
-							<img src="assets/img/profile-img.jpg" class="profile-image img responsive" alt="John Doe"> -->
-							<!--social links-->
-							<!-- <ul class="list-inline">
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-git"></i></a></li>
-							</ul> -->
-							<!--/social links-->
-							<!-- <a href="#" class="btn btn-contact"><i class="fa fa-envelope"></i>CONTACT US</a>
-						</div>
-					</div> -->
-                
 			</div>
 		</div>
 	</div>
 	<footer class="footer">
 	<div class="container text-center">
 			<div class="row copyright-row">
-				<!--This template has been created under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using this template in your own project, thank you.-->
-				<span class="copyright"><a href="#" target="_blank">@ Copyright Fastreed.com | 2023</a></span>
+				<span class="copyright"><a href="#" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
 			</div>
 		</div>
 	</footer>

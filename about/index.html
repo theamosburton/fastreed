@@ -15,7 +15,7 @@
 	
 	<!-- Template CSS -->
 	<link href="../assets/css/style.css?V=1.1.0" rel="stylesheet">
-
+	<link href="../assets/css/page.css?V=1.1.0" rel="stylesheet">
 	<!--Fonts-->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -28,14 +28,23 @@
 			<div class="row">
 
 				<div class="content col-12">
-					<div id="header-section" class="section-block ">
-						<h1 class=" text-center">Fastreed.com</h1>
+					<div id="header-section" class="section-block">
+						<h1> <a href="">Fastreed.com</a> </h1>
+						<!--tabs-->
+				        <div class="head-tabs">
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation"><a href="/#home">Home</a></li>
+								<li role="presentation" class="active"><a href="about/" >About</a></li>
+								<li role="presentation"><a href="terms-privacy/" >Privacy</a></li>
+							</ul>
+					    </div>
 					</div>
+					
 				</div>
-				<!--Side bar -->
+				  <!--Side bar -->
 			      <!--Collections-->
-				  <div class="content col-md-4 col-sm-12 col-xs-12 order-2">
-					<div class="section-block">
+				<div class="content page-col col-md-4 col-sm-12 col-xs-12 order-2">
+					<div class="section-block sidebar-block">
 						<h1 class="section-title">Authors</h1>
 						<!--Authors block-->
 						<div class="credit-block sources">
@@ -48,20 +57,6 @@
 								<li><a href="#"><i class="fa fa-user"></i>Jhumpa Lahiri</a></li>
 							</ul>
 						</div>
-
-
-						<h1 class="section-title">Channels</h1>
-						<!--Channels block-->
-						<div class="credit-block sources">
-							<ul class="list-unstyled">
-								<li><a href="#"><i class="fa fa-link"></i>T-Series</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Free Movies</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Crazy XYZ</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Youtube Tips</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Healthify</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>NASA</a></li>
-							</ul>
-						</div>
 					</div>
 					<!-- Collections -->
 				</div>
@@ -71,18 +66,8 @@
 				<!-- Right Main Bar -->
 				<div class="content col-md-8 col-sm-12 col-xs-12 order-1">
 					<!--tabs-->
-					<div class="section-block">
-						<div class="section-tabs">
-							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation"><a href="/">Home</a></li>
-								<li role="presentation"><a href="/" >Recent</a></li>
-								<li role="presentation"><a href="/" >Popular</a></li>
-								<li role="presentation" class="active"><a href="/" aria-controls="about" role="tab" data-toggle="tab" >About</a></li>
-							</ul>
-						</div>
-					</div>
 					<!--/tabs-->
-					<div class="section-block">
+					<div class="section-block main-block">
 						<div class="tab-content">
 							<!-- About Fastreed -->
 							<div role="tabpanel" class="tab-pane active" id="about">
@@ -165,7 +150,7 @@
 	<div class="container text-center">
 			<div class="row copyright-row">
 				<!--This template has been created under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using this template in your own project, thank you.-->
-				<span class="copyright"><a href="/" target="_blank">@ Copyright Fastreed.com | 2023</a></span>
+				<span class="copyright"><a href="/" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
 			</div>
 		</div>
 	</footer>
