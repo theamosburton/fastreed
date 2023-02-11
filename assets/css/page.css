@@ -68,3 +68,9 @@
         display: block;
     }
 }
+
+@media (max-width: 467px){
+    #toggle-icon{
+        display: inline-block;
+    }
+}
