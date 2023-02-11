@@ -1,10 +1,14 @@
 .sidebar-block, .main-block{
     height: 100%;
+    max-height: 80vh;
+    margin-bottom: 5px;
 }
-
-.main-content{
-}
-
-.sidebar-block{
+.paragraphs{
     overflow: auto;
+}
+.main-block{
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-block{
 }
