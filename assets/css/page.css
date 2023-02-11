@@ -10,5 +10,61 @@
     display: flex;
     flex-direction: column;
 }
-.sidebar-block{
+
+.row{
+    flex-direction: row;
+}
+
+.sidebar-block li{
+    margin: 2px 0 2px 15px;
+    font-weight: 700;
+}
+
+.close-symbol{
+    position: absolute;
+    right: 30px;
+}
+.table-content{
+    display: block;
+    margin-bottom: 0;
+}
+.table-content li{
+    transform: rotate(45deg);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: .5s;
+}
+#toggle-icon{
+    display: none;
+}
+@media (max-width: 1000px){
+    .table-content{
+        font-size: 18px;
+    }
+}
+@media (max-width: 767px) {
+    #toggle-icon{
+        display: inline-block;
+    }
+    #tb-con{
+        display: none;
+    }
+    .table-content{
+        font-size: 25px;
+    }
+    
+    .sidebar{
+        margin-bottom: 10px;
+    }
+    .sidebar-block, .main-block{
+        height: 100%;
+        max-height:none;
+        margin-bottom: 5px;
+    }
+    .sidebar-block{
+        transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* display: none; */
+    }
+    .main-block{
+        display: block;
+    }
 }
