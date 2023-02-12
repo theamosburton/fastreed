@@ -7,6 +7,7 @@
     overflow: auto;
 }
 .paragraphs{
+    padding: 0 30px;
     overflow: auto;
 }
 .paragraphs h3{
@@ -20,6 +21,12 @@
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 20px;
+}.paragraphs q{
+    margin: 5px 20px;
+    display: block;
+    font-size: 18px;
+    padding: 0px 5px;
+    font-style: italic;
 }
 .TOC-subh{
     font-size: 20px;
@@ -91,6 +98,9 @@
 }
 
 @media (max-width: 467px){
+    .paragraphs{
+        padding: 0;
+    }
     #toggle-icon{
         display: inline-block;
     }

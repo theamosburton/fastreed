@@ -430,6 +430,7 @@ a {
 }
 .nav-tabs>li{
 	margin: 2px 5px;
+	white-space: nowrap;
 }
 .tab-content .section-title {
 	margin-bottom: 20px;
