@@ -28,6 +28,19 @@
     padding: 0px 5px;
     font-style: italic;
 }
+.team{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+.team .members{
+    margin: 0 10px;
+    padding: 20px;
+}
+.team .members .btn{
+    margin-top: 10px;
+    padding: 2px 10px;
+}
 .TOC-subh{
     font-size: 20px;
     margin-left: -20px;
