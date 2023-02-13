@@ -170,8 +170,7 @@ a {
 	margin-bottom: 10px;
 }
 .profile-image {
-	border-radius:50%;
-	max-height: 180px;
+	/* border-radius:50%; */
 	margin-bottom:10px;
 }
 .profile-contents ul li {
