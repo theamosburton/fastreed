@@ -37,9 +37,13 @@
 .team .members{
     background-color: #dee6e0;
     border-radius: 15px;
-    margin-right:20px;
+    margin:20px 10px;
     padding: 20px;
     width: auto;
+}
+.team .members:hover{
+    cursor: pointer;
+    box-shadow: 0 0 3px 1px rgb(130, 133, 130);
 }
 .team .members a{
     font-weight: bold;
