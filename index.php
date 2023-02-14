@@ -91,10 +91,13 @@ new VisitorActivity();
 
 				<!-- Right Main Bar -->
 				<div class="content col-md-8 col-sm-12 col-xs-12 order-1">
+				    
 					
-
 					<!--tab panes-->
 					<div class="home-block section-block  ">
+					<div class=" alert alert-danger" role="alert">
+								The Website is currently in Development Mode!
+					</div>
 						<div class="section-tabs">
 							<div class="home-tabs ">
 								<ul class="nav nav-tabs" role="tablist">

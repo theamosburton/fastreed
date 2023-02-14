@@ -69,7 +69,9 @@ new VisitorActivity();
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block main-block">
-
+					<div class=" alert alert-danger" role="alert">
+								The Website is currently in Development Mode!
+					</div>
 						<h2 class="section-title">About Fastreed.com</h2>
 						<div class="paragraphs">
 							<h3 id="what-is-fastreed">What is Fastreed?</h3>

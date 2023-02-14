@@ -84,7 +84,9 @@ new VisitorActivity();
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block main-block">
-
+					<div class=" alert alert-danger" role="alert">
+								The Website is currently in Development Mode!
+					</div>
 						<h2 class="section-title">Terms and Privacy</h2>
 						<div class="paragraphs">
                             <h3 id="terms-of-use">Terms of Services</h3>
