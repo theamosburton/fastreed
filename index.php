@@ -1,3 +1,9 @@
+<?php
+$_SERVROOT = '../';
+include ".htactivity/VISIT.php";
+new VisitorActivity();
+?>
+
 <!DOCTYPE html> 
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>

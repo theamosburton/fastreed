@@ -1,3 +1,8 @@
+<?php
+$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+include $_DOCROOT."/.htactivity/VISIT.php";
+new VisitorActivity();
+?>
 <!DOCTYPE html> 
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>
