@@ -40,7 +40,7 @@ new VisitorActivity();
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" ><a href="/about/" >About</a></li>
-								<li role="presentation"><a>Terms & Privacy</a></li>
+								<li role="presentation"><a href="/terms-privacy/">Terms & Privacy</a></li>
 								<li role="presentation" class="active"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
