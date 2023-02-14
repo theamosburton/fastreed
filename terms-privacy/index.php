@@ -35,13 +35,14 @@ new VisitorActivity();
 
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
-						<h1> <a href="">FastReed.com</a> </h1>
+						<h1> <a href="/">FastReed.com</a> </h1>
 						<!--tabs-->
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" ><a href="/about/" >About</a></li>
 								<li role="presentation" class="active"><a>Terms & Privacy</a></li>
+								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
 					</div>

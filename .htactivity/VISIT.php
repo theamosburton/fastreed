@@ -12,7 +12,7 @@ $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 
 $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
 // $GLOBALS['ERROR_HANDLER'] = $_DOCROOT.'/.htHidden/functions/ERROR_HANDLER.php';
-// $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.htHidden/activity/ADMIN_VISIT.php';
+$GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.htactivity/ADMIN_VISIT.php';
 // $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.htHidden/activity/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.htactivity/GUEST_VISIT.php';
 
@@ -22,7 +22,7 @@ include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['BASIC_FUNC']);
 include_once($GLOBALS['DEV_OPTIONS']);
 
-// include_once($GLOBALS['ADMIN_VISIT']);
+include_once($GLOBALS['ADMIN_VISIT']);
 // include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
 
@@ -34,7 +34,7 @@ class VisitorActivity
   private $AUTH;
   private $DB;
   private $GUEST_VISITED;
-  // private $ADMIN_VISITED;
+  private $ADMIN_VISITED;
   // private $USER_VISITED;
 
 
@@ -43,7 +43,7 @@ class VisitorActivity
 
     // Creating Instances
     $this->GUEST_VISITED = new GuestsVisits();
-    // $this->ADMIN_VISITED = new AdminVisits();
+    $this->ADMIN_VISITED = new AdminVisits();
     // $this->USER_VISITED = new UsersVisits();
 
     $this->DB_CONNECT = new Database();

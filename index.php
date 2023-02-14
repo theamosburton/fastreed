@@ -1,7 +1,7 @@
 <?php
-$_SERVROOT = '../';
-include ".htactivity/VISIT.php";
-new VisitorActivity();
+// $_SERVROOT = '../';
+// include ".htactivity/VISIT.php";
+// new VisitorActivity();
 ?>
 
 <!DOCTYPE html> 
@@ -9,7 +9,7 @@ new VisitorActivity();
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.9">
 	<meta name="description" content="unititled">
 	<meta name="keywords" content="HTML5 Crowdfunding Profile Template">
 	<meta name="author" content="Audain Designs">
@@ -33,13 +33,14 @@ new VisitorActivity();
 			<div class="row">
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
-						<h1> <a href="">FastReed.com</a> </h1>
+						<h1> <a href="/">FastReed.com</a> </h1>
 						<!--tabs-->
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="#home">Home</a></li>
 								<li role="presentation"><a href="about/" >About</a></li>
 								<li role="presentation"><a href="terms-privacy/" >Privacy</a></li>
+								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
 					</div>
@@ -74,12 +75,12 @@ new VisitorActivity();
 						<!--Channels block-->
 						<div class="credit-block sources">
 							<ul class="list-unstyled">
-								<li><a href="#"><i class="fa fa-user"></i>Rakesh Malik</a></li>
-								<li><a href="#"><i class="fa fa-user"></i>MD. Kabeer</a></li>
-								<li><a href="#"><i class="fa fa-user"></i>Mahira Rajput</a></li>
-								<li><a href="#"><i class="fa fa-user"></i>Sophia Vergara</a></li>
-								<li><a href="#"><i class="fa fa-user"></i>Amrita Singh</a></li>
-								<li><a href=""><i class="fa fa-user"></i>Anonymous</a></li>
+								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Rakesh Malik</a></li>
+								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>MD. Kabeer</a></li>
+								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Mahira Rajput</a></li>
+								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Sophia Vergara</a></li>
+								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Amrita Singh</a></li>
+								<li><a href=""><i class="fa fa-user-circle fa-xl"></i>Anonymous</a></li>
 							</ul>
 						</div>
 					</div>
@@ -105,8 +106,6 @@ new VisitorActivity();
 
 									<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
 
-									<li role="presentation"><a href="#popular-posts" aria-controls="popular-posts" role="tab" data-toggle="tab">Popular</a></li>
-
 								</ul>
 							</div>
 							
@@ -115,14 +114,15 @@ new VisitorActivity();
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featured">
 								<div class="section-block featured-block">
-									<h1 class="section-title">Featured Post</h1>
+									<h1 class="section-title">Featured Posts</h1>
 									<!--reward blocks-->
 									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">We've started shipping!</h2>
-										<span class="update-date">Posted 2 days ago</span>
+										<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+										<span class="update-date">Posted 2 hours ago</span>
 										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> NASA</a>
-										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
+											<a href=""><i class="fa fa-tag"></i> Technology</a>
+										    <a href=""><i class="fa fa-user"></i> Mahira Rajput</a> 
+											<a href=""><i class="fa fa-eye"></i>123k</a>
 										</div>
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
@@ -144,6 +144,7 @@ new VisitorActivity();
 										<div class="post-meta">
 											<a href=""><i class="fa fa-tag"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
+											<a href=""><i class="fa fa-eye"></i>123k</a>
 										</div>
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
@@ -158,6 +159,7 @@ new VisitorActivity();
 										<div class="post-meta">
 											<a href=""><i class="fa fa-tag"></i> NASA</a>
 										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
+											<a href=""><i class="fa fa-eye"></i>123k</a>
 										</div>
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>

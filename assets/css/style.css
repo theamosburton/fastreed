@@ -116,6 +116,10 @@ a {
 .section-featured{
 	border: .5px solid #66a778;
 }
+.section-featured .update-title{
+	text-transform: capitalize;
+}
+
 .post-meta{
 	margin-bottom: 8px;
 }
