@@ -75,9 +75,6 @@ if(!isset($_COOKIE['AID'])){
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block main-block">
-					<div class=" alert alert-danger" role="alert">
-								The Website is currently in Development Mode!
-					</div>
 				</div>
 				<div class="col-md-2 col-lg-2 col-sm-0"></div>
 				
