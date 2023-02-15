@@ -75,7 +75,7 @@ new VisitorActivity();
 							<ul>
 								<a class="TOC-subh" href="#conclusion">Conclusion</a>
 							</ul>
-                    </div>
+                        </div>
 					</div>
 					<!-- Collections -->
 				</div>
