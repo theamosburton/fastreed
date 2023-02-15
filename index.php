@@ -1,7 +1,7 @@
 <?php
-// $_SERVROOT = '../';
-// include ".htactivity/VISIT.php";
-// new VisitorActivity();
+$_SERVROOT = '../';
+include ".htactivity/VISIT.php";
+new VisitorActivity();
 ?>
 
 <!DOCTYPE html> 
