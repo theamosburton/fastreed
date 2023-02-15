@@ -76,6 +76,7 @@ class AdminVisits
     $sessionID = $this->BASIC_FUNC->createNewID("admins_sessions" , "ASI");
     $_SESSION["ASI"] = $sessionID;
     $this->updateVisits($sessionID);
+    
     $decAdminID = $this->AUTH->decrypt($adminID);
     $sql2 = "INSERT INTO admins_sessions (sessionID,adminID,tdate, adminIP, refID) VALUES ('$sessionID', '$decAdminID','$date','$adminIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
