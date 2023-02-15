@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=0.9">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="unititled">
 	<meta name="keywords" content="HTML5 Crowdfunding Profile Template">
 	<meta name="author" content="Audain Designs">
@@ -39,7 +39,7 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="#home">Home</a></li>
 								<li role="presentation"><a href="about/" >About</a></li>
-								<li role="presentation"><a href="terms-privacy/" >Privacy</a></li>
+								<li role="presentation"><a href="terms-privacy/" >Terms & Privacy</a></li>
 								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>

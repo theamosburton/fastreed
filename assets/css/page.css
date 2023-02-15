@@ -88,7 +88,6 @@
 
 
 .login-signup{
-    border: 1px solid;
     border-radius: 5px;
     display: flex;
     align-self: center;
@@ -112,7 +111,7 @@
     margin: 15px 0;
     border: 1.5px solid grey;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 10px;
     font-weight: 600;
 }
 .login-signup .lg-inputs:hover, .login-signup .lg-inputs:active, .login-signup .lg-inputs:focus{

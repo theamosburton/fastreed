@@ -59,10 +59,21 @@ new VisitorActivity();
 						<div class="login-signup">
 							<span class="title"> Login </span>
 							<form action="login.php" method="post">
+								<?php
+								        if (isset($_COOKIE['authStatus'])) {
+											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+											<strong>'.$_COOKIE['authStatus'].'</strong>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+										  </div>';
+										  }
+								?>
 								<input class="lg-inputs" type="text"  name="usernameOrEMail" placeholder="Username">
 								<input class="lg-inputs" type="password" name="password" placeholder="Password">
 								<select class="lg-inputs" name="" id="">
 									<option value="">Admin</option>
+									<option value="">Author</option>
 									<option value="" disabled>User (disabled)</option>
 								</select>
 

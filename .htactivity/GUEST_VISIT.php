@@ -19,7 +19,13 @@ class GuestsVisits
   {
     // Authenticate with Cookie
       $cookie =  $this->checkCookie();
-      if ($cookie['bool']) { // if user Exist
+      if ($cookie['bool']) {
+        // if guest Exist
+        // unset AID and UID
+        setcookie('AID', "", time()-3600, '/');
+        setcookie("UID", "", time()-3600, '/');
+
+
         $guestID['id'] = $cookie['id'];
         // check if the session is same or different
         if ($this->sessionExist()["bool"]) {
@@ -54,6 +60,12 @@ class GuestsVisits
     // Add to visiter data to DB
     $sql = "INSERT INTO guests ( tdate, guestID, guestDevice, guestBrowser, guestPlatform, browserInfo ) VALUES ('$date','$guestID','$deviceType', '$browser', '$platform','$browserInfo')";
     mysqli_query($this->DB, $sql);
+
+    // Unset admin and user cookie
+    setcookie('AID', "", time()-3600, '/');
+    setcookie("UID", "", time()-3600, '/');
+
+    // Create guest session
     $this->makeSession($guestID);
   }
 

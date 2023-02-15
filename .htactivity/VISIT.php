@@ -57,15 +57,22 @@ class VisitorActivity
   private function handleActivity(){
     if (isset($_COOKIE['UID'])) {
       if (!empty($_COOKIE['UID'])) {
-        $userID = $_COOKIE['UID'];
-        $encUserID = $this->AUTH->encrypt($userID);
-        $authUser = $this->checkAuthVisitor($encUserID, "users", "userID");
-        if ($authUser) {
-          $this->USER_VISITED->userVisited();
-        }else {
-          setcookie("UID",FALSE,time()-3600);
-          $this->GUEST_VISITED->guestVisited();
+        if(!strlen($_COOKIE['UID']) === 56){
+          $userID = $_COOKIE['UID'];
+          $encUserID = $this->AUTH->encrypt($userID);
+          $authUser = $this->checkAuthVisitor($encUserID, "users", "userID");
+          if ($authUser) {
+            $this->USER_VISITED->userVisited();
+          }else {
+            setcookie("UID",FALSE,time()-3600);
+            $this->GUEST_VISITED->guestVisited();
+          }
+        }else{
+        // Malfunctioned Cookie value Mean an anonymous user
+        setcookie("UID",FALSE,time()-3600);
+        $this->GUEST_VISITED->guestVisited();
         }
+        
       }else {
         // No Cookie value Mean an anonymous user
         setcookie("UID",FALSE,time()-3600);

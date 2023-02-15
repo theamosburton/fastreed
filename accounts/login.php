@@ -6,12 +6,15 @@ include $_SERVROOT.'/secrets/DB_CONNECT.php';
 include $_SERVROOT.'/secrets/AUTH.php';
 include $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 
+// Checking if request is for login.php
 if($_SERVER['REQUEST_URI'] == '/accounts/login.php'){
+  // Creating a validateAdmin instance
   $validateAdmin = new ValidateAdmin();
+  // Checking if admin already logged or not
   if (!$validateAdmin->adminLoginStatus()) {
     $validateAdmin->loginForm();
   }else {
-    header("Location: /accounts/index.php");
+    header("Location: /admin/");
   }
 }
 
@@ -51,16 +54,109 @@ class ValidateAdmin{
   public function loginForm()
   {
     if (!$_SERVER["REQUEST_METHOD"] == "POST") {
+      // if request methos is get
       header('Location: /accounts/index.php');
     }elseif (!$this->validateAdminUN()['valid']) {
+      // if username/adminame is invalid
       header('Location: /accounts/index.php');
     }elseif (!$this->validatePassword($this->validateAdminUN()['AID'])) {
-      header('Location: /accounts/index.php');
+      // if password is invalid
+      header('Location:/accounts/index.php');
     }else {
       $this->deleteGuest();
       $this->loginAdmin($this->validateAdminUN()['AID']);
     }
   }
+
+  
+  // Check username is empty or not
+  // check username in db 
+  // if username found get AID from a method
+  // Return AID
+  public function validateAdminUN(){
+    if (isset($_POST['usernameOrEMail'])) {
+      $uLength = (boolean) strlen($_POST['usernameOrEMail']);
+      if ($uLength) {
+        if ($this->adminNameInDB()['valid']) {
+          $return['valid'] = true;
+          $return['AID'] = $this->adminNameInDB()['AID'];
+        }else {
+          $return['valid'] = false;
+          setcookie("authStatus","Incorrect Username", time()+10, '/');
+        }
+      }else {
+        $return['valid'] = false;
+        setcookie("authStatus","Username Cannot Be Empty", time()+10, '/');
+      }
+    }else {
+      $return['valid'] = false;
+      setcookie("authStatus","Username Not Found In Form", time()+10, '/');
+    }
+    return $return;
+  }
+  
+
+  // Check username in db
+  // If found return AID to parent method
+  public function adminNameInDB(){
+    $x = $_POST['usernameOrEMail'];
+    $sanitizeUsername = $this->sanitizeData($x);
+    $x = mysqli_real_escape_string($this->DB,$sanitizeUsername);
+    $sql = "SELECT * FROM admins WHERE BINARY adminUName = '$x'";
+    $result = mysqli_query($this->DB, $sql);
+    if (mysqli_num_rows($result)) {
+      $row = $result->fetch_assoc();
+      $return['valid'] = true;
+      $return['AID'] = $row['adminID'];
+    }else {
+      $return['valid'] = false;
+    }
+    return $return;
+  }
+
+
+  // this method will check password is empty or not
+  // if not empty get authentication from another method
+  public function validatePassword($adID)
+  {
+    if (!isset($_POST['password'])) {
+        $return = false;
+        setcookie("authStatus","Password Not Included In Form", time()+10, '/');
+    }elseif (!(boolean) strlen($_POST['password'])) {
+      // If password is empty or short
+        $return = false;
+        setcookie("authStatus","Password is empty", time()+10, '/');
+    }elseif (!$this->isPasswordCorrect($_POST['password'], $adID)) {
+      // IF password is incorrect
+        $return = false;
+        setcookie("authStatus","Incorrect Password", time()+10, '/');
+    }else {
+      // If password is correct
+        $return = true;
+    }
+    return $return;
+  }
+
+  // This will authenticate the password given by parent method
+  private function isPasswordCorrect($pass, $adID){
+    $sql = "SELECT * FROM admins WHERE adminID = '$adID'";
+    $result = mysqli_query($this->DB,$sql);
+    if (mysqli_num_rows($result)) {
+      $row = $result->fetch_assoc();
+      $hPassword = $row['adminPassword'];
+      $isPasswordCorrect = password_verify($pass, $hPassword);
+      if ($isPasswordCorrect) {
+        $return = true;
+      }else {
+        $return = false;
+      }
+    }else {
+      $return = false;
+    }
+    return $return;
+  }
+   
+
 
   public function loginAdmin($adminID)
   {
@@ -69,11 +165,11 @@ class ValidateAdmin{
     $adID = $this->AUTH->encrypt($adminID);
     unset($_SESSION['authStatus']);
     setcookie("AID", $adID, time()+3600, '/');
+    $_SESSION['adminLogged'] = true;
     if (!DID_DISABLED) {
       $deviceID = $_COOKIE['DID'];
       $decryptID = $this->AUTH->decrypt($deviceID);
       $dateAndTime = date('Y-m-d h-i-s');
-
       $sql = "UPDATE deviceManager SET loggedDateTime='$dateAndTime', LogoutDateTime='0000-00-00 00-00-00' WHERE deviceID='$decryptID'";
       mysqli_query($this->DB, $sql);
     }
@@ -102,82 +198,8 @@ class ValidateAdmin{
     }
   }
 
-  public function validateAdminUN(){
-    if (isset($_POST['usernameOrEMail'])) {
-      $uLength = (boolean) strlen($_POST['usernameOrEMail']);
-      if ($uLength) {
-        if ($this->adminNameInDB()['valid']) {
-          $return['valid'] = true;
-          $return['AID'] = $this->adminNameInDB()['AID'];
-        }else {
-          $return['valid'] = false;
-          setcookie("authStatus","Incorrect Username", time()+10, '/');
-        }
-      }else {
-        $return['valid'] = false;
-        setcookie("authStatus","Username Cannot Be Empty", time()+10, '/');
-        exit;
-      }
-    }else {
-      $return['valid'] = false;
-      setcookie("authStatus","Username Not Found In Form", time()+10, '/');
-      exit;
-    }
-    return $return;
-  }
 
-  public function adminNameInDB(){
-    $x = $_POST['usernameOrEMail'];
-    $sanitizeUsername = $this->sanitizeData($x);
-    $x = mysqli_real_escape_string($this->DB,$sanitizeUsername);
-    $sql = "SELECT * FROM admins WHERE BINARY adminUName = '$x'";
-    $result = mysqli_query($this->DB, $sql);
-    if (mysqli_num_rows($result)) {
-      $row = $result->fetch_assoc();
-      $return['valid'] = true;
-      $return['AID'] = $row['adminID'];
-    }else {
-      $return['valid'] = false;
-    }
-    return $return;
-  }
 
-  public function validatePassword($adID)
-  {
-    if (!isset($_POST['password'])) {
-        $return = false;
-        setcookie("authStatus","Password Not Included In Form", time()+10, '/');
-    }elseif (!(boolean) strlen($_POST['password'])) {
-        $return = false;
-        setcookie("authStatus","Password Is too Short", time()+10, '/');
-    }elseif ($this->isPasswordCorrect($_POST['password'], $adID)) {
-        $return = false;
-        setcookie("authStatus","Incorrect Password", time()+10, '/');
-    }else {
-        $return = true;
-
-    }
-    return $return;
-  }
-
-  // Check password in db
-  private function isPasswordCorrect($pass, $adID){
-    $sql = "SELECT * FROM admins WHERE adminID = '$adID'";
-    $result = mysqli_query($this->DB,$sql);
-    if (mysqli_num_rows($result)) {
-      $row = $result->fetch_assoc();
-      $hPassword = $row['adminPassword'];
-      $isPasswordCorrect = password_verify($pass, $hPassword);
-      if ($isPasswordCorrect) {
-        $return = true;
-      }else {
-        $return = false;
-      }
-    }else {
-      $return = false;
-    }
-    return $return;
-  }
 
   public function validateRecaptcha(){
     if (RECAPTCHA_DISABLED) {
