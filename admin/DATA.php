@@ -4,9 +4,6 @@ $_SERVROOT = '../../';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 include_once($GLOBALS['DB']);
-define('DOMAIN', 'localhost');
-
-
 $httpRefe = $_SERVER['HTTP_REFERER'];
 $REF_PATH=  preg_replace("(^https?://)", "", $httpRefe );
 $ref1 = ($REF_PATH == DOMAIN.'/admin/index.php');
