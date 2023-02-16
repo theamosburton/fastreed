@@ -60,7 +60,7 @@ class getData{
     }
 
     function getDevices($howMuch, $sequance){
-        $sql = "SELECT * FROM guests";
+        $sql = "SELECT * FROM guests ORDER BY `s.no` $sequance";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
         if($nowOfRows > 10){

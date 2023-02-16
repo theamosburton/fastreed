@@ -1,4 +1,4 @@
-$.post( "DATA.php", {which : 'Devices', howMuch: 10 , sequance:''}, function( data ) {
+$.post( "DATA.php", {which : 'Devices', howMuch: 10 , sequance : 'desc'}, function( data ) {
   console.log(data);
   let input = new Array();
   for(let i=0;i<data.length; i++){
