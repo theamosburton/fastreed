@@ -4,11 +4,10 @@ $_SERVROOT = '../../';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 include_once($GLOBALS['DB']);
+include_once($GLOBALS['DEV_OPTIONS']);
 $httpRefe = $_SERVER['HTTP_REFERER'];
 
 $REF_PATH=  preg_replace("(^https?://)", "", $httpRefe );
-echo $REF_PATH;
-echo DOMAIN;
 $ref1 = ($REF_PATH == DOMAIN.'/admin/index.php');
 $ref2 = ($REF_PATH == 'www.'.DOMAIN.'/admin/index.php');
 $ref3 = ($REF_PATH == DOMAIN.'/admin/');
