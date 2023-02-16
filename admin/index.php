@@ -58,6 +58,7 @@ if(!isset($_COOKIE['AID'])){
 							<li role="presentation"><a href="/">Home</a></li>
 							<li role="presentation" ><a href="/about/" >About</a></li>
 							<li role="presentation"><a href="/terms-privacy/">Terms & Privacy</a></li>
+							<li role="presentation"><a href="DATA.php">Terms & Privacy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -69,7 +70,7 @@ if(!isset($_COOKIE['AID'])){
 					<div id="tb-con">
 						<ul>
 							<!-- <a class="TOC-subh" href="#terms-of-use">User Activity</a> -->
-							<li><a href="#1">All</a></li>
+							<li><a href="#1">All Visits</a></li>
 							<li><a href="#2">Unique</a></li>
 							<li><a href="#3">Existing</a></li>
 							<li><a href="#4">Admin</a></li>
@@ -81,44 +82,24 @@ if(!isset($_COOKIE['AID'])){
 
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
-					<div class="section-title" id="1"> ALL</div>
+					<div class="section-title" id="1">All Devices</div>
 					<div class="activity-tables">
 						
 						<table class="table table-bordered">
 							<thead>
 								<tr>
 								<th scope="col">#ID</th>
-								<th scope="col">SESSIONS</th>
-								<th scope="col">VISITS</th>
-								<th scope="col">DEVICE</th>
+								<th scope="col">DEIVCESS</th>
+								<th scope="col">BROWSER</th>
+								<th scope="col">PLATFORM</th>
 								</tr>
 							</thead>
 
-							<tbody>
-
-								<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								</tr>
-
-								<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-								</tr>
-
-								<tr>
-								<th scope="row">3</th>
-								<td colspan="2">Larry the Bird</td>
-								<td>@twitter</td>
-								</tr>
-
+							<tbody id="devices-rows">
 							</tbody>
-
 						</table>
+
+
 					</div>
 				</div>	
 			</div>
@@ -140,5 +121,6 @@ if(!isset($_COOKIE['AID'])){
 <!-- Template JS -->
 <script type="text/javascript" src="../assets/js/main.js"></script>
 <script type="text/javascript" src="../assets/js/page.js"></script>
+<script type="text/javascript" src="getdata.js"></script>
 </body>
 </html>

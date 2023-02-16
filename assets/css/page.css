@@ -131,6 +131,13 @@
 .activity-tables{
     overflow: auto;
 }
+.table thead th{
+    border-bottom: 2px solid #0782fc;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #0782fc;
+}
+
 @media (max-width: 1000px){
     .table-content{
         font-size: 18px;
