@@ -86,8 +86,8 @@ if(!isset($_COOKIE['AID'])){
 					<div class="filter" action="" method="post">
 					    <label for="order">Order:</label>
 						<select id="order" value="order">
-						<option value="desc">First First</option>
-							<option value="asc">Last First</option>
+						<option value="desc">Last First</option>
+							<option value="asc">From First</option>
 							
 					    </select>
 
