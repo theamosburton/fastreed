@@ -1,0 +1,33 @@
+.filter{
+    margin-bottom: 10px;
+}
+.filter select{
+    margin: 10px;
+    padding: 3px 5px;
+    border: 2px solid rgb(23, 155, 111);
+    border-radius: 3px;
+}
+.filter select:hover, .filter select:active, .filter select:focus{
+    outline: 2px solid rgb(82, 216, 172) ;
+    border:0;
+}
+.filter select:first-child{
+    margin-left: 0;
+}
+.filter-button{
+    margin-top: 10px;
+    padding: 3px 10px;
+    background-color: rgb(11, 202, 202);
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+    border: 2px solid rgb(11, 202, 202);
+    border-radius: 5px;
+}
+.filter-button:hover{
+    background-color: rgb(10, 226, 226);
+}
+
+.filter label{
+    font-weight: bolder;
+}

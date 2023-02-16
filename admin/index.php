@@ -33,6 +33,7 @@ if(!isset($_COOKIE['AID'])){
 	<!-- Template CSS -->
 	<link href="../assets/css/style.css?V=1.1.1" rel="stylesheet">
 	<link href="../assets/css/page.css?V=1.1.4" rel="stylesheet">
+	<link href="style.css?V=1.0.0" rel="stylesheet">
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -58,7 +59,6 @@ if(!isset($_COOKIE['AID'])){
 							<li role="presentation"><a href="/">Home</a></li>
 							<li role="presentation" ><a href="/about/" >About</a></li>
 							<li role="presentation"><a href="/terms-privacy/">Terms & Privacy</a></li>
-							<li role="presentation"><a href="DATA.php">Terms & Privacy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -70,11 +70,11 @@ if(!isset($_COOKIE['AID'])){
 					<div id="tb-con">
 						<ul>
 							<!-- <a class="TOC-subh" href="#terms-of-use">User Activity</a> -->
-							<li><a href="#1">All Visits</a></li>
-							<li><a href="#2">Unique</a></li>
-							<li><a href="#3">Existing</a></li>
+							<li><a href="#1">Devices</a></li>
+							<li><a href="#2">Sessions</a></li>
+							<li><a href="#3">Visits</a></li>
 							<li><a href="#4">Admin</a></li>
-							<li><a href="#5">Sessions</a></li>
+							<li><a href="#5">Admin Sessions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -83,12 +83,36 @@ if(!isset($_COOKIE['AID'])){
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
+					<div class="filter" action="" method="post">
+					    <label for="order">Order:</label>
+						<select id="order" value="order">
+							<option value="asc">Ascending</option>
+							<option value="desc">Descending</option>
+					    </select>
+
+						<label for="rows">Rows:</label>
+						<select name="" id="rows">
+						<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+
+						<label for="columns">Range:</label>
+						<select id="range" value="range">
+							<option value="[1,25]">1-25</option>
+							<option value="[25,50]">25-50</option>
+					    </select>
+
+						<span id="filter-button" class="filter-button">Apply</span>
+	                </div>
+					
 					<div class="activity-tables">
 						
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-								<th scope="col">#ID</th>
+								<th scope="col">S.NO.</th>
+								<th scope="col">Unique ID</th>
 								<th scope="col">DEIVCESS</th>
 								<th scope="col">BROWSER</th>
 								<th scope="col">PLATFORM</th>

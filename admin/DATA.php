@@ -15,30 +15,30 @@ $ref4 = ($REF_PATH == 'www.'.DOMAIN.'/admin/');
 
 if (!$_SERVER["REQUEST_METHOD"] == "POST") {
     echo "{'Reasult':'Post Method Not used'}";
-}else{
-    if($ref1 || $ref2 || $ref3 || $ref4){
-        if(!isset($_POST['which'])){
-            echo "{'Result':'Mention Which Data'}";
-        }else if(!isset($_POST['howMuch'])){
-            echo "{'Result':'Mention How Much Data'}";
-        }else if(!isset($_POST['sequance'])){
-            echo "{'Result':'Mention Data Sequance '}";
-        }else{
-            $sequance = $_POST['sequance'];
-            $which = $_POST['which'];
-            $howMuch = $_POST['howMuch'];
-            if(isset($_POST['whose'])){
-                $whose = $_POST['which'];
-            }else{
-                $whose = '';
-            }
-            new getData($which ,$howMuch, $whose, $sequance);
-        }
-        
+}elseif($ref1 || $ref2 || $ref3 || $ref4){
+
+    if(!isset($_POST['which'])){
+        echo "{'Result':'Mention Which Data'}";
+    }else if(!isset($_POST['howMuch'])){
+        echo "{'Result':'Mention How Much Data'}";
+    }else if(!isset($_POST['sequance'])){
+        echo "{'Result':'Mention Data Sequance '}";
     }else{
-        echo "{'Result':'Wrong Url Used'}";
+        $sequance = $_POST['sequance'];
+        $which = $_POST['which'];
+        $howMuch = $_POST['howMuch'];
+        if(isset($_POST['whose'])){
+            $whose = $_POST['which'];
+        }else{
+            $whose = '';
+        }
+        new getData($which ,$howMuch, $whose, $sequance);
     }
+    
+}else{
+        echo "{'Result':'Wrong Url Used'}";
 }
+
 
 
 
@@ -63,7 +63,7 @@ class getData{
         $sql = "SELECT * FROM guests ORDER BY `s.no` $sequance";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
-        if($nowOfRows > 10){
+        if($nowOfRows > $howMuch){
             $data = [];
             for($i=0;$i < $howMuch; $i++){
                 $rows = mysqli_fetch_assoc($result);
@@ -92,5 +92,7 @@ class getData{
         }
         
     }
+
+
 }
 ?>
