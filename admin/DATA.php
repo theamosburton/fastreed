@@ -21,6 +21,8 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
         echo "{'Result':'Mention Which Data'}";
     }else if(!isset($_POST['howMuch'])){
         echo "{'Result':'Mention How Much Data'}";
+    }else if(!isset($_POST['sequance'])){
+        echo "{'Result':'Mention Data Sequance '}";
     }else{
         $sequance = $_POST['sequance'];
         $which = $_POST['which'];
@@ -30,7 +32,7 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             $whose = '';
         }
-        new getData($which ,$howMuch, $whose);
+        new getData($which ,$howMuch, $whose, $sequance);
     }
     
 }else{
@@ -43,22 +45,22 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
 class getData{
     private $DB_CONNECT;
 
-    function __construct($whichData, $howMuch, $whose)
+    function __construct($whichData, $howMuch, $whose ,$sequance)
     {
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
         // echo "hello";
         if($whichData == 'Devices'){
-            $this->getDevices($howMuch);
+            $this->getDevices($howMuch, $sequance);
         }elseif($whichData == 'Sessions'){
-            $this->getSesions($howMuch, $whose);
+            $this->getSesions($howMuch, $whose, $sequance);
         }else{
             echo "{'Result':'Wrong Parameter Given'}";
         }
     }
 
-    function getDevices($howMuch){
-        $sql = "SELECT * FROM guests";
+    function getDevices($howMuch, $sequance){
+        $sql = "SELECT * FROM guests ORDER BY `s.no` $sequance";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
         if($nowOfRows > $howMuch){
@@ -70,7 +72,7 @@ class getData{
                 $guestDevice= $rows['guestDevice'];
                 $guestBrowser =  $rows['guestBrowser'];
                 $guestPlatform = $rows['guestPlatform'];
-                $data[$i] = array('sno'=>$sno, 'guestID'=>$guestID,'guestDevice'=>$guestDevice,'guestBrowser'=>$guestBrowser,'guestPlatform'=>$guestPlatform);
+                $data[$i] = array('sno'=>$sno,'guestID'=>$guestID,'guestDevice'=>$guestDevice,'guestBrowser'=>$guestBrowser,'guestPlatform'=>$guestPlatform);
             }
             $json_data = json_encode($data);
             echo $json_data;
@@ -83,7 +85,7 @@ class getData{
                 $guestDevice= $rows['guestDevice'];
                 $guestBrowser =  $rows['guestBrowser'];
                 $guestPlatform = $rows['guestPlatform'];
-                $data[$i] = array('sno'=>$sno, 'guestID'=>$guestID,'guestDevice'=>$guestDevice,'guestBrowser'=>$guestBrowser,'guestPlatform'=>$guestPlatform);
+                $data[$i] = array('sno'=>$sno,'guestID'=>$guestID,'guestDevice'=>$guestDevice,'guestBrowser'=>$guestBrowser,'guestPlatform'=>$guestPlatform);
             }
 
             $json_data = json_encode($data);
