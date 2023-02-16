@@ -12,7 +12,7 @@
   $('#filter-button').click(applyFilter);
 
 function readyFun(){
-  $.post( "DATA.php", {which : 'Devices', howMuch: 10 , sequance : 'asc'}, function( data ) {
+  $.post( "DATA.php", {which : 'Devices', howMuch: 10 , sequance : 'desc'}, function( data ) {
     let input = new Array();
     for(let i=0;i<data.length; i++){
       input[i] = `<tr>
