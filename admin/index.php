@@ -92,14 +92,14 @@ if(!isset($_COOKIE['AID'])){
 
 						<label for="rows">Rows:</label>
 						<select name="" id="rows">
-						<option value="25">25</option>
+						    <option value="10">10</option>
+						    <option value="25">25</option>
 							<option value="50">50</option>
-							<option value="100">100</option>
 						</select>
 
 						<label for="columns">Range:</label>
 						<select id="range" value="range">
-							<option value="[1,25]">1-25</option>
+							<option value="1,25">1-25</option>
 							<option value="[25,50]">25-50</option>
 					    </select>
 

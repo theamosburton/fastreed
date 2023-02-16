@@ -19,8 +19,6 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(!isset($_POST['whichRec'])){
             echo "{'Result':' Which Record'}";
-        }elseif(!isset($_POST['alias'])){
-            echo "{'Result':' Alias Needed'}";
         }else{
             $which = $_POST['whichRec'];
             $alias = $_POST['alias'];
@@ -40,8 +38,8 @@ class getRecords{
         
     }
 
-    function totalRecords($table, $alias){
-        $sql = "SELECT * FROM $table $alias";
+    function totalRecords($table){
+        $sql = "SELECT * FROM $table";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
         $data['rows'] = $nowOfRows;
