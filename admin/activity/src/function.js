@@ -31,6 +31,7 @@ $.post( "src/anonymous.php", {which : 'guests'}, function(data){
 
     $('#devices').html(`
     <span class="number">${today}<span class="percent ${pl}">${growth}% </span><li class="${pl} rotate-${arrow} fa fa-play"></li></span>
+    <span class="last">${yesterday}</span>
     <span class="entity">Devices</span>
     `);
     $('#devices').css('border', `1px solid ${border}`);
@@ -68,6 +69,7 @@ $.post( "src/anonymous.php", {which : 'guests_sessions'}, function(data){
 
     $('#sessions').html(`
     <span class="number">${today}<span class="percent ${pl}">${growth}% </span><li class="${pl} rotate-${arrow} fa fa-play"></li></span>
+    <span class="last">${yesterday}</span>
     <span class="entity">Sessions</span>
     `);
     $('#sessions').css('border', `1px solid ${border}`);
