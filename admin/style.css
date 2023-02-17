@@ -7,9 +7,9 @@
     border: 2px solid rgb(23, 155, 111);
     border-radius: 3px;
 }
-.filter select:hover, .filter select:active, .filter select:focus{
-    outline: 2px solid rgb(82, 216, 172) ;
-    border:0;
+.filter select:hover, .filter select:active, .filter select:focus, .filter input:hover, .filter input:focus{
+    border: 2px solid rgb(82, 216, 172) ;
+    outline:0;
 }
 .filter select:first-child{
     margin-left: 0;
