@@ -6,28 +6,26 @@ $.post( "src/anonymous.php", {which : 'guests'}, function(data){
     let pl;
     let arrow;
     let border;
-    if(!yesterday === 0 && !today === 0){
+    if(yesterday === 0 || today === 0){
+        growth = 0;
+        pl = 'profit';
+        arrow = 'up'
+        border = "green";
+    }else{
         if(yesterday > today){
             growth = today/yesterday*100;
             growth = '-'+growth;
             growth = parseInt(growth);
-            // growth = parseFloat(`${growth}`).toFixed(2);
             pl = 'loss';
             arrow = 'down'
             border = "orangered";
         }else{
             growth = yesterday/today*100;
             growth = parseInt(growth);
-            // growth = parseFloat(`${growth}`).toFixed(2);
             pl = 'profit';
             arrow = 'up'
             border = "green";
         }
-    }else{
-        growth = 0;
-        pl = 'profit';
-        arrow = 'up'
-        border = "green";
     }
     
 
@@ -46,30 +44,27 @@ $.post( "src/anonymous.php", {which : 'guests_sessions'}, function(data){
     let pl;
     let arrow;
     let border;
-    if(!yesterday === 0 && !today === 0){
+    if(yesterday === 0 || today === 0){
+        growth = 0;
+        pl = 'profit';
+        arrow = 'up'
+        border = "green";
+    }else{
         if(yesterday > today){
             growth = today/yesterday*100;
             growth = '-'+growth;
             growth = parseInt(growth);
-            // growth = parseFloat(`${growth}`).toFixed(2);
             pl = 'loss';
             arrow = 'down'
             border = "orangered";
         }else{
             growth = yesterday/today*100;
             growth = parseInt(growth);
-            // growth = parseFloat(`${growth}`).toFixed(2);
-            pl = 'profit';
-            arrow = 'up';
-            border = "green";
-        }
-    }else{
-            growth = 0;
             pl = 'profit';
             arrow = 'up'
             border = "green";
+        }
     }
-
 
     $('#sessions').html(`
     <span class="number">${today}<span class="percent ${pl}">${growth}% </span><li class="${pl} rotate-${arrow} fa fa-play"></li></span>
