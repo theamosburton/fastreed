@@ -55,7 +55,6 @@ class filteredData{
                 }else{
                     $query = "where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
                 }
-                
             }else{
                 $query = "where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
             }
