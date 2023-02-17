@@ -1,6 +1,6 @@
 // get anpnymous data onload
 $.post( "src/anonymous.php", {which : 'guests'}, function(data){
-    let today = data.today;
+    let today =  data.today;
     let yesterday = data.yesterday;
     let growth;
     let pl;
@@ -13,14 +13,14 @@ $.post( "src/anonymous.php", {which : 'guests'}, function(data){
         border = "green";
     }else{
         if(yesterday > today){
-            growth = today/yesterday*100;
+            growth = yesterday/today*100;
             growth = '-'+growth;
             growth = parseInt(growth);
             pl = 'loss';
             arrow = 'down'
             border = "orangered";
         }else{
-            growth = yesterday/today*100;
+            growth = today/yesterday*100;
             growth = parseInt(growth);
             pl = 'profit';
             arrow = 'up'
@@ -51,14 +51,14 @@ $.post( "src/anonymous.php", {which : 'guests_sessions'}, function(data){
         border = "green";
     }else{
         if(yesterday > today){
-            growth = today/yesterday*100;
+            growth = yesterday/today*100;
             growth = '-'+growth;
             growth = parseInt(growth);
             pl = 'loss';
             arrow = 'down'
             border = "orangered";
         }else{
-            growth = yesterday/today*100;
+            growth = today/yesterday*100;
             growth = parseInt(growth);
             pl = 'profit';
             arrow = 'up'
