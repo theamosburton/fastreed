@@ -41,10 +41,8 @@
     border-radius: 5px;
     color: rgb(0, 0, 0);
     width: fit-content;
-    min-height: 50px;
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
+    justify-content: center;
     text-transform: uppercase;
     font-weight: 600;
     flex-direction: column;

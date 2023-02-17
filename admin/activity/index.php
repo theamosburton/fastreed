@@ -33,7 +33,7 @@ if(!isset($_COOKIE['AID'])){
 	<!-- Template CSS -->
 	<link href="/assets/css/style.css?V=1.1.1" rel="stylesheet">
 	<link href="/assets/css/page.css?V=1.1.4" rel="stylesheet">
-	<link href="/admin/style.css?V=1.0.1" rel="stylesheet">
+	<link href="/admin/style.css?V=1.0.2" rel="stylesheet">
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -88,11 +88,11 @@ if(!isset($_COOKIE['AID'])){
                             <span class="entity">Sessions</span>
                         </div>
 
-                        <div class="tabs" id="visits">
-                            <div class="loader"></div>
+                        <!-- <div class="tabs" id="visits"> -->
+                            <!-- <div class="loader"></div> -->
                             <!-- <span class="number">Load...<span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span> -->
-                            <span class="entity">Views</span>
-                        </div>
+                            <!-- <span class="entity">Views</span> -->
+                        <!-- </div> -->
                     </div>
                     <a id="view-more" href="anonymous">Detail Info</a>
 				</div>	
