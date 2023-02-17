@@ -33,7 +33,7 @@ $.post( "src/anonymous.php", {which : 'sessionVisits'}, function(data){
     $('#views').html(`
     <span class="number">${today}<span class="percent ${pl}">${growth}% </span><li class="${pl} rotate-${arrow} fa fa-play"></li></span>
     <span class="last">${yesterday}</span>
-    <span class="entity">Devices</span>
+    <span class="entity">Visits</span>
     `);
     $('#views').css('border', `1px solid ${border}`);
 
