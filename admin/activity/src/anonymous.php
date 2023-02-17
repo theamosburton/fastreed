@@ -22,7 +22,7 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
     }else{
         $which = $_POST['which'];
         $today = date('Y-m-d');
-        $yesterday = date('d-m-Y',strtotime("-1 days"));
+        $yesterday = date('Y-m-d',strtotime("-1 days"));
         new getData($which ,$today, $yesterday);
     }
 }else{
