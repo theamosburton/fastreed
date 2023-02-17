@@ -3,18 +3,18 @@
 
 
 $.post( "src/anonymous.php", {which : 'guests'}, function(data){
-    updateContent(data, 'devices');
+    updateContent(data, 'devices', 'Devices');
 });
 
 $.post( "src/anonymous.php", {which : 'guests_sessions'}, function(data){
-    updateContent(data, 'sessions');
+    updateContent(data, 'sessions', 'Sessions');
 });
 
 $.post( "src/anonymous.php", {which : 'sessionVisits'}, function(data){
-    updateContent(data, 'views');
+    updateContent(data, 'views', 'Views');
 });
 
-function updateContent(data, viewId){
+function updateContent(data, viewId, name){
     let today = data.today;
     let yesterday = data.yesterday;
     let growth, pl, arrow, border;
@@ -42,7 +42,7 @@ function updateContent(data, viewId){
     $(`#${viewId}`).html(`
     <span class="number">${today}<span class="percent ${pl}">${growth}% </span><li class="${pl} rotate-${arrow} fa fa-play"></li></span>
     <span class="last">${yesterday}</span>
-    <span class="entity">Sessions</span>
+    <span class="entity">${name}</span>
     `);
     $(`#${viewId}`).css('border', `1px solid ${border}`);
 
