@@ -89,7 +89,7 @@ if(!isset($_COOKIE['AID'])){
 					<div class="section-title" id="1">All Devices</div>
 					<div class="filter" action="" method="post">
 					    <label for="dateRange">Date:</label>
-						<input id="dateRange" type="date" name="example" value="" list="exampleList">
+						<input id="dateRange" type="date">
 					    <label for="order">Order:</label>
 						<select id="order" value="order">
 						    <option value="desc">Descending Order</option>

@@ -38,8 +38,8 @@ class getRecords{
         
     }
 
-    function totalRecords($table){
-        $sql = "SELECT * FROM $table";
+    function totalRecords($table, $alias){
+        $sql = "SELECT * FROM $table $alias";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
         $data['rows'] = $nowOfRows;

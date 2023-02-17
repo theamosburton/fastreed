@@ -10,6 +10,12 @@
   $('#order').change(function() {
     filter();
   });
+  var dateRange;
+
+  $('#dateRange').change(function(){
+    filter();
+   });
+
 
   $('#filter-button').click(applyFilter);
 
@@ -32,16 +38,13 @@ function readyFun(){
   });
   filter();
   }
-  let dateRange;
-  $('#dateRange').change(function () {
-    dateRange = $('#dateRange').val( );
-  });
+
 
 function applyFilter(){
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
   let range = $('#range').find(":selected").val();
-  console.log(dateRange);
+  let  dateRange = $('#dateRange').val();
   $.post( "data/Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range, date :dateRange}, function(data){
     let input = new Array();
     for(let i=0;i<data.length; i++){
@@ -61,7 +64,14 @@ function applyFilter(){
 
 
 function filter(){
-  $.post( "data/Records.php", {whichRec : 'guests', alias : ''}, function(data){
+  let  dateRange = $('#dateRange').val();
+  console.log(dateRange);
+  if(!dateRange == ''){
+    alias = `Where tdate = '${dateRange}'`;
+  }else{
+    alias = '';
+  }
+  $.post( "data/Records.php", {whichRec : 'guests', alias : alias}, function(data){
     // $no = data.rows;
     let x = $('#rows').find(":selected").val();
     let diffRows = parseInt(x);
@@ -95,6 +105,9 @@ function filter(){
   });
 }
 
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
 
                 
 
