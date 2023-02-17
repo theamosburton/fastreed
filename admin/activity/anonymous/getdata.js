@@ -61,47 +61,6 @@ function applyFilter(){
     $("#devices-rows").html(input);
   });
 }
-
-
-// function filter(){
-//   let  dateRange = $('#dateRange').val();
-//   if(isNaN(dateRange)){
-//     alias = `Where tdate = '${dateRange}'`;
-//   }else{
-//     alias = '';
-//   }
-//   $.post( "data/Records.php", {whichRec : 'guests', alias : alias}, function(data){
-//     // $no = data.rows;
-//     let x = $('#rows').find(":selected").val();
-//     let diffRows = parseInt(x);
-//     let totalRecords = data.rows;
-//     if(totalRecords < diffRows){
-//       $("#range").html(`<option value="1,${totalRecords}">1-${totalRecords}</option>`);
-//     }else{
-//       let group =Math.trunc(totalRecords/diffRows);
-//       let input = new Array();
-//       let diff = diffRows;
-//       let lower = 1;
-//       let upper = diffRows;
-//       for(let i =0; i<group; i++){
-//         input[i] = `<option value="${lower},${upper}">${lower}-${upper}</option>`;
-//         lower = upper;
-//         upper = upper+diff;
-//       }
-//       let newLastElement = `<option value="${lower},${totalRecords}">${lower}-${totalRecords}</option>`;
-//       const array = input.concat([newLastElement]);
-
-//       let order = $('#order').find(":selected").val();
-//       let finialArray;
-//       if(order == 'desc'){
-//         array.reverse();
-//       }
-      
-//       $("#range").html(array);
-//     }
-//   });
-// }
-
 function isValidDate(d) {
   return d instanceof Date && !isNaN(d);
 }
