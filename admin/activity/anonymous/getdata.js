@@ -12,7 +12,7 @@
   $('#filter-button').click(applyFilter);
 
 function readyFun(){
-  $.post( "DATA.php", {which : 'Devices', howMuch: 5 , sequance : 'desc'}, function( data ) {
+  $.post( "data/DATA.php", {which : 'Devices', howMuch: 5 , sequance : 'desc'}, function( data ) {
     let input = new Array();
     for(let i=0;i<data.length; i++){
       input[i] = `<tr>
@@ -35,7 +35,7 @@ function applyFilter(){
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
   let range = $('#range').find(":selected").val();
-  $.post( "Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range}, function(data){
+  $.post( "data/Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range}, function(data){
     let input = new Array();
     for(let i=0;i<data.length; i++){
       input[i] = `<tr>
@@ -54,7 +54,7 @@ function applyFilter(){
 
 
 function filter(){
-  $.post( "Records.php", {whichRec : 'guests', alias : ''}, function(data){
+  $.post( "data/Records.php", {whichRec : 'guests', alias : ''}, function(data){
     // $no = data.rows;
     let x = $('#rows').find(":selected").val();
     let diffRows = parseInt(x);

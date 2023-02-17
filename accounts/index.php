@@ -52,8 +52,8 @@ new VisitorActivity();
 
 				<div class="content col-lg-6  col-sm-12 col-xs-12">
 				    <div class="section-block main-block" style="max-height: fit-content">
-						<div class=" alert alert-danger" role="alert">
-							The Website is currently in Development Mode!
+						<div class=" alert alert-warning" role="alert">
+							Only admins and Writers are allowed!
 					    </div>
 
 						<div class="login-signup">
@@ -61,7 +61,7 @@ new VisitorActivity();
 							<form action="login.php" method="post">
 								<?php
 								        if (isset($_COOKIE['authStatus'])) {
-											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+											echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 											<strong>'.$_COOKIE['authStatus'].'</strong>
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											  <span aria-hidden="true">&times;</span>

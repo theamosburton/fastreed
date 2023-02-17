@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../../../';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 include_once($GLOBALS['DB']);
@@ -8,10 +8,10 @@ include_once($GLOBALS['DEV_OPTIONS']);
 $httpRefe = $_SERVER['HTTP_REFERER'];
 
 $REF_PATH=  preg_replace("(^https?://)", "", $httpRefe );
-$ref1 = ($REF_PATH == DOMAIN.'/admin/index.php');
-$ref2 = ($REF_PATH == 'www.'.DOMAIN.'/admin/index.php');
-$ref3 = ($REF_PATH == DOMAIN.'/admin/');
-$ref4 = ($REF_PATH == 'www.'.DOMAIN.'/admin/');
+$ref1 = ($REF_PATH == DOMAIN.'/admin/activity/anonymous/index.php');
+$ref2 = ($REF_PATH == 'www.'.DOMAIN.'/admin/activity/anonymous/index.php');
+$ref3 = ($REF_PATH == DOMAIN.'/admin/activity/anonymous/');
+$ref4 = ($REF_PATH == 'www.'.DOMAIN.'/admin/activity/anonymous/');
 
 if (!$_SERVER["REQUEST_METHOD"] == "POST") {
     echo "{'Reasult':'Post Method Not used'}";

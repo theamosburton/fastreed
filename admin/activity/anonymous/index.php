@@ -1,5 +1,5 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../../';
 // $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 // include $_DOCROOT."/.htactivity/VISIT.php";
 // new VisitorActivity();
@@ -56,8 +56,8 @@ if(!isset($_COOKIE['AID'])){
 					<!--tabs-->
 					<div class="head-tabs">
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation"  class="active" ><a>Dashboard</a></li>
-							<li role="presentation"><a  href="activity">Activty</a></li>
+							<li role="presentation"><a href="/admin/">Dashboard</a></li>
+							<li role="presentation" class="active" ><a>Activty</a></li>
 							<li role="presentation"><a href="/profile/">Profile</a></li>
 						</ul>
 					</div>
@@ -65,14 +65,79 @@ if(!isset($_COOKIE['AID'])){
 			</div>
 
 			<div class="content sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
-				<div class="section-block ">
+				<div class="section-block admin-block-sidebar">
+					<h1 id="tab"class=" table-content section-title">Activity <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
+					<div id="tb-con">
+						<ul>
+							<!-- <a class="TOC-subh" href="#terms-of-use">User Activity</a> -->
+							<li><a href="#1">Devices</a></li>
+							<li><a href="#2">Sessions</a></li>
+							<li><a href="#3">Visits</a></li>
+							<li><a href="#4">Admin</a></li>
+							<li><a href="#5">Admin Sessions</a></li>
+						</ul>
+					</div>
 				</div>
+
+
+
 			</div>
 
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
+				<!-- All Devices Block -->
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
+					<div class="filter" action="" method="post">
+					    <label for="order">Order:</label>
+						<select id="order" value="order">
+						    <option value="desc">Descending Order</option>
+							<option value="asc">Ascending Order</option>	
+					    </select>
+						<label for="rows">Rows:</label>
+						<select name="" id="rows">
+						    <option value="5">5</option>
+						    <option value="10">10</option>
+						    <option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+						<label for="columns">Range:</label>
+						<select id="range" value="range">
+							<option value="1,25">1-25</option>
+							<option value="25,50">25-50</option>
+					    </select>
+						<span id="filter-button" class="filter-button">Apply</span>
+	                </div>
+					<div class="activity-tables">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+								<th scope="col">S.NO.</th>
+								<th scope="col">Unique ID</th>
+								<th scope="col">DEIVCESS</th>
+								<th scope="col">BROWSER</th>
+								<th scope="col">PLATFORM</th>
+								</tr>
+							</thead>
+							<tbody id="devices-rows">
+							</tbody>
+						</table>
+					</div>
 				</div>	
+				<!-- All Devices Block End -->
+
+
+				<!-- Sessions Block -->
+				<div class="section-block main-block">
+					<div class="section-title" id="1">Sessions</div>
+				</div>
+				<!-- Sessions Block Ends-->
+
+				<!-- Visits Block -->
+				<div class="section-block main-block">
+					<div class="section-title" id="1">Visits</div>
+				</div>
+				<!-- Visits Block Ends -->
 			</div>
 		</div>
 	</div>
@@ -92,5 +157,6 @@ if(!isset($_COOKIE['AID'])){
 <!-- Template JS -->
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/page.js"></script>
+<script type="text/javascript" src="getdata.js"></script>
 </body>
 </html>

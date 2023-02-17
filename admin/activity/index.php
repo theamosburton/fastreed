@@ -1,5 +1,5 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../';
 // $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 // include $_DOCROOT."/.htactivity/VISIT.php";
 // new VisitorActivity();
@@ -56,9 +56,9 @@ if(!isset($_COOKIE['AID'])){
 					<!--tabs-->
 					<div class="head-tabs">
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation"  class="active" ><a>Dashboard</a></li>
-							<li role="presentation"><a  href="activity">Activty</a></li>
-							<li role="presentation"><a href="/profile/">Profile</a></li>
+							<li role="presentation"><a href="/admin/">Dashboard</a></li>
+							<li role="presentation" class="active"><a>Activity</a></li>
+							<li role="presentation" ><a href="/profile/">Profile</a></li>
 						</ul>
 					</div>
 				</div>
@@ -71,7 +71,38 @@ if(!isset($_COOKIE['AID'])){
 
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
-					<div class="section-title" id="1">All Devices</div>
+					<div class="section-title" id="1">Anonymous</div>
+                    <div class="activity-tabs row">
+
+                        <div class="tabs" id="devices">
+                            <div class="loader"></div>
+                            <!--   
+                            <span class="number">Load... <span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span>-->
+                            <span class="entity">Devices</span>
+                            
+                        </div>
+
+                        <div class="tabs" id="sessions">
+                            <div class="loader"></div>
+                            <!-- <span class="number">Load... <span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span> -->
+                            <span class="entity">Sessions</span>
+                        </div>
+
+                        <div class="tabs" id="visits">
+                            <div class="loader"></div>
+                            <!-- <span class="number">Load...<span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span> -->
+                            <span class="entity">Views</span>
+                        </div>
+                    </div>
+                    <a id="view-more" href="anonymous">Detail Info</a>
+				</div>	
+
+                <div class="section-block main-block">
+					<div class="section-title" id="1">Users</div>
+				</div>	
+
+                <div class="section-block main-block">
+					<div class="section-title" id="1">Admins</div>
 				</div>	
 			</div>
 		</div>
@@ -92,5 +123,6 @@ if(!isset($_COOKIE['AID'])){
 <!-- Template JS -->
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/page.js"></script>
+<script type="text/javascript" src="src/function.js"></script>
 </body>
 </html>
