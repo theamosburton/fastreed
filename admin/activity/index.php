@@ -33,7 +33,7 @@ if(!isset($_COOKIE['AID'])){
 	<!-- Template CSS -->
 	<link href="/assets/css/style.css?V=1.1.1" rel="stylesheet">
 	<link href="/assets/css/page.css?V=1.1.4" rel="stylesheet">
-	<link href="/admin/style.css?V=1.0.0" rel="stylesheet">
+	<link href="/admin/style.css?V=1.0.1" rel="stylesheet">
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
