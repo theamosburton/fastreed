@@ -8,12 +8,14 @@ $.post( "src/anonymous.php", {which : 'guests'}, function(data){
     if(yesterday > today){
         growth = today/yesterday*100;
         growth = '-'+growth;
-        growth = parseFloat(`${growth}`).toFixed(2);
+        growth = parseInt(growth);
+        // growth = parseFloat(`${growth}`).toFixed(2);
         pl = 'loss';
         arrow = 'down'
     }else{
         growth = yesterday/today*100;
-        growth = parseFloat(`${growth}`).toFixed(2);
+        growth = parseInt(growth);
+        // growth = parseFloat(`${growth}`).toFixed(2);
         pl = 'profit';
         arrow = 'up'
     }
@@ -35,12 +37,14 @@ $.post( "src/anonymous.php", {which : 'guests_sessions'}, function(data){
         if(yesterday > today){
             growth = today/yesterday*100;
             growth = '-'+growth;
-            growth = parseFloat(`${growth}`).toFixed(2);
+            growth = parseInt(growth);
+            // growth = parseFloat(`${growth}`).toFixed(2);
             pl = 'loss';
             arrow = 'down'
         }else{
             growth = yesterday/today*100;
-            growth = parseFloat(`${growth}`).toFixed(2);
+            growth = parseInt(growth);
+            // growth = parseFloat(`${growth}`).toFixed(2);
             pl = 'profit';
             arrow = 'up'
         }
