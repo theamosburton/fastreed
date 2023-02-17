@@ -65,8 +65,7 @@ function applyFilter(){
 
 function filter(){
   let  dateRange = $('#dateRange').val();
-  console.log(dateRange);
-  if(!dateRange == ''){
+  if(isNaN(dateRange)){
     alias = `Where tdate = '${dateRange}'`;
   }else{
     alias = '';
