@@ -73,13 +73,15 @@ new VisitorActivity();
 								<input class="lg-inputs" type="password" name="password" placeholder="Password">
 								<select class="lg-inputs" name="" id="">
 									<option value="">Admin</option>
-									<option value="">Author</option>
+									<option value="">Writer</option>
 									<option value="" disabled>User (disabled)</option>
 								</select>
 
 								<input  class="lg-inputs btn" type="submit" value="LOGIN">
 							</form>
-							<form action=""></form>
+							<a href="#">Forgotten Password</a>
+							<br>
+							<a>Create an Account</a>
 						</div>
                     </div>
 				</div>
