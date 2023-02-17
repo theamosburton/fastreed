@@ -88,11 +88,11 @@ if(!isset($_COOKIE['AID'])){
                             <span class="entity">Sessions</span>
                         </div>
 
-                        <!-- <div class="tabs" id="visits"> -->
-                            <!-- <div class="loader"></div> -->
-                            <!-- <span class="number">Load...<span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span> -->
-                            <!-- <span class="entity">Views</span> -->
-                        <!-- </div> -->
+                        <div class="tabs" id="views">
+                            <div class="loader"></div>
+                            <span class="entity">Views</span>
+                        </div>
+
                     </div>
                     <a id="view-more" href="anonymous">Detail Info</a>
 				</div>	

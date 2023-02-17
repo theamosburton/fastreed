@@ -21,9 +21,18 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
         echo "{'Result':'Mention Which Data'}";
     }else{
         $which = $_POST['which'];
-        $today = date('Y-m-d');
-        $yesterday = date('Y-m-d',strtotime("-1 days"));
-        new getData($which ,$today, $yesterday);
+        if($which == 'sessionVisits'){
+            $today = 'GSI'.date('Ymd');
+            $yesterday = date('Ymd',strtotime("-1 days"));
+            
+            $yesterday = 'GSI'.$yesterday;
+            new getData($which ,$today, $yesterday);
+        }else{
+            $today = date('Y-m-d');
+            $yesterday = date('Y-m-d',strtotime("-1 days"));
+            new getData($which ,$today, $yesterday);
+        }
+        
     }
 }else{
         echo "{'Result':'Wrong Url Used'}";
@@ -40,18 +49,34 @@ class getData{
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
 
-        $todaySql = "SELECT * FROM $which WHERE `tdate` = '$today'";
-        $result = mysqli_query($this->DB, $todaySql);
-        $noToday = mysqli_num_rows($result);
+        if($which == 'sessionVisits'){
+            $todaySql = "SELECT * FROM $which WHERE sessionID RLIKE '$today'";
+            $result = mysqli_query($this->DB, $todaySql);
+            $noToday = mysqli_num_rows($result);
 
-        $yesterDay = "SELECT * FROM $which WHERE `tdate` = '$yesterday'";
-        $result2 = mysqli_query($this->DB, $yesterDay);
-        $noYesterday = mysqli_num_rows($result2);
+            $yesterDay = "SELECT * FROM $which WHERE sessionID RLIKE  '$yesterday'";
+            $result2 = mysqli_query($this->DB, $yesterDay);
+            $noYesterday = mysqli_num_rows($result2);
+            $data = array('today'=>$noToday,'yesterday'=>$noYesterday);
+    
+            $json_data = json_encode($data);
+                echo $json_data;
+        }else{
+            $todaySql = "SELECT * FROM $which WHERE `tdate` = '$today'";
+            $result = mysqli_query($this->DB, $todaySql);
+            $noToday = mysqli_num_rows($result);
+    
+            $yesterDay = "SELECT * FROM $which WHERE `tdate` = '$yesterday'";
+            $result2 = mysqli_query($this->DB, $yesterDay);
+            $noYesterday = mysqli_num_rows($result2);
+    
+            $data = array('today'=>$noToday,'yesterday'=>$noYesterday);
+    
+            $json_data = json_encode($data);
+                echo $json_data;
+        }
 
-        $data = array('today'=>$noToday,'yesterday'=>$noYesterday);
 
-        $json_data = json_encode($data);
-            echo $json_data;
     }
 }
 ?>
