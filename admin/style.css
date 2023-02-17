@@ -73,7 +73,6 @@
     transform: rotate(270deg);
 }
 #view-more{
-    display: flex;
     font-weight: 700;
     margin-left: 22px;
 }
