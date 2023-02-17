@@ -99,6 +99,13 @@
     justify-content: center;
 }
 
+
+.login-signup form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .login-signup .title{
     text-transform: uppercase;
     font-size: 25px;
@@ -109,8 +116,8 @@
     display: block;
     width: 100%;
     margin: 15px 0;
-    border: 1.5px solid grey;
-    border-radius: 5px;
+    border: 0;
+    border-bottom: 1.5px solid grey;
     padding: 10px;
     font-weight: 600;
 }
@@ -119,13 +126,19 @@
     box-shadow: 0 0 3px 0px purple;
 }
 .login-signup .btn{
+    border: 0;
+    background-color: #0782fc;
+    max-width: 100px;
+    color: aliceblue;
     font-weight: bold;
     margin-top: 30px;
     padding: 5px 6px;
 }
-.login-signup .btn:hover{
+.login-signup .btn:hover, .login-signup .btn:focus,.login-signup .btn:active{
+    box-shadow: none;
+    border: 0;
+    background-color: #1168c0;
     color: rgb(255, 253, 253);
-    background-color: rgb(154, 154, 150);
 }
 
 .activity-tables{
@@ -136,6 +149,10 @@
 }
 .table-bordered td, .table-bordered th {
     border: 1px solid #0782fc;
+}
+
+.login-block{
+    /* max-height: auto; */
 }
 
 @media (max-width: 1000px){

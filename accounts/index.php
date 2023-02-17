@@ -51,7 +51,7 @@ new VisitorActivity();
 				</div>
 
 				<div class="content col-lg-6  col-sm-12 col-xs-12">
-				    <div class="section-block main-block">
+				    <div class="section-block main-block" style="max-height: fit-content">
 						<div class=" alert alert-danger" role="alert">
 							The Website is currently in Development Mode!
 					    </div>

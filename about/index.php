@@ -41,7 +41,7 @@ new VisitorActivity();
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" class="active"><a>About</a></li>
 								<li role="presentation"><a href="/terms-privacy/" >Terms & Privacy</a></li>
-								<li role="presentation"><a href="/users/" >Login/Signup</a></li>
+								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
 					</div>
@@ -95,8 +95,8 @@ new VisitorActivity();
 								<div class="section-block members summary">
 									<div class="profile-contents">
 										<img src="../assets/img/dummy.png" class="profile-image img responsive" alt="John Doe">
-										<a href="#" class="btn">Rakesh Malik</a>
-										<p>Owner, Author and Developer</p>
+										<a href="#" class="btn">Shikhar Pahariya</a>
+										<p>Senior Writer</p>
 									</div>
 								</div>
 
@@ -104,7 +104,7 @@ new VisitorActivity();
 									<div class="profile-contents">
 										<img src="../assets/img/dummy.png" class="profile-image img responsive" alt="John Doe">
 										<a href="#" class="btn">MD. Kabeer</a>
-										<p>Author and Web Designer</p>
+										<p>Senior Writerd</p>
 									</div>
 								</div>
 
@@ -112,7 +112,7 @@ new VisitorActivity();
 									<div class="profile-contents">
 										<img src="../assets/img/w-dummy.png" class="profile-image img responsive" alt="John Doe">
 										<a href="#" class="btn">Mahira Rajput</a>
-										<p>Author</p>
+										<p>Writer</p>
 									</div>
 								</div>
 
