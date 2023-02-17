@@ -2,6 +2,8 @@
 
   $(document).ready(readyFun);
 
+
+
   $('#rows').change(function() {
     filter();
   });
@@ -12,6 +14,7 @@
   $('#filter-button').click(applyFilter);
 
 function readyFun(){
+
   $.post( "data/DATA.php", {which : 'Devices', howMuch: 5 , sequance : 'desc'}, function( data ) {
     let input = new Array();
     for(let i=0;i<data.length; i++){
@@ -35,7 +38,8 @@ function applyFilter(){
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
   let range = $('#range').find(":selected").val();
-  $.post( "data/Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range}, function(data){
+  let dateRange = $('#dateRange').find(":selected").val();
+  $.post( "data/Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range, date :dateRange}, function(data){
     let input = new Array();
     for(let i=0;i<data.length; i++){
       input[i] = `<tr>

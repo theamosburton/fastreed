@@ -32,11 +32,8 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
         $howMuch = $_POST['howMuch'];
         $range = $_POST['range'];
         $rangeArray = explode (",", $range); 
-        // if(isset($_POST['whose'])){
-        //     $whose = $_POST['which'];
-        // }else{
-        //     $whose = '';
-        // }
+        // If date is given
+        
         new filteredData($which ,$howMuch, $sequance, $rangeArray);
     }
 }else{
@@ -49,7 +46,16 @@ class filteredData{
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
         if($whichData == 'Devices'){
-            $this->filterDevices($howMuch, $sequance, $rangeArray);
+            $lowerLimit = $rangeArray[0];
+            $upperLimit = $rangeArray[1];
+            //run this query if no date is given
+            if(isset($_POST['date'])){
+                $date = $_POST['date'];
+                $query = "where `tdate` = '$date' order by `s.no` $sequance";
+            }else{
+                $query = "where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
+            }
+            $this->filterDevices($howMuch, $query);
         }elseif($whichData == 'Sessions'){
             $this->getSefilterDevicessions($howMuch, $whose, $sequance);
         }else{
@@ -57,12 +63,8 @@ class filteredData{
         }
     }
 
-    function filterDevices($howMuch, $sequance, $rangeArray){
-        $lowerLimit = $rangeArray[0];
-        $upperLimit = $rangeArray[1];
-
-        $sql = "Select * from guests where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
-
+    function filterDevices($howMuch, $query){
+        $sql = "Select * from guests  $query";
         $result = mysqli_query($this->DB, $sql);
         $nowOfRows = mysqli_num_rows($result);
 
@@ -95,6 +97,9 @@ class filteredData{
             echo $json_data;
 
         }
+
+        // Without date
+        
     }
 }
 ?>
