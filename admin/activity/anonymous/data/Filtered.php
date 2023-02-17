@@ -33,7 +33,6 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST") {
         $range = $_POST['range'];
         $rangeArray = explode (",", $range); 
         // If date is given
-        
         new filteredData($which ,$howMuch, $sequance, $rangeArray);
     }
 }else{

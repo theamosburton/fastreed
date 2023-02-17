@@ -32,13 +32,16 @@ function readyFun(){
   });
   filter();
   }
-
+  let dateRange;
+  $('#dateRange').change(function () {
+    dateRange = $('#dateRange').val( );
+  });
 
 function applyFilter(){
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
   let range = $('#range').find(":selected").val();
-  let dateRange = $('#dateRange').find(":selected").val();
+  console.log(dateRange);
   $.post( "data/Filtered.php", {which : 'Devices', howMuch : rows, sequance: order, range: range, date :dateRange}, function(data){
     let input = new Array();
     for(let i=0;i<data.length; i++){
