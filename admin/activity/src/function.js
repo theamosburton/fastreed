@@ -13,6 +13,7 @@ $.post( "src/anonymous.php", {which : 'guests'}, function(data){
         arrow = 'down'
     }else{
         growth = yesterday/today*100;
+        growth = parseFloat(`${growth}`).toFixed(2);
         pl = 'profit';
         arrow = 'up'
     }
