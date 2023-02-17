@@ -71,7 +71,7 @@ new VisitorActivity();
 						</div>
 
 
-						<h1 class="section-title">Authors</h1>
+						<h1 class="section-title">Writers</h1>
 						<!--Channels block-->
 						<div class="credit-block sources">
 							<ul class="list-unstyled">

@@ -79,6 +79,7 @@ new VisitorActivity();
 
 								<input  class="lg-inputs btn" type="submit" value="LOGIN">
 							</form>
+							<hr width="100%">
 							<a href="#">Forgotten Password</a>
 							<br>
 							<a>Create an Account</a>
