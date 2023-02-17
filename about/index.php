@@ -57,7 +57,7 @@ new VisitorActivity();
 							<li><a href="#what-is-fastreed">What is Fastreed?</a></li>
 							<li><a href="#why-fastreed">Why Fastreed.com?</a></li>
 							<!-- <li><a href="#our-goals">Vision and Mission</a></li> -->
-							<li><a href="#team-members">Our Team Members</a></li>
+							<li><a href="#our-writers">Our Writers</a></li>
 						</ul>
 					</div>
 					<!-- Collections -->
@@ -90,7 +90,7 @@ new VisitorActivity();
 								You will be able to <b>earn money</b> by writing articles when it is enabled on our platform. We will let you know when it is enabled.
 							</div>
 
-							<h3 id="team-members">Our Team Members</h3>
+							<h3 id="our-writers">Our Writers</h3>
 							<div class="team">
 								<div class="section-block members summary">
 									<div class="profile-contents">
@@ -104,7 +104,7 @@ new VisitorActivity();
 									<div class="profile-contents">
 										<img src="../assets/img/dummy.png" class="profile-image img responsive" alt="John Doe">
 										<a href="#" class="btn">MD. Kabeer</a>
-										<p>Senior Writerd</p>
+										<p>Senior Writer</p>
 									</div>
 								</div>
 
