@@ -49,8 +49,13 @@ class filteredData{
             $upperLimit = $rangeArray[1];
             //run this query if no date is given
             if(isset($_POST['date'])){
-                $date = $_POST['date'];
+                if(!empty($_POST['date'])){
+                    $date = $_POST['date'];
                 $query = "where `tdate` = '$date' order by `s.no` $sequance";
+                }else{
+                    $query = "where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
+                }
+                
             }else{
                 $query = "where `s.no` between ($lowerLimit) and ($upperLimit) order by `s.no` $sequance";
             }
