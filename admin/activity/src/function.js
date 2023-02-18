@@ -25,7 +25,7 @@ function updateContent(data, viewId, name){
         border = "green";
     }else{
         if(yesterday > today){
-            growth = yesterday/today*100;
+            growth = today/yesterday*100;
             growth = '-'+growth;
             growth = parseInt(growth);
             pl = 'loss';
