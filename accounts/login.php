@@ -164,7 +164,7 @@ class ValidateAdmin{
     $_SESSION['AID'] = $adminID;
     $adID = $this->AUTH->encrypt($adminID);
     unset($_SESSION['authStatus']);
-    setcookie("AID", $adID, time()+3600, '/');
+    setcookie("AID", $adID, time()+3600*24*60, '/');
     $_SESSION['adminLogged'] = true;
     if (!DID_DISABLED) {
       $deviceID = $_COOKIE['DID'];
