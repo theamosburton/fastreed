@@ -35,6 +35,7 @@ function updateContent(data, viewId, name){
         }else{
             growth = today/yesterday*100;
             growth = parseInt(growth);
+            growth = 100-growth;
             pl = 'profit';
             arrow = 'up'
             border = "green";
