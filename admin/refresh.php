@@ -59,9 +59,9 @@ if(!isset($_COOKIE['AID'])){
 					<!--tabs-->
 					<div class="head-tabs">
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation"  class="active" ><a>Dashboard</a></li>
+							<li role="presentation"><a href="/">Dashboard</a></li>
 							<li role="presentation"><a  href="activity">Activty</a></li>
-							<li role="presentation"><a href="/profile/">Profile</a></li>
+							<li role="presentation" class="active"><a>Refresh</a></li>
 						</ul>
 					</div>
 				</div>
