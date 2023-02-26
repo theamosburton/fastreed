@@ -13,6 +13,9 @@ if(!isset($_COOKIE['AID'])){
 
 ?>
 
+
+
+
 <!DOCTYPE html> 
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>
@@ -58,20 +61,19 @@ if(!isset($_COOKIE['AID'])){
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"  class="active" ><a>Dashboard</a></li>
 							<li role="presentation"><a  href="activity">Activty</a></li>
-							<li role="presentation"><a href="refresh.php">Refresh</a></li>
+							<li role="presentation"><a href="/profile/">Profile</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
-			<div class="content  side-block sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
-				<div class="section-block ">
-				</div>
-			</div>
-
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
-					<div class="section-title" id="1">All Devices</div>
+					<span>
+                        <?php 
+                                $output = shell_exec('git pull fastreed main');
+                                echo $output;
+                        ?>
+                    </span>
 				</div>	
 			</div>
 		</div>
