@@ -43,9 +43,9 @@ new VisitorActivity();
 
 								<?php
 								if(!isset($_COOKIE['AID'])){
-									echo `<li role="presentation"><a href="/admin/" >Admin Panel</a></li>`;
+									echo '<li role="presentation"><a href="/admin/" >Admin Panel</a></li>';
 								}else{
-									echo `<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>`;
+									echo '<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>';
 								}
 								?>
 							</ul>
