@@ -40,7 +40,14 @@ new VisitorActivity();
 								<li role="presentation" class="active"><a href="#home">Home</a></li>
 								<li role="presentation"><a href="about/" >About</a></li>
 								<li role="presentation"><a href="terms-privacy/" >Terms & Privacy</a></li>
-								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
+
+								<?php
+								if(!isset($_COOKIE['AID'])){
+									echo `<li role="presentation"><a href="/admin/" >Admin Panel</a></li>`;
+								}else{
+									echo `<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>`;
+								}
+								?>
 							</ul>
 					    </div>
 					</div>
