@@ -39,8 +39,10 @@ if(!isset($_COOKIE['AID'])){
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<style>
 		.main-block{
-			height: auto;
-			max-height: none;
+			height: 100%;
+		}
+		.side-block{
+			height: 100%;
 		}
 	</style>
 </head>
@@ -64,7 +66,7 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
+			<div class="content  side-block sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block ">
 				</div>
 			</div>
