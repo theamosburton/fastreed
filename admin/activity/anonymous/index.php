@@ -99,28 +99,7 @@ if(!isset($_COOKIE['AID'])){
 				<!-- All Devices Block -->
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
-					<div class="filter">
-					    <label for="dateRange">Date:</label>
-						<input id="dateRange" type="date">
-					    <label for="order">Order:</label>
-						<select id="order" value="order">
-						    <option value="desc">Descending Order</option>
-							<option value="asc">Ascending Order</option>	
-					    </select>
-						<label for="rows">Rows:</label>
-						<select name="" id="rows">
-						    <option value="10">10</option>
-						    <option value="25">25</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>
-						<label for="columns">Range:</label>
-						<select id="range" value="range">
-							<option value="1,25">1-25</option>
-							<option value="25,50">25-50</option>
-					    </select>
-						<span id="filter-button-device" class="filter-button">Apply</span>
-	                </div>
+					
 					<div class="activity-tables device-table">
 					    <div class="loader device-loader"></div>
 						<table class="table table-bordered tb-devices">
@@ -152,6 +131,29 @@ if(!isset($_COOKIE['AID'])){
 							</tbody>
 						</table>
 					</div>
+
+					<div class="filter">
+					    <label for="dateRange">Date:</label>
+						<input id="dateRange" type="date">
+					    <label for="order">Order:</label>
+						<select id="order" value="order">
+						    <option value="desc">Descending Order</option>
+							<option value="asc">Ascending Order</option>	
+					    </select>
+						<label for="rows">Rows:</label>
+						<select name="" id="rows">
+						    <option value="10">10</option>
+						    <option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+						<label for="columns">Range:</label>
+						<select id="range" value="range">
+							<option value="1,25">1-25</option>
+							<option value="25,50">25-50</option>
+					    </select>
+						<span id="filter-button-device" class="filter-button">Apply</span>
+	                </div>
 
 				</div>	
 				<!-- All Devices Block End -->
