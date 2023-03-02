@@ -5,15 +5,15 @@
 
 
   $('#rows').change(function() {
-    filter();
+    filterDevice();
   });
   $('#order').change(function() {
-    filter();
+    filterDevice();
   });
   var dateRange;
 
   $('#dateRange').change(function(){
-    filter();
+    filterDevice();
    });
 
 
