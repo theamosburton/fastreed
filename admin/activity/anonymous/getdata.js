@@ -17,10 +17,13 @@
    });
 
 
-  $('#filter-button').click(applyFilter);
+  $('#filter-button-device').click(getDeviceData());
 
 function readyFun(){
+  prefilledDevices();
+  }
 
+function prefilledDevices(){
   $.post( "data/DATA.php", {which : 'Devices', howMuch: 10 , sequance : 'desc'}, function( data ) {
     let input = new Array();
     for(let i=0;i<data.length; i++){
@@ -34,16 +37,19 @@ function readyFun(){
                   </tr>
       `;
     }
-    $(".activity-tables").css('display', 'block');
-    $(".loader").hide();
+    $(".device-table").css('display', 'block');
+    $(".device-loader").hide();
+    $('.tb-devices').css('filter','blur(0px)');
     $("#devices-rows").html(input);
-    $('.table-bordered').css('filter','blur(0px)')
   });
-  filter();
-  }
+  filterDevice();
+}
 
+function getDeviceData(){
+  $(".device-table").css('display', 'flex');
+  $(".device-loader").show();
+  $('.tb-devices').css('filter','blur(3px)');
 
-function applyFilter(){
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
   let range = $('#range').find(":selected").val();
@@ -61,6 +67,9 @@ function applyFilter(){
                   </tr>
       `;
     }
+    $(".device-table").css('display', 'block');
+    $(".device-loader").hide();
+    $('.tb-devices').css('filter','blur(0px)');
     $("#devices-rows").html(input);
   });
 }
@@ -72,7 +81,7 @@ function isValidDate(d) {
 
 
 
-function filter(){
+function filterDevice(){
   let  dateRange = $('#dateRange').val();
   if(isNaN(dateRange)){
     alias = `Where tdate = '${dateRange}'`;

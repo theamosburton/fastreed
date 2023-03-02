@@ -48,7 +48,7 @@ if(!isset($_COOKIE['AID'])){
 			align-items: center;
 			
 		}
-		.table-bordered{
+		.tb-devices, .tb-sessions{
 			filter: blur(3px);
 		}
 		.loader{
@@ -99,7 +99,7 @@ if(!isset($_COOKIE['AID'])){
 				<!-- All Devices Block -->
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
-					<div class="filter" action="" method="post">
+					<div class="filter">
 					    <label for="dateRange">Date:</label>
 						<input id="dateRange" type="date">
 					    <label for="order">Order:</label>
@@ -119,11 +119,11 @@ if(!isset($_COOKIE['AID'])){
 							<option value="1,25">1-25</option>
 							<option value="25,50">25-50</option>
 					    </select>
-						<span id="filter-button" class="filter-button">Apply</span>
+						<span id="filter-button-device" class="filter-button">Apply</span>
 	                </div>
-					<div class="activity-tables">
-					<div class="loader"></div>
-						<table class="table table-bordered">
+					<div class="activity-tables device-table">
+					    <div class="loader device-loader"></div>
+						<table class="table table-bordered tb-devices">
 							<thead>
 								<tr>
 								<th scope="col">S.NO.</th>
@@ -160,6 +160,47 @@ if(!isset($_COOKIE['AID'])){
 				<!-- Sessions Block -->
 				<div class="section-block main-block">
 					<div class="section-title" id="1">Sessions</div>
+
+					<div class="filter">
+						<label for="sessionId">Session ID:</label>
+						<input type="text" name="" id="">
+						<label for="rows">Rows:</label>
+						<select name="" id="rows">
+						    <option value="10">10</option>
+						    <option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+						<span id="filter-button" class="filter-button">Apply</span>
+	                </div>
+
+					<div class="activity-tables sessions-table">
+						<table class="table table-bordered tb-sessions">
+							<thead>
+								<tr>
+								<th scope="col">S.NO.</th>
+								<th scope="col">SESSION ID</th>
+								<th scope="col">DATE</th>
+								<th scope="col">IP ADDRESS</th>
+								</tr>
+							</thead>
+							<tbody id="devices-rows">
+							    <tr>
+									<th></th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>	
+
+								<tr>
+									<th></th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<!-- Sessions Block Ends-->
 
