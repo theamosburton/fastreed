@@ -42,6 +42,18 @@ if(!isset($_COOKIE['AID'])){
 			height: auto;
 			max-height: none;
 		}
+		.activity-tables{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
+		}
+		.table-bordered{
+			filter: blur(3px);
+		}
+		.loader{
+			position: absolute;
+		}
 	</style>
 </head>
 <body>
@@ -110,6 +122,7 @@ if(!isset($_COOKIE['AID'])){
 						<span id="filter-button" class="filter-button">Apply</span>
 	                </div>
 					<div class="activity-tables">
+					<div class="loader"></div>
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -121,6 +134,21 @@ if(!isset($_COOKIE['AID'])){
 								</tr>
 							</thead>
 							<tbody id="devices-rows">
+							    <tr>
+									<th></th>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>	
+
+								<tr>
+									<th></th>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

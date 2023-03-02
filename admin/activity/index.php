@@ -84,7 +84,6 @@ if(!isset($_COOKIE['AID'])){
 
                         <div class="tabs" id="sessions">
                             <div class="loader"></div>
-                            <!-- <span class="number">Load... <span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span> -->
                             <span class="entity">Sessions</span>
                         </div>
 

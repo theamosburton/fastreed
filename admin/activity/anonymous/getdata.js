@@ -34,7 +34,10 @@ function readyFun(){
                   </tr>
       `;
     }
+    $(".activity-tables").css('display', 'block');
+    $(".loader").hide();
     $("#devices-rows").html(input);
+    $('.table-bordered').css('filter','blur(0px)')
   });
   filter();
   }
