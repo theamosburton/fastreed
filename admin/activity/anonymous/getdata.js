@@ -49,6 +49,21 @@ function getDeviceData(){
   $(".device-table").css('display', 'flex');
   $(".device-loader").show();
   $('.tb-devices').css('filter','blur(3px)');
+  $('#devices-rows').html(`<tr>
+  <th></th>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>	
+
+<tr>
+  <th></th>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>`);
 
   let rows = $('#rows').find(":selected").val();
   let order = $('#order').find(":selected").val();
