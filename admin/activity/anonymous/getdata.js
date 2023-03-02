@@ -17,10 +17,11 @@
    });
 
 
-  $('#filter-button-device').click(getDeviceData());
+  $('#filter-button-device').click(getDeviceData);
 
 function readyFun(){
   prefilledDevices();
+  filterDevice();
   }
 
 function prefilledDevices(){
@@ -42,7 +43,6 @@ function prefilledDevices(){
     $('.tb-devices').css('filter','blur(0px)');
     $("#devices-rows").html(input);
   });
-  filterDevice();
 }
 
 function getDeviceData(){
