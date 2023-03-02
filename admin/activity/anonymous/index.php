@@ -159,6 +159,6 @@ if(!isset($_COOKIE['AID'])){
 <!-- Template JS -->
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/page.js"></script>
-<script type="text/javascript" src="getdata.js"></script>
+<script type="text/javascript" src="getdata.js?v=1.0.0"></script>
 </body>
 </html>
