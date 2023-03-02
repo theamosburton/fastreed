@@ -25,7 +25,7 @@ function readyFun(){
   }
 
 function prefilledDevices(){
-  $.post( "data/DATA.php", {which : 'Devices', howMuch: 10 , sequance : 'desc'}, function( data ) {
+  $.post( "data/DATA.php", {which : 'Devices', howMuch: 7 , sequance : 'desc'}, function( data ) {
     let input = new Array();
     for(let i=0;i<data.length; i++){
       input[i] = `<tr>
