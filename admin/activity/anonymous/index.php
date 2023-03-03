@@ -39,8 +39,7 @@ if(!isset($_COOKIE['AID'])){
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<style>
 		.main-block{
-			height: auto;
-			max-height: none;
+			min-height: 80vh;
 		}
 		.activity-tables{
 			display: flex;
@@ -78,17 +77,6 @@ if(!isset($_COOKIE['AID'])){
 
 			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block admin-block-sidebar">
-					<h1 id="tab"class=" table-content section-title">Activity <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
-					<div id="tb-con">
-						<ul>
-							<!-- <a class="TOC-subh" href="#terms-of-use">User Activity</a> -->
-							<li><a href="#1">Devices</a></li>
-							<li><a href="#2">Sessions</a></li>
-							<li><a href="#3">Visits</a></li>
-							<li><a href="#4">Admin</a></li>
-							<li><a href="#5">Admin Sessions</a></li>
-						</ul>
-					</div>
 				</div>
 
 
@@ -98,6 +86,19 @@ if(!isset($_COOKIE['AID'])){
 			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
 				<!-- All Devices Block -->
 				<div class="section-block main-block">
+
+				        <div class="section-tabs">
+							<div class="home-tabs ">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">Featured</a></li>
+
+									<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
+
+								</ul>
+							</div>
+						</div>
+
+
 					<div class="section-title" id="1">All Devices</div>
 					<div class="filter">
 					    <label for="dateRange">Date:</label>
@@ -155,60 +156,6 @@ if(!isset($_COOKIE['AID'])){
 
 				</div>	
 				<!-- All Devices Block End -->
-
-
-				<!-- Sessions Block -->
-				<div class="section-block main-block">
-					<div class="section-title" id="1">Sessions</div>
-
-					<div class="filter">
-						<label for="sessionId">Session ID:</label>
-						<input type="text" name="" id="">
-						<label for="rows">Rows:</label>
-						<select name="" id="rows">
-						    <option value="10">10</option>
-						    <option value="25">25</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>
-						<span id="filter-button" class="filter-button">Apply</span>
-	                </div>
-
-					<div class="activity-tables sessions-table">
-						<table class="table table-bordered tb-sessions">
-							<thead>
-								<tr>
-								<th scope="col">S.NO.</th>
-								<th scope="col">SESSION ID</th>
-								<th scope="col">DATE</th>
-								<th scope="col">IP ADDRESS</th>
-								</tr>
-							</thead>
-							<tbody id="devices-rows">
-							    <tr>
-									<th></th>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>	
-
-								<tr>
-									<th></th>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- Sessions Block Ends-->
-
-				<!-- Visits Block -->
-				<div class="section-block main-block">
-					<div class="section-title" id="1">Visits</div>
-				</div>
-				<!-- Visits Block Ends -->
 			</div>
 			<div class="content col-12 order-3 footer">
 					<div class="section-block footer-section"></div>

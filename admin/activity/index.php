@@ -39,8 +39,7 @@ if(!isset($_COOKIE['AID'])){
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<style>
 		.main-block{
-			height: auto;
-			max-height: none;
+			min-height: 80vh;
 		}
 	</style>
 </head>
@@ -71,37 +70,110 @@ if(!isset($_COOKIE['AID'])){
 
 			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
-					<div class="section-title" id="1">Anonymous</div>
-                    <div class="activity-tabs row">
 
-                        <div class="tabs" id="devices">
-                            <div class="loader"></div>
-                            <!--   
-                            <span class="number">Load... <span class="percent profit">00% </span><li class="profit rotate-up fa fa-play"></li></span>-->
-                            <span class="entity">Devices</span>
-                            
-                        </div>
+						<div class="section-tabs">
+							<div class="home-tabs ">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#anonymous" aria-controls="anonymous" role="tab" data-toggle="tab">ANONYMOUS</a></li>
 
-                        <div class="tabs" id="sessions">
-                            <div class="loader"></div>
-                            <span class="entity">Sessions</span>
-                        </div>
+									<li role="presentation"><a href="#writers" aria-controls="writers" role="tab" data-toggle="tab">WRITERS</a></li>
 
-                        <div class="tabs" id="views">
-                            <div class="loader"></div>
-                            <span class="entity">Views</span>
-                        </div>
+									<li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">USERS</a></li>
 
-                    </div>
-                    <a id="view-more" href="anonymous">Detail Info</a>
-				</div>	
+									<li role="presentation"><a href="#admins" aria-controls="admins" role="tab" data-toggle="tab">ADMINS</a></li>
 
-                <div class="section-block main-block">
-					<div class="section-title" id="1">Users</div>
-				</div>	
+								</ul>
+							</div>
+						</div>
+					
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="anonymous">
+							<div class="section-block">
+								<div class="section-title" id="1">Anonymous</div>
+								<div class="activity-tabs row">
+									<div class="tabs" id="devices">
+										<div class="loader"></div>
+										<span class="entity">Devices</span>
+										
+									</div>
+									<div class="tabs" id="sessions">
+										<div class="loader"></div>
+										<span class="entity">Sessions</span>
+									</div>
+									<div class="tabs" id="views">
+										<div class="loader"></div>
+										<span class="entity">Views</span>
+									</div>
+								</div>
+								<a id="view-more" href="anonymous">Detail Info</a>
+							</div>
+						</div>
 
-                <div class="section-block main-block">
-					<div class="section-title" id="1">Admins</div>
+						<!-- Writers Data -->
+						<div role="tabpanel" class="tab-pane" id="writers">
+							<div class="section-block">
+								<div class="section-title" id="1">Writers</div>
+								<div class="activity-tabs row">
+
+									<div class="tabs" id="w-sessions">
+										<div class="loader"></div>
+										<span class="entity">Sessions</span>
+									</div>
+
+									<div class="tabs" id="w-views">
+										<div class="loader"></div>
+										<span class="entity">Views</span>
+									</div>
+
+								</div>
+								<a id="view-more" href="writers">Detail Info</a>
+							</div>
+						</div>	
+
+						<!-- Users Data -->
+						<div role="tabpanel" class="tab-pane" id="users">
+							<div class="section-block">
+								<div class="section-title" id="1">Users</div>
+								<div class="activity-tabs row">
+
+									<div class="tabs" id="u-sessions">
+										<div class="loader"></div>
+										<span class="entity">Sessions</span>
+									</div>
+
+									<div class="tabs" id="u-views">
+										<div class="loader"></div>
+										<span class="entity">Views</span>
+									</div>
+
+								</div>
+								<a id="view-more" href="users">Detail Info</a>
+							</div>
+						</div>	
+
+						<!-- Admins -->
+
+						<div role="tabpanel" class="tab-pane" id="admins">
+							<div class="section-block">
+								<div class="section-title" id="1">Admins</div>
+								<div class="activity-tabs row">
+
+									<div class="tabs" id="a-sessions">
+										<div class="loader"></div>
+										<span class="entity">Sessions</span>
+									</div>
+
+									<div class="tabs" id="a-views">
+										<div class="loader"></div>
+										<span class="entity">Views</span>
+									</div>
+
+								</div>
+								<a id="view-more" href="admins">Detail Info</a>
+							</div>
+						</div>	
+					</div>
+					
 				</div>	
 			</div>
 			<div class="content col-12 order-3 footer">
