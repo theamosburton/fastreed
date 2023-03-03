@@ -26,11 +26,11 @@ new VisitorActivity();
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="style-7">
 	<!--main content-->
 	<div class="main-content">
-		<div class="container">
-			<div class="row">
+		<div class="container ">
+			<div class="row ">
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
 						<h1> <a href="/">FastReed.com</a> </h1>
@@ -55,41 +55,9 @@ new VisitorActivity();
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div class="content col-md-3 col-sm-12 col-xs-12 order-2">
-					<!-- <div class="section-block summary">
-						<div class="profile-contents">
-							<img src="assets/img/profile.webp" class="profile-image img responsive" alt="John Doe">
-							<a href="#" class="btn btn-contact"><i class="fa fa-user"></i>JAMES CAMERON</a>
-						</div>
-					</div> -->
+				  <div class="content col-md-3 col-sm-12 col-xs-12 order-3">
 
-					<div class="section-block sidebar-block">
-						<h1 class="section-title ">Topics</h1>
-						<!--Authors block-->
-						<div class="credit-block sources">
-							<ul class="list-unstyled">
-								<li><a href="#"><i class="fa fa-link"></i>Social Media(10)</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Technology(20)</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Business(12)</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Education(98)</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Politics(12)</a></li>
-								<li><a href="#"><i class="fa fa-link"></i>Entertainment(123)</a></li>
-							</ul>
-						</div>
-
-
-						<h1 class="section-title">Writers</h1>
-						<!--Channels block-->
-						<div class="credit-block sources">
-							<ul class="list-unstyled">
-								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Rakesh Malik</a></li>
-								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>MD. Kabeer</a></li>
-								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Mahira Rajput</a></li>
-								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Sophia Vergara</a></li>
-								<li><a href="#"><i class="fa fa-user-circle fa-xl"></i>Amrita Singh</a></li>
-								<li><a href=""><i class="fa fa-user-circle fa-xl"></i>Anonymous</a></li>
-							</ul>
-						</div>
+					<div class="section-block sidebar-block">				
 					</div>
 					<!-- Collections -->
 
@@ -98,11 +66,11 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-9 col-sm-12 col-xs-12 order-1">
+				<div class="content col-md-7 col-sm-12 col-xs-12 order-2">
 				    
 					
 					<!--tab panes-->
-					<div class="home-block section-block  ">
+					<div class="home-block style-7 section-block  ">
 					<!-- <div class=" alert alert-danger" role="alert">
 								The Website is currently in Development Mode!
 					</div> -->
@@ -174,12 +142,18 @@ new VisitorActivity();
 										
 										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
 									</div>
+									<div class="block"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="content col-12 order-3 footer">
+
+				<div class="content col-md-2 col-sm-12 col-xs-12 order-1">
+					<div class="section-block"></div>
+				</div>
+
+				<div class="content col-12 order-4 footer">
 					<div class="section-block footer-section"></div>
 				</div>
 			</div>

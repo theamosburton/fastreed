@@ -25,7 +25,7 @@ new VisitorActivity();
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="style-7">
 	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
@@ -50,7 +50,7 @@ new VisitorActivity();
 				  <!--Side bar -->
 			      <!--Collections-->
 				<div class="content sidebar page-col col-md-3 col-sm-12 col-xs-12">
-					<div class="section-block sidebar-block">
+					<div class="section-block style-7 sidebar-block">
 						
 						<h1 id="tab"class=" table-content section-title">Table of content <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
 						<ul id="tb-con">
@@ -69,7 +69,7 @@ new VisitorActivity();
 				<div class="content col-md-9 col-sm-12 col-xs-12">
 					<!--tabs-->
 					<!--/tabs-->
-					<div class="section-block main-block">
+					<div class="section-block style-7 main-block">
 					<!-- <div class=" alert alert-danger" role="alert">
 								The Website is currently in Development Mode!
 					</div> -->

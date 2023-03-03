@@ -56,7 +56,7 @@ if(!isset($_COOKIE['AID'])){
 		}
 	</style>
 </head>
-<body>
+<body class="style-7">
 <!--main content-->
 <div class="main-content">
 	<div class="container">
