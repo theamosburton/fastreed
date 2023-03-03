@@ -64,12 +64,12 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
+			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block ">
 				</div>
 			</div>
 
-			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
+			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
 					<div class="section-title" id="1">Anonymous</div>
                     <div class="activity-tabs row">
@@ -104,16 +104,12 @@ if(!isset($_COOKIE['AID'])){
 					<div class="section-title" id="1">Admins</div>
 				</div>	
 			</div>
+			<div class="content col-12 order-3 footer">
+					<div class="section-block footer-section"></div>
+				</div>
 		</div>
 	</div>
 </div>
-<footer class="footer">
-<div class="container text-center">
-		<div class="row copyright-row">
-			<span class="copyright"><a href="/" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
-		</div>
-	</div>
-</footer>
 
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>

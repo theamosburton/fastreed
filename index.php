@@ -103,9 +103,9 @@ new VisitorActivity();
 					
 					<!--tab panes-->
 					<div class="home-block section-block  ">
-					<div class=" alert alert-danger" role="alert">
+					<!-- <div class=" alert alert-danger" role="alert">
 								The Website is currently in Development Mode!
-					</div>
+					</div> -->
 						<div class="section-tabs">
 							<div class="home-tabs ">
 								<ul class="nav nav-tabs" role="tablist">
@@ -179,16 +179,12 @@ new VisitorActivity();
 						</div>
 					</div>
 				</div>
+				<div class="content col-12 order-3 footer">
+					<div class="section-block footer-section"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-	<div class="container text-center">
-			<div class="row copyright-row">
-				<span class="copyright"><a href="#" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
-			</div>
-		</div>
-	</footer>
 	
 	<!-- Global jQuery -->
 	<script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>

@@ -159,18 +159,12 @@ new VisitorActivity();
 						</div>
 					</div>
 				</div>
+				<div class="content col-12 order-3 footer">
+					<div class="section-block footer-section"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-	<div class="container text-center">
-			<div class="row copyright-row">
-				<!--This template has been created under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using this template in your own project, thank you.-->
-				<span class="copyright"><a href="/" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
-			</div>
-		</div>
-	</footer>
-	
 	<!-- Global jQuery -->
 	<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

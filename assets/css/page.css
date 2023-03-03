@@ -1,14 +1,12 @@
 .sidebar-block, .main-block{
     height: 100%;
-    max-height: 80vh;
+    max-height: 100vh;
     margin-bottom: 5px;
-}
-.sidebar-block{
     overflow: auto;
 }
+
 .paragraphs{
     padding: 0 30px;
-    overflow: auto;
 }
 .paragraphs h3{
     font-weight: bolder;
@@ -182,9 +180,6 @@
         padding: 5px 10px;  
     }
     
-    .sidebar{
-        margin-bottom: 10px;
-    }
     .sidebar-block, .main-block{
         height: 100%;
         max-height:none;

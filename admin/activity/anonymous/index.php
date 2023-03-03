@@ -76,7 +76,7 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-4 col-md-12 col-sm-12 col-xs-12">
+			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block admin-block-sidebar">
 					<h1 id="tab"class=" table-content section-title">Activity <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
 					<div id="tb-con">
@@ -95,7 +95,7 @@ if(!isset($_COOKIE['AID'])){
 
 			</div>
 
-			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
+			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
 				<!-- All Devices Block -->
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
@@ -210,16 +210,12 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 				<!-- Visits Block Ends -->
 			</div>
+			<div class="content col-12 order-3 footer">
+					<div class="section-block footer-section"></div>
+				</div>
 		</div>
 	</div>
 </div>
-<footer class="footer">
-<div class="container text-center">
-		<div class="row copyright-row">
-			<span class="copyright"><a href="/" target="_blank">@ Copyright www.Fastreed.com | 2023</a></span>
-		</div>
-	</div>
-</footer>
 
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
