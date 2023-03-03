@@ -55,7 +55,7 @@ new VisitorActivity();
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div class="content col-md-4 col-sm-12 col-xs-12 order-2">
+				  <div class="content col-md-3 col-sm-12 col-xs-12 order-2">
 					<!-- <div class="section-block summary">
 						<div class="profile-contents">
 							<img src="assets/img/profile.webp" class="profile-image img responsive" alt="John Doe">
@@ -98,7 +98,7 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-8 col-sm-12 col-xs-12 order-1">
+				<div class="content col-md-9 col-sm-12 col-xs-12 order-1">
 				    
 					
 					<!--tab panes-->

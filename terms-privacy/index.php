@@ -50,7 +50,7 @@ new VisitorActivity();
 				</div>
 				  <!--Side bar -->
 			      <!--Collections-->
-				<div class="content sidebar page-col col-md-4 col-sm-12 col-xs-12">
+				<div class="content sidebar page-col col-md-3 col-sm-12 col-xs-12">
 					<div class="section-block sidebar-block">
 						
 						<h1 id="tab"class=" table-content section-title">Table of content <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
@@ -81,7 +81,7 @@ new VisitorActivity();
 				</div>
 				<!--/sidebar-->
 				<!-- Right Main Bar -->
-				<div class="content col-md-8 col-sm-12 col-xs-12">
+				<div class="content col-md-9 col-sm-12 col-xs-12">
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block main-block">

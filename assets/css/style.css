@@ -29,8 +29,10 @@ a {
 }
 /*-Header-*/
 #header-section {
+	border-radius: 5px 5px 0px 0px ;
 	padding: 10px 20px;
 	display: flex;
+	border-bottom: 1px solid grey;
 }
 
 .home-tabs{
@@ -50,8 +52,7 @@ a {
 	text-decoration: none;
 }
 .content{
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 0px 1px;
 }
 .goal-summary {
 	/* padding: 0px 40px; */
@@ -87,7 +88,33 @@ a {
 	background-color:#85AD90;
 	color:#fff;
 }
+
+
+@media (min-width: 1200px){
+	.container {
+		max-width: 100%;
+	}
+}
+@media (min-width: 992px){
+.container {
+    max-width: 100%;
+}
+}
+@media (min-width: 720px) {
+	.container {
+		max-width: 100%;
+	}
+}
+@media (min-width: 1300px){
+	.container {
+		max-width: 1250px;
+	}
+}
+
 @media (max-width: 767px) {
+	.container {
+		max-width: 100%;
+	}
 	.goal-summary {
 		text-align: center;
 		padding: 0px 40px;
@@ -100,9 +127,8 @@ a {
 /*-Section Blocks-*/
 .section-block {
 	background-color: #f5f5f9;
-	border-radius:4px;
 	padding: 30px;
-	margin-bottom:20px;
+	margin-bottom:0px;
 }
 
 .home-block{
@@ -111,6 +137,9 @@ a {
 .section-block.summary {
     background-color: #66a778;
 	
+}
+.featured-block{
+	padding-top: 5px;
 }
 
 .section-featured{
@@ -157,7 +186,7 @@ a {
 
 /*-Main Content-*/
 .main-content {
-	padding:20px 0px;
+	padding:5px;
 }
 
 /*-Profile Summary-*/
@@ -376,9 +405,6 @@ a {
 	}
 	#header-section .head-tabs{
 		justify-content: center;
-	}
-	.main-content{
-		padding-top: 10px;
 	}
 }
 
