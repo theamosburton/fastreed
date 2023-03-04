@@ -30,9 +30,7 @@ new VisitorActivity();
         form{
             display: flex;
             flex-direction: column;
-        }
-        #submit{
-            margin-top: 20px;
+            justify-content: center;
         }
 
         form .button{
@@ -40,7 +38,7 @@ new VisitorActivity();
             justify-content: center;
         }
         .i-elements{
-            margin-top: 20px;
+            margin-top: 40px;
             display: flex;
             flex-direction: column;
             font-weight: 700;
@@ -58,12 +56,12 @@ new VisitorActivity();
             background-color: transparent;
         }
         #submit{
-            
-            padding: 5px 60px;
+            margin-top: 40px;
+            padding: 10px 60px;
             color: white;
             background-color: cornflowerblue;
             border: 0;
-            border-radius: 20px;
+            border-radius: 40px;
             font-weight: 700;
         }
         #submit:hover{
