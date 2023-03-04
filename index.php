@@ -80,7 +80,7 @@ new VisitorActivity();
 						
 						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>
 
-						<a href=""><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
+						<a href="my-interests"><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
 
 						<a href="/accounts"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
 

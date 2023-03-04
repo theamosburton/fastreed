@@ -35,23 +35,52 @@ new VisitorActivity();
 
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
-						<h1> <a href="/">FastReed.com</a> </h1>
+					<div class="brand">
+							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<h1> <a href="/">FastReed.com</a> </h1>
+						</div>
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" ><a href="/about/" >About</a></li>
-								<li role="presentation"><a href="/terms-privacy/">Terms & Privacy</a></li>
 								<li role="presentation" class="active"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-0 col-sm-0">
+				<div class=" content sidebar col-lg-3 col-md-0 col-sm-0">
+				<div class="section-block sidebar-block">
+					    <p id="sidebarPosition" hidden>0</p>
+						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
+					    <div class="s-tabs profile-tab">
+							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
+							<div>
+							<p class="name">Anonymous</p>
+							<p class="desig">New User</p>
+							</div>
+							
+						</div>	
+
+						
+						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>
+
+						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
+						
+						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>
+
+						<a href="/my-interests"><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
+
+						<a style="color:blue"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
+
+						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>
+						
+										
+					</div>
 				</div>
 
-				<div class="content col-lg-6  col-sm-12 col-xs-12">
-				    <div class="section-block main-block" style="max-height: fit-content">
+				<div class=" content col-lg-6  col-sm-12 col-xs-12">
+				    <div class="style-7 section-block main-block">
 						<div class=" alert alert-warning" role="alert">
 							Only admins and Writers are allowed!
 					    </div>
