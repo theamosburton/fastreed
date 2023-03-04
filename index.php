@@ -66,7 +66,7 @@ new VisitorActivity();
 					<p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <div class="s-tabs profile-tab">
-							<img height="50px" widht="50px" src="/assets/img/profile.webp" alt="" class="s-photo">
+							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
 							<div>
 							<p class="name">MD. Shafiq Malik</p>
 							<p class="desig">New User</p>
