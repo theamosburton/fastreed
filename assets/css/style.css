@@ -400,7 +400,7 @@ a {
 
 /*-Sign up form-*/
 .sidebar-block{
-	padding: 20px;
+	padding: 20px 3px;
 }
 
 .sign-up-form {
@@ -417,7 +417,95 @@ a {
 	border-radius: 4px;
 	max-width: 400px;
 }
+.s-tabs{
+	padding: 10px 15px;
+	font-weight: 700;
+	border-bottom: 1px solid grey;
+}
+.s-tabs:hover{
+	cursor: pointer;
+}
+.profile-tab{
+	display: flex;
+	padding-bottom: 20px;
+	flex-direction: row;
+	align-items: center;
+}
+.profile-tab img{
+	margin-right: 10px;
+	border-radius: 40px;
+	height: 60px;
+	width: 60px;
+	border: 3px solid rgb(135, 183, 181);
+}
+.s-tabs i{
+	margin-right: 10px;
+}
+.s-tabs p{
+	margin-bottom: 2px;
+}
+.s-tabs .desig{
+	font-size: 15px;
+}
+.s-tabs .name{
+	color: black;
+	text-transform: capitalize;
+}
+
+#close-bars{
+	color: #239677;
+	display: none;
+	cursor: pointer;
+}
+
+#bars{
+	margin-top: 23px;
+	margin-right: 20px;
+	color:#5a9269;
+	display: none;
+	cursor: pointer;
+}
+
+.brand{
+	display: flex;
+    flex-direction: row;
+}
+
+
+@media (max-width: 900px) {
+	.s-tabs .name{
+		font-size: 15px;
+	}
+	.s-tabs .desig{
+		font-size: 12px;
+	}
+}
+
 @media (max-width: 767px) {
+	#bars{
+		display: block;
+	}
+	#close-bars{
+		display: block;
+	}
+	.profile-tab{
+		border: 0;
+		margin-top: 10px;
+	}
+	.profile-tab img{
+		height: 70px;
+		width: 70px;
+	}
+	.sidebar{
+		transition: left .8s;
+		position: absolute;
+		z-index: 999;
+		right: 0;
+		left: -100vw;
+		bottom: 0;
+		top:0;
+	}
+
 	.style-7::-webkit-scrollbar{
 		width: 3px;
 		border-radius: 3px;
@@ -435,6 +523,9 @@ a {
 }
 
 @media (max-width: 570px) {
+	.nav-tabs>li{
+		margin: 0px 5px 10px 5px;
+	}
 	#header-section{
 		flex-direction: column;
 	}
@@ -509,7 +600,7 @@ a {
 	text-decoration: none;
 }
 .nav-tabs>li{
-	margin: 0px 5px 10px 5px;
+	margin: 5px;
 	white-space: nowrap;
 }
 

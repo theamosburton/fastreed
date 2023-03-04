@@ -33,7 +33,12 @@ new VisitorActivity();
 			<div class="row ">
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
-						<h1> <a href="/">FastReed.com</a> </h1>
+						<div class="brand">
+							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<h1> <a href="/">FastReed.com</a> </h1>
+						</div>
+					
+						
 						<!--tabs-->
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
@@ -55,9 +60,26 @@ new VisitorActivity();
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div class="content col-md-3 col-sm-12 col-xs-12 order-3">
+				  <div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
 
-					<div class="section-block sidebar-block">				
+					<div class="section-block sidebar-block">
+					<p id="sidebarPosition" hidden>0</p>
+						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
+					    <div class="s-tabs profile-tab">
+							<img height="50px" widht="50px" src="/assets/img/profile.webp" alt="" class="s-photo">
+							<div>
+							<p class="name">MD. Shafiq Malik</p>
+							<p class="desig">New User</p>
+							</div>
+							
+						</div>	
+
+						<div class="s-tabs"> <i class="fa fa-user"></i> Sign Up/Log In</div>
+							
+						<div class="s-tabs">Topics</div>	
+						<div class="s-tabs">Support</div>	
+						<div class="s-tabs">My Activity</div>
+										
 					</div>
 					<!-- Collections -->
 
@@ -66,7 +88,7 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-7 col-sm-12 col-xs-12 order-2">
+				<div class="content col-md-6 col-sm-12 col-xs-12 order-2">
 				    
 					
 					<!--tab panes-->
@@ -149,7 +171,7 @@ new VisitorActivity();
 					</div>
 				</div>
 
-				<div class="content col-md-2 col-sm-12 col-xs-12 order-1">
+				<div class="content col-md-3 col-sm-12 col-xs-12 order-1">
 					<div class="section-block"></div>
 				</div>
 
