@@ -61,7 +61,7 @@ new VisitorActivity();
 			      <!--Collections-->
 				  <div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
 
-					<div class="section-block sidebar-block">
+					<div class="style-7 section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <div class="s-tabs profile-tab">
@@ -179,11 +179,20 @@ new VisitorActivity();
 				</div>
 
 				<div class="content r-sidebar col-lg-3 col-md-3">
-					<div class="section-block right-sidebar">
-					<div class="right-ad">
+					<div class="style-7 section-block right-sidebar">
+					    <div class="right-ad">
+							Ad 01
+						</div>
+
+						<div class="right-ad">
+							Ad 01
+						</div>
+
+						<div class="right-ad">
 							Ad 01
 						</div>
 					</div>
+					
 				</div>
 
 				<div class="content col-12 order-4 footer">
