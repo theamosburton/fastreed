@@ -63,7 +63,7 @@ new VisitorActivity();
 				  <div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
 
 					<div class="section-block sidebar-block">
-					<p id="sidebarPosition" hidden>0</p>
+					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <div class="s-tabs profile-tab">
 							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
@@ -74,11 +74,18 @@ new VisitorActivity();
 							
 						</div>	
 
-						<div class="s-tabs"> <i class="fa fa-circle-user fa-xl"></i> Sign Up/Log In</div>
-							
-						<div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div>	
-						<div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Support</div>	
-						<div class="s-tabs">  <i class="fa fa-tasks fa-lg"></i>My Activity</div>
+						
+						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i> Tags </div></a>
+
+						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
+						
+						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i> Contact Us</div></a>
+
+						<a href=""><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i> My Interests</div></a>
+
+						<a href="/accounts"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i> Sign Up/Log In</div></a>
+
+						
 										
 					</div>
 					<!-- Collections -->
