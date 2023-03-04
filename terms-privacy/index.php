@@ -47,38 +47,6 @@ new VisitorActivity();
 					</div>
 					
 				</div>
-				  <!--Side bar -->
-			      <!--Collections-->
-				<div class="content sidebar page-col col-md-3 col-sm-12 col-xs-12">
-					<div class="section-block sidebar-block">
-						
-						<h1 id="tab"class=" table-content section-title">Table of content <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
-						<div id="tb-con">
-                            <ul>
-                                <a class="TOC-subh" href="#terms-of-use">Terms of Service</a>
-                                <li><a href="#1">Owner's Content</a></li>
-                                <li><a href="#2">Other Content</a></li>
-                                <li><a href="#3">Your Rights</a></li>
-                                <li><a href="#4">Respect others</a></li>
-                                <li><a href="#5">Age requirements</a></li>
-                            </ul>
-
-                            <ul>
-                                <a class="TOC-subh" href="#privacy-policy">Privacy Policy</a>
-                                <li><a href="#7">What we Collect?</a></li>
-                                <li><a href="#8">Ads & Promotion</a></li>
-								<li><a href="#6">Third Party Links</a></li>
-                                <li><a href="#9">Tracking and Analytics</a></li>
-                                <li><a href="#10">Session and Cookies</a></li>
-                            </ul>
-							<ul>
-								<a class="TOC-subh" href="#conclusion">Conclusion</a>
-							</ul>
-                        </div>
-					</div>
-					<!-- Collections -->
-				</div>
-				<!--/sidebar-->
 				<!-- Right Main Bar -->
 				<div class="content col-md-9 col-sm-12 col-xs-12">
 					<!--tabs-->
@@ -158,6 +126,15 @@ new VisitorActivity();
 						</div>
 					</div>
 				</div>
+
+				<div class="content r-sidebar col-lg-3 col-md-3">
+					<div class="section-block right-sidebar">
+					<div class="right-ad">
+							Ad 01
+						</div>
+					</div>
+				</div>
+
 				<div class="content col-12 order-3 footer">
 					<div class="section-block footer-section"></div>
 				</div>

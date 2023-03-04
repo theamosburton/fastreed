@@ -178,8 +178,12 @@ new VisitorActivity();
 					</div>
 				</div>
 
-				<div class="content col-md-3 col-sm-12 col-xs-12 order-1">
-					<div class="section-block"></div>
+				<div class="content r-sidebar col-lg-3 col-md-3">
+					<div class="section-block right-sidebar">
+					<div class="right-ad">
+							Ad 01
+						</div>
+					</div>
 				</div>
 
 				<div class="content col-12 order-4 footer">

@@ -152,17 +152,17 @@ new VisitorActivity();
 									<!--reward blocks-->
                                     <form action="send.php">
                                         <div class="i-elements">
-                                            <input class="i-e" type="text" placeholder="Enter Your Name">
+                                            <input class="i-e" type="text" placeholder="Enter Your Name" required>
                                         </div>
                                         
 
                                         <div class="i-elements">
-                                            <input class="i-e" type="text" placeholder="Enter Your Email">
+                                            <input class="i-e" type="email" placeholder="Enter Your Email" required>
                                         </div>
                                         
 
                                         <div class="i-elements">
-                                            <textarea class="i-e" name="" id="message" placeholder="Enter Your Message"></textarea>
+                                            <textarea class="i-e" name="" id="message" placeholder="Enter Your Message" required></textarea>
                                         </div>
                                         
                                         <div class="button"> <input id="submit" type="Submit" value="Submit"></div>
@@ -174,8 +174,12 @@ new VisitorActivity();
 					</div>
 				</div>
 
-				<div class="content col-md-3 col-sm-12 col-xs-12 order-1">
-					<div class="section-block"></div>
+				<div class="content r-sidebar col-lg-3 col-md-3">
+					<div class="section-block right-sidebar">
+					<div class="right-ad">
+							Ad 01
+						</div>
+					</div>
 				</div>
 
 				<div class="content col-12 order-4 footer">

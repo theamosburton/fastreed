@@ -46,24 +46,6 @@ new VisitorActivity();
 					</div>
 					
 				</div>
-				  <!--Side bar -->
-			      <!--Collections-->
-				<div class="content sidebar page-col col-md-3 col-sm-12 col-xs-12">
-					<div class="section-block style-7 sidebar-block">
-						
-						<h1 id="tab"class=" table-content section-title">Table of content <li id="toggle-icon" class="close-symbol fa fa-close fa-md" style="color:#69dbbd; float:right"></li></h1>
-						<ul id="tb-con">
-							<li><a href="#what-is-fastreed">What is Fastreed?</a></li>
-							<li><a href="#why-fastreed">Why Fastreed.com?</a></li>
-							<!-- <li><a href="#our-goals">Vision and Mission</a></li> -->
-							<li><a href="#our-writers">Our Writers</a></li>
-						</ul>
-					</div>
-					<!-- Collections -->
-				</div>
-				<!--/sidebar-->
-
-
 				<!-- Right Main Bar -->
 				<div class="content col-md-9 col-sm-12 col-xs-12">
 					<!--tabs-->
@@ -119,6 +101,14 @@ new VisitorActivity();
 							</div>
 							
 
+						</div>
+					</div>
+				</div>
+
+				<div class="content r-sidebar col-lg-3 col-md-3">
+					<div class="section-block right-sidebar">
+					<div class="right-ad">
+							Ad 01
 						</div>
 					</div>
 				</div>

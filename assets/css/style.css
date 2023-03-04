@@ -52,7 +52,7 @@ a {
 	text-decoration: none;
 }
 .content{
-	padding: 0px 1px;
+	padding: 0px;
 }
 .goal-summary {
 	/* padding: 0px 40px; */
@@ -117,6 +117,9 @@ a {
 }
 
 @media (max-width: 767px) {
+	.r-sidebar{
+		display: none;
+	}
 	.style-7::-webkit-scrollbar
 	{
 		width: 2px;
@@ -163,6 +166,10 @@ a {
     max-height: 100vh;
 
 }
+.sidebar-block{
+	border-right: 3px solid #b299a8;
+}
+
 
 .home-block{
 	padding: 20px;
@@ -400,7 +407,22 @@ a {
 
 /*-Sign up form-*/
 .sidebar-block{
-	padding: 20px 3px;
+	padding: 20px 0px;
+}
+
+.right-sidebar{
+	padding: 25px 2px;
+	display: flex;
+	justify-content: center;
+}
+
+.right-ad{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 240px;
+	height:400px;
+	background-color: #A7A7A7;
 }
 
 .sign-up-form {
@@ -418,7 +440,7 @@ a {
 	max-width: 400px;
 }
 .s-tabs{
-	padding: 10px 15px;
+	padding: 15px;
 	font-weight: 700;
 	border-bottom: 1px solid grey;
 }
@@ -685,30 +707,11 @@ a {
 	color: #fff;
 }
 
-/*-Credits-*/
-.credit-block {
-	height: 200px;
-	overflow-y: scroll;
-	padding: 15px;
-	background-color: #FFF;
-	border-radius: 4px;
-	/* margin-bottom: 10px; */
-}
-.credit-block.sources a{
-	margin: 10px 0px;
-	display: block;
-}
-.credit-block.license a.lined{
-	text-decoration:underline;
-}
-.credit-block i.fa {
-	padding-right:10px;
-}
+
 
 /*-Footer-*/
 .footer {
-	
-	border-top: 4px solid #b299a8;
+	margin-top: 4px;
 }
 .footer-section{
 	border-radius: 0 0 6px 6px;
@@ -717,4 +720,4 @@ a {
 /*-Overrides-*/
 .btn, input{
 	outline:none;
-	{
+}
