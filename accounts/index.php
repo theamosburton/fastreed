@@ -49,8 +49,8 @@ new VisitorActivity();
 					</div>
 				</div>
 
-				<div class=" content sidebar col-lg-3 col-md-0 col-sm-0">
-				<div class="section-block sidebar-block">
+				<div class="content sidebar col-lg-3 col-md-3 col-sm-0">
+				    <div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <div class="s-tabs profile-tab">
@@ -61,8 +61,6 @@ new VisitorActivity();
 							</div>
 							
 						</div>	
-
-						
 						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>
 
 						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
@@ -73,18 +71,12 @@ new VisitorActivity();
 
 						<a style="color:blue"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
 
-						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>
-						
-										
+						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>				
 					</div>
 				</div>
 
-				<div class=" content col-lg-6  col-sm-12 col-xs-12">
+				<div class=" content col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				    <div class="style-7 section-block main-block">
-						<div class=" alert alert-warning" role="alert">
-							Only admins and Writers are allowed!
-					    </div>
-
 						<div class="login-signup">
 							<span class="title"> Login </span>
 							<form action="login.php" method="post">
@@ -116,8 +108,10 @@ new VisitorActivity();
                     </div>
 				</div>
 
-				<div class="col-lg-3 col-md-0 col-sm-0">
-				</div>
+				<!-- <div class="content col-lg-3 col-md-0 col-sm-0">
+					<div class="section-block">
+					</div>
+				</div> -->
 
 				<div class="content col-12 order-3 footer">
 					<div class="section-block footer-section"></div>

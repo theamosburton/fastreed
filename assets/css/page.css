@@ -89,7 +89,6 @@
     display: flex;
     align-self: center;
     padding: 20px;
-    max-width: 400px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -110,32 +109,32 @@
     margin: 10px 0;
 }
 .login-signup .lg-inputs{
+    background-color: transparent;
     display: block;
     width: 100%;
     margin: 15px 0;
     border: 0;
-    border-bottom: 1.5px solid grey;
+    border-bottom:3px solid purple;
     padding: 10px;
     font-weight: 600;
 }
 .login-signup .lg-inputs:hover, .login-signup .lg-inputs:active, .login-signup .lg-inputs:focus{
-    border: 1.5px solid purple;
-    box-shadow: 0 0 3px 0px purple;
+    border-bottom: 3px solid lime;
 }
 .login-signup .btn{
     border: 0;
     background-color: #0782fc;
-    max-width: 100px;
-    color: aliceblue;
+    color: white;
     font-weight: bold;
     margin-top: 30px;
-    padding: 5px 6px;
+    padding: 5px 20px;
+    border-radius: 20px;
 }
 .login-signup .btn:hover, .login-signup .btn:focus,.login-signup .btn:active{
     box-shadow: none;
     border: 0;
     background-color: #1168c0;
-    color: rgb(255, 253, 253);
+    color: aliceblue;
 }
 
 .activity-tables{
