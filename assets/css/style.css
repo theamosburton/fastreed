@@ -453,6 +453,7 @@ a {
 }
 
 #close-bars{
+	margin-top: 20px;
 	color: #239677;
 	display: none;
 	cursor: pointer;
