@@ -74,11 +74,11 @@ new VisitorActivity();
 							
 						</div>	
 
-						<div class="s-tabs"> <i class="fa fa-user"></i> Sign Up/Log In</div>
+						<div class="s-tabs"> <i class="fa fa-circle-user fa-xl"></i> Sign Up/Log In</div>
 							
-						<div class="s-tabs">Topics</div>	
-						<div class="s-tabs">Support</div>	
-						<div class="s-tabs">My Activity</div>
+						<div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div>	
+						<div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Support</div>	
+						<div class="s-tabs">  <i class="fa fa-tasks fa-lg"></i>My Activity</div>
 										
 					</div>
 					<!-- Collections -->
