@@ -68,7 +68,7 @@ new VisitorActivity();
 					    <div class="s-tabs profile-tab">
 							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
 							<div>
-							<p class="name">MD. Shafiq Malik</p>
+							<p class="name">Anonymous</p>
 							<p class="desig">New User</p>
 							</div>
 							
