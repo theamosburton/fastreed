@@ -187,6 +187,6 @@ new VisitorActivity();
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	
 	<!-- Template JS -->
-	<script type="text/javascript" src="assets/js/main.js"></script>
+	<script type="text/javascript" src="assets/js/main.js?v=1.1.0"></script>
 </body>
 </html>
