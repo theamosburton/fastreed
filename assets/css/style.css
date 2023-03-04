@@ -136,7 +136,7 @@ a {
 
 .style-7::-webkit-scrollbar
 {
-	width: 8px;
+	width: 6px;
 }
 
 .style-7::-webkit-scrollbar-thumb
@@ -419,9 +419,13 @@ a {
 	max-width: 400px;
 }
 @media (max-width: 767px) {
+	.style-7::-webkit-scrollbar{
+		width: 3px;
+		border-radius: 3px;
+	}
 	.signup-input {
 		width: 75%;
-		max-width: 100%%;
+		max-width: 100%;
 	}
 	.featured{
 		padding: 0;
