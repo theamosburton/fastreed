@@ -44,13 +44,12 @@ new VisitorActivity();
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="#home">Home</a></li>
 								<li role="presentation"><a href="about/" >About</a></li>
-								<li role="presentation"><a href="terms-privacy/" >Terms & Privacy</a></li>
 
 								<?php
 								if(isset($_COOKIE['AID'])){
 									echo '<li role="presentation"><a href="/admin/" >Admin Panel</a></li>';
 								}else{
-									echo '<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>';
+									echo '<li role="presentation"><a href="/accounts/" >Accounts</a></li>';
 								}
 								?>
 							</ul>
@@ -75,16 +74,17 @@ new VisitorActivity();
 						</div>	
 
 						
-						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i> Tags </div></a>
+						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>
 
 						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
 						
-						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i> Contact Us</div></a>
+						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>
 
-						<a href=""><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i> My Interests</div></a>
+						<a href=""><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
 
-						<a href="/accounts"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i> Sign Up/Log In</div></a>
+						<a href="/accounts"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
 
+						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>
 						
 										
 					</div>
