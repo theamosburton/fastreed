@@ -41,7 +41,6 @@ new VisitorActivity();
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" class="active"><a>About</a></li>
 								<li role="presentation"><a href="/terms-privacy/" >Terms & Privacy</a></li>
-								<li role="presentation"><a href="/accounts/" >Login/Signup</a></li>
 							</ul>
 					    </div>
 					</div>
