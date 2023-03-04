@@ -161,7 +161,6 @@ a {
 .sidebar-block, .main-block, .section-block{
     height: 100%;
     max-height: 100vh;
-    margin-bottom: 5px;
 
 }
 
@@ -615,8 +614,11 @@ a {
 
 /*-Footer-*/
 .footer {
+	
+	border-top: 4px solid #b299a8;
+}
+.footer-section{
 	border-radius: 0 0 6px 6px;
-	margin-top: 5px;
 }
 
 /*-Overrides-*/
