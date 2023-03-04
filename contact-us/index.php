@@ -25,6 +25,53 @@ new VisitorActivity();
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+        }
+        #submit{
+            margin-top: 20px;
+        }
+
+        form .button{
+            display: flex;
+            justify-content: center;
+        }
+        .i-elements{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            font-weight: 700;
+        }
+        .i-e:hover, .i-e:focus, .i-e:active{
+            outline: none;
+            border-bottom: 3px solid lime;
+        }
+        .i-e{
+            color: black;
+            font-weight: bold;
+            padding:10px;
+            border: 0;
+            border-bottom: 3px solid purple;
+            background-color: transparent;
+        }
+        #submit{
+            
+            padding: 5px 60px;
+            color: white;
+            background-color: cornflowerblue;
+            border: 0;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        #submit:hover{
+            cursor: pointer;
+            color: #e9ecef;
+            background-color: #6489cc;
+        }
+    </style>
 </head>
 <body class="style-7">
 	<!--main content-->
@@ -100,78 +147,29 @@ new VisitorActivity();
 					
 					<!--tab panes-->
 					<div class="home-block style-7 section-block  ">
-					<!-- <div class=" alert alert-danger" role="alert">
-								The Website is currently in Development Mode!
-					</div> -->
-						<div class="section-tabs">
-							<div class="home-tabs ">
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">Featured</a></li>
-
-									<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
-
-								</ul>
-							</div>
-							
-						</div>
-
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featured">
 								<div class="section-block featured-block">
-									<h1 class="section-title">Featured Posts</h1>
+									<h1 class="section-title">Contact Page</h1>
 									<!--reward blocks-->
-									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
-										<span class="update-date">Posted 2 hours ago</span>
-										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> Technology</a>
-										    <a href=""><i class="fa fa-user"></i> Mahira Rajput</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
-										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
-									</div>
-								</div>
-							</div>
+                                    <form action="send.php">
+                                        <div class="i-elements">
+                                            <input class="i-e" type="text" placeholder="Enter Your Name">
+                                        </div>
+                                        
 
+                                        <div class="i-elements">
+                                            <input class="i-e" type="text" placeholder="Enter Your Email">
+                                        </div>
+                                        
 
-							<div role="tabpanel" class="tab-pane" id="recent-posts">
-								<div class="section-block featured-block">
-									<h1 class="section-title">Recent Posts</h1>
-									<!--reward blocks-->
-									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">We've started shipping!</h2>
-										<span class="update-date">Posted 2 days ago</span>
-										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> NASA</a>
-										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
-										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
-									</div>
-
-									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">We've started shipping!</h2>
-										<span class="update-date">Posted 2 days ago</span>
-										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> NASA</a>
-										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
-										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
-									</div>
-									<div class="block"></div>
+                                        <div class="i-elements">
+                                            <textarea class="i-e" name="" id="message" placeholder="Enter Your Message"></textarea>
+                                        </div>
+                                        
+                                        <div class="button"> <input id="submit" type="Submit" value="Submit"></div>
+                                       
+                                    </form>
 								</div>
 							</div>
 						</div>
