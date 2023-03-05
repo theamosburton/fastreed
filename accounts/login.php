@@ -64,7 +64,7 @@ class ValidatePerson{
 // Selecting Login Choice //  
   public function loginAsAdmin(){
     if (!$this->validateUsername('admin')['valid']) {
-      setcookie("authStatus","Admin Username Not Found", time()+10, '/');
+      setcookie("authStatus","Wrong Admin Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }elseif (!$this->validatePassword('admin', $this->validateUsername('admin')['PID'])) {
       setcookie("authStatus","Wrong Admin Password Entered", time()+10, '/');
@@ -79,7 +79,7 @@ class ValidatePerson{
   }
   public function loginAsUser(){
     if (!$this->validateUsername('user')['valid']) {
-      setcookie("authStatus","User Username Not Found", time()+10, '/');
+      setcookie("authStatus","Wrong Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }elseif (!validatePassword('user', $this->validateUsername('user')['PID'])) {
       setcookie("authStatus","Wrong User Password Entered", time()+10, '/');
