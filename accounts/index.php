@@ -1,7 +1,12 @@
 <?php
+$_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.htactivity/VISIT.php";
 new VisitorActivity();
+
+if (isset($_SESSION['USI']) || isset($_SESSION['ASI']) || isset($_SESSION['WSI'])) {
+	header('Location: /');
+}
 ?>
 
 <!DOCTYPE html> 
@@ -25,6 +30,22 @@ new VisitorActivity();
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+	<style>
+		.remember-me{
+		    display: flex;
+			align-items: center;
+			width: 100%;
+			margin: 10px 5px;
+		}
+		.remember-me p{
+			margin-left: 10px;
+		}
+		.remember-me input{
+			margin-bottom: 15px;
+		}
+	</style>
 </head>
 <body>
 	<header class="header-section"></header>
@@ -61,24 +82,17 @@ new VisitorActivity();
 							</div>
 							
 						</div>	
-						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>
-
-						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
-						
-						<a href="/contact-us"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>
-
-						<a href="/my-interests"><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
-
-						<a style="color:blue"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
-
-						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>				
+						<?php
+						include '../views/sidebar.php';
+						echo $Guest;
+						?>				
 					</div>
 				</div>
 
 				<div class=" content col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				    <div class="style-7 section-block main-block">
 						<div class="login-signup">
-							<span class="title"> Login </span>
+							<span class="title"> Welcome Back </span>
 							<form action="login.php" method="post">
 								<?php
 								        if (isset($_COOKIE['authStatus'])) {
@@ -90,15 +104,22 @@ new VisitorActivity();
 										  </div>';
 										  }
 								?>
-								<input class="lg-inputs" type="text"  name="usernameOrEMail" placeholder="Username">
+								<input class="lg-inputs" type="text"  name="usernameOrEMail" placeholder="Username or Email">
 								<input class="lg-inputs" type="password" name="password" placeholder="Password">
-								<select class="lg-inputs" name="" id="">
-									<option value="">Admin</option>
-									<option value="">Writer</option>
-									<option value="" disabled>User (disabled)</option>
+								<select class="lg-inputs" name="login_as" id="">
+									<option value="user">User</option>
+									<option value="writer">Writer</option>
+									<option value="admin">Admin</option>
+									
 								</select>
 
-								<input  class="lg-inputs btn" type="submit" value="LOGIN">
+								<div class="remember-me">
+									<input type="checkbox" name="remember_me" value="checked">
+									<p>Remember this device</p>
+								</div>
+								<div class="g-recaptcha" data-callback='onSubmit' data-sitekey="6LfHsUkjAAAAAI7vWP697QK0n8EMTwY1OqZSk1wC"></div>
+
+								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login">
 							</form>
 							<hr width="100%">
 							<a href="#">Forgotten Password</a>
@@ -115,10 +136,6 @@ new VisitorActivity();
 						</div>
 					</div>
 				</div>
-
-				<div class="content col-12 order-3 footer">
-					<div class="section-block footer-section"></div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -126,7 +143,10 @@ new VisitorActivity();
 	<!-- Global jQuery -->
 	<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-	
+	<script>
+		$('#accounts_link').removeAttr('href');
+		$('#accounts_link').css('color','blue');
+	</script>
 	<!-- Template JS -->
 	<script type="text/javascript" src="../assets/js/main.js"></script>
 	<script type="text/javascript" src="../assets/js/page.js"></script>

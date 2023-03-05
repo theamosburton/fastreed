@@ -13,7 +13,7 @@ $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
 // $GLOBALS['ERROR_HANDLER'] = $_DOCROOT.'/.htHidden/functions/ERROR_HANDLER.php';
 $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.htactivity/ADMIN_VISIT.php';
-// $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.htHidden/activity/USER_VISIT.php';
+$GLOBALS['USER_VISIT'] = $_DOCROOT.'/.htactivity/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.htactivity/GUEST_VISIT.php';
 
 // Include Important File
@@ -23,9 +23,8 @@ include_once($GLOBALS['BASIC_FUNC']);
 include_once($GLOBALS['DEV_OPTIONS']);
 
 include_once($GLOBALS['ADMIN_VISIT']);
-// include_once($GLOBALS['USER_VISIT']);
+include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
-
 
 class VisitorActivity
 {
@@ -35,7 +34,7 @@ class VisitorActivity
   private $DB;
   private $GUEST_VISITED;
   private $ADMIN_VISITED;
-  // private $USER_VISITED;
+  private $USER_VISITED;
 
 
   function __construct()
@@ -44,7 +43,7 @@ class VisitorActivity
     // Creating Instances
     $this->GUEST_VISITED = new GuestsVisits();
     $this->ADMIN_VISITED = new AdminVisits();
-    // $this->USER_VISITED = new UsersVisits();
+    $this->USER_VISITED = new UsersVisits();
 
     $this->DB_CONNECT = new Database();
     $this->AUTH = new Auth();
@@ -60,7 +59,7 @@ class VisitorActivity
         if(!strlen($_COOKIE['UID']) === 56){
           $userID = $_COOKIE['UID'];
           $encUserID = $this->AUTH->encrypt($userID);
-          $authUser = $this->checkAuthVisitor($encUserID, "users", "userID");
+          $authUser = $this->checkAuthVisitor($encUserID, "users", "personID");
           if ($authUser) {
             $this->USER_VISITED->userVisited();
           }else {
@@ -82,7 +81,7 @@ class VisitorActivity
       if (!empty($_COOKIE['AID'])) {
         $adminID = $_COOKIE['AID'];
         $encAdminID = $this->AUTH->decrypt($adminID);
-        $authAdmin = $this->checkAuthVisitor($encAdminID, "admins", "adminID");
+        $authAdmin = $this->checkAuthVisitor($encAdminID, "admins", "personID");
         if ($authAdmin) {
           $this->ADMIN_VISITED->adminVisited();
         }else {
@@ -100,6 +99,7 @@ class VisitorActivity
       $this->GUEST_VISITED->guestVisited();
     }
   }
+
   private function checkAuthVisitor($id, $table, $parameter){
     $sql = "SELECT $parameter FROM $table WHERE $parameter = '$id'";
     $result = mysqli_query($this->DB, $sql);
