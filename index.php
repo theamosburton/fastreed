@@ -7,8 +7,6 @@ if(isset($_SESSION['ASI'])){
 	$userType = 'Admin';
 }elseif (isset($_SESSION['USI'])) {
 	$userType = 'User';
-}elseif (isset($_SESSION['WSI'])) {
-	$userType = 'Writer';
 }else{
 	$userType = 'Guest';
 }
