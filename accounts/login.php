@@ -92,7 +92,6 @@ class ValidatePerson{
       $this->loggingIn('user',$UID);
     }
   }
-}
 // Selecting Login Choice // 
 
 // Logging In and Remmebering Devices//
