@@ -140,7 +140,6 @@ public function makeReference(){
     $_SESSION['refSession'] = $refID;
   }
 $this->deleteOtherID();
-
 }
 
 public function deleteOtherID(){

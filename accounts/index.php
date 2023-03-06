@@ -5,7 +5,7 @@ include $_DOCROOT."/.htactivity/VISIT.php";
 new VisitorActivity();
 
 if (isset($_SESSION['USI']) || isset($_SESSION['ASI']) || isset($_SESSION['WSI'])) {
-	header('Location: /');
+	header('Location: /accounts/profile/');
 }
 ?>
 
