@@ -1,4 +1,17 @@
+
 <?php
+$p_Data = new getLoggedData();
+
+$profileTab = '<div class="s-tabs profile-tab">
+<img height="50px" widht="50px" src="'.$p_Data->PROFILE_PIC.'" alt="" class="s-photo">
+<div>
+<p class="name">'.$p_Data->NAME.'</p>
+<p class="desig">'.$p_Data->DESIG.'</p>
+</div>
+</div>';
+
+							
+
 $tags =  '<a href="/tags/" id="tags_link"><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>';
 
 $contact_us = '<a href="/contact-us/" id="contactUs_link"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>';

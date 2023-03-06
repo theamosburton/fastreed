@@ -2,14 +2,6 @@
 $_SERVROOT = '../';
 include ".htactivity/VISIT.php";
 new VisitorActivity();
-$userType;
-if(isset($_SESSION['ASI'])){
-	$userType = 'Admin';
-}elseif (isset($_SESSION['USI'])) {
-	$userType = 'User';
-}else{
-	$userType = 'Guest';
-}
 ?>
 
 <!DOCTYPE html> 
@@ -72,16 +64,11 @@ if(isset($_SESSION['ASI'])){
 					<div class="style-7 section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-					    <div class="s-tabs profile-tab">
-							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
-							<div>
-							<p class="name">Anonymous</p>
-							<p class="desig">New User</p>
-							</div>
-							
-						</div>	
+					   	
 						<?php include 'views/sidebar.php' ;
-						echo $$userType;
+						echo $profileTab;
+						$t = $p_Data->TYPE;
+						echo $$t;
 						?>			
 					</div>
 					<!-- Collections -->
