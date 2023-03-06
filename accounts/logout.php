@@ -12,6 +12,6 @@
     setcookie("AID", "", time()-3600, '/');
     unset($_SESSION["ASI"]);
   }
-  setcookie("authStatus","Logged Out", time()+10, '/');
+  setcookie("authStatus","Successfully logged Out", time()+10, '/');
   header("Location: /accounts/");
 ?>
