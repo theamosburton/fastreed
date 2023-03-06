@@ -17,6 +17,11 @@ class GuestsVisits
 
   public function guestVisited()
   {
+      if (isset($_SESSION['USI'])) {
+        unset($_SESSION['USI']);
+      }elseif (isset($_SESSION['ASI'])) {
+        unset($_SESSION['ASI']);
+      }
     // Authenticate with Cookie
       $cookie =  $this->checkCookie();
       if ($cookie['bool']) {

@@ -4,7 +4,7 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.htactivity/VISIT.php";
 new VisitorActivity();
 
-if (isset($_SESSION['USI']) || isset($_SESSION['ASI']) || isset($_SESSION['WSI'])) {
+if (isset($_SESSION['USI']) || isset($_SESSION['ASI'])) {
 	header('Location: /accounts/profile/');
 }
 ?>

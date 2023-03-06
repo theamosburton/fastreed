@@ -62,6 +62,11 @@ class VisitorActivity
           $decUserID = $this->AUTH->decrypt($userID);
           $authUser = $this->checkAuthVisitor($decUserID, "users", "personID");
           if ($authUser) {
+            if (isset($_SESSION['ASI'])) {
+              unset($_SESSION['ASI']);
+            }elseif (isset($_SESSION['GSI'])) {
+              unset($_SESSION['GSI']);
+            }
             $this->USER_VISITED->userVisited();
           }else {
             setcookie("authStatus","UserID Not Found", time()+10, '/');
@@ -80,6 +85,11 @@ class VisitorActivity
         $encAdminID = $this->AUTH->decrypt($adminID);
         $authAdmin = $this->checkAuthVisitor($encAdminID, "admins", "personID");
         if ($authAdmin) {
+          if (isset($_SESSION['USI'])) {
+            unset($_SESSION['USI']);
+          }elseif (isset($_SESSION['GSI'])) {
+            unset($_SESSION['GSI']);
+          }
           $this->ADMIN_VISITED->adminVisited();
         }else {
           // Wrong Cookie means anonymous User
