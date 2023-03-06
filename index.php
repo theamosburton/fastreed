@@ -48,8 +48,10 @@ new VisitorActivity();
 								<?php
 								if(isset($_COOKIE['AID'])){
 									echo '<li role="presentation"><a href="/admin/" >Admin Panel</a></li>';
+								}elseif(isset($_COOKIE['UID'])){
+									echo '<li role="presentation"><a href="/accounts/profile/" >Profile</a></li>';
 								}else{
-									echo '<li role="presentation"><a href="/accounts/" >Accounts</a></li>';
+									echo '<li role="presentation"><a href="/accounts/" >Login</a></li>';
 								}
 								?>
 							</ul>
