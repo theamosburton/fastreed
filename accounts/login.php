@@ -98,16 +98,15 @@ class ValidatePerson{
 private function loggingIn($type, $PID){
   if (isset($_SERVER['HTTP_REFERER'])) {
     $httpRefe = $_SERVER['HTTP_REFERER'];
-    $referedByPage = preg_replace("(^https?://)", "", $httpRefe );
   }else {
-    $referedByPage = '/';
+    $httpRefe = '/';
   }
 
   if (isset($_POST['remember_me'])) {
     switch ($type) {
       case 'user':
         setcookie('UID', $PID, time()+(60 * 60 * 24 * 90), '/');
-        header(`Location: $referedByPage`);
+        header(`Location: $httpRefe`);
         break;
 
       case 'admin':
@@ -120,7 +119,7 @@ private function loggingIn($type, $PID){
     switch ($type) {
       case 'user':
         setcookie('UID', $PID, time()+(60 * 20), '/');
-        header(`Location: $referedByPage`);
+        header(`Location: $httpRefe`);
         break;
 
       case 'admin':
