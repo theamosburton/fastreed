@@ -1,10 +1,4 @@
 <?php
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $httpRefe = $_SERVER['HTTP_REFERER'];
-  }else{
-    $referedByPage = "/";
-  }
-
   if (isset($_COOKIE['AID'])) {
     setcookie("AID", "", time()-3600, '/');
     unset($_SESSION['ASI']);
@@ -19,5 +13,5 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     unset($_SESSION['ASI']);
   }
 
-  header("Location: $referedByPage");
+  header("Location: /accounts/");
 ?>
