@@ -73,7 +73,6 @@ class ValidatePerson{
       $PID = $this->validateUsername('admin')['PID'];
       $this->makeReference();
       $AID = $this->AUTH->encrypt($PID);
-      $_SESSION['ASI'] = $PID;
       $this->loggingIn('admin',$AID);
     }
   }
@@ -87,8 +86,8 @@ class ValidatePerson{
     }else{
       $PID = $this->validateUsername('user')['PID'];
       $this->makeReference();
+      //Encrypted UID
       $UID = $this->AUTH->encrypt($PID);
-      $_SESSION['USI'] = $PID;
       $this->loggingIn('user',$UID);
     }
   }
@@ -100,7 +99,8 @@ private function loggingIn($type, $PID){
     switch ($type) {
       case 'user':
         setcookie('UID', $PID, time()+(60 * 60 * 24 * 90), '/');
-        header('Location: /accounts/profile/');
+        echo 'Logged';
+        // header('Location: /');
         break;
 
       case 'admin':
@@ -113,7 +113,7 @@ private function loggingIn($type, $PID){
     switch ($type) {
       case 'user':
         setcookie('UID', $PID, time()+(60 * 20), '/');
-        header('Location: /accounts/profile/');
+        header('Location: /');
         break;
 
       case 'admin':

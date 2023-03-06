@@ -78,7 +78,7 @@ class GuestsVisits
           $cookieResult = $a;
         }else {
           $a['bool'] = false;
-          $a['error'] = "cookie is -empty";
+          $a['error'] = "cookie is empty";
           $cookieResult = $a;
         }
       }else {
@@ -105,6 +105,7 @@ class GuestsVisits
     }
     return $userPresent;
   }
+
   public function sessionExist(){
     if (isset($_SESSION["GSI"])) {
       $sess = $_SESSION["GSI"];
@@ -121,6 +122,7 @@ class GuestsVisits
     }
     return $sessionPresent;
   }
+  
   public function checkSession($sess){
     $sql = "SELECT * FROM guests_sessions WHERE sessionID = '$sess'";
     $result = mysqli_query($this->DB, $sql);

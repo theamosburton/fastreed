@@ -19,8 +19,9 @@ class UsersVisits
   public function userVisited(){
     if ($this->sessionExist()["bool"]) {
       $sessionID = $this->sessionExist()["id"];
-      $this->updateVisits($pagesViews,$sessionID);
+      $this->updateVisits($sessionID);
     }else {
+      $encUserID = $_COOKIE['UID'];
       $this->makeSession($encUserID);
     }
   }
@@ -59,18 +60,27 @@ class UsersVisits
     }
     return $sessionPresent;
   }
+
+
   public function makeSession($userID){
+    if (isset($_SESSION['refSession'])) {
+      $refByGuestID = $_SESSION['refSession'];
+    }else {
+      $refByGuestID = "";
+    }
     $userIP = $this->BASIC_FUNC->getIp();
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];
-    $sessionID = $this->BASIC_FUNC->createNewID("users_sessions",'USI');
-    $sessionID = 'USI'.$sessionID;
+    $sessionID = $this->BASIC_FUNC->createNewID("users_sessions" , "USI");
     $_SESSION["USI"] = $sessionID;
     $this->updateVisits($sessionID);
-    $sql2 = "INSERT INTO users_sessions (sessionID,personID,tdate, userIP) VALUES ('$sessionID','$userID','$date','$userIP')";
+    
+    $decUserID = $this->AUTH->decrypt($userID);
+    $sql2 = "INSERT INTO users_sessions (sessionID,personID,tdate, userIP, refID) VALUES ('$sessionID', '$decUserID','$date','$userIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
   }
+
 
   public function updateVisits($sessionID){
     $visitTime = time();
@@ -80,8 +90,8 @@ class UsersVisits
     }else{
       $referedByPage = "";
     }
-    if(isset($_GET['ref']) && !empty($_GET['referer'])){
-      $referedByPerson = $_GET['referer'];
+    if(isset($_GET['ref']) && !empty($_GET['ref'])){
+      $referedByPerson = $_GET['ref'];
     }else {
       $referedByPerson = "";
     }
