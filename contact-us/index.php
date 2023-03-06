@@ -109,14 +109,12 @@ new VisitorActivity();
 					<div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-					    <div class="s-tabs profile-tab">
-							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
-							<div>
-							<p class="name">Anonymous</p>
-							<p class="desig">New User</p>
-							</div>
-							
-						</div>	
+					    <?php
+						include '../views/sidebar.php';
+						echo $profileTab;
+						$t = $p_Data->TYPE;
+						echo $$t;
+						?>	
 
 						
 						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>

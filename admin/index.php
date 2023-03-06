@@ -1,8 +1,8 @@
 <?php
 $_SERVROOT = '../../';
-// $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-// include $_DOCROOT."/.htactivity/VISIT.php";
-// new VisitorActivity();
+$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+include $_DOCROOT."/.htactivity/VISIT.php";
+new VisitorActivity();
 
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 
@@ -65,8 +65,16 @@ if(!isset($_COOKIE['AID'])){
 			</div>
 
 			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
-				<div class="section-block ">
-				</div>
+			        <div class="section-block sidebar-block">
+					    <p id="sidebarPosition" hidden>0</p>
+						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
+						<?php
+						include '../views/sidebar.php';
+						echo $profileTab;
+						$t = $p_Data->TYPE;
+						echo $$t;
+						?>				
+					</div>
 			</div>
 
 			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">

@@ -73,18 +73,12 @@ if (isset($_SESSION['USI']) || isset($_SESSION['ASI']) || isset($_SESSION['WSI']
 				<div class="content sidebar col-lg-3 col-md-3 col-sm-0">
 				    <div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-					    <div class="s-tabs profile-tab">
-							<img height="50px" widht="50px" src="/assets/img/dummy.png" alt="" class="s-photo">
-							<div>
-							<p class="name">Anonymous</p>
-							<p class="desig">New User</p>
-							</div>
-							
-						</div>	
+						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
 						<?php
 						include '../views/sidebar.php';
-						echo $Guest;
+						echo $profileTab;
+						$t = $p_Data->TYPE;
+						echo $$t;
 						?>				
 					</div>
 				</div>
@@ -108,7 +102,6 @@ if (isset($_SESSION['USI']) || isset($_SESSION['ASI']) || isset($_SESSION['WSI']
 								<input class="lg-inputs" type="password" name="password" placeholder="Password">
 								<select class="lg-inputs" name="login_as" id="">
 									<option value="user">User</option>
-									<option value="writer">Writer</option>
 									<option value="admin">Admin</option>
 									
 								</select>
