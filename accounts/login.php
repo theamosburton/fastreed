@@ -81,7 +81,7 @@ class ValidatePerson{
     if (!$this->validateUsername('user')['valid']) {
       setcookie("authStatus","Wrong Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
-    }elseif (!validatePassword('user', $this->validateUsername('user')['PID'])) {
+    }elseif (!$this->validatePassword('user', $this->validateUsername('user')['PID'])) {
       setcookie("authStatus","Wrong User Password Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }else{
