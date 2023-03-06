@@ -78,6 +78,7 @@ class ValidatePerson{
     }
   }
   public function loginAsUser(){
+    validateUsername();
     if (!$this->validateUsername('user')['valid']) {
       setcookie("authStatus","Wrong Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
