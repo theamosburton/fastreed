@@ -17,14 +17,30 @@ class AdminVisits
   }
 
   public function adminVisited(){
+      $encAdminID = $_COOKIE['AID'];
+      $decAdminID = $this->AUTH->decrypt($encAdminID);
     if ($this->sessionExist()["bool"]) {
       $sessionID = $this->sessionExist()["id"];
       $this->updateVisits($sessionID);
     }else {
-      $encAdminID = $_COOKIE['AID'];
-      $this->makeSession($encAdminID);
+      $this->makeSession($decAdminID);
+      if (!isset($_SESSION['LOGGED_ADMIN'])) {
+        if (isset($_COOKIE['RMM'])) {
+          $RMM = $_COOKIE['RMM'];
+          if ($RMM == 'YUBDEF') {
+            $_SESSION['LOGGED_ADMIN'] = $decAdminID;
+          }elseif ($RMM == 'FEDBUY') {
+            $_SESSION['LOGGED_ADMIN'] = false;
+          }else {
+            $_SESSION['LOGGED_ADMIN'] = false;
+          }
+        }
+      }
     }
   }
+
+
+
 
   public function sessionExist(){
     if (isset($_SESSION["ASI"])) {
@@ -76,9 +92,7 @@ class AdminVisits
     $sessionID = $this->BASIC_FUNC->createNewID("admins_sessions" , "ASI");
     $_SESSION["ASI"] = $sessionID;
     $this->updateVisits($sessionID);
-    
-    $decAdminID = $this->AUTH->decrypt($adminID);
-    $sql2 = "INSERT INTO admins_sessions (sessionID,personID,tdate, adminIP, refID) VALUES ('$sessionID', '$decAdminID','$date','$adminIP','$refByGuestID')";
+    $sql2 = "INSERT INTO admins_sessions (sessionID,personID,tdate, adminIP, refID) VALUES ('$sessionID', '$adminID','$date','$adminIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
   }
 

@@ -11,7 +11,7 @@ $profileTab = '<div class="s-tabs profile-tab">
 </div>';
 
 							
-$logout = '<a href="/accounts/logout.php/" id="tags_link"><div class="s-tabs">  <i class="fa fa-power-off fa-lg"></i>Log Out </div></a>';
+$logout = '<a href="/accounts/logout.php/" id="logout"><div class="s-tabs">  <i class="fa fa-power-off fa-lg"></i>Log Out </div></a>';
 
 $tags =  '<a href="/tags/" id="tags_link"><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>';
 
@@ -35,7 +35,7 @@ $login_up = '<a href="/accounts/" id="accounts_link"><div class="s-tabs"> <i cla
 
 $t_c = '<a href="/terms-privacy/" id="tc_link"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>';
 
-$User = $tags.$topics.$writers.$profile.$contact_us.$logout.$my_interests.$t_c;
+$User = $tags.$topics.$writers.$profile.$logout.$contact_us.$my_interests.$t_c;
 
 $Guest = $tags.$topics.$writers.$login_up.$t_c;
 

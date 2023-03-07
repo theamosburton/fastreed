@@ -17,15 +17,17 @@ class GuestsVisits
 
   public function guestVisited()
   {
-      if (isset($_SESSION['USI'])) {
-        unset($_SESSION['USI']);
-      }elseif (isset($_SESSION['ASI'])) {
-        unset($_SESSION['ASI']);
-      }
+     
     // Authenticate with Cookie
       $cookie =  $this->checkCookie();
       if ($cookie['bool']) {
         // if guest Exist
+        // unset ASI and USI
+        if (isset($_SESSION['USI'])) {
+          unset($_SESSION['USI']);
+        }elseif (isset($_SESSION['ASI'])) {
+          unset($_SESSION['ASI']);
+        }
         // unset AID and UID
         setcookie('AID', "", time()-3600, '/');
         setcookie("UID", "", time()-3600, '/');

@@ -25,21 +25,37 @@ class getLoggedData{
             $this->DESIG = 'New User';
             $this->PROFILE_PIC = '/assets/img/dummy.png';
             $this->TYPE = 'Guest';
-        }elseif (isset($_SESSION['USI'])) {
-            $PSI = $_SESSION['USI'];
-            $this->getUserData($PSI);
-            $this->TYPE = 'User';
-        }elseif (isset($_SESSION['ASI'])) {
-            $PSI = $_SESSION['ASI'];
-            $this->getAdminData($PSI);
-            $this->TYPE = 'Admin';
+        }elseif (isset($_SESSION['LOGGED_USER'])) {
+            $PID = $_SESSION['LOGGED_USER'];
+            if ($PID === false) {
+                $this->NAME = 'Anonymous';
+                $this->DESIG = 'New User';
+                $this->PROFILE_PIC = '/assets/img/dummy.png';
+                $this->TYPE = 'Guest';
+            }else {
+                $this->getUserData($PID);
+                $this->TYPE = 'User';
+            }
+        }elseif (isset($_SESSION['LOGGED_ADMIN'])) {
+            $PID = $_SESSION['LOGGED_ADMIN'];
+            if ($PID === false) {
+                $this->NAME = 'Anonymous';
+                $this->DESIG = 'New User';
+                $this->PROFILE_PIC = '/assets/img/dummy.png';
+                $this->TYPE = 'Guest';
+            }else {
+                $this->getAdminData($PID);
+                $this->TYPE = 'Admin';
+            }
         }else{
-            // Something Went Wrong
+            $this->NAME = 'Anonymous';
+            $this->DESIG = 'New User';
+            $this->PROFILE_PIC = '/assets/img/dummy.png';
+            $this->TYPE = 'Guest';
         }
     }
 
-     private function getUserData($PSI){
-        $PID = $this->getID($PSI, 'users_sessions');
+     private function getUserData($PID){
         $sql = "SELECT * FROM users WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
@@ -63,8 +79,7 @@ class getLoggedData{
      }
 
 
-     private function getAdminData($PSI){
-        $PID = $this->getID($PSI, 'admins_sessions');
+     private function getAdminData($PID){
         $sql = "SELECT * FROM admins WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
@@ -84,19 +99,6 @@ class getLoggedData{
                 $this->PROFILE_PIC  = $row['profilePic'];
             }
         }
-     }
-
-     private function getID($PSI, $table){
-        $sql = "SELECT * FROM $table WHERE sessionID = '$PSI'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-        $isPresent = mysqli_num_rows($result);
-            if ($isPresent) {
-                $row = mysqli_fetch_assoc($result);
-                $PID = $row['personID'];
-            }
-        }
-        return $PID;
      }
 }
 

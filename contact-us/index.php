@@ -69,6 +69,9 @@ new VisitorActivity();
             color: #e9ecef;
             background-color: #6489cc;
         }
+		#contactUs_link{
+			color: blue;
+		}
     </style>
 </head>
 <body class="style-7">
@@ -102,9 +105,8 @@ new VisitorActivity();
 					</div>
 					
 				</div>
-				<!--Side bar -->
-			      <!--Collections-->
-				  <div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
+				<!--Left Side bar -->
+				<div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
 
 					<div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
@@ -114,31 +116,16 @@ new VisitorActivity();
 						echo $profileTab;
 						$t = $p_Data->TYPE;
 						echo $$t;
-						?>	
-
-						
-						<a href=""><div class="s-tabs">  <i class="fa fa-hashtag fa-lg"></i>Tags </div></a>
-
-						<a href=""><div class="s-tabs"> <i class="fa fa-table-list fa-lg"></i>Topics</div></a>
-						
-						<a style="color:blue"><div class="s-tabs" > <i class="fa fa-headset fa-lg"></i>Contact Us</div></a>
-
-						<a href="/my-interests"><div class="s-tabs">  <i class="fa fa-icons fa-lg"></i>My Interests</div></a>
-
-						<a href="/accounts"><div class="s-tabs"> <i class="fa fa-user-plus fa-lg"></i>Sign Up/Log In</div></a>
-
-						<a href="/terms-privacy"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-lg"></i>Terms & Privacy</div></a>
-						
+						?>			
 										
 					</div>
-					<!-- Collections -->
 
 				</div>
-				<!--/sidebar-->
+				<!--/Left sidebar-->
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-6 col-sm-12 col-xs-12 order-2">
+				<div class="content col-md-9 col-sm-12 col-xs-12 order-2">
 				    
 					
 					<!--tab panes-->
@@ -170,18 +157,6 @@ new VisitorActivity();
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="content r-sidebar col-lg-3 col-md-3">
-					<div class="section-block right-sidebar">
-					<div class="right-ad">
-							Ad 01
-						</div>
-					</div>
-				</div>
-
-				<div class="content col-12 order-4 footer">
-					<div class="section-block footer-section"></div>
 				</div>
 			</div>
 		</div>

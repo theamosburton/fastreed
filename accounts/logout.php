@@ -1,17 +1,11 @@
 <?php
+session_start();
+setcookie("RMM", "", time()-3600, "/");
   if (isset($_COOKIE['AID'])) {
-    setcookie("AID", "", time()-3600, '/');
-    unset($_SESSION["ASI"]);
+    unset($_SESSION['LOGGED_ADMIN']);
   }elseif (isset($_COOKIE['UID'])) {
-    setcookie("UID", "", time()-3600, '/');
-    unset($_SESSION["USI"]);
-  }elseif (isset($_SESSION['USI'])) {
-    setcookie("UID", "", time()-3600, '/');
-    unset($_SESSION["USI"]);
-  }elseif (isset($_SESSION['ASI'])) {
-    setcookie("AID", "", time()-3600, '/');
-    unset($_SESSION["ASI"]);
+    unset($_SESSION['LOGGED_USER']);
   }
   setcookie("authStatus","Successfully logged Out", time()+10, '/');
-  header("Location: /accounts/");
+  header("Location: /accounts/profile");
 ?>

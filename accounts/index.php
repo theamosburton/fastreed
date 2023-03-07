@@ -4,8 +4,14 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.htactivity/VISIT.php";
 new VisitorActivity();
 
-if (isset($_SESSION['USI']) || isset($_SESSION['ASI'])) {
-	header('Location: /accounts/profile/');
+if (isset($_SESSION['LOGGED_USER'])){
+	if($_SESSION['LOGGED_USER']){
+		header('Location: /accounts/profile/');
+	}
+}elseif(isset($_SESSION['LOGGED_ADMIN'])) {
+	if($_SESSION['LOGGED_ADMIN']){
+		header('Location: /admin/');
+	}
 }
 ?>
 

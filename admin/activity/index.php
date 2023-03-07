@@ -51,7 +51,10 @@ if(!isset($_COOKIE['AID'])){
 
 			<div class="content col-12">
 				<div id="header-section" class="section-block">
-					<h1> <a href="/">FastReed.com</a> </h1>
+				        <div class="brand">
+							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<h1> <a href="/">FastReed.com</a> </h1>
+						</div>
 					<!--tabs-->
 					<div class="head-tabs">
 						<ul class="nav nav-tabs" role="tablist">

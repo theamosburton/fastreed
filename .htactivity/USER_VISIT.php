@@ -17,12 +17,25 @@ class UsersVisits
   }
 
   public function userVisited(){
+      $encUserID = $_COOKIE['UID'];
+      $decUserID = $this->AUTH->decrypt($encUserID);
     if ($this->sessionExist()["bool"]) {
       $sessionID = $this->sessionExist()["id"];
       $this->updateVisits($sessionID);
     }else {
-      $encUserID = $_COOKIE['UID'];
-      $this->makeSession($encUserID);
+      $this->makeSession($decUserID);
+      if (!isset($_SESSION['LOGGED_USER'])) {
+        if (isset($_COOKIE['RMM'])) {
+          $RMM = $_COOKIE['RMM'];
+          if ($RMM == 'YUBDEF') {
+            $_SESSION['LOGGED_USER'] = $decUserID;
+          }elseif ($RMM == 'FEDBUY') {
+            $_SESSION['LOGGED_USER'] = false;
+          }else {
+            $_SESSION['LOGGED_USER'] = false;
+          }
+        }
+      }
     }
   }
 
@@ -74,10 +87,9 @@ class UsersVisits
     $thisPage = $_SERVER["REQUEST_URI"];
     $sessionID = $this->BASIC_FUNC->createNewID("users_sessions" , "USI");
     $_SESSION["USI"] = $sessionID;
-    $this->updateVisits($sessionID);
     
-    $decUserID = $this->AUTH->decrypt($userID);
-    $sql2 = "INSERT INTO users_sessions (sessionID,personID,tdate, userIP, refID) VALUES ('$sessionID', '$decUserID','$date','$userIP','$refByGuestID')";
+    $this->updateVisits($sessionID);
+    $sql2 = "INSERT INTO users_sessions (sessionID,personID,tdate, userIP, refID) VALUES ('$sessionID', '$userID','$date','$userIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
   }
 

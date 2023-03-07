@@ -34,7 +34,10 @@ new VisitorActivity();
 
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
-						<h1> <a href="/">FastReed.com</a> </h1>
+					<div class="brand">
+							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<h1> <a href="/">FastReed.com</a> </h1>
+						</div>
 						<!--tabs-->
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
@@ -46,6 +49,26 @@ new VisitorActivity();
 					</div>
 					
 				</div>
+
+
+				<!--Left Side bar -->
+				<div class="content sidebar col-md-3 col-sm-12 col-xs-12">
+
+					<div class="section-block sidebar-block">
+					    <p id="sidebarPosition" hidden>0</p>
+						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
+					    <?php
+						include '../views/sidebar.php';
+						echo $profileTab;
+						$t = $p_Data->TYPE;
+						echo $$t;
+						?>			
+										
+					</div>
+
+				</div>
+				<!--/Left sidebar-->
+
 				<!-- Right Main Bar -->
 				<div class="content col-md-9 col-sm-12 col-xs-12">
 					<!--tabs-->
@@ -101,14 +124,6 @@ new VisitorActivity();
 							</div>
 							
 
-						</div>
-					</div>
-				</div>
-
-				<div class="content r-sidebar col-lg-3 col-md-3">
-					<div class="section-block right-sidebar">
-					<div class="right-ad">
-							Ad 01
 						</div>
 					</div>
 				</div>

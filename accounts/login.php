@@ -5,7 +5,6 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_SERVROOT.'/secrets/DB_CONNECT.php';
 include $_SERVROOT.'/secrets/AUTH.php';
 include $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-
 // Checking if request is for login.php
 if($_SERVER['REQUEST_URI'] == '/accounts/login.php'){
   new ValidatePerson();
@@ -71,9 +70,10 @@ class ValidatePerson{
       header('Location: /accounts/index.php');
     }else{
       $PID = $this->validateUsername('admin')['PID'];
+      // Make Session
       $this->makeReference();
       $AID = $this->AUTH->encrypt($PID);
-      $this->loggingIn('admin',$AID);
+      $this->loggingIn('admin',$AID, $PID);
     }
   }
   public function loginAsUser(){
@@ -86,25 +86,27 @@ class ValidatePerson{
     }else{
       $PID = $this->validateUsername('user')['PID'];
       $this->makeReference();
-      //Encrypted UID
       $UID = $this->AUTH->encrypt($PID);
-      $this->loggingIn('user',$UID);
+      $this->loggingIn('user',$UID, $PID);
     }
   }
 // Selecting Login Choice // 
 
 // Logging In and Remmebering Devices//
-private function loggingIn($type, $PID){
+private function loggingIn($type, $ePID, $dPID){
   if (isset($_POST['remember_me'])) {
     switch ($type) {
       case 'user':
-        setcookie('UID', $PID, time()+(60 * 60 * 24 * 90), '/');
-        echo 'Logged';
-        // header('Location: /');
+        setcookie('UID', $ePID, time()+(60 * 60 * 24 * 90), '/');
+        setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/');
+        $_SESSION['LOGGED_USER'] = $dPID;
+        header('Location: /');
         break;
 
       case 'admin':
-        setcookie('AID', $PID, time()+(60 * 60 * 24 * 30), '/');
+        setcookie('AID', $ePID, time()+(60 * 60 * 24 * 30), '/');
+        setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/');
+        $_SESSION['LOGGED_ADMIN'] = $dPID;
         header('Location: /admin/');
         break;
     }
@@ -112,12 +114,16 @@ private function loggingIn($type, $PID){
   }else {
     switch ($type) {
       case 'user':
-        setcookie('UID', $PID, time()+(60 * 20), '/');
+        setcookie('UID', $ePID, time()+(60 * 20), '/');
+        setcookie('RMM', 'FEDBUY', time()+(60 * 60 * 24 * 90), '/');
+        $_SESSION['LOGGED_USER'] = $dPID;
         header('Location: /');
         break;
 
       case 'admin':
-        setcookie('AID', $PID, time()+(60 * 20), '/');
+        setcookie('AID', $ePID, time()+(60 * 20), '/');
+        setcookie('RMM', 'FEDBUY', time()+(60 * 60 * 24 * 90), '/');
+        $_SESSION['LOGGED_ADMIN'] = $dPID;
         header('Location: /admin/');
         break;
     }
