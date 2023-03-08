@@ -75,6 +75,7 @@ new VisitorActivity();
     </style>
 </head>
 <body class="style-7">
+<p id="rightsidebar" hidden>true</p>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container ">
@@ -83,6 +84,7 @@ new VisitorActivity();
 					<div id="header-section" class="section-block">
 						<div class="brand">
 							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 					
@@ -106,10 +108,11 @@ new VisitorActivity();
 					
 				</div>
 				<!--Left Side bar -->
-				<div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
+				<div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 
 					<div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
+						<p id="sidebarPositionLg" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <?php
 						include '../views/sidebar.php';
@@ -125,7 +128,7 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-9 col-sm-12 col-xs-12 order-2">
+				<div id="center-block" class="content col-md-9 col-sm-12 col-xs-12">
 				    
 					
 					<!--tab panes-->

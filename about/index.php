@@ -26,6 +26,7 @@ new VisitorActivity();
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body class="style-7">
+<p id="rightsidebar" hidden>false</p>
 	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
@@ -36,6 +37,7 @@ new VisitorActivity();
 					<div id="header-section" class="section-block">
 					<div class="brand">
 							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 						<!--tabs-->
@@ -52,10 +54,11 @@ new VisitorActivity();
 
 
 				<!--Left Side bar -->
-				<div class="content sidebar col-md-3 col-sm-12 col-xs-12">
+				<div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 
 					<div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
+						<p id="sidebarPositionLg" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <?php
 						include '../views/sidebar.php';
@@ -70,7 +73,7 @@ new VisitorActivity();
 				<!--/Left sidebar-->
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-9 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-md-11 col-sm-12 col-xs-12">
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block style-7 main-block">

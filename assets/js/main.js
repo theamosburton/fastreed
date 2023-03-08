@@ -25,18 +25,27 @@ $('.t-icon').click(function (){
 
 $('.t-icon-lg').click(function (){
   let a = $("#sidebarPositionLg").html();
+  let isRightSideBar = $('#rightsidebar').html();
+  isRightSideBar = (isRightSideBar === 'true')
   if(a == '0'){
     $('.s-tabs').css('padding','15px');
     
     $('.s-tabs').css('justify-content','flex-start');
-    
-   
-    $("#sidebarPositionLg").html('1');
     $("#center-block").removeAttr('col-md-8');
-    $("#center-block").attr('class', 'content col-md-6 col-sm-12 col-xs-12 order-2');
+    $("#sidebarPositionLg").html('1');
+    
+  
+    if(isRightSideBar){
+      $("#center-block").attr('class', 'content col-md-6 col-sm-12 col-xs-12');
 
     $("#side-block").removeAttr('col-md-1');
-    $("#side-block").attr('class','content sidebar col-md-3 col-sm-12 col-xs-12 order-3');
+    $("#side-block").attr('class','content sidebar col-md-3 col-sm-12 col-xs-12');
+    }else{
+      $("#center-block").attr('class', 'content col-md-9 col-sm-12 col-xs-12');
+
+    $("#side-block").removeAttr('col-md-1');
+    $("#side-block").attr('class','content sidebar col-md-3 col-sm-12 col-xs-12');
+    }
 
     $('.s-tabs').css('display','block');
     $('.profile-tab').css('display','flex');
@@ -49,10 +58,22 @@ $('.t-icon-lg').click(function (){
     $('.side-menu-name').css('display','none');
     $("#sidebarPositionLg").html('0');
     $("#side-block").removeAttr('col-md-3');
-    $("#side-block").attr('class','content sidebar col-md-1 col-sm-12 col-xs-12 order-3');
+    
+
+    if (isRightSideBar) {
+      $("#side-block").attr('class','content sidebar col-md-1 col-sm-12 col-xs-12');
 
     $("#center-block").removeAttr('col-md-6');
-    $("#center-block").attr('class', 'content col-md-8 col-sm-12 col-xs-12 order-2');
+    $("#center-block").attr('class', 'content col-md-8 col-sm-12 col-xs-12');
+
+    $('.s-tabs').css('display','flex');
+    }else{
+      $("#side-block").attr('class','content sidebar col-md-1 col-sm-12 col-xs-12');
+
+    $("#center-block").removeAttr('col-md-9');
+    $("#center-block").attr('class', 'content col-md-11 col-sm-12 col-xs-12');
+    }
+    
 
     $('.s-tabs').css('display','flex');
 

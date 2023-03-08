@@ -17,7 +17,7 @@ $tags =  '<a href="/tags/" id="tags_link"><div class="s-tabs">  <i class="fa fa-
 
 $contact_us = '<a href="/contact-us/" id="contactUs_link"><div class="s-tabs" > <i class="fa fa-headset fa-xl"></i><span class="side-menu-name">Contact Us</span></div></a>';
 
-$topics = '<a href="/topics/" id="topics_link"><div class="s-tabs"> <i class="fa fa-table-list fa-xl"></i><span class="side-menu-name">Topics</span></div></a>
+$topics = '<a href="/topics/" id="topics_link"><div class="s-tabs"><i class="fa fa-table-list fa-xl"></i><span class="side-menu-name">Topics</span></div></a>
 ';
 
 $writers = '<a href="/writers/" id="writers_link"><div class="s-tabs"> <i class="fa fa-user-pen fa-xl"></i><span class="side-menu-name">Writers</span></div></a>';
@@ -33,11 +33,11 @@ $profile = '<a href="/accounts/profile/" id="profile_link"><div class="s-tabs"> 
 
 $login_up = '<a href="/accounts/" id="accounts_link"><div class="s-tabs"> <i class="fa fa-user-plus fa-xl"></i><span class="side-menu-name">Sign Up/Log In</span></div></a>';
 
-$t_c = '<a href="/terms-privacy/" id="tc_link"><div class="s-tabs"> <i class="fa fa-solid fa-file-contract fa-xl"></i><span class="side-menu-name">Terms & Privacy</span></div></a>';
+$t_c = '<a href="/terms-privacy/" id="tc_link"><div class="s-tabs"><i class="fa fa-solid fa-file-contract fa-xl"></i><span class="side-menu-name">Terms & Privacy</span></div></a>';
 
 $User = $tags.$topics.$writers.$profile.$logout.$contact_us.$my_interests.$t_c;
 
-$Guest = $tags.$topics.$writers.$login_up.$t_c;
+$Guest = $tags.$topics.$writers.$contact_us.$login_up.$t_c;
 
 
 $Admin = $new_user.$tags.$topics.$writers.$profile.$logout;

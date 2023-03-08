@@ -18,9 +18,6 @@ p {
 a { 
 	color:#5a9269;
 }
-.row{
-	flex-direction: row-reverse;
-}
 
 
 .copyright-row{
@@ -343,7 +340,7 @@ a {
 /*-Sign up form-*/
 .sidebar-block{
 	overflow: auto;
-	padding: 20px 0px;
+	padding: 0;
 }
 
 .right-ad{
@@ -428,7 +425,7 @@ a {
 	cursor: pointer;
 }
 #center-block, #side-block{
-	transition: all 1s linear;
+	transition: all .3s ease-in-out;
 }
 #bars-lg{
 	display: block;
@@ -446,6 +443,10 @@ a {
 	}
 	.s-tabs .desig{
 		font-size: 12px;
+	}
+	.profile-tab img{
+		height: 50px;
+		width: 50px;
 	}
 }
 

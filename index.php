@@ -27,6 +27,7 @@ new VisitorActivity();
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body class="style-7">
+	<p id="rightsidebar" hidden>true</p>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container ">
@@ -72,7 +73,7 @@ new VisitorActivity();
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12 order-3">
+				  <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 
 					<div class="style-7 section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
@@ -91,7 +92,7 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-md-8 col-sm-12 col-xs-12 order-2">
+				<div id="center-block" class="content col-md-8 col-sm-12 col-xs-12">
 				    
 					
 					<!--tab panes-->
