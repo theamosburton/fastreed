@@ -35,6 +35,7 @@ new VisitorActivity();
 					<div id="header-section" class="section-block">
 						<div class="brand">
 							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 					
@@ -71,12 +72,12 @@ new VisitorActivity();
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div class="content sidebar col-md-3 col-sm-12 col-xs-12 order-3">
+				  <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12 order-3">
 
 					<div class="style-7 section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
+						<p id="sidebarPositionLg" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-					   	
 						<?php include 'views/sidebar.php' ;
 						echo $profileTab;
 						$t = $p_Data->TYPE;
@@ -90,7 +91,7 @@ new VisitorActivity();
 
 
 				<!-- Right Main Bar -->
-				<div class="content col-md-6 col-sm-12 col-xs-12 order-2">
+				<div id="center-block" class="content col-md-8 col-sm-12 col-xs-12 order-2">
 				    
 					
 					<!--tab panes-->

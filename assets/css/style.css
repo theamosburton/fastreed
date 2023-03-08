@@ -167,12 +167,12 @@ a {
 
 }
 .sidebar-block{
-	border-right: 3px solid #b299a8;
+	border-right: 1px solid #b299a8;
 }
 
 
 .right-sidebar{
-	border-left: 3px solid #b299a8;
+	border-left: 1px solid #b299a8;
 	overflow: auto;
 	padding: 20px
 }
@@ -372,12 +372,18 @@ a {
 	max-width: 400px;
 }
 .s-tabs{
+	display: flex;
 	padding: 15px;
 	font-weight: 700;
 	border-bottom: 1px solid grey;
+	padding:25px 5px;
+	justify-content:center;
 }
 .s-tabs:hover{
 	cursor: pointer;
+}
+.side-menu-name{
+	display: none;
 }
 .profile-tab{
 	display: flex;
@@ -414,12 +420,18 @@ a {
 	cursor: pointer;
 }
 
-#bars{
+#bars, #bars-lg{
 	margin-top: 23px;
 	margin-right: 20px;
 	color:#5a9269;
 	display: none;
 	cursor: pointer;
+}
+#center-block, #side-block{
+	transition: all 1s linear;
+}
+#bars-lg{
+	display: block;
 }
 
 .brand{
@@ -438,11 +450,17 @@ a {
 }
 
 @media (max-width: 767px) {
+	#bars-lg{
+		display: none;
+	}
 	#bars{
 		display: block;
 	}
 	#close-bars{
 		display: block;
+	}
+	.s-tabs{
+		justify-content: flex-start;
 	}
 	.profile-tab{
 		border: 0;
