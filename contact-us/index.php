@@ -76,6 +76,8 @@ new VisitorActivity();
 </head>
 <body class="style-7">
 <p id="rightsidebar" hidden>true</p>
+<p id="sidebarPosition" hidden>0</p>
+<p id="sidebarPositionLg" hidden>0</p>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container ">
@@ -93,7 +95,7 @@ new VisitorActivity();
 				        <div class="head-tabs">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="/">Home</a></li>
-								<li role="presentation"><a href="about/" >About</a></li>
+								<li role="presentation"><a href="/about/" >About</a></li>
 
 								<?php
 								if(isset($_COOKIE['AID'])){
@@ -111,8 +113,6 @@ new VisitorActivity();
 				<div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 
 					<div class="section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<p id="sidebarPositionLg" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <?php
 						include '../views/sidebar.php';
