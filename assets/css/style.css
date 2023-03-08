@@ -416,6 +416,16 @@ a {
 	display: none;
 	cursor: pointer;
 }
+a:hover{
+	text-decoration: none;
+}
+.profilePlus{
+	color: #5a9269;
+	padding: 15px 10px;
+}
+.profile-tab:hover>.profilePlus{
+	color:darkturquoise;
+}
 
 #bars, #bars-lg{
 	margin-top: 23px;
@@ -423,6 +433,7 @@ a {
 	color:#5a9269;
 	display: none;
 	cursor: pointer;
+	margin-left: 6px;
 }
 #center-block, #side-block{
 	transition: all .3s ease-in-out;
@@ -472,7 +483,7 @@ a {
 		width: 70px;
 	}
 	.sidebar{
-		transition: left .8s;
+		transition: left .4s;
 		position: absolute;
 		z-index: 999;
 		right: 0;

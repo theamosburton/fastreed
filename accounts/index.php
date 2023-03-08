@@ -54,6 +54,9 @@ if (isset($_SESSION['LOGGED_USER'])){
 	</style>
 </head>
 <body>
+    <p id="rightsidebar" hidden>true</p>
+	<p id="sidebarPosition" hidden>0</p>
+	<p id="sidebarPositionLg" hidden>0</p>
 	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
@@ -64,6 +67,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 					<div id="header-section" class="section-block">
 					<div class="brand">
 							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
+							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 				        <div class="head-tabs">
@@ -76,7 +80,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 					</div>
 				</div>
 
-				<div class="content sidebar col-lg-3 col-md-3 col-sm-0">
+				<div id="side-block" class="content sidebar col-lg-1 col-md-3 col-sm-0">
 				    <div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
@@ -89,7 +93,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 					</div>
 				</div>
 
-				<div class=" content col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div id="center-block" class=" content col-lg-8 col-md-6 col-sm-12 col-xs-12">
 				    <div class="style-7 section-block main-block">
 						<div class="login-signup">
 							<span class="title"> Welcome Back </span>

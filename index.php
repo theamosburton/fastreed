@@ -28,6 +28,8 @@ new VisitorActivity();
 </head>
 <body class="style-7">
 	<p id="rightsidebar" hidden>true</p>
+	<p id="sidebarPosition" hidden>0</p>
+	<p id="sidebarPositionLg" hidden>0</p>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container ">
@@ -76,8 +78,7 @@ new VisitorActivity();
 				  <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 
 					<div class="style-7 section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<p id="sidebarPositionLg" hidden>0</p>
+					    
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 						<?php include 'views/sidebar.php' ;
 						echo $profileTab;
@@ -93,8 +94,6 @@ new VisitorActivity();
 
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-md-8 col-sm-12 col-xs-12">
-				    
-					
 					<!--tab panes-->
 					<div class="home-block style-7 section-block  ">
 					<!-- <div class=" alert alert-danger" role="alert">

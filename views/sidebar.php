@@ -1,14 +1,22 @@
 
 <?php
 $p_Data = new getLoggedData();
+if (isset($_SESSION['LOGGED_USER']) || isset($_SESSION['LOGGED_ADMIN'])) {
+    if($_SESSION['LOGGED_USER'] || $_SESSION['LOGGED_ADMIN']){
+        $profilePic = '<img height="50px" widht="50px" src="'.$p_Data->PROFILE_PIC.'" alt="" class="s-photo">';
+    }else {
+        $profilePic = '<i class="fa fa-circle-plus fa-2xl profilePlus"></i>';
+    }
+}else {
+    $profilePic = '<i class="fa fa-circle-plus fa-2xl profilePlus"></i>';
+}
 
-$profileTab = '<div class="s-tabs profile-tab">
-<img height="50px" widht="50px" src="'.$p_Data->PROFILE_PIC.'" alt="" class="s-photo">
+$profileTab = '<a href="dsfsdf" class="s-tabs profile-tab">'.$profilePic.'
 <div class="side-menu-name">
 <p class="name">'.$p_Data->NAME.'</p>
 <p class="desig">'.$p_Data->DESIG.'</p>
 </div>
-</div>';
+</a>';
 
 							
 $logout = '<a href="/accounts/logout.php/" id="logout"><div class="s-tabs">  <i class="fa fa-power-off fa-xl"></i><span class="side-menu-name">Log Out </span></div></a>';
