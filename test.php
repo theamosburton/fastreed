@@ -5,7 +5,8 @@
 include '../secrets/AUTH.php';
 
 $d = new AUTH();
-$dat = 'VkdVc2JZb2s5cHh0QnVXeC9BclE0bk9LOjqgZBUxyCinbHHrlnucox6g';
+
+$dat = 'lhwP6SeefDaj70%2B%2Bqru3eB3WyuwjmKg%2BSKbnbYvAdGsdjQ%3D%3D';
 $data = $d->decrypt($dat);
 echo $data;
 ?>

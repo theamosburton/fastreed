@@ -84,7 +84,6 @@ class VisitorActivity
         $adminID = $_COOKIE['AID'];
         
         $decAdminID = $this->AUTH->decrypt($adminID);
-        echo $decAdminID;
         $authAdmin = $this->checkAuthVisitor($decAdminID, "admins", "personID");
         if ($authAdmin) {
           if (isset($_SESSION['USI'])) {
@@ -111,7 +110,6 @@ class VisitorActivity
 
   private function checkAuthVisitor($id, $table, $parameter){
     $sql = "SELECT $parameter FROM $table WHERE $parameter = '$id'";
-    var_dump($sql);
     $result = mysqli_query($this->DB, $sql);
     $row = mysqli_num_rows($result);
     if ($row) {
