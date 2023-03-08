@@ -27,11 +27,10 @@ a {
 /*-Header-*/
 #header-section {
 	border-radius: 5px 5px 0px 0px ;
-	padding: 10px 20px;
+	padding: 0px 20px;
 	display: flex;
-	border-bottom: 4px solid #b299a8;
+	border-bottom: 2px solid #b299a8;
 }
-
 .home-tabs{
 	padding: 5px 5px 0 20px;
 }
@@ -163,13 +162,10 @@ a {
     max-height: 100vh;
 
 }
-.sidebar-block{
-	border-right: 1px solid #b299a8;
-}
+
 
 
 .right-sidebar{
-	border-left: 1px solid #b299a8;
 	overflow: auto;
 	padding: 20px
 }
@@ -369,22 +365,15 @@ a {
 	max-width: 400px;
 }
 .s-tabs{
-	display: flex;
-	padding: 15px 15px 15px 0px;
 	font-weight: 700;
-	border-bottom: 1px solid grey;
-	padding:25px 5px;
-	justify-content:center;
+	padding:15px;
 }
 .s-tabs:hover{
 	cursor: pointer;
 }
-.side-menu-name{
-	display: none;
-}
 .profile-tab{
 	display: flex;
-	padding: 10px 0px;
+	padding: 10px;
 	flex-direction: row;
 	align-items: center;
 }

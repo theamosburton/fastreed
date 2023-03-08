@@ -83,8 +83,13 @@
     display: none;
 }
 
-
-.login-signup{
+.sign-log-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-div, .signup-div{
+    max-width: 300px;
     border-radius: 5px;
     display: flex;
     align-self: center;
@@ -95,18 +100,18 @@
 }
 
 
-.login-signup form{
+.login-div form, .signup-div form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.login-signup .title{
+.login-div .title, .signup-div .title{
     font-size: 25px;
     font-weight: bolder;
     margin: 10px 0;
 }
-.login-signup .lg-inputs{
+.lg-inputs{
     background-color: transparent;
     display: block;
     width: 100%;
@@ -116,10 +121,10 @@
     padding: 10px;
     font-weight: 600;
 }
-.login-signup .lg-inputs:hover, .login-signup .lg-inputs:active, .login-signup .lg-inputs:focus{
+.login-div .lg-inputs:hover, .login-div .lg-inputs:active, .login-div .lg-inputs:focus{
     border-bottom: 3px solid lime;
 }
-.login-signup .btn{
+.login-div .btn, .signup-div .btn{
     border: 0;
     background-color: #0782fc;
     color: white;
@@ -128,7 +133,7 @@
     padding: 5px 20px;
     border-radius: 20px;
 }
-.login-signup .btn:hover, .login-signup .btn:focus,.login-signup .btn:active{
+.login-div .btn:hover, .login-div .btn:focus,.login-div .btn:active, .signup-div .btn:hover, .signup-div .btn:active, .signup-div .btn:focus{
     box-shadow: none;
     border: 0;
     background-color: #1168c0;

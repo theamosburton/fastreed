@@ -51,12 +51,15 @@ if (isset($_SESSION['LOGGED_USER'])){
 		.remember-me input{
 			margin-bottom: 15px;
 		}
+		.agree p{
+			margin-left :0px;
+		}
 	</style>
 </head>
 <body>
     <p id="rightsidebar" hidden>true</p>
 	<p id="sidebarPosition" hidden>0</p>
-	<p id="sidebarPositionLg" hidden>0</p>
+	<p id="sidebarPositionLg" hidden>1</p>
 	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
@@ -80,7 +83,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 					</div>
 				</div>
 
-				<div id="side-block" class="content sidebar col-lg-1 col-md-3 col-sm-0">
+				<div id="side-block" class="content sidebar col-lg-2 col-md-3 col-sm-0">
 				    <div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
@@ -93,10 +96,11 @@ if (isset($_SESSION['LOGGED_USER'])){
 					</div>
 				</div>
 
-				<div id="center-block" class=" content col-lg-8 col-md-6 col-sm-12 col-xs-12">
-				    <div class="style-7 section-block main-block">
-						<div class="login-signup">
-							<span class="title"> Welcome Back </span>
+				<div id="center-block" class=" content col-lg-7 col-md-6 col-sm-12 col-xs-12">
+				    <div class="style-7 section-block main-block sign-log-block row">
+
+						<div class="login-div d-none">
+							<span class="title"> WELCOME BACK </span>
 							<form action="login.php" method="post">
 								<?php
 								        if (isset($_COOKIE['authStatus'])) {
@@ -113,7 +117,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 								<select class="lg-inputs" name="login_as" id="">
 									<option value="user">User</option>
 									<option value="admin">Admin</option>
-									
 								</select>
 
 								<div class="remember-me">
@@ -128,6 +131,37 @@ if (isset($_SESSION['LOGGED_USER'])){
 							<a href="#">Forgotten Password</a>
 							<br>
 							<a>Create an Account</a>
+						</div>
+                        <!-- Sign Up Div -->
+						<div class="signup-div">
+						<span class="title"> CREATE ACCOUNT </span>
+						<form action="signup.php" method="post">
+						<?php
+								        if (isset($_COOKIE['authStatus'])) {
+											echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+											<strong>'.$_COOKIE['authStatus'].'</strong>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+										  </div>';
+										  }
+						?>
+						<input class="lg-inputs" type="text"  name="username" placeholder="Username">
+						<input class="lg-inputs" type="email"  name="email" placeholder="Email Address">
+						<input class="lg-inputs" type="password" name="password" placeholder="Password">
+						<select class="lg-inputs" name="gender" id="">
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="others">Others</option>
+								</select>
+						<div class="agree">
+							<p>By clicking Sign Up, you read and agree to Our <a href="/terms-privacy/">Terms of Service</a> </p>
+
+							<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Sign Up">
+							<hr width="100%">
+							<a href="#">Log In</a>
+						</div>		
+						</form>
 						</div>
                     </div>
 				</div>

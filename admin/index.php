@@ -67,7 +67,7 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
+			<div class="content sidebar page-col col-lg-2 col-md-12 col-sm-12 col-xs-12">
 			        <div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
@@ -80,7 +80,7 @@ if(!isset($_COOKIE['AID'])){
 					</div>
 			</div>
 
-			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
+			<div class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
 					<div class="section-title" id="1">All Devices</div>
 				</div>	
