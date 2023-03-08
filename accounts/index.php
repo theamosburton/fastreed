@@ -97,7 +97,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 				</div>
 
 				<div id="center-block" class=" content col-lg-7 col-md-6 col-sm-12 col-xs-12">
-				    <div class="style-7 section-block main-block sign-log-block row">
+				    <div class="style-7 section-block main-block sign-log-block">
 
 						<div class="login-div">
 							<span class="title"> WELCOME BACK </span>
