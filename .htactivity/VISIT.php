@@ -111,6 +111,7 @@ class VisitorActivity
 
   private function checkAuthVisitor($id, $table, $parameter){
     $sql = "SELECT $parameter FROM $table WHERE $parameter = '$id'";
+    var_dump($sql);
     $result = mysqli_query($this->DB, $sql);
     $row = mysqli_num_rows($result);
     if ($row) {
