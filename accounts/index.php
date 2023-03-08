@@ -77,7 +77,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="/">Home</a></li>
 								<li role="presentation" ><a href="/about/" >About</a></li>
-								<li role="presentation" class="active"><a href="/accounts/" >Login/Signup</a></li>
+								<li role="presentation" class="active"><a href="/accounts/" >Account</a></li>
 							</ul>
 					    </div>
 					</div>
@@ -99,7 +99,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 				<div id="center-block" class=" content col-lg-7 col-md-6 col-sm-12 col-xs-12">
 				    <div class="style-7 section-block main-block sign-log-block row">
 
-						<div class="login-div d-none">
+						<div class="login-div">
 							<span class="title"> WELCOME BACK </span>
 							<form action="login.php" method="post">
 								<?php
@@ -127,13 +127,12 @@ if (isset($_SESSION['LOGGED_USER'])){
 
 								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login">
 							</form>
-							<hr width="100%">
 							<a href="#">Forgotten Password</a>
 							<br>
-							<a>Create an Account</a>
+							<p class="changeSign" id="tlogup">Create an Account</p>
 						</div>
                         <!-- Sign Up Div -->
-						<div class="signup-div">
+						<div class="signup-div" style="display:none">
 						<span class="title"> CREATE ACCOUNT </span>
 						<form action="signup.php" method="post">
 						<?php
@@ -155,11 +154,11 @@ if (isset($_SESSION['LOGGED_USER'])){
 									<option value="others">Others</option>
 								</select>
 						<div class="agree">
-							<p>By clicking Sign Up, you read and agree to Our <a href="/terms-privacy/">Terms of Service</a> </p>
+							<p>By clicking Sign Up, you read and agree to our <a href="/terms-privacy/">Terms of Service</a> </p>
 
 							<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Sign Up">
 							<hr width="100%">
-							<a href="#">Log In</a>
+							<p class="changeSign" id="tlogin">Log In</p>
 						</div>		
 						</form>
 						</div>

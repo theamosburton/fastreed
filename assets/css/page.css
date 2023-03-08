@@ -99,7 +99,16 @@
     justify-content: center;
 }
 
-
+form a{
+    font-weight: 800;
+}
+.changeSign{
+    font-weight: 800;
+    cursor: pointer;
+}
+.changeSign:hover{
+    color: cadetblue;
+}
 .login-div form, .signup-div form{
     display: flex;
     flex-direction: column;

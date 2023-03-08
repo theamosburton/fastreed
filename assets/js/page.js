@@ -8,4 +8,13 @@ $("#tab").click(function(){
     }
 });
 
+$('#tlogup').click(function(){
+    $('.signup-div').css('display', 'flex');
+    $('.login-div').css('display', 'none');
+});
+
+$('#tlogin').click(function(){
+    $('.signup-div').css('display', 'none');
+    $('.login-div').css('display', 'flex')
+});
 
