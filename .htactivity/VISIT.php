@@ -82,6 +82,7 @@ class VisitorActivity
     }elseif (isset($_COOKIE['AID'])) {
       if (!empty($_COOKIE['AID'])) {
         $adminID = $_COOKIE['AID'];
+        echo $decAdminID;
         $decAdminID = $this->AUTH->decrypt($adminID);
         $authAdmin = $this->checkAuthVisitor($decAdminID, "admins", "personID");
         if ($authAdmin) {
