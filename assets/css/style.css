@@ -384,7 +384,7 @@ a {
 }
 .profile-tab{
 	display: flex;
-	padding-bottom: 20px;
+	padding: 10px 0px;
 	flex-direction: row;
 	align-items: center;
 }

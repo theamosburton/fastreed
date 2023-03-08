@@ -54,7 +54,7 @@ $('.t-icon-lg').click(function (){
   }else{
     $('.s-tabs').css('justify-content','center');
     $('.s-tabs').css('padding','25px 5px');
-    
+    $('.profile-tab').css('padding','10px 0px');
     $('.side-menu-name').css('display','none');
     $("#sidebarPositionLg").html('0');
     $("#side-block").removeAttr('col-md-3');
