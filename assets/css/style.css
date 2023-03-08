@@ -370,7 +370,7 @@ a {
 }
 .s-tabs{
 	display: flex;
-	padding: 15px;
+	padding: 15px 15px 15px 0px;
 	font-weight: 700;
 	border-bottom: 1px solid grey;
 	padding:25px 5px;
@@ -420,8 +420,10 @@ a:hover{
 	text-decoration: none;
 }
 .profilePlus{
+	
 	color: #5a9269;
-	padding: 15px 10px;
+	padding: 15px 0;
+	
 }
 .profile-tab:hover>.profilePlus{
 	color:darkturquoise;
