@@ -158,12 +158,12 @@ if (isset($_SESSION['LOGGED_USER'])){
 						?>
 						<div class="lg-inputs">
 							<input  type="text"  name="username" placeholder="Username">
-							<i class=" fa fa-sharp fa-solid fa-spinner"></i>
+							<i></i>
 						</div>
 
 						<div class="lg-inputs">
 							<input  type="email"  name="email" placeholder="Email Address">
-							<i class=" fa fa-sharp fa-solid fa-spinner"></i>
+							<i></i>
 						</div>
 						
 						<div class="lg-inputs">
@@ -194,9 +194,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 
 				<div class="content r-sidebar col-lg-3 col-md-3">
 					<div class="section-block right-sidebar">
-					<div class="right-ad">
-							Ad 01
-						</div>
 					</div>
 				</div>
 			</div>

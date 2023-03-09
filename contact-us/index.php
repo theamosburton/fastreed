@@ -112,7 +112,7 @@ $version = implode('.', str_split($version, 1));
 					
 				</div>
 				<!--Left Side bar -->
-				<div id="side-block" class="content sidebar col-md-2 col-sm-12 col-xs-12">
+				<div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
 
 					<div class="section-block sidebar-block">
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
@@ -130,11 +130,11 @@ $version = implode('.', str_split($version, 1));
 
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-md-7 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-md-6 col-sm-12 col-xs-12">
 				    
 					
 					<!--tab panes-->
-					<div class="home-block style-7 section-block  ">
+					<div class="home-block style-7 section-block">
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featured">
 								<div class="section-block featured-block">
@@ -161,6 +161,10 @@ $version = implode('.', str_split($version, 1));
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="content r-sidebar col-lg-3 col-md-2">
+					<div class="style-7 section-block right-sidebar">
 					</div>
 				</div>
 			</div>
