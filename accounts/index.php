@@ -101,7 +101,8 @@ if (isset($_SESSION['LOGGED_USER'])){
 
 						<div class="login-div">
 							<span class="title"> WELCOME BACK </span>
-							<form action="login.php" method="post">
+							<form id="login-form" action="login.php" method="post">
+								<div id="f-status"></div>
 								<?php
 								        if (isset($_COOKIE['authStatus'])) {
 											echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -112,8 +113,16 @@ if (isset($_SESSION['LOGGED_USER'])){
 										  </div>';
 										  }
 								?>
-								<input class="lg-inputs" type="text"  name="usernameOrEMail" placeholder="Username or Email">
-								<input class="lg-inputs" type="password" name="password" placeholder="Password">
+								<div class="lg-inputs">
+									<input type="text" id="logUsername" onkeyup="checkUsername('1')" name="usernameOrEMail" placeholder="Username or Email">
+									<i id="logUsername-status"></i>
+								</div>
+								
+								<div class="lg-inputs">
+									<input type="password"  id="logPassword" onkeyup="checkPassword('1')" name="password" placeholder="Password">
+									<i id="logPassword-status"></i>
+								</div>
+								
 								<select class="lg-inputs" name="login_as" id="">
 									<option value="user">User</option>
 									<option value="admin">Admin</option>
@@ -124,8 +133,8 @@ if (isset($_SESSION['LOGGED_USER'])){
 									<p>Remember this device</p>
 								</div>
 
-								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login">
-								<div class="g-recaptcha" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
+								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login" disabled>
+								<div class="g-recaptcha" data-callback="onSubmit('o')" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
 							</form>
 							<hr width="100%">
 							<a href="#">Forgotten Password</a>
@@ -146,10 +155,24 @@ if (isset($_SESSION['LOGGED_USER'])){
 										  </div>';
 										  }
 						?>
-						<input class="lg-inputs" type="text"  name="username" placeholder="Username">
-						<input class="lg-inputs" type="email"  name="email" placeholder="Email Address">
-						<input class="lg-inputs" type="password" name="password" placeholder="Password">
-						<input class="lg-inputs" type="password" name="vpassword" placeholder="Verify Password">
+						<div class="lg-inputs">
+							<input  type="text"  name="username" placeholder="Username">
+							<i class=" fa fa-sharp fa-solid fa-spinner"></i>
+						</div>
+
+						<div class="lg-inputs">
+							<input  type="email"  name="email" placeholder="Email Address">
+							<i class=" fa fa-sharp fa-solid fa-spinner"></i>
+						</div>
+						
+						<div class="lg-inputs">
+							<input type="password" name="password" placeholder="Password">
+						</div>
+
+						<div class="lg-inputs">
+							<input  type="password" name="vpassword" placeholder="Verify Password">
+						</div>
+						
 						<select class="lg-inputs" name="gender" id="">
 									<option value="male">Male</option>
 									<option value="female">Female</option>
@@ -189,5 +212,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 	<!-- Template JS -->
 	<script type="text/javascript" src="../assets/js/main.js"></script>
 	<script type="text/javascript" src="../assets/js/page.js"></script>
+	<script type="text/javascript" src="src/fun.js"></script>
 </body>
 </html>

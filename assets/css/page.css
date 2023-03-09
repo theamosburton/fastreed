@@ -120,19 +120,34 @@ form a{
     margin: 10px 0;
 }
 .lg-inputs{
+    display: flex;
+    align-items: flex-start;
     background-color: transparent;
-    display: block;
     width: 100%;
     margin: 15px 0;
     border: 0;
+    padding: 1px 5px 1px 5px;
     border-bottom:3px solid purple;
-    padding: 10px;
     font-weight: 600;
+}
+.lg-inputs i{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    width: 15%;
+}
+.lg-inputs input{
+    width: 85%;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
 }
 .login-div .lg-inputs:hover, .login-div .lg-inputs:active, .login-div .lg-inputs:focus{
     border-bottom: 3px solid lime;
 }
 .login-div .btn, .signup-div .btn{
+    display: flex;
+    justify-content: center;
     border: 0;
     background-color: #0782fc;
     color: white;
@@ -161,6 +176,42 @@ form a{
 .login-block{
     /* max-height: auto; */
 }
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .rotating {
+    -webkit-animation:1s linear 0s infinite normal none running rotating;
+    -moz-animation:1s linear 0s infinite normal none running rotating;
+    -ms-animation:1s linear 0s infinite normal none running rotating;
+    -o-animation: 1s linear 0s infinite normal none running rotating;
+    animation: 1s linear 0s infinite normal none running rotating;
+  }
 
 @media (max-width: 1000px){
     .table-content{
