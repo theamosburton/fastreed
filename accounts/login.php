@@ -9,7 +9,7 @@ include $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 if($_SERVER['REQUEST_URI'] == '/accounts/login.php'){
   new ValidatePerson();
 }else {
-  header("Location: /accounts/index.php");
+  // header("Location: /accounts/index.php");
 }
 /**
  * This class Is used to validate admin and user with proper credentials
