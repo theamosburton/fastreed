@@ -7,17 +7,17 @@ let uValid = false;
     if (userInput.length < 6) {
       uValid = false;
       $('#logUsername-status').css('animation',' none');
-      $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark');
+      $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark fa-xl');
       $('#logUsername-status').css('color','red');
     }else {
       if (hasWhiteSpace(userInput)) {
         $('#logUsername-status').css('animation',' none');
-        $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark');
+        $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark fa-xl');
         $('#logUsername-status').css('color','red');
         uValid = false;
       }else {
         $('#logUsername-status').css('animation',' none');
-        $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-check');
+        $('#logUsername-status').attr('class', 'fa fa-sharp fa-solid fa-circle-check fa-xl');
         $('#logUsername-status').css('color','green');
         uValid = true;
         if(x == '1'){
@@ -36,12 +36,12 @@ let uValid = false;
         if (userInput.length < 1) {
           uValid = false;
           $('#logPassword-status').css('animation',' none');
-          $('#logPassword-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark');
+          $('#logPassword-status').attr('class', 'fa fa-sharp fa-solid fa-circle-xmark fa-xl');
           $('#logPassword-status').css('color','red');
         }else {
           uValid = true;
           $('#logPassword-status').css('animation',' none');
-          $('#logPassword-status').attr('class', 'fa fa-sharp fa-solid fa-circle-check');
+          $('#logPassword-status').attr('class', 'fa fa-sharp fa-solid fa-circle-check  fa-xl');
           $('#logPassword-status').css('color','green');
           if(x == '1'){
             onSubmit('p');

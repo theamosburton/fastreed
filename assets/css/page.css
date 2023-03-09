@@ -109,6 +109,7 @@ form a{
     color: cadetblue;
 }
 .login-div form, .signup-div form{
+    text-align: start;
     display: flex;
     flex-direction: column;
     justify-content: center;
