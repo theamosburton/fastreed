@@ -1,4 +1,3 @@
-
 <?php
 $p_Data = new getLoggedData();
 if (isset($_SESSION['LOGGED_USER'])) {
@@ -41,8 +40,8 @@ $new_article = '<a href="/new-article/" id="newArticle_link"><div class="s-tabs"
 
 $new_user = '<a href="/admin/create-user/" id="newUser_link"><div class="s-tabs">  <i class="fa fa-square-plus fa-xl"></i><span class="side-menu-name">Create User</span></div></a>';
 
-$my_interests = '<a href="/my-interests/" id="interests_link"><div class="s-tabs">  <i class="fa fa-icons fa-xl"></i><span class="side-menu-name">My Interests</span</div></a>';
 
+$my_interests = '<a href="/accounts/profile/" id="profile_link"><div class="s-tabs"> <i class="fa fa-solid fa-icons fa-xl"></i><span class="side-menu-name">My Interests</span></div></a>';
 
 $profile = '<a href="/accounts/profile/" id="profile_link"><div class="s-tabs"> <i class="fa fa-solid fa-circle-user fa-xl"></i><span class="side-menu-name">Profile</span></div></a>';
 

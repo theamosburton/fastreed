@@ -8,7 +8,7 @@ $version = implode('.', str_split($version, 1));
 ?>
 
 <!DOCTYPE html> 
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<html lang="en">  
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +35,10 @@ $version = implode('.', str_split($version, 1));
 	<p id="sidebarPositionLg" hidden>1</p>
 	<!--main content-->
 	<div class="main-content">
-		<div class="container ">
+		<div class="container">
 			<div class="row ">
+
+			    <!-- Header Section -->
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
 						<div class="brand">
@@ -55,20 +57,18 @@ $version = implode('.', str_split($version, 1));
 								<?php
 								if(isset($_SESSION['LOGGED_ADMIN'])){
 									if($_SESSION['LOGGED_ADMIN']){
-										echo '<li role="presentation"><a href="/admin/" >Admin Panel</a></li>';
+										echo '<li role="presentation"><a href="/admin/">Admin Panel</a></li>';
 									}else {
 										echo '<li role="presentation"><a href="/accounts/" >Login</a></li>';
 									}
-									
 								}elseif(isset($_SESSION['LOGGED_USER'])){
 									if($_SESSION['LOGGED_USER']){
-										echo '<li role="presentation"><a href="/accounts/profile/" >Profile</a></li>';
+										echo '<li role="presentation"><a href="/accounts/profile/">Profile</a></li>';
 									}else {
-										echo '<li role="presentation"><a href="/accounts/" >Login</a></li>';
+										echo '<li role="presentation"><a href="/accounts/">Login</a></li>';
 									}
-									
 								}else{
-									echo '<li role="presentation"><a href="/accounts/" >Login</a></li>';
+									echo '<li role="presentation"><a href="/accounts/">Login</a></li>';
 								}
 								?>
 							</ul>
@@ -78,10 +78,8 @@ $version = implode('.', str_split($version, 1));
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				  <div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
-
+				<div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
 					<div class="style-7 section-block sidebar-block">
-					    
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 						<?php include 'views/sidebar.php' ;
 						echo $profileTab;
@@ -89,8 +87,6 @@ $version = implode('.', str_split($version, 1));
 						echo $$t;
 						?>			
 					</div>
-					<!-- Collections -->
-
 				</div>
 				<!--/sidebar-->
 
@@ -98,7 +94,7 @@ $version = implode('.', str_split($version, 1));
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-md-6 col-sm-12 col-xs-12">
 					<!--tab panes-->
-					<div class="home-block style-7 section-block  ">
+					<div class="home-block style-7 section-block">
 					<!-- <div class=" alert alert-danger" role="alert">
 								The Website is currently in Development Mode!
 					</div> -->
@@ -181,19 +177,15 @@ $version = implode('.', str_split($version, 1));
 					<div class="style-7 section-block right-sidebar">
 					</div>
 				</div>
-
-				<!-- <div class="content col-12 order-4 footer">
-					<div class="section-block footer-section"></div>
-				</div> -->
 			</div>
 		</div>
 	</div>
 	
-	<!-- Global jQuery -->
-	<script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	
-	<!-- Template JS -->
-	<script type="text/javascript" src="assets/js/main.js?v=<?php echo $version;?>"></script>
+<!-- Global jQuery -->
+<script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+<!-- Template JS -->
+<script type="text/javascript" src="assets/js/main.js?v=<?php echo $version;?>"></script>
 </body>
 </html>
