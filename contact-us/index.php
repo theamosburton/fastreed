@@ -1,7 +1,9 @@
 <?php
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.htactivity/VISIT.php";
-new VisitorActivity();
+$visit = new VisitorActivity();
+$version = $visit->VERSION;
+$version = implode('.', str_split($version, 1));
 ?>
 
 <!DOCTYPE html> 
@@ -20,7 +22,7 @@ new VisitorActivity();
 	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Template CSS -->
-	<link href="/assets/css/style.css?V=1.2.3" rel="stylesheet">
+	<link href="/assets/css/style.css?V=<?php echo $version;?>" rel="stylesheet">
 
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">

@@ -1,15 +1,32 @@
 <?php
 $_SERVROOT = '../../';
-// $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-// include $_DOCROOT."/.htactivity/VISIT.php";
-// new VisitorActivity();
+$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+include $_DOCROOT."/.htactivity/VISIT.php";
 
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-
-include_once($GLOBALS['DB']);
-if(!isset($_COOKIE['AID'])){
+if(!isset($_SESSION['LOGGED_ADMIN'])){
 	header('Location: /accounts/index.php');
 }
+
+class HardRefresh extends VisitorActivity{	
+	public function updateVersion(){
+		$oldVersion = (int) $this->VERSION;
+		$newVersion = $this->VERSION + 1;
+		$newVersion = (string) $newVersion;
+		$sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
+		$result = mysqli_query($this->DB, $sql);
+		if ($result) {
+			$vStatus = "Version Updated to : $newVersion";
+		}else {
+			$vStatus = "Version could not Updated";
+		}
+		return $vStatus;
+	}
+ }
+$updateCode = shell_exec('git pull fastreed main');                      
+$refresh = new HardRefresh();
+$vStatus = $refresh->updateVersion();
+
+
 
 ?>
 
@@ -69,10 +86,10 @@ if(!isset($_COOKIE['AID'])){
 			<div class="content col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
 					<span>
-                        <?php 
-                                $output = shell_exec('git pull fastreed main');
-                                echo $output;
-                        ?>
+						<?php
+						  echo $updateCode;
+						  echo $vStatus;
+						?>
                     </span>
 				</div>	
 			</div>

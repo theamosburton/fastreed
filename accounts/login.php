@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_URI'] == '/accounts/login.php'){
   header("Location: /accounts/index.php");
 }
 /**
- * This class Is used to validate admin, users and writers with proper credentials
+ * This class Is used to validate admin and user with proper credentials
  * If admin succefully validated the login acces will be granted
  * If not the header will be redirected to login/index.php with cookie
  * containing error message.
@@ -259,6 +259,7 @@ public function deleteOtherID(){
       $return['valid'] = true;
       $return['PID'] = $row['personID'];
     }else {
+      setcookie("authStatus","Username Not Found", time()+10, '/');
       $return['valid'] = false;
     }
     return $return;

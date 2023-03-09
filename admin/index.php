@@ -2,8 +2,8 @@
 $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.htactivity/VISIT.php";
-new VisitorActivity();
-
+$visit = new VisitorActivity();
+$version = $visit->VERSION;
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 
 include_once($GLOBALS['DB']);
@@ -29,9 +29,9 @@ if(!isset($_COOKIE['AID'])){
 	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Template CSS -->
-	<link href="/assets/css/style.css?V=1.1.1" rel="stylesheet">
-	<link href="/assets/css/page.css?V=1.1.4" rel="stylesheet">
-	<link href="/admin/style.css?V=1.0.0" rel="stylesheet">
+	<link href="/assets/css/style.css?V=<?php echo $version;?>" rel="stylesheet">
+	<link href="/assets/css/page.css?V=<?php echo $version;?>" rel="stylesheet">
+	<link href="/admin/style.css?V=<?php echo $version;?>" rel="stylesheet">
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -97,7 +97,7 @@ if(!isset($_COOKIE['AID'])){
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 
 <!-- Template JS -->
-<script type="text/javascript" src="/assets/js/main.js"></script>
-<script type="text/javascript" src="/assets/js/page.js"></script>
+<script type="text/javascript" src="/assets/js/main.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="/assets/js/page.js?=<?php echo $version;?>"></script>
 </body>
 </html>

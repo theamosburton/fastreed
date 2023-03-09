@@ -33,10 +33,12 @@ class VisitorActivity
 
   private $DB_CONNECT;
   private $AUTH;
-  private $DB;
+  protected $DB;
   private $GUEST_VISITED;
   private $ADMIN_VISITED;
   private $USER_VISITED;
+
+  public $VERSION;
 
 
   function __construct()
@@ -51,8 +53,15 @@ class VisitorActivity
     $this->AUTH = new Auth();
     // Get Connection
     $this->DB = $this->DB_CONNECT->DBConnection();
-
+    $this->getVersions();
     $this->handleActivity();
+  }
+
+  public function getVersions(){
+    $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
+    $result = mysqli_query($this->DB, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $this->VERSION = $row['optionValue'];
   }
 
   private function handleActivity(){
