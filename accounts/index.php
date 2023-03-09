@@ -127,6 +127,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login">
 								<div class="g-recaptcha" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
 							</form>
+							<hr width="100%">
 							<a href="#">Forgotten Password</a>
 							<br>
 							<p class="changeSign" id="tlogup">Create an Account</p>
