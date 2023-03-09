@@ -157,21 +157,23 @@ if (isset($_SESSION['LOGGED_USER'])){
 										  }
 						?>
 						<div class="lg-inputs">
-							<input  type="text"  name="username" placeholder="Username">
-							<i></i>
+							<input  type="text" id="SignUsername" name="username" placeholder="Username">
+							<i id="SignUsername-status"></i>
 						</div>
 
 						<div class="lg-inputs">
-							<input  type="email"  name="email" placeholder="Email Address">
-							<i></i>
+							<input  type="email" id="SignEmail"  name="email" placeholder="Email Address">
+							<i id="SignEmail-status"></i>
 						</div>
 						
 						<div class="lg-inputs">
-							<input type="password" name="password" placeholder="Password">
+							<input type="password" id="SignPassword" name="password" placeholder="Password">
+							<i id="SignPassword-status"></i>
 						</div>
 
 						<div class="lg-inputs">
-							<input  type="password" name="vpassword" placeholder="Verify Password">
+							<input  type="password" id="SignVPassword" name="vpassword" placeholder="Verify Password">
+							<i id="SignVPassword-status"></i>
 						</div>
 						
 						<select class="lg-inputs" name="gender" id="">

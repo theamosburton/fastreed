@@ -55,11 +55,11 @@ $version = $visit->VERSION;
 
 
 				<!--Left Side bar -->
-				<div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
+				<div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
 
 					<div class="section-block sidebar-block">
 					    <p id="sidebarPosition" hidden>0</p>
-						<p id="sidebarPositionLg" hidden>0</p>
+						<p id="sidebarPositionLg" hidden>1</p>
 						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
 					    <?php
 						include '../views/sidebar.php';
@@ -74,7 +74,7 @@ $version = $visit->VERSION;
 				<!--/Left sidebar-->
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-md-11 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-md-7 col-sm-12 col-xs-12">
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block style-7 main-block">
@@ -122,17 +122,14 @@ $version = $visit->VERSION;
 										<a href="#" class="btn">Mahira Rajput</a>
 										<p>Writer</p>
 									</div>
-								</div>
-
-								
+								</div>	
 							</div>
-							
-
 						</div>
 					</div>
 				</div>
-				<div class="content col-12 order-3 footer">
-					<div class="section-block footer-section"></div>
+				<div class="content r-sidebar col-lg-2 col-md-2">
+					<div class="style-7 section-block right-sidebar">
+					</div>
 				</div>
 			</div>
 		</div>

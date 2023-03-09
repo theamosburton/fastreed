@@ -172,7 +172,6 @@ $version = implode('.', str_split($version, 1));
 						</div>
 					</div>
 				</div>
-
 				<div class="content r-sidebar col-lg-3 col-md-3">
 					<div class="style-7 section-block right-sidebar">
 					</div>
