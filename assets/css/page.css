@@ -117,21 +117,21 @@ form a{
 .login-div .title, .signup-div .title{
     font-size: 25px;
     font-weight: bolder;
-    margin: 10px 0;
+    margin: 10px 0 25px 10px;
 }
 .lg-inputs{
     display: flex;
     align-items: flex-start;
     background-color: transparent;
     width: 100%;
-    margin: 20px 0;
+    margin: 25px 0;
     border: 0;
     padding: 1px 5px 1px 5px;
     border-bottom:3px solid purple;
     font-weight: 600;
 }
 .lg-inputs i{
-    margin-top: 5px;
+    margin-top: 8px;
     display: flex;
     justify-content: center;
     width: 15%;
@@ -144,6 +144,7 @@ form a{
 }
 .login-div .lg-inputs:hover, .login-div .lg-inputs:active, .login-div .lg-inputs:focus{
     border-bottom: 3px solid lime;
+    background-color: transparent;
 }
 .login-div .btn, .signup-div .btn{
     display: flex;
