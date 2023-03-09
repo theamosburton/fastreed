@@ -112,7 +112,6 @@ form a{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 .login-div .title, .signup-div .title{
     font-size: 25px;
