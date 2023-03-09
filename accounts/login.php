@@ -78,8 +78,10 @@ class ValidatePerson{
   }
   public function loginAsUser(){
     if (!$this->validateUsername('user')['valid']) {
+      setcookie("authStatus","Wrong Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }elseif (!$this->validatePassword('user', $this->validateUsername('user')['PID'])) {
+      setcookie("authStatus","Wrong Password Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }else{
       $PID = $this->validateUsername('user')['PID'];
