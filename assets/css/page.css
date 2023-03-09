@@ -85,7 +85,6 @@
 
 .sign-log-block{
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 .login-div, .signup-div{

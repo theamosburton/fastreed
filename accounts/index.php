@@ -123,9 +123,9 @@ if (isset($_SESSION['LOGGED_USER'])){
 									<input type="checkbox" name="remember_me" value="checked">
 									<p>Remember this device</p>
 								</div>
-								<div class="g-recaptcha" data-callback='onSubmit' data-sitekey="6LfHsUkjAAAAAI7vWP697QK0n8EMTwY1OqZSk1wC"></div>
 
 								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login">
+								<div class="g-recaptcha" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
 							</form>
 							<a href="#">Forgotten Password</a>
 							<br>
@@ -148,15 +148,17 @@ if (isset($_SESSION['LOGGED_USER'])){
 						<input class="lg-inputs" type="text"  name="username" placeholder="Username">
 						<input class="lg-inputs" type="email"  name="email" placeholder="Email Address">
 						<input class="lg-inputs" type="password" name="password" placeholder="Password">
+						<input class="lg-inputs" type="password" name="vpassword" placeholder="Verify Password">
 						<select class="lg-inputs" name="gender" id="">
 									<option value="male">Male</option>
 									<option value="female">Female</option>
 									<option value="others">Others</option>
 								</select>
 						<div class="agree">
-							<p>By clicking Sign Up, you read and agree to our <a href="/terms-privacy/">Terms of Service</a> </p>
+							<p>By clicking Sign Up, you read and agree to our <a href="/terms-privacy/">Terms and Privacy</a> </p>
 
 							<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Sign Up">
+							<div class="g-recaptcha" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
 							<hr width="100%">
 							<p class="changeSign" id="tlogin">Log In</p>
 						</div>		

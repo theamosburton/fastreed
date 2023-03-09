@@ -427,6 +427,8 @@ a:hover{
 	margin-left: 6px;
 }
 #center-block, #side-block{
+	overflow: auto;
+    min-height: 80vh;
 	transition: all .3s ease-in-out;
 }
 #bars-lg{

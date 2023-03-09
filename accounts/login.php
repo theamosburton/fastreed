@@ -78,10 +78,8 @@ class ValidatePerson{
   }
   public function loginAsUser(){
     if (!$this->validateUsername('user')['valid']) {
-      setcookie("authStatus","Wrong Username Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }elseif (!$this->validatePassword('user', $this->validateUsername('user')['PID'])) {
-      setcookie("authStatus","Wrong User Password Entered", time()+10, '/');
       header('Location: /accounts/index.php');
     }else{
       $PID = $this->validateUsername('user')['PID'];
@@ -272,52 +270,47 @@ public function deleteOtherID(){
   public function validateRecaptcha(){
     if (RECAPTCHA_DISABLED) {
       $return = true;
-    }else {
+    }else{
       $captchaKey = G_RECAPTCHA;
       if (isset($_POST['g-recaptcha-response'])) {
         $g_captcha = $_POST['g-recaptcha-response'];
         if (!empty($g_captcha)) {
-          function verifyCaptcha($res, $captchaKey){
-            try {
-                $url = 'https://www.google.com/recaptcha/api/siteverify';
-                $data = ['secret'   => $captchaKey,
-                         'response' => $res,
-                         'remoteip' => $_SERVER['REMOTE_ADDR']];
+          
+          $url = 'https://www.google.com/recaptcha/api/siteverify';
+          $data = array(
+              'secret' => $captchaKey,
+              'response' => $g_captcha
+          );
+          
+          // Send a POST request to the reCAPTCHA verification endpoint
+          $options = array(
+              'http' => array(
+                  'header' => 'Content-type: application/x-www-form-urlencoded',
+                  'method' => 'POST',
+                  'content' => http_build_query($data)
+              )
+          );
+          
+          $context = stream_context_create($options);
+          $result = file_get_contents($url, false, $context);
+          
+          // Parse the JSON response from the server
+          $response_data = json_decode($result, true);
+          
+          // Return true if the reCAPTCHA was successful
+          $return = ($response_data && isset($response_data['success']) && $response_data['success'] === true);
 
-                $options = [
-                    'http' => [
-                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                        'method'  => 'POST',
-                        'content' => http_build_query($data)
-                    ]
-                ];
-
-                $context  = stream_context_create($options);
-                $result = file_get_contents($url, false, $context);
-                return json_decode($result)->success;
-            }
-            catch (Exception $e) {
-                return null;
-            }
-          }
-          $captchaVerified = verifyCaptcha($g_captcha, $g_recaptcha);
-          if ($captchaVerified) {
-            $return = true;
-          }else {
-            // G_recaptcha not Authorized
-            setcookie("authStatus","Captcha Not Valid", time()+10, '/');
-            $return = false;
-          }
         }else {
-          setcookie("authStatus","Refill The Captcha", time()+10, '/');
+          setcookie("authStatus","Please Fill The Captcha", time()+10, '/');
           $return = false;
         }
-      }else {
+      }else{
         setcookie("authStatus","Captcha Not Included In Form", time()+10, '/');
         $return = false;
       }
     }
     return $return;
+        
   }
 // Captcha Validation //
 
