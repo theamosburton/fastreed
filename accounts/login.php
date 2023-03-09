@@ -48,6 +48,7 @@ class ValidatePerson{
           }
         }else{
           header('Location: /accounts/index.php');
+          setcookie("authStatus","Please refill the captcha", time()+10, '/');
         }
       }else {
         setcookie("authStatus","Mention Type", time()+10, '/');
