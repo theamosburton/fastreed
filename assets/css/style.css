@@ -417,6 +417,9 @@ a:hover{
 .profile-tab:hover>.profilePlus{
 	color:darkturquoise;
 }
+#profile-name-desig{
+	margin-left: 12px;
+}
 
 #bars, #bars-lg{
 	margin-top: 23px;

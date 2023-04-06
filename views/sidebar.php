@@ -18,7 +18,7 @@ else {
 }
 
 $profileTab = '<a href="/accounts/profile/" class="s-tabs profile-tab">'.$profilePic.'
-<div class="side-menu-name">
+<div id="profile-name-desig" class="side-menu-name">
 <p class="name">'.$p_Data->NAME.'</p>
 <p class="desig">'.$p_Data->DESIG.'</p>
 </div>

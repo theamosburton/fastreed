@@ -135,7 +135,7 @@ if (isset($_SESSION['LOGGED_USER'])){
 								</div>
 
 								<input  class="lg-inputs btn" id="submit" type="submit" name="Submit" value="Login" disabled>
-								<div class="g-recaptcha" data-callback="onSubmit('o')" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
+								<div class="g-recaptcha" data-callback="onSubmit.bind(null, 'response', 'O')" data-sitekey="6Lf74uYkAAAAAHAqvSge0diDDgoRjf400tBBSGJe"></div>
 							</form>
 							<hr width="100%">
 							<a href="#">Forgotten Password</a>
@@ -213,5 +213,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 	<script type="text/javascript" src="../assets/js/main.js?v=<?php echo $version;?>"></script>
 	<script type="text/javascript" src="../assets/js/page.js?v=<?php echo $version;?>"></script>
 	<script type="text/javascript" src="src/fun.js?v=<?php echo $version;?>"></script>
+	<script type="text/javascript" src="src/fun2.js?v=<?php echo $version;?>"></script>
 </body>
 </html>
