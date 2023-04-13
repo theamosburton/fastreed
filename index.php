@@ -98,7 +98,7 @@ $version = implode('.', str_split($version, 1));
 					<!-- <div class=" alert alert-danger" role="alert">
 								The Website is currently in Development Mode!
 					</div> -->
-						<div class="section-tabs">
+						<!-- <div class="section-tabs">
 							<div class="home-tabs ">
 								<ul class="nav nav-tabs" role="tablist">
 									<li role="presentation" class="active"><a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">Featured</a></li>
@@ -108,31 +108,31 @@ $version = implode('.', str_split($version, 1));
 								</ul>
 							</div>
 							
-						</div>
+						</div> -->
 
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featured">
 								<div class="section-block featured-block">
-									<h1 class="section-title">Featured Posts</h1>
 									<!--reward blocks-->
+									
 									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
-										<span class="update-date">Posted 2 hours ago</span>
+									    <a href="#">
+											<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
+											<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+										</a>
 										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> Technology</a>
-										    <a href=""><i class="fa fa-user"></i> Mahira Rajput</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
+										<a href=""><i class="fa fa-tag"></i> Technology</a>
+										<a href="">1h</a> 
 										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec.</p>
 									</div>
+									
+									
 								</div>
 							</div>
 
 
 							<div role="tabpanel" class="tab-pane" id="recent-posts">
 								<div class="section-block featured-block">
-									<h1 class="section-title">Recent Posts</h1>
 									<!--reward blocks-->
 									<div class="reward-block border-1 section-featured">
 										<h2 class="update-title">We've started shipping!</h2>

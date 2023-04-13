@@ -306,7 +306,7 @@ a {
 	border-radius: 4px;
 }
 .reward-block h2 {
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bolder;
 	margin: 10px 0px;
 }
@@ -331,6 +331,10 @@ a {
 	border-radius: 4px;
 	text-transform: uppercase;
 	font-weight: 700;
+}
+.post-image img{
+	max-width: 100%;
+    max-height: 100%;
 }
 
 /*-Sign up form-*/
@@ -501,7 +505,7 @@ a:hover{
 		padding: 0;
 	}
 	.section-block{
-		padding: 20px;
+		padding: 5px;
 	}
 }
 
