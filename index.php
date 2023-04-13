@@ -31,7 +31,7 @@ $version = implode('.', str_split($version, 1));
 </head>
 <body class="style-7">
 	<p id="rightsidebar" hidden>true</p>
-	<p id="sidebarPosition" hidden>0</p>
+	<p id="sidebarPosition" hidden>1</p>
 	<p id="sidebarPositionLg" hidden>1</p>
 	<!--main content-->
 	<div class="main-content">
@@ -124,10 +124,7 @@ $version = implode('.', str_split($version, 1));
 											<a href=""><i class="fa fa-eye"></i>123k</a>
 										</div>
 										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
+										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec.</p>
 									</div>
 								</div>
 							</div>
@@ -148,8 +145,6 @@ $version = implode('.', str_split($version, 1));
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
 										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
 									</div>
 
 									<div class="reward-block border-1 section-featured">
@@ -162,9 +157,7 @@ $version = implode('.', str_split($version, 1));
 										</div>
 										
 										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-										
-										<a href="" class="btn btn-reward">READ FULL ARTICLE</a>
+
 									</div>
 									<div class="block"></div>
 								</div>
