@@ -72,17 +72,20 @@ body{
   grid-row-end: span var(--card_med);
  }
 
- @media (max-width: 570px) {
+ @media (max-width: 500px) {
   .pin_container {
     width: 100%;
     grid-template-columns: repeat(auto-fill, 180px);
   }
 
-  .card_large{
-    grid-row-end: span 30px;
+  .card_small{
+    grid-row-end: span 20;
+   }
+   .card_large{
+    grid-row-end: span 30;
    }
    .card_medium{
-    grid-row-end: span 28px;
+    grid-row-end: span 25;
    }
   
  }
