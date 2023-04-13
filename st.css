@@ -75,7 +75,7 @@ body{
  @media (max-width: 500px) {
   .pin_container {
     width: 100%;
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, 180px);
   }
 
   .card_small{
