@@ -92,81 +92,35 @@ $version = implode('.', str_split($version, 1));
 
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-md-6 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<!--tab panes-->
 					<div class="home-block style-7 section-block">
-					<!-- <div class=" alert alert-danger" role="alert">
-								The Website is currently in Development Mode!
-					</div> -->
-						<!-- <div class="section-tabs">
-							<div class="home-tabs ">
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">Featured</a></li>
-
-									<li role="presentation"><a href="#recent-posts" aria-controls="recent-posts" role="tab" data-toggle="tab">Recent</a></li>
-
-								</ul>
-							</div>
-							
-						</div> -->
-
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featured">
-								<div class="section-block featured-block">
-									<!--reward blocks-->
-									
-									<div class="reward-block border-1 section-featured">
-									    <a href="#">
-											<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
-											<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
-										</a>
-										<div class="post-meta">
-										<a href=""><i class="fa fa-tag"></i> Technology</a>
-										<a href="">1h</a> 
-										</div>
-									</div>
-									
-									
-								</div>
-							</div>
-
-
-							<div role="tabpanel" class="tab-pane" id="recent-posts">
-								<div class="section-block featured-block">
-									<!--reward blocks-->
-									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">We've started shipping!</h2>
-										<span class="update-date">Posted 2 days ago</span>
-										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> NASA</a>
-										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
-										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-										
-									</div>
-
-									<div class="reward-block border-1 section-featured">
-										<h2 class="update-title">We've started shipping!</h2>
-										<span class="update-date">Posted 2 days ago</span>
-										<div class="post-meta">
-											<a href=""><i class="fa fa-tag"></i> NASA</a>
-										    <a href=""><i class="fa fa-user"></i> Justin Hall</a> 
-											<a href=""><i class="fa fa-eye"></i>123k</a>
-										</div>
-										
-										<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-
-									</div>
-									<div class="block"></div>
+						<div class="featured-block" style="">
+							<div class="reward-block border-1 section-featured">
+								<a href="#">
+									<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
+									<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+								</a>
+								<div class="post-meta">
+								<a href=""><i class="fa fa-tag"></i> Technology</a>
+								<a href="">1h</a> 
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="content r-sidebar col-lg-3 col-md-3">
-					<div class="style-7 section-block right-sidebar">
+
+						<div class=" featured-block">
+							<div class="reward-block border-1 section-featured">
+								<a href="#">
+									<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
+									<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+								</a>
+								<div class="post-meta">
+								<a href=""><i class="fa fa-tag"></i> Technology</a>
+								<a href="">1h</a> 
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
