@@ -71,3 +71,11 @@ body{
  .card_medium{
   grid-row-end: span var(--card_med);
  }
+
+ @media (max-width: 570px) {
+  .pin_container {
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, 230px);
+  }
+  
+ }
