@@ -75,7 +75,7 @@ body{
  @media (max-width: 570px) {
   .pin_container {
     width: 100%;
-    grid-template-columns: repeat(auto-fill, 230px);
+    grid-template-columns: repeat(auto-fill, 200px);
   }
   
  }
