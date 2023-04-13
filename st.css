@@ -82,7 +82,7 @@ body{
     grid-row-end: span 20;
    }
    .card_large{
-    grid-row-end: span 25;
+    grid-row-end: span 28;
    }
    .card_medium{
     grid-row-end: span 25;
