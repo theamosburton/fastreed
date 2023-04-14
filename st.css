@@ -63,6 +63,12 @@ body{
   background-image: linear-gradient(transparent, transparent,  black);
   border-radius: 10px;
  }
+ .overlay .cat, .overlay .date{
+  color: white;
+  margin: 0px 10px;
+  font-size: 10px;
+  font-weight: lighter;
+ }
  .card_small .title{
   padding: 5px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
