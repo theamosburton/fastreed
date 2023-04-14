@@ -131,7 +131,6 @@
   }
    @media (max-width: 518px) {
     .pin_container {
-      width: 100%;
       display: block;
     }
     .f-card_small .image img{
@@ -142,7 +141,7 @@
      }
   
     .f-card{
-      margin: 20px 20px 0px 20px;
+      margin: 15px 15px 0px 15px;
     }
     .f-card::after{
       content: " ";
