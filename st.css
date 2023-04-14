@@ -30,6 +30,7 @@ body{
   padding: 1px;
   margin: 11px 8px;
   border-radius: var(--card_border_radius);
+  
  }
 
  .card_small .image img{
@@ -37,6 +38,7 @@ body{
   height: 60%;
   object-fit: cover;
   border-radius: 10px;
+  border: .5px solid grey;
  }
 
  .card_small .title{
@@ -50,7 +52,7 @@ body{
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border: .5px solid;
+  border: .5px solid rgb(175, 172, 172);
  }
 
  .card_large .title, .card_medium .title{
@@ -76,17 +78,7 @@ body{
  @media (max-width: 500px) {
   .pin_container {
     width: 100%;
-    grid-template-columns: repeat(auto-fill, 180px);
+    /* grid-template-columns: repeat(auto-fill, 180px); */
   }
-
-  .card_small{
-    grid-row-end: span 20;
-   }
-   .card_large{
-    grid-row-end: span 28;
-   }
-   .card_medium{
-    grid-row-end: span 25;
-   }
   
  }
