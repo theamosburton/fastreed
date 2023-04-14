@@ -41,29 +41,37 @@ body{
   border: .5px solid grey;
  }
 
+ .card_large .image, .card_medium .image{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px; 
+  border: .5px solid grey;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column-reverse;
+ }
+
  .card_small .title{
   padding: 5px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bolder;
   text-transform: capitalize;
  }
- .card_large .image img, .card_medium .image img{
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border: .5px solid rgb(175, 172, 172);
- }
 
  .card_large .title, .card_medium .title{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bolder;
   text-transform: capitalize;
-  margin-top: -75px;
-  padding: 0px 10px;
-  color: white;
-
+  background-color: aliceblue;
+  margin: 30px 10px;
  }
+ .card_large .title p, .card_medium .title p{
+  padding: 5px 10px;
+  margin: 0;
+ }
+
 
  .card_small{
   grid-row-end: span var(--card_small);
@@ -75,10 +83,38 @@ body{
   grid-row-end: span var(--card_med);
  }
 
- @media (max-width: 500px) {
+ .card_small::after{
+  content: " ";
+  display: block;
+  height: 1px;
+  background: rgb(42, 37, 37);
+}
+ @media (max-width: 518px) {
   .pin_container {
     width: 100%;
-    /* grid-template-columns: repeat(auto-fill, 180px); */
+    display: block;
+  }
+
+  .card_large .image, .card_medium .image{
+    height: 500px;
+   }
+
+  .card{
+    margin: 15px 15px 0px 15px;
+  }
+  .card::after{
+    content: " ";
+    display: block;
+    height: 1px;
+    background: rgb(42, 37, 37);
+    margin: 10px 5px 0px 5px;
   }
   
  }
+
+ @media (max-width: 350px) {
+  
+  .card_large .image, .card_medium .image{
+    height: 400px;
+   }
+}
