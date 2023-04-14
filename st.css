@@ -100,14 +100,14 @@ body{
    }
 
   .card{
-    margin: 15px 15px 0px 15px;
+    margin: 20px 20px 0px 20px;
   }
   .card::after{
     content: " ";
     display: block;
     height: 1px;
     background: rgb(42, 37, 37);
-    margin: 2f0px 5px 0px 5px;
+    margin: 20px 5px 0px 5px;
   }
   
  }
