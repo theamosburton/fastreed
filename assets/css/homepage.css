@@ -61,7 +61,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(transparent, transparent,  black);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.229), rgba(0, 0, 0, 0.229),  black);
     border-radius: 10px;
    }
    .overlay .cat, .overlay .date{
