@@ -65,7 +65,6 @@ if(!isset($_COOKIE['AID'])){
 			<div class="content col-12">
 				<div id="header-section" class="section-block">
 				        <div class="brand">
-							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 					<!--tabs-->
@@ -79,20 +78,9 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-3 col-md-12 col-sm-12 col-xs-12">
-			<div class="section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
-						<?php
-						include '../../../views/sidebar.php';
-						echo $profileTab;
-						$t = $p_Data->TYPE;
-						echo $$t;
-						?>				
-					</div>
-			</div>
+	
 
-			<div class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
+			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<!-- All Devices Block -->
 				<div class="section-block main-block">
 
@@ -166,9 +154,7 @@ if(!isset($_COOKIE['AID'])){
 				</div>	
 				<!-- All Devices Block End -->
 			</div>
-			<div class="content col-12 order-3 footer">
-					<div class="section-block footer-section"></div>
-				</div>
+			
 		</div>
 	</div>
 </div>

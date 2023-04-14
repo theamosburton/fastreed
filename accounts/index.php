@@ -58,9 +58,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 	</style>
 </head>
 <body>
-    <p id="rightsidebar" hidden>true</p>
-	<p id="sidebarPosition" hidden>0</p>
-	<p id="sidebarPositionLg" hidden>1</p>
 	<header class="header-section"></header>
 	<!--main content-->
 	<div class="main-content">
@@ -70,8 +67,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
 					<div class="brand">
-							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
-							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 				        <div class="head-tabs">
@@ -84,20 +79,9 @@ if (isset($_SESSION['LOGGED_USER'])){
 					</div>
 				</div>
 
-				<div id="side-block" class="content sidebar col-lg-2 col-md-3 col-sm-0">
-				    <div class="section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
-						<?php
-						include '../views/sidebar.php';
-						echo $profileTab;
-						$t = $p_Data->TYPE;
-						echo $$t;
-						?>				
-					</div>
-				</div>
+				
 
-				<div id="center-block" class=" content col-lg-7 col-md-6 col-sm-12 col-xs-12">
+				<div id="center-block" class=" content col-lg-12 col-md-6 col-sm-12 col-xs-12">
 				    <div class="style-7 section-block main-block sign-log-block">
 
 						<div class="login-div">
@@ -193,11 +177,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 						</div>
                     </div>
 				</div>
-
-				<div class="content r-sidebar col-lg-3 col-md-3">
-					<div class="section-block right-sidebar">
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -210,8 +189,6 @@ if (isset($_SESSION['LOGGED_USER'])){
 		$('#accounts_link').css('color','blue');
 	</script>
 	<!-- Template JS -->
-	<script type="text/javascript" src="../assets/js/main.js?v=<?php echo $version;?>"></script>
-	<script type="text/javascript" src="../assets/js/page.js?v=<?php echo $version;?>"></script>
 	<script type="text/javascript" src="src/fun.js?v=<?php echo $version;?>"></script>
 	<script type="text/javascript" src="src/fun2.js?v=<?php echo $version;?>"></script>
 </body>

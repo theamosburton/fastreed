@@ -67,20 +67,9 @@ if(!isset($_COOKIE['AID'])){
 				</div>
 			</div>
 
-			<div class="content sidebar page-col col-lg-2 col-md-12 col-sm-12 col-xs-12">
-			<div class="section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>	
-						<?php
-						include '../../views/sidebar.php';
-						echo $profileTab;
-						$t = $p_Data->TYPE;
-						echo $$t;
-						?>				
-					</div>
-			</div>
+		
 
-			<div class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
+			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="section-block main-block">
 
 						<div class="section-tabs">
@@ -188,9 +177,6 @@ if(!isset($_COOKIE['AID'])){
 					
 				</div>	
 			</div>
-			<div class="content col-12 order-3 footer">
-					<div class="section-block footer-section"></div>
-				</div>
 		</div>
 	</div>
 </div>
@@ -200,8 +186,6 @@ if(!isset($_COOKIE['AID'])){
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 
 <!-- Template JS -->
-<script type="text/javascript" src="/assets/js/main.js?v=<?php echo $version;?>"></script>
-<script type="text/javascript" src="/assets/js/page.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="src/function.js?v=<?php echo $version;?>"></script>
 </body>
 </html>

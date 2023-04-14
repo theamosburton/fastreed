@@ -26,7 +26,6 @@ a {
 }
 /*-Header-*/
 #header-section {
-	background-color: rgb(22, 20, 20);
 	padding: 0px 20px;
 	display: flex;
 	border-bottom: 2px solid #b299a8;
@@ -152,6 +151,7 @@ a {
 
 /*-Section Blocks-*/
 .section-block {
+	padding: 20px;
 	background-color: #f5f5f9;
 	margin-bottom:0px;
 }
@@ -500,9 +500,6 @@ a:hover{
 	}
 	.featured{
 		padding: 0;
-	}
-	.section-block{
-		padding: 5px;
 	}
 }
 

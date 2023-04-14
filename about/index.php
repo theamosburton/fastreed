@@ -37,8 +37,6 @@ $version = $visit->VERSION;
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
 					<div class="brand">
-							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
-							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
 						<!--tabs-->
@@ -55,26 +53,11 @@ $version = $visit->VERSION;
 
 
 				<!--Left Side bar -->
-				<div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
-
-					<div class="section-block sidebar-block">
-					    <p id="sidebarPosition" hidden>0</p>
-						<p id="sidebarPositionLg" hidden>1</p>
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-					    <?php
-						include '../views/sidebar.php';
-						echo $profileTab;
-						$t = $p_Data->TYPE;
-						echo $$t;
-						?>			
-										
-					</div>
-
-				</div>
+				
 				<!--/Left sidebar-->
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-md-7 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-md-12 col-sm-12 col-xs-12">
 					<!--tabs-->
 					<!--/tabs-->
 					<div class="section-block style-7 main-block">
@@ -125,10 +108,6 @@ $version = $visit->VERSION;
 								</div>	
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="content r-sidebar col-lg-2 col-md-2">
-					<div class="style-7 section-block right-sidebar">
 					</div>
 				</div>
 			</div>
