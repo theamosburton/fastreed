@@ -113,7 +113,9 @@ body{
     width: 100%;
     display: block;
   }
-
+  .f-card_small .image img{
+    height: 100%;
+  }
   .f-card_large .image, .f-card_medium .image{
     height: 500px;
    }
