@@ -52,13 +52,14 @@ body{
   background-repeat: no-repeat;
   display: flex;
  background-image: radial-gradient(white, black);
+ border: .5px solid rgb(208, 206, 206);
  }
 
  .overlay{
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   background-image: linear-gradient(transparent, transparent,  black);
   border-radius: 10px;
  }
@@ -74,6 +75,24 @@ body{
   font-weight: bolder;
   text-transform: capitalize;
  }
+
+ .overlay .top-overlay{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+ }
+.overlay .st-logo{
+  border-radius: 50px;
+  box-shadow: 0 0 2px .3px black;
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url('assets/img/stories_logo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
  .f-card_large .title, .f-card_medium .title{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
