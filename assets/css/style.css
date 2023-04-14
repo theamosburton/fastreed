@@ -435,7 +435,7 @@ a:hover{
 	margin-left: 6px;
 }
 #center-block, #side-block{
-	overflow: auto;
+	background-color: rgb(33, 32, 32);
     min-height: 80vh;
 	transition: all .3s ease-in-out;
 }

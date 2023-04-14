@@ -24,7 +24,7 @@ $version = implode('.', str_split($version, 1));
 	
 	<!-- Template CSS -->
 	<link href="assets/css/style.css?v=<?php echo $version;?>" rel="stylesheet">
-
+	<link href="st.css?v=<?php echo $version;?>" rel="stylesheet">
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -78,51 +78,229 @@ $version = implode('.', str_split($version, 1));
 				</div>
 				<!--Side bar -->
 			      <!--Collections-->
-				<div id="side-block" class="content sidebar col-md-3 col-sm-12 col-xs-12">
+				<!-- <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
 					<div class="style-7 section-block sidebar-block">
-						<i id="close-bars" class=" t-icon fa-solid fa-arrow-left fa-lg"></i>
-						<?php include 'views/sidebar.php' ;
-						echo $profileTab;
-						$t = $p_Data->TYPE;
-						echo $$t;
-						?>			
+									
 					</div>
-				</div>
+				</div> -->
 				<!--/sidebar-->
 
 
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-lg-9 col-md-9 col-sm-12 col-xs-12">
-					<!--tab panes-->
-					<div class="home-block style-7 section-block">
-						<div class="featured-block" style="">
-							<div class="reward-block border-1 section-featured">
+				<div id="center-block" class="content col-lg-12 col-md-9 col-sm-12 col-xs-12">
+				    <div class="pin_container">
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port1.png');">
 								<a href="#">
-									<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
-									<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+										<p> This is the dummy text for this website for testing</p>
+										<span class="cat">Technology</span>
+										<span class="date">2h</span>
+										</div>
+										
+										
+									</div>
 								</a>
-								<div class="post-meta">
-								<a href=""><i class="fa fa-tag"></i> Technology</a>
-								<a href="">1h</a> 
-								</div>
 							</div>
 						</div>
 
-						<div class=" featured-block">
-							<div class="reward-block border-1 section-featured">
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb2.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
+
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port2.jpg');">
 								<a href="#">
-									<div class="post-image"><img src="assets/img/aws.avif" alt=""></div>
-									<h2 class="update-title">Amazon Web Services(AWS) is still a choice of new web developers for its flexible free tier</h2>
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
 								</a>
-								<div class="post-meta">
-								<a href=""><i class="fa fa-tag"></i> Technology</a>
-								<a href="">1h</a> 
-								</div>
 							</div>
 						</div>
-						
+
+						<div class="f-card f-card_medium">
+							<div class="image" style="background-image:url('assets/img/port4.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port3.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb2.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
+
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port5.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_medium">
+							<div class="image" style="background-image:url('assets/img/port6.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb1.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
+						<div class="f-card f-card_large">
+
+							<div class="image" style="background-image:url('assets/img/port7.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb2.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
+
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port8.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_medium">
+							<div class="image" style="background-image:url('assets/img/port9.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port10.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb2.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
+
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port11.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+											<span class="cat">Technology</span>
+											<span class="date">2h</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="f-card f-card_small">
+							<div class="image">
+								<img src="assets/img/thumb1.png" alt="">
+							</div>
+							<div class="title">This is the dummy text for this website for testing</div>
+						</div>
 					</div>
 				</div>
+				<!-- <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
+					<div class="style-7 section-block sidebar-block">
+									
+					</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
