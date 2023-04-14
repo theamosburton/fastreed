@@ -128,7 +128,7 @@ body{
   content: " ";
   display: block;
   height: 1px;
-  background: rgb(42, 37, 37);
+  background: rgb(108, 106, 106);
 }
  @media (max-width: 518px) {
   .pin_container {
