@@ -75,7 +75,5 @@ if(!isset($_COOKIE['AID'])){
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 
 <!-- Template JS -->
-<script type="text/javascript" src="/assets/js/main.js?v=<?php echo $version;?>"></script>
-<script type="text/javascript" src="/assets/js/page.js?=<?php echo $version;?>"></script>
 </body>
 </html>

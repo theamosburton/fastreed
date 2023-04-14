@@ -90,7 +90,7 @@
     margin: 10px;
     width: 30px;
     height: 30px;
-    background-image: url('assets/img/stories_logo.png');
+    background-image: url('/assets/img/stories_logo.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

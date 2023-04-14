@@ -248,6 +248,8 @@ $version = implode('.', str_split($version, 1));
 	</div>
 	
 <!-- Global jQuery -->
+<script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
 </body>
 </html>
