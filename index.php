@@ -30,9 +30,6 @@ $version = implode('.', str_split($version, 1));
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body class="style-7">
-	<p id="rightsidebar" hidden>true</p>
-	<p id="sidebarPosition" hidden>1</p>
-	<p id="sidebarPositionLg" hidden>1</p>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container">
@@ -42,52 +39,13 @@ $version = implode('.', str_split($version, 1));
 				<div class="content col-12">
 					<div id="header-section" class="section-block">
 						<div class="brand">
-							<i id="bars" class="t-icon fa fa-bars fa-lg"></i>
-							<i id="bars-lg" class="t-icon-lg fa fa-bars fa-lg"></i>
 							<h1> <a href="/">FastReed.com</a> </h1>
 						</div>
-					
-						
-						<!--tabs-->
-				        <div class="head-tabs">
-							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a href="#home">Home</a></li>
-								<li role="presentation"><a href="about/" >About</a></li>
-
-								<?php
-								if(isset($_SESSION['LOGGED_ADMIN'])){
-									if($_SESSION['LOGGED_ADMIN']){
-										echo '<li role="presentation"><a href="/admin/">Admin Panel</a></li>';
-									}else {
-										echo '<li role="presentation"><a href="/accounts/" >Login</a></li>';
-									}
-								}elseif(isset($_SESSION['LOGGED_USER'])){
-									if($_SESSION['LOGGED_USER']){
-										echo '<li role="presentation"><a href="/accounts/profile/">Profile</a></li>';
-									}else {
-										echo '<li role="presentation"><a href="/accounts/">Login</a></li>';
-									}
-								}else{
-									echo '<li role="presentation"><a href="/accounts/">Login</a></li>';
-								}
-								?>
-							</ul>
-					    </div>
 					</div>
 					
 				</div>
-				<!--Side bar -->
-			      <!--Collections-->
-				<!-- <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
-					<div class="style-7 section-block sidebar-block">
-									
-					</div>
-				</div> -->
-				<!--/sidebar-->
-
-
 				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-lg-12 col-md-9 col-sm-12 col-xs-12">
+				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				    <div class="pin_container">
 						<div class="f-card f-card_large">
 							<div class="image" style="background-image:url('assets/img/port1.png');">
@@ -296,20 +254,11 @@ $version = implode('.', str_split($version, 1));
 						</div>
 					</div>
 				</div>
-				<!-- <div id="side-block" class="content sidebar col-md-1 col-sm-12 col-xs-12">
-					<div class="style-7 section-block sidebar-block">
-									
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</div>
 	
 <!-- Global jQuery -->
-<script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
-<!-- Template JS -->
-<script type="text/javascript" src="assets/js/main.js?v=<?php echo $version;?>"></script>
 </body>
 </html>

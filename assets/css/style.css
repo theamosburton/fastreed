@@ -9,7 +9,7 @@
 /*-Base-*/
 
 body {
-	background-color:#dddbdb;
+	background-color: rgb(22, 20, 20);
 	font-family: 'Open Sans', sans-serif;
 }
 p {
@@ -26,7 +26,7 @@ a {
 }
 /*-Header-*/
 #header-section {
-	border-radius: 5px 5px 0px 0px ;
+	background-color: rgb(22, 20, 20);
 	padding: 0px 20px;
 	display: flex;
 	border-bottom: 2px solid #b299a8;
@@ -225,10 +225,6 @@ a {
 	font-weight:700;
 }
 
-/*-Main Content-*/
-.main-content {
-	padding:5px;
-}
 
 /*-Profile Summary-*/
 .section-block.members{
