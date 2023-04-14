@@ -127,8 +127,8 @@ body{
  .f-card_small::after{
   content: " ";
   display: block;
-  height: 1px;
-  background: rgb(108, 106, 106);
+  height: 1.5px;
+  background: rgb(145, 142, 142);
 }
  @media (max-width: 518px) {
   .pin_container {
