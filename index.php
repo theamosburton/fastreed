@@ -54,10 +54,12 @@ $version = implode('.', str_split($version, 1));
 						</div>
 
 						<div class="f-card f-card_small">
-							<div class="image">
-								<img src="assets/img/thumb2.png" alt="">
+							<div class="image" style="background-image:url('/assets/img/thumb2.png');">
+								<a href="">
+									<div class="overlay"></div>
+								</a>
 							</div>
-							<div class="title">This is the dummy text for this website for testing</div>
+							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
 						</div>
 
 						<div class="f-card f-card_large">
