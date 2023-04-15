@@ -73,6 +73,7 @@
     font-weight: lighter;
     color: white;
    }
+
    .cat a{
     color: white;
    }
@@ -80,11 +81,12 @@
     padding: 5px;
     height: 30%;
     width: 100%;
+    font-size: 15px;
    }
 
    .f-card_small .title a{
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     height: 100%;
@@ -144,6 +146,7 @@
   }
   .f-card_small .meta{
     height: 10%;
+    padding: 15px 10px;
   }
    .f-card_small{
     grid-row-end: span var(--f-card_small);
@@ -183,7 +186,7 @@
     }
 
     .f-card .meta{
-      font-size: unset;
+      font-size: 10px;
     }
     
    }
