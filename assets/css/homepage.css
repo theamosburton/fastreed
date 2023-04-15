@@ -142,6 +142,7 @@
     padding: 15px 10px;
     border-bottom: 1px solid grey;
     font-size: 12px;
+    font-weight: bold;
   }
   .f-card_small .meta{
     height: 10%;
