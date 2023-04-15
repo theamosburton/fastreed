@@ -52,20 +52,46 @@
 }
 
 header{
-  /* max-width: 1200px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 968px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  padding-top: 25px;
+  align-items: center;
+}
+header .brand{
+  width: 20%;
+  display: flex;
   align-items: center;
 }
 
+header .rightside{
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
 header h1{
-  margin-top: 20px;
-  font-weight: 500;
-  color: whitesmoke;
+  font-size: 30px;
+  font-weight: 700;
+  display: inline-block;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+header h1 a{
+  text-decoration: none;
+  color:cornsilk;
+}
+header h1 a:hover{
+  text-decoration: none;
+  color: white;
+}
+
+header .nav{
+  display: flex;
+  align-items: center;
+  float: right;
+  color: rgb(218, 218, 218);
 }
   /* Small Cards */
 .f-card_small .image{
@@ -177,7 +203,26 @@ header h1{
   color: rgb(194, 194, 194);
 }
 
+@media (max-width: 1201px) {
+  header{
+    width: 726px;
+  }
+}
+
+@media (max-width: 992px) {
+  header{
+    width: 484px;
+    padding: 0px 5px;
+  }
+}
    @media (max-width: 518px) {
+   
+    header{
+      padding: 15px 15px 0px 15px;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
     .pin_container {
       display: block;
     }

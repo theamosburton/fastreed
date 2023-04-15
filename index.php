@@ -28,7 +28,14 @@ $version = implode('.', str_split($version, 1));
 </head>
 <body>
 	<header>
-		<h1>Fastreed</h1>
+		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
+		<div class="rightside">
+			<div class="nav">
+				
+				<i class="fa fa-regular fa-circle-user fa-xl"></i>
+				<i class="fa fa-gear fa-xl"></i>
+			</div>
+		</div>
 	</header>
 	<!--main content-->
 	<div class="main-content">
