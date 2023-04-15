@@ -15,16 +15,25 @@ function removeOptions(){
 }
 function toggleSetting(){
     if(settingState.style.display == 'none'){
-        // overlay.style.display = 'block';
-        settingState.style.display = 'block';
+        if(optionsState.style.display = 'none'){
+            settingState.style.display = 'block';
+        }else{
+            optionsState.style.display = 'none';
+            settingState.style.display = 'block';
+        }
+        
     }else{
         settingState.style.display = 'none';
     }
 }
 function toggleOptions(){
     if(optionsState.style.display == 'none'){
-        // overlay.style.display = 'block';
-        optionsState.style.display = 'block';
+        if(settingState.style.display == 'none'){
+            optionsState.style.display = 'block';
+        }else{
+            settingState.style.display == 'none';
+            optionsState.style.display = 'block';
+        }
     }else{
         optionsState.style.display = 'none';
     }
