@@ -26,7 +26,10 @@ $version = implode('.', str_split($version, 1));
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
-<body class="style-7">
+<body>
+	<header>
+		<h1>Fastreed</h1>
+	</header>
 	<!--main content-->
 	<div class="main-content">
 		<div class="container">
