@@ -20,6 +20,7 @@
   max-width: 1200px;
   position: absolute;
   left: 50%;
+  z-index: 99;
   transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--f-card_width));
@@ -58,17 +59,52 @@
   left: 100%;
 }
 
-
-.options{
-  width: 300px;
-  height: 500px;
-  border-radius: 20px;
-  background-color: #202023;
+.option-overlay{
+  display: none;
   position: absolute;
-  z-index: 1;
-  right: 63px;
+  z-index: 999;
+  width: 100%;
+  height: 300%;
+  background-color: #35374000;
+}
+
+.options, .settings{
+  padding: 10px;
+  min-width: 200px;
+  border-radius: 15px;
+  background-color: #353740;
+  color-scheme: dark;
+  position: absolute;
+  z-index: 9999;
+  right: 79px;
   border: 1px solid grey;
   top: -2px;
+}
+.options .menu-head, .settings .menu-head{
+  margin-bottom: 10px;
+}
+.options .name, .settings .name{
+  font-weight: 500;
+  color: rgb(231, 231, 231);
+}
+.options .menus, .settings .menus{
+  margin-bottom: 10px;
+  color: rgb(231, 231, 231);
+}
+.options .menus .left, .settings .menus .left{
+  padding-right: 10px;
+}
+.options .menus .right, .settings .menus .right{
+  padding-left: 20px;
+}
+.options .menu-head::after, .settings .menu-head::after{
+  content: " ";
+  display: block;
+  height: 1px;
+  background: rgb(231, 231, 231);
+  width: 100%;
+  left: 100%;
+  margin: 5px 0px;
 }
 
 /* headers */
@@ -235,7 +271,10 @@ header .nav i:last-child{
     width: 726px;
   }
   .options{
-    right: 98px;
+    right: 108px;
+  }
+  .settings{
+    right: 113px;
   }
 }
 
@@ -246,21 +285,33 @@ header .nav i:last-child{
   }
   .options{
     top: -17px;
-    right: 103px;
+    right: 119px;
+  }
+  .settings{
+    right: 119px;
   }
 }
 @media (max-width: 767px) {
   .options{
     right: 13px;
   }
+  .settings{
+    right: 30px;
+  }
 }
 @media (max-width: 576px) {
-
+  .settings{
+    right: 66px;
+  }
 }
 @media (max-width: 530px) {
   .options{
-    right: 3px;
+    right: 17px;
     top: 0px;
+  }
+  .settings{
+    right: 17px;
+    top: 10px;
   }
   header{
     padding: 15px 18px 0px 18px;
@@ -279,8 +330,7 @@ header .nav i:last-child{
     }
 
   .f-card{
-    margin: 0;
-    margin-top: 15px;
+    margin: 15px;
   }
 
   .f-card_large .title p, .f-card_medium .title p{

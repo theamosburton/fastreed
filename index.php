@@ -27,13 +27,14 @@ $version = implode('.', str_split($version, 1));
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
+	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
 	<header>
 		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
 		<div class="rightside">
 			<div class="nav">
-				<i class="fa fa-regular fa-circle-user fa-xl"></i>
-				<i class="fa fa-gear fa-xl"></i>
-				<i class="fa fa-ellipsis-v fa-xl"></i>
+				<i class="fa fa-regular fa-circle-user fa-xl" onclick="toggleUser()"></i>
+				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+				<i class="fa fa-ellipsis-v fa-xl" onclick="toggleOptions()"></i>
 			</div>
 		</div>
 		
@@ -42,12 +43,28 @@ $version = implode('.', str_split($version, 1));
 	<div class="main-content">
 		<div class="container">
 			<div class="row ">
-					
-				</div>
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				    <div class="options" id="options" style="display:none">
+						<div class="menu-head">
+						    <span class="name">Options</span>
+						</div>
+						
+						<div class="menus"> <i class="left fa fa-circle-info"></i>About Fastreed</div>
+						<div class="menus"><i class="left fa fa-file-contract"></i>Terms and Privacy</div>
+					</div>
+
+					<div class="settings" id="settings" style="display:none">
+					    <div class="menu-head">
+						    <span class="name">Settings</span>
+						</div>
+						
+						<div class="menus"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-off fa-lg"></i></div>
+						<div class="menus"><i class="left fa fa-icons"></i>Manage Interests</div>
+					</div>
+
 				    <div class="pin_container">
-					<div class="options"></div>
+					
 						<!-- 01 -->
 						<div class="f-card f-card_large">
 							<div class="image" style="background-image:url('assets/img/port1.png');">
@@ -354,6 +371,7 @@ $version = implode('.', str_split($version, 1));
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/fun.js"></script>
 
 </body>
 </html>
