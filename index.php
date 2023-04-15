@@ -43,14 +43,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 										<p> This is the dummy text for this website for testing</p>
-										<span class="cat">Technology</span>
-										<span class="date">2h</span>
-										<i class="fa fa-ellipsis-h"></i>
 										</div>
-										
-										
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -61,6 +61,12 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -70,12 +76,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -86,12 +94,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -102,6 +112,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -111,12 +126,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -127,6 +144,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -136,12 +158,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -152,12 +176,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -168,6 +194,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -177,12 +208,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -193,6 +226,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -202,12 +240,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -218,12 +258,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 						<div class="f-card f-card_large">
@@ -233,12 +275,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 
@@ -249,6 +293,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 
 						<div class="f-card f-card_large">
@@ -258,12 +307,14 @@ $version = implode('.', str_split($version, 1));
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
 											<p> This is the dummy text for this website for testing</p>
-											<span class="cat">Technology</span>
-											<span class="date">2h</span>
-											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
+							</div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
 						<div class="f-card f-card_small">
@@ -273,6 +324,11 @@ $version = implode('.', str_split($version, 1));
 								</a>
 							</div>
 							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
