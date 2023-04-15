@@ -155,9 +155,16 @@
       margin: 15px 15px 0px 15px;
     }
 
-    .f-card_small .title a, .f-card_large .title p, .f-card_medium .title p{
+    .f-card_large .title p, .f-card_medium .title p{
       font-size: 25px;
+      
     } 
+
+    .f-card_small .title a{
+      font-size: 22px;
+      font-weight: lighter;
+      font-family: unset;
+    }
 
     .f-card::after{
       content: " ";
