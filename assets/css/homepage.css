@@ -178,7 +178,7 @@
 
     .f-card_large .title p, .f-card_medium .title p{
       font-size: 25px;
-      
+      font-weight: 600;
     } 
 
     .f-card_small .title a{
