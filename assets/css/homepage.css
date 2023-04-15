@@ -70,7 +70,6 @@
 
    .cat, .date{
     margin: 0px 10px 0px 0px;
-    font-weight: lighter;
     color: white;
    }
 
@@ -142,7 +141,7 @@
     color: white;
     padding: 15px 10px;
     border-bottom: 1px solid grey;
-    font-size: 10px;
+    font-size: 12px;
   }
   .f-card_small .meta{
     height: 10%;
