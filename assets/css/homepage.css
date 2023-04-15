@@ -10,7 +10,7 @@
   body{
     margin: 0;
     padding: 0;
-    background-color: #292a2d;
+    background-color: #202023;
   }
   
 .pin_container {
@@ -68,7 +68,7 @@
   z-index: 1;
   right: 63px;
   border: 1px solid grey;
-  top: -9px;
+  top: -2px;
 }
 
 /* headers */
@@ -245,12 +245,23 @@ header .nav i:last-child{
     padding: 0px 7px;
   }
   .options{
-    top: -23px;
+    top: -17px;
     right: 103px;
   }
 }
+@media (max-width: 767px) {
+  .options{
+    right: 13px;
+  }
+}
+@media (max-width: 576px) {
 
-@media (max-width: 518px) {
+}
+@media (max-width: 530px) {
+  .options{
+    right: 3px;
+    top: 0px;
+  }
   header{
     padding: 15px 18px 0px 18px;
     height: 100%;
