@@ -184,7 +184,9 @@
       font-weight: 300;
       font-family: unset;
     }
-    
+    .f-card .meta{
+      font-size: 14px;
+    }
    }
   
    @media (max-width: 350px) {
