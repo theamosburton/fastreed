@@ -128,7 +128,12 @@
     text-decoration: none;
    }
   
-  
+  .f-card .fa-ellipsis-h{
+    color: white;
+    float: right;
+    margin-right: 20px;
+  }
+
    .f-card_small{
     grid-row-end: span var(--f-card_small);
    }

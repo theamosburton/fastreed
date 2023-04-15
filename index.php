@@ -45,6 +45,7 @@ $version = implode('.', str_split($version, 1));
 										<p> This is the dummy text for this website for testing</p>
 										<span class="cat">Technology</span>
 										<span class="date">2h</span>
+										<i class="fa fa-ellipsis-h"></i>
 										</div>
 										
 										
@@ -71,6 +72,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -86,6 +88,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -110,6 +113,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -134,6 +138,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -149,6 +154,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -173,6 +179,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -197,6 +204,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -212,6 +220,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -226,6 +235,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
@@ -250,6 +260,7 @@ $version = implode('.', str_split($version, 1));
 											<p> This is the dummy text for this website for testing</p>
 											<span class="cat">Technology</span>
 											<span class="date">2h</span>
+											<i class="fa fa-ellipsis-h"></i>
 										</div>
 									</div>
 								</a>
