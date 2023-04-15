@@ -10,7 +10,7 @@
   body{
     margin: 0;
     padding: 0;
-    background-color: rgb(22, 20, 20);
+    background-color: #292a2d;
   }
   
 .pin_container {
@@ -58,6 +58,20 @@
   left: 100%;
 }
 
+
+.options{
+  width: 300px;
+  height: 500px;
+  border-radius: 20px;
+  background-color: #202023;
+  position: absolute;
+  z-index: 1;
+  right: 63px;
+  border: 1px solid grey;
+  top: -9px;
+}
+
+/* headers */
 header{
   height: 80px;
   margin-left: auto;
@@ -220,6 +234,9 @@ header .nav i:last-child{
   header{
     width: 726px;
   }
+  .options{
+    right: 98px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -227,44 +244,48 @@ header .nav i:last-child{
     width: 484px;
     padding: 0px 7px;
   }
+  .options{
+    top: -23px;
+    right: 103px;
+  }
 }
-   @media (max-width: 518px) {
-   
-    header{
-      padding: 15px 18px 0px 18px;
-      height: 100%;
-      width: 100%;
-    }
-    .pin_container {
-      display: block;
-    }
-    .f-card_small .image{
-      width: 100%;
-      height: 200px;
-    }
-    .f-card_large .image, .f-card_medium .image{
-      height: 500px;
-     }
-  
-    .f-card{
-      margin: 0;
-      margin-top: 15px;
+
+@media (max-width: 518px) {
+  header{
+    padding: 15px 18px 0px 18px;
+    height: 100%;
+    width: 100%;
+  }
+  .pin_container {
+    display: block;
+  }
+  .f-card_small .image{
+    width: 100%;
+    height: 200px;
+  }
+  .f-card_large .image, .f-card_medium .image{
+    height: 500px;
     }
 
-    .f-card_large .title p, .f-card_medium .title p{
-      font-size: 25px;
-      font-weight: 600;
-    } 
+  .f-card{
+    margin: 0;
+    margin-top: 15px;
+  }
 
-    .f-card_small .title a{
-      font-size: 19px;
-      font-weight: 400;
-      font-family: unset;
-    }
-    .f-card .meta{
-      font-size: 14px;
-    }
-   }
+  .f-card_large .title p, .f-card_medium .title p{
+    font-size: 25px;
+    font-weight: 600;
+  } 
+
+  .f-card_small .title a{
+    font-size: 19px;
+    font-weight: 400;
+    font-family: unset;
+  }
+  .f-card .meta{
+    font-size: 14px;
+  }
+}
   
    @media (max-width: 350px) {
     

@@ -31,12 +31,12 @@ $version = implode('.', str_split($version, 1));
 		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
 		<div class="rightside">
 			<div class="nav">
-				
 				<i class="fa fa-regular fa-circle-user fa-xl"></i>
 				<i class="fa fa-gear fa-xl"></i>
 				<i class="fa fa-ellipsis-v fa-xl"></i>
 			</div>
 		</div>
+		
 	</header>
 	<!--main content-->
 	<div class="main-content">
@@ -47,6 +47,7 @@ $version = implode('.', str_split($version, 1));
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				    <div class="pin_container">
+					<div class="options"></div>
 						<!-- 01 -->
 						<div class="f-card f-card_large">
 							<div class="image" style="background-image:url('assets/img/port1.png');">
