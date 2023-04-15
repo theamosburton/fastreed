@@ -40,7 +40,6 @@
 .f-card .meta{
   color: rgb(221, 218, 218);
   padding: 15px 10px;
-  border-bottom: 1px solid grey;
   font-size: 12px;
   font-weight: bold;
 }
@@ -49,6 +48,14 @@
   margin: 11px 8px;
   border-radius: var(--f-card_border_radius);
   
+}
+.f-card::after{
+  content: " ";
+  display: block;
+  height: 1px;
+  background: rgb(131, 130, 130);
+  width: 100%;
+  left: 100%;
 }
 
 header{
