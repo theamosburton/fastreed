@@ -34,6 +34,7 @@ $version = implode('.', str_split($version, 1));
 				
 				<i class="fa fa-regular fa-circle-user fa-xl"></i>
 				<i class="fa fa-gear fa-xl"></i>
+				<i class="fa fa-ellipsis-v fa-xl"></i>
 			</div>
 		</div>
 	</header>

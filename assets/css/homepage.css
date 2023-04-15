@@ -80,7 +80,7 @@ header h1{
 }
 header h1 a{
   text-decoration: none;
-  color:cornsilk;
+  color:rgb(218, 218, 218);
 }
 header h1 a:hover{
   text-decoration: none;
@@ -92,6 +92,12 @@ header .nav{
   align-items: center;
   float: right;
   color: rgb(218, 218, 218);
+}
+header .nav i{
+  padding-right: 20px;
+}
+header .nav i:last-child{
+  padding-right: 0;
 }
   /* Small Cards */
 .f-card_small .image{
@@ -212,7 +218,7 @@ header .nav{
 @media (max-width: 992px) {
   header{
     width: 484px;
-    padding: 0px 5px;
+    padding: 0px 7px;
   }
 }
    @media (max-width: 518px) {
@@ -221,7 +227,6 @@ header .nav{
       padding: 15px 15px 0px 15px;
       height: 100%;
       width: 100%;
-      padding: 0;
     }
     .pin_container {
       display: block;
