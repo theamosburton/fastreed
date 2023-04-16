@@ -40,9 +40,25 @@ $version = implode('.', str_split($version, 1));
 		
 	</header>
 	<!--main content-->
+	
+
 	<div class="main-content">
 		<div class="container">
 			<div class="row ">
+			<div id="g_id_onload"
+         data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+         data-login_uri="https://your.domain/your_login_endpoint"
+         data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-callback="OnSuccess"
+         data-logo_alignment="left">
+      </div>
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				    <div class="options" id="s-options" style="display:none">

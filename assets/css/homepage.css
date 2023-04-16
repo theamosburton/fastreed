@@ -150,6 +150,9 @@ header .nav{
 header .nav i{
   padding-right: 20px;
 }
+header .nav i:hover{
+  cursor: pointer;
+}
 header .nav i:last-child{
   padding-right: 0;
 }
