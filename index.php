@@ -25,6 +25,7 @@ $version = implode('.', str_split($version, 1));
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
@@ -45,13 +46,14 @@ $version = implode('.', str_split($version, 1));
 			<div class="row ">
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				    <div class="options" id="options" style="display:none">
+				    <div class="options" id="s-options" style="display:none">
 						<div class="menu-head">
 						    <span class="name">Options</span>
 						</div>
-						
-						<div class="menus"> <i class="left fa fa-circle-info"></i>About Fastreed</div>
-						<div class="menus"><i class="left fa fa-file-contract"></i>Terms and Privacy</div>
+						<div class="menus">Reading List</div>
+						<div class="menus">Feedback</div>
+						<div class="menus"> About Fastreed</div>
+						<div class="menus">Terms and Privacy</div>
 					</div>
 
 					<div class="settings" id="settings" style="display:none">
@@ -59,7 +61,7 @@ $version = implode('.', str_split($version, 1));
 						    <span class="name">Settings</span>
 						</div>
 						
-						<div class="menus"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-off fa-lg"></i></div>
+						<div class="menus"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg" onclick="toggleMode()" id="toggleMode"></i></div>
 						<div class="menus"><i class="left fa fa-icons"></i>Manage Interests</div>
 					</div>
 
