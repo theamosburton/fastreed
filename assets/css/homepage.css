@@ -10,7 +10,7 @@
   body{
     margin: 0;
     padding: 0;
-    background-color: rgba(32,33,35);
+    /* background-color: rgba(32,33,35); */
   }
   
 .pin_container {
@@ -92,6 +92,10 @@
 .options .menus, .settings .menus{
   margin-top: 15px;
   color: rgb(231, 231, 231);
+}
+
+.options .menus:hover, .settings .menus:hover{
+  cursor: pointer;
 }
 .options .menus .left, .settings .menus .left{
   padding-right: 10px;

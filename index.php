@@ -49,10 +49,10 @@ $version = implode('.', str_split($version, 1));
 						<div class="menu-head">
 						    <span class="name">Options</span>
 						</div>
-						<div class="menus">Reading List</div>
-						<div class="menus">Feedback</div>
-						<div class="menus"> About Fastreed</div>
-						<div class="menus">Terms and Privacy</div>
+						<div class="menus"><i class="left fa fa-table-list"></i>Reading List</div>
+						<div class="menus"><i class="left fa fa-message"></i>Feedback</div>
+						<div class="menus"> <i class="left fa fa-info-circle"></i>About Fastreed</div>
+						<div class="menus"><i class="left fa fa-file-circle-check"></i>Terms and Privacy</div>
 					</div>
 
 					<div class="settings" id="settings" style="display:none">
