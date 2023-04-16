@@ -31,24 +31,27 @@ function enableDarkMode() {
       });
 
       $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgb(231, 231, 231)');  
+      $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgb(231, 231, 231)');
+      toggleMode.classList.remove('fa-toggle-off');
+      toggleMode.classList.add('fa-toggle-on');  
 }
 
 function enableLightMode(){
-$('body').css('background-color', 'rgb(218, 218, 218)');
-$('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
+    $('body').css('background-color', 'rgb(218, 218, 218)');
+    $('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
 
-$('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
+    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
 
-$('.f-card_small .title a').css('color', 'rgba(32,33,35)');
+    $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
 
-$('.options, .settings').css({
-  'border-color': '#353740',
-  'background-color': 'rgb(218, 218, 218)'
-});
-$('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgba(32,33,35)');
-$('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgba(32,33,35)');
-
+    $('.options, .settings').css({
+    'border-color': '#353740',
+    'background-color': 'rgb(218, 218, 218)'
+    });
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgba(32,33,35)');
+    $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgba(32,33,35)');
+    toggleMode.classList.remove('fa-toggle-on');
+    toggleMode.classList.add('fa-toggle-off');
 }
 
 function toggleMode(){
@@ -57,13 +60,13 @@ function toggleMode(){
     var toggleMode = document.querySelector('#toggleMode');
     // Check if it contains any <style> elements
     if (head.querySelector('style') !== null) {
-        // style Tag Exists light mode enabled 
+        // Enable Light Mode
         enableDarkMode();
         toggleMode.classList.remove('fa-toggle-off');
         toggleMode.classList.add('fa-toggle-on');
         document.cookie = "DARKMODE=true";
     } else {
-        // style not Tag Exists dark mode enabled 
+        // Enable light mode 
         toggleMode.classList.remove('fa-toggle-on');
         toggleMode.classList.add('fa-toggle-off');
         enableLightMode();
