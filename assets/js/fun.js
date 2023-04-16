@@ -54,7 +54,6 @@ function enableLightMode(){
     } 
 
     .options .menu-head::after, .settings .menu-head::after {
-        height: 1px;
         background: rgba(32,33,35);
     }
 </style>`;
