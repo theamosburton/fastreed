@@ -1,62 +1,21 @@
 
 window.onload = function(){
     // checking cookie mode
-    let darkMode;
-    let cookieExist = (document.cookie.match(/^(?:.*;)?\s*DARKMODE\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
+    let colorMode;
+    let cookieExist = (document.cookie.match(/^(?:.*;)?\s*colorMode\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
     if (cookieExist != null) {
-        darkMode = str_obj(document.cookie).DARKMODE;
-
+        colorMode = str_obj(document.cookie).colorMode;
     }else{
-        document.cookie = "DARKMODE=true";
-        darkMode = 'true';
+        document.cookie = "colorMode=dark; max-age=31104000; path=/";
+        colorMode = 'true';
     }
 
     // setting mode with respect to cookie
-    if (darkMode == 'true') {
+    if (colorMode == 'dark') {
         enableDarkMode();
-    }else if(darkMode == 'false'){
+    }else if(colorMode == 'light'){
         enableLightMode();
     }
-}
-
-
-
-function enableDarkMode() {
-    $('body').css('background-color', 'rgb(32,33,35)');
-    $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
-    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
-    $('.f-card_small .title a').css('color', 'white');
-    $('.options, .settings').css({
-        'background-color': '#353740',
-        'border-color': 'rgb(218, 218, 218)'
-      });
-
-      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
-      var toggleMode = document.querySelector('#toggleMode');
-      toggleMode.classList.remove('fa-toggle-off');
-      toggleMode.classList.add('fa-toggle-on'); 
-      document.cookie = "DARKMODE=true"; 
-}
-
-function enableLightMode(){
-    $('body').css('background-color', 'rgb(218, 218, 218)');
-    $('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
-
-    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
-
-    $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
-
-    $('.options, .settings').css({
-    'border-color': '#353740',
-    'background-color': 'rgb(218, 218, 218)'
-    });
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
-    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(32, 33, 35)');
-    var toggleMode = document.querySelector('#toggleMode');
-    toggleMode.classList.remove('fa-toggle-on');
-    toggleMode.classList.add('fa-toggle-off');
-    document.cookie = "DARKMODE=false";
 }
 
 function toggleMode(){
@@ -74,9 +33,50 @@ function toggleMode(){
         toggleMode.classList.remove('fa-toggle-on');
         toggleMode.classList.add('fa-toggle-off');
         enableLightMode();
-        document.cookie = "DARKMODE=false";
     }
 }
+
+function enableDarkMode() {
+    document.cookie = "colorMode=dark; max-age=31104000; path=/"; 
+    $('body').css('background-color', 'rgb(32,33,35)');
+    $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
+    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
+    $('.f-card_small .title a').css('color', 'white');
+    $('.options, .settings').css({
+        'background-color': '#353740',
+        'border-color': 'rgb(218, 218, 218)'
+      });
+
+      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
+      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
+      var toggleMode = document.querySelector('#toggleMode');
+      toggleMode.classList.remove('fa-toggle-off');
+      toggleMode.classList.add('fa-toggle-on'); 
+      
+}
+
+function enableLightMode(){
+    document.cookie = "colorMode=light; max-age=31104000; path=/";
+    $('body').css('background-color', 'rgb(218, 218, 218)');
+    $('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
+
+    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
+
+    $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
+
+    $('.options, .settings').css({
+    'border-color': '#353740',
+    'background-color': 'rgb(218, 218, 218)'
+    });
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
+    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(32, 33, 35)');
+    var toggleMode = document.querySelector('#toggleMode');
+    toggleMode.classList.remove('fa-toggle-on');
+    toggleMode.classList.add('fa-toggle-off');
+   
+}
+
+
 
 let settingState = document.getElementById('settings');
 let optionsState = document.getElementById('s-options');
