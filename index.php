@@ -25,7 +25,6 @@ $version = implode('.', str_split($version, 1));
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-
 </head>
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>

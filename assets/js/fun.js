@@ -13,7 +13,7 @@ window.onload = function(){
     // setting mode with respect to cookie
     if (darkMode == 'false') {
         enableLightMode();
-    }else if(darkMode == 'false'){
+    }else if(darkMode == 'true'){
         enableDarkMode();
     }
 }
@@ -21,42 +21,34 @@ window.onload = function(){
 
 
 function enableDarkMode() {
-    var hs = document.getElementsByTagName('style');
-    for (var i=0, max = hs.length; i < max; i++) {
-        hs[i].parentNode.removeChild(hs[i]);
-    }
+    $('body').css('background-color', 'rgb(32,33,35)');
+    $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
+    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
+    $('.f-card_small .title a').css('color', 'white');
+    $('.options, .settings').css({
+        'background-color': '#353740',
+        'border-color': 'rgb(218, 218, 218)'
+      });
+
+      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
+      $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgb(231, 231, 231)');  
 }
 
 function enableLightMode(){
-    document.head.innerHTML += `	
-<style>
-    body{
-        background-color : rgb(218, 218, 218);
-    }
-    header .nav, header h1 a{
-        color :rgba(32,33,35);
-    }
-    .cat a, .date, .f-card .fa-ellipsis-v{
-        color :rgba(32,33,35);
-    }
+$('body').css('background-color', 'rgb(218, 218, 218)');
+$('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
 
-    .f-card_small .title a{
-        color :rgba(32,33,35);
-    }
+$('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
 
-    .options, .settings{
-        border-color:#353740;
-        background-color: rgb(218, 218, 218);
-        color: rgba(32,33,35);
-    }
-    .options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i{
-        color: rgba(32,33,35);
-    } 
+$('.f-card_small .title a').css('color', 'rgba(32,33,35)');
 
-    .options .menu-head::after, .settings .menu-head::after {
-        background: rgba(32,33,35);
-    }
-</style>`;
+$('.options, .settings').css({
+  'border-color': '#353740',
+  'background-color': 'rgb(218, 218, 218)'
+});
+$('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgba(32,33,35)');
+$('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgba(32,33,35)');
+
 }
 
 function toggleMode(){
