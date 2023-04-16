@@ -81,6 +81,8 @@
   top: -2px;
 }
 .options .menu-head, .settings .menu-head{
+  border-bottom: 3px solid;
+  padding-bottom: 5px;
   margin-bottom: 10px;
 }
 .options .name, .settings .name{
@@ -96,15 +98,6 @@
 }
 .options .menus .right, .settings .menus .right{
   padding-left: 20px;
-}
-.options .menu-head::after, .settings .menu-head::after{
-  content: " ";
-  display: block;
-  height: 2px;
-  background: rgb(231, 231, 231);
-  width: 100%;
-  left: 100%;
-  margin: 8px 0px 15px 0px;
 }
 
 /* headers */

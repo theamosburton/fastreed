@@ -5,6 +5,7 @@ window.onload = function(){
     let cookieExist = (document.cookie.match(/^(?:.*;)?\s*DARKMODE\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
     if (cookieExist != null) {
         darkMode = str_obj(document.cookie).DARKMODE;
+
     }else{
         document.cookie = "DARKMODE=true";
         darkMode = 'true';
@@ -31,7 +32,7 @@ function enableDarkMode() {
       });
 
       $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgb(231, 231, 231)');
+      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
       var toggleMode = document.querySelector('#toggleMode');
       toggleMode.classList.remove('fa-toggle-off');
       toggleMode.classList.add('fa-toggle-on'); 
@@ -50,8 +51,8 @@ function enableLightMode(){
     'border-color': '#353740',
     'background-color': 'rgb(218, 218, 218)'
     });
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgba(32,33,35)');
-    $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgba(32,33,35)');
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
+    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
@@ -63,8 +64,8 @@ function toggleMode(){
     var head = document.querySelector('head');
     var toggleMode = document.querySelector('#toggleMode');
     // Check if it contains any <style> elements
-    if (head.querySelector('style') !== null) {
-        // Enable Light Mode
+    if (toggleMode.classList.contains('fa-toggle-off')) {
+        // Enable Dark Mode
         enableDarkMode();
         toggleMode.classList.remove('fa-toggle-off');
         toggleMode.classList.add('fa-toggle-on');
