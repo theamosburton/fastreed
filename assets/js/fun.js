@@ -47,8 +47,8 @@ function enableDarkMode() {
         'border-color': 'rgb(218, 218, 218)'
       });
 
-      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
+      $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
+      $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(231, 231, 231)');
       var toggleMode = document.querySelector('#toggleMode');
       toggleMode.classList.remove('fa-toggle-off');
       toggleMode.classList.add('fa-toggle-on'); 
@@ -68,8 +68,8 @@ function enableLightMode(){
     'border-color': '#353740',
     'background-color': 'rgb(218, 218, 218)'
     });
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
-    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(32, 33, 35)');
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
+    $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
@@ -80,7 +80,7 @@ function enableLightMode(){
 
 let settingState = document.getElementById('settings');
 let optionsState = document.getElementById('s-options');
-// let userState = document.getElementById('user');
+let accountsState = document.getElementById('accounts');
 let overlay = document.getElementById('opt-overlay');
 
 function toggleUser(){
@@ -102,9 +102,14 @@ function removeOptions(){
         settingState.style.display = 'none';
     }else if(optionsState.style.display == 'block'){
         optionsState.style.display = 'none';
+    }else if(accountsState.style.display == 'block'){
+        accountsState.style.display = 'none';
     }
     overlay.style.display = 'none';
+    
 }
+
+
 function toggleSetting(){
     if(settingState.style.display == 'none'){
         settingState.style.display = 'block';
@@ -115,11 +120,18 @@ function toggleSetting(){
 }
 
 function toggleOptions(){
-    let settingState = document.getElementById('settings');
     if(optionsState.style.display == 'none'){
         optionsState.style.display = 'block';
         overlay.style.display = 'block';
     }else{
         optionsState.style.display = 'none';
+    }
+}
+function toggleAccounts(){
+    if(accountsState.style.display == 'none'){
+        accountsState.style.display = 'block';
+        overlay.style.display = 'block';
+    }else{
+        accountsState.style.display = 'none';
     }
 }

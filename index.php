@@ -25,6 +25,8 @@ $version = implode('.', str_split($version, 1));
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
@@ -32,7 +34,7 @@ $version = implode('.', str_split($version, 1));
 		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
 		<div class="rightside">
 			<div class="nav">
-				<i class="fa fa-regular fa-circle-user fa-xl" onclick="toggleUser()"></i>
+				<i class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
 				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
 				<i class="fa fa-ellipsis-v fa-xl" onclick="toggleOptions()"></i>
 			</div>
@@ -41,24 +43,12 @@ $version = implode('.', str_split($version, 1));
 	</header>
 	<!--main content-->
 	
-
+	
 	<div class="main-content">
 		<div class="container">
 			<div class="row ">
-			<div id="g_id_onload"
-         data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
-         data-login_uri="https://your.domain/your_login_endpoint"
-         data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-callback="OnSuccess"
-         data-logo_alignment="left">
-      </div>
+
+		
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				    <div class="options" id="s-options" style="display:none">
@@ -78,6 +68,29 @@ $version = implode('.', str_split($version, 1));
 						
 						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
 						<div class="menus"><i class="left fa fa-icons"></i>Manage Interests</div>
+					</div>
+
+					<div class="accounts" id="accounts" style="display:none">
+					    <div class="menu-head">
+						    <span class="name">Login/Sign Up</span>
+						</div>
+						<div id="g_id_onload"
+							data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+							data-context="signup"
+							data-ux_mode="popup"
+							data-login_uri="<?php URL  ?>/"
+							data-nonce=""
+							data-auto_prompt="false">
+						</div>
+
+						<div class="g_id_signin"
+							data-type="standard"
+							data-shape="pill"
+							data-theme="filled_black"
+							data-text="continue_with"
+							data-size="large"
+							data-logo_alignment="left">
+						</div>
 					</div>
 
 				    <div class="pin_container">
