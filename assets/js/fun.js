@@ -101,20 +101,16 @@ function str_obj(str) {
 
 function removeOptions(){
     if(settingState.style.display == 'block'){
-        settingState.style.display == 'none';
-    }else{
-        optionsState.style.display == 'none';
+        settingState.style.display = 'none';
+    }else if(optionsState.style.display == 'block'){
+        optionsState.style.display = 'none';
     }
+    overlay.style.display = 'none';
 }
 function toggleSetting(){
     if(settingState.style.display == 'none'){
-        if(optionsState.style.display = 'none'){
-            settingState.style.display = 'block';
-        }else{
-            optionsState.style.display = 'none';
-            settingState.style.display = 'block';
-        }
-        
+        settingState.style.display = 'block';
+        overlay.style.display = 'block';
     }else{
         settingState.style.display = 'none';
     }
@@ -123,12 +119,8 @@ function toggleSetting(){
 function toggleOptions(){
     let settingState = document.getElementById('settings');
     if(optionsState.style.display == 'none'){
-        if(settingState.style.display == 'none'){
-            optionsState.style.display = 'block';
-        }else{
-            settingState.style.display = 'none';
-            optionsState.style.display = 'block';
-        }
+        optionsState.style.display = 'block';
+        overlay.style.display = 'block';
     }else{
         optionsState.style.display = 'none';
     }
