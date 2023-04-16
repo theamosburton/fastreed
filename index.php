@@ -61,7 +61,7 @@ $version = implode('.', str_split($version, 1));
 						    <span class="name">Settings</span>
 						</div>
 						
-						<div class="menus"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg" onclick="toggleMode()" id="toggleMode"></i></div>
+						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
 						<div class="menus"><i class="left fa fa-icons"></i>Manage Interests</div>
 					</div>
 
