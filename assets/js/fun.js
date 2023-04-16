@@ -11,10 +11,10 @@ window.onload = function(){
     }
 
     // setting mode with respect to cookie
-    if (darkMode == 'false') {
-        enableLightMode();
-    }else if(darkMode == 'true'){
+    if (darkMode == 'true') {
         enableDarkMode();
+    }else if(darkMode == 'false'){
+        enableLightMode();
     }
 }
 
@@ -32,8 +32,10 @@ function enableDarkMode() {
 
       $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
       $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgb(231, 231, 231)');
+      var toggleMode = document.querySelector('#toggleMode');
       toggleMode.classList.remove('fa-toggle-off');
-      toggleMode.classList.add('fa-toggle-on');  
+      toggleMode.classList.add('fa-toggle-on'); 
+      document.cookie = "DARKMODE=true"; 
 }
 
 function enableLightMode(){
@@ -50,8 +52,10 @@ function enableLightMode(){
     });
     $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgba(32,33,35)');
     $('.options .menu-head::after, .settings .menu-head::after').css('background', 'rgba(32,33,35)');
+    var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
+    document.cookie = "DARKMODE=false";
 }
 
 function toggleMode(){
@@ -64,7 +68,6 @@ function toggleMode(){
         enableDarkMode();
         toggleMode.classList.remove('fa-toggle-off');
         toggleMode.classList.add('fa-toggle-on');
-        document.cookie = "DARKMODE=true";
     } else {
         // Enable light mode 
         toggleMode.classList.remove('fa-toggle-on');
