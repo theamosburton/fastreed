@@ -42,16 +42,17 @@ function enableDarkMode() {
     $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
-    $('.options, .settings, .accounts').css({
-        'background-color': '#white',
+    $('.options, .settings').css({
+        'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
       });
 
-      $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(231, 231, 231)');
+      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
+      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
       var toggleMode = document.querySelector('#toggleMode');
       toggleMode.classList.remove('fa-toggle-off');
       toggleMode.classList.add('fa-toggle-on'); 
+      $('#toggleMode').css('color','#8f8fed');
       
 }
 
@@ -68,11 +69,16 @@ function enableLightMode(){
     'border-color': '#353740',
     'background-color': 'rgb(218, 218, 218)'
     });
+
+    $('.accounts').css('background-color','white');
+
+    $('.accounts').css('background-color: white');
     $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
     $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
+    $('#toggleMode').css('color','rgb(32,33,35)');
    
 }
 
