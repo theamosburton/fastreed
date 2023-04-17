@@ -99,17 +99,13 @@ $version = implode('.', str_split($version, 1));
 				    <div class="pin_container">
 					
 						<!-- 01 -->
-						<div class="f-card f-card_large">
-							<div class="image" style="background-image:url('assets/img/port1.png');">
-								<a href="#">
-									<div class="overlay">
-										<div class="top-overlay"> <div class="st-logo"></div> </div>
-										<div class="title"> 
-										<p> This is the dummy text for this website for testing</p>
-										</div>
-									</div>
+						<div class="f-card f-card_small">
+							<div class="image" style="background-image:url('/assets/img/thumb3.png');">
+								<a href="">
+									<div class="overlay"></div>
 								</a>
 							</div>
+							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
 							<div class="meta">
 								<span class="cat"> <a href="">Technology</a> </span>
 								<span class="date">2h</span>
@@ -117,14 +113,17 @@ $version = implode('.', str_split($version, 1));
 							</div>
 						</div>
 						<!-- 02 -->
-						<div class="f-card f-card_small">
-							<div class="image" style="background-image:url('/assets/img/thumb2.png');">
-								<a href="">
-									<div class="overlay"></div>
+						<div class="f-card f-card_medium">
+							<div class="image" style="background-image:url('assets/img/port4.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+										</div>
+									</div>
 								</a>
 							</div>
-							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
-
 							<div class="meta">
 								<span class="cat"> <a href="">Technology</a> </span>
 								<span class="date">2h</span>
@@ -150,17 +149,14 @@ $version = implode('.', str_split($version, 1));
 							</div>
 						</div>
 						<!-- 04 -->
-						<div class="f-card f-card_medium">
-							<div class="image" style="background-image:url('assets/img/port4.png');">
-								<a href="#">
-									<div class="overlay">
-										<div class="top-overlay"> <div class="st-logo"></div> </div>
-										<div class="title"> 
-											<p> This is the dummy text for this website for testing</p>
-										</div>
-									</div>
+						<div class="f-card f-card_small">
+							<div class="image" style="background-image:url('/assets/img/thumb2.png');">
+								<a href="">
+									<div class="overlay"></div>
 								</a>
 							</div>
+							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+
 							<div class="meta">
 								<span class="cat"> <a href="">Technology</a> </span>
 								<span class="date">2h</span>
@@ -202,13 +198,17 @@ $version = implode('.', str_split($version, 1));
 							</div>
 						</div>
 						<!-- 07-->
-						<div class="f-card f-card_small">
-							<div class="image" style="background-image:url('/assets/img/thumb3.png');">
-								<a href="">
-									<div class="overlay"></div>
+						<div class="f-card f-card_medium">
+							<div class="image" style="background-image:url('assets/img/port6.png');">
+								<a href="#">
+									<div class="overlay">
+										<div class="top-overlay"> <div class="st-logo"></div> </div>
+										<div class="title"> 
+											<p> This is the dummy text for this website for testing</p>
+										</div>
+									</div>
 								</a>
 							</div>
-							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
 							<div class="meta">
 								<span class="cat"> <a href="">Technology</a> </span>
 								<span class="date">2h</span>
@@ -234,13 +234,13 @@ $version = implode('.', str_split($version, 1));
 							</div>
 						</div>
 						<!--09  -->
-						<div class="f-card f-card_medium">
-							<div class="image" style="background-image:url('assets/img/port6.png');">
+						<div class="f-card f-card_large">
+							<div class="image" style="background-image:url('assets/img/port1.png');">
 								<a href="#">
 									<div class="overlay">
 										<div class="top-overlay"> <div class="st-logo"></div> </div>
 										<div class="title"> 
-											<p> This is the dummy text for this website for testing</p>
+										<p> This is the dummy text for this website for testing</p>
 										</div>
 									</div>
 								</a>
@@ -251,6 +251,7 @@ $version = implode('.', str_split($version, 1));
 								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
+
 
 						<div class="f-card f-card_small">
 							<div class="image" style="background-image:url('/assets/img/thumb4.png');">
@@ -395,6 +396,22 @@ $version = implode('.', str_split($version, 1));
 								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
+
+						<div class="f-card f-card_small">
+							<div class="image" style="background-image:url('/assets/img/thumb4.png');">
+								<a href="">
+									<div class="overlay"></div>
+								</a>
+							</div>
+							<div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
+							<div class="meta">
+								<span class="cat"> <a href="">Technology</a> </span>
+								<span class="date">2h</span>
+								<a href=""><i class="fa fa-ellipsis-v"></i></a>
+							</div>
+						</div>
+
+						
 					</div>
 				</div>
 			</div>
