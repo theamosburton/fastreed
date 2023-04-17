@@ -45,14 +45,14 @@ function enableDarkMode() {
     $('.options, .settings').css({
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
-      });
-
-      $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-      $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
-      var toggleMode = document.querySelector('#toggleMode');
-      toggleMode.classList.remove('fa-toggle-off');
-      toggleMode.classList.add('fa-toggle-on'); 
-      $('#toggleMode').css('color','#8f8fed');
+    });
+    $('.accounts').css('background-color','white');
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
+    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
+    var toggleMode = document.querySelector('#toggleMode');
+    toggleMode.classList.remove('fa-toggle-off');
+    toggleMode.classList.add('fa-toggle-on'); 
+    $('#toggleMode').css('color','#8f8fed');
       
 }
 

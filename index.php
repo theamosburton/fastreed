@@ -72,8 +72,13 @@ $version = implode('.', str_split($version, 1));
 
 					<div class="accounts" id="accounts" style="display:none">
 					    <div class="menu-head">
-						    <span class="name">Login/Sign Up</span>
+						    <span class="name">Accounts</span>
 						</div>
+
+						<!-- <div class="continueEmail"> -->
+							<a class="continueEmail" href=""> <i class="left fa fa-envelope"></i> Continue with email</a>
+						<!-- </div> -->
+
 						<div id="g_id_onload"
 							data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
 							data-context="signup"

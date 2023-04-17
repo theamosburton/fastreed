@@ -84,6 +84,31 @@
   padding: 30px;
 }
 
+.accounts .continueEmail{
+  padding: 8px;
+  background-color: #202124;
+  border-radius: 50px;
+  margin: 10px 0px;
+  display: flex;
+  color: #e8eaed;
+  font-weight: 510;
+  font-size: 14px;
+  font-family: "Google Sans",arial,sans-serif;
+  align-items: center;
+}
+.accounts .continueEmail i{
+  border: 1.5px solid;
+  border-radius: 50px;
+  padding: 4px;
+  margin-right: 10px;
+
+}
+.accounts .continueEmail:hover{
+  text-decoration: none;
+
+}
+
+
 .options .menu-head, .settings .menu-head, .accounts .menu-head{
   border-bottom: 3px solid;
   padding-bottom: 5px;
