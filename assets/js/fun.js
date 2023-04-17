@@ -42,8 +42,8 @@ function enableDarkMode() {
     $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
-    $('.options, .settings').css({
-        'background-color': '#353740',
+    $('.options, .settings, .accounts').css({
+        'background-color': '#white',
         'border-color': 'rgb(218, 218, 218)'
       });
 
