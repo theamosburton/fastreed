@@ -13,9 +13,9 @@ $version = implode('.', str_split($version, 1));
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="unititled">
-	<meta name="keywords" content="HTML5 Crowdfunding Profile Template">
-	<meta name="author" content="Audain Designs">
+	<meta name="description" content="Read, Write and Share Greate Ideas and Stories">
+	<meta name="keywords" content="Read, Write and Share Greate Ideas and Stories">
+	<meta name="author" content="MD. Shafiq Malik">
 	<link rel="shortcut icon" href="favicon.ico">  
 	<title>Fastreed - Read, Write and Share Greate Ideas and Stories</title>
 
@@ -55,10 +55,10 @@ $version = implode('.', str_split($version, 1));
 						<div class="menu-head">
 						    <span class="name">Options</span>
 						</div>
-						<div class="menus"><i class="left fa fa-table-list"></i>Reading List</div>
-						<div class="menus"><i class="left fa fa-message"></i>Feedback</div>
-						<div class="menus"> <i class="left fa fa-info-circle"></i>About Fastreed</div>
-						<div class="menus"><i class="left fa fa-file-circle-check"></i>Terms and Privacy</div>
+						<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
+						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
+						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="">About Fastreed</a></div>
+						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="">Terms and Privacy</a></div>
 					</div>
 
 					<div class="settings" id="settings" style="display:none">
@@ -67,18 +67,14 @@ $version = implode('.', str_split($version, 1));
 						</div>
 						
 						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-						<div class="menus"><i class="left fa fa-icons"></i>Manage Interests</div>
+						<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
 					</div>
 
 					<div class="accounts" id="accounts" style="display:none">
 					    <div class="menu-head">
-						    <span class="name">Accounts</span>
+						    <span class="name">Login or Create Account</span>
 						</div>
-
-						<!-- <div class="continueEmail"> -->
-							<a class="continueEmail" href=""> <i class="left fa fa-envelope"></i> Continue with email</a>
-						<!-- </div> -->
-
+						
 						<div id="g_id_onload"
 							data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
 							data-context="signup"
@@ -96,6 +92,8 @@ $version = implode('.', str_split($version, 1));
 							data-size="large"
 							data-logo_alignment="left">
 						</div>
+
+						<a class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
 					</div>
 
 				    <div class="pin_container">
@@ -405,7 +403,7 @@ $version = implode('.', str_split($version, 1));
 	
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/fun.js"></script>
 
 </body>

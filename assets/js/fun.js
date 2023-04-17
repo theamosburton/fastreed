@@ -46,6 +46,7 @@ function enableDarkMode() {
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
     });
+    $('.options .menus a, .settings .menus a').css('color', 'rgb(231, 231, 231)');
     $('.accounts').css('background-color','white');
     $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
     $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
@@ -71,7 +72,7 @@ function enableLightMode(){
     });
 
     $('.accounts').css('background-color','white');
-
+    $('.options .menus a, .settings .menus a').css('color', 'rgb(32, 33, 35)');
     $('.accounts').css('background-color: white');
     $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
     $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(32, 33, 35)');

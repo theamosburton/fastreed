@@ -105,6 +105,7 @@
 }
 .accounts .continueEmail:hover{
   text-decoration: none;
+  background-color: #333438;
 
 }
 
@@ -128,6 +129,10 @@
 
 .options .menus:hover, .settings .menus:hover{
   cursor: pointer;
+}
+.options .menus a, .settings .menus a{
+  text-decoration: none;
+  color: rgb(231, 231, 231);
 }
 .options .menus .left, .settings .menus .left{
   padding-right: 10px;
