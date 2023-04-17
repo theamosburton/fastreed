@@ -206,6 +206,7 @@ header .nav i:last-child{
   
   /*Large and Medium Cards   */
 .f-card_large .image, .f-card_medium .image{
+  border:0.5px solid slategrey;
   width: 100%;
   height: 90%;
   border-radius: 20px; 
