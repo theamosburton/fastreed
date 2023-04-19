@@ -109,7 +109,12 @@
   background-color: #333438;
 
 }
-
+.rotate{
+  animation: rotate 1s linear infinite; 
+}
+@keyframes rotate{
+  to{ transform: rotate(360deg); }
+}
 
 .options .menu-head, .settings .menu-head, .accounts .menu-head{
   border-bottom: 3px solid;
@@ -186,13 +191,19 @@ header .nav{
   color: rgb(218, 218, 218);
 }
 header .nav i{
-  padding-right: 20px;
+  margin-right: 20px;
 }
 header .nav i:hover{
   cursor: pointer;
 }
 header .nav i:last-child{
   padding-right: 0;
+}
+header #nav #profileImage{
+  width: 30px;
+  border-radius: 50px;
+  margin-right: 20px;
+  height: 30px;
 }
   /* Small Cards */
 .f-card_small .image{

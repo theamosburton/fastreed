@@ -4,10 +4,6 @@ if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../';
 }
 
-
-
-
-
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
@@ -15,7 +11,6 @@ $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 
 $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
-// $GLOBALS['ERROR_HANDLER'] = $_DOCROOT.'/.htHidden/functions/ERROR_HANDLER.php';
 $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.htactivity/ADMIN_VISIT.php';
 $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.htactivity/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.htactivity/GUEST_VISIT.php';
@@ -37,7 +32,7 @@ if(DOMAIN == 'fastreed.com'){
    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'))
   {
-    $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $redirect = URL.'/' . $_SERVER['REQUEST_URI'];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $redirect);
     exit();

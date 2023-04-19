@@ -2,7 +2,9 @@
 $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
+// include ".htactivity/LOGGED_DATA.php";
 $visit = new VisitorActivity();
+$data = new getLoggedData();
 $version = $visit->VERSION;
 $version = implode('.', str_split($version, 1));
 ?>
@@ -36,8 +38,15 @@ $version = implode('.', str_split($version, 1));
 	<header>
 		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
 		<div class="rightside">
-			<div class="nav">
-				<i class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
+			<div class="nav" id="nav">
+				<?php
+				if(isset($_SESSION['LOGGED_USER'])){
+					echo 
+					'<img onclick="toggleProfile()" src="'.$data->PROFILE_PIC.'" alt="" id="profileImage">';
+				} else {
+					echo '<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>';
+				}
+				?>
 				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
 				<i class="fa fa-ellipsis-v fa-xl" onclick="toggleOptions()"></i>
 			</div>
@@ -74,8 +83,20 @@ $version = implode('.', str_split($version, 1));
 					</div>
 
 					<div class="accounts" id="accounts" style="display:none">
-					    <div class="menu-head">
-						    <span class="name">Login or Create Account</span>
+					<?php 
+					if (isset($_SESSION['LOGGED_USER'])) {
+						$logedUser = <<<HTML
+						<div class="menu-head">
+							<span class="name">My Account</span>
+						</div>
+						
+					HTML;
+
+						echo $loggedUser;
+					}else {
+						$loginPop = <<<HTML
+						<div class="menu-head">
+							<span class="name">Login or Create Account</span>
 						</div>
 						
 						<div id="g_id_onload"
@@ -86,7 +107,7 @@ $version = implode('.', str_split($version, 1));
 							data-auto_prompt="false">
 						</div>
 
-						<div class="g_id_signin"
+						<div id="g_id_signin" class="g_id_signin"
 							data-type="standard"
 							data-shape="pill"
 							data-theme="filled_black"
@@ -95,7 +116,14 @@ $version = implode('.', str_split($version, 1));
 							data-logo_alignment="left">
 						</div>
 
-						<a class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
+						<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
+					HTML;
+
+					echo $loginPop;
+
+					}
+					?>
+					    
 					</div>
 
 				    <div class="pin_container">

@@ -89,6 +89,8 @@ let settingState = document.getElementById('settings');
 let optionsState = document.getElementById('s-options');
 let accountsState = document.getElementById('accounts');
 let overlay = document.getElementById('opt-overlay');
+let accountIcon = document.getElementById('accountIcon');
+let profileImage = document.getElementById('profileImage');
 
 function toggleUser(){
 
@@ -111,20 +113,23 @@ function removeOptions(){
         optionsState.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
+        accountIcon.classList.remove('fa-arrows-spin', 'fa-solid','rotate');
+        accountIcon.classList.add('fa-circle-user','fa-regular');
     }
     overlay.style.display = 'none';
-    
 }
 
 
 function toggleSetting(){
     if(settingState.style.display == 'none'){
+        
         settingState.style.display = 'block';
         overlay.style.display = 'block';
     }else{
         settingState.style.display = 'none';
+        
     }
-}
+ }
 
 function toggleOptions(){
     if(optionsState.style.display == 'none'){
@@ -136,9 +141,24 @@ function toggleOptions(){
 }
 function toggleAccounts(){
     if(accountsState.style.display == 'none'){
+        
         accountsState.style.display = 'block';
         overlay.style.display = 'block';
+        accountIcon.classList.remove('fa-circle-user', 'fa-regular');
+        accountIcon.classList.add('rotate','fa-arrows-spin','fa-solid');
     }else{
         accountsState.style.display = 'none';
+        accountIcon.classList.remove('fa-arrows-spin');
+        accountIcon.classList.add('fa-circle-user');
     }
+}
+
+function toggleProfile() {
+    if(accountsState.style.display == 'none'){
+      accountsState.style.display = 'block';
+      overlay.style.display = 'block';
+    }else{
+        accountsState.style.display = 'none'; 
+    }
+    
 }
