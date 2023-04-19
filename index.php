@@ -25,8 +25,11 @@ $version = implode('.', str_split($version, 1));
 	<!--Fonts-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+	
 
 	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
@@ -77,10 +80,9 @@ $version = implode('.', str_split($version, 1));
 						
 						<div id="g_id_onload"
 							data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
-							data-context="signup"
+							data-context="use"
 							data-ux_mode="popup"
-							data-login_uri="<?php URL  ?>/"
-							data-nonce=""
+							data-callback="onGoogleSignIn"
 							data-auto_prompt="false">
 						</div>
 
@@ -422,6 +424,7 @@ $version = implode('.', str_split($version, 1));
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/fun.js"></script>
+<script src="/assets/js/log.js"></script>
 
 </body>
 </html>
