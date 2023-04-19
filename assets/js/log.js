@@ -10,7 +10,7 @@ function onGoogleSignIn(response) {
     console.log('Family Name: ' + responsePayload.family_name);
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
-    console.log("Is Verified "+ responsePayload.email_verified);
+    console.log("Is Verified: "+ responsePayload.email_verified);
  }
 
 
