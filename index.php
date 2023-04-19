@@ -89,7 +89,6 @@ $version = implode('.', str_split($version, 1));
 						<div class="menu-head">
 							<span class="name">My Account</span>
 						</div>
-						
 					HTML;
 
 						echo $loggedUser;

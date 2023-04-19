@@ -32,7 +32,7 @@ if(DOMAIN == 'fastreed.com'){
    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'))
   {
-    $redirect = URL.'/' . $_SERVER['REQUEST_URI'];
+    $redirect = URL . $_SERVER['REQUEST_URI'];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $redirect);
     exit();
