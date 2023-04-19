@@ -205,6 +205,10 @@ header #nav #profileImage{
   margin-right: 20px;
   height: 30px;
 }
+
+#profileImage:hover{
+  cursor: pointer;
+}
   /* Small Cards */
 .f-card_small .image{
   width: 100%;
