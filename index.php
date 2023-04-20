@@ -63,7 +63,7 @@ $version = implode('.', str_split($version, 1));
 					$notifyDiv = <<<HTML
 					<div class="navs">
 						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-						<span class="badge">1123</span>
+						<span class="badge">3</span>
 					</div>
 					HTML;
 					echo $notifyDiv;

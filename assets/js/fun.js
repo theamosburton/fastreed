@@ -56,7 +56,7 @@ function enableDarkMode() {
     });
 
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
-
+    $('.badge').css('border','2px solid rgb(32,33,35)');
     $('.options .menus a, .settings .menus a, .accounts .menus a').css('color', 'rgb(231, 231, 231)');
     $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i, .accounts .menu-head span, .accounts .menus, .accounts .menus i').css('color', 'rgb(231, 231, 231)');
     $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(231, 231, 231)');
