@@ -35,7 +35,5 @@ function getVersions($DB){
 
 updateVersion();
 $updateCode = shell_exec('git pull fastreed main');                      
-$refresh = new HardRefresh();
-$vStatus = $refresh->updateVersion();
-
+echo $updateCode;
 ?>
