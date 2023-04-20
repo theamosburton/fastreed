@@ -48,7 +48,9 @@ class gSignUpLogin{
         $cantRead = array("Result"=>false, "message"=>"No Parameter Given");
         $cantReadDecode = json_encode($cantRead);
         echo "$cantReadDecode";
-      }elseif (!isset($_GET['email'])) {
+      }else if (isset($_GET['intent'])) {
+        $this->logoutAccount();
+      }else if(!isset($_GET['email'])){
         $cantRead = array("Result"=>false, "message"=>"Email Not Provided");
         $cantReadDecode = json_encode($cantRead);
         echo "$cantReadDecode";
@@ -92,30 +94,30 @@ class gSignUpLogin{
   }  
 
   // Deleting Other IDS and Making Reference //
-public function makeReference(){
-  if(isset($_COOKIE['UID'])){
-    $refID = $this->AUTH->decrypt($_COOKIE['UID']);
-    $_SESSION['refSession'] = $refID;
-  }elseif (isset($_COOKIE['AID'])) {
-    $refID = $this->AUTH->decrypt($_COOKIE['AID']);
-    $_SESSION['refSession'] = $refID;
-  }else{
-    $refID = $this->AUTH->decrypt($_COOKIE['GID']);
-    $_SESSION['refSession'] = $refID;
+  public function makeReference(){
+    if(isset($_COOKIE['UID'])){
+      $refID = $this->AUTH->decrypt($_COOKIE['UID']);
+      $_SESSION['refSession'] = $refID;
+    }elseif (isset($_COOKIE['AID'])) {
+      $refID = $this->AUTH->decrypt($_COOKIE['AID']);
+      $_SESSION['refSession'] = $refID;
+    }else{
+      $refID = $this->AUTH->decrypt($_COOKIE['GID']);
+      $_SESSION['refSession'] = $refID;
+    }
+    $this->deleteOtherID();
   }
-$this->deleteOtherID();
-}
 
-public function deleteOtherID(){
-  setcookie("UID", "", time()-3600, '/');
-  unset($_SESSION['USI']);
-  setcookie("AID", "", time()-3600, '/');
-  unset($_SESSION['ASI']);
-  setcookie("GID", "", time()-3600, '/');
-  unset($_SESSION['GSI']);
-  setcookie("authStatus", "", time()-3600, '/');
-}
-// Deleting Other IDS and Making Reference //
+  public function deleteOtherID(){
+    setcookie("UID", "", time()-3600, '/');
+    unset($_SESSION['USI']);
+    setcookie("AID", "", time()-3600, '/');
+    unset($_SESSION['ASI']);
+    setcookie("GID", "", time()-3600, '/');
+    unset($_SESSION['GSI']);
+    setcookie("authStatus", "", time()-3600, '/');
+  }
+  // Deleting Other IDS and Making Reference //
 
 
   public function createNewAccount(){
@@ -134,6 +136,18 @@ public function deleteOtherID(){
       $cantReadDecode = json_encode($cantRead);
       echo "$cantReadDecode";
     }
+  }
+
+
+  // This function is for logging out account
+
+  public function logoutAccount(){
+    setcookie('UID', "", time()-3600);
+    setcookie('RMM',  "", time()-3600);
+    unset($_SESSION['LOGGED_USER']);
+    $cantRead = array("Result"=>true, "message"=>"Logged Out");
+    $cantReadDecode = json_encode($cantRead);
+    echo "$cantReadDecode";
   }
 
 }

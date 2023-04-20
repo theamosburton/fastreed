@@ -77,7 +77,7 @@ $version = implode('.', str_split($version, 1));
 								<span class="name">My Account</span>
 							</div>
 							<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
-							<div class="menus"><i class="left fa fa-power-off"></i> <a href="">Log Out</a> </div>
+							<div class="menus" onclick="logout()"><i class="left fa fa-power-off"></i>Log Out</div>
 						HTML;
 
 							echo $loggedUser;
@@ -113,7 +113,7 @@ $version = implode('.', str_split($version, 1));
 						?>
 					    
 					</div>
-					
+
 					<div class="options" id="s-options" style="display:none">
 						<div class="menu-head">
 						    <span class="name">Options</span>

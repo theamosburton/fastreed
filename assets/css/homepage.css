@@ -142,7 +142,7 @@
   text-decoration: none;
 }
 
-.options .menus:hover, .settings .menus:hover{
+.options .menus:hover, .settings .menus:hover, .accounts .menus:hover{
   cursor: pointer;
 }
 .options .menus a, .settings .menus a{
