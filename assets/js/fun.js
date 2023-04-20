@@ -98,7 +98,7 @@ function enableLightMode(){
 
 
 let settingState = document.getElementById('settings');
-let optionsState = document.getElementById('s-options');
+let notification = document.getElementById('notifications');
 let accountsState = document.getElementById('accounts');
 let overlay = document.getElementById('opt-overlay');
 let accountIcon = document.getElementById('accountIcon');
@@ -119,8 +119,8 @@ function str_obj(str) {
 function removeOptions(){
     if(settingState.style.display == 'block'){
         settingState.style.display = 'none';
-    }else if(optionsState.style.display == 'block'){
-        optionsState.style.display = 'none';
+    }else if(notification.style.display == 'block'){
+        notification.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
         mSpinner.style.display = 'none';
@@ -140,13 +140,13 @@ function toggleSetting(){
     }
  }
 
-function toggleOptions(){
-    if(optionsState.style.display == 'none'){
-        optionsState.style.display = 'block';
-        overlay.style.display = 'block';
-    }else{
-        optionsState.style.display = 'none';
-    }
+function toggleNotifications(){
+    // if(optionsState.style.display == 'none'){
+    //     optionsState.style.display = 'block';
+    //     overlay.style.display = 'block';
+    // }else{
+    //     optionsState.style.display = 'none';
+    // }
 }
 function toggleAccounts(){
     if(accountsState.style.display == 'none'){
