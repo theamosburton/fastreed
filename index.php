@@ -48,8 +48,16 @@ $version = implode('.', str_split($version, 1));
 				}
 				?>
 				<div class="spinner" id="MenuSpinner"></div>
+				<?php
+				if(isset($_SESSION['LOGGED_USER'])){
+					$notify = <<<HTML
+					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" style="display:none;" onclick="toggleNotification()"></i>
+					HTML;
+					echo $notify;
+				}
+				?>
+				
 				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
-				<i class="fa fa-ellipsis-v fa-xl" onclick="toggleOptions()"></i>
 			</div>
 		</div>
 		
@@ -61,15 +69,14 @@ $version = implode('.', str_split($version, 1));
 		<div class="container">
 			<div class="row ">
 
-				<div class="settings" id="settings" style="display:none">
+			<!-- Notifications -->
+				<div class="notifications" id="notifications" style="display:none">
 					<div class="menu-head">
-						<span class="name">Settings</span>
+						<span class="name">Notifications</span>
 					</div>
-					
-					<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-					<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
 				</div>
 
+				<!-- Accounts -->
 				<div class="accounts" id="accounts" style="display:none">
 						<?php 
 						if (isset($_SESSION['LOGGED_USER'])) {
@@ -112,14 +119,16 @@ $version = implode('.', str_split($version, 1));
 
 						}
 						?>
-					    
 					</div>
 
-					<div class="options" id="s-options" style="display:none">
+					<!-- settings -->
+					<div class="settings" id="settings" style="display:none">
 						<div class="menu-head">
-						    <span class="name">Options</span>
+						    <span class="name">Settings</span>
 						</div>
+						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
 						<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
+						<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
 						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
 						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
 						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
