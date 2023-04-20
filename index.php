@@ -2,7 +2,6 @@
 $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
-// include ".htactivity/LOGGED_DATA.php";
 $visit = new VisitorActivity();
 $data = new getLoggedData();
 $version = $visit->VERSION;
