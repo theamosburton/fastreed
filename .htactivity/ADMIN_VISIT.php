@@ -61,7 +61,7 @@ class AdminVisits
 
 
   public function checkSession($sess){
-    $sql = "SELECT * FROM admins_sessions WHERE sessionID = '$sess'";
+    $sql = "SELECT * FROM session WHERE sessionID = '$sess'";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $isPresent = mysqli_num_rows($result);
@@ -89,10 +89,10 @@ class AdminVisits
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];
-    $sessionID = $this->BASIC_FUNC->createNewID("admins_sessions" , "ASI");
+    $sessionID = $this->BASIC_FUNC->createNewID("session" , "ASI");
     $_SESSION["ASI"] = $sessionID;
     $this->updateVisits($sessionID);
-    $sql2 = "INSERT INTO admins_sessions (sessionID,personID,tdate, adminIP, refID) VALUES ('$sessionID', '$adminID','$date','$adminIP','$refByGuestID')";
+    $sql2 = "INSERT INTO session (tdate, sessionID, personID, IPADD) VALUES ('$date',$sessionID', '$adminID','$refByGuestID', '$adminIP')";
     mysqli_query($this->DB, $sql2);
   }
 

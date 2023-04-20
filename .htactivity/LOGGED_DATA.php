@@ -27,36 +27,21 @@ class getLoggedData{
             $this->TYPE = 'Guest';
         }elseif (isset($_SESSION['LOGGED_USER'])) {
             $PID = $_SESSION['LOGGED_USER'];
-            if ($PID === false) {
-                $this->NAME = 'Anonymous';
-                $this->DESIG = 'New User';
-                $this->PROFILE_PIC = '/assets/img/dummy.png';
-                $this->TYPE = 'Guest';
-            }else {
+            if (!$PID === false) {
                 $this->getUserData($PID);
                 $this->TYPE = 'User';
             }
         }elseif (isset($_SESSION['LOGGED_ADMIN'])) {
             $PID = $_SESSION['LOGGED_ADMIN'];
-            if ($PID === false) {
-                $this->NAME = 'Anonymous';
-                $this->DESIG = 'New User';
-                $this->PROFILE_PIC = '/assets/img/dummy.png';
-                $this->TYPE = 'Guest';
-            }else {
-                $this->getAdminData($PID);
+            if (!$PID === false) {
+                $this->getUserData($PID);
                 $this->TYPE = 'Admin';
             }
-        }else{
-            $this->NAME = 'Anonymous';
-            $this->DESIG = 'New User';
-            $this->PROFILE_PIC = '/assets/img/dummy.png';
-            $this->TYPE = 'Guest';
         }
     }
 
      private function getUserData($PID){
-        $sql = "SELECT * FROM users WHERE personID = '$PID'";
+        $sql = "SELECT * FROM accounts WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
         $isPresent = mysqli_num_rows($result);
@@ -73,29 +58,6 @@ class getLoggedData{
                 $this->GENDER  = $row['gender'];
                 $this->USERNAME = $row['userName'];
                 $this->REFERER  = $row['Referer'];
-                $this->PROFILE_PIC  = $row['profilePic'];
-            }
-        }
-     }
-
-
-     private function getAdminData($PID){
-        $sql = "SELECT * FROM admins WHERE personID = '$PID'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-        $isPresent = mysqli_num_rows($result);
-            if ($isPresent) {
-                $row = mysqli_fetch_assoc($result);
-                $isAuthor = $row['adminType'];
-                if ($isAuthor == '1') {
-                    $this->DESIG = 'Super Admin';
-                }else {
-                    $this->DESIG = 'Admin';
-                }
-                $this->NAME = $row['Name'];
-                $this->EMAIL = $row['emailID'];
-                $this->GENDER  = $row['gender'];
-                $this->USERNAME = $row['userName'];
                 $this->PROFILE_PIC  = $row['profilePic'];
             }
         }

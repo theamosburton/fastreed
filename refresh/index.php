@@ -1,0 +1,22 @@
+<?php
+
+function updateVersion(){
+	$oldVersion = (int) $this->VERSION;
+	$newVersion = $this->VERSION + 1;
+	$newVersion = (string) $newVersion;
+	$sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
+	$result = mysqli_query($this->DB, $sql);
+	if ($result) {
+		$vStatus = "Version Updated to : $newVersion";
+	}else {
+		$vStatus = "Version could not Updated";
+	}
+	return $vStatus;
+}
+
+updateVersion();
+$updateCode = shell_exec('git pull fastreed main');                      
+$refresh = new HardRefresh();
+$vStatus = $refresh->updateVersion();
+
+?>

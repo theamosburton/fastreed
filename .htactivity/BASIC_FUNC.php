@@ -34,8 +34,12 @@ class BasicFunctions
     $newID = $year.$month.$day;
     $sql = "SELECT * FROM $ID_TABLE_NAME WHERE tdate ='$date'";
     $result = mysqli_query($this->DB, $sql);
-    $x =  mysqli_num_rows($result);
-    $noOfRow = $this->realNum($x);
+    if (!$result) {
+      $noOfRow = $this->realNum('0');
+    }else {
+      $x =  mysqli_num_rows($result);
+      $noOfRow = $this->realNum($x);
+    }
     if ($noOfRow < 100) {
       $newID .= '00000'.$noOfRow;
     }elseif ($noOfRow < 1000) {

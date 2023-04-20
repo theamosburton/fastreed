@@ -57,7 +57,7 @@ class UsersVisits
   }
 
   public function checkSession($sess){
-    $sql = "SELECT * FROM users_sessions WHERE sessionID = '$sess'";
+    $sql = "SELECT * FROM session WHERE sessionID = '$sess'";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $isPresent = mysqli_num_rows($result);
@@ -85,11 +85,11 @@ class UsersVisits
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];
-    $sessionID = $this->BASIC_FUNC->createNewID("users_sessions" , "USI");
+    $sessionID = $this->BASIC_FUNC->createNewID("session" , "USI");
     $_SESSION["USI"] = $sessionID;
     
     $this->updateVisits($sessionID);
-    $sql2 = "INSERT INTO users_sessions (sessionID,personID,tdate, userIP, refID) VALUES ('$sessionID', '$userID','$date','$userIP','$refByGuestID')";
+    $sql2 = "INSERT INTO session (tdate, sessionID, personID, IPADD, refID) VALUES ('$date', '$sessionID', '$userID','$userIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
   }
 

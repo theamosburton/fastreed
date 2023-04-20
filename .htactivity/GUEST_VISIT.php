@@ -131,7 +131,7 @@ class GuestsVisits
   }
   
   public function checkSession($sess){
-    $sql = "SELECT * FROM guests_sessions WHERE sessionID = '$sess'";
+    $sql = "SELECT * FROM session WHERE sessionID = '$sess'";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $isPresent = mysqli_num_rows($result);
@@ -150,13 +150,13 @@ class GuestsVisits
 
   public function makeSession($guestID){
     $thisPage = $_SERVER["REQUEST_URI"];
-    $sessionID = $this->BASIC_FUNC->createNewID("guests_sessions", "GSI");
+    $sessionID = $this->BASIC_FUNC->createNewID("session", "GSI");
     $_SESSION["GSI"] = $sessionID;
     $guestIP = $this->BASIC_FUNC->getIp();
     $date = date('Y-m-d');
     $dateTime = time();
     $this->updateVisits($sessionID);
-    $sql2 = "INSERT INTO guests_sessions (tdate, sessionID, guestIP, guestID) VALUES ('$date','$sessionID','$guestIP','$guestID')";
+    $sql2 = "INSERT INTO session (tdate, sessionID, personID, IPADD) VALUES ('$date','$sessionID','$guestID','$guestIP')";
     mysqli_query($this->DB, $sql2);
   }
 
@@ -174,7 +174,7 @@ class GuestsVisits
       $referedByPerson = "";
     }
     $visitedPage = $_SERVER["REQUEST_URI"];
-    $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson,referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
+    $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson, referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
   }
 }

@@ -117,20 +117,28 @@ class gSignUpLogin{
     unset($_SESSION['GSI']);
     setcookie("authStatus", "", time()-3600, '/');
   }
+
   // Deleting Other IDS and Making Reference //
-
-
   public function createNewAccount(){
     $email = $_GET['email'];
+    $username = str_replace('@gmail.com', '', $email);
     // Creating new Guest ID and encrypt
-    $userID = $this->BASIC_FUNC->createNewID("users", "UID");
+    $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
     $name = $_GET['name'];
     $profilePic = $_GET['profilePic'];
     $date = date('Y-m-d');
-    $sql = "INSERT INTO users (tdate, Name, personID, profilePic, userName, emailID, Referer, isAuthor, accountType) VALUES ('$date', '$name','$userID','$profilePic', '$email', '$email', ' ', 0, 'google')";
+    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google')";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
-      $this->loginAccount($userID);
+      $sql = "INSERT INTO account_access (personID, gender, DOB, type) VALUES ('$userID',' ', ' ', 'user')";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $this->loginAccount($userID);
+      }else {
+        $cantRead = array("Result"=>false, "message"=>"Account Not Created");
+        $cantReadDecode = json_encode($cantRead);
+        echo "$cantReadDecode";
+      }
     }else {
       $cantRead = array("Result"=>false, "message"=>"Account Not Created");
       $cantReadDecode = json_encode($cantRead);

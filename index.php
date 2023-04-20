@@ -40,7 +40,7 @@ $version = implode('.', str_split($version, 1));
 		<div class="rightside">
 			<div class="nav" id="nav">
 				<?php
-				if(isset($_SESSION['LOGGED_USER'])){
+				if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER'] != false){
 					$a = <<<HTML
 					<div>
 					<img onclick="toggleProfile()" src="$data->PROFILE_PIC" alt="" id="profileImage">
@@ -59,7 +59,7 @@ $version = implode('.', str_split($version, 1));
 				?>
 				<div class="spinner" id="MenuSpinner"></div>
 				<?php
-				if(isset($_SESSION['LOGGED_USER'])){
+				if(isset($_SESSION['LOGGED_USER']) &&  $_SESSION['LOGGED_USER'] != false){
 					$notifyDiv = <<<HTML
 					<div class="navs">
 						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
@@ -94,7 +94,7 @@ $version = implode('.', str_split($version, 1));
 				<!-- Accounts -->
 				<div class="accounts" id="accounts" style="display:none">
 						<?php 
-						if (isset($_SESSION['LOGGED_USER'])) {
+						if (isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER'] != false) {
 							$loggedUser = <<<HTML
 							<div class="menu-head">
 								<span class="name">My Account</span>
