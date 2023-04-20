@@ -26,7 +26,7 @@ function updateVersion(){
 
 function getVersions(){
     $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
-    $result = mysqli_query($this->DB, $sql);
+    $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);
     $return = $row['optionValue'];
 	return $return;
