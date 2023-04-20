@@ -8,8 +8,8 @@ if (!isset($_SERVROOT)) {
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 include_once($GLOBALS['DB']);
-$this->DB_CONNECT = new Database();
-$this->DB = $this->DB_CONNECT->DBConnection();
+$DB_CONNECT = new Database();
+$DB = $DB_CONNECT->DBConnection();
 function updateVersion(){
 	$oldVersion = (int) $this->VERSION;
 	$newVersion = $this->VERSION + 1;
