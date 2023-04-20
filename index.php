@@ -50,10 +50,10 @@ $version = implode('.', str_split($version, 1));
 				<div class="spinner" id="MenuSpinner"></div>
 				<?php
 				if(isset($_SESSION['LOGGED_USER'])){
-					$notify = <<<HTML
-					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" style="display:none;" onclick="toggleNotification()"></i>
+					$notifyDiv = <<<HTML
+					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotification()"></i>
 					HTML;
-					echo $notify;
+					echo $notifyDiv;
 				}
 				?>
 				
