@@ -15,7 +15,7 @@ function updateVersion(){
 	$newVersion = $oldVersion + 1;
 	$newVersion = (string) $newVersion;
 	$sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
-	$result = mysqli_query($this->DB, $sql);
+	$result = mysqli_query($DB, $sql);
 	if ($result) {
 		$vStatus = "Version Updated to : $newVersion";
 	}else {
