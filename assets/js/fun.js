@@ -84,9 +84,9 @@ function enableLightMode(){
     $('header').css('border-bottom', '1px solid #353740');
 
     $('.accounts').css('background-color','white');
-    $('.options .menus a, .settings .menus a').css('color', 'rgb(32, 33, 35)');
+    $('.options .menus a, .settings .menus a, .accounts .menus a').css('color', 'rgb(32, 33, 35)');
     $('.accounts').css('background-color: white');
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(32,33,35)');
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i, .accounts .menus, .accounts .menus i').css('color', 'rgb(32,33,35)');
     $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
@@ -132,7 +132,6 @@ function removeOptions(){
 
 function toggleSetting(){
     if(settingState.style.display == 'none'){
-        
         settingState.style.display = 'block';
         overlay.style.display = 'block';
     }else{
