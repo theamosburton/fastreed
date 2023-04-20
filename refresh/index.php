@@ -33,7 +33,9 @@ function getVersions($DB){
 	return $return;
   }
 
-updateVersion();
+
 $updateCode = shell_exec('git pull fastreed main');                      
 echo $updateCode;
+echo "<br/>"
+echo updateVersion();
 ?>
