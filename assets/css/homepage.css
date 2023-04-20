@@ -214,6 +214,10 @@ header .nav i:hover{
 header .nav i:last-child{
   padding-right: 0;
 }
+header .nav .navs{
+  position: relative;
+  display: inline-block;
+}
 header #nav #profileImage{
   width: 30px;
   border-radius: 50px;
@@ -244,6 +248,24 @@ header #nav #profileImage{
 }
 #profileImage:hover{
   cursor: pointer;
+}
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -2px;
+  right: 16px;
+  background-color: rgb(63, 102, 255);
+  color: white;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgb(255, 255, 255);
+  padding: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  overflow: hidden;
 }
   /* Small Cards */
 .f-card_small .image{

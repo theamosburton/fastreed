@@ -41,24 +41,38 @@ $version = implode('.', str_split($version, 1));
 			<div class="nav" id="nav">
 				<?php
 				if(isset($_SESSION['LOGGED_USER'])){
-					echo 
-					'<img onclick="toggleProfile()" src="'.$data->PROFILE_PIC.'" alt="" id="profileImage">
-					<i id="accountIcon" hidden></i>';
+					$a = <<<HTML
+					<div>
+					<img onclick="toggleProfile()" src="$data->PROFILE_PIC" alt="" id="profileImage">
+					<i id="accountIcon" hidden></i>
+					</div>
+					HTML;
+					echo $a;
 				} else {
-					echo '<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>';
+					$a = <<<HTML
+					<div>
+					<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
+					</div>
+					HTML;
+					echo $a;
 				}
 				?>
 				<div class="spinner" id="MenuSpinner"></div>
 				<?php
 				if(isset($_SESSION['LOGGED_USER'])){
 					$notifyDiv = <<<HTML
-					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
+					<div class="navs">
+						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
+						<span class="badge">1123</span>
+					</div>
 					HTML;
 					echo $notifyDiv;
 				}
 				?>
-				
+				<div class="navs">
 				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+				</div>
+				
 			</div>
 		</div>
 		
