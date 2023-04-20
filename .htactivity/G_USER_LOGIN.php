@@ -69,7 +69,7 @@ class gSignUpLogin{
 
     public function checkUserExists($email){
       $email = mysqli_real_escape_string($this->DB,$email);
-      $sql = "SELECT * FROM users WHERE emailID = '$email'";
+      $sql = "SELECT * FROM accounts WHERE emailID = '$email'";
       $result = mysqli_query($this->DB, $sql);
    
       if (mysqli_num_rows($result)) {

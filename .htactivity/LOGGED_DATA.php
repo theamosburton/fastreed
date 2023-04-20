@@ -47,12 +47,6 @@ class getLoggedData{
         $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
-                $isAuthor = $row['isAuthor'];
-                if ($isAuthor == '1') {
-                    $this->DESIG = 'Writer';
-                }else {
-                    $this->DESIG = 'User';
-                }
                 $this->NAME = $row['Name'];
                 $this->EMAIL = $row['emailID'];
                 $this->GENDER  = $row['gender'];

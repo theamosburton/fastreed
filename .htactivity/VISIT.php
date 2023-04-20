@@ -80,7 +80,7 @@ class VisitorActivity
       if (!empty($_COOKIE['UID'])) {
           $userID = $_COOKIE['UID'];
           $decUserID = $this->AUTH->decrypt($userID);
-          $authUser = $this->checkAuthVisitor($decUserID, "users", "personID");
+          $authUser = $this->checkAuthVisitor($decUserID, "accounts", "personID");
           if ($authUser) {
             if (isset($_SESSION['ASI'])) {
               unset($_SESSION['ASI']);
@@ -104,7 +104,7 @@ class VisitorActivity
         $adminID = $_COOKIE['AID'];
         
         $decAdminID = $this->AUTH->decrypt($adminID);
-        $authAdmin = $this->checkAuthVisitor($decAdminID, "admins", "personID");
+        $authAdmin = $this->checkAuthVisitor($decAdminID, "accounts", "personID");
         if ($authAdmin) {
           if (isset($_SESSION['USI'])) {
             unset($_SESSION['USI']);
