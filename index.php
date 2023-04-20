@@ -121,8 +121,8 @@ $version = implode('.', str_split($version, 1));
 						</div>
 						<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
 						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
-						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="">About Fastreed</a></div>
-						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="">Terms and Privacy</a></div>
+						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
+						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
 					</div>
 
 				<!-- Right Main Bar -->
