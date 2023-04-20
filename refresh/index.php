@@ -8,10 +8,11 @@ if (!isset($_SERVROOT)) {
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 include_once($GLOBALS['DB']);
-$DB_CONNECT = new Database();
-$DB = $DB_CONNECT->DBConnection();
+
 function updateVersion(){
-	$oldVersion = (int) getVersions();
+	$DB_CONNECT = new Database();
+    $DB = $DB_CONNECT->DBConnection();
+	$oldVersion = (int) getVersions($DB);
 	$newVersion = $oldVersion + 1;
 	$newVersion = (string) $newVersion;
 	$sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
@@ -24,7 +25,7 @@ function updateVersion(){
 	return $vStatus;
 }
 
-function getVersions(){
+function getVersions($DB){
     $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
     $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);
