@@ -204,6 +204,7 @@ header .nav{
 }
 header .nav i{
   margin-right: 20px;
+  transform-origin: center;
 }
 header .nav i:hover{
   cursor: pointer;

@@ -125,7 +125,7 @@ function removeOptions(){
         optionsState.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
-        accountIcon.classList.remove('fa-arrows-spin', 'fa-solid','rotate');
+        accountIcon.classList.remove('fa-circle-notch', 'fa-solid','rotate');
         accountIcon.classList.add('fa-circle-user','fa-regular');
     }
     overlay.style.display = 'none';
@@ -153,17 +153,18 @@ function toggleOptions(){
 }
 function toggleAccounts(){
     if(accountsState.style.display == 'none'){
-        
         accountsState.style.display = 'block';
         overlay.style.display = 'block';
         accountIcon.classList.remove('fa-circle-user', 'fa-regular');
-        accountIcon.classList.add('rotate','fa-arrows-spin','fa-solid');
+        accountIcon.classList.add('rotate','fa-circle-notch','fa-solid');
     }else{
         accountsState.style.display = 'none';
-        accountIcon.classList.remove('fa-arrows-spin');
+        accountIcon.classList.remove('fa-circle-notch');
         accountIcon.classList.add('fa-circle-user');
     }
 }
+
+
 
 function toggleProfile() {
     if(accountsState.style.display == 'none'){
