@@ -127,7 +127,7 @@
 .options .name, .settings .name, .accounts .name{
   font-weight: 500;
 }
-.options .menus, .settings .menus{
+.options .menus, .settings .menus, .accounts .menus{
   margin-top: 15px;
   color: rgb(231, 231, 231);
 }
