@@ -130,9 +130,9 @@ class gSignUpLogin{
     $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google')";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
-      $sql = "INSERT INTO account_access (personID, gender, DOB, type) VALUES ('$userID',' ', ' ', 'user')";
-      $result = mysqli_query($this->DB, $sql);
-      if ($result) {
+      $sql1 = "INSERT INTO account_access (personID, acctype) VALUES ('$userID', 'user')";
+      $result1 = mysqli_query($this->DB, $sql1);
+      if ($result1) {
         $this->loginAccount($userID);
       }else {
         $cantRead = array("Result"=>false, "message"=>"Account Not Created");

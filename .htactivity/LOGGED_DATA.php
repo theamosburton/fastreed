@@ -49,7 +49,6 @@ class getLoggedData{
                 $row = mysqli_fetch_assoc($result);
                 $this->NAME = $row['Name'];
                 $this->EMAIL = $row['emailID'];
-                $this->GENDER  = $row['gender'];
                 $this->USERNAME = $row['userName'];
                 $this->REFERER  = $row['Referer'];
                 $this->PROFILE_PIC  = $row['profilePic'];
