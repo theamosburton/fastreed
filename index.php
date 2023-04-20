@@ -42,7 +42,8 @@ $version = implode('.', str_split($version, 1));
 				<?php
 				if(isset($_SESSION['LOGGED_USER'])){
 					echo 
-					'<img onclick="toggleProfile()" src="'.$data->PROFILE_PIC.'" alt="" id="profileImage">';
+					'<img onclick="toggleProfile()" src="'.$data->PROFILE_PIC.'" alt="" id="profileImage">
+					<i id="accountIcon" hidden></i>';
 				} else {
 					echo '<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>';
 				}
