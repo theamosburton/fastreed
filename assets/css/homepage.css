@@ -128,6 +128,8 @@
   font-weight: 500;
 }
 .options .menus, .settings .menus, .accounts .menus{
+  display: flex;
+  align-items: center;
   margin-top: 15px;
   color: rgb(231, 231, 231);
 }
@@ -219,7 +221,27 @@ header #nav #profileImage{
   height: 30px;
   border: 2px solid rgb(186, 186, 246);
 }
+.spinner{
+  border: 4px solid rgb(218, 218, 218);
+  border-left: 4px solid rgb(32,33,35);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  animation: rotate 1s linear infinite; 
+  margin-right: 20px;
+}
 
+#MenuSpinner{
+  display: none;
+}
+#oSpinner{
+  margin-right: 10px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-width: 3px;
+  border-left:3px solid rgb(53,55,64);
+}
 #profileImage:hover{
   cursor: pointer;
 }

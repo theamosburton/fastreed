@@ -102,11 +102,9 @@ let optionsState = document.getElementById('s-options');
 let accountsState = document.getElementById('accounts');
 let overlay = document.getElementById('opt-overlay');
 let accountIcon = document.getElementById('accountIcon');
+let mSpinner =  document.getElementById('MenuSpinner');
 let profileImage = document.getElementById('profileImage');
 
-function toggleUser(){
-
-}
 
 function str_obj(str) {
     str = str.split('; ');
@@ -125,8 +123,8 @@ function removeOptions(){
         optionsState.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
-        accountIcon.classList.remove('fa-circle-notch', 'fa-solid','rotate');
-        accountIcon.classList.add('fa-circle-user','fa-regular');
+        mSpinner.style.display = 'none';
+        accountIcon.style.display = "block";
     }
     overlay.style.display = 'none';
 }
@@ -155,12 +153,11 @@ function toggleAccounts(){
     if(accountsState.style.display == 'none'){
         accountsState.style.display = 'block';
         overlay.style.display = 'block';
-        accountIcon.classList.remove('fa-circle-user', 'fa-regular');
-        accountIcon.classList.add('rotate','fa-circle-notch','fa-solid');
+        accountIcon.style.display = 'none';
+        mSpinner.style.display = 'block';
     }else{
         accountsState.style.display = 'none';
-        accountIcon.classList.remove('fa-circle-notch');
-        accountIcon.classList.add('fa-circle-user');
+        mSpinner.style.display = 'none';
     }
 }
 

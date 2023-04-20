@@ -47,6 +47,7 @@ $version = implode('.', str_split($version, 1));
 					echo '<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>';
 				}
 				?>
+				<div class="spinner" id="MenuSpinner"></div>
 				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
 				<i class="fa fa-ellipsis-v fa-xl" onclick="toggleOptions()"></i>
 			</div>

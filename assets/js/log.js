@@ -19,7 +19,7 @@ function onGoogleSignIn(response) {
  function logout() {
   let logout = document.querySelector('#logout');
   let logoutIcon = document.querySelector('#logout i');
-  logout.innerHTML = `<i class="left fa fa-solid fa-circle-notch rotate"></i>Logging Out`;
+  logout.innerHTML = `<div class="spinner" id="oSpinner"></div>Logging Out...`;
 
   const logoutURL =`/.htactivity/G_USER_LOGIN.php?intent=logout`;
   serverLogout(logoutURL);
