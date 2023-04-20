@@ -404,7 +404,9 @@ header #nav #profileImage{
   .badge {
     width: 25px;
     height: 25px;
-    top: -8px
+    top: -8px;
+    right: 12px;
+    font-size: 11px;
     
   }
   .settings, .accounts, .options{
