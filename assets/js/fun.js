@@ -1,5 +1,13 @@
 
 window.onload = function(){
+
+    // inject css to iframe
+    var iframe = document.querySelector('.S9gUrf-YoZ4jf iframe');
+    var innerHtmlTag = iframe.contentWindow.document.documentElement;
+    innerHtmlTag.style.backgroundcolor = 'rgb(53, 55, 64);';
+
+    
+
     // checking cookie mode
     let colorMode;
     let cookieExist = (document.cookie.match(/^(?:.*;)?\s*colorMode\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
