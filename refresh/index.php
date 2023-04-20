@@ -11,8 +11,8 @@ include_once($GLOBALS['DB']);
 $DB_CONNECT = new Database();
 $DB = $DB_CONNECT->DBConnection();
 function updateVersion(){
-	$oldVersion = (int) $this->VERSION;
-	$newVersion = $this->VERSION + 1;
+	$oldVersion = (int) getVersions();
+	$newVersion = $oldVersion + 1;
 	$newVersion = (string) $newVersion;
 	$sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
 	$result = mysqli_query($this->DB, $sql);
@@ -23,6 +23,14 @@ function updateVersion(){
 	}
 	return $vStatus;
 }
+
+function getVersions(){
+    $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
+    $result = mysqli_query($this->DB, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $return = $row['optionValue'];
+	return $return;
+  }
 
 updateVersion();
 $updateCode = shell_exec('git pull fastreed main');                      
