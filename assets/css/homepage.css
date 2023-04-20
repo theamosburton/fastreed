@@ -401,6 +401,11 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 576px) {
+  .badge {
+    width: 20px;
+    height: 20px;
+    
+  }
   .settings, .accounts, .options{
     top: 66px;
   }
