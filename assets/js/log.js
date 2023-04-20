@@ -8,19 +8,7 @@ function onGoogleSignIn(response) {
         islogged = data.Result;
         message = data.message;
         if (islogged) {
-          let nav = document.getElementById('nav')
-          document.getElementById('g_id_onload').style.display = 'none';
-          document.getElementById('g_id_signin').style.display = 'none';
-          document.getElementById('accountIcon').style.display = 'none';
-          document.getElementById('contEmail').style.display = 'none';
-          var exContent = nav.innerHTML;
-          nav.innerHTML = `<img src="${responsePayload.picture}" id="profileImage" onclick="toggleProfile()">` + exContent;
-
-          document.getElementById('accounts').innerHTML = `<div class="menu-head">
-          <span class="name">My Account</span>
-        </div>`;
-         
-          removeOptions();
+          location.reload();
         }else {
           alert("There is some Problem at our end");
         }

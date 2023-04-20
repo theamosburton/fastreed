@@ -1,5 +1,5 @@
 :root {
-    --f-card_width: 250px;
+    --f-card_width: 252px;
     --row_increment: 10px;
     --f-card_border_radius: 0px;
     --f-card_small: 22;
@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   position: absolute;
   left: 50%;
   z-index: 99;
@@ -76,9 +76,9 @@
   color-scheme: dark;
   position: absolute;
   z-index: 9999;
-  right: 79px;
+  right: 10px;
   border: 1px solid grey;
-  top: -2px;
+  top: 65px;
 }
 .accounts{
   padding: 30px;
@@ -124,13 +124,22 @@
 .accounts .menu-head{
   margin-bottom: 20px;
 }
-.options .name, .settings .name{
+.options .name, .settings .name, .accounts .name{
   font-weight: 500;
-  /* color: rgb(231, 231, 231); */
 }
 .options .menus, .settings .menus{
   margin-top: 15px;
   color: rgb(231, 231, 231);
+}
+
+.accounts .menus{
+  margin-top: 15px;
+  color: #333438;
+  text-decoration: none;
+}
+.accounts .menus a{
+  color: #333438;
+  text-decoration: none;
 }
 
 .options .menus:hover, .settings .menus:hover{
@@ -140,10 +149,10 @@
   text-decoration: none;
   color: rgb(231, 231, 231);
 }
-.options .menus .left, .settings .menus .left{
+.options .menus .left, .settings .menus .left, .accounts .menus .left{
   padding-right: 10px;
 }
-.options .menus .right, .settings .menus .right{
+.options .menus .right, .settings .menus .right, .accounts .menus .right{
   padding-left: 20px;
 }
 
@@ -152,16 +161,19 @@ header{
   height: 80px;
   margin-left: auto;
   margin-right: auto;
-  width: 968px;
   display: flex;
   flex-direction: row;
   padding-top: 25px;
   align-items: center;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  padding-bottom: 15px;
+  margin-bottom: 5px;
 }
 header .brand{
   width: 20%;
   display: flex;
   align-items: center;
+  margin-left: 20px;
 }
 
 header .rightside{
@@ -204,6 +216,7 @@ header #nav #profileImage{
   border-radius: 50px;
   margin-right: 20px;
   height: 30px;
+  border: 2px solid rgb(186, 186, 246);
 }
 
 #profileImage:hover{
@@ -321,54 +334,38 @@ header #nav #profileImage{
 }
 
 @media (max-width: 1201px) {
-  header{
-    width: 726px;
-  }
-  .options{
-    right: 108px;
-  }
-  .settings, .accounts{
-    right: 113px;
+  .settings, .accounts, .options{
+    right: 10px;
+    top: 65px;
   }
 }
 
 @media (max-width: 992px) {
   header{
-    width: 484px;
     padding: 0px 7px;
   }
-  .options{
-    top: -17px;
-    right: 119px;
-  }
-  .settings, .accounts{
-    right: 119px;
+  .settings, .accounts, .options{
+    right: 10px;
+    top: 65px;
   }
 }
 @media (max-width: 767px) {
-  .options{
-    right: 13px;
-  }
-  .settings, .accounts{
-    right: 30px;
+  .settings, .accounts, .options{
+    top: 66px;
+    right: 10px;
   }
 }
 @media (max-width: 576px) {
-  .settings, .accounts{
-    right: 66px;
+  .settings, .accounts, .options{
+    top: 66px;
   }
 }
 @media (max-width: 530px) {
-  .options{
-    right: 17px;
-    top: 0px;
-  }
-  .settings, .accounts{
-    right: 17px;
-    top: 10px;
+  .settings, .accounts, .options{
+    top: 62px;
   }
   header{
-    padding: 15px 18px 0px 18px;
+    padding: 15px 18px 15px 18px;
     height: 100%;
     width: 100%;
   }

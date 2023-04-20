@@ -42,14 +42,16 @@ function enableDarkMode() {
     $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
-    $('.options, .settings').css({
+    $('.options, .settings, .accounts').css({
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
     });
-    $('.options .menus a, .settings .menus a').css('color', 'rgb(231, 231, 231)');
-    $('.accounts').css('background-color','white');
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i').css('color', 'rgb(231, 231, 231)');
-    $('.options .menu-head, .settings .menu-head').css('border-color', 'rgb(231, 231, 231)');
+
+    $('header').css('border-bottom', '1px solid rgb(218,218,218)');
+
+    $('.options .menus a, .settings .menus a, .accounts .menus a').css('color', 'rgb(231, 231, 231)');
+    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i, .accounts .menu-head span, .accounts .menus, .accounts .menus i').css('color', 'rgb(231, 231, 231)');
+    $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(231, 231, 231)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on'); 
@@ -59,7 +61,7 @@ function enableDarkMode() {
 
 function enableLightMode(){
     document.cookie = "colorMode=light; max-age=31104000; path=/";
-    $('body').css('background-color', 'rgb(218, 218, 218)');
+    $('body').css('background-color', 'rgb(255, 255, 255)');
     $('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
 
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
@@ -68,8 +70,10 @@ function enableLightMode(){
 
     $('.options, .settings').css({
     'border-color': '#353740',
-    'background-color': 'rgb(218, 218, 218)'
+    'background-color': 'rgb(255, 255, 255)'
     });
+
+    $('header').css('border-bottom', '1px solid #353740');
 
     $('.accounts').css('background-color','white');
     $('.options .menus a, .settings .menus a').css('color', 'rgb(32, 33, 35)');

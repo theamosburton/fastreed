@@ -60,10 +60,61 @@ $version = implode('.', str_split($version, 1));
 		<div class="container">
 			<div class="row ">
 
-		
-				<!-- Right Main Bar -->
-				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				    <div class="options" id="s-options" style="display:none">
+				<div class="settings" id="settings" style="display:none">
+					<div class="menu-head">
+						<span class="name">Settings</span>
+					</div>
+					
+					<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+					<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
+				</div>
+
+				<div class="accounts" id="accounts" style="display:none">
+						<?php 
+						if (isset($_SESSION['LOGGED_USER'])) {
+							$loggedUser = <<<HTML
+							<div class="menu-head">
+								<span class="name">My Account</span>
+							</div>
+							<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
+							<div class="menus"><i class="left fa fa-power-off"></i> <a href="">Log Out</a> </div>
+						HTML;
+
+							echo $loggedUser;
+						}else {
+							$loginPop = <<<HTML
+							<div class="menu-head">
+								<span class="name">Login or Create Account</span>
+							</div>
+							
+							<div id="g_id_onload"
+								data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+								data-context="use"
+								data-ux_mode="popup"
+								data-callback="onGoogleSignIn"
+								data-auto_prompt="false">
+							</div>
+
+							<div id="g_id_signin" class="g_id_signin"
+								data-type="standard"
+								data-shape="pill"
+								data-theme="filled_black"
+								data-text="continue_with"
+								data-size="large"
+								data-logo_alignment="left">
+							</div>
+
+							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
+						HTML;
+
+						echo $loginPop;
+
+						}
+						?>
+					    
+					</div>
+					
+					<div class="options" id="s-options" style="display:none">
 						<div class="menu-head">
 						    <span class="name">Options</span>
 						</div>
@@ -73,57 +124,8 @@ $version = implode('.', str_split($version, 1));
 						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="">Terms and Privacy</a></div>
 					</div>
 
-					<div class="settings" id="settings" style="display:none">
-					    <div class="menu-head">
-						    <span class="name">Settings</span>
-						</div>
-						
-						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-						<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
-					</div>
-
-					<div class="accounts" id="accounts" style="display:none">
-					<?php 
-					if (isset($_SESSION['LOGGED_USER'])) {
-						$logedUser = <<<HTML
-						<div class="menu-head">
-							<span class="name">My Account</span>
-						</div>
-					HTML;
-
-						echo $loggedUser;
-					}else {
-						$loginPop = <<<HTML
-						<div class="menu-head">
-							<span class="name">Login or Create Account</span>
-						</div>
-						
-						<div id="g_id_onload"
-							data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
-							data-context="use"
-							data-ux_mode="popup"
-							data-callback="onGoogleSignIn"
-							data-auto_prompt="false">
-						</div>
-
-						<div id="g_id_signin" class="g_id_signin"
-							data-type="standard"
-							data-shape="pill"
-							data-theme="filled_black"
-							data-text="continue_with"
-							data-size="large"
-							data-logo_alignment="left">
-						</div>
-
-						<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
-					HTML;
-
-					echo $loginPop;
-
-					}
-					?>
-					    
-					</div>
+				<!-- Right Main Bar -->
+				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">		    
 
 				    <div class="pin_container">
 					
