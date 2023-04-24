@@ -146,6 +146,14 @@ $version = implode('.', str_split($version, 1));
 						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
 						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
 						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+						<?php
+						$userType = $data->getAccess()['accountType'];
+						if ($userType == 'admin') {
+							$a = <<<HTML
+							<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/admin-panel/">Admin Panel</a></div>
+							HTML;
+						}
+						?>
 					</div>
 
 				<!-- Right Main Bar -->

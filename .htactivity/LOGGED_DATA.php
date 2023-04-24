@@ -55,6 +55,26 @@ class getLoggedData{
             }
         }
      }
+
+     public function getAccess(){
+        $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                $DOB = $row['DOB'];
+                $Gender = $row['gender'];
+                $accountType = $row['acctype'];
+                $data = array("DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType);
+            }else {
+                $data = array();
+            }
+        }else {
+            $data = array();
+        }
+       return $data;
+     }
 }
 
 ?>

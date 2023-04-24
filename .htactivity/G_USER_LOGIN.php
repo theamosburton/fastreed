@@ -127,7 +127,18 @@ class gSignUpLogin{
     $name = $_GET['name'];
     $profilePic = $_GET['profilePic'];
     $date = date('Y-m-d');
-    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google')";
+    // Checking If Reference Session Availabe or Not
+    if (isset($_SESSION['refSession'])) {
+      if (!empty($_SESSION['refSession'])) {
+        $refID = $_SESSION['refSession'];
+      }else {
+        $refID = null;
+      }
+    }else {
+      $refID = null;
+    }
+
+    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,refID) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', $refID)";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $sql1 = "INSERT INTO account_access (personID, accType) VALUES ('$userID', 'user')";
