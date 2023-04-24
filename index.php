@@ -107,7 +107,7 @@ $version = implode('.', str_split($version, 1));
 			<div class="row ">
 
 			<!-- Notifications -->
-				<div class="notifications" id="notifications" style="display:none">
+				<div class="dropdowns" id="notifications" style="display:none">
 					<div class="menu-head">
 						<span class="name">Notifications</span>
 					</div>
@@ -166,14 +166,25 @@ $version = implode('.', str_split($version, 1));
 								<div class="menu-head">
 									<span class="name">Options</span>
 								</div>
-								<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-								<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
-								<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
-								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
-								<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
-								<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+
+								<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
+
+								<div class="menus" onclick="refreshCss()"> 
+									<div class="spinner" id="RSpinner"></div>
+									<i class="left fa fa-rotate"></i>
+									Refresh CSS  
+							    </div>
+
+								<div class="menus" onclick="hardRefresh()"> 
+								<div class="spinner" id="RSpinner"></div>
+									<i class="left fa fa-code-pull-request"></i>
+									Hard Pull
+							    </div>
+								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
 							</div>
 							HTML;
+
+							echo $advOptions;
 						}
 					}
 

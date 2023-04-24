@@ -238,6 +238,10 @@ header #nav #profileImage{
 #MenuSpinner{
   display: none;
 }
+#RSpinner, #HRSpinner{
+  display: none;
+  margin-left: 20px;
+}
 #oSpinner{
   margin-right: 10px;
   display: inline-block;

@@ -104,6 +104,7 @@ let overlay = document.getElementById('opt-overlay');
 let accountIcon = document.getElementById('accountIcon');
 let mSpinner =  document.getElementById('MenuSpinner');
 let profileImage = document.getElementById('profileImage');
+let advOptions = document.getElementById('advOptions');
 
 
 function str_obj(str) {
@@ -125,6 +126,8 @@ function removeOptions(){
         accountsState.style.display = 'none';
         mSpinner.style.display = 'none';
         accountIcon.style.display = "block";
+    }else if(advOptions.style.display = 'block'){
+        advOptions.style.display = 'none';
     }
     overlay.style.display = 'none';
 }
@@ -141,12 +144,12 @@ function toggleSetting(){
  }
 
 function toggleNotifications(){
-    // if(optionsState.style.display == 'none'){
-    //     optionsState.style.display = 'block';
-    //     overlay.style.display = 'block';
-    // }else{
-    //     optionsState.style.display = 'none';
-    // }
+    if(notifications.style.display == 'none'){
+        notifications.style.display = 'block';
+        overlay.style.display = 'block';
+    }else{
+        notifications.style.display = 'none';
+    }
 }
 function toggleAccounts(){
     if(accountsState.style.display == 'none'){
@@ -157,6 +160,15 @@ function toggleAccounts(){
     }else{
         accountsState.style.display = 'none';
         mSpinner.style.display = 'none';
+    }
+}
+
+function toggleAdmin() {
+    if(advOptions.style.display == 'none'){
+        advOptions.style.display = 'block';
+        overlay.style.display = 'block';
+    }else{
+        advOptions.style.display = 'none';
     }
 }
 
