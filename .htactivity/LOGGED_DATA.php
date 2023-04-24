@@ -31,12 +31,6 @@ class getLoggedData{
                 $this->getUserData($PID);
                 $this->TYPE = 'User';
             }
-        }elseif (isset($_SESSION['LOGGED_ADMIN'])) {
-            $PID = $_SESSION['LOGGED_ADMIN'];
-            if (!$PID === false) {
-                $this->getUserData($PID);
-                $this->TYPE = 'Admin';
-            }
         }
     }
 
@@ -57,6 +51,7 @@ class getLoggedData{
      }
 
      public function getAccess(){
+        $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
