@@ -50,16 +50,16 @@ function enableDarkMode() {
     $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
-    $('.options, .settings, .accounts').css({
+    $('.dropdowns').css({
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
     });
 
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
-    $('.badge').css('border','2px solid rgb(32,33,35)');
-    $('.options .menus a, .settings .menus a, .accounts .menus a').css('color', 'rgb(231, 231, 231)');
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .settings .menus, .settings .menus i, .options .menus i, .accounts .menu-head span, .accounts .menus, .accounts .menus i').css('color', 'rgb(231, 231, 231)');
-    $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menus a').css('color', 'rgb(231, 231, 231)');
+    $('dropdowns .menu-head span, .dropdowns .menus, .dropdowns .menus i').css('color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menu-head').css('border-color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on'); 
@@ -76,18 +76,18 @@ function enableLightMode(){
 
     $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
 
-    $('.options, .settings').css({
+    $('.dropdowns').css({
     'border-color': '#353740',
     'background-color': 'rgb(255, 255, 255)'
     });
 
     $('header').css('border-bottom', '1px solid #353740');
 
-    $('.accounts').css('background-color','white');
-    $('.options .menus a, .settings .menus a, .accounts .menus').css('color', 'rgb(32, 33, 35)');
-    $('.accounts').css('background-color: white');
-    $('.options .menu-head span, .settings .menu-head span, .options .menus, .accounts .menu-head span, .settings .menus, .settings .menus i, .options .menus i, .accounts .menus, .accounts .menus i').css('color', 'rgb(32,33,35)');
-    $('.options .menu-head, .settings .menu-head, .accounts .menu-head').css('border-color', 'rgb(32, 33, 35)');
+    $('#accounts').css('background-color','white');
+    $('.dropdowns .menus a').css('color', 'rgb(32, 33, 35)');
+    $('dropdowns .menu-head span, .dropdowns .menus, .dropdowns .menus i').css('color', 'rgb(32,33,35)');
+    $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
+    $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');

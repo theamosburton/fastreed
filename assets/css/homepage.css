@@ -68,7 +68,7 @@
   background-color: #35374000;
 }
 
-.options, .settings, .accounts{
+.dropdowns{
   padding: 30px;
   min-width: 200px;
   border-radius: 15px;
@@ -81,7 +81,7 @@
   top: 65px;
 }
 
-.accounts .continueEmail{
+#accounts .continueEmail{
   padding: 8px;
   background-color: #202124;
   border-radius: 50px;
@@ -92,7 +92,7 @@
   font-family: "Google Sans",arial,sans-serif;
   align-items: center;
 }
-.accounts .continueEmail i{
+#accounts .continueEmail i{
   border: 1.5px solid;
   border-radius: 50px;
   padding: 4px;
@@ -102,7 +102,7 @@
 #toggleMode{
   color: rgb(143, 143, 237);
 }
-.accounts .continueEmail:hover{
+#accounts .continueEmail:hover{
   text-decoration: none;
   background-color: #333438;
 
@@ -114,47 +114,47 @@
   to{ transform: rotate(360deg); }
 }
 
-.options .menu-head, .settings .menu-head, .accounts .menu-head{
+.dropdowns.menu-head{
   border-bottom: 3px solid;
   padding-bottom: 5px;
   margin-bottom: 10px;
   color: #e8eaed;
 }
-.accounts .menu-head{
+#accounts .menu-head{
   margin-bottom: 20px;
 }
-.options .name, .settings .name, .accounts .name{
+.dropdowns .name{
   font-weight: 500;
 }
-.options .menus, .settings .menus, .accounts .menus{
+.dropdowns .menus{
   display: flex;
   align-items: center;
   margin-top: 15px;
   color: rgb(231, 231, 231);
 }
 
-.accounts .menus{
+#accounts .menus{
   margin-top: 15px;
   color: #333438;
   text-decoration: none;
 }
-.accounts .menus a{
+#accounts .menus a{
   color: #333438;
   text-decoration: none;
 }
 
-.options .menus:hover, .settings .menus:hover, .accounts .menus:hover{
+.dropdowns .menus:hover{
   cursor: pointer;
 }
-.options .menus a, .settings .menus a{
+.dropdowns .menus, .dropdowns .menus a{
   font-size: 20px;
   text-decoration: none;
   color: rgb(231, 231, 231);
 }
-.options .menus .left, .settings .menus .left, .accounts .menus .left{
+.dropdowns .menus .left{
   padding-right: 10px;
 }
-.options .menus .right, .settings .menus .right, .accounts .menus .right{
+.dropdowns .menus .right{
   padding-left: 20px;
 }
 
@@ -252,14 +252,15 @@ header #nav #profileImage{
 .badge {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   position: absolute;
   top: -8px;
   right: 12px;
   background-color: rgb(255, 1, 1);
   color: white;
-  border-radius: 50%;
-  width: 20px;
+  border-radius:60px;
+  min-width: 20px;
+  max-width: 30px;
   height: 20px;
   border: 1.5px solid rgb(255, 255, 255);
   padding: 3px;

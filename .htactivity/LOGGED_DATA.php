@@ -13,6 +13,7 @@ class getLoggedData{
     public $REFERER;
     public $PROFILE_PIC;
     public $TYPE;
+    public $U_AUTH;
 
     function __construct(){
         $this->DB_CONNECT = new Database();
@@ -38,6 +39,7 @@ class getLoggedData{
         $sql = "SELECT * FROM accounts WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
+        $this->U_AUTH = true;    
         $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
@@ -47,6 +49,8 @@ class getLoggedData{
                 $this->REFERER  = $row['Referer'];
                 $this->PROFILE_PIC  = $row['profilePic'];
             }
+        }else {
+            $this->U_AUTH = false;  
         }
      }
 

@@ -3,7 +3,7 @@ $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
 $visit = new VisitorActivity();
-$data = new getLoggedData();
+$userData = new getLoggedData();
 $version = $visit->VERSION;
 $version = implode('.', str_split($version, 1));
 ?>
@@ -35,45 +35,68 @@ $version = implode('.', str_split($version, 1));
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
 	<header>
-		<div class="brand"><h1><a href="">Fastreed</a></h1></div>
-		<div class="rightside">
-			<div class="nav" id="nav">
-				<?php
-				if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER'] != false){
-					$a = <<<HTML
+		<?php 
+		if ($userData->U_AUTH) {
+			if ($userData->getAccess()['userType'] == 'admin') {
+				$adminNav = <<<HTML
+				<div>
+					<i id="adminNavIcon" class="fa fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
+				</div>
+				HTML;
+			}else {
+				$adminNav = <<<HTML
+				HTML;
+			}
+
+			$regHeader = <<<HTML
+			<!-- Registered User Header -->
+			<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
+			<div class="rightside">
+				<div class="nav" id="nav">
+
+				
+	
 					<div>
-					<img onclick="toggleProfile()" src="$data->PROFILE_PIC" alt="" id="profileImage">
-					<i id="accountIcon" hidden></i>
+						<img onclick="toggleProfile()" src="$userData->PROFILE_PIC" alt="" id="profileImage">
+						<i id="accountIcon" hidden></i>
 					</div>
-					HTML;
-					echo $a;
-				} else {
-					$a = <<<HTML
-					<div>
-					<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
-					</div>
-					HTML;
-					echo $a;
-				}
-				?>
-				<div class="spinner" id="MenuSpinner"></div>
-				<?php
-				if(isset($_SESSION['LOGGED_USER']) &&  $_SESSION['LOGGED_USER'] != false){
-					$notifyDiv = <<<HTML
+					$adminNav
+					<div class="spinner" id="MenuSpinner"></div>
+					
 					<div class="navs">
 						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-						<span class="badge">12</span>
+						<span class="badge">9</span>
 					</div>
-					HTML;
-					echo $notifyDiv;
-				}
-				?>
-				<div class="navs">
-				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+	
+					<div class="navs">
+					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+					</div>
+	
 				</div>
+			</div>
+			HTML;
+
+			echo $regHeader;
+		}else {
+		$anonHeader = <<<HTML
+		<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
+		<div class="rightside">
+			<div class="nav" id="nav">
+				<div>
+					<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
+				</div>
+
+				<div class="spinner" id="MenuSpinner"></div>
 				
+				<div class="navs">
+					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+				</div>
 			</div>
 		</div>
+		HTML;
+		echo $anonHeader;
+		}
+		?>
 		
 	</header>
 	<!--main content-->
@@ -91,20 +114,19 @@ $version = implode('.', str_split($version, 1));
 				</div>
 
 				<!-- Accounts -->
-				<div class="accounts" id="accounts" style="display:none">
+				<div class="dropdowns" id="accounts" style="display:none">
 						<?php 
-						if (isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER'] != false) {
-							$loggedUser = <<<HTML
+						if ($userData->U_AUTH) {
+							$accountDropdown = <<<HTML
 							<div class="menu-head">
 								<span class="name">My Account</span>
 							</div>
 							<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
 							<div class="menus"id="logout" onclick="logout()"><i class="left fa fa-power-off"></i>Log Out</div>
 						HTML;
-
-							echo $loggedUser;
+							echo $accountDropdown;
 						}else {
-							$loginPop = <<<HTML
+							$accountDropdown = <<<HTML
 							<div class="menu-head">
 								<span class="name">Login or Create Account</span>
 							</div>
@@ -129,32 +151,45 @@ $version = implode('.', str_split($version, 1));
 							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
 						HTML;
 
-						echo $loginPop;
+						echo $accountDropdown;
 
 						}
 						?>
 					</div>
 
+
+					<?php
+					if ($userData->U_AUTH){
+						if($userData->getAccess()['userType'] == 'admin'){
+							$advOptions = <<<HTML
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Options</span>
+								</div>
+								<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+								<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
+								<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
+								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
+								<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
+								<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+							</div>
+							HTML;
+						}
+					}
+
+					?>
+
 					<!-- settings -->
-					<div class="settings" id="settings" style="display:none">
+					<div class="dropdowns" id="settings" style="display:none">
 						<div class="menu-head">
 						    <span class="name">Settings</span>
 						</div>
-						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i>Dark Mode <i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
 						<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
 						<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
 						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
 						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
 						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
-						<?php
-						$userType = $data->getAccess()['userType'];
-						if ($userType == 'admin') {
-							$a = <<<HTML
-							<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/admin-panel/">Admin Panel</a></div>
-							HTML;
-							echo $a;
-						}
-						?>
 					</div>
 
 				<!-- Right Main Bar -->
