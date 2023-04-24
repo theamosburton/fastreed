@@ -40,7 +40,7 @@ $version = implode('.', str_split($version, 1));
 			if ($userData->getAccess()['userType'] == 'admin') {
 				$adminNav = <<<HTML
 				<div>
-					<i id="adminNavIcon" class="fa fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
+					<i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
 				</div>
 				HTML;
 			}else {

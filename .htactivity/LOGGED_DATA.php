@@ -64,7 +64,7 @@ class getLoggedData{
                 $row = mysqli_fetch_assoc($result);
                 $DOB = $row['DOB'];
                 $Gender = $row['gender'];
-                $accountType = $row['acctype'];
+                $accountType = $row['accType'];
                 $data = array("DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType);
             }else {
                 $data = array();
