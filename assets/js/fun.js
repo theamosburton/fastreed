@@ -20,21 +20,7 @@ window.onload = function(){
  
 }
 
-function updateNeeded() {
-    if (gitIsUpdated) {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
-        $('#refHard span').html('Repo Pulled');
-        $('#refStyle span').html('Style Updated');
-        $('#refHard, #refStyle').hover(function(){
-            $(this).css('cursor', 'default');
-        });
-        
-    }else {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'lime');
-        
-    }
-    
-}
+
 
 function toggleMode(){
     var toggleMode = document.querySelector('#toggleMode');
@@ -181,7 +167,21 @@ function toggleAdmin() {
     }
 }
 
-
+function updateNeeded() {
+    if (gitIsUpdated) {
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
+        $('#refHard span').html('Repo Pulled');
+        $('#refStyle span').html('Style Updated');
+        $('#refHard, #refStyle').hover(function(){
+            $(this).css('cursor', 'default');
+        });
+        
+    }else {
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'lime');
+        
+    }
+    
+}
 
 function toggleProfile() {
     if(accountsState.style.display == 'none'){
