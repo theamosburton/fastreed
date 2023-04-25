@@ -48,9 +48,9 @@ function enableDarkMode() {
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
     });
-
+    $('#noti-nav').css('box-shadow',' 0 0 1px 0 rgb(218,218,218)');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
-    $('.dropdowns .menus a').css('color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
