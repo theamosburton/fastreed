@@ -1,7 +1,7 @@
 let Ricon = document.getElementById('Ricon');
 let HPicon = document.getElementById('HPicon');
 window.onload = function(){
-    const refreshURL =`/.htactivity/G_USER_LOGIN.php?intent=gitIsUpdated`;
+    const refreshURL =`/.htactivity/REFRESH.php?intent=gitIsUpdated`;
     refreshStatus(refreshURL);
     async function refreshStatus(url){
         const response = await fetch(url);
