@@ -8,11 +8,11 @@ window.onload = function(){
         var data = await response.json();
         isUpdated = data.Result;
         if (isUpdated) {
-            $('#Ricon').css('color', 'grey');
-            $('#HPicon').css('color', 'grey');
-        }else {
             $('#Ricon').css('color', 'aquamarine');
             $('#HPicon').css('color', 'aquamarine');
+        }else {
+            $('#Ricon').css('color', 'grey');
+            $('#HPicon').css('color', 'grey');
         }
       }
 }
