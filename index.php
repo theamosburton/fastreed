@@ -153,8 +153,8 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<div class="notification">
 										<img class="image" src="/assets/img/w-dummy.png">
 										<div class="body">
-											<p class="title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
-											<span class="time">$userSince</span>
+											<p class="noti-parts title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
+											<span class="noti-parts time">$userSince</span>
 											<a class="singleAction"href="#">Complete Profile</a>
 										</div>
 									</div>

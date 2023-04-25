@@ -78,7 +78,7 @@ function enableLightMode(){
     $('header').css('border-bottom', '1px solid #353740');
 
     $('#accounts').css('background-color','white');
-    $('.dropdowns .menus a').css('color', 'rgb(32, 33, 35)');
+    $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
