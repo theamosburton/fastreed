@@ -44,5 +44,5 @@ echo updateVersion();
 echo "<br/>";
 echo "<br/>";
 $diff = shell_exec('git diff main fastreed/main');                      
-echo "Difference is: ".$diff;
+echo "Differenc is: ".$diff;
 ?>
