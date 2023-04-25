@@ -33,6 +33,7 @@ function refreshCss() {
         var data = await response.json();
         let isRefreshed = data.Result;
         if (isRefreshed) {
+            alert(data.message);
             $('#RSpinner').css('display', 'none');
             $('#RefreshIcon').css('display', 'block');
             $('#refStyle span').html('Updated');
