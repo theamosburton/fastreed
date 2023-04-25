@@ -444,7 +444,7 @@ header #nav #profileImage{
     right: 10px;
   }
   #noti-nav{
-    left: 0;
+    right: 0;
   }
   .notification{
     margin: 0px 5px;
