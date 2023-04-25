@@ -159,9 +159,9 @@ function toggleAccounts(){
 
 function toggleAdmin() {
     if(advOptions.style.display == 'none'){
-        updateNeeded();
         advOptions.style.display = 'block';
         overlay.style.display = 'block';
+        updateNeeded();
     }else{
         advOptions.style.display = 'none';
     }
