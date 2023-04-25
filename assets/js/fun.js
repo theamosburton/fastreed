@@ -16,6 +16,11 @@ window.onload = function(){
     }else if(colorMode == 'light'){
         enableLightMode();
     }
+    if (gitIsUpdated) {
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
+    }else {
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'aquamarine');
+    }
 }
 
 function toggleMode(){
