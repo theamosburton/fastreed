@@ -227,7 +227,10 @@ header #nav #profileImage{
 }
 #RSpinner, #HRSpinner{
   display: none;
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-right: 5px;
+  width: 19px;
+  height: 19px;
 }
 #oSpinner{
   margin-right: 10px;
