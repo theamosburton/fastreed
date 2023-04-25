@@ -6,7 +6,21 @@ if (!isset($_SERVROOT)) {
 }
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
-
+$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
+include($GLOBALS['LOGGED_DATA']);
+$userLogged = false;
+$adminLogged = false;
+if(isset($_SESSION['LOGGED_USER'])){
+	$userData = new getLoggedData();
+	if ($userData->U_AUTH) {
+		$userLogged = true;
+		if ($userData->getAccess()['userType'] == 'admin') {
+			$adminLogged = true;
+		}else {
+            $adminLogged = false;
+        }
+	}
+}
 
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
@@ -15,7 +29,7 @@ include_once($GLOBALS['DEV_OPTIONS']);
 if (isset($_SERVER['HTTP_REFERER'])) {
     $thisHttp = $_SERVER['HTTP_REFERER'];
     $refurl = URL.'/';
-    if (isset($_SESSION["ASI"])) {
+    if ($adminLogged) {
         if ($thisHttp == $refurl) {
             include_once($GLOBALS['DB']);
             new refreshSite();
