@@ -44,7 +44,7 @@ $remoteSha = shell_exec('git rev-parse fastreed/main');
 
 // Compare the local and remote branches
 $diff = shell_exec("git diff $localSha $remoteSha");
-echo $diff;
+var_dump($diff);
 if ($diff) {
   // If there are differences, pull changes from the remote repository
   shell_exec('git pull fastreed main');
