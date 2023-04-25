@@ -35,14 +35,23 @@ function getVersions($DB){
 	return $return;
   }
 
-// shell_exec('git fetch');
-$updateCode = shell_exec('git pull fastreed main');                      
-echo $updateCode;
-echo "<br/>";
-echo "<br/>";
-echo updateVersion();
-echo "<br/>";
-echo "<br/>";
-$diff = shell_exec('git diff');                      
-echo "Difference is: "."$diff";
+
+  // Fetch changes from the remote repository
+shell_exec('git fetch fastreed');
+
+// Get the SHA hash of the latest commit on the local and remote branches
+$localSha = shell_exec('git rev-parse HEAD');
+$remoteSha = shell_exec('git rev-parse fastreed/main');
+
+// Compare the local and remote branches
+$diff = shell_exec("git diff $localSha $remoteSha");
+
+if ($diff) {
+  // If there are differences, pull changes from the remote repository
+  shell_exec('git pull fastreed main');
+  echo 'Changes pulled successfully.';
+} else {
+  // If there are no differences, do nothing
+  echo 'No changes to pull.';
+}
 ?>
