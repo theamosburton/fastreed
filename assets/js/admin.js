@@ -21,7 +21,7 @@ function hardRefresh(){
 function refreshCss() {
     $('#RefreshIcon').css('display', 'none');
     $('#RSpinner').css('display', 'block');
-    $('#refStyle span').html('Updating....');
+    $('#refStyle span').html('Updating...');
     const refreshUrl = `/.htactivity/REFRESH.php?intent=refreshCSS`;
     refreshFunction(refreshUrl);
     async function refreshFunction(url){
