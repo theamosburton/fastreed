@@ -443,6 +443,9 @@ header #nav #profileImage{
     top: 66px;
     right: 10px;
   }
+  .notification{
+    max-width: 95vw;
+  }
 }
 @media (max-width: 576px) {
   .badge {
