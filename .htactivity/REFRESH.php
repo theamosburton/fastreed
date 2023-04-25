@@ -22,7 +22,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 }else {
     include_once($GLOBALS['DB']);
     $a = new refreshSite();
-    $a->gitIsUpdated();
+    showError($a->gitIsUpdated(), " ");
 }
 
 
