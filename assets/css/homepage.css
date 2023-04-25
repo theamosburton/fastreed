@@ -146,6 +146,9 @@
 }
 
 /* Notifications */
+#noti-nav{
+  background-color: #353740;
+}
 .notification{
   display: flex;
   flex-direction: row;
@@ -445,7 +448,7 @@ header #nav #profileImage{
   }
   #noti-nav{
     right: 0;
-    margin: 0px 5px;
+    margin: 0px 5px 0px 10px;
   }
   .notification{
    
