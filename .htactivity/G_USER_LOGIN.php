@@ -132,10 +132,10 @@ class gSignUpLogin{
       if (!empty($_SESSION['refSession'])) {
         $refID = $_SESSION['refSession'];
       }else {
-        $refID = null;
+        $refID = '';
       }
     }else {
-      $refID = null;
+      $refID = '';
     }
 
     $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,refID) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', $refID)";
