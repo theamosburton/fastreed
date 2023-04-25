@@ -159,7 +159,7 @@ function toggleAccounts(){
 
 function toggleAdmin() {
     if(advOptions.style.display == 'none'){
-        updateNeeded();
+        async updateNeeded();
         advOptions.style.display = 'block';
         overlay.style.display = 'block';
     }else{
