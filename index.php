@@ -192,7 +192,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										Refresh CSS  
+										Refresh
 									</div>
 									<div class="menus" onclick="hardRefresh()"> 
 										<div class="spinner" id="HRSpinner"></div>
