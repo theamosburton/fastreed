@@ -190,12 +190,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 							if ($basic_func->gitIsUpdated()) {
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
-										<div class="spinner" id="RSpinner"></div>
+										<div id="refStyle" class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
 										Refresh
 									</div>
 									<div class="menus" onclick="hardRefresh()"> 
-										<div class="spinner" id="HRSpinner"></div>
+										<div id="refHard" class="spinner" id="HRSpinner"></div>
 										<i id="HPicon" class="left fa fa-code-pull-request"></i>
 										Hard Pull
 									</div>
@@ -203,12 +203,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 							}else {
 								$refresh = <<<HTML
 									<div class="menus"> 
-										<div class="spinner" id="RSpinner"></div>
+										<div id="refStyle" class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
 										Refresh CSS  
 									</div>
 									<div class="menus"> 
-										<div class="spinner" id="HRSpinner"></div>
+										<div id="refHard" class="spinner" id="HRSpinner"></div>
 										<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
 										Hard Pull
 									</div>
