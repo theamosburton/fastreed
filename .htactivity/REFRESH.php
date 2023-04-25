@@ -21,7 +21,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     }
 }else {
     include_once($GLOBALS['DB']);
-    new refreshSite()->gitIsUpdated();
+    $a = new refreshSite()
+    $a->gitIsUpdated();
 }
 
 
