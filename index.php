@@ -3,6 +3,7 @@ $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
 $visit = new VisitorActivity();
+$basic_func = new BasicFunctions();
 $version = $visit->VERSION;
 $version = implode('.', str_split($version, 1));
 $userLogged = false;
@@ -12,12 +13,9 @@ if(isset($_SESSION['LOGGED_USER'])){
 	include($GLOBALS['LOGGED_DATA']);
 	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
-		
 		$userLogged = true;
 		if ($userData->getAccess()['userType'] == 'admin') {
 			$adminLogged = true;
-			include ".htactivity/REFRESH.php";
-			$refresh = new refreshSite();
 		}
 	}
 }
@@ -47,6 +45,18 @@ if(isset($_SESSION['LOGGED_USER'])){
 	<script src="https://accounts.google.com/gsi/client" async defer></script>
 	<script src="https://apis.google.com/js/api.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	<?php
+	if ($basic_func->gitIsUpdated()) {
+		echo '<script>
+		let gitIsUpdated = true;
+	</script>';
+	}else {
+		echo '<script>
+		let gitIsUpdated = false;
+	</script>';
+	}
+	?>
 </head>
 <body>
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
@@ -177,7 +187,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<?php
 					if ($userLogged){
 						if($adminLogged){
-							if ($refresh->gitIsUpdated()) {
+							if ($basic_func->gitIsUpdated()) {
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>

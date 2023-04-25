@@ -1,4 +1,5 @@
 <?php
+header('content-type:application/json');
 if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../';
 }
@@ -17,12 +18,14 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         if ($thisHttp == $refurl) {
             include_once($GLOBALS['DB']);
             new refreshSite();
+        }else {
+            showError(false, "Access Denied");
         }
+    }else {
+        showError(false, "Access Denied");
     }
 }else {
-    include_once($GLOBALS['DB']);
-    $a = new refreshSite();
-    showError($a->gitIsUpdated(), " ");
+    showError(false, "Access Denied");
 }
 
 
@@ -46,9 +49,11 @@ class  refreshSite{
                 $this->refreshCSS();
             }elseif ($_GET['intent'] == 'hardRefresh') {
                 $this->hardRefresh();
-            }elseif ($_GET['intent'] == 'gitIsUpdated') {
-                showError($this->gitIsUpdated(), " ");
+            }else {
+                showError(false, "Intent is empty");
             }
+        }else {
+            showError(false, "Intent Required");
         }
     }
 
@@ -71,15 +76,6 @@ class  refreshSite{
         $row = mysqli_fetch_assoc($result);
         $return = $row['optionValue'];
         return $return;
-      }
-
-    public function hardRefresh(){
-        if ($this->gitIsUpdated()) {
-            showError(true, "Already upto date");
-        }else {
-            shell_exec('git pull fastreed main');
-            showError(false, "Updated Now");
-        }
     }
 
     public function gitIsUpdated(){
@@ -99,7 +95,15 @@ class  refreshSite{
         return $return;
     }
 
-   
+    public function hardRefresh(){
+        if ($this->gitIsUpdated()) {
+            showError(true, "Already upto date");
+        }else {
+            shell_exec('git pull fastreed main');
+            showError(false, "Updated Now");
+        }
+    }
+
 }
 
 function showError($result, $message){
