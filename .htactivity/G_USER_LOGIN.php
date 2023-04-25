@@ -17,16 +17,16 @@ include_once($GLOBALS['DEV_OPTIONS']);
 // if($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 $thisHttp = $_SERVER['HTTP_REFERER'];
 $refurl = URL.'/';
-  if ($thisHttp == $refurl) {
-      include_once($GLOBALS['DB']);
-      include_once($GLOBALS['AUTH']);
-      include_once($GLOBALS['BASIC_FUNC']);
-      new gSignUpLogin();
-  }else {
-    $cantRead = array("Result"=>"Access Denied");
-    $cantReadDecode = json_encode($cantRead);
-    echo "$cantReadDecode";
-  }
+if ($thisHttp == $refurl) {
+    include_once($GLOBALS['DB']);
+    include_once($GLOBALS['AUTH']);
+    include_once($GLOBALS['BASIC_FUNC']);
+    new gSignUpLogin();
+}else {
+  $cantRead = array("Result"=>"Access Denied");
+  $cantReadDecode = json_encode($cantRead);
+  echo "$cantReadDecode";
+}
 
 
 class gSignUpLogin{
