@@ -138,7 +138,7 @@ class gSignUpLogin{
       $refID = ' ';
     }
 
-    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,refID) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', '$refID')";
+    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,Referer) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', '$refID')";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $sql1 = "INSERT INTO account_access (personID, accType) VALUES ('$userID', 'user')";
