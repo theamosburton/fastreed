@@ -40,7 +40,7 @@ shell_exec('git fetch fastreed');
 // Get the SHA hash of the latest commit on the local and remote branches
 $localSha = shell_exec('git rev-parse HEAD');
 $remoteSha = shell_exec('git rev-parse fastreed/main');
-
+echo "dfd";
 // Compare the local and remote branches
 $diff = shell_exec("git diff $localSha $remoteSha");
 if ($diff) {
