@@ -9,8 +9,6 @@ $version = implode('.', str_split($version, 1));
 $userLogged = false;
 $adminLogged = false;
 if(isset($_SESSION['LOGGED_USER'])){
-	$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
-	include($GLOBALS['LOGGED_DATA']);
 	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
 		$userLogged = true;
