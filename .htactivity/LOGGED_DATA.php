@@ -12,6 +12,7 @@ class getLoggedData{
     public $PROFILE_PIC;
     public $TYPE;
     public $U_AUTH;
+    private $USER_SINCE;
 
     function __construct(){
         $this->DB_CONNECT = new Database();
@@ -44,6 +45,7 @@ class getLoggedData{
                 $this->USERNAME = $row['userName'];
                 $this->REFERER  = $row['Referer'];
                 $this->PROFILE_PIC  = $row['profilePic'];
+                $this->USER_SINCE = $row['userSince'];
             }
         }else {
             $this->U_AUTH = false;  

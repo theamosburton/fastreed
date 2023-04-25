@@ -78,68 +78,99 @@ if(isset($_SESSION['LOGGED_USER'])){
 			<div class="rightside">
 				<div class="nav" id="nav">
 
-				
-	
+					<!-- Profile Pic -->
 					<div>
 						<img onclick="toggleProfile()" src="$userData->PROFILE_PIC" alt="" id="profileImage">
 						<i id="accountIcon" hidden></i>
 					</div>
+					<!-- Profile Pic -->
+
+					<!-- Admin Nav -->
 					$adminNav
-					<div class="spinner" id="MenuSpinner"></div>
-					
+					<!-- Admin Nav -->
+
+					<!-- Notifications Nav-->
 					<div class="navs">
 						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-						<span class="badge">9</span>
+						<span class="badge" id="notiCount">1</span>
 					</div>
-	
+					<!-- Notifications Nav-->
+
+					<!-- Settings Nav -->
 					<div class="navs">
 					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
 					</div>
-	
+					<!-- Settings Nav -->
+
 				</div>
 			</div>
 			HTML;
-
 			echo $regHeader;
 		}else {
 		$anonHeader = <<<HTML
+		<!-- Anonymous User Header -->
 		<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
 		<div class="rightside">
 			<div class="nav" id="nav">
+				<!-- Accounts Nav -->
 				<div>
 					<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
 				</div>
-
 				<div class="spinner" id="MenuSpinner"></div>
-				
+				<!-- Accounts Nav -->
+
+				<!-- Settings Nav -->
 				<div class="navs">
 					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
 				</div>
+				<!-- Settings Nav -->
 			</div>
 		</div>
 		HTML;
 		echo $anonHeader;
 		}
 		?>
-		
 	</header>
+	<!-- ***************************************************** Headers **************************************************** -->
+
 	<!--main content-->
-	
-	
 	<div class="main-content">
 		<div class="container">
 			<div class="row ">
 
-			<!-- Notifications -->
-				<div class="dropdowns" id="notifications" style="display:none">
+			    <!-- Notifications -->
+				<div class="dropdowns" id="noti-nav" style="display:none">
 					<div class="menu-head">
 						<span class="name">Notifications</span>
 					</div>
+					<div class="notifications">
+						<?php
+						if ($userLogged) {
+							if ($userData->getAccess()['Gender'] === null || $userData->getAccess()['DOB'] == null) {
+								$profileNotify = <<<HTML
+									<div class="notification">
+										<img class="image" src="/assets/img/w-dummy.png">
+										<div class="body">
+											<p class="title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
+											<span class="time">$userData->USER_SINCE</span>
+											<a class="singleAction"href="#">Complete Profile</a>
+										</div>
+									</div>
+								HTML;
+								echo $profileNotify;
+							}
+						}
+						
+						?>
+						
+					</div>
 				</div>
+				<!-- ******************************************** Notifications ********************************************** -->
 
 				<!-- Accounts -->
 				<div class="dropdowns" id="accounts" style="display:none">
 						<?php 
+						// Logged Users
 						if ($userLogged) {
 							$accountDropdown = <<<HTML
 							<div class="menu-head">
@@ -149,8 +180,9 @@ if(isset($_SESSION['LOGGED_USER'])){
 							<div class="menus"id="logout" onclick="logout()"><i class="left fa fa-power-off"></i>Log Out</div>
 						HTML;
 							echo $accountDropdown;
+						// Anonymous Users
 						}else {
-							$accountDropdown = <<<HTML
+							$loginWith = <<<HTML
 							<div class="menu-head">
 								<span class="name">Login or Create Account</span>
 							</div>
@@ -175,78 +207,79 @@ if(isset($_SESSION['LOGGED_USER'])){
 							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
 						HTML;
 
-						echo $accountDropdown;
-
+						echo $loginWith;
 						}
 						?>
-					</div>
-					
+				</div>
+				<!--*********************************** Accounts ************************************************************ -->
 
-					<?php
-					if ($userLogged){
-						if($adminLogged){
-							if (!$basic_func->gitIsUpdated()) {
-								$refresh = <<<HTML
-									<div id="refStyle" class="menus" onclick="refreshCss()"> 
-										<div  class="spinner" id="RSpinner"></div>
-										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										<span>Refresh Style </span>
-									</div>
-									<div id="refHard" class="menus" onclick="hardRefresh()"> 
-										<div  class="spinner" id="HRSpinner"></div>
-										<i id="HPicon" class="left fa fa-code-pull-request"></i>
-										<span> Hard Pull</span>
-									</div>
-								HTML;
-							}else {
-								$refresh = <<<HTML
-									<div  id="refStyle" class="menus"> 
-										<div class="spinner" id="RSpinner"></div>
-										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										<span>Refresh Style</span>
-									</div>
-									<div id="refHard" class="menus"> 
-										<div class="spinner" id="HRSpinner"></div>
-										<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
-										<span> Hard Pull</span>
-									</div>
-								HTML;
-							}
-							$advOptions = <<<HTML
-								<div class="dropdowns" id="advOptions" style="display:none">
-									<div class="menu-head">
-										<span class="name">Options</span>
-									</div>
+				<!-- Admin Options -->
+				<?php
+				if ($userLogged){
+					if($adminLogged){
+						if (!$basic_func->gitIsUpdated()) {
 
-									<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
-									$refresh
-									<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
+							$refresh = <<<HTML
+								<div id="refStyle" class="menus" onclick="refreshCss()"> 
+									<div  class="spinner" id="RSpinner"></div>
+									<i id="RefreshIcon" class="left fa fa-rotate"></i>
+									<span>Refresh Style </span>
+								</div>
+								<div id="refHard" class="menus" onclick="hardRefresh()"> 
+									<div  class="spinner" id="HRSpinner"></div>
+									<i id="HPicon" class="left fa fa-code-pull-request"></i>
+									<span> Hard Pull</span>
 								</div>
 							HTML;
-
-							echo $advOptions;
+						}else {
+							$refresh = <<<HTML
+								<div  id="refStyle" class="menus"> 
+									<div class="spinner" id="RSpinner"></div>
+									<i id="RefreshIcon" class="left fa fa-rotate"></i>
+									<span>Refresh Style</span>
+								</div>
+								<div id="refHard" class="menus"> 
+									<div class="spinner" id="HRSpinner"></div>
+									<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
+									<span> Hard Pull</span>
+								</div>
+							HTML;
 						}
+						$advOptions = <<<HTML
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Options</span>
+								</div>
+
+								<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
+								$refresh
+								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
+							</div>
+						HTML;
+
+						echo $advOptions;
 					}
+				}
+				?>
+				<!-- ********************************* Admin Options *************************************************** -->
+					
 
-					?>
-					<!-- Accounts -->
-
-					<!-- Settings-->
-					<div class="dropdowns" id="settings" style="display:none">
-						<div class="menu-head">
-						    <span class="name">Settings</span>
-						</div>
-						<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-						<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
-						<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
-						<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
-						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
-						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+				<!-- Settings-->
+				<div class="dropdowns" id="settings" style="display:none">
+					<div class="menu-head">
+						<span class="name">Settings</span>
 					</div>
+					<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+					<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
+					<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
+					<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
+					<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
+					<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+				</div>
+				<!-- ********************************* Settings *************************************************** -->
 
-					<!-- Settings-->
 
-				<!-- Right Main Bar -->
+				<!-- Center Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">		    
 
 				    <div class="pin_container">
@@ -563,10 +596,9 @@ if(isset($_SESSION['LOGGED_USER'])){
 								<a href=""><i class="fa fa-ellipsis-v"></i></a>
 							</div>
 						</div>
-
-						
 					</div>
 				</div>
+				<!-- ********************************************************************************************************* -->
 			</div>
 		</div>
 	</div>

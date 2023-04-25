@@ -92,7 +92,7 @@ function enableLightMode(){
 
 
 let settingState = document.getElementById('settings');
-let notification = document.getElementById('notifications');
+let notification = document.getElementById('noti-nav');
 let accountsState = document.getElementById('accounts');
 let overlay = document.getElementById('opt-overlay');
 let accountIcon = document.getElementById('accountIcon');
@@ -138,11 +138,11 @@ function toggleSetting(){
  }
 
 function toggleNotifications(){
-    if(notifications.style.display == 'none'){
-        notifications.style.display = 'block';
+    if(notification.style.display == 'none'){
+        notification.style.display = 'block';
         overlay.style.display = 'block';
     }else{
-        notifications.style.display = 'none';
+        notification.style.display = 'none';
     }
 }
 function toggleAccounts(){
