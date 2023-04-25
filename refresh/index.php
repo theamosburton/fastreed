@@ -45,4 +45,5 @@ echo "<br/>";
 echo "<br/>";
 $diff = shell_exec('git diff');                      
 echo "Differenc is: ".$diff;
+echo "df";
 ?>
