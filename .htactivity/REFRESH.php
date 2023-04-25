@@ -13,19 +13,23 @@ $GLOBALS['L_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
 include_once($GLOBALS['DEV_OPTIONS']);
 include_once($GLOBALS['L_DATA']);
 
-$thisHttp = $_SERVER['HTTP_REFERER'];
-$refurl = URL.'/';
-$userData = new getLoggedData();
-if ($userData->getAccess()['userType'] == 'admin') {
-    if ($thisHttp == $refurl) {
-        include_once($GLOBALS['DB']);
-        new refreshSite();
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $thisHttp = $_SERVER['HTTP_REFERER'];
+    $refurl = URL.'/';
+    $userData = new getLoggedData();
+    if ($userData->getAccess()['userType'] == 'admin') {
+        if ($thisHttp == $refurl) {
+            include_once($GLOBALS['DB']);
+            new refreshSite();
+        }else {
+            showError(false, "Access Denied");
+        }
     }else {
         showError(false, "Access Denied");
     }
-}else {
-    showError(false, "Access Denied");
 }
+
+
 
 
 
