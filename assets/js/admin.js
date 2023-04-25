@@ -1,5 +1,3 @@
-let Ricon = document.getElementById('Ricon');
-let HPicon = document.getElementById('HPicon');
 window.onload = function(){
     const refreshURL =`/.htactivity/REFRESH.php?intent=gitIsUpdated`;
     refreshStatus(refreshURL);
@@ -8,7 +6,8 @@ window.onload = function(){
         var data = await response.json();
         isUpdated = data.Result;
         if (isUpdated) {
-            $('#Ricon').css('color', 'aqua');
+            // No need to update git
+            $('#Ricon').css('color', 'aquamarine');
             $('#HPicon').css('color', 'aquamarine');
         }else {
             $('#Ricon').css('color', 'grey');
