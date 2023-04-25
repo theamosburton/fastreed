@@ -6,7 +6,7 @@ window.onload = function(){
         $('#HPicon').css('color', 'grey');
         
     }else {
-        $('#RefreshIcon').css('color', 'lightblue');
-        $('#HPicon').css('color', 'lightblue');
+        $('#RefreshIcon').css('color', 'aquamarine');
+        $('#HPicon').css('color', 'aquamarine');
     }
 }
