@@ -444,7 +444,7 @@ header #nav #profileImage{
     right: 10px;
   }
   .notification{
-    max-width: 200px;
+    max-width: 90vw;
   }
 }
 @media (max-width: 576px) {
