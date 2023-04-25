@@ -1,8 +1,6 @@
 <?php
 class getLoggedData{
     private $DB_CONNECT;
-    private $AUTH;
-    private $BASIC_FUNC;
     private $DB;
 
     public $NAME;
@@ -17,8 +15,6 @@ class getLoggedData{
 
     function __construct(){
         $this->DB_CONNECT = new Database();
-        $this->AUTH = new Auth();
-        $this->BASIC_FUNC = new BasicFunctions();
         $this->DB = $this->DB_CONNECT->DBConnection();
 
         if (isset($_SESSION['GSI'])) {
