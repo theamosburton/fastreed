@@ -1,5 +1,5 @@
 <?php
-header('content-type:application/json');
+// header('content-type:application/json');
 if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../';
 }
@@ -37,7 +37,7 @@ class  refreshSite{
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
 
-        if (!isset($_GET[])) {
+        if (!isset($_GET)) {
             showError(false, "Request not Found");
         }elseif (isset($_GET['intent'])) {
             if (empty($_GET['intent'])) {
@@ -51,8 +51,6 @@ class  refreshSite{
             }else {
                 showError(false, "Request not Found");
             }
-        }else {
-            showError(false, "Empty Request Found");
         }
     }
 

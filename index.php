@@ -2,6 +2,8 @@
 $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
+include ".htactivity/REFRESH.php";
+$refresh = new refreshSite();
 $visit = new VisitorActivity();
 $userData = new getLoggedData();
 $version = $visit->VERSION;
@@ -161,27 +163,43 @@ $version = implode('.', str_split($version, 1));
 					<?php
 					if ($userData->U_AUTH){
 						if($userData->getAccess()['userType'] == 'admin'){
+							if ($refresh->gitIsUpdated()) {
+								$refresh = <<<HTML
+									<div class="menus" onclick="refreshCss()"> 
+										<div class="spinner" id="RSpinner"></div>
+										<i class="left fa fa-rotate" style="color:blue"></i>
+										Refresh CSS  
+									</div>
+									<div class="menus" onclick="hardRefresh()"> 
+										<div class="spinner" id="RSpinner"></div>
+										<i class="left fa fa-code-pull-request" style="color:blue"></i>
+										Hard Pull
+									</div>
+								HTML;
+							}else {
+								$refresh = <<<HTML
+									<div class="menus"> 
+										<div class="spinner" id="RSpinner"></div>
+										<i class="left fa fa-rotate" style="color:grey"></i>
+										Refresh CSS  
+									</div>
+									<div class="menus"> 
+										<div class="spinner" id="RSpinner"></div>
+										<i class="left fa fa-code-pull-request" style="color:grey"></i>
+										Hard Pull
+									</div>
+								HTML;
+							}
 							$advOptions = <<<HTML
-							<div class="dropdowns" id="advOptions" style="display:none">
-								<div class="menu-head">
-									<span class="name">Options</span>
+								<div class="dropdowns" id="advOptions" style="display:none">
+									<div class="menu-head">
+										<span class="name">Options</span>
+									</div>
+
+									<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
+									$refresh
+									<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
 								</div>
-
-								<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
-
-								<div class="menus" onclick="refreshCss()"> 
-									<div class="spinner" id="RSpinner"></div>
-									<i class="left fa fa-rotate"></i>
-									Refresh CSS  
-							    </div>
-
-								<div class="menus" onclick="hardRefresh()"> 
-								<div class="spinner" id="RSpinner"></div>
-									<i class="left fa fa-code-pull-request"></i>
-									Hard Pull
-							    </div>
-								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
-							</div>
 							HTML;
 
 							echo $advOptions;
