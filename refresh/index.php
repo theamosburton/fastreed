@@ -25,6 +25,8 @@ function updateVersion(){
 	return $vStatus;
 }
 
+
+
 function getVersions($DB){
     $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
     $result = mysqli_query($DB, $sql);
@@ -37,5 +39,10 @@ function getVersions($DB){
 $updateCode = shell_exec('git pull fastreed main');                      
 echo $updateCode;
 echo "<br/>";
+echo "<br/>";
 echo updateVersion();
+echo "<br/>";
+echo "<br/>";
+$diff = shell_exec('git diff main fastreed/main');                      
+echo $diff;
 ?>
