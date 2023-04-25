@@ -104,7 +104,7 @@ class  refreshSite{
         $return = false;
         // If there are differences, return false
         } else {
-        // If there are no differences, return true
+        // If there are no differences, return true.
         $return = true; 
         }
         return $return;
