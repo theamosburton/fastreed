@@ -7,10 +7,10 @@ window.onload = function(){
         isUpdated = data.Result;
         if (isUpdated) {
             // No need to update git
-            $('#Ricon').css('color', 'blue');
+            $('#RefreshIcon').css('color', 'blue');
             $('#HPicon').css('color', 'blue');
         }else {
-            $('#Ricon').css('color', 'grey');
+            $('#RefreshIcon').css('color', 'grey');
             $('#HPicon').css('color', 'grey');
         }
       }

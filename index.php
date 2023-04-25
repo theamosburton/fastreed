@@ -195,7 +195,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								$refresh = <<<HTML
 									<div class="menus"> 
 										<div class="spinner" id="RSpinner"></div>
-										<i id="Ricon" class="left fa fa-rotate"></i>
+										<i id="RefreshIcon" class="left fa fa-rotate"></i>
 										Refresh CSS  
 									</div>
 									<div class="menus"> 
