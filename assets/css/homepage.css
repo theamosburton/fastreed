@@ -121,13 +121,12 @@
   color: #e8eaed;
 }
 .dropdowns .name{
-  font-weight: 500;
+  font-weight: 800;
 }
 .dropdowns .menus{
   display: flex;
   align-items: center;
   margin-top: 16px;
-  font-weight: 500;
   color: rgb(231, 231, 231);
 }
 
