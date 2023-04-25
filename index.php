@@ -146,7 +146,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 						<?php
 						if ($userLogged) {
 							if ($userData->getAccess()['Gender'] === null || $userData->getAccess()['DOB'] == null) {
-								$userSince = $userData->getAccess()['userSince'];
+								$userSince = (int) $userData->getAccess()['userSince'];
 								$userSince = date('M j, Y \a\t h:i A', $userSince);
 
 								$profileNotify = <<<HTML
