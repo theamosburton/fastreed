@@ -48,10 +48,11 @@ $diff = shell_exec("git diff $localSha $remoteSha");
 
 if ($diff) {
   // If there are differences, pull changes from the remote repository
-  shell_exec('git pull fastreed main');
+//   shell_exec('git pull fastreed main');
   echo 'Changes pulled successfully.';
 } else {
   // If there are no differences, do nothing
   echo 'No changes to pull.';
+  echo 'dsfdsf';
 }
 ?>
