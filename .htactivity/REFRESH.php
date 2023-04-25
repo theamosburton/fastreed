@@ -47,7 +47,7 @@ class  refreshSite{
             }elseif ($_GET['intent'] == 'hardRefresh') {
                 $this->hardRefresh();
             }elseif ($_GET['intent'] == 'gitIsUpdated') {
-                $this->gitIsUpdated();
+                showError($this->gitIsUpdated(), " ");
             }else {
                 showError(false, "Request not Found");
             }

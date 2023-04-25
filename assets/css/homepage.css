@@ -114,14 +114,11 @@
   to{ transform: rotate(360deg); }
 }
 
-.dropdowns.menu-head{
+.dropdowns .menu-head{
   border-bottom: 3px solid;
   padding-bottom: 5px;
   margin-bottom: 10px;
   color: #e8eaed;
-}
-#accounts .menu-head{
-  margin-bottom: 20px;
 }
 .dropdowns .name{
   font-weight: 500;
@@ -129,18 +126,9 @@
 .dropdowns .menus{
   display: flex;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 16px;
+  font-weight: 500;
   color: rgb(231, 231, 231);
-}
-
-#accounts .menus{
-  margin-top: 15px;
-  color: #333438;
-  text-decoration: none;
-}
-#accounts .menus a{
-  color: #333438;
-  text-decoration: none;
 }
 
 .dropdowns .menus:hover{

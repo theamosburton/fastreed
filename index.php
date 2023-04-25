@@ -158,6 +158,7 @@ $version = implode('.', str_split($version, 1));
 						}
 						?>
 					</div>
+					
 
 					<?php
 					if ($userData->U_AUTH){
@@ -166,12 +167,12 @@ $version = implode('.', str_split($version, 1));
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>
-										<i class="left fa fa-rotate" style="color:blue"></i>
+										<i id="Ricon" class="left fa fa-rotate"></i>
 										Refresh CSS  
 									</div>
 									<div class="menus" onclick="hardRefresh()"> 
-										<div class="spinner" id="RSpinner"></div>
-										<i class="left fa fa-code-pull-request" style="color:blue"></i>
+										<div class="spinner" id="HRSpinner"></div>
+										<i id="HPicon" class="left fa fa-code-pull-request"></i>
 										Hard Pull
 									</div>
 								HTML;
@@ -179,12 +180,12 @@ $version = implode('.', str_split($version, 1));
 								$refresh = <<<HTML
 									<div class="menus"> 
 										<div class="spinner" id="RSpinner"></div>
-										<i class="left fa fa-rotate" style="color:grey"></i>
+										<i id="Ricon" class="left fa fa-rotate"></i>
 										Refresh CSS  
 									</div>
 									<div class="menus"> 
-										<div class="spinner" id="RSpinner"></div>
-										<i class="left fa fa-code-pull-request" style="color:grey"></i>
+										<div class="spinner" id="HRSpinner"></div>
+										<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
 										Hard Pull
 									</div>
 								HTML;
@@ -206,8 +207,9 @@ $version = implode('.', str_split($version, 1));
 					}
 
 					?>
+					<!-- Accounts -->
 
-					<!-- settings -->
+					<!-- Settings-->
 					<div class="dropdowns" id="settings" style="display:none">
 						<div class="menu-head">
 						    <span class="name">Settings</span>
@@ -219,6 +221,8 @@ $version = implode('.', str_split($version, 1));
 						<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
 						<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
 					</div>
+
+					<!-- Settings-->
 
 				<!-- Right Main Bar -->
 				<div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">		    
@@ -548,8 +552,15 @@ $version = implode('.', str_split($version, 1));
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/fun.js"></script>
-<script src="/assets/js/log.js"></script>
+<script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
+<?php
+	if ($userData->U_AUTH) {
+		if ($userData->getAccess()['userType'] == 'admin') {
+			echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
+		}
+	}
+	?>
 
 </body>
 </html>

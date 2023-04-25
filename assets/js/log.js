@@ -12,7 +12,7 @@ function onGoogleSignIn(response) {
         }else {
           alert("Unable To Login");
         }
-    }
+      }
  }
 
 
@@ -21,7 +21,7 @@ function onGoogleSignIn(response) {
   let logoutIcon = document.querySelector('#logout i');
   logout.innerHTML = `<div class="spinner" id="oSpinner"></div>Logging Out...`;
 
-  const logoutURL =`/.htactivity/G_USER_LOGIN.php?intent=logout`;
+  const logoutURL =`/.htactivity/G_USER_LOGIN.php?logout`;
   serverLogout(logoutURL);
   async function serverLogout(url){
     const response = await fetch(url);

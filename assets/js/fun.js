@@ -1,13 +1,5 @@
 
 window.onload = function(){
-
-    // inject css to iframe
-    // var iframe = document.querySelector('.S9gUrf-YoZ4jf iframe');
-    // var innerHtmlTag = iframe.contentWindow.document.documentElement;
-    // innerHtmlTag.style.backgroundcolor = 'rgb(53, 55, 64);';
-
-    
-
     // checking cookie mode
     let colorMode;
     let cookieExist = (document.cookie.match(/^(?:.*;)?\s*colorMode\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
@@ -57,7 +49,7 @@ function enableDarkMode() {
 
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
     $('.dropdowns .menus a').css('color', 'rgb(231, 231, 231)');
-    $('dropdowns .menu-head span, .dropdowns .menus, .dropdowns .menus i').css('color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
     var toggleMode = document.querySelector('#toggleMode');
@@ -85,7 +77,7 @@ function enableLightMode(){
 
     $('#accounts').css('background-color','white');
     $('.dropdowns .menus a').css('color', 'rgb(32, 33, 35)');
-    $('dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
+    $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
     var toggleMode = document.querySelector('#toggleMode');

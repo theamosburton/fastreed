@@ -48,7 +48,7 @@ class gSignUpLogin{
         $cantRead = array("Result"=>false, "message"=>"No Parameter Given");
         $cantReadDecode = json_encode($cantRead);
         echo "$cantReadDecode";
-      }else if (isset($_GET['intent'])) {
+      }else if (isset($_GET['logout'])) {
         $this->logoutAccount();
       }else if(!isset($_GET['email'])){
         $cantRead = array("Result"=>false, "message"=>"Email Not Provided");
