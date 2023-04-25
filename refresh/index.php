@@ -34,7 +34,6 @@ function getVersions($DB){
     $return = $row['optionValue'];
 	return $return;
   }
-  echo 'dsfdsf';
 
   // Fetch changes from the remote repository
 shell_exec('git fetch fastreed');
