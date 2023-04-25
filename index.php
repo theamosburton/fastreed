@@ -8,20 +8,19 @@ $version = implode('.', str_split($version, 1));
 $userLogged = false;
 $adminLogged = false;
 if(isset($_SESSION['LOGGED_USER'])){
-	include ".htactivity/REFRESH.php";
+	$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
+	include($GLOBALS['LOGGED_DATA']);
 	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
 		
 		$userLogged = true;
 		if ($userData->getAccess()['userType'] == 'admin') {
 			$adminLogged = true;
+			include ".htactivity/REFRESH.php";
 			$refresh = new refreshSite();
 		}
 	}
 }
-
-
-
 
 ?>
 
@@ -182,7 +181,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>
-										<i id="Ricon" class="left fa fa-rotate"></i>
+										<i id="RefreshIcon" class="left fa fa-rotate"></i>
 										Refresh CSS  
 									</div>
 									<div class="menus" onclick="hardRefresh()"> 

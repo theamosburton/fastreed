@@ -16,7 +16,7 @@ $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
 $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.htactivity/ADMIN_VISIT.php';
 $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.htactivity/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.htactivity/GUEST_VISIT.php';
-$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
+// $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
 // Include Important File
 include_once($GLOBALS['DB']);
 include_once($GLOBALS['AUTH']);
@@ -26,7 +26,7 @@ include_once($GLOBALS['DEV_OPTIONS']);
 include_once($GLOBALS['ADMIN_VISIT']);
 include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
-include_once($GLOBALS['LOGGED_DATA']);
+// include_once($GLOBALS['LOGGED_DATA']);
 
 if(DOMAIN == 'fastreed.com'){
   if (!(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || 
