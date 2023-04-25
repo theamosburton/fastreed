@@ -2,7 +2,7 @@ function hardRefresh(){
     refreshCss();
     $('#HPicon').css('display', 'none');
     $('#HRSpinner').css('display', 'block');
-    $('#refHard span').html('Pulling...');
+    $('#refHard span').html('Pulling Repos...');
     const refreshUrl = '/.htactivity/REFRESH.php?intent=hardRefresh';
     refreshFunction(refreshUrl);
     async function refreshFunction(url){
@@ -25,7 +25,7 @@ function hardRefresh(){
 function refreshCss() {
     $('#RefreshIcon').css('display', 'none');
     $('#RSpinner').css('display', 'block');
-    $('#refStyle span').html('Updating...');
+    $('#refStyle span').html('Updating Styles...');
     const refreshUrl = '/.htactivity/REFRESH.php?intent=refreshCSS';
     refreshFunction(refreshUrl);
     async function refreshFunction(url){
