@@ -15,6 +15,9 @@ function hardRefresh(){
             $('#refHard span').html('Repo Pulled');
         }else{
             alert(data.message);
+            $('#HRSpinner').css('display', 'none');
+            $('#HPicon').css('display', 'block');
+            $('#refHard span').html('Repo Pulled');
         }
     }
 }
@@ -35,6 +38,9 @@ function refreshCss() {
             $('#refStyle span').html('Updated');
         }else{
             alert(data.message);
+            $('#RSpinner').css('display', 'none');
+            $('#RefreshIcon').css('display', 'block');
+            $('#refStyle span').html('Updated');
         }
     }
 }
