@@ -102,7 +102,7 @@ class  refreshSite{
         // $diff = shell_exec("git diff $localSha $remoteSha");
         if ($localSha != $remoteSha) {  
         $return = false;
-        // If there are differences, return false
+        // If there are difference, return false
         } else {
         // If there are no differences, return true.
         $return = true; 
