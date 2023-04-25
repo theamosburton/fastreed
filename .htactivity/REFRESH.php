@@ -109,7 +109,7 @@ class  refreshSite{
 }
 
 function showError($result, $message){
-    $data = array("Result"=>$a, "message"=>"$message");
+    $data = array("Result"=>$result, "message"=>"$message");
     $dataDecode = json_encode($data);
     echo "$dataDecode";
 }
