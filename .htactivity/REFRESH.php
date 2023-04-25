@@ -80,7 +80,7 @@ class  refreshSite{
 
     public function gitIsUpdated(){
         shell_exec('git fetch fastreed');
-        // Get the SHA hash of the latest commit on the local and remote branches
+        // Get the SHA hash of the latest commit on the local and remote branche
         $localSha = shell_exec('git rev-parse HEAD');
         $remoteSha = shell_exec('git rev-parse fastreed/main');
         // Compare the local and remote branches
