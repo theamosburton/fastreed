@@ -151,7 +151,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 
 								$profileNotify = <<<HTML
 									<div class="notification">
-										<img class="image" src="/assets/img/favicon.png">
+										<img class="image" src="/assets/img/favicon2.jpg">
 										<div class="body">
 											<p class="noti-parts title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
 											<span class="noti-parts time">$userSince</span>
