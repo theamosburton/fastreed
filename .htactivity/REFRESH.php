@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('content-type:application/json');
 if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../';
@@ -14,7 +15,7 @@ include_once($GLOBALS['DEV_OPTIONS']);
 if (isset($_SERVER['HTTP_REFERER'])) {
     $thisHttp = $_SERVER['HTTP_REFERER'];
     $refurl = URL.'/';
-    if (isset($_SESSION['ASI'])) {
+    if (isset($_SESSION["ASI"])) {
         if ($thisHttp == $refurl) {
             include_once($GLOBALS['DB']);
             new refreshSite();
