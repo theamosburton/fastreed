@@ -174,7 +174,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								data-logo_alignment="left">
 							</div>
 
-							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email (Disabled)</a>
+							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
 						HTML;
 
 						echo $accountDropdown;
