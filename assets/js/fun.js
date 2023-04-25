@@ -76,7 +76,7 @@ function enableLightMode(){
     });
 
     $('header').css('border-bottom', '1px solid #353740');
-
+    $('#noti-nav').css('box-shadow',' 0 0 1px 0 rgb(52 52 52)');
     $('#accounts').css('background-color','white');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
