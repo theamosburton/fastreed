@@ -17,11 +17,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         if ($thisHttp == $refurl) {
             include_once($GLOBALS['DB']);
             new refreshSite();
-        }else {
-            showError(false, "Access Denied");
         }
-    }else {
-        showError(false, "Access Denied");
     }
 }
 
