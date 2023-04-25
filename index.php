@@ -2,12 +2,27 @@
 $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
-include ".htactivity/REFRESH.php";
-$refresh = new refreshSite();
 $visit = new VisitorActivity();
-$userData = new getLoggedData();
 $version = $visit->VERSION;
 $version = implode('.', str_split($version, 1));
+$userLogged = false;
+$adminLogged = false;
+if(isset($_SESSION['LOGGED_USER'])){
+	include ".htactivity/REFRESH.php";
+	$userData = new getLoggedData();
+	if ($userData->U_AUTH) {
+		
+		$userLogged = true;
+		if ($userData->getAccess()['userType'] == 'admin') {
+			$adminLogged = true;
+			$refresh = new refreshSite();
+		}
+	}
+}
+
+
+
+
 ?>
 
 <!DOCTYPE html> 
@@ -38,8 +53,8 @@ $version = implode('.', str_split($version, 1));
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
 	<header>
 		<?php 
-		if ($userData->U_AUTH) {
-			if ($userData->getAccess()['userType'] == 'admin') {
+		if ($userLogged) {
+			if ($adminLogged) {
 				$adminNav = <<<HTML
 				<div>
 					<i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
@@ -118,7 +133,7 @@ $version = implode('.', str_split($version, 1));
 				<!-- Accounts -->
 				<div class="dropdowns" id="accounts" style="display:none">
 						<?php 
-						if ($userData->U_AUTH) {
+						if ($userLogged) {
 							$accountDropdown = <<<HTML
 							<div class="menu-head">
 								<span class="name">My Account</span>
@@ -161,8 +176,8 @@ $version = implode('.', str_split($version, 1));
 					
 
 					<?php
-					if ($userData->U_AUTH){
-						if($userData->getAccess()['userType'] == 'admin'){
+					if ($userLogged){
+						if($adminLogged){
 							if (!$refresh->gitIsUpdated()) {
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
@@ -555,8 +570,8 @@ $version = implode('.', str_split($version, 1));
 <script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
 <?php
-	if ($userData->U_AUTH) {
-		if ($userData->getAccess()['userType'] == 'admin') {
+	if ($userLogged) {
+		if ($adminLogged) {
 			echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
 		}
 	}

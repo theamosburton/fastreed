@@ -8,7 +8,7 @@ window.onload = function(){
         var data = await response.json();
         isUpdated = data.Result;
         if (isUpdated) {
-            $('#Ricon').css('color', 'aquamarine');
+            $('#Ricon').css('color', 'aqua');
             $('#HPicon').css('color', 'aquamarine');
         }else {
             $('#Ricon').css('color', 'grey');

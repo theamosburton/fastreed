@@ -9,9 +9,7 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['L_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
 include_once($GLOBALS['DEV_OPTIONS']);
-include_once($GLOBALS['L_DATA']);
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $thisHttp = $_SERVER['HTTP_REFERER'];
