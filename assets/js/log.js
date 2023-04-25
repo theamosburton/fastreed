@@ -28,6 +28,7 @@ function onGoogleSignIn(response) {
     var data = await response.json();
     isloggedout = data.Result;
     if (isloggedout) {
+      google.accounts.id.disableAutoSelect();
       location.reload();
     }else {
       alert("Unable To Logout");
