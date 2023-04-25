@@ -1,4 +1,5 @@
 window.onload = function(){
+    // 
     if (gitIsUpdated) {
         // No need to update git
         $('#RefreshIcon').css('color', 'grey');
