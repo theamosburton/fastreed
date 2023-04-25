@@ -37,7 +37,7 @@ function getVersions($DB){
 
   // Fetch changes from the remote repository
 shell_exec('git fetch fastreed');
-
+echo "sdfds";
 // Get the SHA hash of the latest commit on the local and remote branches
 $localSha = shell_exec('git rev-parse HEAD');
 $remoteSha = shell_exec('git rev-parse fastreed/main');
