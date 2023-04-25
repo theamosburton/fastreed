@@ -177,7 +177,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<?php
 					if ($userLogged){
 						if($adminLogged){
-							if (!$refresh->gitIsUpdated()) {
+							if ($refresh->gitIsUpdated()) {
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>
