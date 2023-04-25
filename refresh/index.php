@@ -44,6 +44,5 @@ echo updateVersion();
 echo "<br/>";
 echo "<br/>";
 $diff = shell_exec('git diff');                      
-echo "Differenc is: ".$diff;
-echo "df";
+echo "Differenc is: "."$diff";
 ?>
