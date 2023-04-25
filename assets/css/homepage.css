@@ -443,8 +443,12 @@ header #nav #profileImage{
     top: 66px;
     right: 10px;
   }
+  #noti-nav{
+    left: 0;
+  }
   .notification{
-    max-width: 90vw;
+    margin: 0px 5px;
+    width: auto;
   }
 }
 @media (max-width: 576px) {
