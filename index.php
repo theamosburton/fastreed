@@ -163,7 +163,7 @@ $version = implode('.', str_split($version, 1));
 					<?php
 					if ($userData->U_AUTH){
 						if($userData->getAccess()['userType'] == 'admin'){
-							if ($refresh->gitIsUpdated()) {
+							if (!$refresh->gitIsUpdated()) {
 								$refresh = <<<HTML
 									<div class="menus" onclick="refreshCss()"> 
 										<div class="spinner" id="RSpinner"></div>
