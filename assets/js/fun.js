@@ -19,8 +19,6 @@ window.onload = function(){
 }
 
 function toggleMode(){
-    let styleTagExists;
-    var head = document.querySelector('head');
     var toggleMode = document.querySelector('#toggleMode');
     // Check if it contains any <style> elements
     if (toggleMode.classList.contains('fa-toggle-off')) {
