@@ -101,7 +101,7 @@ class  refreshSite{
         $localSha = shell_exec('git rev-parse HEAD');
         $remoteSha = shell_exec('git rev-parse fastreed/main');
         // Compare the local and remote branches
-        // $diff = shell_exec("git diff $localSha $remoteSha")
+        // $diff = shell_exec("git diff $localSha $remoteSha"
         if ($localSha != $remoteSha) {  
         $return = false;
         // If there are difference, return false
