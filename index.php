@@ -17,7 +17,6 @@ if(isset($_SESSION['LOGGED_USER'])){
 		}
 	}
 }
-
 ?>
 
 <!DOCTYPE html> 
@@ -147,12 +146,15 @@ if(isset($_SESSION['LOGGED_USER'])){
 						<?php
 						if ($userLogged) {
 							if ($userData->getAccess()['Gender'] === null || $userData->getAccess()['DOB'] == null) {
+								$userSince = $userData->getAccess()['userSince'];
+								$userSince = date('M j, Y \a\t h:i A', $userSince);
+
 								$profileNotify = <<<HTML
 									<div class="notification">
 										<img class="image" src="/assets/img/w-dummy.png">
 										<div class="body">
 											<p class="title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
-											<span class="time">$userData->USER_SINCE</span>
+											<span class="time">$userSince</span>
 											<a class="singleAction"href="#">Complete Profile</a>
 										</div>
 									</div>

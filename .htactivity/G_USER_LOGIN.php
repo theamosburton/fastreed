@@ -137,11 +137,12 @@ class gSignUpLogin{
     }else {
       $refID = ' ';
     }
-    $time = time();
+    
     $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,Referer) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', '$refID')";
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
-      $sql1 = "INSERT INTO account_access (personID, accType, userSince) VALUES ('$userID', 'user','$time'";
+      $userSince = time();
+      $sql1 = "INSERT INTO account_access (personID, accType, userSince) VALUES ('$userID', 'user', '$userSince')";
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
         $this->loginAccount($userID);
