@@ -578,13 +578,6 @@ if(isset($_SESSION['LOGGED_USER'])){
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
-<?php
-	if ($userLogged) {
-		if ($adminLogged) {
-			echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
-		}
-	}
-	?>
 
 </body>
 </html>
