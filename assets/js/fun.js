@@ -25,7 +25,7 @@ window.onload = function(){
         });
         
     }else {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'aquamarine');
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'lime');
         
     }
 }
