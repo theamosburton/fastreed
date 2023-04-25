@@ -18,8 +18,15 @@ window.onload = function(){
     }
     if (gitIsUpdated) {
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
+        $('#refHard span').html('Repo Pulled');
+        $('#refStyle span').html('Style Updated');
+        $('#refHard, #refStyle').hover(function(){
+            $(this).css('cursor', 'default');
+        });
+        
     }else {
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'aquamarine');
+        
     }
 }
 

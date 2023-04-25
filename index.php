@@ -192,12 +192,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<div id="refStyle" class="menus" onclick="refreshCss()"> 
 										<div  class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										Refresh
+										<span>Refresh Style </span>
 									</div>
 									<div id="refHard" class="menus" onclick="hardRefresh()"> 
 										<div  class="spinner" id="HRSpinner"></div>
 										<i id="HPicon" class="left fa fa-code-pull-request"></i>
-										Hard Pull
+										<span> Hard Pull</span>
 									</div>
 								HTML;
 							}else {
@@ -205,12 +205,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<div  id="refStyle" class="menus"> 
 										<div class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										Refresh 
+										<span>Refresh Style</span>
 									</div>
 									<div id="refHard" class="menus"> 
 										<div class="spinner" id="HRSpinner"></div>
 										<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
-										Hard Pull
+										<span> Hard Pull</span>
 									</div>
 								HTML;
 							}
@@ -577,6 +577,11 @@ if(isset($_SESSION['LOGGED_USER'])){
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
+<?php
+if ($adminLogged) {
+	echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
+}
+?>
 <script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
 
 </body>
