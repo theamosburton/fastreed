@@ -43,6 +43,6 @@ echo "<br/>";
 echo updateVersion();
 echo "<br/>";
 echo "<br/>";
-$diff = shell_exec('git diff main fastreed/main');                      
+$diff = shell_exec('git diff @ @{upstream}');                      
 echo "Differenc is: ".$diff;
 ?>
