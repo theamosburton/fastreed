@@ -205,7 +205,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<div  id="refStyle" class="menus"> 
 										<div class="spinner" id="RSpinner"></div>
 										<i id="RefreshIcon" class="left fa fa-rotate"></i>
-										Refresh CSS  
+										Refresh 
 									</div>
 									<div id="refHard" class="menus"> 
 										<div class="spinner" id="HRSpinner"></div>
