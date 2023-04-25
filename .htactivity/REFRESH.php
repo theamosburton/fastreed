@@ -9,9 +9,10 @@ if (!isset($_SERVROOT)) {
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-include_once($GLOBALS['DEV_OPTIONS']);
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
+include_once($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
+include_once($GLOBALS['DB']);
 $userLogged = false;
 $adminLogged = false;
 if(isset($_SESSION['LOGGED_USER'])){
@@ -33,7 +34,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $refurl = URL.'/';
     if ($adminLogged) {
         if ($thisHttp == $refurl) {
-            include_once($GLOBALS['DB']);
+            
             new refreshSite();
         }else {
             showError(false, "Access Denied 0");
