@@ -34,7 +34,7 @@ function getVersions($DB){
     $return = $row['optionValue'];
 	return $return;
   }
-
+  echo 'dsfdsf';
 
   // Fetch changes from the remote repository
 shell_exec('git fetch fastreed');
@@ -53,6 +53,6 @@ if ($diff) {
 } else {
   // If there are no differences, do nothing
   echo 'No changes to pull.';
-  echo 'dsfdsf';
+  
 }
 ?>
