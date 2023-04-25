@@ -7,7 +7,9 @@ if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../';
 }
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-
+$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
+$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
+include_once($GLOBALS['DEV_OPTIONS']);
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
 include($GLOBALS['LOGGED_DATA']);
 $userLogged = false;
@@ -24,9 +26,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 	}
 }
 
-$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-include_once($GLOBALS['DEV_OPTIONS']);
+
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $thisHttp = $_SERVER['HTTP_REFERER'];
