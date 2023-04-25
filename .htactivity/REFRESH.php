@@ -112,10 +112,10 @@ class  refreshSite{
 
     public function hardRefresh(){
         if ($this->gitIsUpdated()) {
-            showError(true, "Already upto date");
+            showError(false, "Already upto date");
         }else {
             shell_exec('git pull fastreed main');
-            showError(false, "Updated Now");
+            showError(true, "Updated Now");
         }
     }
 
