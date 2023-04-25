@@ -19,13 +19,13 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             include_once($GLOBALS['DB']);
             new refreshSite();
         }else {
-            showError(false, "Access Denied");
+            showError(false, "Access Denied 0");
         }
     }else {
-        showError(false, "Access Denied");
+        showError(false, "Access Denied 1");
     }
 }else {
-    showError(false, "Access Denied");
+    showError(false, "Access Denied 3");
 }
 
 
