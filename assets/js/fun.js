@@ -16,6 +16,11 @@ window.onload = function(){
     }else if(colorMode == 'light'){
         enableLightMode();
     }
+    updateNeeded();
+ 
+}
+
+function updateNeeded() {
     if (gitIsUpdated) {
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
         $('#refHard span').html('Repo Pulled');
@@ -28,6 +33,7 @@ window.onload = function(){
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'lime');
         
     }
+    
 }
 
 function toggleMode(){
@@ -167,6 +173,7 @@ function toggleAccounts(){
 
 function toggleAdmin() {
     if(advOptions.style.display == 'none'){
+        updateNeeded();
         advOptions.style.display = 'block';
         overlay.style.display = 'block';
     }else{
