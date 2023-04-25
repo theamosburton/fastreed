@@ -1,4 +1,5 @@
 function hardRefresh(){
+    refreshCss();
     $('#HPicon').css('display', 'none');
     $('#HRSpinner').css('display', 'block');
     $('#refHard span').html('Pulling...');
