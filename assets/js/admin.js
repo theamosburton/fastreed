@@ -35,4 +35,5 @@ function refreshCss() {
         }else{
             alert(data.message);
         }
+    }
 }
