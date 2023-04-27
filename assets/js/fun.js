@@ -118,12 +118,11 @@ function removeOptions(){
         notification.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
-        if (mSpinner.style.display != null) {
-            mSpinner.style.display = 'none';
-        }
-        
+        mSpinner.style.display = 'none';  
         accountIcon.style.display = "block";
-    }else if(advOptions.style.display = 'block'){
+    }else if(profileImage.style.display == 'block'){
+        profileImage.style.display == 'block
+    }else if(advOptions.style.display == 'block'){
         advOptions.style.display = 'none';
     }
     overlay.style.display = 'none';
@@ -187,11 +186,11 @@ function updateNeeded() {
 }
 
 function toggleProfile() {
-    if(accountsState.style.display == 'none'){
-      accountsState.style.display = 'block';
+    if(profileImage.style.display == 'none'){
+        profileImage.style.display = 'block';
       overlay.style.display = 'block';
     }else{
-        accountsState.style.display = 'none'; 
+        profileImage.style.display = 'none'; 
     }
     
 }
