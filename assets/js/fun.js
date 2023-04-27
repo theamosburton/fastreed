@@ -120,8 +120,6 @@ function removeOptions(){
         accountsState.style.display = 'none';
         mSpinner.style.display = 'none';  
         accountIcon.style.display = "block";
-    }else if(profileImage.style.display == 'block'){
-        profileImage.style.display == 'block
     }else if(advOptions.style.display == 'block'){
         advOptions.style.display = 'none';
     }
@@ -186,11 +184,11 @@ function updateNeeded() {
 }
 
 function toggleProfile() {
-    if(profileImage.style.display == 'none'){
-        profileImage.style.display = 'block';
+    if(accountsState.style.display == 'none'){
+        accountsState.style.display = 'block';
       overlay.style.display = 'block';
     }else{
-        profileImage.style.display = 'none'; 
+        accountsState.style.display = 'none';
     }
     
 }

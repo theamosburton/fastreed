@@ -82,6 +82,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 						<img onclick="toggleProfile()" src="$userData->PROFILE_PIC" alt="" id="profileImage">
 						<i id="accountIcon" hidden></i>
 					</div>
+					<div class="spinner" id="MenuSpinner" hidden></div>
 					<!-- Profile Pic -->
 
 					<!-- Admin Nav -->
