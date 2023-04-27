@@ -148,6 +148,8 @@
 /* Notifications */
 #noti-nav{
   background-color: #353740;
+  max-height: 90vh;
+  overflow-x: scroll;
 }
 .notification{
   display: flex;

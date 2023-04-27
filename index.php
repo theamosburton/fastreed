@@ -160,6 +160,8 @@ if(isset($_SESSION['LOGGED_USER'])){
 									</div>
 								HTML;
 								echo $profileNotify;
+								echo $profileNotify;
+								echo $profileNotify;
 							}
 						}
 						
