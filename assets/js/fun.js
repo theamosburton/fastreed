@@ -118,7 +118,7 @@ function removeOptions(){
         notification.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
-        mSpinner.style.display = 'none';
+        // mSpinner.style.display = 'none';
         accountIcon.style.display = "block";
     }else if(advOptions.style.display = 'block'){
         advOptions.style.display = 'none';
