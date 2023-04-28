@@ -171,6 +171,7 @@
   background-color: #353740; 
   margin-bottom: 20px;
   bottom: 2px;
+  min-width: 300px;
 }
 
 .notifications{
