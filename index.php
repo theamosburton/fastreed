@@ -143,7 +143,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<div class="menu-head">
 						<span class="name">Notifications</span>
 					</div>
-					<div class="notifications">
+					<div class="notifications scrollbar-style" id="notifications">
 						<?php
 						if ($userLogged) {
 							if ($userData->getAccess()['Gender'] === null || $userData->getAccess()['DOB'] == null) {
@@ -151,17 +151,18 @@ if(isset($_SESSION['LOGGED_USER'])){
 								$userSince = date('M j, Y \a\t h:i A', $userSince);
 
 								$profileNotify = <<<HTML
-									<div class="notification">
-										<img class="image" src="/assets/img/favicon2.jpg">
-										<div class="body">
-											<p class="noti-parts title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features. Thank you!</p>
-											<span class="noti-parts time">$userSince</span>
-											<a class="singleAction"href="#">Complete Profile</a>
-										</div>
+								
+									<div class="notification" id="notification">
+										<a href="/profile/">
+											<img class="image" src="/assets/img/favicon2.jpg">
+											<div class="body">
+												<p class="noti-parts title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features.</p>
+												<span class="noti-parts time">$userSince</span>
+											</div>
+										</a>
 									</div>
+								
 								HTML;
-								echo $profileNotify;
-								echo $profileNotify;
 								echo $profileNotify;
 							}
 						}
@@ -232,7 +233,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								</div>
 								<div id="refHard" class="menus" onclick="hardRefresh()"> 
 									<div  class="spinner" id="HRSpinner"></div>
-									<i id="HPicon" class="left fa fa-code-pull-request"></i>
+									<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
 									<span> Hard Pull</span>
 								</div>
 							HTML;
@@ -615,6 +616,8 @@ if(isset($_SESSION['LOGGED_USER'])){
 <?php
 if ($adminLogged) {
 	echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
+}elseif ($userLogged) {
+	echo '<script type="text/javascript" src="/assets/js/user.js?v='.$version.'"></script>';
 }
 ?>
 <script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>

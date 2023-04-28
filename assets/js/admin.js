@@ -12,12 +12,12 @@ function hardRefresh(){
         if (isRefreshed) {
             $('#HRSpinner').css('display', 'none');
             $('#HPicon').css('display', 'block');
-            $('#refHard span').html('Repo Pulled');
+            $('#refHard span').html('Repos Pulled');
         }else{
             alert(data.message);
             $('#HRSpinner').css('display', 'none');
             $('#HPicon').css('display', 'block');
-            $('#refHard span').html('Repo Pulled');
+            $('#refHard span').html('Repos Pulled');
         }
     }
 }

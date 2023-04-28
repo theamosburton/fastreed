@@ -17,6 +17,7 @@ window.onload = function(){
         enableLightMode();
     }
     updateNeeded();
+    $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
  
 }
 
@@ -48,18 +49,31 @@ function enableDarkMode() {
         'background-color': '#353740',
         'border-color': 'rgb(218, 218, 218)'
     });
-    $('.notification').css('box-shadow',' 0 0 1px 0 rgb(218,218,218)');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
+    document.querySelectorAll('.notification').forEach(function(notification) {
+        notification.classList.add('notiDark');
+      });
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on'); 
     $('#toggleMode').css('color','#8f8fed');
       
 }
+
+
+$('#noti-nav').mouseover(function(){
+    document.querySelector('#notifications').classList.add('sc-color');
+});
+$('#noti-nav').mouseout(function(){
+    document.querySelector('#notifications').classList.remove('sc-color');
+});
+
+  
+  
 
 function enableLightMode(){
     document.cookie = "colorMode=light; max-age=31104000; path=/";
@@ -76,12 +90,14 @@ function enableLightMode(){
     });
 
     $('header').css('border-bottom', '1px solid #353740');
-    $('.notification').css('box-shadow',' 0 0 1.5px 0 rgb(52 52 52)');
     $('#accounts').css('background-color','white');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
+    document.querySelectorAll('.notification').forEach(function(notification) {
+        notification.classList.remove('notiDark');
+      });
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
