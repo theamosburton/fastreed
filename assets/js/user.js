@@ -16,7 +16,7 @@ async function isUserlogged(){
         let NAME = userLog.message.NAME;
         getNotifications()
         async function getNotifications(){
-            const logUrl = `/.htactivity/API/getNotifications.php?ePID=${UID}`;
+            const logUrl = `/.htactivity/API/getNotifications.php?ePID=${userID}`;
             const response = await fetch(logUrl);
             var notificationData = await response.json();
 
