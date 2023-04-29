@@ -82,7 +82,7 @@ function profileCompleted($DB, $dPID){
     $sql = "SELECT * FROM account_access WHERE personID = '$dPID'";
     $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);
-    var_dump($row);
+    var_dump($result);
     $DOB = $row['DOB'];
     $Gender = $row['gender'];
     $userSince = $row['userSince'];
