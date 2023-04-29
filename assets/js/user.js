@@ -135,7 +135,7 @@ function timeAgo(timestamp) {
       return `${interval} ${interval === 1 ? "minute" : "minutes"} ago`;
     }
     if (interval === 1) {
-      return "1 min. ago";
+      return "1 minute ago";
     }
     return `${Math.floor(seconds)} seconds ago`;
   }
