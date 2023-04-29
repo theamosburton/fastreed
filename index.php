@@ -104,7 +104,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<!-- Notifications Nav-->
 					<div class="navs">
 						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-						<span class="badge" id="notiCount">1</span>
+						<span class="badge" id="notiCount"></span>
 					</div>
 					<!-- Notifications Nav-->
 
