@@ -66,29 +66,46 @@ async function isUserlogged(){
 function timeAgo(timestamp) {
     const seconds = Math.floor((new Date() - timestamp * 1000) / 1000);
     if (seconds < 60) {
-      return "Just now";
+      return "just now";
     }
     let interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
-        return `${interval} ${interval === 1 ? "year" : "years"} ago`;
+      return `${interval} years ago`;
+    }
+    if (interval === 1) {
+      return "1 year ago";
     }
     interval = Math.floor(seconds / 2592000);
     if (interval > 1) {
-        return `${interval} ${interval === 1 ? "month" : "months"} ago`;
+      return `${interval} months ago`;
+    }
+    if (interval === 1) {
+      return "1 month ago";
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-        return `${interval} ${interval === 1 ? "day" : "days"} ago`;
+      return `${interval} ${interval === 1 ? "day" : "days"} ago`;
+    }
+    if (interval === 1) {
+      return "1 day ago";
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-        return `${interval} ${interval === 1 ? "hr." : "hrs."} ago`;
+      return `${interval} ${interval === 1 ? "hour" : "hours"} ago`;
+    }
+    if (interval === 1) {
+      return "1 hour ago";
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-        return `${interval} ${interval === 1 ? "min." : "mins."} ago`;
+      return `${interval} ${interval === 1 ? "minute" : "minutes"} ago`;
     }
-    return `${Math.floor(seconds)}s ago`;
+    if (interval === 1) {
+      return "1 min. ago";
+    }
+    return `${Math.floor(seconds)} seconds ago`;
+  }
+  
   }
   
   
