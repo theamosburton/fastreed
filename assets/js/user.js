@@ -101,9 +101,7 @@ async function isUserlogged(userID){
 
 function timeAgo(timestamp) {
     const seconds = Math.floor((new Date() - timestamp * 1000) / 1000);
-    if (seconds < 60) {
-      return "just now";
-    }
+
     let interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
       return `${interval} years ago`;
