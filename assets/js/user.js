@@ -1,21 +1,22 @@
 
 let cookieExist = (document.cookie.match(/^(?:.*;)?\s*UID\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
+let userID;
 if (cookieExist != null) {
-    let userID = str_obj(document.cookie).UID;
+    userID = str_obj(document.cookie).UID;
 }else{
-    let userID = '';
+    userID = '';
 }
 
-isUserlogged();
-async function isUserlogged(){
+isUserlogged(userID);
+async function isUserlogged(userID){
     const logUrl = `/.htactivity/API/checkUser.php`;
     const response = await fetch(logUrl);
     var userLog = await response.json();
     if (userLog.Result) {
         let PID = userLog.message.PID;
         let NAME = userLog.message.NAME;
-        getNotifications()
-        async function getNotifications(){
+        getNotifications(userID)
+        async function getNotifications(userID){
             const logUrl = `/.htactivity/API/getNotifications.php?ePID=${userID}`;
             const response = await fetch(logUrl);
             var notificationData = await response.json();
