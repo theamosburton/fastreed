@@ -1,5 +1,14 @@
 
-window.onload = function(){
+let settingState = document.getElementById('settings');
+let notification = document.getElementById('noti-nav');
+let accountsState = document.getElementById('accounts');
+let overlay = document.getElementById('opt-overlay');
+let accountIcon = document.getElementById('accountIcon');
+let mSpinner =  document.getElementById('MenuSpinner');
+let profileImage = document.getElementById('profileImage');
+let advOptions = document.getElementById('advOptions');
+styleUpdate();
+function styleUpdate() {
     // checking cookie mode
     let colorMode;
     let cookieExist = (document.cookie.match(/^(?:.*;)?\s*colorMode\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
@@ -18,7 +27,6 @@ window.onload = function(){
     }
     updateNeeded();
     $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
- 
 }
 
 
@@ -107,14 +115,6 @@ function enableLightMode(){
 
 
 
-let settingState = document.getElementById('settings');
-let notification = document.getElementById('noti-nav');
-let accountsState = document.getElementById('accounts');
-let overlay = document.getElementById('opt-overlay');
-let accountIcon = document.getElementById('accountIcon');
-let mSpinner =  document.getElementById('MenuSpinner');
-let profileImage = document.getElementById('profileImage');
-let advOptions = document.getElementById('advOptions');
 
 
 function str_obj(str) {

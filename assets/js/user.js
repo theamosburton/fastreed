@@ -29,6 +29,9 @@ async function isUserlogged(){
                 }
             }
 
+            if (notifiCount < 2) {
+                $('#noti-nav').css('bottom', 'auto');
+            }
             var nonReadCount = nonRead.length;
             
             if (nonReadCount > 0) {
@@ -57,6 +60,10 @@ async function isUserlogged(){
 
             }
         }
+        getNotifications().then(() => {
+            // Update styles
+            styleUpdate();
+          });
     }else{
         // Something Went Wrong with user Log
 

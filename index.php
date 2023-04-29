@@ -605,7 +605,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 <!-- Global jQuery -->
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="/assets/js/style.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
 <?php
 if ($adminLogged) {

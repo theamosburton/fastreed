@@ -203,8 +203,12 @@
   text-decoration: none;
 }
 .notification a:hover{
-  box-shadow: 0 0 2px 0 aqua;
+  background-color: #d9dee6;
   cursor: pointer;
+}
+
+.notiDark a:hover{
+  background-color: rgb(42, 43, 48);
 }
 
 
@@ -223,11 +227,13 @@
 }
 .notification .title{
   margin: 0;
+  color:rgb(240, 240, 240);
 }
 
 .notification .time{
   font-weight: 400;
   font-size: 14px;
+  color:rgb(218, 218, 218);
 }
 
 .notification .singleAction{
