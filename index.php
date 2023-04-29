@@ -604,6 +604,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 <?php
 if ($adminLogged) {
 	echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
+	echo '<script type="text/javascript" src="/assets/js/user.js?v='.$version.'"></script>';
 }elseif ($userLogged) {
 	echo '<script type="text/javascript" src="/assets/js/user.js?v='.$version.'"></script>';
 }
