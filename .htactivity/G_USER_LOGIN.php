@@ -161,7 +161,7 @@ class gSignUpLogin{
 
   public function notifyAdmin($name, $profilePic, $userSince){
     $adminID = ADMINID;
-    $title = `<b> $name </b> has created an account on Fastreed`;
+    $title = '<b> '.$name.' </b> has created an account on Fastreed';
     $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', '0')";
     $result = mysqli_query($this->DB, $sql);
   }
