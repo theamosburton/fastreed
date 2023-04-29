@@ -64,7 +64,6 @@ function responseNotifications($dPID){
                 "Purpose" => $row["purpose"],
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
-                "receiver" => $row['reciever'],
                 "isRead" => $row['markRead'],
                 "image" =>$row['image']
             );
@@ -106,7 +105,6 @@ function checkBroadCast($DB){
                 "Purpose" => $row["purpose"],
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
-                "receiver" => $row['reciever'],
                 "isRead" => $row['markRead'],
                 "image" =>$row['image']
                 
