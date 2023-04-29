@@ -13,28 +13,8 @@ async function isUserlogged(){
             const logUrl = `/.htactivity/API/getNotifications.php?ePID=${PID}`;
             const response = await fetch(logUrl);
             var notificationData = await response.json();
-            let notificationHTML = '';
-            for (let g = 0; g < notificationData.length; g++) {
-                let str = notificationData[g].title;
-                if (str.includes("${NAME}")) {
-                    str = str.replace("${NAME}", NAME);
-                } else if (str.includes("${USERNAME}")) {
-                    str = str.replace("${USERNAME}", USERNAME);
-                }
-                notificationHTML += `
-                <div class="notification" id="notification">
-                    <a href="/profile/">
-                        <img class="image" src="/assets/img/favicon2.jpg">
-                        <div class="body">
-                            <p class="noti-parts title"> ${str}</p>
-                            <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
-                        </div>
-                    </a>
-                </div>`;
-            }
-            document.getElementById('notifications').innerHTML = notificationHTML;
-            
 
+            
             var notifiCount = notificationData.length;
             if (notifiCount < 3) {
                 $('#noti-nav').css('bottom', 'auto');
@@ -61,6 +41,39 @@ async function isUserlogged(){
                 $('#notiCount').css('display', 'none')
             }
             // ********* //
+
+            let notificationHTML = '';
+            if (notificationData.length > 5) {
+                notificationData.length = 5;
+            }
+            for (let g = 0; g < notificationData.length; g++) {
+                let str = notificationData[g].title;
+                if (str.includes("${NAME}")) {
+                    str = str.replace("${NAME}", NAME);
+                } else if (str.includes("${USERNAME}")) {
+                    str = str.replace("${USERNAME}", USERNAME);
+                }
+                var isRead = Boolean(notificationData[g].isRead);
+                if(isRead){
+                    var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
+                }else{
+                    var showDot = `<i></i>`;
+                }
+                notificationHTML += `
+                <div class="notification" id="notification">
+                    <a href="/profile/">
+                        <img class="image" src="/assets/img/favicon2.jpg">
+                        <div class="body">
+                            <p class="noti-parts title"> ${str}</p>
+                            <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
+                        </div>
+                    </a>
+                    ${showDot}
+                </div>`;
+            }
+            document.getElementById('notifications').innerHTML = notificationHTML;
+            
+
            
         }
         getNotifications().then(() => 
