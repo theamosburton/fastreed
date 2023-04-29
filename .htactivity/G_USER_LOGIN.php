@@ -159,7 +159,7 @@ class gSignUpLogin{
     }
   }
 
-  public notifyAdmin($name, $profilePic, $userSince){
+  public function notifyAdmin($name, $profilePic, $userSince){
     $adminID = ADMINID;
     $title = `<b> $name </b> has created an account on Fastreed`;
     $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', '0')";
