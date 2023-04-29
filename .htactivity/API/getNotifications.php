@@ -24,6 +24,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         }else {
             $ePID = $_GET['ePID'];
             $AUTH = new AUTH();
+            echo $ePID;
             $dPID = $AUTH->decrypt($ePID);
             responseNotifications($dPID);
         }
@@ -79,7 +80,6 @@ function responseNotifications($dPID){
 
 // Function to check if profile is completed or not
 function profileCompleted($DB, $dPID){
-    echo $dPID;
     $sql = "SELECT * FROM account_access WHERE personID = '$dPID'";
     $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);
