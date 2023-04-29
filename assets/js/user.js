@@ -1,4 +1,10 @@
 
+let cookieExist = (document.cookie.match(/^(?:.*;)?\s*UID\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
+if (cookieExist != null) {
+    let UID = str_obj(document.cookie).colorMode;
+}else{
+  let UID = '';
+}
 
 isUserlogged();
 async function isUserlogged(){
@@ -10,7 +16,7 @@ async function isUserlogged(){
         let NAME = userLog.message.NAME;
         getNotifications()
         async function getNotifications(){
-            const logUrl = `/.htactivity/API/getNotifications.php?ePID=${PID}`;
+            const logUrl = `/.htactivity/API/getNotifications.php?ePID=${UID}`;
             const response = await fetch(logUrl);
             var notificationData = await response.json();
 
