@@ -50,7 +50,7 @@ async function isUserlogged(){
                     <a href="/profile/">
                         <img class="image" src="/assets/img/favicon2.jpg">
                         <div class="body">
-                            <p class="noti-parts title"> Hi <b>${NAME}!</b> Please complete your profile to enable more options.</p>
+                            <p class="noti-parts title"> Hello, <b>${NAME}!</b> Please complete your profile to enable more options.</p>
                             <span class="noti-parts time">${timeAgo(completeProfile.time)}</span>
                         </div>
                     </a>
