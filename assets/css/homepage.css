@@ -203,12 +203,8 @@
   text-decoration: none;
 }
 .notification a:hover{
-  background-color: #d9dee6;
+  box-shadow: 0 0 2px 0 aqua;
   cursor: pointer;
-}
-
-.notiDark a:hover{
-  background-color: rgb(42, 43, 48);
 }
 
 
