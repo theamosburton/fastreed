@@ -14,26 +14,44 @@ async function isUserlogged(){
             const response = await fetch(logUrl);
             var notificationData = await response.json();
             var notifiCount = notificationData.length;
+            if (notifiCount < 2) {
+                $('#noti-nav').css('bottom', 'auto');
+            }else{
+                $('#noti-nav').css('bottom', '5px');
+            }
+
             var nonRead = [];
+            var broadCast = [];
+            var completeProfile = {};
+            var selfNotify = [];
             
             for (let i= 0; i < notifiCount; i++) {
                 if (notificationData[i].isRead == '0') {
                     nonRead[i] = notificationData[i];
                 }
 
+                if (notificationData[i].reciever == 'public') {
+                    broadCast[i] = notificationData[i];
+                }
+
                 if (notificationData[i].Purpose == 'profileCompletion') {
-                    var completeProfile = {
+                    completeProfile = {
                         result: true,
                         time: notificationData[i].time
                     };
+                }else{
+                    completeProfile = {
+                        result: false
+                    };
                 }
+
+                if (notificationData[i].Purpose != 'profileCompletion' && notificationData[i].reciever != 'public') {
+                    selfNotify[i] = notificationData[i];
+                } 
             }
 
-            if (notifiCount < 2) {
-                $('#noti-nav').css('bottom', 'auto');
-            }
+            // hide and show notification badge based on notifications
             var nonReadCount = nonRead.length;
-            
             if (nonReadCount > 0) {
                 if (nonReadCount > 100) {
                     $('#notiCount').css('width', 'auto');
@@ -43,9 +61,26 @@ async function isUserlogged(){
             }else{
                 $('#notiCount').css('display', 'none')
             }
+            // ********* //
 
+            let broadcast = ' ';
+            for (let j = 0; j < broadCast.length; j++) {
+
+                broadcast[j] = `
+                <div class="notification" id="notification">
+                    <a href="/profile/">
+                        <img class="image" src="/assets/img/favicon2.jpg">
+                        <div class="body">
+                            <p class="noti-parts title"> ${broadCast[j].other}
+                            <span class="noti-parts time">${timeAgo(broadCast[j].time)}</span>
+                        </div>
+                    </a>
+                </div>
+            `;
+            }
+            let profileNotifications = ' ';
             if (completeProfile.result) {
-                document.getElementById('notifications').innerHTML = `
+                profileNotifications = `
                 <div class="notification" id="notification">
                     <a href="/profile/">
                         <img class="image" src="/assets/img/favicon2.jpg">
@@ -56,17 +91,31 @@ async function isUserlogged(){
                     </a>
                 </div>
                 `;
-            }else{
-
             }
+            let selfNotifications = ' ';
+            for (let k = 0; k < selfNotify.length; k++) {
+                selfNotifications[k] =  `
+                <div class="notification" id="notification">
+                    <a href="/profile/">
+                        <img class="image" src="/assets/img/favicon2.jpg">
+                        <div class="body">
+                            <p class="noti-parts title"> ${broadCast[k].other}
+                            <span class="noti-parts time">${timeAgo(broadCast[k].time)}</span>
+                        </div>
+                    </a>
+                </div>
+            `;
+            }
+
+
+            
+        document.getElementById('notifications').innerHTML = broadCast + profileNotifications + selfNotifications;
         }
-        getNotifications().then(() => {
+        getNotifications().then(() => 
+        {
             // Update styles
             styleUpdate();
-          });
-    }else{
-        // Something Went Wrong with user Log
-
+        });
     }
 }
 

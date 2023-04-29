@@ -38,12 +38,14 @@ function responseNotifications($dPID){
     $DB_CONNECT = new Database();
     $DB = $DB_CONNECT->DBConnection();
     $checkProfile = profileCompleted($DB, $dPID);
+    // If profile is not completed
     if ($checkProfile['Result']) {
         $pNoti = array();
     }else {
         $pNoti[] = array("Purpose"=>"profileCompletion", "time"=>$checkProfile['time'], "isRead"=>'0');
     }
-
+    
+    // If notification is broadcasted to all
     if(checkBroadcast($DB)['Result']){
         $bNoti = checkBroadcast($DB)['B-Noti'];
     }else {
@@ -59,14 +61,14 @@ function responseNotifications($dPID){
                 "Purpose" => $row["purpose"],
                 "time" => $row["timestamp"],
                 "other" => $row['other'],
-                "isRead" =>$row['markRead']
+                "isRead" => $row['markRead'],
+                "reciever"=>$row['reciever']
             );
             $notifications[] = $notification;
         }
     }
+    // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
     $mergedArray = array_merge($bNoti, $pNoti, $notifications);
-
-   
     $dataDecode = json_encode($mergedArray);
     echo "$dataDecode";
      
@@ -88,6 +90,8 @@ function profileCompleted($DB, $dPID){
     return $return;
 }
 
+
+// Function to check if any broadcasted notification
 function checkBroadCast($DB){
     $sql = "SELECT * FROM notifications WHERE reciever = 'public' AND markRead = 0";
     $result = mysqli_query($DB, $sql);
@@ -98,7 +102,8 @@ function checkBroadCast($DB){
                 "Purpose" => $row["purpose"],
                 "time" => $row["timestamp"],
                 "other" => $row['other'],
-                "isRead" => $row['markRead']
+                "isRead" => $row['markRead'],
+                "reciever"=>$row['reciever']
             );
             $notifications[] = $notification;
         }
@@ -108,6 +113,7 @@ function checkBroadCast($DB){
     }
     return $return;
 }
+
 function showMessage($result, $message){
     $data = array("Result"=>$result, "message"=>"$message");
     $dataDecode = json_encode($data);
