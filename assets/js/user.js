@@ -106,7 +106,6 @@ function timeAgo(timestamp) {
     return `${Math.floor(seconds)} seconds ago`;
   }
   
-  }
   
   
 
