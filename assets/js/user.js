@@ -59,10 +59,17 @@ async function isUserlogged(){
                 }else{
                     var showDot = `<i></i>`;
                 }
+
+                let srcImage;
+                if (notificationData[g].image != null) {
+                    srcImage = notificationData[g].image;
+                }else{
+                    srcImage = "/assets/img/favicon2.jpg";
+                }
                 notificationHTML += `
                 <div class="notification" id="notification">
                     <a href="/profile/">
-                        <img class="image" src="/assets/img/favicon2.jpg">
+                        <img class="image" src="${srcImage}">
                         <div class="body">
                             <p class="noti-parts title"> ${str}</p>
                             <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>

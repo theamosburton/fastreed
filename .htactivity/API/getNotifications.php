@@ -38,11 +38,12 @@ function responseNotifications($dPID){
     $DB_CONNECT = new Database();
     $DB = $DB_CONNECT->DBConnection();
     $checkProfile = profileCompleted($DB, $dPID);
+    $time = $checkProfile['time'];
     // If profile is not completed
     if ($checkProfile['Result']) {
         $pNoti = array();
     }else {
-        $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "time"=>$checkProfile['time'], "isRead"=>'0');
+        $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "image"=>"/assets/img/favicon2.jpg", "time"=>$time, "isRead"=>'0');
     }
     
     // If notification is broadcasted to all
@@ -60,10 +61,11 @@ function responseNotifications($dPID){
         while ($row = mysqli_fetch_assoc($result2)) {
             $rowArray = array(
                 "Purpose" => $row["purpose"],
-                "title" => $row['other'],
+                "title" => $row['title'],
                 "time" => $row["timestamp"],
                 "receiver" => $row['reciever'],
-                "isRead" => $row['markRead']
+                "isRead" => $row['markRead'],
+                "image" =>$row['image']
             );
             array_push($notifications2, $rowArray);
         }
@@ -101,10 +103,12 @@ function checkBroadCast($DB){
         while ($row = mysqli_fetch_assoc($result)) {
             $rowArray = array(
                 "Purpose" => $row["purpose"],
-                "title" => $row['other'],
+                "title" => $row['title'],
                 "time" => $row["timestamp"],
                 "receiver" => $row['reciever'],
-                "isRead" => $row['markRead']
+                "isRead" => $row['markRead'],
+                "image" =>$row['image']
+                
             );
             array_push($notifications, $rowArray);
         }

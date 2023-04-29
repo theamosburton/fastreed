@@ -146,6 +146,7 @@ class gSignUpLogin{
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
         $this->loginAccount($userID);
+        $this->notifyAdmin($name, $profilePic, $userSince);
       }else {
         $cantRead = array("Result"=>false, "message"=>"Account Not Created");
         $cantReadDecode = json_encode($cantRead);
@@ -158,7 +159,12 @@ class gSignUpLogin{
     }
   }
 
-
+  public notifyAdmin($name, $profilePic, $userSince){
+    $adminID = ADMINID;
+    $title = `<b> $name </b> has created an account on Fastreed`;
+    $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', '0')";
+    $result = mysqli_query($this->DB, $sql);
+  }
   // This function is for logging out account
 
   public function logoutAccount(){
