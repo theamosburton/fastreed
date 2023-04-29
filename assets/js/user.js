@@ -67,8 +67,9 @@ async function isUserlogged(){
                             <p class="noti-parts title"> ${str}</p>
                             <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
                         </div>
+                        ${showDot}
                     </a>
-                    ${showDot}
+                    
                 </div>`;
             }
             document.getElementById('notifications').innerHTML = notificationHTML;
