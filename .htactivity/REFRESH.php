@@ -30,11 +30,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 
 
 if (isset($_SERVER['HTTP_REFERER'])) {
-    $thisHttp = $_SERVER['HTTP_REFERER'];
-    $refurl = URL.'/';
+    $referrer = $_SERVER['HTTP_REFERER'];
+    $urlParts = parse_url($referrer);
+    $refdomain = $urlParts['host'];
+
     if ($adminLogged) {
-        if ($thisHttp == $refurl) {
-            
+        if ($refdomain == DOMAIN) {
             new refreshSite();
         }else {
             showError(false, "Access Denied 0");

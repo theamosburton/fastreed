@@ -14,6 +14,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 		$userLogged = true;
 		if ($userData->getAccess()['userType'] == 'admin') {
 			$adminLogged = true;
+			
 		}
 	}
 }
@@ -44,6 +45,17 @@ if(isset($_SESSION['LOGGED_USER'])){
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 	<?php
+	// if ($userLogged) {
+	// 	echo '<script>var userLogged = true;</script>';
+	// 	if ($adminLogged) {
+	// 		echo '<script>var adminLogged = true;</script>';
+	// 	}else {
+	// 		echo '<script>var adminLogged = false;</script>';
+	// 	}
+	// }else {
+	// 	echo '<script>var userLogged = false;</script>';
+	// }
+
 	if ($basic_func->gitIsUpdated()) {
 		echo '<script>
 		let gitIsUpdated = true;
@@ -144,30 +156,11 @@ if(isset($_SESSION['LOGGED_USER'])){
 						<span class="name">Notifications</span>
 					</div>
 					<div class="notifications scrollbar-style" id="notifications">
-						<?php
-						if ($userLogged) {
-							if ($userData->getAccess()['Gender'] === null || $userData->getAccess()['DOB'] == null) {
-								$userSince = (int) $userData->getAccess()['userSince'];
-								$userSince = date('M j, Y \a\t h:i A', $userSince);
-
-								$profileNotify = <<<HTML
-								
-									<div class="notification" id="notification">
-										<a href="/profile/">
-											<img class="image" src="/assets/img/favicon2.jpg">
-											<div class="body">
-												<p class="noti-parts title"> <b>Hi $userData->NAME!</b> Please complete your profile to access all features.</p>
-												<span class="noti-parts time">$userSince</span>
-											</div>
-										</a>
-									</div>
-								
-								HTML;
-								echo $profileNotify;
-							}
-						}
-						
-						?>
+						<div id="reloadNotify">
+							<span>
+								Load more....
+							</span>
+						</div>
 						
 					</div>
 				</div>
@@ -613,6 +606,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/fun.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
 <?php
 if ($adminLogged) {
 	echo '<script type="text/javascript" src="/assets/js/admin.js?v='.$version.'"></script>';
@@ -620,7 +614,7 @@ if ($adminLogged) {
 	echo '<script type="text/javascript" src="/assets/js/user.js?v='.$version.'"></script>';
 }
 ?>
-<script type="text/javascript" src="/assets/js/log.js?v=<?php echo $version;?>"></script>
+
 
 </body>
 </html>

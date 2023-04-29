@@ -12,6 +12,7 @@ class getLoggedData{
     public $PROFILE_PIC;
     public $TYPE;
     public $U_AUTH;
+    public $PID;
 
     function __construct(){
         $this->DB_CONNECT = new Database();
@@ -32,10 +33,17 @@ class getLoggedData{
     }
 
      private function getUserData($PID){
+        $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM accounts WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-        $this->U_AUTH = true;    
+        $this->U_AUTH = true;  
+        if (isset($_COOKIE['AID'])) {
+            $ePID = $_COOKIE['AID'];
+        }else {
+            $ePID = $_COOKIE['UID'];
+        }
+        $this->PID = $ePID;
         $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
