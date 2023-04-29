@@ -155,13 +155,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<div class="menu-head">
 						<span class="name">Notifications</span>
 					</div>
-					<div class="notifications scrollbar-style" id="notifications">
-						<!-- <div id="reloadNotify">
-							<span>
-								Load more....
-							</span>
-						</div> -->
-						
+					<div class="notifications scrollbar-style" id="notifications">	
 					</div>
 				</div>
 				<!-- ******************************************** Notifications ********************************************** -->

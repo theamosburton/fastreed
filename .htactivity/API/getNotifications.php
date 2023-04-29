@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('content-type:application/json');
+// header('content-type:application/json');
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../../';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
@@ -42,7 +42,7 @@ function responseNotifications($dPID){
     if ($checkProfile['Result']) {
         $pNoti = array();
     }else {
-        $pNoti[] = array("Purpose"=>"profileCompletion", "time"=>$checkProfile['time'], "isRead"=>'0');
+        $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "time"=>$checkProfile['time'], "isRead"=>'0');
     }
     
     // If notification is broadcasted to all
@@ -57,13 +57,13 @@ function responseNotifications($dPID){
     $result2 = mysqli_query($DB, $sql2);
     $notifications2 = array();
     if(mysqli_num_rows($result2) > 0){
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result2)) {
             $rowArray = array(
                 "Purpose" => $row["purpose"],
+                "title" => $row['other'],
                 "time" => $row["timestamp"],
-                "other" => $row['other'],
-                "isRead" => $row['markRead'],
-                "receiver" => $row['reciever']
+                "receiver" => $row['reciever'],
+                "isRead" => $row['markRead']
             );
             array_push($notifications2, $rowArray);
         }
@@ -101,10 +101,10 @@ function checkBroadCast($DB){
         while ($row = mysqli_fetch_assoc($result)) {
             $rowArray = array(
                 "Purpose" => $row["purpose"],
+                "title" => $row['other'],
                 "time" => $row["timestamp"],
-                "other" => $row['other'],
-                "isRead" => $row['markRead'],
-                "receiver" => $row['reciever']
+                "receiver" => $row['reciever'],
+                "isRead" => $row['markRead']
             );
             array_push($notifications, $rowArray);
         }

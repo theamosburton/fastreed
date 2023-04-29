@@ -13,6 +13,28 @@ async function isUserlogged(){
             const logUrl = `/.htactivity/API/getNotifications.php?ePID=${PID}`;
             const response = await fetch(logUrl);
             var notificationData = await response.json();
+            let notificationHTML = '';
+            for (let g = 0; g < notificationData.length; g++) {
+                let str = notificationData[g].title;
+                if (str.includes("${NAME}")) {
+                    str = str.replace("${NAME}", NAME);
+                } else if (str.includes("${USERNAME}")) {
+                    str = str.replace("${USERNAME}", USERNAME);
+                }
+                notificationHTML += `
+                <div class="notification" id="notification">
+                    <a href="/profile/">
+                        <img class="image" src="/assets/img/favicon2.jpg">
+                        <div class="body">
+                            <p class="noti-parts title"> ${str}</p>
+                            <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
+                        </div>
+                    </a>
+                </div>`;
+            }
+            document.getElementById('notifications').innerHTML = notificationHTML;
+            
+
             var notifiCount = notificationData.length;
             if (notifiCount < 3) {
                 $('#noti-nav').css('bottom', 'auto');
@@ -21,33 +43,10 @@ async function isUserlogged(){
             }
 
             var nonRead = [];
-            var broadCast = [];
-            var completeProfile = {};
-            var selfNotify = [];
-            
             for (let i= 0; i < notifiCount; i++) {
                 if (notificationData[i].isRead == '0') {
                     nonRead[i] = notificationData[i];
                 }
-
-                if (notificationData[i].reciever == 'public') {
-                    broadCast[i] = notificationData[i];
-                }
-
-                if (notificationData[i].Purpose == 'profileCompletion') {
-                    completeProfile = {
-                        result: true,
-                        time: notificationData[i].time
-                    };
-                }else{
-                    completeProfile = {
-                        result: false
-                    };
-                }
-
-                if (notificationData[i].Purpose != 'profileCompletion' && notificationData[i].reciever != 'public') {
-                    selfNotify[i] = notificationData[i];
-                } 
             }
 
             // hide and show notification badge based on notifications
@@ -62,58 +61,7 @@ async function isUserlogged(){
                 $('#notiCount').css('display', 'none')
             }
             // ********* //
-
-            let broadcast = [];
-            for (let j = 0; j < broadCast.length; j++) {
-                var str = broadCast[j].other;
-                    if(str.includes("${NAME}")){
-                        str = str.replace("${NAME}", NAME);
-                    }else if(str.includes("${USERNAME}")){
-                        str = str.replace("${USERNAME}", USERNAME);
-                    }
-                broadcast[j] = `
-                <div class="notification" id="notification">
-                    <a href="/profile/">
-                        <img class="image" src="/assets/img/favicon2.jpg">
-                        <div class="body">
-                            <p class="noti-parts title"> ${str}
-                            <span class="noti-parts time">${timeAgo(broadCast[j].time)}</span>
-                        </div>
-                    </a>
-                </div>
-            `;
-            document.getElementById('notifications').innerHTML = broadcast[j];
-            }
-            let profileNotifications = [];
-            if (completeProfile.result) {
-                profileNotifications = `
-                <div class="notification" id="notification">
-                    <a href="/profile/">
-                        <img class="image" src="/assets/img/favicon2.jpg">
-                        <div class="body">
-                            <p class="noti-parts title"> Hello, <b>${NAME}!</b> Please complete your profile to enable more options.</p>
-                            <span class="noti-parts time">${timeAgo(completeProfile.time)}</span>
-                        </div>
-                    </a>
-                </div>
-                `;
-                document.getElementById('notifications').innerHTML += profileNotifications;
-            }
-            let selfNotifications = ' ';
-            for (let k = 0; k < selfNotify.length; k++) {
-                selfNotifications[k] =  `
-                <div class="notification" id="notification">
-                    <a href="/profile/">
-                        <img class="image" src="/assets/img/favicon2.jpg">
-                        <div class="body">
-                            <p class="noti-parts title"> ${selfNotifications[k].other}
-                            <span class="noti-parts time">${timeAgo(selfNotifications[k].time)}</span>
-                        </div>
-                    </a>
-                </div>
-            `;
-            document.getElementById('notifications').innerHTML += selfNotifications[k];
-            }
+           
         }
         getNotifications().then(() => 
         {
