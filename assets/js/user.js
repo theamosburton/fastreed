@@ -91,7 +91,7 @@ async function isUserlogged(userID){
 
            
         }
-        getNotifications().then(() => 
+        getNotifications(userID).then(() => 
         {
             // Update styles
             styleUpdate();
