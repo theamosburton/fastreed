@@ -1,9 +1,9 @@
 
 let cookieExist = (document.cookie.match(/^(?:.*;)?\s*UID\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
 if (cookieExist != null) {
-    let UID = str_obj(document.cookie).colorMode;
+    let userID = str_obj(document.cookie).UID;
 }else{
-  let UID = '';
+    let userID = '';
 }
 
 isUserlogged();
