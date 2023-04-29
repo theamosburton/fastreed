@@ -527,9 +527,6 @@ header #nav #profileImage{
    
     width: auto;
   }
-  .notification .title{
-    -webkit-line-clamp: 3;
-  }
 }
 @media (max-width: 576px) {
   .badge {
