@@ -52,23 +52,24 @@ function responseNotifications($dPID){
         $bNoti = array();
     }
 
-    $sql = "SELECT * FROM notifications WHERE reciever = '$dPID'";
-    $result = mysqli_query($DB, $sql);
-    $notifications = array();
-    if(mysqli_num_rows($result) > 0){
+    $sql2 = "SELECT * FROM notifications WHERE reciever = '$dPID'";
+
+    $result2 = mysqli_query($DB, $sql2);
+    $notifications2 = array();
+    if(mysqli_num_rows($result2) > 0){
         while ($row = mysqli_fetch_assoc($result)) {
-            $notification = array(
+            $rowArray = array(
                 "Purpose" => $row["purpose"],
                 "time" => $row["timestamp"],
                 "other" => $row['other'],
                 "isRead" => $row['markRead'],
-                "reciever"=>$row['reciever']
+                "receiver" => $row['reciever']
             );
-            $notifications[] = $notification;
+            array_push($notifications2, $rowArray);
         }
     }
     // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
-    $mergedArray = array_merge($bNoti, $pNoti, $notifications);
+    $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
     $dataDecode = json_encode($mergedArray);
     echo "$dataDecode";
      
@@ -98,14 +99,14 @@ function checkBroadCast($DB){
     $notifications = array();
     if(mysqli_num_rows($result) > 0){
         while ($row = mysqli_fetch_assoc($result)) {
-            $notification = array(
+            $rowArray = array(
                 "Purpose" => $row["purpose"],
                 "time" => $row["timestamp"],
                 "other" => $row['other'],
                 "isRead" => $row['markRead'],
-                "reciever"=>$row['reciever']
+                "receiver" => $row['reciever']
             );
-            $notifications[] = $notification;
+            array_push($notifications, $rowArray);
         }
         $return = array("Result"=>true, "B-Noti"=>$notifications);
     }else {

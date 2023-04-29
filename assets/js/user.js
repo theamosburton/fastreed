@@ -14,7 +14,7 @@ async function isUserlogged(){
             const response = await fetch(logUrl);
             var notificationData = await response.json();
             var notifiCount = notificationData.length;
-            if (notifiCount < 2) {
+            if (notifiCount < 3) {
                 $('#noti-nav').css('bottom', 'auto');
             }else{
                 $('#noti-nav').css('bottom', '5px');
@@ -63,22 +63,28 @@ async function isUserlogged(){
             }
             // ********* //
 
-            let broadcast = ' ';
+            let broadcast = [];
             for (let j = 0; j < broadCast.length; j++) {
-
+                var str = broadCast[j].other;
+                    if(str.includes("${NAME}")){
+                        str = str.replace("${NAME}", NAME);
+                    }else if(str.includes("${USERNAME}")){
+                        str = str.replace("${USERNAME}", USERNAME);
+                    }
                 broadcast[j] = `
                 <div class="notification" id="notification">
                     <a href="/profile/">
                         <img class="image" src="/assets/img/favicon2.jpg">
                         <div class="body">
-                            <p class="noti-parts title"> ${broadCast[j].other}
+                            <p class="noti-parts title"> ${str}
                             <span class="noti-parts time">${timeAgo(broadCast[j].time)}</span>
                         </div>
                     </a>
                 </div>
             `;
+            document.getElementById('notifications').innerHTML = broadcast[j];
             }
-            let profileNotifications = ' ';
+            let profileNotifications = [];
             if (completeProfile.result) {
                 profileNotifications = `
                 <div class="notification" id="notification">
@@ -91,6 +97,7 @@ async function isUserlogged(){
                     </a>
                 </div>
                 `;
+                document.getElementById('notifications').innerHTML += profileNotifications;
             }
             let selfNotifications = ' ';
             for (let k = 0; k < selfNotify.length; k++) {
@@ -99,17 +106,14 @@ async function isUserlogged(){
                     <a href="/profile/">
                         <img class="image" src="/assets/img/favicon2.jpg">
                         <div class="body">
-                            <p class="noti-parts title"> ${broadCast[k].other}
-                            <span class="noti-parts time">${timeAgo(broadCast[k].time)}</span>
+                            <p class="noti-parts title"> ${selfNotifications[k].other}
+                            <span class="noti-parts time">${timeAgo(selfNotifications[k].time)}</span>
                         </div>
                     </a>
                 </div>
             `;
+            document.getElementById('notifications').innerHTML += selfNotifications[k];
             }
-
-
-            
-        document.getElementById('notifications').innerHTML = broadCast + profileNotifications + selfNotifications;
         }
         getNotifications().then(() => 
         {
