@@ -374,7 +374,7 @@ header #nav #profileImage{
   justify-content: center;
   margin: auto;
   width: 40px;
-  margin: 20px;
+  margin-top: 20px;
   height: 40px;
 }
 #profileImage:hover{
