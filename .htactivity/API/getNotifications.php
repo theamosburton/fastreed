@@ -23,8 +23,9 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             showMessage(false, "Access Denied No ePID");
         }else {
             $ePID = $_GET['ePID'];
-            echo $ePID;
+            
             $ePID = urldecode($ePID);
+            echo $ePID;
             $AUTH = new AUTH();
             $dPID = $AUTH->decrypt($ePID);
             responseNotifications($dPID);
