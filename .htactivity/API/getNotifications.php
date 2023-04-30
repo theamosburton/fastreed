@@ -30,6 +30,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             $dPID = $AUTH->decrypt($ePID);
             
             echo mb_detect_encoding($ePID);
+            echo $dPID;
             responseNotifications($dPID);
         }
     }else {
