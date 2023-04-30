@@ -18,6 +18,7 @@ class UsersVisits
 
   public function userVisited(){
       $encUserID = $_COOKIE['UID'];
+      echo $encUserID;
       $decUserID = $this->AUTH->decrypt($encUserID);
     if ($this->sessionExist()["bool"]) {
       $sessionID = $this->sessionExist()["id"];
