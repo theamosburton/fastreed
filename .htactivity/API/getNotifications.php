@@ -26,6 +26,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             
             $ePID = urldecode($ePID);
             $ePID = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $ePID);
+            echo strlen($ePID);
             $AUTH = new AUTH();
             $dPID = $AUTH->decrypt($ePID);
             
