@@ -73,7 +73,7 @@ function responseNotifications($dPID){
             array_push($notifications2, $rowArray);
         }
     }
-    var_dump($notifications2)
+    var_dump('dfdf'.$notifications2)
     // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
     $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
     $dataDecode = json_encode($mergedArray);
