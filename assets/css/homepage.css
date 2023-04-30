@@ -370,8 +370,8 @@ header #nav #profileImage{
 
 #notiSpinner{
   margin: auto;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 #profileImage:hover{
   cursor: pointer;
