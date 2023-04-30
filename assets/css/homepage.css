@@ -367,6 +367,12 @@ header #nav #profileImage{
   border-width: 3px;
   border-left:3px solid rgb(53,55,64);
 }
+
+.notiSpinner{
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
 #profileImage:hover{
   cursor: pointer;
 }

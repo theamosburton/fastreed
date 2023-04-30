@@ -155,7 +155,8 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<div class="menu-head noti-head">
 						<span class="name">Notifications</span>
 					</div>
-					<div class="notifications scrollbar-style" id="notifications">	
+					<div class="notifications scrollbar-style" id="notifications">
+					<div  class="spinner" id="notiSpinner"></div>	
 					</div>
 				</div>
 				<!-- ******************************************** Notifications ********************************************** -->
