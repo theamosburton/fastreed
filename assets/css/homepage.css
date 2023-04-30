@@ -137,9 +137,12 @@
 
 .dropdowns .menu-head{
   border-bottom: 3px solid;
-  padding-bottom: 5px;
+  padding: 5px 0px;
   margin-bottom: 10px;
   color: #e8eaed;
+}
+.dropdowns .noti-head{
+  margin: 10px;
 }
 .dropdowns .name{
   font-weight: 800;
