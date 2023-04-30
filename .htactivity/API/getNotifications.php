@@ -57,9 +57,7 @@ function responseNotifications($dPID){
     }
 
     $sql2 = "SELECT * FROM notifications WHERE reciever = '$dPID'";
-    echo $sql2;
     $result2 = mysqli_query($DB, $sql2);
-    var_dump($result2);
     $notifications2 = array();
     if(mysqli_num_rows($result2) > 0){
         while ($row = mysqli_fetch_assoc($result2)) {
@@ -73,8 +71,6 @@ function responseNotifications($dPID){
             array_push($notifications2, $rowArray);
         }
     }
-    echo 'dfdf';
-    var_dump($notifications2);
     // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
     $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
     $dataDecode = json_encode($mergedArray);
