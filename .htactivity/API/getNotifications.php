@@ -25,9 +25,9 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             $ePID = $_GET['ePID'];
             
             $ePID = urldecode($ePID);
-            echo $ePID;
             $AUTH = new AUTH();
             $dPID = $AUTH->decrypt($ePID);
+            echo $dPIDl
             responseNotifications($dPID);
         }
     }else {
