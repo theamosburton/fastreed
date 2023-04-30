@@ -27,7 +27,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             $ePID = urldecode($ePID);
             $AUTH = new AUTH();
             $dPID = $AUTH->decrypt($ePID);
-            echo mb_detect_encoding($dPID);
+            // $ascii_string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+            echo mb_detect_encoding($ePID);
             responseNotifications($dPID);
         }
     }else {
