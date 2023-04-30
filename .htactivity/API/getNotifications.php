@@ -59,7 +59,7 @@ function responseNotifications($dPID){
     $sql2 = "SELECT * FROM notifications WHERE reciever = '$dPID'";
 
     $result2 = mysqli_query($DB, $sql2);
-    var_dump($result);
+    var_dump($result2);
     $notifications2 = array();
     if(mysqli_num_rows($result2) > 0){
         while ($row = mysqli_fetch_assoc($result2)) {
