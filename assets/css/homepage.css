@@ -369,6 +369,9 @@ header #nav #profileImage{
 }
 
 #notiSpinner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: auto;
   width: 40px;
   height: 40px;
