@@ -8,7 +8,7 @@ function onGoogleSignIn(response) {
         islogged = data.Result;
         message = data.message;
         if (islogged) {
-          //location.reload();
+          location.reload();
         }else {
           alert("Unable To Login");
         }
@@ -29,7 +29,7 @@ function onGoogleSignIn(response) {
     isloggedout = data.Result;
     if (isloggedout) {
       google.accounts.id.disableAutoSelect();
-      //location.reload();
+      location.reload();
     }else {
       alert("Unable To Logout");
     }
