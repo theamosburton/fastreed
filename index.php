@@ -68,6 +68,35 @@ if(isset($_SESSION['LOGGED_USER'])){
 	?>
 </head>
 <body>
+<div class="profileUpdateShade">
+	<div class="wrapper">
+		<div class="cancel">
+			<i class="fa fa-times" onclick="cancelUpdatePopup()"></i>
+        </div>
+		<p class="title">Update Profile</p>
+		<form>
+			<span id="errorMessage">Gender not correct</span>
+			<div class="u-inputs">
+				<span class="up-name">Gender</span>
+				<select id="updateGender">
+					<option value="" disabled selected>Select</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Others">Others</option>
+				</select>
+            </div>
+			<div class="u-inputs">
+				<span class="up-name">Date Of Birth</span>
+				<input type="date" id="updateDOB">
+            </div>
+			<div class="u-inputs">
+				<span class='button' id="updateDOBndGender" onclick='updateDOBndGender()'>Update</span>
+            </div>
+		</form>
+    </div>
+</div>
+
+
 	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
 	<header>
 		<?php 
@@ -146,6 +175,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 	<!-- ***************************************************** Headers **************************************************** -->
 
 	<!--main content-->
+	
 	<div class="main-content">
 		<div class="container">
 			<div class="row ">

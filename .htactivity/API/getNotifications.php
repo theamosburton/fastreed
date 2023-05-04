@@ -46,7 +46,7 @@ function responseNotifications($dPID){
     if ($checkProfile['Result']) {
         $pNoti = array();
     }else {
-        $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "image"=>"/assets/img/favicon2.jpg", "time"=>"$time", "isRead"=>'0');
+        $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "image"=>"/assets/img/favicon2.jpg", "time"=>"$time", "isRead"=>'0', "url"=>"update");
     }
     
     // If notification is broadcasted to all
@@ -66,7 +66,8 @@ function responseNotifications($dPID){
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
                 "isRead" => $row['markRead'],
-                "image" =>$row['image']
+                "image" =>$row['image'],
+                "url" =>$row['url']
             );
             array_push($notifications2, $rowArray);
         }
@@ -107,8 +108,8 @@ function checkBroadCast($DB){
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
                 "isRead" => $row['markRead'],
-                "image" =>$row['image']
-                
+                "image" =>$row['image'],
+                "url" =>$row['url']
             );
             array_push($notifications, $rowArray);
         }

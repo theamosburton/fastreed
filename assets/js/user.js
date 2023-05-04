@@ -7,6 +7,61 @@ if (cookieExist != null) {
     userID = '';
 }
 
+function cancelUpdatePopup() {
+    $('.profileUpdateShade').css('display', 'none');
+}
+function enableUpdatePopup(){
+    $('.profileUpdateShade').css('display', 'flex');
+    removeOptions();
+}
+
+function updateDOBndGender(){
+    var DOB = document.querySelector('#updateDOB').value;
+    var Gender = document.querySelector('#updateGender').value;
+    var errorMessage = document.querySelector('#errorMessage');
+    var dob = false;
+    var gen = false;
+    console.log(Gender.length);
+  
+
+
+    if(Gender.length < 1){
+        errorMessage.style.display = 'inline-block';
+        errorMessage.innerHTML = 'Please select gender';
+    }else if (Gender == 'Male' || Gender == 'Female' || Gender == 'Others') {
+        if (DOB != '') {
+            if (isFiveYearsOld(DOB)) {
+                errorMessage.style.display = 'none';
+                document.querySelector('#updateDOBndGender').innerHTML = `Updating...`;
+                
+
+            }else{
+                errorMessage.style.display = 'inline-block';
+                errorMessage.innerHTML = 'Must Greater then 5 Yrs';
+            }
+        }else{
+            errorMessage.style.display = 'inline-block';
+            errorMessage.innerHTML = 'Please Enter DOB';
+        }
+    }else{
+        errorMessage.style.display = 'inline-block';
+        errorMessage.innerHTML = 'Incorrect Gender given';
+    }
+
+
+    
+}
+
+
+
+function isFiveYearsOld(dateString) {
+    var inputDate = new Date(dateString);
+    var today = new Date();
+    var tenYearsAgo = new Date().setFullYear(today.getFullYear() - 5);
+    return inputDate <= tenYearsAgo;
+  }
+
+
 isUserlogged(userID);
 async function isUserlogged(userID){
     const logUrl = `/.htactivity/API/checkUser.php`;
@@ -67,6 +122,13 @@ async function isUserlogged(userID){
                     var showDot = `<i></i>`;
                 }
 
+                let url = notificationData[g].url;
+                var aTag;
+                if(url == 'update'){
+                    aTag = `onclick="enableUpdatePopup()"`;
+                }else{
+                    aTag = `href="${url}"`;
+                }
                 let srcImage;
                 if (notificationData[g].image != null) {
                     srcImage = notificationData[g].image;
@@ -75,7 +137,7 @@ async function isUserlogged(userID){
                 }
                 notificationHTML += `
                 <div class="notification" id="notification">
-                    <a href="/profile/">
+                    <a ${aTag}>
                         <img class="image" src="${srcImage}">
                         <div class="body">
                             <p class="noti-parts title"> ${str}</p>

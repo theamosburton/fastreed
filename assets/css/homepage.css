@@ -272,6 +272,131 @@
 .notification .singleAction:hover{
   background-color: rgb(129, 19, 231);
 }
+
+.profileUpdateShade{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  align-self: center;
+  background-color: #1e1f209f;
+  align-items: center;
+  justify-content: center;
+}
+.profileUpdateShade .wrapper{
+  margin: 0 10px;
+  width: 400px;
+  border-radius: 20px;
+  background-color: #16161d;
+}
+.profileUpdateShade .wrapper .title{
+  margin: 40px;
+  margin-top: 20px;
+  margin-bottom: 6px;
+    padding: 10px 17px;
+    font-size: large;
+    font-weight: bolder;
+    color: aliceblue;
+    border-radius: 10px 10px 0 0;
+    background-color: #434343;
+}
+.profileUpdateShade .wrapper form{
+  background-color: #434343;
+  padding: 10px;
+  padding-top: 20px;
+  border-radius: 0 0 10px 10px;
+  margin: 40px;
+  margin-top: 0;
+}
+
+.profileUpdateShade .wrapper form #errorMessage{
+  color: aliceblue;
+  margin-left: 20px;
+  padding: 8px 20px;
+  background-color: #d1795670;
+  border-radius: 36px;
+  font-weight: 700;
+  display: none;
+}
+.profileUpdateShade .wrapper .cancel{
+  display: flex;
+  margin: 15px 20px 0 0;
+  flex-direction: row-reverse;
+  color: aliceblue;
+}
+.profileUpdateShade .wrapper .u-inputs{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  
+}
+.u-inputs input:hover, .u-inputs select:hover, .u-inputs input:focus,  .u-inputs select:focus{
+  cursor: pointer;
+  outline: none;
+}
+.profileUpdateShade .wrapper .u-inputs input,.profileUpdateShade .wrapper .u-inputs select {
+  background-color: #333438;
+  border: 1px solid aliceblue;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: aliceblue;
+}
+
+.u-inputs input[type="date"] {
+  position: relative;
+  padding: 10px;
+  outline: none;
+}
+.u-inputs input[type="date"]:hover,.u-inputs input[type="date"]:focus {
+  outline: none;
+  cursor: pointer;
+}
+.u-inputs input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+.u-inputs input[type="date"]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: 'FontAwesome';
+  content: '\f073';
+  /* This is the calendar icon in FontAwesome */
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: #e8eaed;
+}
+.u-inputs:hover{
+  cursor: pointer;
+}
+.profileUpdateShade .wrapper .u-inputs .up-name{
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: aliceblue;
+}
+.u-inputs .button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  font-weight: bolder;
+  text-align: center;
+  width: 100%;
+  border: 1px solid aliceblue;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+#updateDOBndGender:hover{
+  background-color: #353740;
+}
+
 /* headers */
 header{
   height: 80px;
@@ -518,6 +643,7 @@ header #nav #profileImage{
 }
 
 @media (max-width: 992px) {
+
   header{
     padding: 0px 7px;
   }
@@ -555,6 +681,10 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 530px) {
+  .profileUpdateShade .wrapper{
+    padding: 40px;
+    width: auto;
+  }
   .settings, .accounts, .options{
     top: 62px;
   }
