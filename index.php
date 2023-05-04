@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 $_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include ".htactivity/VISIT.php";
