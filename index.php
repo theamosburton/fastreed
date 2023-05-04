@@ -45,16 +45,16 @@ if(isset($_SESSION['LOGGED_USER'])){
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 	<?php
-	// if ($userLogged) {
-	// 	echo '<script>var userLogged = true;</script>';
-	// 	if ($adminLogged) {
-	// 		echo '<script>var adminLogged = true;</script>';
-	// 	}else {
-	// 		echo '<script>var adminLogged = false;</script>';
-	// 	}
-	// }else {
-	// 	echo '<script>var userLogged = false;</script>';
-	// }
+	if ($userLogged) {
+		echo '<script>var userLogged = true;</script>';
+		if ($adminLogged) {
+			echo '<script>var adminLogged = true;</script>';
+		}else {
+			echo '<script>var adminLogged = false;</script>';
+		}
+	}else {
+		echo '<script>var userLogged = false;</script>';
+	}
 
 	if ($basic_func->gitIsUpdated()) {
 		echo '<script>
