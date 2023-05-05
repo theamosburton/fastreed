@@ -201,7 +201,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								<span class="name">My Account</span>
 							</div>
 							<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
-							<div class="menus"id="logout" onclick="logout()"><i class="left fa fa-power-off"></i>Log Out</div>
+							<div class="menus"id="logout" onclick="logout()"><i class="left fa fa-right-from-bracket"></i>Log Out</div>
 						HTML;
 							echo $accountDropdown;
 						// Anonymous Users
