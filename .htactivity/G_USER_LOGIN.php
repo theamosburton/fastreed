@@ -17,7 +17,7 @@ include_once($GLOBALS['DEV_OPTIONS']);
 // if($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 $thisHttp = $_SERVER['HTTP_REFERER'];
 $refurl = 'https://'.DOMAIN.'/';
-$refurl2 = 'https://'.DOMAIN2.'/';
+$refurl2 = 'https://'.DOMAIN_ALIAS.'/';
 if ($thisHttp == $refurl || $thisHttp == $refurl2) {
     include_once($GLOBALS['DB']);
     include_once($GLOBALS['AUTH']);

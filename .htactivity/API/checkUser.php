@@ -19,7 +19,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
     $urlParts = parse_url($referrer);
     $refdomain = $urlParts['host'];
-    if ($refdomain == DOMAIN || $refdomain == DOMAIN2) {
+    if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
         $loggedData = new getLoggedData();
         $isLogged = $loggedData->U_AUTH;
         if ($isLogged) {

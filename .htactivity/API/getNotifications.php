@@ -16,7 +16,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
     $urlParts = parse_url($referrer);
     $refdomain = $urlParts['host'];
-    if ($refdomain == DOMAIN || $refdomain == DOMAIN2) {
+    if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
         if (!isset($_GET)) {
             showMessage(false, "Access Denied No argument");
         }elseif (!isset($_GET['ePID'])) {
