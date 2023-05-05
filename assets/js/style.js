@@ -195,7 +195,7 @@ function toggleAdmin() {
         advOptions.style.display = 'none';
     }
 }
-
+//
 function updateNeeded() {
     if (gitIsUpdated) {
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
