@@ -56,6 +56,8 @@ function enableDarkMode() {
     $('.dropdowns').css({
         'background-color': '#353740'
     });
+    $('.dropdowns .menu-head').css('background-color', '#16161d');
+    $('.dropdowns .settings, #advOptions .menus').css('background-color', '#16161d');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
@@ -95,7 +97,12 @@ function enableLightMode(){
     'border-color': '#353740',
     'background-color': 'rgb(255, 255, 255)'
     });
-
+    $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
+    $('.notification').css('background-color', 'rgb(213, 211 ,211)');
+    $('.profile-info').css('background-color', 'rgb(213, 211 ,211)');
+    $('.profile-top .menus').css('background-color', 'rgb(213, 211 ,211)');
+    $('.profile-info').css('color', 'rgb(32, 33, 35)');
+    $('.dropdowns .settings, #advOptions .menus').css('background-color', 'rgb(213, 211 ,211)');
     $('header').css('border-bottom', '1px solid #353740');
     $('#accounts').css('background-color','white');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(32, 33, 35)');
