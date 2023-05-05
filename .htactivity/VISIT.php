@@ -1,6 +1,6 @@
 <?php
 
-echo exec('whoami')
+echo exec('whoami');
 
 session_start();
 ini_set('display_errors', 1);
