@@ -14,8 +14,10 @@ include_once($GLOBALS['DB']);
 include($GLOBALS['LOGGED_DATA']);
 include($GLOBALS['DEV_OPTIONS']);
 
+
 if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
+    echo $referrer;
     $urlParts = parse_url($referrer);
     $refdomain = $urlParts['host'];
     if ($refdomain == DOMAIN) {
