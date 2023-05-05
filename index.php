@@ -209,6 +209,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 								</div>
 
 								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Manage Account</a> </div>
+								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Manage Account</a> </div>
 						    </div>
 
 							<div class="profile-bottom">

@@ -13,11 +13,14 @@ $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 include_once($GLOBALS['DEV_OPTIONS']);
-
-// if($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+if(HTTPS){
+  $prefix = 'https://';
+}else{
+  $prefix = 'http://';
+}
 $thisHttp = $_SERVER['HTTP_REFERER'];
-$refurl = 'https://'.DOMAIN.'/';
-$refurl2 = 'https://'.DOMAIN_ALIAS.'/';
+$refurl = $prefix.DOMAIN.'/';
+$refurl2 = $prefix.DOMAIN_ALIAS.'/';
 if ($thisHttp == $refurl || $thisHttp == $refurl2) {
     include_once($GLOBALS['DB']);
     include_once($GLOBALS['AUTH']);

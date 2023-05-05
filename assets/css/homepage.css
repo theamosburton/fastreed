@@ -379,11 +379,28 @@
   flex-direction: column;
   background-color: #353740;
 }
-.profile-top .menus{
-  padding: 10px;
-  background-color: rgb(32,33,35);
+
+
+.profile-top .menus:first-child{
   margin-top: 3px;
-  border-radius: 2px 2px 15px 15px;
+}
+
+.profile-top .menus{
+  background-color: rgb(32,33,35);
+  padding: 10px;
+  margin-top: 3px;
+}
+.profile-top .menus:hover{
+  background-color: #292b32;
+}
+
+.profile-bottom .menus:hover{
+  background-color: rgb(32,33,35);
+}
+.profile-top .menus:last-child{
+  padding: 10px;
+  margin-top: 0;
+  border-radius: 2px 2px 22px 22px;
 }
 .profile-info{
   color: aliceblue;
@@ -392,7 +409,7 @@
   align-items: center;
   flex-direction: row;
   padding: 15px;
-  border-radius: 15px 15px 2px 2px;
+  border-radius: 22px 22px 2px 2px;
   background-color: rgb(32,33,35);
   font-weight: 700;
 }
@@ -415,8 +432,10 @@
   width: 70px;
   height: 70px;
   border-radius: 100px;
+  border: 1px solid blueviolet;
 }
 #accounts{
+  border-radius: 22px;
   padding: 0;
 }
 .profile-info .info-div{
@@ -424,8 +443,9 @@
 }
 
 .profile-bottom .menus{
-  padding: 20px;
-  margin-top: 0;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 10px;
   
 }
 /* headers */
