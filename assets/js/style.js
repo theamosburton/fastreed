@@ -206,7 +206,7 @@ function updateNeeded() {
         });
         
     }else {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'lime');
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
         
     }
     
