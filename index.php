@@ -208,8 +208,9 @@ if(isset($_SESSION['LOGGED_USER'])){
 									</div>
 								</div>
 
-								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Manage Account</a> </div>
-								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Manage Account</a> </div>
+								<div class="menus"><i class="left fa fa-circle-plus"></i> <a href="">Create</a> </div>
+								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">View Profile</a> </div>
+								<div class="menus"><i class="left fa fa-gear"></i> <a href="">Manage Account</a> </div>
 						    </div>
 
 							<div class="profile-bottom">
