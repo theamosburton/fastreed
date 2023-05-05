@@ -342,36 +342,6 @@
   border-radius: 5px;
   color: aliceblue;
 }
-
-.u-inputs input[type="date"] {
-  position: relative;
-  padding: 10px;
-  outline: none;
-}
-.u-inputs input[type="date"]:hover,.u-inputs input[type="date"]:focus {
-  outline: none;
-  cursor: pointer;
-}
-.u-inputs input[type="date"]::-webkit-calendar-picker-indicator {
-  color: transparent;
-  background: none;
-  z-index: 1;
-}
-
-.u-inputs input[type="date"]:before {
-  color: transparent;
-  background: none;
-  display: block;
-  font-family: 'FontAwesome';
-  content: '\f073';
-  /* This is the calendar icon in FontAwesome */
-  width: 15px;
-  height: 20px;
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  color: #e8eaed;
-}
 .u-inputs:hover{
   cursor: pointer;
 }
