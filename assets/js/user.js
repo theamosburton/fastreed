@@ -32,7 +32,19 @@ function updateDOBndGender(){
             if (isFiveYearsOld(DOB)) {
                 errorMessage.style.display = 'none';
                 document.querySelector('#updateDOBndGender').innerHTML = `Updating...`;
-                
+                updateDOBndGender();
+                async function updateDOBndGender(){
+                    const logUrl = `/.htactivity/API/updateDetails.php?gender=${Gender}&DOB=${DOB}`;
+                    const response = await fetch(logUrl);
+                    var data = await response.json();
+                    if (data.Result) {
+                        document.querySelector('#updateDOBndGender').innerHTML = `Updated`;
+                        
+                    }else{
+                        errorMessage.style.display = 'inline-block';
+                        errorMessage.innerHTML = 'Not Updated';
+                    }
+                }
 
             }else{
                 errorMessage.style.display = 'inline-block';
