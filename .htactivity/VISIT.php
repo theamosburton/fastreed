@@ -28,18 +28,21 @@ include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
 include_once($GLOBALS['LOGGED_DATA']);
 
-if(DOMAIN == 'fastreed.com'){
+if(HTTPS){
+  $reqDomain = $_SERVER['HTTP_HOST'];
   if (!(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || 
-   $_SERVER['HTTPS'] == 1) ||  
-   isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
-   $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'))
-  {
-    $redirect = URL . $_SERVER['REQUEST_URI'];
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location: ' . $redirect);
-    exit();
-  }
+  $_SERVER['HTTPS'] == 1) ||  
+  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
+  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'))
+ {
+   $redirect = 'https://'.$reqDomain.$_SERVER['REQUEST_URI'];
+   header('HTTP/1.1 301 Moved Permanently');
+   header('Location: ' . $redirect);
+   exit();
+ }
 }
+
+
 
 class VisitorActivity
 {
