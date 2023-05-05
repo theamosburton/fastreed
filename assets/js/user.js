@@ -107,7 +107,7 @@ async function isUserlogged(userID){
 
             
             var notifiCount = notificationData.length;
-            if (notifiCount < 3) {
+            if (notifiCount < 5) {
                 $('#noti-nav').css('bottom', 'auto');
             }else{
                 $('#noti-nav').css('bottom', '5px');
