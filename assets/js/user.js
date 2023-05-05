@@ -9,9 +9,12 @@ if (cookieExist != null) {
 
 function cancelUpdatePopup() {
     $('.profileUpdateShade').css('display', 'none');
+     enableScroll();
+
 }
 function enableUpdatePopup(){
     $('.profileUpdateShade').css('display', 'flex');
+    disbaleScroll();
     removeOptions();
 }
 
@@ -21,10 +24,6 @@ function updateDOBndGender(){
     var errorMessage = document.querySelector('#errorMessage');
     var dob = false;
     var gen = false;
-    console.log(Gender.length);
-  
-
-
     if(Gender.length < 1){
         errorMessage.style.display = 'inline-block';
         errorMessage.innerHTML = 'Please select gender';
@@ -52,6 +51,24 @@ function updateDOBndGender(){
     
 }
 
+
+function disbaleScroll() {
+    // Get the current Y scroll position
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    // Set the body to hide overflow and record the previous scroll position
+    document.body.style.overflow = 'hidden';
+    document.body.dataset.scrollY = scrollY;
+  }
+  
+  // Enable scrolling on the webpage
+  function enableScroll() {
+    // Get the previous Y scroll position
+    var scrollY = parseInt(document.body.dataset.scrollY || '0');
+    // Remove the overflow style from the body
+    document.body.style.overflow = '';
+    // Scroll back to the previous position
+    window.scrollTo(0, scrollY);
+  }
 
 
 function isFiveYearsOld(dateString) {
