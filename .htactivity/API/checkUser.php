@@ -1,6 +1,6 @@
 <?php
 session_start();
-// header('content-type:application/json');
+header('content-type:application/json');
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../../';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
@@ -17,9 +17,7 @@ include($GLOBALS['DEV_OPTIONS']);
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
-    // echo $referrer;
     $urlParts = parse_url($referrer);
-    var_dump($urlParts);
     $refdomain = $urlParts['host'];
     if ($refdomain == DOMAIN) {
         $loggedData = new getLoggedData();
