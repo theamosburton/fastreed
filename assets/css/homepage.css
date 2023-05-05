@@ -283,9 +283,10 @@
   background-color: #1e1f209f;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 2px 0 grey;
+  
 }
 .profileUpdateShade .wrapper{
+  box-shadow: 0 0 2px 0 grey;
   margin: 0 10px;
   width: 400px;
   border-radius: 20px;
