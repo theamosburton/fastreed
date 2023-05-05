@@ -35,7 +35,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $refdomain = $urlParts['host'];
 
     if ($adminLogged) {
-        if ($refdomain == DOMAIN) {
+        if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
             new refreshSite();
         }else {
             showError(false, "Access Denied 0");
