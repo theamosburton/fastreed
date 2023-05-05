@@ -28,7 +28,7 @@ include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
 include_once($GLOBALS['LOGGED_DATA']);
 
-if(DOMAIN == 'www.fastreed.com'){
+if(DOMAIN == 'fastreed.com'){
   if (!(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || 
    $_SERVER['HTTPS'] == 1) ||  
    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
