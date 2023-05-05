@@ -73,7 +73,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 		<div class="cancel">
 			<i class="fa fa-times" onclick="cancelUpdatePopup()"></i>
         </div>
-		<p class="title">Update Profile</p>
+		<p class="title">Complete Profile</p>
 		<form>
 			<span id="errorMessage">Gender not correct</span>
 			<div class="u-inputs">
