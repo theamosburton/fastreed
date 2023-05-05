@@ -87,7 +87,7 @@ if(isset($_SESSION['LOGGED_USER'])){
             </div>
 			<div class="u-inputs">
 				<span class="up-name">Date Of Birth</span>
-				<input type="date" id="updateDOB">
+				<input type="date" id="updateDOB" placeholder="DD/MM/YYYY">
             </div>
 			<div class="u-inputs">
 				<span class='button' id="updateDOBndGender" onclick='updateDOBndGender()'>Update</span>
