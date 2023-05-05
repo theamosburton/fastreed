@@ -681,6 +681,12 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 530px) {
+  .profileUpdateShade .wrapper form #errorMessage{
+    margin-left:0px;
+  }
+  .profileUpdateShade .wrapper form{
+   padding: 25px;
+  }
   .profileUpdateShade .wrapper{
     width: auto;
   }
