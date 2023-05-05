@@ -361,6 +361,7 @@
   border: 1px solid aliceblue;
   border-radius: 4px;
   padding: 6px 12px;
+  margin-top: 10px;
 }
 
 #updateDOBndGender:hover{
