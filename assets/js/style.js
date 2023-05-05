@@ -58,6 +58,10 @@ function enableDarkMode() {
         'box-shadow': '0px 0px 40px 3px black'
     });
 
+    $('.profile-info').css('background-color', 'rgb(22, 22, 29)');
+    $('.profile-top .menus').css('background-color', 'rgb(22, 22, 29)');
+    $('.profile-info').css('color', 'aliceblue');
+
     $('.dropdowns .menu-head').css('background-color', '#16161d');
     $('.dropdowns .settings, #advOptions .menus').css('background-color', '#16161d');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
