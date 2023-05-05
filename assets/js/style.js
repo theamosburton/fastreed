@@ -54,8 +54,7 @@ function enableDarkMode() {
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
     $('.dropdowns').css({
-        'background-color': '#353740',
-        'border-color': 'rgb(218, 218, 218)'
+        'background-color': '#353740'
     });
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');

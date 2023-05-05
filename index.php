@@ -197,11 +197,27 @@ if(isset($_SESSION['LOGGED_USER'])){
 						// Logged Users
 						if ($userLogged) {
 							$accountDropdown = <<<HTML
-							<div class="menu-head">
-								<span class="name">My Account</span>
-							</div>
-							<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
-							<div class="menus"id="logout" onclick="logout()"><i class="left fa fa-right-from-bracket"></i>Log Out</div>
+							<div class="profile-top">
+								<div class="profile-info"> 
+									<div class="image-div">
+										<img id="profile-image" src="$userData->PROFILE_PIC">
+									</div>
+									<div class="info-div">
+										<div>$userData->NAME</div>
+										<div>$userData->EMAIL</div>
+									</div>
+								</div>
+								<div class="profile-button">
+									<span>Manage Account</span>
+								</div>
+
+								<div class="menus"><i class="left fa fa-user-circle"></i> <a href="">Profile</a> </div>
+						    </div>
+
+							<div class="profile-bottom">
+								<div class="menus" id="logout" onclick="logout()"><i class="left fa fa-right-from-bracket"></i>Log Out</div>
+						    </div>
+							
 						HTML;
 							echo $accountDropdown;
 						// Anonymous Users
