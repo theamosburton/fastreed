@@ -41,7 +41,8 @@ function updateGenderDob($gender, $dob){
     $uid = $AUTH->decrypt($uid);
     $DB_CONNECT = new Database();
     $DB = $DB_CONNECT->DBConnection();
-    $sql = "UPDATE account_access SET gender = '$gender' AND  DOB = '$dob' WHERE personID = '$uid'";
+    $sql = "UPDATE account_access SET gender = '$gender', DOB = '$dob' WHERE personID = '$uid'";
+
     $result = mysqli_query($DB, $sql);
     if ($result) {
         showMessage(true, "Profile Updated");
