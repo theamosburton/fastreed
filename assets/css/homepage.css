@@ -682,7 +682,6 @@ header #nav #profileImage{
 }
 @media (max-width: 530px) {
   .profileUpdateShade .wrapper{
-    padding: 40px;
     width: auto;
   }
   .settings, .accounts, .options{
