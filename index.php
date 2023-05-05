@@ -223,28 +223,31 @@ if(isset($_SESSION['LOGGED_USER'])){
 						// Anonymous Users
 						}else {
 							$loginWith = <<<HTML
-							<div class="menu-head">
-								<span class="name">Login or Create Account</span>
+							<div class="non-logged-account">
+								<div class="menu-head">
+									<span class="name">Login or Create Account</span>
+								</div>
+								
+								<div id="g_id_onload"
+									data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+									data-context="use"
+									data-ux_mode="popup"
+									data-callback="onGoogleSignIn"
+									data-auto_prompt="false">
+								</div>
+
+								<div id="g_id_signin" class="g_id_signin"
+									data-type="standard"
+									data-shape="pill"
+									data-theme="filled_black"
+									data-text="continue_with"
+									data-size="large"
+									data-logo_alignment="left">
+								</div>
+
+								<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
 							</div>
 							
-							<div id="g_id_onload"
-								data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
-								data-context="use"
-								data-ux_mode="popup"
-								data-callback="onGoogleSignIn"
-								data-auto_prompt="false">
-							</div>
-
-							<div id="g_id_signin" class="g_id_signin"
-								data-type="standard"
-								data-shape="pill"
-								data-theme="filled_black"
-								data-text="continue_with"
-								data-size="large"
-								data-logo_alignment="left">
-							</div>
-
-							<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
 						HTML;
 
 						echo $loginWith;

@@ -272,7 +272,9 @@
 .notification .singleAction:hover{
   background-color: rgb(129, 19, 231);
 }
-
+.non-logged-account{
+  padding: 15px;
+}
 .profileUpdateShade{
   position: absolute;
   display: none;
