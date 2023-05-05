@@ -293,7 +293,6 @@ if(isset($_SESSION['LOGGED_USER'])){
 									<span class="name">Options</span>
 								</div>
 
-								<div class="menus"><i class="left fa fa-circle-plus"></i><a href="">Create</a></div>
 								$refresh
 								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
 							</div>
@@ -311,12 +310,12 @@ if(isset($_SESSION['LOGGED_USER'])){
 					<div class="menu-head">
 						<span class="name">Settings</span>
 					</div>
-					<div class="menus" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-					<div class="menus"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
-					<div class="menus"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
-					<div class="menus"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
-					<div class="menus"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
-					<div class="menus"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+					<div class="menus settings" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+					<div class="menus settings"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
+					<div class="menus settings"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
+					<div class="menus settings"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
+					<div class="menus settings"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
+					<div class="menus settings"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
 				</div>
 				<!-- ********************************* Settings *************************************************** -->
 
