@@ -54,8 +54,10 @@ function enableDarkMode() {
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
     $('.f-card_small .title a').css('color', 'white');
     $('.dropdowns').css({
-        'background-color': '#353740'
+        'background-color': '#353740',
+        'box-shadow': '0px 0px 40px 3px black'
     });
+
     $('.dropdowns .menu-head').css('background-color', '#16161d');
     $('.dropdowns .settings, #advOptions .menus').css('background-color', '#16161d');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
@@ -95,7 +97,8 @@ function enableLightMode(){
 
     $('.dropdowns').css({
     'border-color': '#353740',
-    'background-color': 'rgb(255, 255, 255)'
+    'background-color': 'rgb(255, 255, 255)',
+    'box-shadow': '0px 0px 40px 0px grey'
     });
     $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
     $('.notification').css('background-color', 'rgb(213, 211 ,211)');
