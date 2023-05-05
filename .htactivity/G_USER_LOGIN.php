@@ -148,7 +148,7 @@ class gSignUpLogin{
       if ($result1) {
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
-        $this->notifyAdmin($name, $profilePic, $userSince, $ePID);
+        $this->notifyAdmin($name, $profilePic, $userSince, $username);
       }else {
         $cantRead = array("Result"=>false, "message"=>"Account Not Created");
         $cantReadDecode = json_encode($cantRead);
