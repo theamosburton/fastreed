@@ -374,7 +374,7 @@
 
 .profile-top{
   border-radius: 15px;
-  margin: 10px;
+  margin: 10px 10px 0px 10px;
   display: flex;
   flex-direction: column;
   background-color: #353740;
@@ -424,7 +424,7 @@
 }
 
 .profile-bottom .menus{
-  padding: 15px;
+  padding: 20px 15px;
   margin-top: 0;
   
 }
