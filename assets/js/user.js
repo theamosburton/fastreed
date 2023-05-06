@@ -38,7 +38,6 @@ function updateDOBndGender(){
                     const response = await fetch(logUrl);
                     var data = await response.json();
                     if (data.Result) {
-                        document.querySelector('#updateDOBndGender').innerHTML = `Updated`;
                         location.reload();
                     }else{
                         errorMessage.style.display = 'inline-block';
