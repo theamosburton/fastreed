@@ -146,7 +146,7 @@ class gSignUpLogin{
     $result = mysqli_query($this->DB, $sql);
     if ($result) {
       $userSince = time();
-      $sql1 = "INSERT INTO account_access (personID, accType, userSince) VALUES ('$userID', 'user', '$userSince')";
+      $sql1 = "INSERT INTO account_details (personID, accType, userSince) VALUES ('$userID', 'user', '$userSince')";
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
         $this->loginAccount($userID);

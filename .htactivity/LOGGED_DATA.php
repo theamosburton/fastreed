@@ -60,7 +60,7 @@ class getLoggedData{
 
      public function getAccess(){
         $PID = $_SESSION['LOGGED_USER'];
-        $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
+        $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
