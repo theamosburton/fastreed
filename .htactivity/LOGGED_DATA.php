@@ -70,7 +70,7 @@ class getLoggedData{
                 $userSince = $row['userSince'];
                 $bio = $row['bio'];
                 $username = $row['username'];
-                $data = array("Username"=>$username, "DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType, "userSince" => $userSince, "bio"=>$bio);
+                $data = array("Username"=>$username, "DOB"=>$DOB, "Gender"=>$Gender,"userSince" => $userSince, "bio"=>$bio);
             }else {
                 $data = array();
             }
