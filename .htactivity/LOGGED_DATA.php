@@ -56,7 +56,7 @@ class getLoggedData{
         }
      }
 
-     public function getAccess(){
+     public function getDetails(){
         $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
@@ -67,11 +67,35 @@ class getLoggedData{
                 
                 $DOB = $row['DOB'];
                 $Gender = $row['gender'];
-                $accountType = $row['accType'];
                 $userSince = $row['userSince'];
                 $bio = $row['bio'];
                 $username = $row['username'];
                 $data = array("Username"=>$username, "DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType, "userSince" => $userSince, "bio"=>$bio);
+            }else {
+                $data = array();
+            }
+        }else {
+            $data = array();
+        }
+       return $data;
+     }
+
+
+     public function getAccess(){
+        $PID = $_SESSION['LOGGED_USER'];
+        $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                
+                $userType = $row['accType'];
+                $canEditUser = $row['canEditUser'];
+                $canCreateUsers = $row['canCreateUser'];
+                $canDeleteUser = $row['canDeleteUser'];
+
+                $data = array("userType"=>$userType, "canEditUsers"=>$canEditUser, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUser);
             }else {
                 $data = array();
             }

@@ -70,7 +70,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 <body>
 <?php
 if ($userLogged) {
-	if (!isset($userData->getAccess()['DOB']) || !isset($userData->getAccess()['Gender'])) {
+	if (!isset($userData->getDetails()['DOB']) || !isset($userData->getDetails()['Gender'])) {
 		$profileUpdateDiv = <<<HTML
 		<div class="profileUpdateShade">
 			<div class="wrapper">
