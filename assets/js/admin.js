@@ -13,7 +13,7 @@ function hardRefresh(){
             $('#HRSpinner').css('display', 'none');
             $('#HPicon').css('display', 'block');
             $('#refHard span').html('Repos Pulled');
-            location.reload();
+            // location.reload();
         }else{
             alert(data.message);
             $('#HRSpinner').css('display', 'none');
