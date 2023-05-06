@@ -191,11 +191,11 @@ async function isUserlogged(userID){
 
            
         }
-        getNotifications(userID).then(() => 
-        {
-            // Update styles
-            styleUpdate();
-        });
+        // getNotifications(userID).then(() => 
+        // {
+        //     // Update styles
+        //     styleUpdate();
+        // });
     }
 }
 
