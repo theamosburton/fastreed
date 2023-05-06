@@ -90,13 +90,12 @@ function getUserDetails($username, $DB){
             $username = $row['username'];
             $DOB = $row['DOB'];
             $Gender = $row['gender'];
-            $accountType = $row['accType'];
             $userSince = $row['userSince'];
             $bio = $row['bio'];
             $today = new DateTime();
             $diff = $today->diff(new DateTime($DOB));
             $age = $diff->y;
-            $return = array("name"=>$name, "username"=>$username, "profilePic"=>$profilePic, "userSince"=>$userSince, "age"=>$age, "Gender"=>$Gender,"userType" => $accountType, "userSince" => $userSince, "bio"=>$bio);
+            $return = array("name"=>$name, "username"=>$username, "profilePic"=>$profilePic, "userSince"=>$userSince, "age"=>$age, "Gender"=>$Gender, "userSince" => $userSince, "bio"=>$bio);
         }else {
             $return = false;
         }
