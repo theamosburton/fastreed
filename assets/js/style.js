@@ -67,7 +67,7 @@ function enableDarkMode() {
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
     $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
-    $('.dropdowns .menu-head').css('border-color', 'rgb(231, 231, 231)');
+    $('.dropdowns .menu-head').css('border-color', '#239677');
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
     document.querySelectorAll('.notification').forEach(function(notification) {
         notification.classList.add('notiDark');
@@ -100,7 +100,7 @@ function enableLightMode(){
     $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
 
     $('.dropdowns').css({
-    'border-color': '#353740',
+    'border-color': '#239677',
     'background-color': 'rgb(255, 255, 255)',
     'box-shadow': '0px 0px 40px 0px grey'
     });

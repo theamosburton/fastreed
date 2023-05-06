@@ -68,111 +68,121 @@ if(isset($_SESSION['LOGGED_USER'])){
 	?>
 </head>
 <body>
-<div class="profileUpdateShade">
-	<div class="wrapper">
-		<div class="cancel">
-			<i class="fa fa-times" onclick="cancelUpdatePopup()"></i>
-        </div>
-		<p class="title">Complete Profile</p>
-		<form>
-			<span id="errorMessage">Gender not correct</span>
-			<div class="u-inputs">
-				<span class="up-name">Gender</span>
-				<select id="updateGender">
-					<option value="" disabled selected>Select</option>
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>
-					<option value="Others">Others</option>
-				</select>
-            </div>
-			<div class="u-inputs">
-				<span class="up-name">Date Of Birth</span>
-				<input type="date" id="updateDOB" placeholder="DD/MM/YYYY">
-            </div>
-			<div class="u-inputs">
-				<span class='button' id="updateDOBndGender" onclick='updateDOBndGender()'>Update</span>
-            </div>
-		</form>
-    </div>
-</div>
-
-
-	<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
-	<header>
-		<?php 
-		if ($userLogged) {
-			if ($adminLogged) {
-				$adminNav = <<<HTML
-				<div>
-					<i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
+<?php
+if ($userLogged) {
+	if (!isset($userData->getAccess()['DOB']) || !isset($userData->getAccess()['Gender'])) {
+		$profileUpdateDiv = <<<HTML
+		<div class="profileUpdateShade">
+			<div class="wrapper">
+				<div class="cancel">
+					<i class="fa fa-times" onclick="cancelUpdatePopup()"></i>
 				</div>
-				HTML;
-			}else {
-				$adminNav = <<<HTML
-				HTML;
-			}
-
-			$regHeader = <<<HTML
-			<!-- Registered User Header -->
-			<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
-			<div class="rightside">
-				<div class="nav" id="nav">
-
-					<!-- Profile Pic -->
-					<div>
-						<img onclick="toggleProfile()" src="$userData->PROFILE_PIC" alt="" id="profileImage">
-						<i id="accountIcon" hidden></i>
+				<p class="title">Complete Profile</p>
+				<form>
+					<span id="errorMessage">Gender not correct</span>
+					<div class="u-inputs">
+						<span class="up-name">Gender</span>
+						<select id="updateGender">
+							<option value="" disabled selected>Select</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Others">Others</option>
+						</select>
 					</div>
-					<div class="spinner" id="MenuSpinner" hidden></div>
-					<!-- Profile Pic -->
-
-					<!-- Admin Nav -->
-					$adminNav
-					<!-- Admin Nav -->
-
-					<!-- Notifications Nav-->
-					<div class="navs">
-						<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-						<span class="badge" id="notiCount"></span>
+					<div class="u-inputs">
+						<span class="up-name">Date Of Birth</span>
+						<input type="date" id="updateDOB" placeholder="DD/MM/YYYY">
 					</div>
-					<!-- Notifications Nav-->
-
-					<!-- Settings Nav -->
-					<div class="navs">
-					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+					<div class="u-inputs">
+						<span class='button' id="updateDOBndGender" onclick='updateDOBndGender()'>Update</span>
 					</div>
-					<!-- Settings Nav -->
-
-				</div>
-			</div>
-			HTML;
-			echo $regHeader;
-		}else {
-		$anonHeader = <<<HTML
-		<!-- Anonymous User Header -->
-		<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
-		<div class="rightside">
-			<div class="nav" id="nav">
-				<!-- Accounts Nav -->
-				<div>
-					<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
-				</div>
-				<div class="spinner" id="MenuSpinner"></div>
-				<!-- Accounts Nav -->
-
-				<!-- Settings Nav -->
-				<div class="navs">
-					<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
-				</div>
-				<!-- Settings Nav -->
+				</form>
 			</div>
 		</div>
 		HTML;
-		echo $anonHeader;
+		echo $profileUpdateDiv;
+	}
+}
+?>
+
+
+
+<div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
+<header>
+	<?php 
+	if ($userLogged) {
+		if ($adminLogged) {
+			$adminNav = <<<HTML
+			<div>
+				<i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
+			</div>
+			HTML;
+		}else {
+			$adminNav = <<<HTML
+			HTML;
 		}
-		?>
-	</header>
-	<!-- ***************************************************** Headers **************************************************** -->
+
+		$regHeader = <<<HTML
+		<!-- Registered User Header -->
+		<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
+		<div class="rightside">
+			<div class="nav" id="nav">
+
+				<!-- Profile Pic -->
+				<div>
+					<img onclick="toggleProfile()" src="$userData->PROFILE_PIC" alt="" id="profileImage">
+					<i id="accountIcon" hidden></i>
+				</div>
+				<div class="spinner" id="MenuSpinner" hidden></div>
+				<!-- Profile Pic -->
+
+				<!-- Admin Nav -->
+				$adminNav
+				<!-- Admin Nav -->
+
+				<!-- Notifications Nav-->
+				<div class="navs">
+					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
+					<span class="badge" id="notiCount"></span>
+				</div>
+				<!-- Notifications Nav-->
+
+				<!-- Settings Nav -->
+				<div class="navs">
+				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+				</div>
+				<!-- Settings Nav -->
+
+			</div>
+		</div>
+		HTML;
+		echo $regHeader;
+	}else {
+	$anonHeader = <<<HTML
+	<!-- Anonymous User Header -->
+	<div class="brand"><h1><a href="/">Fastreed</a></h1></div>
+	<div class="rightside">
+		<div class="nav" id="nav">
+			<!-- Accounts Nav -->
+			<div>
+				<i id="accountIcon" class="fa fa-regular fa-circle-user fa-xl" onclick="toggleAccounts()"></i>
+			</div>
+			<div class="spinner" id="MenuSpinner"></div>
+			<!-- Accounts Nav -->
+
+			<!-- Settings Nav -->
+			<div class="navs">
+				<i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+			</div>
+			<!-- Settings Nav -->
+		</div>
+	</div>
+	HTML;
+	echo $anonHeader;
+	}
+	?>
+</header>
+<!-- ***************************************************** Headers **************************************************** -->
 
 	<!--main content-->
 	
@@ -290,7 +300,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 						$advOptions = <<<HTML
 							<div class="dropdowns" id="advOptions" style="display:none">
 								<div class="menu-head">
-									<span class="name">Options</span>
+									<span class="name">Advance Options</span>
 								</div>
 
 								$refresh
@@ -311,7 +321,6 @@ if(isset($_SESSION['LOGGED_USER'])){
 						<span class="name">Settings</span>
 					</div>
 					<div class="menus settings" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-					<div class="menus settings"><i class="left fa fa-table-list"></i><a href="">Reading List</a></div>
 					<div class="menus settings"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
 					<div class="menus settings"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
 					<div class="menus settings"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>

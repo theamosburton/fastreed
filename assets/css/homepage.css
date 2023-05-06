@@ -137,7 +137,7 @@
 .dropdowns .menu-head{
   text-transform: uppercase;
   font-size: large;
- 
+  border-bottom: 3px solid #239677;
   padding: 15px;
   padding-left: 20px;
   color: #e8eaed;
@@ -170,7 +170,7 @@
 
 .dropdowns .menus:hover{
   cursor: pointer;
-  background-color: rgb(42, 43, 48);
+  /* background-color: rgb(42, 43, 48); */
 }
 .dropdowns .menus, .dropdowns .menus a{
   font-size: 20px;
@@ -413,11 +413,11 @@
   margin-top: 3px;
 }
 .profile-top .menus:hover{
-  background-color: #292b32;
+  /* background-color: #292b32; */
 }
 
 .profile-bottom .menus:hover{
-  background-color: rgb(32,33,35);
+  /* background-color: rgb(32,33,35); */
 }
 .profile-top .menus:last-child{
   padding: 10px;
