@@ -47,7 +47,6 @@ class gSignUpLogin{
       // Get Connection
       $this->DB = $this->DB_CONNECT->DBConnection();
 
-      
       if (!isset($_GET)) {
         $cantRead = array("Result"=>false, "message"=>"No Parameter Given");
         $cantReadDecode = json_encode($cantRead);
@@ -73,7 +72,7 @@ class gSignUpLogin{
 
     public function checkUserExists($email){
       $email = mysqli_real_escape_string($this->DB,$email);
-      $sql = "SELECT * FROM accounts WHERE emailID = '$email'";
+      $sql = "SELECT * FROM account_details WHERE emailID = '$email'";
       $result = mysqli_query($this->DB, $sql);
    
       if (mysqli_num_rows($result)) {
@@ -141,24 +140,28 @@ class gSignUpLogin{
     }else {
       $refID = ' ';
     }
-    
-    $sql = "INSERT INTO accounts (tdate, Name, personID, profilePic, userName, emailID, accountWith ,Referer) VALUES ('$date', '$name','$userID','$profilePic', '$username', '$email', 'google', '$refID')";
+    // Inserting data into accounts table
+    $sql = "INSERT INTO accounts (personID, emailID, accountWith) VALUES ('$userID', '$email', 'google')";
     $result = mysqli_query($this->DB, $sql);
+    // Inserting data into account_details table
     if ($result) {
       $userSince = time();
-      $sql1 = "INSERT INTO account_details (personID, accType, userSince, bio) VALUES ('$userID', 'user', '$userSince', '')";
+      $sql1 = "INSERT INTO account_details 
+      (personID,fullName, username, emailID, profilePic,  accType, userSince, Referer) 
+      VALUES 
+      ('$userID','$name', '$username', '$email', '$profilePic', 'user', '$userSince', '$refID')";
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
         $this->notifyAdmin($name, $profilePic, $userSince, $username);
       }else {
-        $cantRead = array("Result"=>false, "message"=>"Account Not Created");
+        $cantRead = array("Result"=>false, "message"=>"Account Not Created 1");
         $cantReadDecode = json_encode($cantRead);
         echo "$cantReadDecode";
       }
     }else {
-      $cantRead = array("Result"=>false, "message"=>"Account Not Created");
+      $cantRead = array("Result"=>false, "message"=>"Account Not Created 2");
       $cantReadDecode = json_encode($cantRead);
       echo "$cantReadDecode";
     }

@@ -105,7 +105,7 @@
   padding: 8px;
   background-color: #202124;
   border-radius: 50px;
-  margin: 10px 0px;
+  margin: 20px;
   display: flex;
   color: #e8eaed;
   font-weight: 510;
@@ -119,6 +119,7 @@
   margin-right: 10px;
 
 }
+
 #toggleMode{
   color: rgb(143, 143, 237);
 }
@@ -126,6 +127,12 @@
   text-decoration: none;
   background-color: #333438;
 
+}
+.g_id_signin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
 }
 .rotate{
   animation: rotate 1s linear infinite; 
@@ -296,7 +303,6 @@
   background-color: rgb(129, 19, 231);
 }
 .non-logged-account{
-  padding: 25px;
 }
 .profileUpdateShade{
   position: absolute;

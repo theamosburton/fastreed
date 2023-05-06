@@ -17,12 +17,10 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $urlParts = parse_url($referrer);
     $refdomain = $urlParts['host'];
     if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
-        if (!isset($_GET)) {
-            showMessage(false, "Access Denied No argument");
-        }elseif (!isset($_GET['ePID'])) {
+       if (!isset($_POST['ePID'])) {
             showMessage(false, "Access Denied No ePID");
         }else {
-            $ePID = $_GET['ePID'];
+            $ePID = $_POST['ePID'];
             
             $ePID = urldecode($ePID);
             $AUTH = new AUTH();
@@ -81,6 +79,7 @@ function responseNotifications($dPID){
 
 // Function to check if profile is completed or not
 function profileCompleted($DB, $dPID){
+    echo $dPID;
     $sql = "SELECT * FROM account_details WHERE personID = '$dPID'";
     $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);

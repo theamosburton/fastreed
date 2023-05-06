@@ -7,7 +7,6 @@ class getLoggedData{
     public $DESIG;
     public $EMAIL;
     public $GENDER;
-    public $USERNAME;
     public $REFERER;
     public $PROFILE_PIC;
     public $TYPE;
@@ -34,25 +33,24 @@ class getLoggedData{
 
      private function getUserData($PID){
         $PID = $_SESSION['LOGGED_USER'];
-        $sql = "SELECT * FROM accounts WHERE personID = '$PID'";
+        $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-        $this->U_AUTH = true;  
-        if (isset($_COOKIE['AID'])) {
-            $ePID = $_COOKIE['AID'];
-        }else {
-            $ePID = $_COOKIE['UID'];
-        }
-        $this->PID = $ePID;
-        $isPresent = mysqli_num_rows($result);
-            if ($isPresent) {
-                $row = mysqli_fetch_assoc($result);
-                $this->NAME = $row['Name'];
-                $this->EMAIL = $row['emailID'];
-                $this->USERNAME = $row['userName'];
-                $this->REFERER  = $row['Referer'];
-                $this->PROFILE_PIC  = $row['profilePic'];
+            $this->U_AUTH = true;  
+            if (isset($_COOKIE['AID'])) {
+                $ePID = $_COOKIE['AID'];
+            }else {
+                $ePID = $_COOKIE['UID'];
             }
+            $this->PID = $ePID;
+            $isPresent = mysqli_num_rows($result);
+                if ($isPresent) {
+                    $row = mysqli_fetch_assoc($result);
+                    $this->NAME = $row['fullName'];
+                    $this->EMAIL = $row['emailID'];
+                    $this->REFERER  = $row['Referer'];
+                    $this->PROFILE_PIC  = $row['profilePic'];
+                }
         }else {
             $this->U_AUTH = false;  
         }
@@ -66,11 +64,14 @@ class getLoggedData{
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
+                
                 $DOB = $row['DOB'];
                 $Gender = $row['gender'];
                 $accountType = $row['accType'];
                 $userSince = $row['userSince'];
-                $data = array("DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType, "userSince" => $userSince);
+                $bio = $row['bio'];
+                $username = $row['username'];
+                $data = array("Username"=>$username, "DOB"=>$DOB, "Gender"=>$Gender,"userType" => $accountType, "userSince" => $userSince, "bio"=>$bio);
             }else {
                 $data = array();
             }

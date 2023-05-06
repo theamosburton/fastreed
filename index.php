@@ -236,7 +236,7 @@ if ($userLogged) {
 								<div class="menu-head">
 									<span class="name">Login or Create Account</span>
 								</div>
-								
+								<div class="signInWith">
 								<div id="g_id_onload"
 									data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
 									data-context="use"
@@ -245,16 +245,20 @@ if ($userLogged) {
 									data-auto_prompt="false">
 								</div>
 
-								<div id="g_id_signin" class="g_id_signin"
+								<div id="g_id_signin menus" class="g_id_signin"
 									data-type="standard"
 									data-shape="pill"
 									data-theme="filled_black"
 									data-text="continue_with"
 									data-size="large"
-									data-logo_alignment="left">
+									data-logo_alignment="left"
+									data-width="290">
+									
 								</div>
 
 								<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
+								</div>
+								
 							</div>
 							
 						HTML;
