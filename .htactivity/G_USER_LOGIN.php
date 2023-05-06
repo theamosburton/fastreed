@@ -152,6 +152,13 @@ class gSignUpLogin{
       ('$userID','$name', '$username', '$email', '$profilePic', 'user', '$userSince', '$refID')";
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
+
+        $sql2 = "INSERT INTO account_access 
+        (personID,accType) 
+        VALUES 
+        ('$userID','User')";
+        $result2 = mysqli_query($this->DB, $sql2);
+
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
         $this->notifyAdmin($name, $profilePic, $userSince, $username);

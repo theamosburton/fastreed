@@ -12,7 +12,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
 		$userLogged = true;
-		if ($userData->getAccess()['userType'] == 'admin') {
+		if ($userData->getAccess()['userType'] == 'Admin') {
 			$adminLogged = true;
 			
 		}

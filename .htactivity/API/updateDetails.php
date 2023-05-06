@@ -36,9 +36,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 }
 
 function updateGenderDob($gender, $dob){
-    $uid = $_COOKIE['UID'];
-    $AUTH = new AUTH();
-    $uid = $AUTH->decrypt($uid);
+    $uid = $_SESSION['LOGGED_USER'];
     $DB_CONNECT = new Database();
     $DB = $DB_CONNECT->DBConnection();
     $sql = "UPDATE account_details SET gender = '$gender', DOB = '$dob' WHERE personID = '$uid'";
