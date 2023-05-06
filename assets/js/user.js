@@ -99,18 +99,18 @@ async function isUserlogged(userID){
     if (userLog.Result) {
         let PID = userLog.message.PID;
         let NAME = userLog.message.NAME;
-        getNotifications(PID)
+        getNotifications(PID);
         async function getNotifications(PID){
-            const logUrl = `/.htactivity/API/getNotifications.php`;
-            const data = {
-                ePID : PID
+            const logUrl = '/.htactivity/API/getNotifications.php';
+            var encyDat = {
+                'ePID' : `${PID}`
             };
             const response = await fetch(logUrl, {
-                method: 'POST',
+                method: 'post',
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(encyDat)
               });
             var notificationData = await response.json();
 
