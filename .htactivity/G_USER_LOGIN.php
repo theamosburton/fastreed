@@ -141,7 +141,7 @@ class gSignUpLogin{
       $refID = ' ';
     }
     // Inserting data into accounts table
-    $sql = "INSERT INTO accounts (personID, emailID, accountWith) VALUES ('$userID', '$email', 'google')";
+    $sql = "INSERT INTO accounts (tdate, personID, emailID, accountWith) VALUES ('$date','$userID', '$email', 'google')";
     $result = mysqli_query($this->DB, $sql);
     // Inserting data into account_details table
     if ($result) {
