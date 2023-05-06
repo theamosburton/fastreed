@@ -20,7 +20,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 }
 
 if ($userLogged) {
-    
+
 }
 
 ?>
@@ -33,7 +33,7 @@ if ($userLogged) {
         <meta name="description" content="Read, Write and Share Greate Ideas and Stories">
         <meta name="keywords" content="Read, Write and Share Greate Ideas and Stories">
         <meta name="author" content="MD. Shafiq Malik">
-        <link rel="shortcut icon" href="favicon.ico">  
+        <link rel="shortcut icon" href="/favicon.ico">  
         <title>Fastreed - Read, Write and Share Greate Ideas and Stories</title>
 
         <!-- Gobal CSS -->
