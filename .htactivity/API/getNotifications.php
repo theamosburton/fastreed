@@ -81,7 +81,7 @@ function responseNotifications($dPID){
 
 // Function to check if profile is completed or not
 function profileCompleted($DB, $dPID){
-    $sql = "SELECT * FROM account_access WHERE personID = '$dPID'";
+    $sql = "SELECT * FROM account_details WHERE personID = '$dPID'";
     $result = mysqli_query($DB, $sql);
     $row = mysqli_fetch_assoc($result);
     $DOB = $row['DOB'];
