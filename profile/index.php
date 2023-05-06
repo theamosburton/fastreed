@@ -14,7 +14,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
 		$userLogged = true;
-		if ($userData->getAccess()['userType'] == 'admin') {
+		if ($userData->getAccess()['userType'] == 'Admin') {
 			$adminLogged = true;
 			
 		}
@@ -43,7 +43,7 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
         <title>$userData->NAME - Fastreed User</title>
      HTML;
      // If bio is not set by user
-     if (strlen($userData->getAccess()['bio']) < 2) {
+     if (strlen($userData->getDetails()['bio']) < 2) {
         $description = <<<HTML
             <meta name="description" content="$userData->NAME is a writer at Fastreed">
             <meta name="keywords" content="$userData->NAME is a writer at Fastreed">
