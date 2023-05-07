@@ -239,6 +239,13 @@
   color: rgb(5, 177, 235);
   margin: 0px 5px;
 }
+.no-noti{
+  font-weight: 600;
+  display: flex;
+  padding: 20px 0;
+  justify-content: center;
+  align-items: center;
+}
 .notification a{
   display: flex;
   flex-direction: row;

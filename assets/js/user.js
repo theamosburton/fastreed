@@ -90,12 +90,13 @@ function isFiveYearsOld(dateString) {
   }
 
 
-isUserlogged(userID);
-async function isUserlogged(userID){
+isUserlogged();
+async function isUserlogged(){
     const logUrl = `/.htactivity/API/checkUser.php`;
     const response = await fetch(logUrl);
     var userLog = await response.json();
     if (userLog.Result) {
+        console.log(userLog.Result.length);
         let PID = userLog.message.PID;
         let NAME = userLog.message.NAME;
         getNotifications(PID);
@@ -144,6 +145,15 @@ async function isUserlogged(userID){
             let notificationHTML = '';
             if (notificationData.length > 5) {
                 notificationData.length = 5;
+            }else if(notificationData.length <= 1){
+                notificationHTML += `
+                <div class="notification no-noti" id="notification">
+                
+                        <div class="body">
+                            <p class="noti-parts title"> No Notification</p>
+                        </div>
+                </div>`;
+                document.getElementById('notifications').innerHTML = notificationHTML;
             }
             for (let g = 0; g < notificationData.length; g++) {
                 let str = notificationData[g].title;
