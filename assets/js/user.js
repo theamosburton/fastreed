@@ -195,15 +195,10 @@ async function isUserlogged(){
                 </div>`;
             }
             document.getElementById('notifications').innerHTML = notificationHTML;
-            
-
+            styleUpdate();
            
         }
-        getNotifications(userID).then(() => 
-        {
-            // Update styles
-            styleUpdate();
-        });
+
     }
 }
 
