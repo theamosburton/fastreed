@@ -62,7 +62,7 @@ function responseNotifications($dPID){
     if(mysqli_num_rows($result2) > 0){
         while ($row = mysqli_fetch_assoc($result2)) {
             $rowArray = array(
-                "id" => $row['s.no'];
+                "id" => $row['s.no'],
                 "Purpose" => $row["purpose"],
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
@@ -105,7 +105,7 @@ function checkBroadCast($DB){
     if(mysqli_num_rows($result) > 0){
         while ($row = mysqli_fetch_assoc($result)) {
             $rowArray = array(
-                "id" => $row['s.no'];
+                "id" => $row['s.no'],
                 "Purpose" => $row["purpose"],
                 "title" => $row['title'],
                 "time" => $row["timestamp"],
