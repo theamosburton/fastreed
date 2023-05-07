@@ -70,9 +70,6 @@ function enableDarkMode() {
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
     $('.dropdowns .menu-head').css('border-color', '#239677');
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
-    document.querySelectorAll('.notification').forEach(function(notification) {
-        notification.classList.add('notiDark');
-      });
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on'); 
@@ -117,9 +114,6 @@ function enableLightMode(){
     $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
     $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
     $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
-    document.querySelectorAll('.notification').forEach(function(notification) {
-        notification.classList.remove('notiDark');
-      });
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
