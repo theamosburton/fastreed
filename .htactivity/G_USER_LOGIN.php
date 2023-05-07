@@ -150,6 +150,10 @@ class gSignUpLogin{
       (personID,fullName, username, emailID, profilePic,  accType, userSince, Referer) 
       VALUES 
       ('$userID','$name', '$username', '$email', '$profilePic', 'user', '$userSince', '$refID')";
+
+      echo $sql1;
+
+
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
 
