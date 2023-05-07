@@ -154,7 +154,7 @@ class gSignUpLogin{
       if ($result1) {
 
         $sql2 = "INSERT INTO account_access 
-        (personID,accType) 
+        (personID,accType, canGiveAccess, canEditUser, canDeleteUsers, canCreateUsers) 
         VALUES 
         ('$userID','User', ? , ? , ? , ?)";
         $result2 = mysqli_query($this->DB, $sql2);
