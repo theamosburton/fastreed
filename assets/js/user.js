@@ -162,7 +162,7 @@ async function isUserlogged(){
                     str = str.replace("${USERNAME}", USERNAME);
                 }
                 var isRead = Boolean(notificationData[g].isRead);
-                if(isRead){
+                if(!isRead){
                     var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
                 }else{
                     var showDot = `<i></i>`;
