@@ -151,16 +151,13 @@ class gSignUpLogin{
       VALUES 
       ('$userID','$name', '$username', '$email', '$profilePic', 'user', '$userSince', '$refID')";
 
-      echo $sql1;
-
-
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
 
         $sql2 = "INSERT INTO account_access 
         (personID,accType, canGiveAccess, canEditUser, canDeleteUsers, canCreateUsers) 
         VALUES 
-        ('$userID','User', '?' , '?' , '?' , '?')";
+        ('$userID','User', 0 , 0 , 0 , 0)";
         $result2 = mysqli_query($this->DB, $sql2);
 
         $this->loginAccount($userID);
