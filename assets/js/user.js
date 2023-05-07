@@ -204,7 +204,7 @@ async function isUserlogged(){
 function markRead(SNO){
     isUserlogged();
     async function isUserlogged(){
-        const logUrl = `/.htactivity/API/markRead.php`;
+        const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
         const response = await fetch(logUrl);
         var userLog = await response.json();
         if (userLog.Result) {
