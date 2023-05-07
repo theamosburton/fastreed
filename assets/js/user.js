@@ -173,7 +173,7 @@ async function isUserlogged(){
                 if(url == 'update'){
                     aTag = `onclick="enableUpdatePopup()"`;
                 }else{
-                    aTag = `href="${url}"`;
+                    aTag = url;
                 }
                 let srcImage;
                 if (notificationData[g].image != null) {
