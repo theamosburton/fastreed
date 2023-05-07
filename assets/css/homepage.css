@@ -238,6 +238,10 @@
   color: rgb(5, 177, 235);
   margin: 0px 5px;
 }
+#markedRead{
+  color: rgb(114, 122, 125);
+  margin: 0px 5px;
+}
 .no-noti{
   font-weight: 600;
   display: flex;

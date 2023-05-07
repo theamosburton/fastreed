@@ -165,7 +165,7 @@ async function isUserlogged(){
                 if(notificationData[g].isRead == '0'){
                     var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
                 }else{
-                    var showDot = `<i></i>`;
+                    var showDot = `<i id="markedRead" class="fa fa-circle-dot"></i>`;
                 }
 
                 let url = notificationData[g].url;
