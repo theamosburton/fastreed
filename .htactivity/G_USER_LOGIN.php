@@ -146,10 +146,7 @@ class gSignUpLogin{
     // Inserting data into account_details table
     if ($result) {
       $userSince = time();
-      $sql1 = "INSERT INTO account_details 
-      (personID,fullName, username, emailID, profilePic,  accType, userSince, Referer) 
-      VALUES 
-      ('$userID','$name', '$username', '$email', '$profilePic', 'user', '$userSince', '$refID')";
+      $sql1 = "INSERT INTO account_details (personID , fullName, username, emailID, profilePic, userSince, Referer) VALUES ('$userID','$name', '$username', '$email', '$profilePic', '$userSince', '$refID')";
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
