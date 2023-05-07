@@ -182,7 +182,7 @@ async function isUserlogged(){
                     srcImage = "/assets/img/favicon2.jpg";
                 }
                 notificationHTML += `
-                <div onclick="markRead(${notificationData[g].id}, ${aTag})" class="notification" id="notification${g+1}">
+                <div onclick="markRead("${notificationData[g].id}", "${aTag}")" class="notification" id="notification${g+1}">
                     <a>
                         <img class="image" src="${srcImage}">
                         <div class="body">
