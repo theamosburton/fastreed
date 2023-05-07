@@ -200,11 +200,11 @@ async function isUserlogged(){
 
            
         }
-        // getNotifications(userID).then(() => 
-        // {
-        //     // Update styles
-        //     styleUpdate();
-        // });
+        getNotifications(userID).then(() => 
+        {
+            // Update styles
+            styleUpdate();
+        });
     }
 }
 
