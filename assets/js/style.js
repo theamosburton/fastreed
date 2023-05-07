@@ -57,7 +57,8 @@ function enableDarkMode() {
         'background-color': '#353740',
         'box-shadow': '0px 0px 40px 3px black'
     });
-
+   
+    $('.notification').css('background-color', '#16161d');
     $('.profile-info').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-top .menus').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-info').css('color', 'aliceblue');
@@ -104,8 +105,8 @@ function enableLightMode(){
     'background-color': 'rgb(255, 255, 255)',
     'box-shadow': '0px 0px 40px 0px grey'
     });
+    $('.notification').css('background-color', 'rgb(213,211,211)');
     $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
-    $('.notification').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-info').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-top .menus').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-info').css('color', 'rgb(32, 33, 35)');

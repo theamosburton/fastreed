@@ -247,12 +247,9 @@
   align-items: center;
 }
 .notification:hover{
-  background-color: #d9dee6;
   cursor: pointer;
 }
-.notiDark:hover{
-  background-color: rgb(42, 43, 48);
-}
+
 
 
 .notifications.show-scrollbar {
