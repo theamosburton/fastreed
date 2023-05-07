@@ -19,7 +19,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         if (isset($_GET) && !empty($_GET['SNO'])) {
             $sno = $_GET['SNO'];
             $sql = "UPDATE notifications SET markRead = 1  WHERE `s.no` = '$sno'";
-
+            $DB_CONNECT = new Database();
+            $DB = $DB_CONNECT->DBConnection();
              $result = mysqli_query($DB, $sql);
              if ($result) {
                 showMessage(true, "Marked Read");
