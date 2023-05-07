@@ -182,8 +182,8 @@ async function isUserlogged(){
                     srcImage = "/assets/img/favicon2.jpg";
                 }
                 notificationHTML += `
-                <div onclick="markRead(${notificationData[g].id})" class="notification" id="notification${g+1}">
-                    <a ${aTag}>
+                <div onclick="markRead(${notificationData[g].id}, ${aTag})" class="notification" id="notification${g+1}">
+                    <a>
                         <img class="image" src="${srcImage}">
                         <div class="body">
                             <p class="noti-parts title"> ${str}</p>
@@ -201,14 +201,15 @@ async function isUserlogged(){
 
     }
 }
-function markRead(SNO){
-    isUserlogged();
-    async function isUserlogged(){
+function markRead(SNO, red){
+    isUserlogged(SNO ,red);
+    async function isUserlogged(SNO, red){
         const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
         const response = await fetch(logUrl);
         var userLog = await response.json();
         if (userLog.Result) {
             console.log("Marked Read");
+            window.location.replace(red);
         }else{
             console.log("Not Marked Read");
         }
