@@ -95,7 +95,7 @@ async function isUserlogged(){
     const logUrl = `/.htactivity/API/checkUser.php`;
     const response = await fetch(logUrl);
     var userLog = await response.json();
-    if (userLog.Result) {g
+    if (userLog.Result) {
         let PID = userLog.message.PID;
         let NAME = userLog.message.NAME;
         getNotifications(PID);
