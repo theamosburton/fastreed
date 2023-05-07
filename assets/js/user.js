@@ -145,7 +145,7 @@ async function isUserlogged(){
             let notificationHTML = '';
             if (notificationData.length > 5) {
                 notificationData.length = 5;
-            }else if(notificationData.length <= 1){
+            }else if(notificationData.length <= 0){
                 notificationHTML += `
                 <div class="notification no-noti" id="notification">
                 
@@ -183,7 +183,7 @@ async function isUserlogged(){
                     srcImage = "/assets/img/favicon2.jpg";
                 }
                 notificationHTML += `
-                <div class="notification" id="notification">
+                <div class="notification" id="notification${g+1}">
                     <a ${aTag}>
                         <img class="image" src="${srcImage}">
                         <div class="body">
