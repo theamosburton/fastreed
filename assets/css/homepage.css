@@ -218,7 +218,7 @@
 }
 
 .notifications{
-  max-height: 500px;
+  max-height: 450px;
   display: flex;
   flex-direction: column;
   overflow: auto;
