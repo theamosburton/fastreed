@@ -197,9 +197,9 @@ async function isUserlogged(){
 
                 let otherFunction;
                 if (notificationData[g].Purpose == 'profileCompletion') {
-                    otherFunction = 'profileCompletion()';
+                    otherFunction = "profileCompletion()";
                 }else{
-                    otherFunction = '';
+                    otherFunction = " ";
                 }
 
                 notificationHTML += `
