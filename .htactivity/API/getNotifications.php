@@ -69,10 +69,10 @@ function responseNotifications($dPID){
                 "isRead" => $row['markRead'],
                 "image" =>$row['image'],
                 "url" =>$row['url']
-            );
-            $notifications2 = array_reverse($notifications2);
-            array_push($notifications2, $rowArray);
+            ); 
         }
+        $notifications2 = array_reverse($notifications2);
+        array_push($notifications2, $rowArray);
     }
     // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
     $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
@@ -114,9 +114,9 @@ function checkBroadCast($DB){
                 "image" =>$row['image'],
                 "url" =>$row['url']
             );
-            $notifications = array_reverse($notifications);
-            array_push($notifications, $rowArray);
         }
+        $notifications = array_reverse($notifications);
+        array_push($notifications, $rowArray);
         $return = array("Result"=>true, "B-Noti"=>$notifications);
     }else {
         $return = array("Result"=>false, "B-Noti"=>null);
