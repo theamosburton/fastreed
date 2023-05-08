@@ -208,7 +208,7 @@ async function isUserlogged(){
                     
                 </div>`;
             }
-            const oldFirst = [...notification].reverse();
+            let oldFirst = [...notification].reverse();
             let newFirst = notification;
             newFirst = newFirst.join("\n");
             oldFirst = oldFirst.join("\n");
