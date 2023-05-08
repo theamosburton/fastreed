@@ -208,6 +208,7 @@ async function isUserlogged(){
                     
                 </div>`;
             }
+            console.log(notificationHTML);
             let newFirst = notificationHTML.reverse();
             let oldFirst = notificationHTML;
             document.getElementById('notifications').innerHTML = newFirst;
