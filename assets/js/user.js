@@ -10,7 +10,6 @@ if (cookieExist != null) {
 function cancelUpdatePopup() {
     $('.profileUpdateShade').css('display', 'none');
      enableScroll();
-
 }
 function enableUpdatePopup(){
     $('.profileUpdateShade').css('display', 'flex');
@@ -178,12 +177,6 @@ async function isUserlogged(){
 
                 // Get notification link
                 let url = notificationData[g].url;
-                var aTag;
-                if(url == 'update'){
-                    aTag = `onclick="enableUpdatePopup()"`;
-                }else{
-                    aTag = url;
-                }
                 // ***************** //
 
                 // Get notifier image
@@ -203,7 +196,7 @@ async function isUserlogged(){
                 }
 
                 notificationHTML += `
-                <div onclick="markRead('${notificationData[g].id}', '${aTag}', '${otherFunction}')" class="notification" id="notification${g+1}">
+                <div onclick="markRead('${notificationData[g].id}', '${url}')" class="notification" id="notification${g+1}">
                     <a>
                         <img class="image" src="${srcImage}">
                         <div class="body">
@@ -222,33 +215,26 @@ async function isUserlogged(){
 
     }
 }
-function markRead(SNO, red, func){
-    isUserlogged(SNO,red, func);
-    async function isUserlogged(SNO, red, func){
-        const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
-        const response = await fetch(logUrl);
-        var userLog = await response.json();
-        if (!func) {
+function markRead(SNO, red){
+    if (red == 'update') {
+        enableUpdatePopup();
+    }else{
+        cancelUpdatePopup();
+        isUserlogged(SNO,red);
+        async function isUserlogged(SNO, red){
+            const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
+            const response = await fetch(logUrl);
+            var userLog = await response.json();
             if (userLog.Result) {
                 console.log("Marked Read");
                 window.location.replace(red);
             }else{
                 console.log("Not Marked Read");
             }
-        }else{
-            if (userLog.Result) {
-                console.log("Marked Read");
-                if (typeof window[func] === "function") {
-                    window[func](); // call the function
-                  }else{
-                    console.log("Cannot call profileCompletion");
-                  }
-            }else{
-                console.log("Not Marked Read");
-            }
+        
         }
-       
     }
+    
 }
 function timeAgo(timestamp) {
     const seconds = Math.floor((new Date() - timestamp * 1000) / 1000);
