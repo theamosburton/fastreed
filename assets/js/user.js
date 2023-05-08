@@ -227,7 +227,7 @@ function markRead(SNO, red){
             var userLog = await response.json();
             if (userLog.Result) {
                 console.log("Marked Read");
-                window.location.replace(red);
+                window.location.assign(red);
             }else{
                 console.log("Not Marked Read");
             }
