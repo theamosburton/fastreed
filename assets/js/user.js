@@ -199,7 +199,7 @@ async function isUserlogged(){
                 if (notificationData[g].Purpose == 'profileCompletion') {
                     otherFunction = "profileCompletion()";
                 }else{
-                    otherFunction = " ";
+                    otherFunction = false;
                 }
 
                 notificationHTML += `
@@ -228,7 +228,7 @@ function markRead(SNO, red, func){
         const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
         const response = await fetch(logUrl);
         var userLog = await response.json();
-        if (func == "") {
+        if (!func) {
             if (userLog.Result) {
                 console.log("Marked Read");
                 window.location.replace(red);
