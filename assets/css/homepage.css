@@ -218,12 +218,11 @@
 }
 
 .notifications{
-  max-height: 450px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   overflow: auto;
   margin: 0px 10px 10px 10px;
-  
 }
 .notification{
   margin-top: 3px;
@@ -744,6 +743,9 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 767px) {
+  .notifications{
+    max-height: 70%;
+  }
   .settings, .accounts, .options{
     top: 66px;
     right: 10px;
@@ -753,7 +755,6 @@ header #nav #profileImage{
     margin: 0px 5px 0px 10px;
   }
   .notification{
-   
     width: auto;
   }
 }
