@@ -120,7 +120,7 @@ async function isUserlogged(){
                 $('#noti-nav').css('bottom', '5px');
             }
 
-            var nonRead = {};
+            var nonRead = [];
             for (let i= 0; i < notifiCount; i++) {
                 if (notificationData[i].isRead == '0') {
                     nonRead[i] = notificationData[i];
@@ -195,7 +195,7 @@ async function isUserlogged(){
                     otherFunction = false;
                 }
 
-                notification.g = `
+                notification[g] = `
                 <div onclick="markRead('${notificationData[g].id}', '${url}')" class="notification" id="notification${g+1}">
                     <a>
                         <img class="image" src="${srcImage}">
