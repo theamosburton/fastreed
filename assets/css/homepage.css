@@ -744,7 +744,7 @@ header #nav #profileImage{
 }
 @media (max-width: 767px) {
   .notifications{
-    max-height: 70%;
+    max-height: 50%;
   }
   .settings, .accounts, .options{
     top: 66px;
