@@ -100,7 +100,7 @@ function enableLightMode(){
     $('.dropdowns').css({
     'border-color': '#239677',
     'background-color': 'rgb(255, 255, 255)',
-    'box-shadow': '0px 0px 40px 0px grey'
+    'box-shadow': '0px 0px 40px 7px grey'
     });
     $('.notification').css('background-color', 'rgb(213,211,211)');
     $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
