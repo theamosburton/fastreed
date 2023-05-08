@@ -154,7 +154,7 @@ async function isUserlogged(){
                 document.getElementById('notifications').innerHTML = notificationHTML;
             }
             // 
-
+            let notification = [];
             for (let g = 0; g < notificationData.length; g++) {
 
                 // Get title of notification title and name, username etc
@@ -195,7 +195,7 @@ async function isUserlogged(){
                     otherFunction = false;
                 }
 
-                notificationHTML += `
+                notification[g] = `
                 <div onclick="markRead('${notificationData[g].id}', '${url}')" class="notification" id="notification${g+1}">
                     <a>
                         <img class="image" src="${srcImage}">
@@ -208,7 +208,7 @@ async function isUserlogged(){
                     
                 </div>`;
             }
-            console.log(typeof notificationHTML);
+            console.log(notificationHTML);
             let newFirst = notificationHTML.reverse();
             let oldFirst = notificationHTML;
             document.getElementById('notifications').innerHTML = newFirst;
