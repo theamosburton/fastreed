@@ -19,7 +19,7 @@
   }
   .scrollbar-style::-webkit-scrollbar
 {
-	width: 6px;
+	width: 0px;
 }
 
 .scrollbar-style::-webkit-scrollbar-thumb
