@@ -136,9 +136,7 @@ async function isUserlogged(){
             // ********* //
 
             let notificationHTML = '';
-            if (notificationData.length > 5) {
-                notificationData.length = 5;
-            }else if(notificationData.length <= 0){
+            if (notificationData.length <= 0) {
                 notificationHTML += `
                 <div class="notification no-noti" id="notification">
                 
