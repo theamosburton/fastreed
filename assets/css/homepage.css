@@ -196,8 +196,8 @@
   background-color: #353740; 
   margin-bottom: 20px;
   min-width: 300px;
-  max-height: 500px;
-  overflow: auto;
+  /* max-height: 500px; */
+  /* overflow: auto; */
 }
 #noti-nav .noti-head{
   margin-bottom: 0px;
@@ -218,9 +218,10 @@
 }
 
 .notifications{
+  max-height: 500px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: auto;
   margin: 0px 10px 10px 10px;
   
 }
