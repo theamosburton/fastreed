@@ -71,8 +71,9 @@ function responseNotifications($dPID){
                 "url" =>$row['url']
             ); 
             array_push($notifications2, $rowArray);
-            $notifications2 = array_reverse($notifications2);
+            
         }
+        $notifications2 = array_reverse($notifications2);
         
         
     }
@@ -117,8 +118,9 @@ function checkBroadCast($DB){
                 "url" =>$row['url']
             );
             array_push($notifications, $rowArray);
-            $notifications = array_reverse($notifications);
+            
         }
+        $notifications = array_reverse($notifications);
        
        
         $return = array("Result"=>true, "B-Noti"=>$notifications);
