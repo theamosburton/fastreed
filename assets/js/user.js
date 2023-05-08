@@ -208,7 +208,9 @@ async function isUserlogged(){
                     
                 </div>`;
             }
-            document.getElementById('notifications').innerHTML = notificationHTML;
+            let newFirst = notificationHTML.reverse();
+            let oldFirst = notificationHTML;
+            document.getElementById('notifications').innerHTML = newFirst;
             styleUpdate();
            
         }
