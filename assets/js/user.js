@@ -228,7 +228,7 @@ function markRead(SNO, red, func){
         const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
         const response = await fetch(logUrl);
         var userLog = await response.json();
-        if (func.length == '') {
+        if (func == "") {
             if (userLog.Result) {
                 console.log("Marked Read");
                 window.location.replace(red);
