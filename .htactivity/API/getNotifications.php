@@ -70,6 +70,7 @@ function responseNotifications($dPID){
                 "image" =>$row['image'],
                 "url" =>$row['url']
             );
+            $notifications2 = array_reverse($notifications2);
             array_push($notifications2, $rowArray);
         }
     }
@@ -113,6 +114,7 @@ function checkBroadCast($DB){
                 "image" =>$row['image'],
                 "url" =>$row['url']
             );
+            $notifications = array_reverse($notifications);
             array_push($notifications, $rowArray);
         }
         $return = array("Result"=>true, "B-Noti"=>$notifications);
