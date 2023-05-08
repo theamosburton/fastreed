@@ -214,20 +214,6 @@ async function isUserlogged(){
                     </a>
                     
                 </div>`;
-
-
-                profileUpdate += `
-                <div onclick="updateDOBndGender()" class="notification" id="notification${g+1}">
-                    <a>
-                        <img class="image" src="${srcImage}">
-                        <div class="body">
-                            <p class="noti-parts title"> ${str}</p>
-                            <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
-                        </div>
-                        ${showDot}
-                    </a>
-                    
-                </div>`;
             }
             document.getElementById('notifications').innerHTML = notificationHTML;
             styleUpdate();
