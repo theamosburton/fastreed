@@ -210,8 +210,9 @@ async function isUserlogged(){
             }
             console.log(notification);
             let newFirst = notification.reverse();
+            console.log(newFirst);
             let oldFirst = notification;
-            newFirst = newFirst.join(" \n ");
+            newFirst = newFirst.join("\n");
             oldFirst = newFirst.join(" \n ");
             document.getElementById('notifications').innerHTML = newFirst;
             styleUpdate();
