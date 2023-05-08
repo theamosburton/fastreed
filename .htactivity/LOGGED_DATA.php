@@ -64,7 +64,6 @@ class getLoggedData{
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
-                
                 $DOB = $row['DOB'];
                 $Gender = $row['gender'];
                 $userSince = $row['userSince'];
