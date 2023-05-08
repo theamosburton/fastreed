@@ -212,7 +212,7 @@ async function isUserlogged(){
             let newFirst = notification;
             newFirst = newFirst.join("\n");
             oldFirst = oldFirst.join("\n");
-            document.getElementById('notifications').innerHTML = oldFnewFirstirst;
+            document.getElementById('notifications').innerHTML = newFirst;
             styleUpdate();
            
         }
