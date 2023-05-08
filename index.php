@@ -67,7 +67,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 	}
 	?>
 </head>
-<body>
+<body class="scrollbar-style">
 <?php
 if ($userLogged) {
 	if (!isset($userData->getDetails()['DOB']) || !isset($userData->getDetails()['Gender'])) {
