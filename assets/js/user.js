@@ -114,11 +114,6 @@ async function isUserlogged(){
 
             
             var notifiCount = notificationData.length;
-            if (notifiCount < 4) {
-                $('#noti-nav').css('bottom', 'auto');
-            }else{
-                $('#noti-nav').css('bottom', '5px');
-            }
 
             var nonRead = [];
             for (let i= 0; i < notifiCount; i++) {
