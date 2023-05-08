@@ -154,20 +154,29 @@ async function isUserlogged(){
                 </div>`;
                 document.getElementById('notifications').innerHTML = notificationHTML;
             }
+            // 
+
             for (let g = 0; g < notificationData.length; g++) {
+
+                // Get title of notification title and name, username etc
                 let str = notificationData[g].title;
                 if (str.includes("${NAME}")) {
                     str = str.replace("${NAME}", NAME);
                 } else if (str.includes("${USERNAME}")) {
                     str = str.replace("${USERNAME}", USERNAME);
                 }
-                var isRead = notificationData[g].isRead;
+                // ************************** //
+
+
+                // put green tag to know unread and read notifications
                 if(notificationData[g].isRead == '0'){
                     var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
                 }else{
                     var showDot = `<i id="markedRead" class="fa fa-circle-dot"></i>`;
                 }
+                // *************************************************** //
 
+                // Get notification link
                 let url = notificationData[g].url;
                 var aTag;
                 if(url == 'update'){
@@ -175,14 +184,40 @@ async function isUserlogged(){
                 }else{
                     aTag = url;
                 }
+                // ***************** //
+
+                // Get notifier image
                 let srcImage;
                 if (notificationData[g].image != null) {
                     srcImage = notificationData[g].image;
                 }else{
                     srcImage = "/assets/img/favicon2.jpg";
                 }
+                // *************************   //
+
+                let otherFunction;
+                if (notificationData[g].Purpose == 'profileCompletion') {
+                    otherFunction = 'profileCompletion()';
+                }else{
+                    otherFunction = '';
+                }
+
                 notificationHTML += `
-                <div onclick="markRead('${notificationData[g].id}', '${aTag}')" class="notification" id="notification${g+1}">
+                <div onclick="markRead('${notificationData[g].id}', '${aTag}', ${$otherFunction})" class="notification" id="notification${g+1}">
+                    <a>
+                        <img class="image" src="${srcImage}">
+                        <div class="body">
+                            <p class="noti-parts title"> ${str}</p>
+                            <span class="noti-parts time">${timeAgo(notificationData[g].time)}</span>
+                        </div>
+                        ${showDot}
+                    </a>
+                    
+                </div>`;
+
+
+                profileUpdate += `
+                <div onclick="updateDOBndGender()" class="notification" id="notification${g+1}">
                     <a>
                         <img class="image" src="${srcImage}">
                         <div class="body">
@@ -201,18 +236,32 @@ async function isUserlogged(){
 
     }
 }
-function markRead(SNO, red){
+function markRead(SNO, red, func){
     isUserlogged(SNO,red);
     async function isUserlogged(SNO, red){
         const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
         const response = await fetch(logUrl);
         var userLog = await response.json();
-        if (userLog.Result) {
-            console.log("Marked Read");
-            window.location.replace(red);
+        if (func.length == '') {
+            if (userLog.Result) {
+                console.log("Marked Read");
+                window.location.replace(red);
+            }else{
+                console.log("Not Marked Read");
+            }
         }else{
-            console.log("Not Marked Read");
+            if (userLog.Result) {
+                console.log("Marked Read");
+                if (typeof window[func] === "function") {
+                    window[func](); // call the function
+                  }else{
+                    console.log("Cannot call profileCompletion");
+                  }
+            }else{
+                console.log("Not Marked Read");
+            }
         }
+       
     }
 }
 function timeAgo(timestamp) {
