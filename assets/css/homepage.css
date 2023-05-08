@@ -614,6 +614,9 @@ header #nav #profileImage{
   font-weight: bold;
   overflow: hidden;
 }
+.badge:hover{
+  cursor: pointer;
+}
   /* Small Cards */
 .f-card_small .image{
   width: 100%;

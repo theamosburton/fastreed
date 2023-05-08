@@ -56,27 +56,38 @@ class getLoggedData{
         }
      }
 
-     public function getDetails(){
-        $PID = $_SESSION['LOGGED_USER'];
-        $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
+     public function getDetails($PID){
+        if ('self') {
+            $pID = $_SESSION['LOGGED_USER'];
+        }else{
+            $pID = $PID;
+        }
+        
+        $sql = "SELECT * FROM account_details WHERE personID = '$pID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
+                $name = $row['fullName'];
+                $profilePic = $row['profilePic'];
+                $userSince = $row['userSince'];
+                $username = $row['username'];
                 $DOB = $row['DOB'];
                 $Gender = $row['gender'];
                 $userSince = $row['userSince'];
                 $bio = $row['bio'];
-                $username = $row['username'];
-                $data = array("Username"=>$username, "DOB"=>$DOB, "Gender"=>$Gender,"userSince" => $userSince, "bio"=>$bio);
+                $today = new DateTime();
+                $diff = $today->diff(new DateTime($DOB));
+                $age = $diff->y;
+                $return = array("name"=>$name, "username"=>$username, "profilePic"=>$profilePic, "userSince"=>$userSince, "age"=>$age, "Gender"=>$Gender, "userSince" => $userSince, "bio"=>$bio);
             }else {
-                $data = array();
+                $return = array();
             }
         }else {
-            $data = array();
+            $return = array();
         }
-       return $data;
+       return $return;
      }
 
 
@@ -88,13 +99,12 @@ class getLoggedData{
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
-                
                 $userType = $row['accType'];
-                $canEditUsers = $row['canEditUser'];
+                $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];
                 $canDeleteUsers = $row['canDeleteUsers'];
 
-                $data = array("userType"=>$userType, "canEditUsers"=>$canEditUsers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers);
+                $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers);
             }else {
                 $data = array();
             }

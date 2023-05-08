@@ -8,13 +8,12 @@ $version = $visit->VERSION;
 $version = implode('.', str_split($version, 1));
 $userLogged = false;
 $adminLogged = false;
+$userData = new getLoggedData();
 if(isset($_SESSION['LOGGED_USER'])){
-	$userData = new getLoggedData();
 	if ($userData->U_AUTH) {
 		$userLogged = true;
 		if ($userData->getAccess()['userType'] == 'Admin') {
 			$adminLogged = true;
-			
 		}
 	}
 }
@@ -70,7 +69,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 <body class="scrollbar-style">
 <?php
 if ($userLogged) {
-	if (!isset($userData->getDetails()['DOB']) || !isset($userData->getDetails()['Gender'])) {
+	if (!isset($userData->getDetails('self')['DOB']) || !isset($userData->getDetails('self')['Gender'])) {
 		$profileUpdateDiv = <<<HTML
 		<div class="profileUpdateShade">
 			<div class="wrapper">
@@ -143,7 +142,7 @@ if ($userLogged) {
 				<!-- Notifications Nav-->
 				<div class="navs">
 					<i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
-					<span class="badge" id="notiCount"></span>
+					<span onclick="toggleNotifications()" class="badge" id="notiCount"></span>
 				</div>
 				<!-- Notifications Nav-->
 

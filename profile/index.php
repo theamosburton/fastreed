@@ -27,7 +27,7 @@ if(isset($_SESSION['LOGGED_USER'])){
 }
 
 if (isset($_GET['u']) && !empty($_GET['u'])) {
-    if ($userDtails = getUserDetails($_GET['u'], $DB)) {
+    if ($userDtails = $userData->getDetails($_GET['u'])) {
          
         if ($userLogged && $adminLogged) {
             var_dump($userDtails);
@@ -60,7 +60,7 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
     <title>$userData->NAME - Fastreed $type</title>
     HTML;
      // If bio is not set by user
-     if (strlen($userData->getDetails()['bio']) < 2) {
+     if (strlen($userData->getDetails('self')['bio']) < 2) {
         $description = <<<HTML
             <meta name="description" content="$userData->NAME is a  $type of Fastreed">
             <meta name="keywords" content="$userData->NAME is a  $type of Fastreed">
@@ -78,33 +78,6 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
     exit();
 }
 
-function getUserDetails($username, $DB){
-    $sql = "SELECT * FROM account_details WHERE username = '$username'";
-    $result = mysqli_query($DB, $sql);
-    if ($result) {
-        if (mysqli_num_rows($result)) {
-            $row = mysqli_fetch_assoc($result);
-            $name = $row['fullName'];
-            $profilePic = $row['profilePic'];
-            $userSince = $row['userSince'];
-            $username = $row['username'];
-            $DOB = $row['DOB'];
-            $Gender = $row['gender'];
-            $userSince = $row['userSince'];
-            $bio = $row['bio'];
-            $today = new DateTime();
-            $diff = $today->diff(new DateTime($DOB));
-            $age = $diff->y;
-            $return = array("name"=>$name, "username"=>$username, "profilePic"=>$profilePic, "userSince"=>$userSince, "age"=>$age, "Gender"=>$Gender, "userSince" => $userSince, "bio"=>$bio);
-        }else {
-            $return = false;
-        }
-    }else {
-        $return = false;
-    }
-
-    return $return;
-  }
 ?>
 <!DOCTYPE html> 
 <html lang="en">  
