@@ -79,7 +79,7 @@ if ($userLogged) {
 				</div>
 				<p class="title">Complete Profile</p>
 				<form>
-					<span id="errorMessage">Gender not correct</span>
+					<span id="errorMessage"></span>
 					<div class="u-inputs">
 						<span class="up-name">Gender</span>
 						<select id="updateGender">
