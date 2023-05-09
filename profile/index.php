@@ -27,10 +27,19 @@ if(isset($_SESSION['LOGGED_USER'])){
 }
 
 if (isset($_GET['u']) && !empty($_GET['u'])) {
-    if ($userDtails = $userData->getDetails($_GET['u'])) {
+    $user_id = $_GET['u'];
+    $new_url = '/profile/' . $user_id;
+    $new_url_with_query = $new_url . '?' . $_SERVER['QUERY_STRING'];
+
+    // Redirect to the new URL with a 301 Moved Permanently status code
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $new_url_with_query);
+    exit;
+
+    if ($userDetails = $userData->getDetails($_GET['u'])) {
          
         if ($userLogged && $adminLogged) {
-            var_dump($userDtails);
+            var_dump($userDetails);
             $description = <<<HTML
              HTML;
              $title = <<<HTML
@@ -52,6 +61,10 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
         }
     }else {
         // No Other User found with this id
+        $description = <<<HTML
+        HTML;
+        $title = <<<HTML
+        HTML;
     }
 }else if($userLogged){
     // If user is logged and want to watch own profile

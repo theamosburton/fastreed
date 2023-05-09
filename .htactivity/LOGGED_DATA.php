@@ -56,14 +56,18 @@ class getLoggedData{
         }
      }
 
-     public function getDetails($PID){
-        if ('self') {
+     public function getDetails($eID){
+        if ($eID == 'self') {
             $pID = $_SESSION['LOGGED_USER'];
+            $col = 'personID';
+            $ID = "$pID";
         }else{
-            $pID = $PID;
+            $col = 'username';
+            $ID = "$eID";
         }
+
         
-        $sql = "SELECT * FROM account_details WHERE personID = '$pID'";
+        $sql = "SELECT * FROM account_details WHERE $col = '$ID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
