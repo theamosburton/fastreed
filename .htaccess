@@ -1,2 +1,9 @@
+
 RewriteEngine On
-RewriteRule ^profile/([^/]+)/?$ /profile/?u=$1 [L]
+RewriteRule ^/profile/([^/]+)/?$ /profile/?u=$1 [L]
+# RewriteLog "C:/wamp64/logs/rewrite.log"
+# RewriteLogLevel 3
+
+# LogLevel "C:/wamp64/logs/rewrite.log"
+# RewriteLogLevel 6
+
