@@ -1,9 +1,6 @@
-
 RewriteEngine On
-RewriteRule ^/profile/([^/]+)/?$ /profile/?u=$1 [L]
-# RewriteLog "C:/wamp64/logs/rewrite.log"
-# RewriteLogLevel 3
-
-# LogLevel "C:/wamp64/logs/rewrite.log"
-# RewriteLogLevel 6
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/profile/index\.php$
+RewriteRule ^profile/([^/]+)/?$ /profile/index.php?u=$1 [L,QSA]
 
