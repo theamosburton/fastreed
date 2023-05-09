@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^/profile/([^/]+)/?$ /profile/?u=$1 [L,QSA]
+RewriteRule ^profile/([^/]+)/?$ /profile/?u=$1 [L]
