@@ -33,7 +33,7 @@ function updateDOBndGender(){
                 document.querySelector('#updateDOBndGender').innerHTML = `Updating...`;
                 updateDOBndGender();
                 async function updateDOBndGender(){
-                    const logUrl = `/.htactivity/API/updateDetails.php?gender=${Gender}&DOB=${DOB}`;
+                    const logUrl = `/.ht/API/updateDetails.php?gender=${Gender}&DOB=${DOB}`;
                     const response = await fetch(logUrl);
                     var data = await response.json();
                     if (data.Result) {
@@ -91,7 +91,7 @@ function isFiveYearsOld(dateString) {
 
 isUserlogged();
 async function isUserlogged(){
-    const logUrl = `/.htactivity/API/checkUser.php`;
+    const logUrl = `/.ht/API/checkUser.php`;
     const response = await fetch(logUrl);
     var userLog = await response.json();
     if (userLog.Result) {
@@ -99,7 +99,7 @@ async function isUserlogged(){
         let NAME = userLog.message.NAME;
         getNotifications(PID);
         async function getNotifications(PID){
-            const logUrl = '/.htactivity/API/getNotifications.php';
+            const logUrl = '/.ht/API/getNotifications.php';
             var encyDat = {
                 'ePID' : `${PID}`
             };
@@ -219,7 +219,7 @@ function markRead(SNO, red){
         cancelUpdatePopup();
         isUserlogged(SNO,red);
         async function isUserlogged(SNO, red){
-            const logUrl = `/.htactivity/API/markRead.php?SNO=${SNO}`;
+            const logUrl = `/.ht/API/markRead.php?SNO=${SNO}`;
             const response = await fetch(logUrl);
             var userLog = await response.json();
             if (userLog.Result) {

@@ -1,6 +1,6 @@
 function onGoogleSignIn(response) {
   const responsePayload = decodeJWT(response.credential);
-      const loginURL =`/.htactivity/G_USER_LOGIN.php?email=${responsePayload.email}&name=${responsePayload.name}&profilePic=${responsePayload.picture}`;
+      const loginURL =`/.ht/API/G_USER_LOGIN.php?email=${responsePayload.email}&name=${responsePayload.name}&profilePic=${responsePayload.picture}`;
       serverLogin(loginURL);
       async function serverLogin(url){
         const response = await fetch(url);
@@ -21,7 +21,7 @@ function onGoogleSignIn(response) {
   let logoutIcon = document.querySelector('#logout i');
   logout.innerHTML = `<div class="spinner" id="oSpinner"></div>Logging Out...`;
 
-  const logoutURL =`/.htactivity/G_USER_LOGIN.php?logout`;
+  const logoutURL =`/.ht/API/G_USER_LOGIN.php?logout`;
   serverLogout(logoutURL);
   async function serverLogout(url){
     const response = await fetch(url);
