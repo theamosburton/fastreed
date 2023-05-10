@@ -8,8 +8,6 @@ class UsersVisits
 
   function __construct()
   {
-
-
     $this->DB_CONNECT = new Database();
     $this->AUTH = new Auth();
     $this->BASIC_FUNC = new BasicFunctions();

@@ -2,7 +2,6 @@
 class getLoggedData{
     private $DB_CONNECT;
     private $DB;
-
     public $NAME;
     public $DESIG;
     public $EMAIL;

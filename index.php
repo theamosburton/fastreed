@@ -66,6 +66,8 @@ if(isset($_SESSION['LOGGED_USER'])){
 	}
 	?>
 </head>
+
+
 <body class="scrollbar-style">
 <?php
 if ($userLogged) {
