@@ -2,15 +2,15 @@
 session_start();
 header('content-type:application/json');
 if (!isset($_SERVROOT)) {
-  $_SERVROOT = '../../';
+  $_SERVROOT = '../../../';
 }
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
 
+$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
 
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.htactivity/BASIC_FUNC.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 include_once($GLOBALS['DEV_OPTIONS']);
 if(HTTPS){

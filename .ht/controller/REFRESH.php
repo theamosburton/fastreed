@@ -4,12 +4,12 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 header('content-type:application/json');
 if (!isset($_SERVROOT)) {
-  $_SERVROOT = '../../';
+  $_SERVROOT = '../../../';
 }
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.htactivity/LOGGED_DATA.php';
+$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
 include_once($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
 include_once($GLOBALS['DB']);

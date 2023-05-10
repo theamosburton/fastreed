@@ -1,7 +1,7 @@
 <?php
 $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include "../.htactivity/VISIT.php";
+include "../.ht/controller/VISIT.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -27,44 +27,23 @@ if(isset($_SESSION['LOGGED_USER'])){
 }
 
 if (isset($_GET['u']) && !empty($_GET['u'])) {
-    // $user_id = $_GET['u'];
-    // $new_url = '/profile/' . $user_id;
-    // $new_url_with_query = $new_url . '?' . $_SERVER['QUERY_STRING'];
-
-    // Redirect to the new URL with a 301 Moved Permanently status code
-    // header('HTTP/1.1 301 Moved Permanently');
-    // header('Location: ' . $new_url_with_query);
-    // exit;
-
     if ($userDetails = $userData->getDetails($_GET['u'])) {
-         
-        if ($userLogged && $adminLogged) {
-            var_dump($userDetails);
-            $description = <<<HTML
-             HTML;
-             $title = <<<HTML
-             HTML;
-            
-        }else if($userLogged){
+        if ($userLogged) {
             // If user is logged and want to watch other profile
-            $description = <<<HTML
-             HTML;
-             $title = <<<HTML
-             HTML;
-           
+            if ($adminLogged) {
+                $adminAccess = $userData->getAccess();
+                var_dump($adminAccess);
+                $canEditOthers = $adminAccess['canEditUsers'];
+                $canCreateUsers = $adminAccess['canCreateUsers'];
+                $canDeleteUsers = $adminAccess['canDeleteUser'];
+            }else {
+                # code...
+            }   
         }else {
              // If user is not logged and want to watch other profile
-             $description = <<<HTML
-             HTML;
-             $title = <<<HTML
-             HTML;
         }
     }else {
-        // No Other User found with this id
-        $description = <<<HTML
-        HTML;
-        $title = <<<HTML
-        HTML;
+        // No User found to watch with this id
     }
 }else if($userLogged){
     // If user is logged and want to watch own profile
@@ -99,8 +78,8 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php
-            echo $description."\n";
-            echo $title;
+            // echo $description."\n";
+            // echo $title;
         ?>
 
         <!-- Gobal CSS -->

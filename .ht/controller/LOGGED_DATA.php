@@ -104,11 +104,12 @@ class getLoggedData{
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
                 $userType = $row['accType'];
+                $canGiveAccess = $row['canGiveAccess'];
                 $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];
                 $canDeleteUsers = $row['canDeleteUsers'];
 
-                $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers);
+                $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers, "canGiveAccess" => $canGiveAccess);
             }else {
                 $data = array();
             }

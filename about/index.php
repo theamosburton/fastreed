@@ -1,6 +1,6 @@
 <?php
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include $_DOCROOT."/.htactivity/VISIT.php";
+include $_DOCROOT."/.ht/controller/VISIT.php";
 $visit = new VisitorActivity();
 $version = $visit->VERSION;
 ?>
