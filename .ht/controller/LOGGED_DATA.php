@@ -30,10 +30,7 @@ class getLoggedData{
                 $this->TYPE = 'User';
             }
         }
-        $userType = $this->getAccess()['userType'];
-        if ($userType == 'Admin') {
-            $this->adminLogged = true;
-        }
+       
     }
 
      private function getUserData($PID){
@@ -51,6 +48,10 @@ class getLoggedData{
             $isPresent = mysqli_num_rows($result);
                 if ($isPresent) {
                     $row = mysqli_fetch_assoc($result);
+                    $userType = $this->getAccess()['userType'];
+                    if ($userType == 'Admin') {
+                        $this->adminLogged = true;
+                    }
                     $this->NAME = $row['fullName'];
                     $this->EMAIL = $row['emailID'];
                     $this->REFERER  = $row['Referer'];
