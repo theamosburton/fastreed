@@ -55,6 +55,9 @@ class VisitorActivity
   private $USER_VISITED;
 
   public $VERSION;
+  public $webTitle;
+  public $webDescription;
+  public $webKeywords;
 
 
   function __construct()
@@ -69,9 +72,8 @@ class VisitorActivity
     $this->AUTH = new Auth();
     // Get Connection
     $this->DB = $this->DB_CONNECT->DBConnection();
-    $this->getVersions();
-    $this->handleActivity();
     $this->metaData();
+    $this->handleActivity();
   }
 
 
@@ -79,12 +81,21 @@ class VisitorActivity
   {
     $sql = "SELECT * FROM webmeta";
     $result = mysqli_query($this->DB, $sql);
-    if ($result) {
-      while($row = mysqli_fetch_assoc($result)){
-        $rowArray = array('Name' => $row['optionName'],'Value'=>$row['optionValue']);
-        var_dump($rowArray);
-      }
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+      $rows[] = $row;
     }
+    // First row must be version Number
+    $this->VERSION = $rows[0]['optionValue'];
+
+    // Second Should be title
+    $this->webTitle = $rows[1]['optionValue'];
+
+    // Third should be description
+    $this->webDescription = $rows[2]['optionValue'];
+
+    // Fourth should be keywords
+    $this->webKeywords = $rows[3]['optionValue'];
   }
 
 

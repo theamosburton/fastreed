@@ -30,6 +30,10 @@ class getLoggedData{
                 $this->TYPE = 'User';
             }
         }
+        $userType = $this->getAccess()['userType'];
+        if ($userType == 'Admin') {
+            $this->adminLogged = true;
+        }
     }
 
      private function getUserData($PID){
@@ -104,9 +108,6 @@ class getLoggedData{
                 
                 $row = mysqli_fetch_assoc($result);
                 $userType = $row['accType'];
-                if ($userType == 'Admin') {
-                    $this->adminLogged = true;
-                }
                 $canGiveAccess = $row['canGiveAccess'];
                 $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];

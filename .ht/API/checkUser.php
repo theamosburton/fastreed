@@ -22,7 +22,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $refdomain = $urlParts['host'];
     if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
         $loggedData = new getLoggedData();
-        $isLogged = $loggedData->U_AUTH;
+        $isLogged = $loggedData->userLogged;
         if ($isLogged) {
             showMessage(true, array("PID"=>$loggedData->PID,"NAME"=>$loggedData->NAME));
         }else {

@@ -1,0 +1,140 @@
+			    <!-- Notifications -->
+				<div class="dropdowns" id="noti-nav" style="display:none">
+					<div class="menu-head noti-head">
+						<span class="name">Notifications</span>
+					</div>
+					<div class="notifications scrollbar-style" id="notifications">
+					<div  class="spinner" id="notiSpinner"></div>	
+					</div>
+				</div>
+				<!-- ******************************************** Notifications ********************************************** -->
+
+				<!-- Accounts -->
+				<div class="dropdowns" id="accounts" style="display:none">
+						<?php 
+						// Logged Users
+						if ($this->userLogged) {
+						echo '<div class="profile-top">
+                                <div class="profile-info"> 
+                                    <div class="image-div">
+                                        <img id="profile-image" src='.$this->userData->PROFILE_PIC.'>
+                                    </div>
+                                    <div class="info-div">
+                                        <div>'.$this->userData->NAME.'</div>
+                                        <div>'.$this->userData->EMAIL.'</div>
+                                    </div>
+                                </div>
+                                <div class="menus">
+                                    <i class="left fa fa-circle-plus"></i>
+                                    <a href="">Create</a> 
+                                </div>
+                                <div class="menus">
+                                    <i class="left fa fa-user-circle"></i> 
+                                    <a href="">View Profile</a> 
+                                </div>
+                                <div class="menus">
+                                    <i class="left fa fa-gear"></i> 
+                                    <a href="">Manage Account</a> 
+                                </div>
+                            </div>
+
+							<div class="profile-bottom">
+								<div class="menus" id="logout" onclick="logout()"><i class="left fa fa-right-from-bracket"></i>Log Out</div>
+						    </div>';
+	
+						}else {
+							echo 
+							'<div class="non-logged-account">
+								<div class="menu-head">
+									<span class="name">Login or Create Account</span>
+								</div>
+								<div class="signInWith">
+								<div id="g_id_onload"
+									data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+									data-context="use"
+									data-ux_mode="popup"
+									data-callback="onGoogleSignIn"
+									data-auto_prompt="false">
+								</div>
+
+								<div id="g_id_signin menus" class="g_id_signin"
+									data-type="standard"
+									data-shape="pill"
+									data-theme="filled_black"
+									data-text="continue_with"
+									data-size="large"
+									data-logo_alignment="left"
+									data-width="290">
+									
+								</div>
+
+								<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
+								</div>
+								
+							</div>';
+						}
+						?>
+				</div>
+				<!--****************************** Accounts **************************** -->
+
+				<!-- Admin Options -->
+				<?php
+				if ($this->userLogged){
+					if($this->adminLogged){
+						if (!$this->FUNC->gitIsUpdated()) {
+
+							$refresh = <<<HTML
+								<div id="refStyle" class="menus" onclick="refreshCss()"> 
+									<div  class="spinner" id="RSpinner"></div>
+									<i id="RefreshIcon" class="left fa fa-rotate"></i>
+									<span>Refresh Style </span>
+								</div>
+								<div id="refHard" class="menus" onclick="hardRefresh()"> 
+									<div  class="spinner" id="HRSpinner"></div>
+									<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
+									<span> Hard Pull</span>
+								</div>
+							HTML;
+						}else {
+							$refresh = <<<HTML
+								<div  id="refStyle" class="menus"> 
+									<div class="spinner" id="RSpinner"></div>
+									<i id="RefreshIcon" class="left fa fa-rotate"></i>
+									<span>Refresh Style</span>
+								</div>
+								<div id="refHard" class="menus"> 
+									<div class="spinner" id="HRSpinner"></div>
+									<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
+									<span> Hard Pull</span>
+								</div>
+							HTML;
+						}
+						$advOptions ='
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Advance Options</span>
+								</div>
+
+								'.$refresh.'
+								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
+							</div>';
+
+						echo $advOptions;
+					}
+				}
+				?>
+				<!-- ********************* Admin Options ************************ -->
+					
+
+				<!-- Settings-->
+				<div class="dropdowns" id="settings" style="display:none">
+					<div class="menu-head">
+						<span class="name">Settings</span>
+					</div>
+					<div class="menus settings" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
+					<div class="menus settings"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
+					<div class="menus settings"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
+					<div class="menus settings"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
+					<div class="menus settings"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+				</div>
+				<!-- ************************* Settings ************************** -->
