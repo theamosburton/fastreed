@@ -203,8 +203,7 @@ function updateNeeded() {
     }else {
         $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
         
-    }
-    
+    } 
 }
 
 function toggleProfile() {

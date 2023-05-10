@@ -12,6 +12,8 @@ class getLoggedData{
     public $U_AUTH;
     public $PID;
 
+    public $userLogged;
+    public $adminLogged;
     function __construct(){
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
@@ -35,7 +37,7 @@ class getLoggedData{
         $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-            $this->U_AUTH = true;  
+            $this->userLogged = true;  
             if (isset($_COOKIE['AID'])) {
                 $ePID = $_COOKIE['AID'];
             }else {
@@ -50,8 +52,6 @@ class getLoggedData{
                     $this->REFERER  = $row['Referer'];
                     $this->PROFILE_PIC  = $row['profilePic'];
                 }
-        }else {
-            $this->U_AUTH = false;  
         }
      }
 
@@ -101,8 +101,12 @@ class getLoggedData{
         if ($result) {
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
+                
                 $row = mysqli_fetch_assoc($result);
                 $userType = $row['accType'];
+                if ($userType == 'Admin') {
+                    $this->adminLogged = true;
+                }
                 $canGiveAccess = $row['canGiveAccess'];
                 $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];

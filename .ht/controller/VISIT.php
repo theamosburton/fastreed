@@ -71,10 +71,25 @@ class VisitorActivity
     $this->DB = $this->DB_CONNECT->DBConnection();
     $this->getVersions();
     $this->handleActivity();
+    $this->metaData();
   }
 
+
+  public function metaData()
+  {
+    $sql = "SELECT * FROM webmeta";
+    $result = mysqli_query($this->DB, $sql);
+    if ($result) {
+      while($row = mysqli_fetch_assoc($result)){
+        $rowArray = array('Name' => $row['optionName'],'Value'=>$row['optionValue']);
+        var_dump($rowArray);
+      }
+    }
+  }
+
+
   public function getVersions(){
-    $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
+    $sql = "SELECT * FROM webmeta WHERE optionName = 'cssJsVersion'";
     $result = mysqli_query($this->DB, $sql);
     $row = mysqli_fetch_assoc($result);
     $this->VERSION = $row['optionValue'];
