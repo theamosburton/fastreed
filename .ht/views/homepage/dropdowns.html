@@ -13,8 +13,8 @@
 				<div class="dropdowns" id="accounts" style="display:none">
 						<?php 
 						// Logged Users
-						if ($this->userLogged) {
-						echo '<div class="profile-top">
+					if ($this->userLogged) {
+					echo '  <div class="profile-top">
                                 <div class="profile-info"> 
                                     <div class="image-div">
                                         <img id="profile-image" src='.$this->userData->PROFILE_PIC.'>
@@ -39,8 +39,10 @@
                             </div>
 
 							<div class="profile-bottom">
-								<div class="menus" id="logout" onclick="logout()"><i class="left fa fa-right-from-bracket"></i>Log Out</div>
-						    </div>';
+								<div class="menus" id="logout" onclick="logout()">
+									<i class="left fa fa-right-from-bracket"></i>Log Out
+								</div>
+						    </div>'."\n";
 	
 						}else {
 							echo 
@@ -71,56 +73,70 @@
 								<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
 								</div>
 								
-							</div>';
+							</div>'."\n";
 						}
 						?>
-				</div>
+				        </div>
 				<!--****************************** Accounts **************************** -->
 
 				<!-- Admin Options -->
-				<?php
-				if ($this->userLogged){
-					if($this->adminLogged){
-						if (!$this->FUNC->gitIsUpdated()) {
 
-							$refresh = <<<HTML
-								<div id="refStyle" class="menus" onclick="refreshCss()"> 
-									<div  class="spinner" id="RSpinner"></div>
-									<i id="RefreshIcon" class="left fa fa-rotate"></i>
-									<span>Refresh Style </span>
-								</div>
-								<div id="refHard" class="menus" onclick="hardRefresh()"> 
-									<div  class="spinner" id="HRSpinner"></div>
-									<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
-									<span> Hard Pull</span>
-								</div>
-							HTML;
-						}else {
-							$refresh = <<<HTML
-								<div  id="refStyle" class="menus"> 
-									<div class="spinner" id="RSpinner"></div>
-									<i id="RefreshIcon" class="left fa fa-rotate"></i>
-									<span>Refresh Style</span>
-								</div>
-								<div id="refHard" class="menus"> 
-									<div class="spinner" id="HRSpinner"></div>
-									<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
-									<span> Hard Pull</span>
-								</div>
-							HTML;
-						}
-						$advOptions ='
+				<?php
+				if($this->adminLogged){
+					if (!$this->FUNC->gitIsUpdated()) {
+						$refresh =  <<<HTML
+										<div id="refStyle" class="menus" onclick="refreshCss()"> 
+											<div  class="spinner" id="RSpinner"></div>
+											<i id="RefreshIcon" class="left fa fa-rotate"></i>
+											<span>Refresh Style </span>
+										</div>
+										<div id="refHard" class="menus" onclick="hardRefresh()"> 
+											<div  class="spinner" id="HRSpinner"></div>
+											<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
+											<span> Hard Pull</span>
+										</div>
+								HTML."\n";
+					}else{
+						$refresh =  <<<HTML
+										<div  id="refStyle" class="menus"> 
+											<div class="spinner" id="RSpinner"></div>
+											<i id="RefreshIcon" class="left fa fa-rotate"></i>
+											<span>Refresh Style</span>
+										</div>
+										<div id="refHard" class="menus"> 
+											<div class="spinner" id="HRSpinner"></div>
+											<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
+											<span> Hard Pull</span>
+										</div>
+								HTML."\n";
+					}
+				}
+				
+				if($this->adminLogged){
+					echo <<<HTML
 							<div class="dropdowns" id="advOptions" style="display:none">
 								<div class="menu-head">
 									<span class="name">Advance Options</span>
 								</div>
-
-								'.$refresh.'
-								<div class="menus"><i class="left fa fa-message"></i><a href="">Feedbacks</a></div>
-							</div>';
-
-						echo $advOptions;
-					}
+								$refresh
+								<div class="menus">
+									<i class="left fa fa-message"></i>
+									<a href="">Feedbacks</a>
+								</div>
+							</div>
+						HTML."\n";
+				}elseif($this->userLogged){
+					echo <<<HTML
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Advance Options</span>
+								</div>
+								<div class="menus">
+									<i class="left fa fa-message"></i>
+									<a href="">Feedbacks</a>
+								</div>
+							</div>
+					HTML."\n";
 				}
 				?>
 				<!-- ********************* Admin Options ************************ -->

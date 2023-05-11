@@ -98,7 +98,6 @@ function enableLightMode(){
     $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
 
     $('.dropdowns').css({
-    'border-color': '#239677',
     'background-color': 'rgb(255, 255, 255)',
     'box-shadow': '0px 0px 40px 7px grey'
     });

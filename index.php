@@ -33,6 +33,8 @@ class showIndex{
 
         $this->userData = new getLoggedData();
 
+
+// *************/ Head Section /**************** //
         include ".ht/views/homepage/head.html";
         echo "\n".<<<HTML
         <body class="scrollbar-style">
@@ -61,21 +63,42 @@ class showIndex{
         echo <<<HTML
            </header>
         HTML."\n";
-        // ***************** //
+// ********************************************** //
 
-        // Main Container Starts
+
+
+//***************/ Main Container Starts /**********//
         echo <<<HTML
             <div class="main-content">
                 <div class="container">
                     <div class="row ">
         HTML."\n";
         include ".ht/views/homepage/dropdowns.html";
+
+    //***************/ Posts Section /**********//
+        echo "\n";
+        echo <<<HTML
+                        <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">		    
+                            <div class="pin_container">
+        HTML."\n";
+        include ".ht/views/homepage/content.html";
+        echo <<<HTML
+                            </div>		    
+                        </div>
+        HTML."\n";
+        
+    // ***************************************** //
+
         echo <<<HTML
                     </div>
                 </div>
             </div>
         HTML;    
+// ********************************************** //
 
+
+
+//***************/ Footer Section /*****************//
         echo <<<HTML
         <!-- Global jQuery -->
         <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
@@ -94,11 +117,11 @@ class showIndex{
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             HTML."\n";
         }
-
         echo <<<HTML
         </body>
         </html>
         HTML."\n";
     }
+// ********************************************** //
 }
 ?>
