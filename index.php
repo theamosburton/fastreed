@@ -47,7 +47,7 @@ class showIndex{
         }
 
 
-        // Printer Header Section
+    //Header Section printer
         echo <<<HTML
            <header>
         HTML."\n";
