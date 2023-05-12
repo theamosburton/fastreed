@@ -1,11 +1,12 @@
 .leftSide{
-    border: 1px solid rgb(218, 218, 218);
+    border: 1px solid grey;
     border-radius: 15px;
 }
 .profile{
     margin: 15px 0px;
 }
 .editProfile{
+    cursor: pointer;
     margin-top: 20px;
     padding: 6px;
     border: 1px solid grey;
@@ -32,7 +33,7 @@
     margin-top: -28px;
     margin-right: -86px;
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(126, 0, 250);
+    border: 2px solid grey;
     padding: 4px 10px;
     border-radius: 100px;
     color: #83878f;
@@ -46,7 +47,6 @@
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
-    /* border: 2px solid rgb(126, 2, 250); */
 }
 .account-settings .user-profile h5.user-name {
     margin: 0 0 0.5rem 0;
