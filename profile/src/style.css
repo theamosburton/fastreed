@@ -105,6 +105,7 @@
     }
     .leftSide{
         margin-top: 20px;
+        margin-bottom: 20px;
     }
     .account-settings .user-profile{
         display: flex;
