@@ -18,6 +18,7 @@ class showProfile {
     protected $extraStyle;
     protected $blackMode;
     protected $whiteMode;
+    protected $pageJs;
     function __construct() {
         $this->const4Inherited();
         if ($this->userLogged && isset($_GET['u'])) {
@@ -58,7 +59,7 @@ class showProfile {
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
     } 
-   protected function addHead(){
+    protected function addHead(){
         // *************/ Head Section /**************** //
             include "../.ht/views/homepage/head.html";
             echo "\n".<<<HTML
@@ -88,7 +89,7 @@ class showProfile {
             </header>
             HTML."\n";
         // ********************************************** //
-        } 
+    } 
 
     protected function addFooter(){
         //***************/ Footer Section /*****************//
@@ -99,6 +100,14 @@ class showProfile {
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         HTML."\n";
+        if(isset($this->pageJs)){
+            if(!(count($this->pageJs) <= 0)){
+                for($i =0; $i < count($this->pageJs); $i++){
+                    echo '<script type="text/javascript" src="'.$this->pageJs[$i].'?v='.$this->version.'"></script>';
+                    echo "\n";
+                }
+            }
+        }
         if ($this->adminLogged) {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
@@ -114,9 +123,8 @@ class showProfile {
         </body>
         </html>
         HTML."\n";
-    // ********************************************** //
-    } 
-    
+        // ********************************************** //
+    }   
 }
 
 class loggedAdminVother extends showProfile{
@@ -162,7 +170,7 @@ class loggedVself extends showProfile{
         $this->webTitle = "Add and Edit Your Profile Info";
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-
+        $this->pageJs[0] = '/profile/src/style.js';
         $this->addHead();
 
     //***************/ Main Container Starts /**********//

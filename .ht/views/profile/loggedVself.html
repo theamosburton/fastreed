@@ -18,11 +18,12 @@
                 </div>
               </div>
               <div class="editProfile">
-                <span>Edit Personal Details</span>
+                <span onclick="toggleEditProfile()" id="editButton">Edit Personal Details</span>
             </div>
             </div>
           </div>
-          <div class="card-body edit-fields">
+          <div class="card-body edit-fields" id="edit_fields">
+            <span id="editFieldsStatus" hidden>0</span>
             <div class="row gutters">
               <div class="col-12">
                 <div class="form-group">
