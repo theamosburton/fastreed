@@ -61,7 +61,6 @@
     min-width: 300px;
 }
 .rightSection .fields span{
-    border-bottom: 2px solid;
     font-weight: 600;
 }
 .rightSection .fields input, .rightSection .fields select{
