@@ -15,6 +15,9 @@ class showProfile {
     protected $FUNC;
     protected $userData;
     protected $pageCss;
+    protected $extraStyle;
+    protected $blackMode;
+    protected $whiteMode;
     function __construct() {
         $this->const4Inherited();
         if ($this->userLogged && isset($_GET['u'])) {
@@ -37,12 +40,20 @@ class showProfile {
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
-
+        $this->pageCss[0] = '/profile/src/style.css';
 
         //Create an instance to get logged data
         // This will check weather user is logged or not
+        include "../.ht/views/profile/colorMode.html";
 
-        $this->pageCss = ['/profile/src/style.css'];
+        if (!isset($_COOKIE['colorMode'])) {
+            $this->extraStyle = $this->blackMode;
+        }elseif($_COOKIE['colorMode'] == 'light'){
+            $this->extraStyle = $this->lightMode;
+        }else{
+            $this->extraStyle = $this->blackMode;
+        }
+        
         $this->userData = new getLoggedData();
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
