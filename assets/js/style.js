@@ -39,11 +39,13 @@ function toggleMode(){
         enableDarkMode();
         toggleMode.classList.remove('fa-toggle-off');
         toggleMode.classList.add('fa-toggle-on');
+        location.reload();
     } else {
         // Enable light mode 
         toggleMode.classList.remove('fa-toggle-on');
         toggleMode.classList.add('fa-toggle-off');
         enableLightMode();
+        location.reload();
     }
 }
 

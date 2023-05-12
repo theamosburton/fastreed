@@ -1,146 +1,113 @@
 <div class="container">
-    <div class="row gutters">
-    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 guttersInside">
-    <div class="card h-100">
-        <div class="card-body">
+    <div class="row gutters profile">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
+        <div class="card h-100">
+          <div class="card-body">
             <div class="account-settings">
-                <div class="user-profile">
-                    <div class="user-avatar">
-                        <img src="<?php echo $this->userData->PROFILE_PIC?>" alt="S">
-                        <div class="editPhotos" id="editPhotos">
-                            <i class="fa fa-pen fa-xs"></i>
-                        </div>
-                    </div>
-                    <div class="user-details">
-                        <h5 class="user-name"><?php echo $this->userData->NAME?></h5>
-                        <h6 class="user-email"><?php echo $this->userData->EMAIL?></h6>
-                    </div>
-                    
+              <div class="user-profile">
+                <div class="user-avatar">
+                  <img src="<?php echo $this->userData->PROFILE_PIC?>">
+                  <div class="editPhotos" id="editPhotos">
+                    <i class="fa fa-pen fa-xs"></i>
+                  </div>
                 </div>
+                <div class="user-details">
+                  <h5 class="user-name"><?php echo $this->userData->NAME?></h5>
+                  <h6 class="user-email"><?php echo $this->userData->EMAIL?></h6>
+                  <h6 class="user-email">@<?php echo $this->userData->getDetails('self')['username']?></h6>
+                </div>
+                <div class="editProfile">
+                    <span>Edit Personal Details</span>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    </div>
-    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 guttersInside">
-    <div class="card h-100">
-        <div class="card-body">
+          </div>
+          <div class="card-body edit-fields">
             <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h6 class="mb-2 text-primary">Edit Personal Details</h6>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
+                  <input value="<?php echo $this->userData->NAME?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
                 </div>
-            </br>
-            <br>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
-                        <input value="<?php echo $this->userData->NAME?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
-                    </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"></span>
+                  <input value="<?php echo $this->userData->getDetails('self')['username']?>" type="text" class="form-control" id="username" placeholder="Enter Username">
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"></span>
-                        <input value="<?php echo $this->userData->getDetails('self')['username']?>" type="text" class="form-control" id="username" placeholder="Enter Username">
-                    </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="eMail">Email</label><span class="errorMessage" id="emailErrorMessage"></span>
+                  <input value="<?php echo $this->userData->EMAIL?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="eMail">Email</label><span class="errorMessage" id="emailErrorMessage"></span>
-                        <input value="<?php echo $this->userData->EMAIL?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
-                    </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
+                  <input value="<?php echo $this->userData->getDetails('self')['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                        <input value="<?php echo $this->userData->getDetails('self')['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
-                    </div>
+              </div>
+  
+              <?php
+                if($this->userData->getDetails('self')['Gender'] == 'Male'){
+                  $male = 'selected';
+                  $other = '';
+                  $female = '';
+                }elseif($this->userData->getDetails('self')['Gender'] == 'Female'){
+                  $male = '';
+                  $other= '';
+                  $female = 'selected';
+                }elseif($this->userData->getDetails('self')['Gender'] == 'Others'){
+                  $male = '';
+                  $other = 'selected';
+                  $female = '';
+                }else{
+                  $male = '';
+                  $other = '';
+                  $female = '';
+                }
+              ?>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="gender">Gender</label><span class="errorMessage" id="genderErrorMessage"></span>
+                  <select class="form-control" name="gender" id="gender">
+                    <option value="none">Select</option>
+                    <option value="Male" <?php echo $male;?>>Male</option>
+                    <option value="Female" <?php echo $female;?>>Female</option>
+                    <option value="Others" <?php echo $other;?>>Others</option>
+                  </select>
                 </div>
-
-                
-                <?php
-                  if($this->userData->getDetails('self')['Gender'] == 'Male'){
-                    $male = 'selected';
-                    $other = '';
-                    $female = '';
-                  }elseif($this->userData->getDetails('self')['Gender'] == 'Female'){
-                    $male = '';
-                    $other = '';
-                    $female = 'selected';
-                  }elseif($this->userData->getDetails('self')['Gender'] == 'Others'){
-                    $male = '';
-                    $other = 'selected';
-                    $female = '';
-                  }else{
-                    $male = '';
-                    $other = '';
-                    $female = '';
-                  }
-                ?>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="gender">Gender</label><span class="errorMessage" id="genderErrorMessage"></span>
-                        <select class="form-control" name="gender" id="gender">
-                            <option value="none">Select</option>
-                            <option value="Male" <?php echo $male;?>>Male</option>
-                            <option value="Female" <?php echo $female;?>>Female</option>
-                            <option value="Others" <?php echo $other;?>>Others</option>
-                        </select>
-                    </div>
+              </div>
+  
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
+                  <input value="" type="url" class="form-control" id="website" placeholder="Enter Url">
                 </div>
-
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                        <input value="" type="url" class="form-control" id="website" placeholder="Enter Url">
-                    </div>
+              </div>
+  
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
+                  <textarea value="" class="form-control" name="about" id="about" rows="2"><?php echo $this->userData->getDetails('self')['bio']?></textarea>
                 </div>
-
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                        <textarea value="" class="form-control" name="about" id="about"  rows="2"><?php echo $this->userData->getDetails('self')['bio']?></textarea>
-                    </div>
-                </div>
-                
+              </div>
+              
             </div>
-            <!-- <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h6 class="mt-3 mb-2 text-primary">Address</h6>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="Street">Street</label>
-                        <input type="name" class="form-control" id="Street" placeholder="Enter Street">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="ciTy">City</label>
-                        <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="sTate">State</label>
-                        <input type="text" class="form-control" id="sTate" placeholder="Enter State">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="zIp">Zip Code</label>
-                        <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
-                    </div>
-                </div>
-            </div> -->
             <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="text-right">
-                        <button type="button" id="submit" name="submit" class="btn btn-secondary">Restore</button>
-                        <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-                    </div>
+              <div class="col-12">
+                <div class="text-right">
+                  <button type="button" id="submit" name="submit" class="btn btn-secondary">Restore</button>
+                  <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 guttersInside">
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
+  </div>
+    
