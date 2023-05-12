@@ -1,130 +1,90 @@
-.profileWrapper{
-    box-shadow: 0 0 2px 0px black;
+.gutters{
+    margin: 20px;
+}
+.account-settings{
+    max-width: 400px;
+}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
     display: flex;
-    flex-direction: row;
-    padding: 10px;
-    margin: 20px 30px;
-    border-radius: 10px;
-    width: 100%;
-    
-}
-
-.container{
-    max-width: none;
-}
-.leftSection{
-
-}
-
-
-.leftSection .editImage{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 40px;
     justify-content: center;
     align-items: center;
 }
-.leftSection .editImage .name{
-    margin-top: 10px;
-}
-.leftSection img{
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
     border-radius: 100px;
-    width: 200px;
-    height: 200px;
 }
-.leftBottom{
-    border-top: 1px solid;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
 }
-
-
-.rightSection{
-    border-left: 1px solid grey;
-    width: 100%;
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
 }
-.rightSection .title{
-    font-size:x-large;
-    font-weight: 800;
-    margin: 20px;
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
 }
-.rightSection .fields{
-    margin-top: 20px;
-    display: inline-block;
-    min-width: 300px;
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
 }
-.rightSection .fields span{
-    font-weight: 600;
+.account-settings .about p {
+    font-size: 0.825rem;
 }
-.rightSection .fields input, .rightSection .fields select{
-    margin: 10px 5px 5px 20px;
-    padding: 2px 12px;
-    display: block;
-}
-.rightSection .editProfile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.rightSection .editProfile .field{
-    margin: 20px 40px;
-}
-.updateButton span{
-    background-color: rgb(40, 106, 229);
-    padding: 6px 15px;
-    font-weight: 700;
-    color: aliceblue;
-}
-.updateButton{
-    margin: 20px;
+.form-control {
+    border: 1px solid #cfd1d8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c;
 }
 
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+}
 
-
-@media (max-width: 767px) {
-    .profileWrapper{
+@media (max-width: 990px) {
+    .gutters{
+        margin: 0px;
+    }
+    .account-settings{
+        max-width: none;
+    }
+    .account-settings .user-profile{
         display: flex;
-        flex-direction: column;
-        padding: 10px;
-        margin:0;
-        box-shadow: none;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+        padding: 10px 20px;
+        /* max-width: 500px; */
+        background-color: aliceblue;
+        border-radius: 10px;
+    }
+   
+    .user-profile .user-details{
         width: 100%;
-        
     }
-    .rightSection{
-        border-left: none;
-        margin: 0;
+    .card-body{
+        padding: 10px 0px;
     }
-
-    .rightSection .fields{
-        min-width: none;
-    }
-    .rightSection .field{
-        padding: 0px;
-        margin: 10px;
-    }
-    .leftBottom{
-        border:0;
-        display: none;
-    }
-    .rightSection .title{
-        display: none;
-    }
-    .leftSection .editImage{
-        display: block;
-        padding: 10px 10px 0px 10px;
-    }
-    .leftSection .editImage img{
-        width: 60px;
-        height: 60px;
-        
+    .guttersInside{
+        padding: 0;
     }
 }
