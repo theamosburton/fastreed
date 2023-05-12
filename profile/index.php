@@ -2,95 +2,214 @@
 $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include "../.ht/controller/VISIT.php";
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+new showProfile();
 
-$visit = new VisitorActivity();
-$basic_func = new BasicFunctions();
-$DB_CONNECT = new Database();
-$DB = $DB_CONNECT->DBConnection();
-$version = $visit->VERSION;
-$version = implode('.', str_split($version, 1));
-$userLogged = false;
-$adminLogged = false;
-if(isset($_SESSION['LOGGED_USER'])){
-	$userData = new getLoggedData();
-	if ($userData->U_AUTH) {
-		$userLogged = true;
-		if ($userData->getAccess()['userType'] == 'Admin') {
-            $type = 'Admin';
-			$adminLogged = true;
-		}else {
-            $type = 'User';
-        }
-	}
-}
 
-if (isset($_GET['u']) && !empty($_GET['u'])) {
-    if ($userDetails = $userData->getDetails($_GET['u'])) {
-        if ($userLogged) {
-            // If user is logged and want to watch other profile
-            if ($adminLogged) {
-                $adminAccess = $userData->getAccess();
-                var_dump($adminAccess);
-                $canEditOthers = $adminAccess['canEditUsers'];
-                $canCreateUsers = $adminAccess['canCreateUsers'];
-                $canDeleteUsers = $adminAccess['canDeleteUser'];
-            }else {
-                # code...
-            }   
+class showProfile {
+    public $version;
+    public $captureVisit;
+    protected $adminLogged = false;
+    protected $userLogged = false;
+    protected $DB_CONN;
+    protected $AUTH;
+    protected $FUNC;
+    protected $userData;
+    protected $pageCss;
+    function __construct() {
+        $this->const4Inherited();
+        if ($this->userLogged && isset($_GET['u'])) {
+            new loggedVother();
+        }elseif ($this->adminLogged && isset($_GET['u'])) {
+            new loggedAdminVother();
+        }elseif (isset($_GET['u'])) {
+            new nonLoggedVother();
+        }elseif ($this->userLogged) {
+            new loggedVself();
         }else {
-             // If user is not logged and want to watch other profile
+            header("Location:/");
         }
-    }else {
-        // No User found to watch with this id
     }
-}else if($userLogged){
-    // If user is logged and want to watch own profile
-    /*** Making Head ****/
-    $title = <<<HTML
-    <title>$userData->NAME - Fastreed $type</title>
-    HTML;
-     // If bio is not set by user
-     if (strlen($userData->getDetails('self')['bio']) < 2) {
-        $description = <<<HTML
-            <meta name="description" content="$userData->NAME is a  $type of Fastreed">
-            <meta name="keywords" content="$userData->NAME is a  $type of Fastreed">
-        HTML;
-     }else {
-        $description = <<<HTML
-            <meta name="description" content="$userData->getAccess()['bio']">
-            <meta name="keywords" content="$userData->getAccess()['bio']">
-        HTML;
-     }
-    /********************************************************/
+    // This function construct properties and methods for inherited classes
+    protected function const4Inherited(){
+        // Create an instance to create/save activity
+        $this->captureVisit = new VisitorActivity();
+        $this->FUNC = new BasicFunctions();
+        // Get css,js version from captureVisit
+        $this->version = $this->captureVisit->VERSION;
+        $this->version = implode('.', str_split($this->version, 1));
+
+
+        //Create an instance to get logged data
+        // This will check weather user is logged or not
+
+        $this->pageCss = ['/profile/src/style.css'];
+        $this->userData = new getLoggedData();
+        $this->adminLogged = $this->userData->adminLogged;
+        $this->userLogged = $this->userData->userLogged;
+    } 
+   protected function addHead(){
+        // *************/ Head Section /**************** //
+            include "../.ht/views/homepage/head.html";
+            echo "\n".<<<HTML
+            <body class="scrollbar-style">
+            HTML."\n".<<<HTML
+                <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
+            HTML."\n";
+            if ($this->userLogged) {
+                if (!isset($this->userData->getDetails('self')['DOB']) || !isset($this->userData->getDetails('self')['Gender'])) {
+                    include "../.ht/views/homepage/updateProfile.html";
+                    echo "\n";
+                }
+            }
+
+
+        //Header Section printer
+            echo <<<HTML
+            <header>
+            HTML."\n";
+            if ($this->userLogged) {
+                include "../.ht/views/homepage/userHeader.html";
+            }else{
+                include "../.ht/views/homepage/anonHeader.html";
+            }
+            echo "\n";
+            echo <<<HTML
+            </header>
+            HTML."\n";
+        // ********************************************** //
+        } 
+
+    protected function addFooter(){
+        //***************/ Footer Section /*****************//
+        echo <<<HTML
+        <!-- Global jQuery -->
+        <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
+        <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
+        HTML."\n";
+        if ($this->adminLogged) {
+            echo <<<HTML
+            <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
+            <script type="text/javascript" src="/assets/js/admin.js?v=$this->version"></script>
+            HTML."\n";
+            
+        }elseif ($this->userLogged) {
+            echo <<<HTML
+            <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
+            HTML."\n";
+        }
+        echo <<<HTML
+        </body>
+        </html>
+        HTML."\n";
+    // ********************************************** //
+    } 
     
-}else {
-    header("Location:/");
-    exit();
 }
 
+class loggedAdminVother extends showProfile{
+    protected $webTitle;
+    protected $webDescription;
+    protected $webKeywords;
+
+   function __construct() {
+        $this->const4Inherited();
+        $this->webTitle = "Add and Edit Your Profile Info";
+        $this->webDescription = "Add and Edit Your Profile Info";
+        $this->webKeywords = "Add and Edit Your Profile Info";
+
+        $this->addHead();
+
+    //***************/ Main Container Starts /**********//
+        echo <<<HTML
+            <div class="main-content">
+                <div class="container">
+                    <div class="row ">
+        HTML."\n";
+        include "../.ht/views/homepage/dropdowns.html";
+
+
+        echo <<<HTML
+                    </div>
+                </div>
+            </div>
+        HTML;    
+    // ********************************************** //
+        $this->addFooter();
+   }
+}
+
+class loggedVself extends showProfile{
+    // Url will be fastreed.com/profile/
+    protected $webTitle;
+    protected $webDescription;
+    protected $webKeywords;
+
+   function __construct() {
+        $this->const4Inherited();
+        $this->webTitle = "Add and Edit Your Profile Info";
+        $this->webDescription = "Add and Edit Your Profile Info";
+        $this->webKeywords = "Add and Edit Your Profile Info";
+
+        $this->addHead();
+
+    //***************/ Main Container Starts /**********//
+        echo <<<HTML
+            <div class="main-content">
+                <div class="container">
+                    <div class="row ">
+        HTML."\n";
+        include "../.ht/views/homepage/dropdowns.html";
+
+
+        //***************/ Profile Section /**********//
+        echo "\n";
+        
+        include "../.ht/views/profile/loggedVself.html";
+
+        // ***************************************** //
+        
+
+        echo <<<HTML
+                    </div>
+                </div>
+            </div>
+        HTML;    
+    // ********************************************** //
+        $this->addFooter();
+   }
+}
+
+class loggedVother extends showProfile{ 
+    protected $webTitle;
+    protected $webDescription;
+    protected $webKeywords;
+
+   function __construct() {
+        $this->const4Inherited();
+        $this->webTitle = $this->userData->NAME.'. Fastreed User';
+        $this->webDescription = "Add and Edit Your Profile Info";
+        $this->webKeywords = "Add and Edit Your Profile Info";
+
+        $this->addHead();
+
+    //***************/ Main Container Starts /**********//
+        echo <<<HTML
+            <div class="main-content">
+                <div class="container">
+                    <div class="row ">
+        HTML."\n";
+        include "../.ht/views/homepage/dropdowns.html";
+
+
+        echo <<<HTML
+                    </div>
+                </div>
+            </div>
+        HTML;    
+    // ********************************************** //
+        $this->addFooter();
+   }
+}
 ?>
-<!DOCTYPE html> 
-<html lang="en">  
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php
-            // echo $description."\n";
-            // echo $title;
-        ?>
-
-        <!-- Gobal CSS -->
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Local Css -->
-        <link href="src/style.css" rel="stylesheet">
-        <!--Fonts-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-
-    </body>
-</html>

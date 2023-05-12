@@ -1,0 +1,91 @@
+<div class="profileWrapper">
+    <div class="leftSection">
+        <div class="leftTop">
+            <div class="editImage">
+                <img src="<?php echo $this->userData->PROFILE_PIC?>" alt="">
+                <span class="name"><?php echo $this->userData->NAME?></span>
+            </div>
+        </div>
+        <div class="leftBottom">
+            <div class="menus"></div>
+            <div class="menus"></div>
+            <div class="menus"></div>
+        </div>
+    </div>
+    <div class="rightSection">
+        <div class="title">Edit your profile Information</div>
+        <div class="editProfile">
+            <div class="field">
+                <div class="fields">
+                    <span>Public Name</span>
+                    <input type="text" name="" id="" value="<?php echo $this->userData->NAME?>">
+                </div>
+    
+                <div class="fields">
+                    <span>Username</span>
+                    <input type="text" name="" id="" value="<?php
+                     if($this->userData->getDetails('self')['username'] != null){
+                        echo $this->userData->getDetails('self')['username'];
+                        } 
+                     ?>">
+                </div>
+    
+                <div class="fields">
+                    <span>Email Address</span>
+                    <input type="text" name="" id="" value="<?php
+                     if($this->userData->EMAIL != null){
+                        echo $this->userData->EMAIL;
+                        } 
+                     ?>">
+                </div>
+    
+                <div class="fields">
+                    <span>Date Of Birth</span>
+                    <input type="date" name="" id="" value="<?php
+                     if($this->userData->getDetails('self')['DOB'] != null){
+                        echo $this->userData->getDetails('self')['DOB'];
+                        } 
+                     ?>">
+                </div>
+    
+                <div class="fields">
+                    <span>Gender</span>
+                    <select name="" id="">
+                        <?php
+                        if($this->userData->getDetails('self')['Gender'] != null){
+                            if($this->userData->getDetails('self')['Gender'] == 'Male'){
+                                echo '<option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                      <option value="Others">Others</option>';
+                            }else if($this->userData->getDetails('self')['Gender'] == 'Female'){
+                                echo '<option value="Female">Female</option>
+                                      <option value="Male">Male</option>
+                                      <option value="Others">Others</option>';
+                            }elseif($this->userData->getDetails('self')['Gender'] == 'Others'){
+                                echo '<option value="Others">Others</option>
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>';
+                            }
+                        }
+                        ?>
+                        
+                    </select>
+                </div>
+    
+                <div class="fields">
+                    <span>Bio (Optional)</span>
+                    <input type="textarea" name="" id="" value="<?php
+                    if($this->userData->getDetails('self')['bio'] != null){
+                       echo $this->userData->getDetails('self')['bio'];
+                       } 
+                    ?>">
+                </div>
+            </div>
+
+            <div class="updateButton">
+                <span>Update Profile</span>
+            </div>
+            
+        </div>
+    </div>
+</div>

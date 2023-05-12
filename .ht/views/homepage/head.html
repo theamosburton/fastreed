@@ -4,24 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo$this->captureVisit->webDescription;?>">
-    <meta name="keywords" content="<?php echo $this->captureVisit->webKeywords?>">
+    <meta name="description" content="<?php echo$this->webDescription;?>">
+    <meta name="keywords" content="<?php echo $this->webKeywords?>">
     <meta name="author" content="MD. Shafiq Malik">
     
-    <title><?php echo $this->captureVisit->webTitle;?></title>
+    <title><?php echo $this->webTitle;?></title>
 
     <!-- Gobal CSS -->
-    <link rel="shortcut icon" href="favicon.ico"> 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/homepage.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/homepage.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <?php
+    if(isset($this->pageCss)){
+        if(!(count($this->pageCss) <= 0)){
+            for($i =0; $i < count($this->pageCss); $i++){
+                echo '<link href="'.$this->pageCss[$i].'?v='.$this->version.'" rel="stylesheet">';
+            }
+        }
+    }
+    ?>
 
     <!--Fonts Css-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-        <script src="https://apis.google.com/js/api.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <?php
     if ($this->adminLogged) {
         echo '<script>var adminLogged = true;</script>'."\n";
@@ -33,7 +42,7 @@
     }elseif ($this->userLogged) {
         echo '<script>var userLogged = true;</script>'."\n";
     }else {
-        echo '<script>var userLogged = false; var adminLogged = false;</script>
+        echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>
         '."\n";
     }
     ?>

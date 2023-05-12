@@ -1,0 +1,88 @@
+.profileWrapper{
+    box-shadow: 0 0 2px 0px black;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 20px 30px;
+    border-radius: 10px;
+    width: 100%;
+    
+}
+.container{
+    max-width: none;
+}
+.leftSection{
+
+}
+
+
+.leftSection .editImage{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    justify-content: center;
+    align-items: center;
+}
+.leftSection .editImage .name{
+    margin-top: 10px;
+}
+.leftSection img{
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+}
+.leftBottom{
+    border-top: 1px solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.rightSection{
+    border-left: 1px solid grey;
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.rightSection .title{
+    font-size:x-large;
+    font-weight: 800;
+    margin: 20px;
+}
+.rightSection .fields{
+    margin-top: 20px;
+    display: inline-block;
+    min-width: 300px;
+}
+.rightSection .fields span{
+    border-bottom: 2px solid;
+    font-weight: 600;
+}
+.rightSection .fields input, .rightSection .fields select{
+    margin: 10px 5px 5px 20px;
+    padding: 2px 12px;
+    display: block;
+}
+.rightSection .editProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.rightSection .editProfile .field{
+    margin: 40px;
+}
+.updateButton span{
+    background-color: rgb(40, 106, 229);
+    padding: 6px 15px;
+    font-weight: 700;
+    color: aliceblue;
+}
+.updateButton{
+    margin: 20px;
+}

@@ -54,8 +54,8 @@ $card_medium = <<<HTML
                         </div>
 HTML;
 
-$cards = array($card_small, $card_large, $card_medium);
-for ($i = 0; $i < 3; $i++) {
+$cards = array($card_large, $card_medium);
+for ($i = 0; $i < 8; $i++) {
     shuffle($cards);
     foreach ($cards as $card) {
         $j = $i+1;

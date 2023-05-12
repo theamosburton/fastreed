@@ -11,6 +11,9 @@ class showIndex{
 
     private $adminLogged = false;
     private $userLogged = false;
+    private $webTitle;
+    private $webDescription;
+    private $webKeywords;
 
     private $DB_CONN;
     private $AUTH;
@@ -32,6 +35,10 @@ class showIndex{
         $this->userLogged = $loggedData->userLogged;
 
         $this->userData = new getLoggedData();
+
+        $this->webTitle = $this->captureVisit->webTitle;
+        $this->webDescription = $this->captureVisit->webDescription;;
+        $this->webKeywords = $this->captureVisit->webKeywords;
 
 
 // *************/ Head Section /**************** //

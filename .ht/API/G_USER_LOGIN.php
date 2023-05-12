@@ -13,15 +13,8 @@ $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 include_once($GLOBALS['DEV_OPTIONS']);
-if(HTTPS){
-  $prefix = 'https://';
-}else{
-  $prefix = 'http://';
-}
-$thisHttp = $_SERVER['HTTP_REFERER'];
-$refurl = $prefix.DOMAIN.'/';
-$refurl2 = $prefix.DOMAIN_ALIAS.'/';
-if ($thisHttp == $refurl || $thisHttp == $refurl2) {
+$refurl = $_SERVER['HTTP_HOST'];;
+if ($refurl == DOMAIN || $refurl == DOMAIN_ALIAS) {
     include_once($GLOBALS['DB']);
     include_once($GLOBALS['AUTH']);
     include_once($GLOBALS['BASIC_FUNC']);
@@ -150,12 +143,6 @@ class gSignUpLogin{
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
-
-        $sql2 = "INSERT INTO account_access 
-        (personID,accType, canGiveAccess, canEditUser, canDeleteUsers, canCreateUsers) 
-        VALUES 
-        ('$userID','User', 0 , 0 , 0 , 0)";
-        $result2 = mysqli_query($this->DB, $sql2);
 
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
