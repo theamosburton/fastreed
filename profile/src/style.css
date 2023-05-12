@@ -111,4 +111,20 @@
         padding: 0px;
         margin: 10px;
     }
+    .leftBottom{
+        border:0;
+        display: none;
+    }
+    .rightSection .title{
+        display: none;
+    }
+    .leftSection .editImage{
+        display: block;
+        padding: 10px 10px 0px 10px;
+    }
+    .leftSection .editImage img{
+        width: 60px;
+        height: 60px;
+        
+    }
 }
