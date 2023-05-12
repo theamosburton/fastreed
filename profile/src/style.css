@@ -82,6 +82,7 @@
     }
     .account-settings{
         max-width: none;
+        margin-top: 10px;
     }
     .account-settings .user-profile{
         display: flex;
