@@ -8,6 +8,7 @@
     width: 100%;
     
 }
+
 .container{
     max-width: none;
 }
@@ -85,4 +86,29 @@
 }
 .updateButton{
     margin: 20px;
+}
+
+
+
+@media (max-width: 767px) {
+    .profileWrapper{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        margin: 20px 30px;
+        border-radius: 10px;
+        width: 100%;
+        
+    }
+    .rightSection{
+        border-left: none;
+        margin: 0;
+    }
+
+    .rightSection .fields{
+        min-width: none;
+    }
+    .rightSection .field{
+        padding: 10px;
+    }
 }
