@@ -76,7 +76,7 @@
     justify-content: center;
 }
 .rightSection .editProfile .field{
-    margin: 40px;
+    margin: 20px 40px;
 }
 .updateButton span{
     background-color: rgb(40, 106, 229);
@@ -109,6 +109,7 @@
         min-width: none;
     }
     .rightSection .field{
-        padding: 10px;
+        padding: 0px;
+        margin: 10px;
     }
 }
