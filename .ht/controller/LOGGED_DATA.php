@@ -9,7 +9,6 @@ class getLoggedData{
     public $REFERER;
     public $PROFILE_PIC;
     public $TYPE;
-    public $U_AUTH;
     public $PID;
 
     public $userLogged;

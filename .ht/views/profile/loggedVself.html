@@ -7,16 +7,15 @@
                 <div class="user-profile">
                     <div class="user-avatar">
                         <img src="<?php echo $this->userData->PROFILE_PIC?>" alt="Maxwell Admin">
+                        <div class="editPhotos" id="editPhotos">
+                            <i class="fa fa-camera"></i>
+                        </div>
                     </div>
                     <div class="user-details">
                         <h5 class="user-name"><?php echo $this->userData->NAME?></h5>
                         <h6 class="user-email"><?php echo $this->userData->EMAIL?></h6>
                     </div>
                     
-                </div>
-                <div class="about">
-                    <h5>About</h5>
-                    <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
                 </div>
             </div>
         </div>
@@ -32,34 +31,66 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                        <input value="<?php echo $this->userData->NAME?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter Username">
+                        <input value="<?php echo $this->userData->getDetails('self')['username']?>" type="text" class="form-control" id="username" placeholder="Enter Username">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                        <input value="<?php echo $this->userData->EMAIL?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="phone">Date of birth</label>
-                        <input type="date" class="form-control" id="phone" placeholder="Enter Date of birth">
+                        <input value="<?php echo $this->userData->getDetails('self')['DOB']?>" type="date" class="form-control" id="phone" placeholder="Enter Date of birth">
                     </div>
                 </div>
+
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
-                        <label for="website">About</label>
-                        <!-- <input type="textarea" class="form-control" column="5" id="website" placeholder="Website url"> -->
-                        <textarea class="form-control" name="" id="" cols="5" rows="3"></textarea>
+                        <label for="about">About</label>
+                        <textarea value="" class="form-control" name="about" id="about"  rows="2"><?php echo $this->userData->getDetails('self')['bio']?></textarea>
                     </div>
                 </div>
+                <?php
+                  if($this->userData->getDetails('self')['Gender'] == 'Male'){
+                    $male = 'selected';
+                    $other = '';
+                    $female = '';
+                  }elseif($this->userData->getDetails('self')['Gender'] == 'Female'){
+                    $male = '';
+                    $other = '';
+                    $female = 'selected';
+                  }elseif($this->userData->getDetails('self')['Gender'] == 'Others'){
+                    $male = '';
+                    $other = 'selected';
+                    $female = '';
+                  }else{
+                    $male = '';
+                    $other = '';
+                    $female = '';
+                  }
+                ?>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="gender" id="gender">
+                            <option value="none">Select</option>
+                            <option value="Male" <?php echo $male;?>>Male</option>
+                            <option value="Female" <?php echo $female;?>>Female</option>
+                            <option value="Others" <?php echo $other;?>>Others</option>
+                        </select>
+                    </div>
+                </div>
+
+                
                 
             </div>
             <!-- <div class="row gutters">
@@ -94,7 +125,7 @@
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="text-right">
-                        <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="submit" name="submit" class="btn btn-secondary">Restore</button>
                         <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
