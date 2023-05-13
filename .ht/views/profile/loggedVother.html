@@ -14,7 +14,7 @@
                   <h4 class="user-email">@<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username']?></h4>
                   <h4 class="user-email"><?php 
                     echo '<b>'.$this->userData->getOtherData('username', $this->otherUsername)['userType'].'</b>';
-                    echo ' since ';
+                    echo ' . ';
                    echo date('M Y', $this->userData->getOtherData('username', $this->otherUsername)['userSince']);
                     
                     ?></h4>
