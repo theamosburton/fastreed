@@ -41,7 +41,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="eMail">Email</label><span class="errorMessage" id="emailErrorMessage"></span>
-                  <input value="<?php echo $this->userData->EMAIL?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                  <input value="<?php echo $this->userData->getSelfDetails()['email']?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
                 </div>
               </div>
               <div class="col-12">
@@ -52,22 +52,15 @@
               </div>
   
               <?php
+              $male = '';
+              $female = '';
+              $other = '';
                 if($this->userData->getSelfDetails()['Gender'] == 'Male'){
                   $male = 'selected';
-                  $other = '';
-                  $female = '';
                 }elseif($this->userData->getDetails()['Gender'] == 'Female'){
-                  $male = '';
-                  $other= '';
                   $female = 'selected';
                 }elseif($this->userData->getDetails()['Gender'] == 'Others'){
-                  $male = '';
                   $other = 'selected';
-                  $female = '';
-                }else{
-                  $male = '';
-                  $other = '';
-                  $female = '';
                 }
               ?>
               <div class="col-12">
