@@ -110,6 +110,10 @@
     background-color: #2e323c;
     cursor: pointer;
 }
+
+.userContent .userContentMenus .active{
+    border-bottom: 3px solid #ec775c;
+}
 .contentView{
     border: 1px solid grey;
     border-radius: 15px;
