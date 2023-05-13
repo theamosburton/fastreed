@@ -45,17 +45,21 @@ class getLoggedData{
             }
             $this->PID = $ePID;
             $isPresent = mysqli_num_rows($result);
-                if ($isPresent) {
-                    $row = mysqli_fetch_assoc($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                
+                if (isset($this->getAccess()['userType'])) {
                     $userType = $this->getAccess()['userType'];
-                    if ($userType == 'Admin') {
+                    if ($userType) {
                         $this->adminLogged = true;
                     }
-                    $this->NAME = $row['fullName'];
-                    $this->EMAIL = $row['emailID'];
-                    $this->REFERER  = $row['Referer'];
-                    $this->PROFILE_PIC  = $row['profilePic'];
+                    
                 }
+                $this->NAME = $row['fullName'];
+                $this->EMAIL = $row['emailID'];
+                $this->REFERER  = $row['Referer'];
+                $this->PROFILE_PIC  = $row['profilePic'];
+            }
         }
      }
 
@@ -97,7 +101,7 @@ class getLoggedData{
        return $return;
      }
 
-
+     // This will work if user is super user oe admin
      public function getAccess(){
         $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
@@ -112,6 +116,7 @@ class getLoggedData{
                 $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];
                 $canDeleteUsers = $row['canDeleteUsers'];
+
 
                 $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers, "canGiveAccess" => $canGiveAccess);
             }else {
