@@ -141,6 +141,13 @@
 
 
 @media (max-width: 990px) {
+
+    .contentView{
+        border-bottom: 1px solid grey;
+        border-radius: 0;
+        padding: 20px 8px;
+    }
+
     .userContent{
         border-radius: 15px;
         padding: 20px 0 0 0;
