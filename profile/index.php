@@ -44,8 +44,8 @@ class showProfile {
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
-        $this->pageCss[0] = '/profile/src/style.css';
-        $this->pageJs[0] = '/profile/src/style.js';
+        $this->pageCss = ['/profile/src/style.css'];
+        $this->pageJs = ['/profile/src/style.js'];
 
         //Create an instance to get logged data
         // This will check weather user is logged or not
@@ -142,9 +142,9 @@ class loggedAdminVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
 
-        // if ($this->checkUserExits()) {
+        if ($this->checkUserExits()) {
             $this->otherUsername = $_GET['u'];
-        // }
+        }
 
         $this->addHead();
 
@@ -164,6 +164,20 @@ class loggedAdminVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+   }
+
+   protected function checkUserExits(){
+    $return = false;
+    $username = $_GET['u'];
+    $sql = "SELECT * FROM account_details WHERE username = '$username'";
+    $result = mysqli_query($this->DB_CONN, $sql);
+    if ($result) {
+        if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+            $return = true;
+        }
+    }
+    return $return;
    }
 }
 
@@ -205,6 +219,8 @@ class loggedVself extends showProfile{
     // ********************************************** //
         $this->addFooter();
    }
+
+
 }
 
 class loggedVother extends showProfile{ 
