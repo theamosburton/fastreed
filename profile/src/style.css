@@ -123,4 +123,8 @@
     .guttersInside{
         padding: 0;
     }
+
+    .account-settings .user-profile .user-avatar .editPhotos{
+        margin-right: -64px;
+    }
 }
