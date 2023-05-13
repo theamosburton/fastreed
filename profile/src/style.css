@@ -5,14 +5,14 @@
 .profile{
     margin: 15px 0px;
 }
-.editProfile span{
+.profileOptions span{
     cursor: pointer;
-    margin-top: 20px;
     padding: 6px 25px;
     border: 1px solid grey;
     border-radius: 35px;
 }
-.editProfile{
+.profileOptions{
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,27 +54,16 @@
     border-radius: 100px;
     border: 1px solid grey;
 }
-.account-settings .user-profile h5.user-name {
-    margin: 0 0 0.5rem 0;
-}
 .account-settings .user-profile h4.user-email {
     margin-top: 10px;
     font-size: 16px;
     font-weight: 400;
     color: #9fa8b9;
 }
-.account-settings .about {
-    margin: 2rem 0 0 0;
-    text-align: center;
+.account-settings .user-profile h3.user-name {
+    font-size: 26px;
 }
-.account-settings .about h5 {
-    margin: 0 0 15px 0;
-    font-size:x-large;
-    color: #007ae1;
-}
-.account-settings .about p {
-    font-size: 0.825rem;
-}
+
 .form-control {
     border: 1px solid #cfd1d8;
     -webkit-border-radius: 2px;
@@ -97,6 +86,10 @@
 }
 
 @media (max-width: 990px) {
+    .account-settings .user-profile {
+        margin: 0 0 1rem 0;
+        text-align: unset;
+    }
     .gutters{
         margin: 0px;
     }
@@ -110,20 +103,19 @@
     }
     .account-settings .user-profile{
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        flex-direction: row;
         margin-bottom: 0;
-        padding: 10px 20px;
+        padding: 0 10px;
         background-color: aliceblue;
         border-radius: 10px;
     }
-    .account-settings .user-profile .user-avatar .editPhotos{
-        /* background-color: rgb(240, 248, 255); */
+    .account-settings .user-profile .user-avatar img{
+        width: 100px;
+        height: 100px;
     }
     .user-profile .user-details{
         width: 100%;
-        margin: 0px;
+        padding-left: 20px;
     }
     .card-body{
         padding: 10px 0px;
