@@ -102,7 +102,7 @@ class showProfile {
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         HTML."\n";
-        
+
         if(isset($this->pageJs)){
             if(!(count($this->pageJs) <= 0)){
                 for($i =0; $i < count($this->pageJs); $i++){
@@ -274,4 +274,55 @@ class loggedVother extends showProfile{
     return $return;
    }
 }
+
+class nonLoggedVother extends showProfile{
+    protected $webTitle;
+    protected $webDescription;
+    protected $webKeywords;
+
+   function __construct() {
+        $this->const4Inherited();
+        $this->webTitle = $this->userData->getSelfDetails()['name'].'. Fastreed User';
+        $this->webDescription = "Add and Edit Your Profile Info";
+        $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->pageCss = ['/profile/src/style.css'];
+        $this->pageJs = ['/profile/src/style.js'];
+        if ($this->checkUserExits()) {
+            $this->otherUsername = $_GET['u'];
+        }
+        $this->addHead();
+
+    //***************/ Main Container Starts /**********//
+        echo <<<HTML
+            <div class="main-content">
+                <div class="container">
+                    <div class="row ">
+        HTML."\n";
+        include "../.ht/views/homepage/dropdowns.html";
+        include "../.ht/views/profile/loggedVother.html";
+
+        echo <<<HTML
+                    </div>
+                </div>
+            </div>
+        HTML;    
+    // ********************************************** //
+        $this->addFooter();
+   }
+
+   protected function checkUserExits(){
+    $return = false;
+    $username = $_GET['u'];
+    $sql = "SELECT * FROM account_details WHERE username = '$username'";
+    $result = mysqli_query($this->DB_CONN, $sql);
+    if ($result) {
+        if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+            $return = true;
+        }
+    }
+    return $return;
+   }
+}
+
 ?>
