@@ -6,16 +6,16 @@
             <div class="account-settings">
               <div class="user-profile">
                 <div class="user-avatar">
-                  <img src="<?php echo $this->userData->PROFILE_PIC?>">
+                  <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
                   <div class="editPhotos" id="editPhotos">
                     <i class="fa fa-pen fa-xs"></i>
                   </div>
                 </div>
                 <br>
                 <div class="user-details">
-                  <h5 class="user-name"><?php echo $this->userData->NAME?></h5>
-                  <h6 class="user-email"><?php echo $this->userData->EMAIL?></h6>
-                  <h6 class="user-email">@<?php echo $this->userData->getDetails('self')['username']?></h6>
+                  <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
+                  <h4 class="user-email"><?php echo $this->userData->EMAIL;?></h4>
+                  <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
                 </div>
               </div>
               <div class="editProfile">
@@ -29,13 +29,13 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
-                  <input value="<?php echo $this->userData->NAME?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                  <input value="<?php echo $this->userData->getSelfDetails()['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getDetails('self')['username']?>" type="text" class="form-control" id="username" placeholder="Enter Username">
+                  <input value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
                 </div>
               </div>
               <div class="col-12">
@@ -47,20 +47,20 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getDetails('self')['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+                  <input value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
               </div>
   
               <?php
-                if($this->userData->getDetails('self')['Gender'] == 'Male'){
+                if($this->userData->getSelfDetails()['Gender'] == 'Male'){
                   $male = 'selected';
                   $other = '';
                   $female = '';
-                }elseif($this->userData->getDetails('self')['Gender'] == 'Female'){
+                }elseif($this->userData->getDetails()['Gender'] == 'Female'){
                   $male = '';
                   $other= '';
                   $female = 'selected';
-                }elseif($this->userData->getDetails('self')['Gender'] == 'Others'){
+                }elseif($this->userData->getDetails()['Gender'] == 'Others'){
                   $male = '';
                   $other = 'selected';
                   $female = '';
@@ -92,7 +92,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                  <textarea value="" class="form-control" name="about" id="about" rows="2"><?php echo $this->userData->getDetails('self')['bio']?></textarea>
+                  <textarea value="" class="form-control" name="about" id="about" rows="2"><?php echo $this->userData->getSelfDetails()['bio'];?></textarea>
                 </div>
               </div>
               

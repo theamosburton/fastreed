@@ -53,7 +53,6 @@ class getLoggedData{
                     if ($userType == 'Admin') {
                         $this->adminLogged = true;
                     }
-                    
                 }
                 $this->NAME = $row['fullName'];
                 $this->EMAIL = $row['emailID'];
@@ -63,24 +62,15 @@ class getLoggedData{
         }
      }
 
-     public function getDetails($eID){
-        if ($eID == 'self') {
-            $pID = $_SESSION['LOGGED_USER'];
-            $col = 'personID';
-            $ID = "$pID";
-        }else{
-            $col = 'username';
-            $ID = "$eID";
-        }
-
-        
-        $sql = "SELECT * FROM account_details WHERE $col = '$ID'";
+     public function getSelfDetails(){
+        $pID = $_SESSION['LOGGED_USER'];
+        $sql = "SELECT * FROM account_details WHERE personID = '$pID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
-                $name = $row['fullName'];
+                $UID = $row['personID'];
                 $profilePic = $row['profilePic'];
                 $userSince = $row['userSince'];
                 $username = $row['username'];
@@ -88,6 +78,7 @@ class getLoggedData{
                 $Gender = $row['gender'];
                 $userSince = $row['userSince'];
                 $bio = $row['bio'];
+                $name = $row['fullName'];
                 $today = new DateTime();
                 $diff = $today->diff(new DateTime($DOB));
                 $age = $diff->y;
@@ -109,15 +100,12 @@ class getLoggedData{
         if ($result) {
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
-                
                 $row = mysqli_fetch_assoc($result);
                 $userType = $row['accType'];
                 $canGiveAccess = $row['canGiveAccess'];
                 $canEditOthers = $row['canEditUser'];
                 $canCreateUsers = $row['canCreateUsers'];
                 $canDeleteUsers = $row['canDeleteUsers'];
-
-
                 $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers, "canGiveAccess" => $canGiveAccess);
             }else {
                 $data = array();
@@ -127,6 +115,54 @@ class getLoggedData{
         }
        return $data;
      }
+
+     public function getOtherData($type, $field){
+        $data = array();
+        $sql = "SELECT * FROM account_details WHERE $type = '$field'";
+        $result = mysqli_query($this->DB, $sql);
+        if($result){
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                $UID = $row['personID'];
+                $profilePic = $row['profilePic'];
+                $userSince = $row['userSince'];
+                $username = $row['username'];
+                $DOB = $row['DOB'];
+                $Gender = $row['gender'];
+                $userSince = $row['userSince'];
+                $bio = $row['bio'];
+                $today = new DateTime();
+                $diff = $today->diff(new DateTime($DOB));
+                $age = $diff->y;
+                $userType = 'User';
+                $name = $row['fullName'];
+                $sql2 = "SELECT * FROM account_access WHERE personID = '$UID'";
+                if ($result2 = mysqli_query($this->DB, $sql2)) {
+                    if($isPresent2 = mysqli_num_rows($result2)){
+                        $row2 = mysqli_fetch_assoc($result2);
+                        $userType = $row2['accType'];
+                    }
+                }
+
+                $data = array(
+                    'UID' => $UID,
+                    'profilePic' => $profilePic,
+                    'userSince' => $userSince,
+                    'username' => $username,
+                    'DOB' => $DOB,
+                    'Gender' => $Gender,
+                    'userSince' => $userSince,
+                    'bio' => $bio,
+                    'age' => $age,
+                    'userType' => $userType,
+                    'name' => $name,
+                    'userType'=>$userType
+                );
+            }
+        }
+        return $data;
+     } 
 }
 
 ?>

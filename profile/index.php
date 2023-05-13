@@ -70,7 +70,7 @@ class showProfile {
                 <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
             HTML."\n";
             if ($this->userLogged) {
-                if (!isset($this->userData->getDetails('self')['DOB']) || !isset($this->userData->getDetails('self')['Gender'])) {
+                if (!isset($this->userData->getSelfDetails()['DOB']) || !isset($this->userData->getSelfDetails()['Gender'])) {
                     include "../.ht/views/homepage/updateProfile.html";
                     echo "\n";
                 }

@@ -8,7 +8,7 @@
 .editProfile span{
     cursor: pointer;
     margin-top: 20px;
-    padding: 6px 20px;
+    padding: 6px 25px;
     border: 1px solid grey;
     border-radius: 35px;
 }
@@ -47,8 +47,8 @@
    cursor: pointer;
 }
 .account-settings .user-profile .user-avatar img {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
@@ -57,9 +57,9 @@
 .account-settings .user-profile h5.user-name {
     margin: 0 0 0.5rem 0;
 }
-.account-settings .user-profile h6.user-email {
+.account-settings .user-profile h4.user-email {
     margin-top: 10px;
-    font-size: 0.8rem;
+    font-size: 16px;
     font-weight: 400;
     color: #9fa8b9;
 }
