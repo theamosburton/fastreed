@@ -746,6 +746,9 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 767px) {
+  header{
+    margin: 0;
+  }
   .notifications{
     max-height: 450px;
   }
