@@ -45,6 +45,7 @@ class showProfile {
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
         $this->pageCss[0] = '/profile/src/style.css';
+        $this->pageJs[0] = '/profile/src/style.js';
 
         //Create an instance to get logged data
         // This will check weather user is logged or not
@@ -140,7 +141,6 @@ class loggedAdminVother extends showProfile{
         $this->webTitle = "Add and Edit Your Profile Info";
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageJs[0] = '/profile/src/style.js';
 
         // if ($this->checkUserExits()) {
             $this->otherUsername = $_GET['u'];
@@ -178,7 +178,6 @@ class loggedVself extends showProfile{
         $this->webTitle = "Add and Edit Your Profile Info";
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageJs[0] = '/profile/src/style.js';
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
