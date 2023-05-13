@@ -137,14 +137,15 @@ class loggedAdminVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
+        if ($this->checkUserExits()) {
+            $this->otherUsername = $_GET['u'];
+        }
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js'];
-        if ($this->checkUserExits()) {
-            $this->otherUsername = $_GET['u'];
-        }
+       
 
         $this->addHead();
 
