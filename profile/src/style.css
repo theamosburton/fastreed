@@ -52,6 +52,7 @@
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
+    border: 1px solid grey;
 }
 .account-settings .user-profile h5.user-name {
     margin: 0 0 0.5rem 0;
