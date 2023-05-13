@@ -210,7 +210,7 @@ class loggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->NAME.'. Fastreed User';
+        $this->webTitle = $this->userData->getSelfDetails()['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         if ($this->checkUserExits()) {
