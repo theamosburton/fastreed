@@ -105,6 +105,10 @@
 .userContent .userContentMenus .menus:first-child{
     margin-left: 0;
 }
+
+.userContent .userContentMenus .menus:last-child{
+    margin-right: 0;
+}
 .userContent .userContentMenus .menus:hover{
     border-bottom: 3px solid #ec775c;
     background-color: #2e323c;
