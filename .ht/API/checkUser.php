@@ -24,7 +24,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         $loggedData = new getLoggedData();
         $isLogged = $loggedData->userLogged;
         if ($isLogged) {
-            showMessage(true, array("PID"=>$loggedData->PID,"NAME"=>$loggedData->NAME));
+            showMessage(true, array("PID"=>$loggedData->PID,"NAME"=>$loggedData->getSelfDetails()['name']));
         }else {
             showMessage(false, 'User is not logged');
         }
@@ -41,9 +41,5 @@ function showMessage($result, $message){
     $dataDecode = json_encode($data);
     echo "$dataDecode";
 }
-
-    // $data = array("Result"=>true, "message"=>array("PID"=>$loggedData->PID,"NAME"=>$loggedData->NAME));
-    // $dataDecode = json_encode($data);
-    // echo "$dataDecode";
 
 ?>

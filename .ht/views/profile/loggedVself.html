@@ -14,7 +14,7 @@
                 <br>
                 <div class="user-details">
                   <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
-                  <h4 class="user-email"><?php echo $this->userData->EMAIL;?></h4>
+                  <h4 class="user-email"><?php echo $this->userData->getSelfDetails()['email']?></h4>
                   <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
                 </div>
               </div>

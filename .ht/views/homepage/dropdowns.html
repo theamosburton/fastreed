@@ -17,11 +17,11 @@
 					echo '  <div class="profile-top">
                                 <div class="profile-info"> 
                                     <div class="image-div">
-                                        <img id="profile-image" src='.$this->userData->PROFILE_PIC.'>
+                                        <img id="profile-image" src="'.$this->userData->getSelfDetails()['profilePic'].'">
                                     </div>
                                     <div class="info-div">
-                                        <div>'.$this->userData->NAME.'</div>
-                                        <div>'.$this->userData->EMAIL.'</div>
+                                        <div>'.$this->userData->getSelfDetails()['name'].'</div>
+                                        <div>'.$this->userData->getSelfDetails()['email'].'</div>
                                     </div>
                                 </div>
                                 <div class="menus">
@@ -43,7 +43,6 @@
 									<i class="left fa fa-right-from-bracket"></i>Log Out
 								</div>
 						    </div>'."\n";
-	
 						}else {
 							echo 
 							'<div class="non-logged-account">

@@ -15,7 +15,7 @@
 
             <!-- Profile Pic -->
             <div>
-                <img onclick="toggleProfile()" src="<?php echo $this->userData->PROFILE_PIC; ?>" alt="" id="profileImage">
+                <img onclick="toggleProfile()" src="<?php echo $this->userData->getSelfDetails()['profilePic']; ?>" alt="" id="profileImage">
                 <i id="accountIcon" hidden></i>
             </div>
             <div class="spinner" id="MenuSpinner" hidden></div>
