@@ -1,6 +1,8 @@
 .leftSide{
     border: 1px solid grey;
     border-radius: 15px;
+    height: 100%;
+    margin-top: 20px;
 }
 .profile{
     margin: 15px 0px;
@@ -84,6 +86,51 @@
     border: 0;
     margin-bottom: 1rem;
 }
+
+.userContent{
+    /* border: 1px solid grey; */
+    border-radius: 15px;
+    padding: 20px 20px 0 20px;
+}
+.userContent .userContentMenus{
+    display: flex;
+    overflow: auto;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.607);
+}
+.userContent .userContentMenus .menus{
+    padding: 5px 15px;
+    margin: 0 5px;
+    border-radius: 8px 8px 0 0;
+}
+.userContent .userContentMenus .menus:first-child{
+    margin-left: 0;
+}
+.userContent .userContentMenus .menus:hover, .userContent .userContentMenus .active{
+    border-bottom: 3px solid #ec775c;
+    background-color: #2e323c;
+    cursor: pointer;
+}
+.contentView{
+    border: 1px solid grey;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 20px 10px;
+}
+.contentView .row{
+    margin: 10px 0;
+}
+.contentView .content{
+    border: 1px solid grey;
+    border-radius: 15px;
+    width: 100%;
+    padding: 52.5px 20px;
+    margin: 10px 0;
+}
+.contentView .title{
+    margin-left: 15px;
+    color: #b8bcc5;
+}
+
 
 @media (max-width: 990px) {
     .account-settings .user-profile {
