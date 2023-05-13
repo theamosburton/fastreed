@@ -492,10 +492,9 @@ header{
   margin-right: auto;
   display: flex;
   flex-direction: row;
-  /* padding-top: 25px; */
+  margin: 10px 0;
   align-items: center;
   border-bottom: 1px solid rgb(218, 218, 218);
-  /* padding-bottom: 15px; */
 
 }
 

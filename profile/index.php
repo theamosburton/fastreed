@@ -19,14 +19,15 @@ class showProfile {
     protected $blackMode;
     protected $whiteMode;
     protected $pageJs;
+    protected $otherUsername;
     function __construct() {
         $this->const4Inherited();
-        if ($this->userLogged && isset($_GET['u'])) {
+        if ($this->adminLogged && isset($_GET['u'])) {
+            new loggedAdminVother();
+        }elseif ($this->userLogged && isset($_GET['u'])) {
             new loggedVother();
-        }elseif ($this->adminLogged && isset($_GET['u'])) {
-            // new loggedAdminVother();
         }elseif (isset($_GET['u'])) {
-            // new nonLoggedVother();
+            new nonLoggedVother();
         }elseif ($this->userLogged) {
             new loggedVself();
         }else {
@@ -139,6 +140,11 @@ class loggedAdminVother extends showProfile{
         $this->webTitle = "Add and Edit Your Profile Info";
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->pageJs[0] = '/profile/src/style.js';
+
+        // if ($this->checkUserExits()) {
+            $this->otherUsername = $_GET['u'];
+        // }
 
         $this->addHead();
 
@@ -149,7 +155,7 @@ class loggedAdminVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-
+        include "../.ht/views/profile/adminVOther.html";
 
         echo <<<HTML
                     </div>
@@ -206,7 +212,6 @@ class loggedVother extends showProfile{
     protected $webTitle;
     protected $webDescription;
     protected $webKeywords;
-    protected $otherUsername;
 
    function __construct() {
         $this->const4Inherited();
@@ -215,8 +220,6 @@ class loggedVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         if ($this->checkUserExits()) {
             $this->otherUsername = $_GET['u'];
-        }else{
-
         }
         $this->addHead();
 
