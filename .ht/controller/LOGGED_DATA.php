@@ -50,7 +50,7 @@ class getLoggedData{
                 
                 if (isset($this->getAccess()['userType'])) {
                     $userType = $this->getAccess()['userType'];
-                    if ($userType) {
+                    if ($userType == 'Admin') {
                         $this->adminLogged = true;
                     }
                     

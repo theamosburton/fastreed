@@ -24,9 +24,9 @@ class showProfile {
         if ($this->userLogged && isset($_GET['u'])) {
             new loggedVother();
         }elseif ($this->adminLogged && isset($_GET['u'])) {
-            new loggedAdminVother();
+            // new loggedAdminVother();
         }elseif (isset($_GET['u'])) {
-            new nonLoggedVother();
+            // new nonLoggedVother();
         }elseif ($this->userLogged) {
             new loggedVself();
         }else {
@@ -38,6 +38,8 @@ class showProfile {
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
         $this->FUNC = new BasicFunctions();
+        $DB = new DataBase();
+        $this->DB_CONN = $DB->DBConnection();
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
@@ -204,13 +206,18 @@ class loggedVother extends showProfile{
     protected $webTitle;
     protected $webDescription;
     protected $webKeywords;
+    protected $otherUsername;
 
    function __construct() {
         $this->const4Inherited();
         $this->webTitle = $this->userData->NAME.'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
+        if ($this->checkUserExits()) {
+            $this->otherUsername = $_GET['u'];
+        }else{
 
+        }
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
@@ -220,7 +227,7 @@ class loggedVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-
+        include "../.ht/views/profile/loggedVother.html";
 
         echo <<<HTML
                     </div>
@@ -229,6 +236,20 @@ class loggedVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+   }
+
+   protected function checkUserExits(){
+    $return = false;
+    $username = $_GET['u'];
+    $sql = "SELECT * FROM account_details WHERE username = '$username'";
+    $result = mysqli_query($this->DB_CONN, $sql);
+    if ($result) {
+        if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+            $return = true;
+        }
+    }
+    return $return;
    }
 }
 ?>

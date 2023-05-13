@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row gutters profile">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="account-settings">
+              <div class="user-profile">
+                <div class="user-avatar">
+                  <img src="<?php echo $this->userData->getDetails($this->otherUsername)['profilePic']?>">
+                </div>
+                <div class="user-details">
+                  <h5 class="user-name"><?php echo $this->userData->getDetails($this->otherUsername)['name']?></h5>
+                  <h6 class="user-email">@<?php echo $this->userData->getDetails($this->otherUsername)['username']?></h6>
+                </div>
+              </div>
+              <div class="editProfile">
+                <span onclick="follow()" id="editButton">Follow</span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 guttersInside">
+      </div>
+    </div>
+  </div>
+    
