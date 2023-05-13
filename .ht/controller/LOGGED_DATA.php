@@ -142,7 +142,7 @@ class getLoggedData{
                 $diff = $today->diff(new DateTime($DOB));
                 $age = $diff->y;
                 $userType = 'User';
-                $email = $rwo['emailID'];
+                $email = $row['emailID'];
                 $name = $row['fullName'];
                 $sql2 = "SELECT * FROM account_access WHERE personID = '$UID'";
                 if ($result2 = mysqli_query($this->DB, $sql2)) {
