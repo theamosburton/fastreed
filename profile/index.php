@@ -137,7 +137,7 @@ class loggedAdminVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = "Add and Edit Your Profile Info";
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
@@ -232,7 +232,7 @@ class loggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherDetails('username', $this->otherUsername)['name'].'. Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
@@ -282,7 +282,7 @@ class nonLoggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherDetails('username', $this->otherUsername)['name'].'. Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
