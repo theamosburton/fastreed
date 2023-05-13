@@ -56,9 +56,9 @@
               $other = '';
                 if($this->userData->getSelfDetails()['Gender'] == 'Male'){
                   $male = 'selected';
-                }elseif($this->userData->getDetails()['Gender'] == 'Female'){
+                }elseif($this->userData->getSelfDetails()['Gender'] == 'Female'){
                   $female = 'selected';
-                }elseif($this->userData->getDetails()['Gender'] == 'Others'){
+                }elseif($this->userData->getSelfDetails()['Gender'] == 'Others'){
                   $other = 'selected';
                 }
               ?>

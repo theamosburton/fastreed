@@ -102,6 +102,7 @@ class showProfile {
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         HTML."\n";
+        
         if(isset($this->pageJs)){
             if(!(count($this->pageJs) <= 0)){
                 for($i =0; $i < count($this->pageJs); $i++){
