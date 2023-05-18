@@ -144,7 +144,7 @@ class loggedAdminVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/js/editDetails.js'];
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js'];
        
 
         $this->addHead();
@@ -194,7 +194,7 @@ class loggedVself extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/js/editDetails.js'];
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js'];
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
