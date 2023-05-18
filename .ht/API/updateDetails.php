@@ -25,6 +25,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
             $gender = $_GET['gender'];
             $dob = $_GET['DOB'];
             updateGenderDob($gender, $dob);
+        }elseif (isset($_GET['fullProfileUpdate'])){
+            fullProfileUpdate();
         }else {
             showMessage(false, "Access Denied No Detail");
         }
@@ -34,6 +36,18 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 }else {
     showMessage(false, "Access Denied DA");
 }
+
+function fullProfileUpdate(){
+    $fullName = $_GET['name'];
+    $gender = $_GET['Gender'];
+    $email = $_GET['email'];
+    $DOB = $_GET['DOB'];
+    $Username = $_GET['username'];
+    $website = $_GET['websiteUrl'];
+    $about = $_GET['about'];
+    
+}
+
 
 function updateGenderDob($gender, $dob){
     $uid = $_SESSION['LOGGED_USER'];

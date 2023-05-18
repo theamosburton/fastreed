@@ -18,7 +18,8 @@
                 </div>
               </div>
               <div class="profileOptions">
-                <span onclick="toggleEditProfile()" id="editButton">Edit Personal Details</span>
+                <span class="profileActions" onclick="enableEditing()" id="editButton">Edit</span>
+                <span class="profileActions" onclick="follow()" id="editButton">Follow</span>
             </div>
             </div>
           </div>
@@ -92,7 +93,9 @@
             <div class="row gutters">
               <div class="col-12">
                 <div class="text-right">
+                  <button type="button" onclick="cancelEditing()" id="cancelEditing" name="submit" class="btn btn-secondary"> Cancel</button>
                   <button type="button" id="submit" name="submit" class="btn btn-primary">Update Details</button>
+                  
                 </div>
               </div>
             </div>

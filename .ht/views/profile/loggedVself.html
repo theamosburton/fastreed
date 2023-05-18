@@ -18,12 +18,11 @@
                 </div>
               </div>
               <div class="profileOptions">
-                <span onclick="toggleEditProfile()" id="editButton">Edit Personal Details</span>
-            </div>
+                <span class="profileActions" onclick="enableEditing()" id="editButton">Edit Details</span>
+              </div>
             </div>
           </div>
           <div class="card-body edit-fields" id="edit_fields">
-            <span id="editFieldsStatus" hidden>0</span>
             <div class="row gutters">
               <div class="col-12">
                 <div class="form-group">
@@ -59,7 +58,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="gender">Gender</label><span class="errorMessage" id="genderErrorMessage"></span>
-                  <select class="form-control" name="gender" id="gender">
+                  <select class="form-control" name="Gender" id="gender">
                     <option value="none">Select</option>
                     <option value="Male" <?php echo $male;?>>Male</option>
                     <option value="Female" <?php echo $female;?>>Female</option>
@@ -71,7 +70,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                  <input value="" type="url" class="form-control" id="website" placeholder="Enter Url">
+                  <input value="https://" type="url" class="form-control" id="website" name="websiteUrl" placeholder="Enter Url">
                 </div>
               </div>
   
@@ -86,6 +85,7 @@
             <div class="row gutters">
               <div class="col-12">
                 <div class="text-right">
+                  <button type="button" onclick="cancelEditing()" id="cancelEditing" name="submit" class="btn btn-secondary"> Cancel</button>
                   <button type="button" id="submit" name="submit" class="btn btn-primary">Update Details</button>
                 </div>
               </div>
