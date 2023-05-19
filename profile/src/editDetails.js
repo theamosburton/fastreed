@@ -204,10 +204,10 @@ class updateDetails{
   }
 
   editByAdmin(){
-    var messageDiv = document.querySelector('#updateAlert');
+    var messageDiv = document.querySelector('#uAlert');
     var message = document.querySelector('#message');
-    message.classList.remove('alert-success');
-    message.classList.add('alert-danger');
+    messageDiv.classList.remove('alert-success');
+    messageDiv.classList.add('alert-danger');
     messageDiv.style.display = 'block';
     if (this.isFullName) {
       if (this.isUsername) {
@@ -240,9 +240,12 @@ class updateDetails{
               if (data) {
                 console.log(data);
                 if (data.Result) {
-                  message.classList.add('alert-success');
-                  message.classList.remove('alert-danger');
+                  messageDiv.classList.add('alert-success');
+                  messageDiv.classList.remove('alert-danger');
                   message.innerHTML = 'Updated Successfully';
+                  setTimeout(function(){
+                    location.reload();
+                  }, 3000);
                 }else{
                   message.innerHTML = 'Somthing Wrong at our end';
                 }

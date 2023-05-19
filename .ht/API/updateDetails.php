@@ -113,8 +113,7 @@ class updateDetails{
         && 
         
      !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
-        $ID = $this->AUTH->decrypt($data['personID']);
-        echo $ID;
+        $ePID = $data['personID'];
         $fullName = $data['fullName'];
         $gender = $data['Gender'];
         $DOB = $data['DOB'];
@@ -128,11 +127,12 @@ class updateDetails{
             showMessage(false, "All Argument not set");
         }elseif (!empty($x) || $email) {
             # admin edit
-            if ($this->checkExcept('username', $ID, $Username, $cUsername)) {
+            if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
                 showMessage(false, "Username Already Exists");
-            }elseif($this->checkExcept('emailID', $ID, $email, $cEmail)){
+            }elseif(!$this->checkExcept('emailID', $ePID, $email, $cEmail)){
                 showMessage(false, "Email Already Exists");
             }else {
+                $dPID = $this->AUTH->decrypt($ePID);
                 $email = $data['email'];
                 $sql = "UPDATE account_details SET 
                 gender = '$gender',
@@ -142,7 +142,7 @@ class updateDetails{
                 Username = '$Username',
                 websiteUrl = '$website',
                 emailID = '$email'
-                WHERE personID = '$ID'";
+                WHERE personID = '$dPID'";
 
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
@@ -156,6 +156,7 @@ class updateDetails{
             if ($this->checkExists('username', $Username)) {
                 showMessage(false, "Username Already Exists");
             }else {
+                $dPID = $this->AUTH->decrypt($ePID);
                 $email = $data['email'];
                 $sql = "UPDATE account_details SET 
                 gender = '$gender',
@@ -164,7 +165,7 @@ class updateDetails{
                 bio = '$about',
                 Username = '$Username',
                 websiteUrl = '$website'
-                WHERE personID = '$PID'";
+                WHERE personID = '$dPID'";
 
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
