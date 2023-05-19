@@ -1,6 +1,6 @@
 .leftSide{
     border: 1px solid grey;
-    border-radius: 15px;
+    border-radius: 20px;
     height: 100%;
     margin-top: 20px;
 }
@@ -144,7 +144,16 @@
     color: #b8bcc5;
 }
 
-
+.errorMessage{
+    font-size: 12px;
+    margin-left: 15px;
+}
+.errorSpinner{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+}
 @media (max-width: 990px) {
 
     .contentView{

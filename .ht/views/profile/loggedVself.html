@@ -32,8 +32,8 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
+                  <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"> </span>
+                  <input onkeyup="checkUsername()" value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
                 </div>
               </div>
               <div class="col-12">

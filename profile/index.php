@@ -20,6 +20,7 @@ class showProfile {
     protected $whiteMode;
     protected $pageJs;
     protected $otherUsername;
+    protected $extraScript;
     function __construct() {
         $this->const4Inherited();
         if ($this->adminLogged && isset($_GET['u'])) {
@@ -64,6 +65,7 @@ class showProfile {
     protected function addHead(){
         // *************/ Head Section /**************** //
             include "../.ht/views/homepage/head.html";
+           
             echo "\n".<<<HTML
             <body class="scrollbar-style">
             HTML."\n".<<<HTML
@@ -195,8 +197,9 @@ class loggedVself extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js'];
+        $this->extraScript = '<script> var ePID = "'.$this->userData->getSelfDetails()['ePID'].'" </script>';
         $this->addHead();
-
+        
     //***************/ Main Container Starts /**********//
         echo <<<HTML
             <div class="main-content">

@@ -56,9 +56,6 @@ function updateDOBndGender(){
         errorMessage.style.display = 'inline-block';
         errorMessage.innerHTML = 'Incorrect Gender given';
     }
-
-
-    
 }
 
 

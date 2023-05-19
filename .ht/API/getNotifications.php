@@ -19,7 +19,6 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
         $data = json_decode(file_get_contents('php://input'), true);
        if (isset($data['ePID'])) {
-            $data = json_decode(file_get_contents('php://input'), true);
 
             $ePID = $data['ePID'];
             $AUTH = new AUTH();

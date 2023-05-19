@@ -53,7 +53,13 @@ class getLoggedData{
      public function getSelfDetails(){
         $return = array();
         $pID = $_SESSION['LOGGED_USER'];
-        
+        if (isset($_COOKIE['UID'])) {
+            $ePID = $_COOKIE['UID'];
+        }elseif (isset($_COOKIE['AID'])) {
+            $ePID = $_COOKIE['AID'];
+        }else{
+            $ePID = false;
+        }
         $sql = "SELECT * FROM account_details WHERE personID = '$pID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
@@ -94,7 +100,8 @@ class getLoggedData{
                     "DOB"=>$DOB,
                     "email"=>$email,
                     "userType"=>$userType,
-                    "UID"=>$UID
+                    "UID"=>$UID,
+                    "ePID"=>$ePID
                 );
             }
         }
@@ -123,6 +130,13 @@ class getLoggedData{
      }
 
      public function getOtherData($type, $field){
+        if (isset($_COOKIE['UID'])) {
+            $ePID = $_COOKIE['UID'];
+        }elseif (isset($_COOKIE['AID'])) {
+            $ePID = $_COOKIE['AID'];
+        }else{
+            $ePID = false;
+        }
         $data = array();
         $sql = "SELECT * FROM account_details WHERE $type = '$field'";
         $result = mysqli_query($this->DB, $sql);
@@ -165,7 +179,8 @@ class getLoggedData{
                     'userType' => $userType,
                     'name' => $name,
                     'userType'=>$userType,
-                    'email'=>$email
+                    'email'=>$email,
+                    "ePID"=>$ePID
                 );
             }
         }
