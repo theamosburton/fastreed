@@ -24,16 +24,20 @@
           </div>
           <div class="card-body edit-fields" id="edit_fields">
             <div class="row gutters">
+              <div id="updateAlert" class="col-12">
+                <div class="alert alert-warning"></div>
+              </div>
+
               <div class="col-12">
                 <div class="form-group">
                   <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getSelfDetails()['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                  <input onkeyup="validateName()" value="<?php echo $this->userData->getSelfDetails()['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"> </span>
-                  <input onkeyup="checkUsername()" value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
+                  <input onkeyup="checkUsername()" value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username i.e. Jhon_doe, jhon.doe ">
                 </div>
               </div>
               <div class="col-12">

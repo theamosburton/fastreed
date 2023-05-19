@@ -1,133 +1,250 @@
-var isFullName = false;
-var isUsername = false;
-var isEmail = false;
-var isDOB = false;
-var isGender = false;
-var isWebsite = false;
-var isBio = false;
 
-function checkUsername(){
-  var username = document.querySelector('#username').value;
-  var uError = document.querySelector('#usernameErrorMessage');
-  uError.style.color = 'orange';
-  uError.innerHTML = 'Checking...';
-  if (username.length <= 8) {
-    uError.innerHTML = ' Short Username ';
-  }else{
-    checkFromRemote();
-    async function checkFromRemote(){
-        const logUrl = `/.ht/API/updateDetails.php/?fieldsCheck`;
-        var encyDat = {
-          'personID' : `${ePID}`,
-          'field' : 'username',
-          'value' : `${username}`,
-          'currentValue': `${currentValue}`
-        };
-        const response = await fetch(logUrl, {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(encyDat)
-          });
-        var data = await response.json();
-        if (data) {
-          if (data.Result) {
-            isUsername = false;
-            uError.innerHTML = ' Already Taken ';
-            uError.style.color = 'Orange';
-          }else{
-            // Username  not Avialble
-            isUsername = false;
-            uError.innerHTML = 'Available';
-            uError.style.color = 'Lime';
-          }
-          
-        }else{
-            isUsername = false;
-            uError.innerHTML = 'Try Again...';
-            uError.style.color = 'Orange';
-        }
+
+class updateDetails{
+  isFullName = false;
+  isUsername = false;
+  isEmail = false;
+  isDOB = false;
+  isGender = false;
+  fullName;
+  emailID;
+  username;
+  DOB ;
+  Gender ;
+  website;
+  about;
+
+  constructor(){
+    this.validateName();
+    this.checkDOB()
+    this.checkEmail();
+    this.checkUsername();
+    this.validateGender();
+  }
+
+  validateName() {
+    var nameRegex =/^[a-zA-Z]+(?: [a-zA-Z]+)*(?:\. [a-zA-Z]+)?$/;
+    this.fullName = document.querySelector('#fullName').value;
+    var uError = document.querySelector('#nameErrorMessage');
+    uError.style.color = 'orange';
+    uError.innerHTML = 'Checking...';
+    if(nameRegex.test(this.name)){
+      uError.innerHTML = '&#x2713;';
+      uError.style.color = 'lime';
+      this.isFullName = true;
+    }else{
+      uError.innerHTML = 'Invalid Name';
     }
   }
-}
-    
 
 
-
-function checkEmail(){
-  var emailID = document.querySelector('#eMail').value;
-  var uError = document.querySelector('#emailErrorMessage');
-  uError.style.color = 'orange';
-  uError.innerHTML = 'Checking...';
-  if (username.length <= 5) {
-    uError.innerHTML = ' Short Email ';
-  }else{
-    checkFromRemote();
-    async function checkFromRemote(){
-        const logUrl = `/.ht/API/updateDetails.php/?fieldsCheck`;
-        var encyDat = {
-          'personID' : `${ePID}`,
-          'field' : 'emailID',
-          'value' : `${emailID}`,
-          'currentValue': `${currentValue}`
-        };
-        const response = await fetch(logUrl, {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(encyDat)
-          });
-        var data = await response.json();
-        if (data) {
-          if (data.Result) {
-            isEmail = false;
-            uError.innerHTML = ' Already Taken ';
-            uError.style.color = 'Orange';
-          }else{
-            // Username  not Avialble
-            isEmail = false;
-            uError.innerHTML = 'Available';
-            uError.style.color = 'Lime';
-          }
-          
-        }else{
-            isEmail = false;
-            uError.innerHTML = 'Try Again...';
-            uError.style.color = 'Orange';
-        }
+  validateGender(){
+    this.Gender = document.querySelector('#gender').value;
+    var errorMessage = document.querySelector('#genderErrorMessage');
+    errorMessage.style.color = 'Orange';
+    if (this.Gender == '') {
+      errorMessage.innerHTML = 'Please select gender';
+    }else if(this.Gender == 'Male' || gender.value == 'Female' || gender.value == 'Others'){
+      this.isGender = true;
+      errorMessage.innerHTML = '&#x2713;';
+      errorMessage.style.color = 'lime';
+      
+    }else{
+      errorMessage.innerHTML = `Please select gender`;
     }
   }
-}
 
 
-function checkDOB(){
-  var DOB = document.querySelector('#DOB').value;
-  var errorMessage = document.querySelector('#DOBErrorMessage');
-  if (DOB != '') {
-    if (isFiveYearsOld(DOB)) {
-        isDOB = true;
-        errorMessage.style.color = 'Lime';
+  checkUsername(){
+    this.username = document.querySelector('#username').value;
+    var uError = document.querySelector('#usernameErrorMessage');
+    uError.style.color = 'orange';
+    uError.innerHTML = 'Checking...';
+    var usernameRegex = /^[a-zA-Z0-9_.]+$/;
+    var validUsername = !/\s/.test(this.username) && usernameRegex.test(this.username)
+    if(!validUsername){
+      uError.innerHTML = ' Invalid Username ';
+    }else if (this.username.length <= 8) {
+      uError.innerHTML = ' Short Username ';
+    }else{
+      
+      const checkFromRemote = async () =>{
+          const logUrl = `/.ht/API/updateDetails.php/?fieldsCheck`;
+          var encyDat = {
+            'personID' : `${ePID}`,
+            'field' : 'username',
+            'value' : `${this.username}`,
+            'currentValue': `${currentValue}`
+          };
+          const response = await fetch(logUrl, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(encyDat)
+            });
+          var data = await response.json();
+          if (data) {
+            if (data.Result) {
+              uError.innerHTML = ' Already Taken ';
+              uError.style.color = 'Orange';
+            }else{
+              // Username  not Avialble
+              this.isUsername = true;
+              uError.innerHTML = '&#x2713;';
+              uError.style.color = 'Lime';
+            }
+            
+          }else{
+              uError.innerHTML = 'Try Again...';
+              uError.style.color = 'Orange';
+          }
+      }
+      checkFromRemote();
+    }
+  }
+
+  checkEmail(){
+    this.emailID = document.querySelector('#eMail').value;
+    var uError = document.querySelector('#emailErrorMessage');
+    uError.style.color = 'orange';
+    uError.innerHTML = 'Checking...';
+    if ( this.emailID.length <= 5) {
+      uError.innerHTML = ' Short Email ';
+    }else{
+      const checkFromRemote = async () =>{
+          const logUrl = `/.ht/API/updateDetails.php/?fieldsCheck`;
+          var encyDat = {
+            'personID' : `${ePID}`,
+            'field' : 'emailID',
+            'value' : `${this.emailID}`,
+            'currentValue': `${currentValue}`
+          };
+          const response = await fetch(logUrl, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(encyDat)
+            });
+          var data = await response.json();
+          if (data) {
+            if (data.Result) {
+              this.isEmail = true;
+              uError.innerHTML = ' Already Taken ';
+              uError.style.color = 'Orange';
+            }else{
+              // Username  not Avialble
+              uError.innerHTML = '&#x2713;';
+              uError.style.color = 'Lime';
+            }
+            
+          }else{
+              uError.innerHTML = 'Try Again...';
+              uError.style.color = 'Orange';
+          }
+      }
+      checkFromRemote();
+    }
+  }
+  
+  
+  checkDOB(){
+    this.DOB = document.querySelector('#DOB').value;
+    var errorMessage = document.querySelector('#DOBErrorMessage');
+    if ( this.DOB != '') {
+      if (isFiveYearsOld(DOB)) {
+          isDOB = true;
+          errorMessage.innerHTML = '&#x2713;';
+          errorMessage.style.color = 'Lime';
+      }else{
+          errorMessage.style.color = 'Orange';
+          errorMessage.innerHTML = 'Must be atleast 7 years old';
+      }
     }else{
         errorMessage.style.color = 'Orange';
-        errorMessage.innerHTML = 'Must be atleast 7 years old';
+        errorMessage.innerHTML = 'Please Enter DOB';
     }
-  }else{
-      errorMessage.style.color = 'Orange';
-      errorMessage.innerHTML = 'Please Enter DOB';
+  
+  
+    function isFiveYearsOld(dateString) {
+      var inputDate = new Date(dateString);
+      var today = new Date();
+      var tenYearsAgo = new Date().setFullYear(today.getFullYear() - 7);
+      return inputDate <= tenYearsAgo;
+      }
+  
   }
 
-
-  function isFiveYearsOld(dateString) {
-    var inputDate = new Date(dateString);
-    var today = new Date();
-    var tenYearsAgo = new Date().setFullYear(today.getFullYear() - 7);
-    return inputDate <= tenYearsAgo;
-    }
-
 }
-   
 
+
+
+
+
+
+ 
+
+// function editByAdmin(){
+//   var messageDiv = document.querySelector('#updateAlert');
+//   var message = document.querySelector('#message');
+//   messageDiv.classList.remove('alert-success');
+//   messageDiv.classList.add('alert-danger');
+//   messageDiv.style.display = 'block';
+//   if (isFullName) {
+//     if (isUsername) {
+//       if (isEmail) {
+//         if (isDOB) {
+//           message.innerHTML = 'Updating...';
+//           updateDetails();
+//           async function updateDetails(){
+//             const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
+//             var encyDat = {
+//               'personID' : `${ePID}`,
+//               'fullName' : `${newName}`,
+//               'username' : `${newUsername}`,
+//               'email': `${newEmailID}`,
+//               'DOB': `${newDOB}`,
+//               'Gender' : `${newGender}`,
+//               'website' : `${newWebsite}`,
+//               'about' : `${newAbout}`
+//             };
+//             const response = await fetch(logUrl, {
+//                 method: 'post',
+//                 headers: {
+//                   'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(encyDat)
+//               });
+//             var data = await response.json();
+
+//             if (data) {
+//               if (data.Result) {
+//                 messageDiv.classList.add('alert-success');
+//                 messageDiv.classList.remove('alert-danger');
+//                 message.innerHTML = 'Updated Successfully';
+//               }else{
+//                 message.innerHTML = 'Somthing Wrong at our end';
+//               }
+//             }else{
+//               message.innerHTML = 'Somthing Wrong at our end';
+//             }
+//           }
+//         }else{
+//             message.innerHTML = 'Problem With Date of Birth';
+//         }
+//       }else{
+//           message.innerHTML = 'Problem With Email ID';
+//       }
+//     }else{
+//       message.innerHTML = 'Problem With username';
+//     }
+//   }else{
+//     message.innerHTML = 'Problem With Your Name';
+//   }
+// }
+
+
+let update = new updateDetails();
   
    
