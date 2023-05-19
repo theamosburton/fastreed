@@ -153,6 +153,7 @@
     width: 12px;
     height: 12px;
     border-width: 2px;
+    border-color: lime;
 }
 @media (max-width: 990px) {
 
