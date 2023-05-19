@@ -85,7 +85,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                  <input value="https://" type="url" class="form-control" id="website" placeholder="Enter Url">
+                  <input onkeyup="update.checkWebsite()" value="https://www.fastreed.com" type="url" class="form-control" id="website" placeholder="Enter Url">
                 </div>
               </div>
   
@@ -101,7 +101,7 @@
               <div class="col-12">
                 <div class="text-right">
                   <button type="button" onclick="cancelEditing()" id="cancelEditing" name="submit" class="btn btn-secondary"> Cancel</button>
-                  <button type="button" id="submit" name="submit" class="btn btn-primary">Update Details</button>
+                  <button type="button" onclick="update.editByAdmin()" id="submit" name="submit" class="btn btn-primary">Update Details</button>
                   
                 </div>
               </div>

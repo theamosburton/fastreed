@@ -78,7 +78,7 @@ class updateDetails{
 
     private function fullProfileUpdate(){
         $data = json_decode(file_get_contents('php://input'), true);
-        if(!isset($data['PID']) || empty($data['PID'])){
+        if(!isset($data['personID']) || empty($data['personID'])){
             showMessage(false, "Id not given");
         }elseif($this->adminLogged) {
             $this->editDetails('admin');
@@ -94,33 +94,43 @@ class updateDetails{
 
 
     private function editDetails($x){
-        $PID = isset($data['ePID']) ? $data['ePID'] : null;
-        $fullName = isset($data['name']) ? $data['name'] : null;
+        $data = json_decode(file_get_contents('php://input'), true);
+        $fullName = isset($data['fullName']) ? $data['fullName'] : null;
         $gender = isset($data['Gender']) ? $data['Gender'] : null;
         $DOB = isset($data['DOB']) ? $data['DOB'] : null;
         $Username = isset($data['username']) ? $data['username'] : null;
-        $website = isset($data['websiteUrl']) ? $data['websiteUrl'] : null;
+        $website = isset($data['website']) ? $data['website'] : null;
         $about = isset($data['about']) ? $data['about'] : null;
         $email = isset($data['email']) ? $data['email'] : null;
 
+        $cEmail = isset($data['cEmail']) ? $data['cEmail'] : null;
+        $cUsername = isset($data['cUsername']) ? $data['cUsername'] : null;
         // Using logical operators and short-circuit evaluation to check if variables are set and not empty
-        $all_variables_set = isset($PID) && isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($website) && isset($about) && isset($email) && !empty($PID) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($website) && !empty($about);
-
-        $PID = $data['ePID'];
+        $all_variables_set = 
+        
+       isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($cEmail) && isset($email) 
+        
+        && 
+        
+     !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
+        $ID = $this->AUTH->decrypt($data['personID']);
+        echo $ID;
         $fullName = $data['fullName'];
-        $gender = $data['gender'];
+        $gender = $data['Gender'];
         $DOB = $data['DOB'];
         $Username = $data['username'];
         $website = $data['website'];
         $about = $data['about'];
 
+        $cEmail = $data['cEmail'];
+        $cUsername = $data['cUsername'];
         if(!$all_variables_set){
             showMessage(false, "All Argument not set");
         }elseif (!empty($x) || $email) {
             # admin edit
-            if ($this->checkExists('username', $Username)) {
+            if ($this->checkExcept('username', $ID, $Username, $cUsername)) {
                 showMessage(false, "Username Already Exists");
-            }elseif($this->checkExists('emailID', $email)){
+            }elseif($this->checkExcept('emailID', $ID, $email, $cEmail)){
                 showMessage(false, "Email Already Exists");
             }else {
                 $email = $data['email'];
@@ -132,7 +142,7 @@ class updateDetails{
                 Username = '$Username',
                 websiteUrl = '$website',
                 emailID = '$email'
-                WHERE personID = '$PID'";
+                WHERE personID = '$ID'";
 
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
@@ -168,18 +178,6 @@ class updateDetails{
     }
     
     
-
-    public function checkExists($f, $u){
-        $return = true;
-        $sql = "SELECT username FROM account_details WHERE $f = '$u'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-            if (!mysqli_num_rows($tresult)) {
-                $return = false;
-            }
-        }
-        return $return;
-    }
 
 
     private function updateGenderDob($gender, $dob){

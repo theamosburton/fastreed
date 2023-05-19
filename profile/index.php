@@ -147,7 +147,9 @@ class loggedAdminVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js'];
-        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['ePID'].'"; var currentValue = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'" </script>';
+        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['ePID'].'"; var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
+        var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+         </script>';
        
 
         $this->addHead();

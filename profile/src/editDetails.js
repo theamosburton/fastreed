@@ -1,25 +1,26 @@
-
-
 class updateDetails{
-  isFullName = false;
-  isUsername = false;
-  isEmail = false;
-  isDOB = false;
-  isGender = false;
-  fullName;
-  emailID;
-  username;
-  DOB ;
-  Gender ;
-  website;
-  about;
-
   constructor(){
+
+    this.isFullName = false;
+    this.isUsername = false;
+    this.isEmail = false;
+    this.isDOB = false;
+    this.isGender = false;
+    this.fullName;
+    this.emailID;
+    this.username;
+    this.DOB;
+    this.Gender;
+    this.website;
+    this.about;
+
     this.validateName();
     this.checkDOB()
     this.checkEmail();
     this.checkUsername();
     this.validateGender();
+    this.checkWebsite();
+    this.checkAbout();
   }
 
   validateName() {
@@ -74,7 +75,7 @@ class updateDetails{
             'personID' : `${ePID}`,
             'field' : 'username',
             'value' : `${this.username}`,
-            'currentValue': `${currentValue}`
+            'currentValue': `${currentUsername}`
           };
           const response = await fetch(logUrl, {
               method: 'post',
@@ -89,7 +90,6 @@ class updateDetails{
               uError.innerHTML = ' Already Taken ';
               uError.style.color = 'Orange';
             }else{
-              // Username  not Avialble
               this.isUsername = true;
               uError.innerHTML = '&#x2713;';
               uError.style.color = 'Lime';
@@ -118,7 +118,7 @@ class updateDetails{
             'personID' : `${ePID}`,
             'field' : 'emailID',
             'value' : `${this.emailID}`,
-            'currentValue': `${currentValue}`
+            'currentValue': `${currentEmail}`
           };
           const response = await fetch(logUrl, {
               method: 'post',
@@ -129,16 +129,14 @@ class updateDetails{
             });
           var data = await response.json();
           if (data) {
-            if (data.Result) {
+            if (!data.Result) {
               this.isEmail = true;
+              uError.innerHTML = '&#x2713;';
+              uError.style.color = 'Lime';   
+            }else{
               uError.innerHTML = ' Already Taken ';
               uError.style.color = 'Orange';
-            }else{
-              // Username  not Avialble
-              uError.innerHTML = '&#x2713;';
-              uError.style.color = 'Lime';
             }
-            
           }else{
               uError.innerHTML = 'Try Again...';
               uError.style.color = 'Orange';
@@ -153,8 +151,8 @@ class updateDetails{
     this.DOB = document.querySelector('#DOB').value;
     var errorMessage = document.querySelector('#DOBErrorMessage');
     if ( this.DOB != '') {
-      if (isFiveYearsOld(DOB)) {
-          isDOB = true;
+      if (isFiveYearsOld(this.DOB)) {
+          this.isDOB = true;
           errorMessage.innerHTML = '&#x2713;';
           errorMessage.style.color = 'Lime';
       }else{
@@ -176,75 +174,102 @@ class updateDetails{
   
   }
 
+  checkWebsite(){
+    this.website = document.querySelector('#website').value;
+    var errorMessage = document.querySelector('#websiteErrorMessage');
+    var pattern = new RegExp('^((https?:)?\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  
+    if(pattern.test(this.website)){
+      if(this.website == 'https://www.fastreed.com'){
+        this.website = '';
+        errorMessage.innerHTML = '&#x2713;';
+        errorMessage.style.color = 'Lime';
+      }else{
+        errorMessage.innerHTML = '&#x2713;';
+        errorMessage.style.color = 'Lime';
+      }
+    }else{
+      errorMessage.style.color = 'Orange';
+      errorMessage.innerHTML = 'Invalid Url';
+    }
+  }
+
+  checkAbout(){
+    this.about = document.querySelector('#about').value;
+  }
+
+  editByAdmin(){
+    var messageDiv = document.querySelector('#updateAlert');
+    var message = document.querySelector('#message');
+    message.classList.remove('alert-success');
+    message.classList.add('alert-danger');
+    messageDiv.style.display = 'block';
+    if (this.isFullName) {
+      if (this.isUsername) {
+        if (this.isEmail) {
+          if (this.DOB) {
+            message.innerHTML = 'Updating...';
+            const updateDetails = async () =>{
+              const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
+              var encyDat = {
+                'personID' : `${ePID}`,
+                'fullName' : `${this.fullName}`,
+                'username' : `${this.username}`,
+                'email': `${this.emailID}`,
+                'DOB': `${this.DOB}`,
+                'Gender' : `${this.Gender}`,
+                'website' : `${this.website}`,
+                'about' : `${this.about}`,
+                'cUsername': `${currentUsername}`,
+                'cEmail': `${currentEmail}`
+              };
+              const response = await fetch(url, {
+                  method: 'post',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(encyDat)
+                });
+              var data = await response.json();
+  
+              if (data) {
+                console.log(data);
+                if (data.Result) {
+                  message.classList.add('alert-success');
+                  message.classList.remove('alert-danger');
+                  message.innerHTML = 'Updated Successfully';
+                }else{
+                  message.innerHTML = 'Somthing Wrong at our end';
+                }
+              }else{
+                message.innerHTML = 'Somthing Wrong at our end';
+              }
+            }
+            updateDetails();
+          }else{
+              message.innerHTML = 'Problem With Date of Birth';
+          }
+        }else{
+            message.innerHTML = 'Problem With Email ID';
+        }
+      }else{
+        message.innerHTML = 'Problem With username';
+      }
+    }else{
+      message.innerHTML = 'Problem With Your Name';
+    }
+  }
+
 }
 
-
-
-
-
-
- 
-
-// function editByAdmin(){
-//   var messageDiv = document.querySelector('#updateAlert');
-//   var message = document.querySelector('#message');
-//   messageDiv.classList.remove('alert-success');
-//   messageDiv.classList.add('alert-danger');
-//   messageDiv.style.display = 'block';
-//   if (isFullName) {
-//     if (isUsername) {
-//       if (isEmail) {
-//         if (isDOB) {
-//           message.innerHTML = 'Updating...';
-//           updateDetails();
-//           async function updateDetails(){
-//             const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
-//             var encyDat = {
-//               'personID' : `${ePID}`,
-//               'fullName' : `${newName}`,
-//               'username' : `${newUsername}`,
-//               'email': `${newEmailID}`,
-//               'DOB': `${newDOB}`,
-//               'Gender' : `${newGender}`,
-//               'website' : `${newWebsite}`,
-//               'about' : `${newAbout}`
-//             };
-//             const response = await fetch(logUrl, {
-//                 method: 'post',
-//                 headers: {
-//                   'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(encyDat)
-//               });
-//             var data = await response.json();
-
-//             if (data) {
-//               if (data.Result) {
-//                 messageDiv.classList.add('alert-success');
-//                 messageDiv.classList.remove('alert-danger');
-//                 message.innerHTML = 'Updated Successfully';
-//               }else{
-//                 message.innerHTML = 'Somthing Wrong at our end';
-//               }
-//             }else{
-//               message.innerHTML = 'Somthing Wrong at our end';
-//             }
-//           }
-//         }else{
-//             message.innerHTML = 'Problem With Date of Birth';
-//         }
-//       }else{
-//           message.innerHTML = 'Problem With Email ID';
-//       }
-//     }else{
-//       message.innerHTML = 'Problem With username';
-//     }
-//   }else{
-//     message.innerHTML = 'Problem With Your Name';
-//   }
-// }
-
-
 let update = new updateDetails();
+
+
+
   
    
