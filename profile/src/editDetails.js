@@ -205,14 +205,17 @@ class updateDetails{
 
   editByAdmin(){
     var messageDiv = document.querySelector('#uAlert');
+    var mainDiv = document.querySelector('#updateAlert');
     var message = document.querySelector('#message');
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
     messageDiv.style.display = 'block';
+    mainDiv.style.display = 'none';
     if (this.isFullName) {
       if (this.isUsername) {
         if (this.isEmail) {
           if (this.DOB) {
+            mainDiv.style.display = 'block';
             message.innerHTML = 'Updating...';
             const updateDetails = async () =>{
               const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
@@ -240,6 +243,7 @@ class updateDetails{
               if (data) {
                 console.log(data);
                 if (data.Result) {
+                  mainDiv.style.display = 'block';
                   messageDiv.classList.add('alert-success');
                   messageDiv.classList.remove('alert-danger');
                   message.innerHTML = 'Updated Successfully';
@@ -247,23 +251,29 @@ class updateDetails{
                     location.reload();
                   }, 3000);
                 }else{
+                  mainDiv.style.display = 'block';
                   message.innerHTML = 'Somthing Wrong at our end';
                 }
               }else{
+                mainDiv.style.display = 'block';
                 message.innerHTML = 'Somthing Wrong at our end';
               }
             }
             updateDetails();
           }else{
+            mainDiv.style.display = 'block';
               message.innerHTML = 'Problem With Date of Birth';
           }
         }else{
+          mainDiv.style.display = 'block';
             message.innerHTML = 'Problem With Email ID';
         }
       }else{
+        mainDiv.style.display = 'block';
         message.innerHTML = 'Problem With username';
       }
     }else{
+      mainDiv.style.display = 'block';
       message.innerHTML = 'Problem With Your Name';
     }
   }

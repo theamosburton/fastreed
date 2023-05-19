@@ -157,6 +157,7 @@
 
 #updateAlert{
     padding: 0px 15px;
+    display: none;
 }
 @media (max-width: 990px) {
 
