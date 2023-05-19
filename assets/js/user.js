@@ -83,7 +83,7 @@ function isFiveYearsOld(dateString) {
     var today = new Date();
     var tenYearsAgo = new Date().setFullYear(today.getFullYear() - 5);
     return inputDate <= tenYearsAgo;
-  }
+    }
 
 
 isUserlogged();

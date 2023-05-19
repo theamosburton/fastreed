@@ -85,9 +85,9 @@
 }
 .card {
     background: #ffffff;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
     border: 0;
     margin-bottom: 1rem;
 }

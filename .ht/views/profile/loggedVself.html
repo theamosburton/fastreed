@@ -39,7 +39,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+                  <input onchange="checkDOB()" value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
               </div>
   

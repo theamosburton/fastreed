@@ -35,19 +35,19 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
+                  <input onkeyup="checkUsername()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <label for="eMail">Email</label><span class="errorMessage" id="emailErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['email']?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                  <label  for="eMail">Email</label><span class="errorMessage" id="emailErrorMessage"></span>
+                  <input onkeyup="checkEmail()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['email']?>" type="email" class="form-control" id="eMail" placeholder="Enter email ID">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                  <input value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+                  <input onkeyup="checkDOB()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
               </div>
   
@@ -78,14 +78,14 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                  <input value="" type="url" class="form-control" id="website" placeholder="Enter Url">
+                  <input value="https://" type="url" class="form-control" id="website" placeholder="Enter Url">
                 </div>
               </div>
   
               <div class="col-12">
                 <div class="form-group">
                   <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                  <textarea value="" class="form-control" name="about" id="about" rows="2"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
+                  <textarea value="" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
                 </div>
               </div>
               

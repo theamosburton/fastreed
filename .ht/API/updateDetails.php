@@ -55,7 +55,8 @@ class updateDetails{
             $f = $data['field'];
             $u = $data['personID'];
             $value = $data['value'];
-            if($this->checkExcept($f, $u, $value)){
+            $currentValue = $data['currentValue'];
+            if($this->checkExcept($f, $u, $value, $currentValue)){
                 showMessage(false, "Available");
             }else{
                 showMessage(true, "Exists");
@@ -65,11 +66,10 @@ class updateDetails{
         }
 
     }
-    public function checkExcept($f, $p, $newUsername){
+    public function checkExcept($f, $p, $newValue, $currentValue){
         $p = $this->AUTH->decrypt($p);
-        $currentUsername = $this->userData->getSelfDetails()['username'];
         $return = false;
-        $sql = "SELECT COUNT(username) as count FROM account_details WHERE username = '$newUsername' AND username <> '$currentUsername'";
+        $sql = "SELECT COUNT($f) as count FROM account_details WHERE $f = '$newValue' AND $f <> '$currentValue'";
         $result = mysqli_query($this->DB, $sql);
         $row = mysqli_fetch_assoc($result);
         $return = ($row['count'] == 0);
