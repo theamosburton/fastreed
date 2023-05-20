@@ -222,7 +222,7 @@ class updateDetails{
     if (this.isFullName) {
       if (this.isUsername) {
         if (this.isEmail) {
-          if (this.DOB) {
+          if (this.isDOB) {
             mainDiv.style.display = 'block';
             message.innerHTML = 'Updating...';
             const updateDetails = async () =>{
@@ -307,7 +307,7 @@ class updateDetails{
           this.emailID = '';
         }
         if (this.isEmail) {
-          if (this.DOB) {
+          if (this.isDOB) {
             mainDiv.style.display = 'block';
             message.innerHTML = 'Updating...';
             const updateDetails = async () =>{
