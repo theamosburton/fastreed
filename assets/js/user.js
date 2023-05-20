@@ -136,7 +136,7 @@ async function isUserlogged(){
             <div class="notification no-noti" id="notification">
             
                     <div class="body">
-                        <p class="noti-parts title"> No Notification</p>
+                        <p class="noti-parts title"> No new notification</p>
                     </div>
             </div>`;
             // 
