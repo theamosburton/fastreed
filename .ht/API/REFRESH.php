@@ -91,9 +91,7 @@ class  refreshSite{
     public function hardRefresh() {
         // Execute the shell command and capture the output
         exec('git pull fastreed main', $output, $returnCode);
-
-        echo $returnCode;
-        if ($returnCode === 0) {
+        if ($returnCode !== 0) {
             showError(true, "Updated Now");
         } else {
             showError(false, "Not Updated");
