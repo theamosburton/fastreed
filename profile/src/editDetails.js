@@ -35,6 +35,7 @@ class updateDetails{
       uError.style.color = 'lime';
       this.isFullName = true;
     }else{
+      this.isFullName = false;
       uError.style.color = 'orange';
       uError.innerHTML = 'Checking...';
       uError.innerHTML = 'Invalid Name';
@@ -43,6 +44,7 @@ class updateDetails{
 
 
   validateGender(){
+    this.isGender = false;
     this.Gender = document.querySelector('#gender').value;
     var errorMessage = document.querySelector('#genderErrorMessage');
     errorMessage.style.color = 'Orange';
@@ -60,6 +62,7 @@ class updateDetails{
 
 
   checkUsername(){
+    this.isUsername = false;
     this.username = document.querySelector('#username').value;
     var uError = document.querySelector('#usernameErrorMessage');
     uError.style.color = 'orange';
@@ -108,6 +111,7 @@ class updateDetails{
   }
 
   checkEmail(){
+    this.isEmail = false;
     this.emailID = document.querySelector('#eMail').value;
     var uError = document.querySelector('#emailErrorMessage');
     uError.style.color = 'orange';
@@ -151,6 +155,7 @@ class updateDetails{
   
   
   checkDOB(){
+    this.isDOB = false;
     this.DOB = document.querySelector('#DOB').value;
     var errorMessage = document.querySelector('#DOBErrorMessage');
     if ( this.DOB != '') {
