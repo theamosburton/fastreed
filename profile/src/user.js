@@ -55,13 +55,15 @@ class showMenus{
         xhr.upload.addEventListener('progress', function(event) {
           if (event.lengthComputable) {
             var percentComplete = (event.loaded / event.total) * 100;
+            
+            document.querySelector('#uploadLabel').innerHTML = `Uploading ${percentComplete}%`;
             document.querySelector('#progressTotal').style.width = `${percentComplete}%`;
           }
         });
       
         // Load event handler
         xhr.addEventListener('load', function() {
-          console.log('Upload complete!');
+            document.querySelector('#uploadLabel').innerHTML = `Uploaded ${percentComplete}%`;
         });
       
         // Error event handler
