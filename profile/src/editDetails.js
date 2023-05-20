@@ -17,7 +17,7 @@ class updateDetails{
     if (typeof email !== 'undefined' && email !== null) {
       this.checkEmail();
     }
-    this.validateName();
+    this.checkName();
     this.checkDOB()
     this.checkUsername();
     this.validateGender();
@@ -25,17 +25,18 @@ class updateDetails{
     this.checkAbout();
   }
 
-  validateName() {
+  checkName() {
     var nameRegex =/^[a-zA-Z]+(?: [a-zA-Z]+)*(?:\. [a-zA-Z]+)?$/;
     this.fullName = document.querySelector('#fullName').value;
     var uError = document.querySelector('#nameErrorMessage');
-    uError.style.color = 'orange';
-    uError.innerHTML = 'Checking...';
-    if(nameRegex.test(this.name)){
+    
+    if(nameRegex.test(this.fullName)){
       uError.innerHTML = '&#x2713;';
       uError.style.color = 'lime';
       this.isFullName = true;
     }else{
+      uError.style.color = 'orange';
+      uError.innerHTML = 'Checking...';
       uError.innerHTML = 'Invalid Name';
     }
   }

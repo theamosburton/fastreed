@@ -38,7 +38,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
-                  <input onkeyup="update.validateName()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                  <input onkeyup="update.checkName()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name">
                 </div>
               </div>
               <div class="col-12">
