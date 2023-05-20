@@ -244,7 +244,6 @@ class updateDetails{
               var data = await response.json();
   
               if (data) {
-                console.log(data);
                 if (data.Result) {
                   mainDiv.style.display = 'block';
                   messageDiv.classList.add('alert-success');
