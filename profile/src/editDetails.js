@@ -251,7 +251,7 @@ class updateDetails{
                   messageDiv.classList.remove('alert-danger');
                   message.innerHTML = 'Updated Successfully';
                   setTimeout(function(){
-                    document.location = `/users/${$username}`;
+                    window.location.href = `/users/${$username}`;
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
