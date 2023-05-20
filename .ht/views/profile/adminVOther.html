@@ -87,14 +87,14 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                  <input onkeyup="update.checkWebsite()" value="https://www.fastreed.com" type="url" class="form-control" id="website" placeholder="Enter Url">
+                  <input onkeyup="update.checkWebsite()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['websiteUrl']?>" type="url" class="form-control" id="website" placeholder="Enter Url">
                 </div>
               </div>
   
               <div class="col-12">
                 <div class="form-group">
                   <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                  <textarea value="" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
+                  <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
                 </div>
               </div>
               

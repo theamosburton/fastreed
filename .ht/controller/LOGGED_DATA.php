@@ -80,6 +80,7 @@ class getLoggedData{
                 $age = $diff->y;
                 $email = $row['emailID'];
                 $userType = 'User';
+                $websiteUrl = $row['websiteUrl'];
                 $sql2 = "SELECT * FROM account_access WHERE personID = '$pID'";
                 if ($result2 = mysqli_query($this->DB, $sql2)) {
                     if($isPresent2 = mysqli_num_rows($result2)){
@@ -101,7 +102,8 @@ class getLoggedData{
                     "email"=>$email,
                     "userType"=>$userType,
                     "UID"=>$UID,
-                    "ePID"=>$ePID
+                    "ePID"=>$ePID,
+                    'websiteUrl' => $websiteUrl
                 );
             }
         }
@@ -158,6 +160,7 @@ class getLoggedData{
                 $userType = 'User';
                 $email = $row['emailID'];
                 $name = $row['fullName'];
+                $websiteUrl = $row['websiteUrl'];
                 $sql2 = "SELECT * FROM account_access WHERE personID = '$UID'";
                 if ($result2 = mysqli_query($this->DB, $sql2)) {
                     if($isPresent2 = mysqli_num_rows($result2)){
@@ -180,7 +183,8 @@ class getLoggedData{
                     'name' => $name,
                     'userType'=>$userType,
                     'email'=>$email,
-                    "ePID"=>$ePID
+                    "ePID"=>$ePID,
+                    'websiteUrl' => $websiteUrl
                 );
             }
         }
