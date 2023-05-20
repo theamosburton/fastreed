@@ -2,7 +2,7 @@
 
 class showMenus{
     constructor(){
-        document.querySelector('#progressTotal').style.display = 'none';
+        document.querySelector('#progressBar').style.display = 'none';
         var params = new URLSearchParams(window.location.search);
         this.optValue = params.get('opt');
         this.dashboardMenu = document.querySelector('#dashboardMenu');
@@ -48,7 +48,7 @@ class showMenus{
 
     uploadFile(file) {
 
-        document.querySelector('#progressTotal').style.display = 'block';
+        document.querySelector('#progressBar').style.display = 'block';
         var xhr = new XMLHttpRequest();
       
         // Progress event handler
