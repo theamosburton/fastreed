@@ -26,7 +26,6 @@ class updateDetails{
   }
 
   validateName() {
-    console.log("h");
     var nameRegex =/^[a-zA-Z]+(?: [a-zA-Z]+)*(?:\. [a-zA-Z]+)?$/;
     this.fullName = document.querySelector('#fullName').value;
     var uError = document.querySelector('#nameErrorMessage');
