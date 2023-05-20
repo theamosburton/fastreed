@@ -255,8 +255,9 @@ class updateDetails{
                   messageDiv.classList.add('alert-success');
                   messageDiv.classList.remove('alert-danger');
                   message.innerHTML = 'Updated Successfully';
+                  let urlPostfix = this.username;
                   setTimeout(function(){
-                    window.location.href = `/users/${this.username}`;
+                    window.location.href = `/users/${urlPostfix}`;
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
