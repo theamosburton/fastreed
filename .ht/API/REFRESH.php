@@ -88,16 +88,15 @@ class  refreshSite{
     }
 
 
-    public function hardRefresh(){
+    public function hardRefresh() {
         // Execute the shell command and capture the output
         $isUpdated = shell_exec('git pull fastreed main');
-        
-        if ($isUpdated) {
+    
+        if ($isUpdated !== null) {
             showError(true, "Updated Now");
-            
         } else {
             showError(false, "Not Updated");
-        } 
+        }
     }
 }
 
