@@ -23,20 +23,25 @@ class showProfile {
     protected $extraScript;
     function __construct() {
         $this->const4Inherited();
-        if ($this->adminLogged && isset($_GET['u'])) {
+        if ($this->adminLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new loggedAdminVother();
-        }elseif ($this->userLogged && isset($_GET['u'])) {
+        }elseif ($this->userLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new loggedVother();
-        }elseif (isset($_GET['u'])) {
+        }elseif (isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new nonLoggedVother();
-        }elseif ($this->userLogged) {
-            new loggedVself();
-        }else {
+        }elseif ($this->userLogged && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
+            header("Location:/");
+        }elseif($this->userLogged) {
+            new loggedVother();
+        }else{
             header("Location:/");
         }
     }
     // This function construct properties and methods for inherited classes
     protected function const4Inherited(){
+        if (isset($_GET['u'])) {
+            $this->otherUsername = $_GET['u'];
+        }
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
         $this->FUNC = new BasicFunctions();
@@ -130,6 +135,20 @@ class showProfile {
         HTML."\n";
         // ********************************************** //
     }   
+
+
+    protected function checkUserExits($x){
+        $return = false;
+        $sql = "SELECT * FROM account_details WHERE username = '$x'";
+        $result = mysqli_query($this->DB_CONN, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $row = mysqli_fetch_assoc($result);
+                $return = true;
+            }
+        }
+        return $return;
+    }
 }
 
 class loggedAdminVother extends showProfile{
@@ -139,9 +158,6 @@ class loggedAdminVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        if ($this->checkUserExits()) {
-            $this->otherUsername = $_GET['u'];
-        }
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
@@ -170,20 +186,6 @@ class loggedAdminVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
-   }
-
-   protected function checkUserExits(){
-    $return = false;
-    $username = $_GET['u'];
-    $sql = "SELECT * FROM account_details WHERE username = '$username'";
-    $result = mysqli_query($this->DB_CONN, $sql);
-    if ($result) {
-        if (mysqli_num_rows($result)) {
-            $row = mysqli_fetch_assoc($result);
-            $return = true;
-        }
-    }
-    return $return;
    }
 }
 
@@ -241,9 +243,6 @@ class loggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        if ($this->checkUserExits()) {
-            $this->otherUsername = $_GET['u'];
-        }
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
@@ -268,20 +267,6 @@ class loggedVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
-   }
-
-   protected function checkUserExits(){
-    $return = false;
-    $username = $_GET['u'];
-    $sql = "SELECT * FROM account_details WHERE username = '$username'";
-    $result = mysqli_query($this->DB_CONN, $sql);
-    if ($result) {
-        if (mysqli_num_rows($result)) {
-            $row = mysqli_fetch_assoc($result);
-            $return = true;
-        }
-    }
-    return $return;
    }
 }
 
@@ -292,9 +277,6 @@ class nonLoggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        if ($this->checkUserExits()) {
-            $this->otherUsername = $_GET['u'];
-        }
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
@@ -319,20 +301,6 @@ class nonLoggedVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
-   }
-
-   protected function checkUserExits(){
-    $return = false;
-    $username = $_GET['u'];
-    $sql = "SELECT * FROM account_details WHERE username = '$username'";
-    $result = mysqli_query($this->DB_CONN, $sql);
-    if ($result) {
-        if (mysqli_num_rows($result)) {
-            $row = mysqli_fetch_assoc($result);
-            $return = true;
-        }
-    }
-    return $return;
    }
 }
 
