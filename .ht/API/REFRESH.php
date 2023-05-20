@@ -92,13 +92,14 @@ class  refreshSite{
         ob_start();
         // Execute the shell command and capture the output
         exec('git pull fastreed main', $output, $returnCode);
-        ob_end_clean(); 
+        
         if ($returnCode === 0) {
             showError(true, "Updated Now");
             
         } else {
             showError(false, "Not Updated");
         }
+        ob_end_clean(); 
     }
 }
 
