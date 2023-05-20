@@ -97,30 +97,10 @@ class  refreshSite{
         return $return;
     }
 
-    public function gitIsUpdated(){
-        shell_exec('git fetch fastreed');
-        // Get the SHA hash of the latest commit on the
-        $localSha = shell_exec('git rev-parse HEAD');
-        $remoteSha = shell_exec('git rev-parse fastreed/main');
-        // Compare the local and remote branches
-        // $diff = shell_exec("git diff $localSha $remoteSha"
-        if ($localSha != $remoteSha) {  
-        $return = false;
-        // If there are difference, return false
-        } else {
-        // If there are no difference, return true.
-        $return = true; 
-        }
-        return $return;
-    }
 
     public function hardRefresh(){
-        if ($this->gitIsUpdated()) {
-            showError(false, "Repo already upto date");
-        }else {
-            shell_exec('git pull fastreed main');
-            showError(true, "Updated Now");
-        }
+        shell_exec('git pull fastreed main');
+        showError(true, "Updated Now");
     }
 
 }
