@@ -52,7 +52,7 @@ class showMenus{
         xhr.upload.addEventListener('progress', function(event) {
           if (event.lengthComputable) {
             var percentComplete = (event.loaded / event.total) * 100;
-            document.querySelector('#progressTotal').style.width = `${percentComplete}px`;
+            document.querySelector('#progressTotal').style.width = `${percentComplete}%`;
           }
         });
       
