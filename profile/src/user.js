@@ -56,14 +56,14 @@ class showMenus{
           if (event.lengthComputable) {
             var percentComplete = (event.loaded / event.total) * 100;
             var percentComplete = percentComplete.toFixed(1);
-            document.querySelector('#uploadLabel').innerHTML = `Uploading ${percentComplete}%`;
+            document.querySelector('#uploadLabel').innerHTML = `Upload ${percentComplete}%`;
             document.querySelector('#progressTotal').style.width = `${percentComplete}%`;
           }
         });
       
         // Load event handler
         xhr.addEventListener('load', function() {
-            document.querySelector('#uploadLabel').innerHTML = `Uploaded ${percentComplete}%`;
+            location.reload();
         });
       
         // Error event handler
