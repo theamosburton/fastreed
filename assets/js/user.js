@@ -134,7 +134,7 @@ async function isUserlogged(){
 
             let notificationHTML = '';
             if (notificationData.length <= 0) {
-                notificationHTML += `
+                notification[0] = `
                 <div class="notification no-noti" id="notification">
                 
                         <div class="body">
