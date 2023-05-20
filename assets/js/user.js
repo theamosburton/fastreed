@@ -131,18 +131,13 @@ async function isUserlogged(){
                 $('#notiCount').css('display', 'none')
             }
             // ********* //
-
-            let notificationHTML = '';
-            if (notificationData.length <= 0) {
-                notification[0] = `
-                <div class="notification no-noti" id="notification">
-                
-                        <div class="body">
-                            <p class="noti-parts title"> No Notification</p>
-                        </div>
-                </div>`;
-                document.getElementById('notifications').innerHTML = notificationHTML;
-            }
+            notification[0] = `
+            <div class="notification no-noti" id="notification">
+            
+                    <div class="body">
+                        <p class="noti-parts title"> No Notification</p>
+                    </div>
+            </div>`;
             // 
             let notification = [];
             for (let g = 0; g < notificationData.length; g++) {
