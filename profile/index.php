@@ -202,9 +202,13 @@ class loggedVself extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js'];
-        $this->extraScript = '<script> var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
-        var currentValue = "'.$this->userData->getSelfDetails()['username'].'"
-        </script>';
+        
+        $this->extraScript = 
+        '<script> 
+            var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
+            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
+            var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
+         </script>';
         $this->addHead();
         
     //***************/ Main Container Starts /**********//
@@ -248,6 +252,11 @@ class loggedVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js'];
+
+
+        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
+        var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+         </script>';
         
         $this->addHead();
 
@@ -282,7 +291,6 @@ class nonLoggedVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         $this->pageJs = ['/profile/src/style.js'];
-        
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
