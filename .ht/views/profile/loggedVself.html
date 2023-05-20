@@ -78,14 +78,14 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
-                  <input onkeyup="update.checkWebsite()" value="<?php echo $this->userData->getSelfDetails()['websiteUrl']?>" type="url" class="form-control" id="website" name="websiteUrl" placeholder="Enter Url" autocomplete="off">
+                  <input onkeyup="update.checkWebsite()" value="<?php echo $this->userData->getSelfDetails()['websiteUrl']?>" type="url" class="form-control" id="website" name="websiteUrl" placeholder="Enter Url" >
                 </div>
               </div>
   
               <div class="col-12">
                 <div class="form-group">
                   <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                  <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" autocomplete="off"><?php echo $this->userData->getSelfDetails()['bio'];? ></textarea>
+                  <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" onfocus="this.setAttribute('autocomplete', 'off');" onblur="this.setAttribute('autocomplete', 'on');"><?php echo $this->userData->getSelfDetails()['bio'];?></textarea>
                 </div>
               </div>
               

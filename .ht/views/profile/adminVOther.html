@@ -94,7 +94,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
-                  <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself" autocomplete="off"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
+                  <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself" onfocus="this.setAttribute('autocomplete', 'off');" onblur="this.setAttribute('autocomplete', 'on');"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
                 </div>
               </div>
               
