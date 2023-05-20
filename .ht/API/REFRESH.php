@@ -70,7 +70,7 @@ class  refreshSite{
         $oldVersion = (int) $this->getVersions($this->DB);
         $newVersion = $oldVersion + 1;
         $newVersion = (string) $newVersion;
-        $sql = "UPDATE options SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
+        $sql = "UPDATE webmeta SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             showError(true, "Version Update: $newVersion");
