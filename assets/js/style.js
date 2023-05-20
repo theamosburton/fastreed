@@ -25,7 +25,7 @@ function styleUpdate() {
     }else if(colorMode == 'light'){
         enableLightMode();
     }
-    updateNeeded();
+    $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green'); 
     $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
 }
 
