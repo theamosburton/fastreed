@@ -38,11 +38,6 @@
     
     if ($this->adminLogged) {
         echo '<script>var adminLogged = true;</script>'."\n";
-        if ($this->FUNC->gitIsUpdated()) {
-            echo '<script>var gitIsUpdated = true;</script>'."\n";
-        }else {
-            echo '<script> var gitIsUpdated = false;</script>'."\n";
-        }
     }elseif ($this->userLogged) {
         echo '<script>var userLogged = true;</script>'."\n";
     }else {

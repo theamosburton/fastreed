@@ -186,26 +186,13 @@ function toggleAdmin() {
     if(advOptions.style.display == 'none'){
         advOptions.style.display = 'block';
         overlay.style.display = 'block';
-        updateNeeded();
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green'); 
     }else{
         advOptions.style.display = 'none';
     }
 }
-//
-function updateNeeded() {
-    if (gitIsUpdated) {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'grey');
-        $('#refHard span').html('Repo Pulled');
-        $('#refStyle span').html('Style Updated');
-        $('#refHard, #refStyle').hover(function(){
-            $(this).css('cursor', 'default');
-        });
-        
-    }else {
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
-        
-    } 
-}
+
+    
 
 function toggleProfile() {
     if(accountsState.style.display == 'none'){
