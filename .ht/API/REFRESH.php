@@ -21,15 +21,10 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
     $urlParts = parse_url($referrer);
     $refdomain = $urlParts['host'];
-
-    if ($adminLogged) {
-        if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
-            new refreshSite();
-        }else {
-            showError(false, "Access Denied 0");
-        }
+    if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
+        new refreshSite();
     }else {
-        showError(false, "Access Denied 1");
+        showError(false, "Access Denied 0");
     }
 }else {
     showError(false, "Access Denied 3");
