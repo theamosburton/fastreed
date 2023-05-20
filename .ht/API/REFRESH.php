@@ -68,7 +68,6 @@ class  refreshSite{
 
     public function refreshCSS(){
         $oldVersion = (int) $this->getVersions($this->DB);
-        echo $oldVersion;
         $newVersion = $oldVersion + 1;
         $newVersion = (string) $newVersion;
         $sql = "UPDATE webmeta SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
