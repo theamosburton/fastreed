@@ -80,12 +80,16 @@ class updateDetails{
         $data = json_decode(file_get_contents('php://input'), true);
         if(!isset($data['personID']) || empty($data['personID'])){
             showMessage(false, "Id not given");
-        }elseif($this->adminLogged) {
+        }elseif(!isset($data['editor'])) {
+            showMessage(false, "Editor not mentioned");
             $this->editDetails('admin');
             //When admin try to update other or self detail
-        }elseif ($this->userLogged) {
+        }elseif($data['editor'] == 'admin') {
+            $this->editDetails('admin');
+            //When admin try to update other or self detail
+        }elseif ($data['editor'] == 'user') {
             //When user try to update his/her own detail
-            $this->editDetails('');
+            $this->editDetails('user');
         }else{
             showMessage(false, "Access Denied DA");
         }
@@ -93,90 +97,82 @@ class updateDetails{
     }
 
 
-    private function editDetails($x){
+    private function editDetails($x) {
         $data = json_decode(file_get_contents('php://input'), true);
-        $fullName = isset($data['fullName']) ? $data['fullName'] : null;
-        $gender = isset($data['Gender']) ? $data['Gender'] : null;
-        $DOB = isset($data['DOB']) ? $data['DOB'] : null;
-        $Username = isset($data['username']) ? $data['username'] : null;
-        $website = isset($data['website']) ? $data['website'] : null;
-        $about = isset($data['about']) ? $data['about'] : null;
-        $email = isset($data['email']) ? $data['email'] : null;
+        $fullName = $data['fullName'] ?? null;
+        $gender = $data['Gender'] ?? null;
+        $DOB = $data['DOB'] ?? null;
+        $Username = $data['username'] ?? null;
+        $website = $data['website'] ?? null;
+        $about = $data['about'] ?? null;
+        $email = $data['email'] ?? null;
+        $cEmail = $data['cEmail'] ?? null;
+        $cUsername = $data['cUsername'] ?? null;
+        
+        $adminValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($cEmail) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
 
-        $cEmail = isset($data['cEmail']) ? $data['cEmail'] : null;
-        $cUsername = isset($data['cUsername']) ? $data['cUsername'] : null;
-        // Using logical operators and short-circuit evaluation to check if variables are set and not empty
-        $all_variables_set = 
+        $userValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cUsername);
         
-       isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($cEmail) && isset($email) 
-        
-        && 
-        
-     !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
         $ePID = $data['personID'];
-        $fullName = $data['fullName'];
-        $gender = $data['Gender'];
-        $DOB = $data['DOB'];
-        $Username = $data['username'];
-        $website = $data['website'];
-        $about = $data['about'];
-
-        $cEmail = $data['cEmail'];
-        $cUsername = $data['cUsername'];
-        if(!$all_variables_set){
-            showMessage(false, "All Argument not set");
-        }elseif (!empty($x) || $email) {
-            # admin edit
-            if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
-                showMessage(false, "Username Already Exists");
-            }elseif(!$this->checkExcept('emailID', $ePID, $email, $cEmail)){
-                showMessage(false, "Email Already Exists");
-            }else {
-                $dPID = $this->AUTH->decrypt($ePID);
-                $email = $data['email'];
-                $sql = "UPDATE account_details SET 
-                gender = '$gender',
-                DOB = '$DOB',
-                fullName = '$fullName',
-                bio = '$about',
-                Username = '$Username',
-                websiteUrl = '$website',
-                emailID = '$email'
-                WHERE personID = '$dPID'";
-
-                $result = mysqli_query($this->DB, $sql);
-                if ($result) {
-                    showMessage(true, "Updated by admin");
-                }else{
-                    showMessage(false, "Not Updated 2");
+        
+        if ($x == 'admin') {
+            if ($adminValueSet) {
+                # admin edit
+                if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
+                    showMessage(false, "Username Already Exists");
+                } elseif (!$this->checkExcept('emailID', $ePID, $email, $cEmail)) {
+                    showMessage(false, "Email Already Exists");
+                } else {
+                    $dPID = $this->AUTH->decrypt($ePID);
+                    $sql = "UPDATE account_details SET 
+                    gender = '$gender',
+                    DOB = '$DOB',
+                    fullName = '$fullName',
+                    bio = '$about',
+                    Username = '$Username',
+                    websiteUrl = '$website',
+                    emailID = '$email'
+                    WHERE personID = '$dPID'";
+    
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        showMessage(true, "Updated by admin");
+                    } else {
+                        showMessage(false, "Not Updated 2");
+                    }
                 }
+            } else {
+                showMessage(false, "Not all value set admin");
             }
-        }else{
+        } else {
             # user edit
-            if ($this->checkExists('username', $Username)) {
-                showMessage(false, "Username Already Exists");
-            }else {
-                $dPID = $this->AUTH->decrypt($ePID);
-                $email = $data['email'];
-                $sql = "UPDATE account_details SET 
-                gender = '$gender',
-                DOB = '$DOB',
-                fullName = '$fullName',
-                bio = '$about',
-                Username = '$Username',
-                websiteUrl = '$website'
-                WHERE personID = '$dPID'";
-
-                $result = mysqli_query($this->DB, $sql);
-                if ($result) {
-                    showMessage(true, "Updated by self");
-                }else{
-                    showMessage(false, "Not Updated 1");
+            if ($userValueSet) {
+                if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
+                    showMessage(false, "Username Already Exists");
+                } else {
+                    $dPID = $this->AUTH->decrypt($ePID);
+                    $sql = "UPDATE account_details SET 
+                    gender = '$gender',
+                    DOB = '$DOB',
+                    fullName = '$fullName',
+                    bio = '$about',
+                    username = '$Username',
+                    websiteUrl = '$website'
+                    WHERE personID = '$dPID'";
+    
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        showMessage(true, "Updated by self");
+                    } else {
+                        showMessage(false, "Not Updated 1");
+                    }
                 }
+            } else {
+                showMessage(false, "Not all value set user");
             }
         }
-
     }
+    
     
     
 

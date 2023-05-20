@@ -231,7 +231,8 @@ class updateDetails{
                 'website' : `${this.website}`,
                 'about' : `${this.about}`,
                 'cUsername': `${currentUsername}`,
-                'cEmail': `${currentEmail}`
+                'cEmail': `${currentEmail}`,
+                'editor':'admin'
               };
               const response = await fetch(url, {
                   method: 'post',
@@ -315,7 +316,8 @@ class updateDetails{
                 'website' : `${this.website}`,
                 'about' : `${this.about}`,
                 'cUsername': `${currentUsername}`,
-                'cEmail': `${currentEmail}`
+                'cEmail': `${currentEmail}`,
+                'editor':'user'
               };
               const response = await fetch(url, {
                   method: 'post',

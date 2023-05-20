@@ -21,9 +21,11 @@ class showProfile {
     protected $pageJs;
     protected $otherUsername;
     protected $extraScript;
+    protected $adminIsEditing;
     function __construct() {
         $this->const4Inherited();
         if ($this->adminLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
+            $this->adminIsEditing = true;
             new loggedAdminVother();
         }elseif ($this->userLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new loggedVother();
