@@ -13,19 +13,7 @@ $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
 include_once($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
 include_once($GLOBALS['DB']);
-$userLogged = false;
-$adminLogged = false;
-if(isset($_SESSION['LOGGED_USER'])){
-	$userData = new getLoggedData();
-	if ($userData->U_AUTH) {
-		$userLogged = true;
-		if ($userData->getAccess()['userType'] == 'Admin') {
-			$adminLogged = true;
-		}else {
-            $adminLogged = false;
-        }
-	}
-}
+
 
 
 
@@ -55,25 +43,32 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 class  refreshSite{
     private $DB_CONNECT;
     private $DB;
+    private $userData;
     function __construct(){
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
+        $this->userData = new getLoggedData();
 
-        if (!isset($_GET)) {
-            showError(false, "Request not Found");
-        }elseif (isset($_GET['intent'])) {
-            if (empty($_GET['intent'])) {
-                showError(false, "Empty Request Found");
-            }elseif ($_GET['intent'] == 'refreshCSS') {
-                $this->refreshCSS();
-            }elseif ($_GET['intent'] == 'hardRefresh') {
-                $this->hardRefresh();
+        if ($this->userData->adminLogged) {
+            if (!isset($_GET)) {
+                showError(false, "Request not Found");
+            }elseif (isset($_GET['intent'])) {
+                if (empty($_GET['intent'])) {
+                    showError(false, "Empty Request Found");
+                }elseif ($_GET['intent'] == 'refreshCSS') {
+                    $this->refreshCSS();
+                }elseif ($_GET['intent'] == 'hardRefresh') {
+                    $this->hardRefresh();
+                }else {
+                    showError(false, "Intent is empty");
+                }
             }else {
-                showError(false, "Intent is empty");
+                showError(false, "Intent Required");
             }
-        }else {
-            showError(false, "Intent Required");
+        }else{
+            showError(false, "Not an Admin");
         }
+
     }
 
     public function refreshCSS(){
