@@ -24,18 +24,24 @@
                                         <div>'.$this->userData->getSelfDetails()['email'].'</div>
                                     </div>
                                 </div>
-                                <div class="menus">
+                                <a href="" class="menus">
                                     <i class="left fa fa-circle-plus"></i>
-                                    <a href="">Create</a> 
-                                </div>
-                                <div class="menus">
+                                    <span>Create</span> 
+								</a>
+                                <a href="/profile/" class="menus">
                                     <i class="left fa fa-user-circle"></i> 
-                                    <a href="/profile/">View Profile</a> 
-                                </div>
-                                <div class="menus">
+                                    <span>View Profile</span> 
+								</a>
+
+								<a href="/profile/?opt=media" class="menus">
+                                    <i class="left fa fa-light fa-photo-film"></i> 
+									<span>Media</span>
+                                </a>
+
+                                <a href="" class="menus">
                                     <i class="left fa fa-gear"></i> 
-                                    <a href="">Manage Account</a> 
-                                </div>
+                                    <span>Manage Account</span> 
+								</a>
                             </div>
 
 							<div class="profile-bottom">
@@ -103,10 +109,10 @@
 									<span class="name">Advance Options</span>
 								</div>
 								$refresh
-								<div class="menus">
+								<a href="" class="menus">
 									<i class="left fa fa-message"></i>
-									<a href="">Feedbacks</a>
-								</div>
+									<span>Feedbacks</span>
+								</a>
 							</div>
 						HTML."\n";
 				}elseif($this->userLogged){
@@ -115,10 +121,10 @@
 								<div class="menu-head">
 									<span class="name">Advance Options</span>
 								</div>
-								<div class="menus">
+								<a href="" class="menus">
 									<i class="left fa fa-message"></i>
-									<a href="">Feedbacks</a>
-								</div>
+									<span>Feedbacks</span>
+								</a>
 							</div>
 					HTML."\n";
 				}
@@ -131,10 +137,27 @@
 					<div class="menu-head">
 						<span class="name">Settings</span>
 					</div>
-					<div class="menus settings" onclick="toggleMode()"> <i class="left fa fa-circle-half-stroke"></i> <span> Dark Mode </span><i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i></div>
-					<div class="menus settings"><i class="left fa fa-icons"></i> <a href="">Manage Interests</a> </div>
-					<div class="menus settings"><i class="left fa fa-message"></i><a href="">Feedback</a></div>
-					<div class="menus settings"> <i class="left fa fa-info-circle"></i><a href="/about/">About Fastreed</a></div>
-					<div class="menus settings"><i class="left fa fa-file-circle-check"></i><a href="/terms-privacy/">Terms and Privacy</a></div>
+					<div class="menus settings" onclick="toggleMode()"> 
+						<i class="left fa fa-circle-half-stroke"></i> 
+						<span> Dark Mode </span>
+						<i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i>
+					</div>
+
+					<a href="" class="menus settings">
+						<i class="left fa fa-icons"></i>
+						<span>Manage Interests</span> 
+					</a>
+					<a href="" class="menus settings">
+						<i class="left fa fa-message"></i>
+						<span>Feedback</span>
+					</a>
+					<a href="/about/" class="menus settings">
+						<i class="left fa fa-info-circle"></i>
+						<span>About Fastreed</span>
+					</a>
+					<a href="/terms-privacy/" class="menus settings">
+						<i class="left fa fa-file-circle-check"></i>
+						<span>Terms and Privacy</span>
+					</a>
 				</div>
 				<!-- ************************* Settings ************************** -->

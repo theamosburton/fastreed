@@ -105,12 +105,12 @@
       <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
         <div class="userContent">
           <div class="userContentMenus">
-            <div class="menus active">Dashboard</div>
-            <div class="menus">Content</div>
-            <div class="menus">Media Library</div>
-            <div class="menus">Privacy</div>
+            <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="/profile/">Dashboard</a>
+            <a id="contentMenu" class="menus" onclick="new showMenus()" href="?opt=content">Content</a>
+            <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
+            <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy</a>
           </div>
-          <div class="menuDashboard contentView">
+          <div id="dashboardDiv" class="dashboardDiv contentView">
             <div class="contentTopics">
               <div class="title">Posts and Webstories</div>
               <div class="row">
@@ -129,7 +129,21 @@
               </div>
             </div>
           </div>
-
+          <div id="contentDiv" class="dashboardDiv contentView"></div>
+          <div id="mediaDiv" class="mediaDiv contentView">
+            <div class="contentTopics">
+              <div class="title">All Media Content
+                <form action="" id="uploadForm">
+                  <label for="newUpload">Upload </label>
+                  <input id="newUpload" name="upload" type="file" hidden>
+                </form>
+              </div>
+              <div id="progressBar" class="progressBar">
+                <div id="progressTotal" class="progressTotal"></div>
+              </div>
+            </div>
+          </div>
+          <div id="privacyDiv" class="dashboardDiv contentView"></div>
           <!-- <div class="menuDashboard contentView">
             <div class="contentTopics">
               <div class="title">Categories</div>

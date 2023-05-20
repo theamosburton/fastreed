@@ -106,6 +106,7 @@
     margin: 0 5px;
     border-radius: 8px 8px 0 0;
     white-space: nowrap;
+    text-decoration: none;
 }
 .userContent .userContentMenus .menus:first-child{
     margin-left: 0;
@@ -140,8 +141,9 @@
     margin: 10px 0;
 }
 .contentView .title{
-    margin-left: 15px;
+    padding-left: 15px;
     color: #b8bcc5;
+
 }
 
 .errorMessage{
@@ -161,6 +163,38 @@
 }
 #cancelEditing{
     margin-right: 10px;
+}
+.mediaDiv #uploadForm{
+    display: inline-block;
+    margin-right: 20px;
+    float: right;
+}
+.mediaDiv #uploadForm label{
+    margin: 0;
+    background-color: rgb(215, 215, 215);
+    padding: 0px 10px;
+    color: blueviolet;
+}
+.mediaDiv #uploadForm label:hover{
+    cursor: pointer;
+    background-color: rgb(226, 226, 226);
+    color: blueviolet;
+}
+.mediaDiv .title{
+    margin-bottom: 20px;
+}
+.progressBar{
+    height: 10px;
+    width: calc(100%-10px);
+    margin: 0px 10px;
+    border:  1px solid #83878f;
+    border-radius: 10px;
+}
+.progressTotal{
+    width: auto;
+    height: 100%;
+    border-radius: 10px;
+    background-color: blueviolet;
 }
 @media (max-width: 990px) {
 
