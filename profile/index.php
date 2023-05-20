@@ -32,7 +32,7 @@ class showProfile {
         }elseif ($this->userLogged && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
             header("Location:/");
         }elseif($this->userLogged) {
-            new loggedVother();
+            new loggedVself();
         }else{
             header("Location:/");
         }
