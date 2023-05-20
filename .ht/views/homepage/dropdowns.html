@@ -82,8 +82,7 @@
 
 				<?php
 				if($this->adminLogged){
-					if (!$this->FUNC->gitIsUpdated()) {
-						$refresh =  <<<HTML
+					$refresh =  <<<HTML
 										<div id="refStyle" class="menus" onclick="refreshCss()"> 
 											<div  class="spinner" id="RSpinner"></div>
 											<i id="RefreshIcon" class="left fa fa-rotate"></i>
@@ -95,20 +94,6 @@
 											<span> Hard Pull</span>
 										</div>
 								HTML."\n";
-					}else{
-						$refresh =  <<<HTML
-										<div  id="refStyle" class="menus"> 
-											<div class="spinner" id="RSpinner"></div>
-											<i id="RefreshIcon" class="left fa fa-rotate"></i>
-											<span>Refresh Style</span>
-										</div>
-										<div id="refHard" class="menus"> 
-											<div class="spinner" id="HRSpinner"></div>
-											<i id="HPicon" class="left fa fa-code-pull-request" style="color:grey"></i>
-											<span> Hard Pull</span>
-										</div>
-								HTML."\n";
-					}
 				}
 				
 				if($this->adminLogged){
