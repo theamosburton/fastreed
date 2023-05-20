@@ -80,7 +80,7 @@ class  refreshSite{
     }
 
     public function getVersions($DB){
-        $sql = "SELECT * FROM options WHERE optionName = 'cssJsVersion'";
+        $sql = "SELECT * FROM webmeta WHERE optionName = 'cssJsVersion'";
         $result = mysqli_query($DB, $sql);
         $row = mysqli_fetch_assoc($result);
         $return = $row['optionValue'];
