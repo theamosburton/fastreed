@@ -131,6 +131,7 @@ async function isUserlogged(){
                 $('#notiCount').css('display', 'none')
             }
             // ********* //
+            let notification = [];
             notification[0] = `
             <div class="notification no-noti" id="notification">
             
@@ -139,7 +140,6 @@ async function isUserlogged(){
                     </div>
             </div>`;
             // 
-            let notification = [];
             for (let g = 0; g < notificationData.length; g++) {
 
                 // Get title of notification title and name, username etc
