@@ -89,10 +89,10 @@ class showProfile {
                     <div class="uploadDpDiv">
                         <div class="uploadDpContainer">
                         <form action="" enctype="multipart/form-data">
-                            <label for="uploadInputFile"> <i class="fa fa-upload"></i> Browse file to upload</label>
+                            <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-upload"></i> Browse file to upload</label>
                             <div id="croppieContainer"></div>
-                            <div id="previewContainer"></div>
-                            <input onchange="new showMenus().cropImage()" type="file" id="uploadInputFile">
+                            <input onchange="new showMenus().cropImage()" type="file" id="uploadInputFile" hidden>
+                            <span id="cropButton">Crop Button</span>
                             <input type="submit">
                         </form>
                         </div>

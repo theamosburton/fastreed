@@ -94,36 +94,45 @@ class showMenus{
         xhr.send(formData);
       }
       
-      cropImage() {
+     cropImage() {
         var croppie = new Croppie(document.getElementById('croppieContainer'), {
-            viewport: { width: 200, height: 200 },
-            boundary: { width: 300, height: 300 },
-            enableOrientation: true
+          viewport: { width: '100%', height: '100%', type: 'free' },
+          boundary: { width: 300, height: 300 },
+          enableOrientation: true
         });
-    
-        document.getElementById('uploadInputFile').addEventListener('change', function(e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-    
-            reader.onload = function(e) {
-                var image = new Image();
-                image.src = e.target.result;
-    
-                image.onload = function() {
-                    croppie.bind({
-                        url: image.src,
-                        orientation: 1
-                    });
-    
-                    var container = document.getElementById('previewContainer');
-                    container.innerHTML = '';
-                    container.appendChild(image);
-                };
-            };
-    
-            reader.readAsDataURL(file);
-        });
-    }
+      
+        var fileInput = document.getElementById('uploadInputFile');
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+      
+        reader.onload = function(e) {
+          var image = new Image();
+          image.src = e.target.result;
+      
+          image.onload = function() {
+            croppie.bind({
+              url: image.src,
+              orientation: 1
+            });
+            document.getElementById('uploadFileLabel').style.display = 'none';
+            var container = document.getElementById('croppieContainer');
+            container.appendChild(image);
+      
+            var cropButton = document.getElementById('cropButton');
+            cropButton.addEventListener('click', function() {
+              croppie.result('base64').then(function(result) {
+                console.log(result);
+              });
+            });
+      
+            container.appendChild(cropButton);
+          };
+        };
+      
+        reader.readAsDataURL(file);
+      }
+      
+      
       
 }
 document.addEventListener('DOMContentLoaded', function() {
