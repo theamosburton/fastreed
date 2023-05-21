@@ -91,8 +91,8 @@ class showProfile {
                         <form action="" enctype="multipart/form-data">
                             <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-upload"></i> Browse file to upload</label>
                             <div id="croppieContainer"></div>
+                            <img id="croppedImage" stye="width:50px; height:50px; display:none;">
                             <input onchange="new showMenus().cropImage()" type="file" id="uploadInputFile" hidden>
-                            <span id="cropButton">Crop Button</span>
                             <input type="submit">
                         </form>
                         </div>

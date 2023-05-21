@@ -94,10 +94,15 @@ class showMenus{
         xhr.send(formData);
       }
       
-     cropImage() {
+    cropImage() {
+        document.getElementById('uploadFileLabel').style.display = 'none';
+        var aspectRatio = 1; // Specify your desired aspect ratio here
+        var boundaryWidth = 230; // Width of the boundary
+        var boundaryHeight = boundaryWidth / aspectRatio; // Calculate height based on the aspect ratio
+      
         var croppie = new Croppie(document.getElementById('croppieContainer'), {
           viewport: { width: '100%', height: '100%', type: 'free' },
-          boundary: { width: 300, height: 300 },
+          boundary: { width: boundaryWidth, height: boundaryHeight },
           enableOrientation: true
         });
       
@@ -114,25 +119,22 @@ class showMenus{
               url: image.src,
               orientation: 1
             });
-            document.getElementById('uploadFileLabel').style.display = 'none';
-            var container = document.getElementById('croppieContainer');
-            container.appendChild(image);
       
-            var cropButton = document.getElementById('cropButton');
-            cropButton.addEventListener('click', function() {
-              croppie.result('base64').then(function(result) {
-                console.log(result);
-              });
-            });
+            // var croppedImage = document.getElementById('croppedImage');
+            // croppedImage.style.display = 'block';
+            // croppedImage.style.width = '50px';
+            // croppedImage.style.height = '50px';
       
-            container.appendChild(cropButton);
+            // croppie.element.addEventListener('update', function(event) {
+            //   croppie.result('base64').then(function(result) {
+            //     croppedImage.src = result;
+            //   });
+            // });
           };
         };
       
         reader.readAsDataURL(file);
       }
-      
-      
       
 }
 document.addEventListener('DOMContentLoaded', function() {
