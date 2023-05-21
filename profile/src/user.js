@@ -1,4 +1,40 @@
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('fileUpload').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+            var image = new Image();
+            image.src = e.target.result;
+    
+            image.onload = function() {
+                var container = document.getElementById('previewContainer');
+                console.log(container);
+                var cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    crop: function(event) {
+                        // Capture cropping coordinates
+                        var data = cropper.getData();
+                        console.log(data);
+                    }
+                });
+    
+                container.innerHTML = '';
+                container.appendChild(cropper.container);
+            };
+        };
+    
+        reader.readAsDataURL(file);
+    });
+});
+
+
+
+
+
+
 
 class showMenus{
     constructor(){
@@ -91,7 +127,3 @@ class showMenus{
 }
 
 new showMenus();
-document.getElementById('newUpload').addEventListener('change', function(event) {
-    var inputFile = event.target.files[0];
-    new showMenus().uploadFile(inputFile);
-  });

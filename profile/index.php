@@ -85,6 +85,19 @@ class showProfile {
                 }
             }
 
+            echo <<<HTML
+                    <div class="uploadDpDiv">
+                        <div class="uploadDpContainer">
+                        <form action="">
+                            <label for="fileUpload"> <i class="fa fa-upload"></i> Browse file to upload</label>
+                            <input type="file" id="fileUpload" hidden>
+                            <div id="previewContainer"></div>
+                            <input type="submit">
+                        </form>
+                        </div>
+                    </div>
+            HTML;
+
 
         //Header Section printer
             echo <<<HTML
@@ -206,7 +219,8 @@ class loggedVself extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js','/profile/src/user.js'];
+        
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js'];
 
         $this->extraScript = 
         '<script> 
