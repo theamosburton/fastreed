@@ -86,8 +86,9 @@ class showProfile {
             }
 
             echo <<<HTML
-                    <div class="uploadDpDiv">
+                    <div id="uploadDP" class="uploadDpDiv">
                         <div class="uploadDpContainer">
+                            <i id="cancelDpUpload" onclick="new showMenus().cancelDpUpload()" class="fa fa-xmark"></i>
                         <form action="" enctype="multipart/form-data">
                             <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-upload"></i> Browse file to upload</label>
                             <div id="croppieContainer"></div>

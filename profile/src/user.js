@@ -53,9 +53,11 @@ class showMenus{
         window.location.href =  window.location.href;
     }
 
+    uploadDp(){
+      document.getElementById('uploadDP').style.display = 'flex';
+    }
 
     uploadFile(file) {
-
         document.querySelector('#progressBar').style.display = 'block';
         var xhr = new XMLHttpRequest();
       
@@ -119,21 +121,14 @@ class showMenus{
               url: image.src,
               orientation: 1
             });
-      
-            // var croppedImage = document.getElementById('croppedImage');
-            // croppedImage.style.display = 'block';
-            // croppedImage.style.width = '50px';
-            // croppedImage.style.height = '50px';
-      
-            // croppie.element.addEventListener('update', function(event) {
-            //   croppie.result('base64').then(function(result) {
-            //     croppedImage.src = result;
-            //   });
-            // });
           };
         };
       
         reader.readAsDataURL(file);
+      }
+
+      cancelDpUpload(){
+        document.getElementById('uploadDP').style.display = 'none';
       }
       
 }
