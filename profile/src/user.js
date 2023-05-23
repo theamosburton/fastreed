@@ -101,6 +101,8 @@ class showMenus{
     }
 
     removeImage() {
+      document.querySelector('#uploadDbButton').style.display = 'none';
+      document.querySelector('#removeImage').style.display = 'none';
       if (this.croppie) {
         this.croppie.destroy(); // Destroy the Croppie instance
         this.croppie = null;
@@ -108,6 +110,34 @@ class showMenus{
       document.getElementById('uploadInputFile').value = ''; // Clear the file input value
       document.getElementById('uploadFileLabel').style.display = 'flex'; // Show the upload file label
       // Add any additional code to reset the UI or perform other tasks
+    }
+
+
+    uploadToServer() {
+      this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
+        // Send the base64Image to the server using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/fastreedusercontent/upload.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+    
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            // Upload successful, handle the response
+            var response = JSON.parse(xhr.responseText);
+            // Do something with the response
+          } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+            // Upload failed, handle the error
+            console.log('Upload failed. Error: ' + xhr.status);
+          }
+        };
+    
+        var requestBody = {
+          image: base64Image
+          // Additional data can be included in the request body if needed
+        };
+    
+        xhr.send(JSON.stringify(requestBody));
+      });
     }
     
       

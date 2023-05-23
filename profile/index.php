@@ -94,7 +94,7 @@ class showProfile {
                             <div id="croppieContainer"></div>
                             <img id="croppedImage" stye="width:50px; height:50px; display:none;">
                             <input onchange="new showMenus().uploadImage()" type="file" id="uploadInputFile" hidden>
-                            <span id="removeImage" onclick="new showMenus().removeImage()">Clear</span>
+                            <span id="removeImage" onclick="new showMenus().removeImage()"><i class="fa fa-rotate-right"></i></span>
                             <input id="uploadDbButton" type="submit" value="Upload">
                         </form>
                         </div>

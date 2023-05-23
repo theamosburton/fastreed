@@ -207,16 +207,16 @@
     z-index: 99;
     display: none;
     justify-content: center;
+    align-items: center;
 }
 .uploadDpDiv .uploadDpContainer{
     display: flex;
     position: relative;
-    border: 1px solid grey;
-    border-radius: 30px;
+    /* border: 2px solid #007bff; */
     padding: 0 35px 35px 35px;
     height: fit-content;
     margin-top: 30px;
-    background-color: #2e323c;
+    background-color: #212529;
     flex-direction: column;
     align-items: flex-end;
 }
