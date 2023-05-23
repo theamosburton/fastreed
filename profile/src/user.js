@@ -17,7 +17,7 @@ class showMenus{
         this.contentMenu = document.querySelector('#contentMenu');
         this.mediaMenu = document.querySelector('#mediaMenu');
         this.privacyMenu = document.querySelector('#privacyMenu');
-
+        this.croppie = null;
     
         this.dashboardDiv = document.querySelector('#dashboardDiv');
         this.contentDiv = document.querySelector('#contentDiv');
@@ -62,36 +62,53 @@ class showMenus{
     }
 
     uploadImage() {
-        document.querySelector('#uploadDbButton').style.display = 'block';
-        document.getElementById('uploadFileLabel').style.display = 'none';
-        var aspectRatio = 1; // Specify your desired aspect ratio here
-        var boundaryWidth = 230; // Width of the boundary
-        var boundaryHeight = boundaryWidth / aspectRatio; // Calculate height based on the aspect ratio
-      
-        var croppie = new Croppie(document.getElementById('croppieContainer'), {
-          viewport: { width: '100%', height: '100%', type: 'free' },
-          boundary: { width: boundaryWidth, height: boundaryHeight },
-          enableOrientation: true
-        });
-      
-        var fileInput = document.getElementById('uploadInputFile');
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-      
-        reader.onload = function(e) {
-          var image = new Image();
-          image.src = e.target.result;
-      
-          image.onload = function() {
-            croppie.bind({
-              url: image.src,
-              orientation: 1
-            });
-          };
+      var removeImageButton = document.querySelector('#removeImage');
+      removeImageButton.style.display = 'block';
+      removeImageButton.addEventListener('click', () => {
+        this.removeImage();
+      });
+
+      document.querySelector('#uploadDbButton').style.display = 'block';
+      document.getElementById('uploadFileLabel').style.display = 'none';
+      var aspectRatio = 1; // Specify your desired aspect ratio here
+      var boundaryWidth = 230; // Width of the boundary
+      var boundaryHeight = boundaryWidth / aspectRatio; // Calculate height based on the aspect ratio
+  
+      this.croppie = new Croppie(document.getElementById('croppieContainer'), {
+        viewport: { width: '100%', height: '100%', type: 'free' },
+        boundary: { width: boundaryWidth, height: boundaryHeight },
+        enableOrientation: true
+      });
+  
+      var fileInput = document.getElementById('uploadInputFile');
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+  
+      reader.onload = (e) => {
+        var image = new Image();
+        image.src = e.target.result;
+  
+        image.onload = () => {
+          this.croppie.bind({
+            url: image.src,
+            orientation: 1
+          });
         };
-      
-        reader.readAsDataURL(file);
+      };
+  
+      reader.readAsDataURL(file);
+    }
+
+    removeImage() {
+      if (this.croppie) {
+        this.croppie.destroy(); // Destroy the Croppie instance
+        this.croppie = null;
       }
+      document.getElementById('uploadInputFile').value = ''; // Clear the file input value
+      document.getElementById('uploadFileLabel').style.display = 'flex'; // Show the upload file label
+      // Add any additional code to reset the UI or perform other tasks
+    }
+    
       
 }
 document.addEventListener('DOMContentLoaded', function() {

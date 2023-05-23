@@ -143,7 +143,6 @@ class gSignUpLogin{
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
-
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
         $this->notifyAdmin($name, $profilePic, $userSince, $username);

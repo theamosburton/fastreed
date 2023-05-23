@@ -260,6 +260,12 @@
     flex-direction: column;
     align-items: center;
 }
+#removeImage{
+    display: none;
+    color: aliceblue;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
 
 @media (max-width: 990px) {
 
