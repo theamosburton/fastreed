@@ -59,6 +59,7 @@ class showMenus{
     }
     cancelDpUpload(){
       document.getElementById('uploadDP').style.display = 'none';
+      enableScroll();
     }
 
     uploadImage() {
