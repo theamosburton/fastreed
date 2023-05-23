@@ -212,8 +212,8 @@
     display: flex;
     position: relative;
     border: 1px solid grey;
-    border-radius: 10px;
-    padding: 0 30px 30px 30px;
+    border-radius: 30px;
+    padding: 0 35px 35px 35px;
     height: fit-content;
     margin-top: 30px;
     background-color: #2e323c;
@@ -222,7 +222,7 @@
 }
 .uploadDpDiv .uploadDpContainer .fa-xmark{
     color: aliceblue;
-    margin: 12px -14px 16px 0px;
+    margin: 20px 0px 20px 0px;
 }
 .uploadDpDiv .uploadDpContainer .fa-xmark:hover{
     cursor: pointer;
@@ -241,6 +241,14 @@
     padding: 4px 10px;
     color: rgb(226, 226, 226);
     border-radius: 5px;
+}
+
+#uploadDbButton{
+    display: none;
+}
+.uploadDpDiv .uploadDpContainer form #uploadDbButton:hover{
+    background-color: #18191c;
+    cursor: pointer;
 
 }
 

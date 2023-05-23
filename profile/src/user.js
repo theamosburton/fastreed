@@ -55,48 +55,14 @@ class showMenus{
 
     uploadDp(){
       document.getElementById('uploadDP').style.display = 'flex';
+      disbaleScroll();
+    }
+    cancelDpUpload(){
+      document.getElementById('uploadDP').style.display = 'none';
     }
 
-    uploadFile(file) {
-        document.querySelector('#progressBar').style.display = 'block';
-        var xhr = new XMLHttpRequest();
-      
-        // Progress event handler
-        xhr.upload.addEventListener('progress', function(event) {
-          if (event.lengthComputable) {
-            var percentComplete = (event.loaded / event.total) * 100;
-            var percentComplete = percentComplete.toFixed(1);
-            document.querySelector('#uploadLabel').innerHTML = `Upload ${percentComplete}%`;
-            document.querySelector('#progressTotal').style.width = `${percentComplete}%`;
-          }
-        });
-      
-        // Load event handler
-        xhr.addEventListener('load', function() {
-            location.reload();
-        });
-      
-        // Error event handler
-        xhr.addEventListener('error', function() {
-          console.log('Upload failed!');
-        });
-      
-        // Set the upload URL and method
-        var url = '/fastreedusercontent/upload.php';
-        var method = 'POST';
-      
-        // Open the request
-        xhr.open(method, url, true);
-      
-        // Create a FormData object and append the file
-        var formData = new FormData();
-        formData.append('file', file);
-      
-        // Send the request with the FormData
-        xhr.send(formData);
-      }
-      
-    cropImage() {
+    uploadImage() {
+        document.querySelector('#uploadDbButton').style.display = 'block';
         document.getElementById('uploadFileLabel').style.display = 'none';
         var aspectRatio = 1; // Specify your desired aspect ratio here
         var boundaryWidth = 230; // Width of the boundary
@@ -125,10 +91,6 @@ class showMenus{
         };
       
         reader.readAsDataURL(file);
-      }
-
-      cancelDpUpload(){
-        document.getElementById('uploadDP').style.display = 'none';
       }
       
 }

@@ -90,11 +90,11 @@ class showProfile {
                         <div class="uploadDpContainer">
                             <i id="cancelDpUpload" onclick="new showMenus().cancelDpUpload()" class="fa fa-xmark"></i>
                         <form action="" enctype="multipart/form-data">
-                            <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-upload"></i> Browse file to upload</label>
+                            <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-upload"></i> Browse file to upload <small>Photo will be cropped to 1:1</small></label>
                             <div id="croppieContainer"></div>
                             <img id="croppedImage" stye="width:50px; height:50px; display:none;">
-                            <input onchange="new showMenus().cropImage()" type="file" id="uploadInputFile" hidden>
-                            <input type="submit">
+                            <input onchange="new showMenus().uploadImage()" type="file" id="uploadInputFile" hidden>
+                            <input id="uploadDbButton" type="submit" value="upload">
                         </form>
                         </div>
                     </div>
