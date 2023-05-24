@@ -103,30 +103,25 @@ class showMenus{
           });
         };
       };
-  
       reader.readAsDataURL(file);
-
       uploadDbButton.addEventListener('click', () => {
         this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
-          this.uploadToServer(base64Image); // Pass the base64Image to uploadToServer()
+          var binaryImage = this.dataURItoBlob(base64Image);
+          this.uploadToServer(binaryImage); // Pass the base64Image to uploadToServer()
         });
       });
     }
 
 
 
-    uploadToServer(base64Image) {
+    uploadToServer(binaryImage) {
         var formData = new FormData();
-    
-        // Append the base64 image to the FormData object
 
-        // Convert the base64 image to a Blob object
-        var blob = this.dataURItoBlob(base64Image);
 
         // Determine the file extension based on the MIME type
-        var mimeString = blob.type;
+        var mimeString = binaryImage.type;
         var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
-        formData.append('DPimage', blob, 'image'+fileExtension);
+        formData.append('DPimage', binaryImage, 'image'+fileExtension);
     
         // Append other data to the FormData object
         formData.append('ePID', ePID);
