@@ -89,16 +89,17 @@ class uploadMedia{
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
                 if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
                     $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/';
-                
+                    $add = '/fastreedusercontent/photos/'.$id.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
                     }
                     $fileAddress = $directory.$fileName.'.'.$file_ext;
-
+                    $address = $add.$fileName.'.'.$file_ext;
                     if (move_uploaded_file($file_tmp, $fileAddress)) {
                         // File moved successfully
                         showMessage(true, 'File Uploaded');
+                        $this->resetDP($id, $address);
                     } else {
                         // Failed to move the file
                         showMessage(false, 'Error moving the file');
@@ -123,6 +124,18 @@ class uploadMedia{
             $return['fileName'] = $fileName;
         }
 
+        return $return;
+    }
+    private function resetDP($id, $fileAddress){
+        $return = false;
+        $sql = "UPDATE account_details SET 
+        profilePic = '$fileAddress'
+        WHERE personID = '$id'
+        ";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $return = true;
+        }
         return $return;
     }
     // private function uploadImage($id){

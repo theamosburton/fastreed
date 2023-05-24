@@ -279,7 +279,17 @@
 #removeImage:hover{
     cursor: pointer;
 }
-
+.uploadDpDiv .uploadDpContainer #errorMessage{
+    color: red;
+    background-color: bisque;
+    padding: 4px 14px;
+    border-radius: 5px;
+    display: none;
+}
+.uploadDpDiv .uploadDpContainer #message{
+    display: none;
+    padding: 4px 8px;
+}
 @media (max-width: 990px) {
 
     .contentView{

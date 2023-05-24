@@ -69,8 +69,11 @@ class showMenus{
     }
 
     uploadImage() {
+      document.querySelector('#uploadDbButton').innerHTML = `Upload`;
       var removeImageButton = document.querySelector('#removeImage');
       var uploadDbButton = document.querySelector('#uploadDbButton');
+      document.querySelector('.uploadDpDiv .uploadDpContainer #message').style.display = 'block';
+      
       removeImageButton.style.display = 'block';
       removeImageButton.addEventListener('click', () => {
         this.removeImage();
@@ -131,18 +134,36 @@ class showMenus{
         // Send the FormData object to the server using AJAX
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '../.ht/API/upload.php', true);
-        
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+
+
+        // Track the progress of the upload
+        xhr.upload.addEventListener('progress', (event) => {
+          if (event.lengthComputable) {
+            var percentComplete = (event.loaded / event.total) * 100;
+            document.querySelector('#uploadDbButton').innerHTML = `Uploading ${percentComplete.toFixed(2)}%`;
+            // Update the UI or perform actions based on the progress
+          }
+        });
+
+
+        // Handle the upload completion
+        xhr.addEventListener('load', () => {
+          if (xhr.status === 200) {
             // Upload successful, handle the response
             var response = JSON.parse(xhr.responseText);
-            console.log(response);
+            if (response.Result) {
+              location.reload();
+            }else{
+              document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
+              document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
+            }
+            
             // Do something with the response
-          } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+          } else {
             // Upload failed, handle the error
             console.log('Upload failed. Error: ' + xhr.status);
           }
-        };
+        });
     
         xhr.send(formData);
     }
