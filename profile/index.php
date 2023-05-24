@@ -4,6 +4,16 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include "../.ht/controller/VISIT.php";
 new showProfile();
 
+if (php_ini_loaded_file()) {
+    $safeModeEnabled = (bool) ini_get('safe_mode');
+    if ($safeModeEnabled) {
+        echo "PHP is running in safe mode.";
+    } else {
+        echo "PHP is not running in safe mode.";
+    }
+} else {
+    echo "Unable to determine PHP configuration.";
+}
 
 class showProfile {
     public $version;
