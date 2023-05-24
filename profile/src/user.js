@@ -63,9 +63,10 @@ class showMenus{
       disbaleScroll();
     }
     cancelDpUpload(){
+      this.removeImage();
       document.getElementById('uploadDP').style.display = 'none';
       enableScroll();
-      this.removeImage();
+      
     }
 
     uploadImage() {
