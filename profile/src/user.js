@@ -29,10 +29,14 @@ class showMenus{
         this.mediaDiv.style.display = 'none';
         this.privacyDiv.style.display = 'none';
         this.whoIs = null;
-        if (adminLogged) {
-          this.whoIs = 'admin';
-        }else if(userLogged){
-          this.whoIs = 'user';
+        if (typeof adminLogged !== 'undefined') {
+          if (adminLogged) {
+            this.whoIs = 'admin';
+          }
+        }else if(typeof userLogged !== 'undefined'){
+          if (userLogged) {
+            this.whoIs = 'user';
+          }
         }
         // check the hash and display what to show
         if (this.optValue == '' || this.hash === null || this.hash === 'undefined') {
