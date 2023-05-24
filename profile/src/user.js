@@ -28,7 +28,12 @@ class showMenus{
         this.contentDiv.style.display = 'none';
         this.mediaDiv.style.display = 'none';
         this.privacyDiv.style.display = 'none';
-
+        this.whoIs = null;
+        if (adminLogged) {
+          this.whoIs = 'admin';
+        }else if(userLogged){
+          this.whoIs = 'user';
+        }
         // check the hash and display what to show
         if (this.optValue == '' || this.hash === null || this.hash === 'undefined') {
             // Stay on dashboard
@@ -64,12 +69,13 @@ class showMenus{
 
     uploadImage() {
       var removeImageButton = document.querySelector('#removeImage');
+      var uploadDbButton = document.querySelector('#uploadDbButton');
       removeImageButton.style.display = 'block';
       removeImageButton.addEventListener('click', () => {
         this.removeImage();
       });
 
-      document.querySelector('#uploadDbButton').style.display = 'block';
+      uploadDbButton.style.display = 'block';
       document.getElementById('uploadFileLabel').style.display = 'none';
       var aspectRatio = 1; // Specify your desired aspect ratio here
       var boundaryWidth = 230; // Width of the boundary
@@ -98,7 +104,44 @@ class showMenus{
       };
   
       reader.readAsDataURL(file);
+
+      uploadDbButton.addEventListener('click', () => {
+        this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
+          this.uploadToServer(base64Image); // Pass the base64Image to uploadToServer()
+        });
+      });
     }
+
+
+
+
+    uploadToServer(base64Image) {
+      // Send the base64Image to the server using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', `../.ht/API/upload.php?type=dpUpload&editor=${this.whoIs}`, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          // Upload successful, handle the response
+          var response = JSON.parse(xhr.responseText);
+          console.log(response);
+          // Do something with the response
+        } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+          // Upload failed, handle the error
+          console.log('Upload failed. Error: ' + xhr.status);
+        }
+      };
+    
+      var requestBody = {
+        image: base64Image,
+        ePID: ePID
+        // Additional data can be included in the request body if needed
+      };
+    
+      xhr.send(JSON.stringify(requestBody));
+    }
+    
 
     removeImage() {
       document.querySelector('#uploadDbButton').style.display = 'none';
@@ -110,34 +153,6 @@ class showMenus{
       document.getElementById('uploadInputFile').value = ''; // Clear the file input value
       document.getElementById('uploadFileLabel').style.display = 'flex'; // Show the upload file label
       // Add any additional code to reset the UI or perform other tasks
-    }
-
-
-    uploadToServer() {
-      this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
-        // Send the base64Image to the server using AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/fastreedusercontent/upload.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-    
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            // Upload successful, handle the response
-            var response = JSON.parse(xhr.responseText);
-            // Do something with the response
-          } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
-            // Upload failed, handle the error
-            console.log('Upload failed. Error: ' + xhr.status);
-          }
-        };
-    
-        var requestBody = {
-          image: base64Image
-          // Additional data can be included in the request body if needed
-        };
-    
-        xhr.send(JSON.stringify(requestBody));
-      });
     }
     
       

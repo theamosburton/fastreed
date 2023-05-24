@@ -13,7 +13,8 @@ $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 include_once($GLOBALS['DEV_OPTIONS']);
-$refurl = $_SERVER['HTTP_HOST'];;
+$refurl = $_SERVER['HTTP_HOST'];
+
 if ($refurl == DOMAIN || $refurl == DOMAIN_ALIAS) {
     include_once($GLOBALS['DB']);
     include_once($GLOBALS['AUTH']);
