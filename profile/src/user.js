@@ -65,6 +65,7 @@ class showMenus{
     cancelDpUpload(){
       document.getElementById('uploadDP').style.display = 'none';
       enableScroll();
+      this.removeImage();
     }
 
     uploadImage() {
@@ -112,36 +113,6 @@ class showMenus{
       });
     }
 
-
-
-
-    // uploadToServer(base64Image) {
-    //   // Send the base64Image to the server using AJAX
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.open('POST', `../.ht/API/upload.php?type=dpUpload&editor=${this.whoIs}`, true);
-    //   xhr.setRequestHeader('Content-Type', 'application/json');
-    
-    //   xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-    //       // Upload successful, handle the response
-    //       var response = JSON.parse(xhr.responseText);
-    //       console.log(response);
-    //       // Do something with the response
-    //     } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
-    //       // Upload failed, handle the error
-    //       console.log('Upload failed. Error: ' + xhr.status);
-    //     }
-    //   };
-    
-    //   var requestBody = {
-    //     dpimage: base64Image,
-    //     ePID: ePID
-    //     // Additional data can be included in the request body if needed
-    //   };
-    
-    //   xhr.send(JSON.stringify(requestBody));
-    // }
-    
 
 
     uploadToServer(base64Image) {
