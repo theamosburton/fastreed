@@ -115,31 +115,88 @@ class showMenus{
 
 
 
+    // uploadToServer(base64Image) {
+    //   // Send the base64Image to the server using AJAX
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open('POST', `../.ht/API/upload.php?type=dpUpload&editor=${this.whoIs}`, true);
+    //   xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    //   xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+    //       // Upload successful, handle the response
+    //       var response = JSON.parse(xhr.responseText);
+    //       console.log(response);
+    //       // Do something with the response
+    //     } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+    //       // Upload failed, handle the error
+    //       console.log('Upload failed. Error: ' + xhr.status);
+    //     }
+    //   };
+    
+    //   var requestBody = {
+    //     dpimage: base64Image,
+    //     ePID: ePID
+    //     // Additional data can be included in the request body if needed
+    //   };
+    
+    //   xhr.send(JSON.stringify(requestBody));
+    // }
+    
+
+
     uploadToServer(base64Image) {
-      // Send the base64Image to the server using AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', `../.ht/API/upload.php?type=dpUpload&editor=${this.whoIs}`, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
+        var formData = new FormData();
     
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          // Upload successful, handle the response
-          var response = JSON.parse(xhr.responseText);
-          console.log(response);
-          // Do something with the response
-        } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
-          // Upload failed, handle the error
-          console.log('Upload failed. Error: ' + xhr.status);
-        }
-      };
+        // Append the base64 image to the FormData object
+
+        // Convert the base64 image to a Blob object
+        var blob = this.dataURItoBlob(base64Image);
+
+        // Determine the file extension based on the MIME type
+        var mimeString = blob.type;
+        var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
+        formData.append('DPimage', blob, 'image'+fileExtension);
     
-      var requestBody = {
-        image: base64Image,
-        ePID: ePID
-        // Additional data can be included in the request body if needed
-      };
+        // Append other data to the FormData object
+        formData.append('ePID', ePID);
+        formData.append('ext', fileExtension);
+        formData.append('type', 'dpUpload');
+        formData.append('editor', this.whoIs);
+        // Send the FormData object to the server using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../.ht/API/upload.php', true);
+        
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            // Upload successful, handle the response
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            // Do something with the response
+          } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+            // Upload failed, handle the error
+            console.log('Upload failed. Error: ' + xhr.status);
+          }
+        };
     
-      xhr.send(JSON.stringify(requestBody));
+        xhr.send(formData);
+    }
+    
+    dataURItoBlob(dataURI) {
+      // Convert base64 to raw binary data held in a string
+      var byteString = atob(dataURI.split(',')[1]);
+    
+      // Separate the MIME type from the base64 data
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    
+      // Write the bytes of the string to an ArrayBuffer
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+    
+      // Create a Blob object from the ArrayBuffer
+      return new Blob([ab], { type: mimeString });
     }
     
 
