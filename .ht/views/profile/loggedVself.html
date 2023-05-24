@@ -10,8 +10,8 @@
               <div class="user-profile">
                 <div class="user-avatar">
                   <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
-                  <div class="editPhotos" id="editPhotos">
-                    <i class="fa fa-pen fa-xs" onclick="new showMenus().uploadDp()"></i>
+                  <div onclick="new showMenus().uploadDp()" class="editPhotos" id="editPhotos">
+                    <i class="fa fa-pen fa-xs"></i>
                   </div>
                 </div>
                 <br>
