@@ -411,14 +411,18 @@
         margin-left: 0;
     }
     .setPassword .googleBinded{
-        padding: 0 15px;
+        font-size: 13px;
+        text-align:start;
+        width: 90%;
+        padding: 5px 15px;
         margin-top: 10px;
         border-radius: 9px;
         flex-direction: row-reverse;
+        justify-content: flex-end;
         border: 1px solid;
     }
     .setPassword .password{
-        width: 93%;
+        width: 90%;
     }
     .privacySecurity .password .inp{
         max-width: none;
