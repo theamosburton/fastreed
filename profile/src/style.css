@@ -193,7 +193,7 @@
     border-radius: 5px     ;
 }
 .privacySecurity .password input:-internal-autofill-selected {
-    background-color: transparent;
+    background-color: transparent!important;
   }
 .privacySecurity .password input:hover,.privacySecurity .password input:focus{
     background-color: transparent;
