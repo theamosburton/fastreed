@@ -192,6 +192,9 @@
     /* color: aliceblue; */
     border-radius: 5px     ;
 }
+.privacySecurity .password input::selection {
+    background-color: transparent;
+  }
 .privacySecurity .password input:hover,.privacySecurity .password input:focus{
     background-color: transparent;
 }
