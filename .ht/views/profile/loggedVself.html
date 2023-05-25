@@ -51,7 +51,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                  <input onchange="update.checkDOB()" value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+                  <input onkeyup="update.checkDOB()" onselect="update.checkDOB()" onchange="update.checkDOB()"value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
               </div>
   
