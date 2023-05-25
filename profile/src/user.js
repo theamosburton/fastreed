@@ -6,18 +6,18 @@ class showMenus{
         this.dashboardMenu = document.querySelector('#dashboardMenu');
         this.contentMenu = document.querySelector('#contentMenu');
         this.mediaMenu = document.querySelector('#mediaMenu');
-        this.privacyMenu = document.querySelector('#privacyMenu');
+        this.accountMenu = document.querySelector('#accountMenu');
         this.croppie = null;
     
         this.dashboardDiv = document.querySelector('#dashboardDiv');
         this.contentDiv = document.querySelector('#contentDiv');
         this.mediaDiv = document.querySelector('#mediaDiv');
-        this.privacyDiv = document.querySelector('#privacyDiv');
+        this.accountDiv = document.querySelector('#accountDiv');
 
         this.dashboardDiv.style.display = 'none';
         this.contentDiv.style.display = 'none';
         this.mediaDiv.style.display = 'none';
-        this.privacyDiv.style.display = 'none';
+        this.accountDiv.style.display = 'none';
         this.whoIs = null;
         if (typeof adminLogged !== 'undefined') {
           if (adminLogged) {
@@ -42,10 +42,10 @@ class showMenus{
             this.mediaMenu.classList.add('active');
             this.mediaDiv.style.display = 'block';
             this.mediaMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }else if(this.optValue == 'privacy'){
-            this.privacyMenu.classList.add('active');
-            this.privacyDiv.style.display = 'block';
-            this.privacyMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }else if(this.optValue == 'account'){
+            this.accountMenu.classList.add('active');
+            this.accountDiv.style.display = 'block';
+            this.accountMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else{
             this.dashboardMenu.classList.add('active');
             this.dashboardDiv.style.display = 'block';
