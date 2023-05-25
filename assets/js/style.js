@@ -7,7 +7,32 @@ let accountIcon = document.getElementById('accountIcon');
 let mSpinner =  document.getElementById('MenuSpinner');
 let profileImage = document.getElementById('profileImage');
 let advOptions = document.getElementById('advOptions');
+let brandName = document.querySelector('header h1 a');
 styleUpdate();
+
+window.addEventListener('DOMContentLoaded', function() {
+    var link = document.querySelector('.link');
+
+    function updateLinkContent() {
+    if (window.innerWidth < 350) {
+        brandName.innerHTML = 'F';
+        brandName.style.fontSize = 'large';
+        brandName.style.border = '3px solid';
+        brandName.style.borderRadius = '50px';
+        brandName.style.padding = '3px 9px';
+        } else {
+        brandName.innerHTML = 'Fastreed';
+        brandName.style.fontSize = 'inherit';
+        brandName.style.border = 'none';
+        brandName.style.borderRadius = '0px';
+        brandName.style.padding = '0';
+        }
+    }
+    updateLinkContent();
+    window.addEventListener('resize', updateLinkContent);
+});
+
+
 function styleUpdate() {
     // checking cookie mode
     let colorMode;

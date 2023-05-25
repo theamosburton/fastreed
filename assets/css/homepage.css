@@ -90,7 +90,7 @@
 }
 
 .dropdowns{
-  min-width: 200px;
+  max-width: -webkit-fill-available;
   border-radius: 30px;
   background-color: #353740;
   color-scheme: dark;
@@ -144,8 +144,7 @@
   text-transform: uppercase;
   font-size: large;
   border-bottom: 3px solid #239677;
-  padding: 15px;
-  padding-left: 20px;
+  padding: 15px 40px;
   color: #e8eaed;
   background-color: #16161d;
   margin: 15px 15px 3px 15px;
@@ -158,13 +157,12 @@
   font-weight: 800;
 }
 .dropdowns .settings, #advOptions .menus{
-  min-width: 300px;
   display: flex;
   align-items: center;
   color: rgb(231, 231, 231);
   margin-top: 3px;
   margin-bottom: 0;
-  padding: 15px;
+  padding: 10px 40px 10px 10px;
   background-color: #16161d;
   margin-left: 15px;
   margin-right: 15px;
@@ -194,9 +192,6 @@
 #noti-nav{
   background-color: #353740; 
   margin-bottom: 20px;
-  min-width: 300px;
-  /* max-height: 500px; */
-  /* overflow: auto; */
 }
 #noti-nav .noti-head{
   margin-bottom: 0px;
@@ -442,7 +437,6 @@
 .profile-info{
   color: aliceblue;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: row;
   padding: 15px;
@@ -477,6 +471,10 @@
 }
 .profile-info .info-div{
   margin-left: 15px;
+  overflow-wrap: anywhere;
+}
+.profile-info .info-div #myEmail{
+  font-size: smaller;
 }
 
 .profile-bottom .menus{
@@ -511,10 +509,10 @@ header .rightside{
   flex-direction: row-reverse;
 }
 header h1{
+  display: flex;
   margin: 0;
   font-size: 30px;
   font-weight: 700;
-  display: inline-block;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 header h1 a{
@@ -778,6 +776,9 @@ header #nav #profileImage{
   }
 }
 @media (max-width: 530px) {
+  .profile-info .info-div #myEmail{
+    font-size: small;
+  }
   .profileUpdateShade .wrapper form #errorMessage{
     margin-left:0px;
   }
