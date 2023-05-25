@@ -142,6 +142,7 @@
 }
 .contentView .title{
     color: #b8bcc5;
+    font-weight: bolder;
 
 }
 .contentView .contentTopics{
@@ -415,6 +416,12 @@
         border-radius: 9px;
         flex-direction: row-reverse;
         border: 1px solid;
+    }
+    .setPassword .password{
+        width: 93%;
+    }
+    .privacySecurity .password .inp{
+        max-width: none;
     }
     .uploadDpDiv{
         justify-content: center;
