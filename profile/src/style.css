@@ -163,9 +163,11 @@
     margin: 0px 0px 25px 0px;
     max-width: 300px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: row;
+}
+.privacySecurity .password .inp .eye-logo{
+    margin-left: 5px;
 }
 .privacySecurity .password .inp .eye-logo:hover{
     cursor: pointer;
@@ -188,7 +190,7 @@
     border: none;
     padding: 8px 10px;
     /* color: aliceblue; */
-    border-radius: 10px     ;
+    border-radius: 5px     ;
 }
 .privacySecurity .password input:hover,.privacySecurity .password input:focus{
     background-color: transparent;
