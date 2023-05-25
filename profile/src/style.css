@@ -406,6 +406,9 @@
         justify-content: flex-start;
         align-items: flex-start;
     }
+    .contentView .contentTopics{
+        margin-left: 0;
+    }
     .setPassword .googleBinded{
         padding: 0 15px;
         margin-top: 10px;
