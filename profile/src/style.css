@@ -191,7 +191,7 @@
     padding: 8px 10px;
     /* color: aliceblue; */
     border-radius: 5px ;
-    -webkit-user-select: none;
+    -webkit-user-select: none!important;
     -moz-user-select: none;
     -ms-user-select: none;
      user-select: none;
