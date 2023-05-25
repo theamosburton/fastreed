@@ -1,3 +1,6 @@
+var newPass;
+var isNewPass = false;
+var verifyPass = false;
 class updateDetails{
   constructor(){
 
@@ -23,6 +26,8 @@ class updateDetails{
     this.validateGender();
     this.checkWebsite();
     this.checkAbout();
+    this.checkNewPassword();
+    this.checkVerifyPassword();
   }
 
   checkName() {
@@ -287,8 +292,6 @@ class updateDetails{
     }
   }
 
-
-
   editByUser(){
     var messageDiv = document.querySelector('#uAlert');
     var mainDiv = document.querySelector('#updateAlert');
@@ -400,11 +403,74 @@ class updateDetails{
     }
   }
   
+  checkNewPassword(){
+    var error = document.getElementById('newPasswordError');
+    var input = document.getElementById('newPassword');
+    newPass = input.value;
+    error.style.display = 'block';
+    if(newPass.length <= 8){
+      error.innerHTML = 'Short Password';
+      error.style.color = '#ff3e00';
+    }else if(checkPasswordStrength(input) == 'Weak'){
+      error.innerHTML = 'Weak Password';
+      error.style.color = '#ff3e00';
+      isNewPass = false;
+    }else if(checkPasswordStrength(input) == 'Medium'){
+      error.innerHTML = 'Medium Password';
+      error.style.color = 'lime';
+      isNewPass = true;
+    }else if(checkPasswordStrength(input) == 'Strong'){
+      error.innerHTML = 'Strong Password';
+      error.style.color = 'lime';
+      isNewPass = true;
+    }else{
+      error.innerHTML = 'Short Password';
+      error.style.color = 'orange';
+    }
+  }
+
+  checkVerifyPassword(){  
+    var error = document.getElementById('verifyError');
+    var input = document.getElementById('newPasswordVerify');
+    error.style.display = 'block';
+    if (!isNewPass) {
+      error.innerHTML = 'Check new password ';
+      error.style.color = '#ff3e00';
+    }else if(newPass == input.value){
+      error.innerHTML = 'Password matched';
+      error.style.color = 'lime';
+      verifyPass = true;
+    }else{
+      error.innerHTML = 'Password not matched';
+      error.style.color = '#ff3e00';
+    }
+  }
+
+  createNewPassword(){
+
+  }
 
 }
 
 let update = new updateDetails();
 
+function checkPasswordStrength(password) {
+  var strength = '';
+
+  var hasLetters = /[a-zA-Z]/.test(password);
+  var hasNumbers = /\d/.test(password);
+  var hasSpecialChars = /[^a-zA-Z0-9]/.test(password);
+
+  if ((hasLetters && hasNumbers) || (hasLetters && hasSpecialChars) || (hasSpecialChars && hasNumbers)) {
+    strength = 'Medium';
+  } else if (hasLetters && hasNumbers && hasSpecialChars) {
+    strength = 'Strong';
+  } else {
+    strength = 'Weak';
+  }
+
+  return strength;
+}
 
 
   
