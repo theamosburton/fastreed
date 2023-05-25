@@ -195,6 +195,9 @@
 .privacySecurity .password input:-internal-autofill-selected {
     background-color: transparent!important;
   }
+.privacySecurity .password input::selection{
+background-color: transparent!important;
+}
 .privacySecurity .password input:hover,.privacySecurity .password input:focus{
     background-color: transparent;
 }
