@@ -151,7 +151,13 @@ class updateDetails{
         }
 
         if (password_verify($currentPassword, $hashedPassword)) {
-            $this->createPassword();
+            // checking if current and new password are same
+            if (password_verify($data['newPassword'], $hashedPassword)) {
+                showMessage(false, "New and current can not be same");
+            }else{
+                $this->createPassword();
+            }
+           
         } else {
             showMessage(false, "Incorrect Password");
         }
