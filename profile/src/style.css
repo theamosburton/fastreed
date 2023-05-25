@@ -190,7 +190,11 @@
     border: none;
     padding: 8px 10px;
     /* color: aliceblue; */
-    border-radius: 5px     ;
+    border-radius: 5px ;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
 }
 .privacySecurity .password input:-internal-autofill-selected {
     background-color: transparent!important;
