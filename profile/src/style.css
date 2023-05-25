@@ -190,12 +190,8 @@
     /* color: aliceblue; */
     border-radius: 10px     ;
 }
-
-.setPassword{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
+.privacySecurity .password input:hover,.privacySecurity .password input:focus{
+    background-color: transparent;
 }
 .setPassword .password{
     width: 70%;
