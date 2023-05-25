@@ -372,6 +372,35 @@ class updateDetails{
     }
   }
 
+  shuffleVerify(){
+    var verifyPass = document.querySelector('#newPasswordVerify');
+    var verifyEye  = document.querySelector('#verifyEye');
+    if (verifyEye.classList.contains('fa-eye-slash')) {
+      verifyEye.classList.remove('fa-eye-slash');
+      verifyEye.classList.add('fa-eye');
+      verifyPass.type = 'text';
+    } else {
+      verifyEye.classList.remove('fa-eye');
+      verifyEye.classList.add('fa-eye-slash');
+      verifyPass.type = 'password';
+    }
+  }
+
+  shufflePass(){
+    var newPass = document.querySelector('#newPassword');
+    var passEye  = document.querySelector('#passEye');
+    if (passEye.classList.contains('fa-eye-slash')) {
+      passEye.classList.remove('fa-eye-slash');
+      passEye.classList.add('fa-eye');
+      newPass.type = 'text';
+    } else {
+      passEye.classList.remove('fa-eye');
+      passEye.classList.add('fa-eye-slash');
+      newPass.type = 'password';
+    }
+  }
+  
+
 }
 
 let update = new updateDetails();

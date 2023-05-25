@@ -160,22 +160,35 @@
     border-radius: 5px;
     background-color: transparent;
     border: 1px solid;
-    margin: 10px 0px;
+    margin: 0px 0px 25px 0px;
     max-width: 300px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
+}
+.privacySecurity .password .inp .eye-logo:hover{
+    cursor: pointer;
+}
+.privacySecurity .password .button span{
+    padding: 5px 10px;
+}
+.privacySecurity .password .button{
+    width: auto;
+    max-width: none;
 }
 .privacySecurity .password .tit{
     margin: 6px 0px;
 }
 
 .privacySecurity .password input{
-    width: 90%;
+    width: 85%;
     background-color: transparent;
     outline: none;
     border: none;
     padding: 8px 10px;
-    color: aliceblue;
+    /* color: aliceblue; */
+    border-radius: 10px     ;
 }
 
 .setPassword{
@@ -198,6 +211,17 @@
     margin: 10px;
     color: rgb(60, 60, 169);
 }
+.privacySecurity .password .button{
+    width: auto;
+    max-width: none;
+    display: inline-block;
+    padding: 7px 10px;
+}
+.privacySecurity .password .button:hover{
+    cursor: pointer;
+    background-color: #3a3d40;
+}
+
 .errorMessage{
     font-size: 12px;
     margin-left: 15px;
@@ -420,13 +444,18 @@
         border-radius: 9px;
         flex-direction: row-reverse;
         justify-content: flex-end;
-        border: 1px solid;
     }
     .setPassword .password{
         width: 90%;
     }
     .privacySecurity .password .inp{
         max-width: none;
+    }
+    .privacySecurity .password .button{
+        width: auto;
+        max-width: none;
+        display: inline-block;
+        padding: 7px 10px;
     }
     .uploadDpDiv{
         justify-content: center;

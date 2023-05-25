@@ -149,11 +149,15 @@
             <div class="privacySecurity contentTopics">
               <div class="title">Privacy and Security</div>
               <div class="setPassword">
-                <div class="googleBinded"> <i class="fa fa-brands fa-google fa-3x"> </i> Your account is binded with google</div>
+                <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i><i class="fa fa-plus"></i><i class="fa fa-2x">F</i> </i></div>
                 <div class="password">
                   <div class="tit">Set Password</div>
-                  <div class="inp"><input type="password" name="" id=""></div>
-                  <div class="inp" ><input type="password" name="" id=""></div>
+
+                  <div class="inp" ><input type="password" name="" id="newPassword" placeholder="Enter Password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()"></i> </div>
+
+                  <div class="inp" ><input type="password" name="" id="newPasswordVerify" placeholder="Verify Password"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()"></i></div>
+
+                  <div class="inp button" ><span>Update Password</span></div>
                 </div>
               </div>
               
