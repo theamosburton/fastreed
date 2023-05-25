@@ -7,11 +7,13 @@ $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
+$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
 
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['DB']);
 include($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
+include($GLOBALS['BASIC_FUNC']);
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
@@ -61,6 +63,8 @@ class updateDetails{
             }else{
                 showMessage(true, "Exists");
             }
+        }elseif (isset($_GET['passwordRelated'])){
+            $this->passwordRelated();
         }else {
             showMessage(false, "Access Denied No Detail");
         }
@@ -94,6 +98,64 @@ class updateDetails{
             showMessage(false, "Access Denied DA");
         }
        
+    }
+
+    private function passwordRelated(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($data['function'] == 'creation') {
+            $this->createPassword();
+        }elseif ($data['function'] == 'updation') {
+            $this->updatePassword();
+        }else {
+            showMessage(false, "function not mentioned");
+        }
+    }
+    private function createPassword(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        $ePID = $data['ePID'];
+        $dPID = $this->AUTH->decrypt($ePID);
+        $newPassword = $data['newPassword'];
+        $newPassword = trim($newPassword);
+        $newPassword = strip_tags($newPassword);
+        $newPassword = htmlentities($newPassword, ENT_QUOTES, 'UTF-8');
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $sql = "UPDATE accounts SET 
+        Password = '$hashedPassword'
+        WHERE personID = '$dPID' 
+        ";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            showMessage(true, "Password Created");
+        } else {
+            showMessage(false, "Can not create password");
+        }
+
+
+    }
+    private function updatePassword(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        $currentPassword = $data['currentPassword'];
+        $ePID = $data['ePID'];
+        $dPID = $this->AUTH->decrypt($ePID);
+
+        $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
+        $result = mysqli_query($this->DB, $sql);
+        if (!$result) {
+            showMessage(false, "Problem with fetching password");
+        }else if(mysqli_num_rows($result) < 1) {
+            showMessage(false, "Problem with fetching password");
+        }else{
+            $row = mysqli_fetch_assoc($result);
+            $hashedPassword = $row['Password'];
+        }
+
+        if (password_verify($currentPassword, $hashedPassword)) {
+            $this->createPassword();
+        } else {
+            showMessage(false, "Incorrect Password");
+        }
+
     }
 
 

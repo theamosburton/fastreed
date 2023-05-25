@@ -1,6 +1,8 @@
 var newPass;
 var isNewPass = false;
 var verifyPass = false;
+var isCurrentPass = false;
+var currentPass;
 class updateDetails{
   constructor(){
 
@@ -447,9 +449,167 @@ class updateDetails{
     }
   }
 
-  createNewPassword(){
-
+  checkCurrentPassword(){
+    var error = document.getElementById('currentasswordError');
+    var input = document.getElementById('currentPassword').value;
+    currentPass = input;
+    error.style.display = 'block';
+    if (input <= 0) {
+      error.innerHTML = 'Please enter current password';
+      error.style.color = '#ff3e00';
+      isCurrentPass = false;
+    }else{
+      error.style.display = 'none';
+      isCurrentPass = true;
+    }
   }
+
+  createNewPassword(){
+    var error = document.getElementById('pErrorMessage');
+    error.style.display = 'block';
+    if (!isNewPass) {
+      error.classList.add('warning');
+      if (error.classList.contains('success')) {
+        error.classList.remove('success');
+      }
+      error.innerHTML = 'Check new password';
+    }else if(!verifyPass){
+      error.classList.add('warning');
+      if (error.classList.contains('success')) {
+        error.classList.remove('success');
+      }
+      error.innerHTML = 'Verify new password';
+    }else{
+      error.classList.add('success');
+      if (error.classList.contains('warning')) {
+        error.classList.remove('warning');
+      }
+      error.innerHTML = 'Creating password...';
+
+      const createPassword = async () =>{
+        const url = '/.ht/API/updateDetails.php?passwordRelated';
+        var encyDat = {
+          'ePID' : `${ePID}`,
+          'newPassword' : `${newPass}`,
+          'function' : 'creation'
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+          });
+        var data = await response.json();
+
+        if (data) {
+          console.log(data);
+          if (data.Result) {
+            error.classList.add('success');
+            if (error.classList.contains('warning')) {
+              error.classList.remove('warning');
+            }
+            error.innerHTML = 'Password Created';
+            setTimeout(function(){
+              location.reload();
+            }, 3000);
+          }else{
+            error.classList.add('warning');
+            if (error.classList.contains('success')) {
+              error.classList.remove('success');
+            }
+            error.innerHTML = `${data.message}`;
+          }
+        }else{
+          error.classList.add('warning');
+            if (error.classList.contains('success')) {
+              error.classList.remove('success');
+            }
+            error.innerHTML = `${data.message}`;
+        }
+      }
+      createPassword();
+
+    }
+  }
+
+
+ 
+
+  updatePassword(){
+    var error = document.getElementById('pErrorMessage');
+    error.style.display = 'block';
+    if (!isCurrentPass) {
+      error.classList.add('warning');
+      if (error.classList.contains('success')) {
+        error.classList.remove('success');
+      }
+      error.innerHTML = 'Check current password';
+    }else if(!isNewPass){
+      error.classList.add('warning');
+      if (error.classList.contains('success')) {
+        error.classList.remove('success');
+      }
+      error.innerHTML = 'Check new password';
+    }else if(!verifyPass){
+      error.classList.add('warning');
+      if (error.classList.contains('success')) {
+        error.classList.remove('success');
+      }
+      error.innerHTML = 'Verify new password';
+    }else{
+      error.classList.add('success');
+      if (error.classList.contains('warning')) {
+        error.classList.remove('warning');
+      }
+      error.innerHTML = 'Updating password...';
+      const updatePassword = async () =>{
+        const url = '/.ht/API/updateDetails.php?passwordRelated';
+        var encyDat = {
+          'ePID' : `${ePID}`,
+          'newPassword' : `${newPass}`,
+          'currentPassword' : `${currentPass}`,
+          'function' : 'updation'
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+          });
+        var data = await response.json();
+
+        if (data) {
+          console.log(data);
+          if (data.Result) {
+            error.classList.add('success');
+            if (error.classList.contains('warning')) {
+              error.classList.remove('warning');
+            }
+            error.innerHTML = 'Password Updated';
+            setTimeout(function(){
+              location.reload();
+            }, 3000);
+          }else{
+            error.classList.add('warning');
+            if (error.classList.contains('success')) {
+              error.classList.remove('success');
+            }
+            error.innerHTML = `${data.message}`;
+          }
+        }else{
+          error.classList.add('warning');
+            if (error.classList.contains('success')) {
+              error.classList.remove('success');
+            }
+            error.innerHTML = `${data.message}`;
+        }
+      }
+      updatePassword();
+    }
+  }
+
 
 }
 

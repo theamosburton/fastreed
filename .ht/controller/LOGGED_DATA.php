@@ -130,6 +130,74 @@ class getLoggedData{
         }
        return $data;
      }
+     // By user
+     public function accountsByUser(){
+        $return = array();
+        $pID = $_SESSION['LOGGED_USER'];
+        if (isset($_COOKIE['UID'])) {
+            $ePID = $_COOKIE['UID'];
+        }elseif (isset($_COOKIE['AID'])) {
+            $ePID = $_COOKIE['AID'];
+        }else{
+            $ePID = false;
+        }
+        $sql = "SELECT * FROM accounts WHERE personID = '$pID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                $UID = $row['personID'];
+                $userSince = $row['tdate'];
+                $password = $row['Password'];
+                $accountWith = $row['accountWith'];   
+                $sql2 = "SELECT * FROM account_access WHERE personID = '$pID'";
+
+                $return = array(
+                    'UID' => $UID,
+                    'userSince' => $userSince,
+                    'password' => $password,
+                    'accountWith' => $accountWith  
+                );
+            }
+        }
+       return $return;
+     }
+
+    // By user
+    public function accountsByAdmin(){
+        if (isset($_COOKIE['UID'])) {
+            $ePID = $_COOKIE['UID'];
+        }elseif (isset($_COOKIE['AID'])) {
+            $ePID = $_COOKIE['AID'];
+        }else{
+            $ePID = false;
+        }
+        $data = array();
+        $sql = "SELECT * FROM accounts WHERE $type = '$field'";
+        $result = mysqli_query($this->DB, $sql);
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                $UID = $row['personID'];
+                $userSince = $row['tdate'];
+                $password = $row['Password'];
+                $accountWith = $row['accountWith'];   
+                $sql2 = "SELECT * FROM account_access WHERE personID = '$pID'";
+
+                $return = array(
+                    'UID' => $UID,
+                    'userSince' => $userSince,
+                    'password' => $password,
+                    'accountWith' => $accountWith  
+                );
+            }
+        }
+    return $return;
+    }
+
 
      public function getOtherData($type, $field){
         if (isset($_COOKIE['UID'])) {

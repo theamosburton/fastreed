@@ -17,8 +17,8 @@ class BasicFunctions
     $this->DB = $this->DB_CONNECT->DBConnection();
   }
 
-  public function getIP()
-  {
+
+  public function getIP(){
     $IP_ADDRESS = $_SERVER['REMOTE_ADDR'];
     filter_var($IP_ADDRESS, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
     return $IP_ADDRESS;
@@ -41,8 +41,7 @@ class BasicFunctions
       return $return;
   }
 
-  public function createNewID($tableName, $prefix)
-  {
+  public function createNewID($tableName, $prefix){
     $ID_TABLE_NAME = $tableName;
     $date = date('Y-m-d');
     $year = date('Y');

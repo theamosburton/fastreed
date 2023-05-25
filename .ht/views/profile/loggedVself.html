@@ -1,6 +1,3 @@
-
-
-
 <div class="container">
     <div class="row gutters profile">
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
@@ -148,21 +145,47 @@
           <div id="accountDiv" class="accountDiv contentView">
             <div class="privacySecurity contentTopics">
               <div class="title">Privacy and Security</div>
-              <div class="setPassword">
-                <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i> <small>Your account is connected with google account create password to login without G-account</small> </div>
-                <div class="password">
-                  <div class="tit">Set Password</div>
-                  <div id="pErrorMessage" class="" style="display:none"></div>
+              <?php if($this->userData->accountsByUser()['password'] === null){
+                echo <<<HTML
+                  <div class="setPassword">
+                    <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i> <small>Your account is connected with google account create password to login without G-account</small> </div>
+                    <div class="password">
+                      <div class="tit">Create Password</div>
+                      <div id="pErrorMessage" class="" style="display:none"></div>
+                      <span class="IndError" id="newPasswordError" style="display:none"></span>
+                      <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+                      <span class="IndError" id="verifyError" style="display:none"></span>
+                      <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+                      <div class="inp button" onclick="update.createNewPassword()"><span>Create Password</span></div>
+                    </div>
+                  </div>
+                  <!--  -->
+                  HTML;
+              }else{
+                echo <<<HTML
+                  <div class="setPassword">
+                    <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i> <small>You can login with both password and google account</small> </div>
+                    <div class="password">
+                      <div class="tit">Update Password</div>
+                      <div id="pErrorMessage" class="" style="display:none"></div>
+                      <span class="IndError" id="currentasswordError" style="display:none"></span>
+                      <div class="inp" >
+                        <input onkeyup="update.checkCurrentPassword()" type="password" name="" id="currentPassword" placeholder="Enter new password"> 
+                      </div>
+                      <span class="IndError" id="newPasswordError" style="display:none"></span>
+                      <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+                      <span class="IndError" id="verifyError" style="display:none"></span>
+                      <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password" autocomplete="off"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+                      <div class="inp button" onclick="update.updatePassword()"><span>Update Password</span></div>
+                    </div>
+                  </div>
+                  <!--  -->
+                HTML;
+              }
+              ?>
+              
 
-                  <span class="IndError" id="newPasswordError" style="display:none"></span>
-                  <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
-
-                  <span class="IndError" id="verifyError" style="display:none"></span>
-                  <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
-
-                  <div class="inp button" onclick="update.createNewPassword()"><span>Create Password</span></div>
-                </div>
-              </div>
+              
               
             </div>
 
