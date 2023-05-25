@@ -140,6 +140,7 @@
 .contentView .title{
     color: #b8bcc5;
     font-weight: bolder;
+    margin-bottom: 20px;
 
 }
 .contentView .contentTopics{
@@ -174,9 +175,6 @@
 .privacySecurity .password .button{
     width: auto;
     max-width: none;
-}
-.privacySecurity .password .tit{
-    margin: 6px 0px;
 }
 
 .privacySecurity .password input{

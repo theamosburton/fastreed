@@ -522,9 +522,6 @@ class updateDetails{
     }
   }
 
-
- 
-
   updatePassword(){
     var message = document.getElementById('pErrorMessage');
     var messageDiv= document.getElementById('pErrorDiv');
@@ -532,7 +529,7 @@ class updateDetails{
     if (!isCurrentPass) {
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Check new password';
+      message.innerHTML = 'Check current password';
     }else if(!isNewPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');

@@ -144,12 +144,11 @@
           </div>
           <div id="accountDiv" class="accountDiv contentView">
             <div class="privacySecurity contentTopics">
-              <div class="title">Privacy and Security</div>
-              <?php if($this->userData->accountsByUser()['password'] === null){
+              <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
                 echo <<<HTML
+                  <div class="title">Create password</div>
                   <div class="setPassword">
                     <div class="password">
-                      <div class="tit">Create Password</div>
                       <div id="pErrorDiv" class="col-12" style="display:none">
                         <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="editmessage"> </span>
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -168,19 +167,16 @@
                   HTML;
               }else{
                 echo <<<HTML
+                  <div class="title">Update password</div>
                   <div class="setPassword">
                     <div class="password">
-                      <div class="tit">Update Password</div>
                       <div id="pErrorDiv" class="col-12" style="display:none">
-                        <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="editmessage"> </span>
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                        <div id="" class="alert alert-danger alert-dismissible fade show"><span id="pErrorMessage"> </span>
                         </div>
                       </div>
                       <span class="IndError" id="currentasswordError" style="display:none"></span>
                       <div class="inp" >
-                        <input onkeyup="update.checkCurrentPassword()" type="password" name="" id="currentPassword" placeholder="Enter new password"> 
+                        <input onkeyup="update.checkCurrentPassword()" type="password" name="" id="currentPassword" placeholder="Current password"> 
                       </div>
                       <span class="IndError" id="newPasswordError" style="display:none"></span>
                       <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
@@ -193,10 +189,6 @@
                 HTML;
               }
               ?>
-              
-
-              
-              
             </div>
 
 
