@@ -148,10 +148,15 @@
               <?php if($this->userData->accountsByUser()['password'] === null){
                 echo <<<HTML
                   <div class="setPassword">
-                    <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i> <small>Your account is connected with google account create password to login without G-account</small> </div>
                     <div class="password">
                       <div class="tit">Create Password</div>
-                      <div id="pErrorMessage" class="" style="display:none"></div>
+                      <div id="pErrorDiv" class="col-12" style="display:none">
+                        <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="editmessage"> </span>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                      </div>
                       <span class="IndError" id="newPasswordError" style="display:none"></span>
                       <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
                       <span class="IndError" id="verifyError" style="display:none"></span>
@@ -164,10 +169,15 @@
               }else{
                 echo <<<HTML
                   <div class="setPassword">
-                    <div class="googleBinded">  <i class="fa fa-brands fa-google fa-2x"> </i> <small>You can login with both password and google account</small> </div>
                     <div class="password">
                       <div class="tit">Update Password</div>
-                      <div id="pErrorMessage" class="" style="display:none"></div>
+                      <div id="pErrorDiv" class="col-12" style="display:none">
+                        <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="editmessage"> </span>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                      </div>
                       <span class="IndError" id="currentasswordError" style="display:none"></span>
                       <div class="inp" >
                         <input onkeyup="update.checkCurrentPassword()" type="password" name="" id="currentPassword" placeholder="Enter new password"> 

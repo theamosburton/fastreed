@@ -205,11 +205,11 @@ background-color: transparent!important;
     width: 70%;
 }
 .setPassword .googleBinded{
-    text-align: center;
+    /* text-align: center; */
     padding: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 }
 .setPassword .googleBinded i{
     margin: 10px;
@@ -394,8 +394,6 @@ background-color: transparent!important;
     .contentView{
         border: 0;
         border-radius: 0;
-        margin: 0px;
-        padding: 10px;
     }
 
     .userContent{

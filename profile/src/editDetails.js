@@ -465,26 +465,21 @@ class updateDetails{
   }
 
   createNewPassword(){
-    var error = document.getElementById('pErrorMessage');
-    error.style.display = 'block';
+    var message = document.getElementById('pErrorMessage');
+    var messageDiv= document.getElementById('pErrorDiv');
+    messageDiv.style.display = 'block';
     if (!isNewPass) {
-      error.classList.add('warning');
-      if (error.classList.contains('success')) {
-        error.classList.remove('success');
-      }
-      error.innerHTML = 'Check new password';
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = 'Check new password';
     }else if(!verifyPass){
-      error.classList.add('warning');
-      if (error.classList.contains('success')) {
-        error.classList.remove('success');
-      }
-      error.innerHTML = 'Verify new password';
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = 'Verify new password';
     }else{
-      error.classList.add('success');
-      if (error.classList.contains('warning')) {
-        error.classList.remove('warning');
-      }
-      error.innerHTML = 'Creating password...';
+      messageDiv.classList.add('alert-success');
+      messageDiv.classList.remove('alert-danger');
+      message.innerHTML = 'Creating password';
 
       const createPassword = async () =>{
         const url = '/.ht/API/updateDetails.php?passwordRelated';
@@ -505,27 +500,21 @@ class updateDetails{
         if (data) {
           console.log(data);
           if (data.Result) {
-            error.classList.add('success');
-            if (error.classList.contains('warning')) {
-              error.classList.remove('warning');
-            }
-            error.innerHTML = 'Password Created';
+            messageDiv.classList.add('alert-success');
+            messageDiv.classList.remove('alert-danger');
+            message.innerHTML = 'Password created';
             setTimeout(function(){
               location.reload();
             }, 3000);
           }else{
-            error.classList.add('warning');
-            if (error.classList.contains('success')) {
-              error.classList.remove('success');
-            }
-            error.innerHTML = `${data.message}`;
+            messageDiv.classList.add('alert-danger');
+            messageDiv.classList.remove('alert-success');
+            message.innerHTML = `${data.message}`;
           }
         }else{
-          error.classList.add('warning');
-            if (error.classList.contains('success')) {
-              error.classList.remove('success');
-            }
-            error.innerHTML = `${data.message}`;
+            messageDiv.classList.add('alert-danger');
+            messageDiv.classList.remove('alert-success');
+            message.innerHTML = `${data.message}`;
         }
       }
       createPassword();
@@ -537,32 +526,25 @@ class updateDetails{
  
 
   updatePassword(){
-    var error = document.getElementById('pErrorMessage');
-    error.style.display = 'block';
+    var message = document.getElementById('pErrorMessage');
+    var messageDiv= document.getElementById('pErrorDiv');
+    messageDiv.style.display = 'block';
     if (!isCurrentPass) {
-      error.classList.add('warning');
-      if (error.classList.contains('success')) {
-        error.classList.remove('success');
-      }
-      error.innerHTML = 'Check current password';
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = 'Check new password';
     }else if(!isNewPass){
-      error.classList.add('warning');
-      if (error.classList.contains('success')) {
-        error.classList.remove('success');
-      }
-      error.innerHTML = 'Check new password';
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = 'Check new password';
     }else if(!verifyPass){
-      error.classList.add('warning');
-      if (error.classList.contains('success')) {
-        error.classList.remove('success');
-      }
-      error.innerHTML = 'Verify new password';
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = 'Verify new password';
     }else{
-      error.classList.add('success');
-      if (error.classList.contains('warning')) {
-        error.classList.remove('warning');
-      }
-      error.innerHTML = 'Updating password...';
+      messageDiv.classList.remove('alert-danger');
+      messageDiv.classList.add('alert-success');
+      message.innerHTML = 'Upadting password...';
       const updatePassword = async () =>{
         const url = '/.ht/API/updateDetails.php?passwordRelated';
         var encyDat = {
@@ -583,27 +565,21 @@ class updateDetails{
         if (data) {
           console.log(data);
           if (data.Result) {
-            error.classList.add('success');
-            if (error.classList.contains('warning')) {
-              error.classList.remove('warning');
-            }
-            error.innerHTML = 'Password Updated';
+            messageDiv.classList.remove('alert-danger');
+      messageDiv.classList.add('alert-success');
+            message.innerHTML = 'Password Updated';
             setTimeout(function(){
               location.reload();
             }, 3000);
           }else{
-            error.classList.add('warning');
-            if (error.classList.contains('success')) {
-              error.classList.remove('success');
-            }
-            error.innerHTML = `${data.message}`;
+            messageDiv.classList.add('alert-danger');
+            messageDiv.classList.remove('alert-success');
+            message.innerHTML = `${data.message}`;
           }
         }else{
-          error.classList.add('warning');
-            if (error.classList.contains('success')) {
-              error.classList.remove('success');
-            }
-            error.innerHTML = `${data.message}`;
+            messageDiv.classList.add('alert-danger');
+            messageDiv.classList.remove('alert-success');
+            message.innerHTML = `${data.message}`;
         }
       }
       updatePassword();
