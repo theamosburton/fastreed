@@ -407,7 +407,7 @@ class updateDetails{
     var error = document.getElementById('newPasswordError');
     var input = document.getElementById('newPassword');
     newPass = input.value;
-    checkVerifyPassword();
+    this.checkVerifyPassword();
     error.style.display = 'block';
     if(newPass.length <= 8){
       error.innerHTML = 'Short Password';
