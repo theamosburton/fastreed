@@ -56,7 +56,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
-                  <input onkeyup="update.checkDOB()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+                  <inputonkeyup="update.checkDOB()" onselect="update.checkDOB()" onchange="update.checkDOB()" value="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
                 </div>
               </div>
   
