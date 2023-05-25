@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 class showMenus{
     constructor(){
         document.querySelector('#progressBar').style.display = 'none';
@@ -43,18 +33,23 @@ class showMenus{
             // Stay on dashboard
             this.dashboardMenu.classList.add('active');
             this.dashboardDiv.style.display = 'block';
+            this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else if(this.optValue == 'content'){
             this.contentMenu.classList.add('active');
             this.contentDiv.style.display = 'block';
+            this.contentMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else if(this.optValue == 'media'){
             this.mediaMenu.classList.add('active');
             this.mediaDiv.style.display = 'block';
+            this.mediaMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else if(this.optValue == 'privacy'){
             this.privacyMenu.classList.add('active');
             this.privacyDiv.style.display = 'block';
+            this.privacyMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else{
             this.dashboardMenu.classList.add('active');
             this.dashboardDiv.style.display = 'block';
+            this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
