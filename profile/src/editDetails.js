@@ -214,7 +214,7 @@ class updateDetails{
   editByAdmin(){
     var messageDiv = document.querySelector('#uAlert');
     var mainDiv = document.querySelector('#updateAlert');
-    var message = document.querySelector('#message');
+    var message = document.querySelector('#editmessage');
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
     messageDiv.style.display = 'block';
@@ -292,7 +292,7 @@ class updateDetails{
   editByUser(){
     var messageDiv = document.querySelector('#uAlert');
     var mainDiv = document.querySelector('#updateAlert');
-    var message = document.querySelector('#message');
+    var message = document.querySelector('#editmessage');
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
     messageDiv.style.display = 'block';
