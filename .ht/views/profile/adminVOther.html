@@ -133,8 +133,19 @@
                       <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="2" placeholder="Write about yourself" onfocus="this.setAttribute('autocomplete', 'off');" onblur="this.setAttribute('autocomplete', 'on');"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['bio'];?></textarea>
                     </div>
                   </div>
-                  
                 </div>
+                <?php
+                if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
+                  echo <<<HTML 
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label for="DOB">Enter Password</label><span class="errorMessage" id="passwordError"></span>
+                        <input onkeyup="update.checkCurrentPassword1()" type="password" class="form-control" id="currentPasswordDet" placeholder="Enter current password">
+                      </div>
+                    </div>
+                  HTML;
+                }
+                ?>
                 <div class="row gutters">
                   <div class="col-12">
                     <div>
@@ -179,6 +190,18 @@
                         <div id="" class="alert alert-danger alert-dismissible fade show"><span id="pErrorMessage"> </span>
                         </div>
                       </div>
+
+                      <?php
+                      if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'{
+                        echo <<<HTML
+                            <span class="IndError" id="currentasswordError" style="display:none"></span>
+                            <div class="inp" >
+                              <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off"> 
+                            </div>
+                        HTML;
+                      }
+                      ?>
+
                       <span class="IndError" id="newPasswordError" style="display:none"></span>
                       <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
                       <span class="IndError" id="verifyError" style="display:none"></span>
@@ -190,6 +213,9 @@
                 HTML;
               }
               ?>
+
+
+              
             </div>
             <!-- Password Creation and Updation -->
           </div>
