@@ -167,6 +167,38 @@ class updateDetails{
 
     private function editDetails($x) {
         $data = json_decode(file_get_contents('php://input'), true);
+        // Checking if password required or not
+        if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
+            $this->update($x);
+        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
+            $this->update($x);
+        }else{
+            $currentPassword = $data['currentPassword'];
+            $ePID = $data['personID'];
+            $dPID = $this->AUTH->decrypt($ePID);
+    
+            $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
+            $result = mysqli_query($this->DB, $sql);
+            if (!$result) {
+                showMessage(false, "Problem with fetching password");
+            }else if(mysqli_num_rows($result) < 1) {
+                showMessage(false, "Problem with fetching password");
+            }else{
+                $row = mysqli_fetch_assoc($result);
+                $hashedPassword = $row['Password'];
+            }
+    
+            if (password_verify($currentPassword, $hashedPassword)) {
+                $this->update();
+            } else {
+                showMessage(false, "Incorrect Password");
+            }
+        }
+        
+    }
+    
+    private function update($x){
+        $data = json_decode(file_get_contents('php://input'), true);
         $fullName = $data['fullName'] ?? null;
         $gender = $data['Gender'] ?? null;
         $DOB = $data['DOB'] ?? null;
@@ -180,7 +212,7 @@ class updateDetails{
         $adminValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($cEmail) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
 
         $userValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cUsername);
-        
+
         $ePID = $data['personID'];
         
         if ($x == 'admin') {
@@ -240,8 +272,6 @@ class updateDetails{
             }
         }
     }
-    
-    
     
 
 

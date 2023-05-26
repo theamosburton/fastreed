@@ -24,8 +24,10 @@
     margin-left: 0px;
 }
 .edit-fields{
-    display: none;
-    border-top: 1px solid;
+   padding: 0;
+}
+.form-group{
+    max-width: 300px!important;
 }
 
 .account-settings{
@@ -35,31 +37,43 @@
     margin: 0 0 1rem 0;
     text-align: center;
 }
-.account-settings .user-profile .user-avatar {
+.account-settings .user-profile .user-avatar{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.account-settings .user-profile .user-avatar .editPhotos{
-    margin-top: -28px;
-    margin-right: -86px;
+.contentTopics .user-avatar {
+    display: flex;
+    margin: 10px;
+    align-items: flex-start;
+}
+.user-avatar .editPhotos{
+    margin-top: 42px;
+    margin-left: -21px;
     background-color: rgb(255, 255, 255);
     border: 2px solid grey;
-    padding: 4px 10px;
+    padding: 2px 8px;
     border-radius: 100px;
     color: #83878f;
 }
-.account-settings .user-profile .user-avatar .editPhotos:hover{
+.user-avatar .editPhotos{
+
+}
+.user-avatar .editPhotos:hover{
    cursor: pointer;
 }
-.account-settings .user-profile .user-avatar img {
+.account-settings .user-profile .user-avatar img , .user-avatar img{
     width: 180px;
     height: 180px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
     border: 1px solid grey;
+}
+.user-avatar img{
+    width: 80px;
+    height: 80px;
 }
 .account-settings .user-profile h4.user-email {
     margin-top: 10px;

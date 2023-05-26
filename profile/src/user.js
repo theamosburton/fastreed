@@ -1,6 +1,5 @@
 class showMenus{
     constructor(){
-        document.querySelector('#progressBar').style.display = 'none';
         var params = new URLSearchParams(window.location.search);
         this.optValue = params.get('opt');
         this.dashboardMenu = document.querySelector('#dashboardMenu');

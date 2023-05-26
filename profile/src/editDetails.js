@@ -2,6 +2,8 @@ var newPass;
 var isNewPass = false;
 var verifyPass = false;
 var isCurrentPass = false;
+var isCurrentPassDet = false;
+var currentPassDet;
 var currentPass;
 class updateDetails{
   constructor(){
@@ -245,7 +247,8 @@ class updateDetails{
                 'about' : `${this.about}`,
                 'cUsername': `${currentUsername}`,
                 'cEmail': `${currentEmail}`,
-                'editor':'admin'
+                'editor':'admin',
+                'currentPassword': `${currentPassDet}`
               };
               const response = await fetch(url, {
                   method: 'post',
@@ -268,11 +271,11 @@ class updateDetails{
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
-                  message.innerHTML = 'Somthing Wrong at our end';
+                  message.innerHTML = data.message;
                 }
               }else{
                 mainDiv.style.display = 'block';
-                message.innerHTML = 'Somthing Wrong at our end';
+                message.innerHTML = data.message;
               }
             }
             updateDetails();
@@ -328,7 +331,8 @@ class updateDetails{
                 'about' : `${this.about}`,
                 'cUsername': `${currentUsername}`,
                 'cEmail': `${currentEmail}`,
-                'editor':'user'
+                'editor':'user',
+                'currentPassword': `${currentPassDet}`
               };
               const response = await fetch(url, {
                   method: 'post',
@@ -351,11 +355,11 @@ class updateDetails{
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
-                  message.innerHTML = 'Somthing Wrong at our end';
+                  message.innerHTML = data.message;
                 }
               }else{
                 mainDiv.style.display = 'block';
-                message.innerHTML = 'Somthing Wrong at our end';
+                message.innerHTML = data.message;
               }
             }
             updateDetails();
@@ -449,7 +453,24 @@ class updateDetails{
     }
   }
 
-  checkCurrentPassword(){
+// Used when editing details
+  checkCurrentPassword1(){
+    var error = document.getElementById('passwordError');
+    var input = document.getElementById('currentPasswordDet').value;
+    currentPassDet = input;
+    error.style.display = 'inline';
+    if (input <= 0) {
+      error.innerHTML = 'Current password needed';
+      error.style.color = '#ff3e00';
+      isCurrentPassDet = false;
+    }else{
+      error.style.display = 'none';
+      isCurrentPass = true;
+    }
+  }
+
+  // Used when password is updated
+  checkCurrentPassword2(){
     var error = document.getElementById('currentasswordError');
     var input = document.getElementById('currentPassword').value;
     currentPass = input;
