@@ -174,6 +174,7 @@ class updateDetails{
         
         // Checking if password required or not
         // If user password is not set or created
+        
         $adminUpdatingOther = ($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('peresonID', $dPID)['userType'] != 'Admin');
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
