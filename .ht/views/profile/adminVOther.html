@@ -158,8 +158,23 @@
             </div>
 
             <!-- Password Creation and Updation -->
+
+
+           
             <div class="privacySecurity contentTopics">
-              <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+              <?php 
+              if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
+                $currentPass =  <<<HTML
+                    <span class="IndError" id="currentasswordError" style="display:none"></span>
+                    <div class="inp" >
+                      <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off"> 
+                    </div>
+                HTML;
+              }else{
+                $currentPass = '';
+              }
+              
+              if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
                 echo <<<HTML
                   <div class="title">Create password</div>
                   <div class="setPassword">
@@ -190,18 +205,7 @@
                         <div id="" class="alert alert-danger alert-dismissible fade show"><span id="pErrorMessage"> </span>
                         </div>
                       </div>
-
-                      <?php
-                      if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
-                        echo <<<HTML
-                            <span class="IndError" id="currentasswordError" style="display:none"></span>
-                            <div class="inp" >
-                              <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off"> 
-                            </div>
-                        HTML;
-                      }
-                      ?>
-
+                        $curretPass
                       <span class="IndError" id="newPasswordError" style="display:none"></span>
                       <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
                       <span class="IndError" id="verifyError" style="display:none"></span>
