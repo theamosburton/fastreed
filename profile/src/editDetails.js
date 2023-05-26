@@ -418,22 +418,22 @@ class updateDetails{
     this.checkVerifyPassword();
     error.style.display = 'block';
     if(newPass.length <= 8){
-      error.innerHTML = 'Short Password';
+      error.innerHTML = 'Enter new password';
       error.style.color = '#ff3e00';
     }else if(checkPasswordStrength(input) == 'Weak'){
-      error.innerHTML = 'Weak Password';
+      error.innerHTML = 'Weak password';
       error.style.color = '#ff3e00';
       isNewPass = false;
     }else if(checkPasswordStrength(input) == 'Medium'){
-      error.innerHTML = 'Medium Password';
+      error.innerHTML = 'Medium password';
       error.style.color = 'lime';
       isNewPass = true;
     }else if(checkPasswordStrength(input) == 'Strong'){
-      error.innerHTML = 'Strong Password';
+      error.innerHTML = 'Strong password';
       error.style.color = 'lime';
       isNewPass = true;
     }else{
-      error.innerHTML = 'Short Password';
+      error.innerHTML = 'New password required';
       error.style.color = 'orange';
     }
   }
@@ -443,7 +443,7 @@ class updateDetails{
     var input = document.getElementById('newPasswordVerify');
     error.style.display = 'block';
     if (!isNewPass) {
-      error.innerHTML = 'Check new password ';
+      error.innerHTML = 'New password required';
       error.style.color = '#ff3e00';
     }else if(newPass == input.value){
       error.innerHTML = 'Password matched';
