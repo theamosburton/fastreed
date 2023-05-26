@@ -46,7 +46,9 @@
 .contentTopics .user-avatar {
     display: flex;
     margin: 10px;
-    align-items: flex-start;
+    align-items: center;
+    max-width: 300px;
+    justify-content: center;
 }
 .user-avatar .editPhotos{
     margin-top: 42px;
