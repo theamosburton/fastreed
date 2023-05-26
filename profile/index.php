@@ -187,6 +187,7 @@ class loggedAdminVother extends showProfile{
         $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js'];
         $this->extraScript = '
         <script> 
+            // other
             var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['ePID'].'";
             var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
