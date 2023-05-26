@@ -168,9 +168,10 @@ class updateDetails{
 
 
     private function editDetails($x) {
+        $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
         $dPID = $this->AUTH->decrypt($ePID);
-        $data = json_decode(file_get_contents('php://input'), true);
+        
         // Checking if password required or not
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
