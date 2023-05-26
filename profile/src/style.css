@@ -63,7 +63,7 @@
     max-width: 300px!important;
 }
 
-.password .pErrorDiv{
+.password #pErrorDiv{
     max-width: 300px;
 }
 .user-avatar .editPhotos:hover{
