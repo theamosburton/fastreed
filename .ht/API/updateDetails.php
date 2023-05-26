@@ -158,7 +158,9 @@ class updateDetails{
                 $this->createPassword();
             }
            
-        } else {
+        } elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
+            $this->createPassword();
+        }else {
             showMessage(false, "Incorrect Password");
         }
 

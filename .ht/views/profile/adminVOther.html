@@ -137,10 +137,8 @@
                 </div>
                 <div class="row gutters">
                   <div class="col-12">
-                    <div class="text-right">
-                      <button type="button" onclick="cancelEditing()" id="cancelEditing" name="submit" class="btn btn-secondary"> Cancel</button>
+                    <div>
                       <button type="button" onclick="update.editByAdmin()" id="submit" name="submit" class="btn btn-primary">Update Details</button>
-                      
                     </div>
                   </div>
                 </div>
@@ -179,10 +177,6 @@
                       <div id="pErrorDiv" class="col-12" style="display:none">
                         <div id="" class="alert alert-danger alert-dismissible fade show"><span id="pErrorMessage"> </span>
                         </div>
-                      </div>
-                      <span class="IndError" id="currentasswordError" style="display:none"></span>
-                      <div class="inp" >
-                        <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off"> 
                       </div>
                       <span class="IndError" id="newPasswordError" style="display:none"></span>
                       <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
