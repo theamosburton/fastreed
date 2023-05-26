@@ -173,11 +173,15 @@ class updateDetails{
         $dPID = $this->AUTH->decrypt($ePID);
         
         // Checking if password required or not
+        // If user password is not set or created
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
-        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] == 'User'){
+            // If admin is editing other password
+            // Present user is admin and editing is not admin
+        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] != 'Admin'){
             $this->update($x);
         }else{
+            echo $this->userData->getOtherData('personID', $dPID)['userType'];
             $currentPassword = $data['currentPassword'];
             
     
