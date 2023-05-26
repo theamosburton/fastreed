@@ -168,16 +168,17 @@ class updateDetails{
 
 
     private function editDetails($x) {
+        $ePID = $data['personID'];
+        $dPID = $this->AUTH->decrypt($ePID);
         $data = json_decode(file_get_contents('php://input'), true);
         // Checking if password required or not
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
-        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
+        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] != 'Admin'){
             $this->update($x);
         }else{
             $currentPassword = $data['currentPassword'];
-            $ePID = $data['personID'];
-            $dPID = $this->AUTH->decrypt($ePID);
+            
     
             $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
             $result = mysqli_query($this->DB, $sql);
