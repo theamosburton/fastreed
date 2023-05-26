@@ -178,7 +178,7 @@ class updateDetails{
             $this->update($x);
             // If admin is editing other password
             // Present user is admin and editing is not admin
-        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('peresonID', $dPID)['userType'] != 'Admin'){
+        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
             $this->update($x);
         }else{
             $currentPassword = $data['currentPassword'];
