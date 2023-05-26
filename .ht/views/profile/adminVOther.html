@@ -135,7 +135,7 @@
                   </div>
                 </div>
                 <?php
-                if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
+                if($this->userData->getSelfDetails()['userType'] == $this->userData->getOtherData('username', $this->otherUsername)['userType']){
                   echo <<<HTML 
                         <div class="col-12">
                           <div class="form-group">
@@ -163,7 +163,7 @@
            
             <div class="privacySecurity contentTopics">
               <?php 
-              if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
+              if($this->userData->getSelfDetails()['userType'] == $this->userData->getOtherData('username', $this->otherUsername)['userType']){
                 $currentPass =  <<<HTML
                     <span class="IndError" id="currentasswordError" style="display:none"></span>
                     <div class="inp" >
