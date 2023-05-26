@@ -1,22 +1,10 @@
 class showMenus{
-    constructor(){
+    constructor(x){
         var params = new URLSearchParams(window.location.search);
         this.optValue = params.get('opt');
         this.dashboardMenu = document.querySelector('#dashboardMenu');
-        this.contentMenu = document.querySelector('#contentMenu');
-        this.mediaMenu = document.querySelector('#mediaMenu');
-        this.accountMenu = document.querySelector('#accountMenu');
-        this.croppie = null;
-    
         this.dashboardDiv = document.querySelector('#dashboardDiv');
-        this.contentDiv = document.querySelector('#contentDiv');
-        this.mediaDiv = document.querySelector('#mediaDiv');
-        this.accountDiv = document.querySelector('#accountDiv');
-
-        this.dashboardDiv.style.display = 'none';
-        this.contentDiv.style.display = 'none';
-        this.mediaDiv.style.display = 'none';
-        this.accountDiv.style.display = 'none';
+        this.croppie = null;
         this.whoIs = null;
         if (typeof adminLogged !== 'undefined') {
           if (adminLogged) {
@@ -28,27 +16,17 @@ class showMenus{
           }
         }
         // check the hash and display what to show
-        if (this.optValue == '' || this.hash === null || this.hash === 'undefined') {
+        if (this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
             // Stay on dashboard
             this.dashboardMenu.classList.add('active');
             this.dashboardDiv.style.display = 'block';
             this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }else if(this.optValue == 'content'){
-            this.contentMenu.classList.add('active');
-            this.contentDiv.style.display = 'block';
-            this.contentMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }else if(this.optValue == 'media'){
-            this.mediaMenu.classList.add('active');
-            this.mediaDiv.style.display = 'block';
-            this.mediaMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }else if(this.optValue == 'account'){
-            this.accountMenu.classList.add('active');
-            this.accountDiv.style.display = 'block';
-            this.accountMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }else{
-            this.dashboardMenu.classList.add('active');
-            this.dashboardDiv.style.display = 'block';
-            this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            var showDiv = document.getElementById(`${this.optValue}Div`);
+            var showMenu = document.getElementById(`${this.optValue}Menu`);
+            showMenu.classList.add('active');
+            showDiv.style.display = 'block';
+            showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 

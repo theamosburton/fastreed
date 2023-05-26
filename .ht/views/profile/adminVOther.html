@@ -28,33 +28,19 @@
         <div class="userContent">
           <div class="userContentMenus scrollbar-style">
             <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="/users/<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username']?>">Dashboard</a>
-            <a id="contentMenu" class="menus" onclick="new showMenus()" href="?opt=content">Content</a>
             <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
-            <a id="accountMenu" class="menus" onclick="new showMenus()" href="?opt=account">Manage Account</a>
+            <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a>
+            <a id="accountMenu" class="menus" onclick="new showMenus()" href="?opt=account">Account Setting</a>
+            
           </div>
 
 
-          <div id="dashboardDiv" class="dashboardDiv contentView">
-            <div class="contentTopics">
-              <div class="title">Posts and Webstories</div>
-            </div>
-          </div>
+          <div id="dashboardDiv" class="dashboardDiv contentView" style="display:none"></div>
+          <div id="mediaDiv" class="mediaDiv contentView" style="display:none"></div>
+          <div id="privacyDiv" class="privacyDiv contentView" style="display:none"></div>
 
 
-          <div id="contentDiv" class="dashboardDiv contentView"></div>
-          <div id="mediaDiv" class="mediaDiv contentView">
-            <div class="contentTopics">
-              <div class="title">All Media Content
-                <div id="uploadForm">
-                  <span id="uploadLabel">Add new </span>
-                </div>
-              </div>
-              <div id="progressBar" class="progressBar">
-                <div id="progressTotal" class="progressTotal"></div>
-              </div>
-            </div>
-          </div>
-          <div id="accountDiv" class="accountDiv contentView">
+          <div id="accountDiv" class="accountDiv contentView" style="display:none">
             <div class="contentTopics">
               <div class="personalInfoTab" id="personalInfoShow">
                 <div class="title">Personal Details</div>
