@@ -223,17 +223,18 @@ class updateDetails{
   editByAdmin(){
     var messageDiv = document.querySelector('#uAlert');
     var mainDiv = document.querySelector('#updateAlert');
-    var message = document.querySelector('#editmessage');
+    var dispMessage = document.querySelector('#uAlert #editmessage');
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
+    mainDiv.style.display = 'block';
     messageDiv.style.display = 'block';
-    mainDiv.style.display = 'none';
     if (this.isFullName) {
       if (this.isUsername) {
         if (this.isEmail) {
           if (this.isDOB) {
-            mainDiv.style.display = 'block';
-            message.innerHTML = 'Updating...';
+            messageDiv.classList.add('alert-success');
+            messageDiv.classList.remove('alert-danger');
+            dispMessage.innerHTML = 'Updating...';
             const updateDetails = async () =>{
               const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
               var encyDat = {
@@ -261,50 +262,49 @@ class updateDetails{
   
               if (data) {
                 if (data.Result) {
-                  mainDiv.style.display = 'block';
                   messageDiv.classList.add('alert-success');
                   messageDiv.classList.remove('alert-danger');
-                  message.innerHTML = 'Updated Successfully';
+                  dispMessage.innerHTML = 'Updated Successfully';
                   let urlPostfix = this.username;
                   setTimeout(function(){
                     window.location.href = `/users/${urlPostfix}`;
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
-                  message.innerHTML = data.message;
+                  dispMessage.innerHTML = data.message;
                 }
               }else{
                 mainDiv.style.display = 'block';
-                message.innerHTML = data.message;
+                dispMessage.innerHTML = data.message;
               }
             }
             updateDetails();
           }else{
             mainDiv.style.display = 'block';
-              message.innerHTML = 'Problem With Date of Birth';
+            dispMessage.innerHTML = 'Problem With Date of Birth';
           }
         }else{
           mainDiv.style.display = 'block';
-            message.innerHTML = 'Problem With Email ID';
+          dispMessage.innerHTML = 'Problem With Email ID';
         }
       }else{
         mainDiv.style.display = 'block';
-        message.innerHTML = 'Problem With username';
+        dispMessage.innerHTML = 'Problem With username';
       }
     }else{
       mainDiv.style.display = 'block';
-      message.innerHTML = 'Problem With Your Name';
+      dispMessage.innerHTML = 'Problem With Your Name';
     }
   }
 
   editByUser(){
-    var messageDiv = document.querySelector('#uAlert');
-    var mainDiv = document.querySelector('#updateAlert');
-    var message = document.querySelector('#editmessage');
+    var messageDiv = document.getElementById('uAlert');
+    var mainDiv = document.getElementById('updateAlert');
+    var dispMessage = document.querySelector('#uAlert #editmessage');
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
+    mainDiv.style.display = 'block';
     messageDiv.style.display = 'block';
-    mainDiv.style.display = 'none';
     if (this.isFullName) {
       if (this.isUsername) {
         var emailVal = document.querySelector('#eMail');
@@ -316,8 +316,10 @@ class updateDetails{
         }
         if (this.isEmail) {
           if (this.isDOB) {
-            mainDiv.style.display = 'block';
-            message.innerHTML = 'Updating...';
+           
+            messageDiv.classList.add('alert-success');
+            messageDiv.classList.remove('alert-danger');
+            dispMessage.innerHTML = 'Updating...';
             const updateDetails = async () =>{
               const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
               var encyDat = {
@@ -344,40 +346,40 @@ class updateDetails{
               var data = await response.json();
   
               if (data) {
-                console.log(data);
+                console.log();
                 if (data.Result) {
                   mainDiv.style.display = 'block';
                   messageDiv.classList.add('alert-success');
                   messageDiv.classList.remove('alert-danger');
-                  message.innerHTML = 'Updated Successfully';
+                  dispMessage.innerHTML = 'Updated Successfully';
                   setTimeout(function(){
                     location.reload();
                   }, 3000);
                 }else{
                   mainDiv.style.display = 'block';
-                  message.innerHTML = data.message;
+                  dispMessage.innerHTML = data.message;
                 }
               }else{
                 mainDiv.style.display = 'block';
-                message.innerHTML = data.message;
+                dispMessage.innerHTML = data.message;
               }
             }
             updateDetails();
           }else{
             mainDiv.style.display = 'block';
-              message.innerHTML = 'Problem With Date of Birth';
+            dispMessage.innerHTML = 'Problem With Date of Birth';
           }
         }else{
           mainDiv.style.display = 'block';
-            message.innerHTML = 'Problem With Email ID';
+          dispMessage.innerHTML = 'Problem With Email ID';
         }
       }else{
         mainDiv.style.display = 'block';
-        message.innerHTML = 'Problem With username';
+        dispMessage.innerHTML = 'Problem With username';
       }
     }else{
       mainDiv.style.display = 'block';
-      message.innerHTML = 'Problem With Your Name';
+      dispMessage.innerHTML = 'Problem With Your Name';
     }
   }
 
