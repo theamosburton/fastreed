@@ -59,8 +59,12 @@
     border-radius: 100px;
     color: #83878f;
 }
-.user-avatar .editPhotos{
+.gutters .alert{
+    max-width: 300px!important;
+}
 
+.password .pErrorDiv{
+    max-width: 300px;
 }
 .user-avatar .editPhotos:hover{
    cursor: pointer;
