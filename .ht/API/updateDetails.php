@@ -171,7 +171,8 @@ class updateDetails{
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
         $dPID = $this->AUTH->decrypt($ePID);
-        echo $dPID;
+
+        var_dump($this->userData->getOtherData('peresonID', $dPID));
         // Checking if password required or not
         // If user password is not set or created
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
