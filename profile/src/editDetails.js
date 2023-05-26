@@ -604,6 +604,21 @@ class updateDetails{
     }
   }
 
+  enableEditing(){
+    var editFields = document.getElementById('personalInfoEdit');
+    var infoFields = document.getElementById('personalInfoShow');
+
+    editFields.style.display = 'block';
+    infoFields.style.display = 'none';
+  }
+
+  cancelEditing(){
+    var editFields = document.getElementById('personalInfoEdit');
+    var infoFields = document.getElementById('personalInfoShow');
+
+    infoFields.style.display = 'block';
+    editFields.style.display = 'none';
+  }
 
 }
 
