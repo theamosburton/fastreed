@@ -136,14 +136,22 @@
                 </div>
                 <?php
                 if ($this->userData->getSelfDetails()['userType'] == $this->userData->getOtherData('username', $this->otherUsername)['userType']) {
-                    echo <<<HTML 
+                  echo <<<HTML
+                  <div class="col-12">
+                    <div class="form-group">
+                        <label for="DOB">Enter Password</label><span class="errorMessage" id="passwordError"></span>
+                        <input onkeyup="update.checkCurrentPassword1()" type="password" class="form-control" id="currentPasswordDet" placeholder="Enter current password">
+                    </div>
+                </div>
+                  HTML;
+                    <!-- echo <<<HTML 
                     <div class="col-12">
                         <div class="form-group">
                             <label for="DOB">Enter Password</label><span class="errorMessage" id="passwordError"></span>
                             <input onkeyup="update.checkCurrentPassword1()" type="password" class="form-control" id="currentPasswordDet" placeholder="Enter current password">
                         </div>
                     </div>
-                    HTML;
+                    HTML; -->
                 }
                 ?>
                 <div class="row gutters">
