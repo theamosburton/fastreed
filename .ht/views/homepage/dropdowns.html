@@ -4,7 +4,8 @@
 						<span class="name">Notifications</span>
 					</div>
 					<div class="notifications scrollbar-style" id="notifications">
-					<div  class="spinner" id="notiSpinner"></div>	
+					    <div  class="spinner" id="notiSpinner">
+						</div>	
 					</div>
 				</div>
 				<!-- ******************************************** Notifications ********************************************** -->
@@ -24,13 +25,14 @@
                                         <div id="myEmail">'.$this->userData->getSelfDetails()['email'].'</div>
                                     </div>
                                 </div>
-                                <a href="" class="menus">
+                                <!-- <a href="" class="menus">
                                     <i class="left fa fa-circle-plus"></i>
                                     <span>Create</span> 
-								</a>
+								</a> -->
                                 <a href="/profile/" class="menus">
-                                    <i class="left fa fa-user-circle"></i> 
-                                    <span>View Profile</span> 
+                                    <!-- <i class="left fa fa-user-circle"></i>  -->
+									<i class=" left fa fa-table-columns"></i>
+                                    <span>Dashboard</span> 
 								</a>
 
 								<a href="/profile/?opt=media" class="menus">
@@ -40,7 +42,7 @@
 
                                 <a href="/profile/?opt=account" class="menus">
                                     <i class="left fa fa-gear"></i> 
-                                    <span>Manage Account</span> 
+                                    <span>My Account</span> 
 								</a>
                             </div>
 
