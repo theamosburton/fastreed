@@ -547,7 +547,7 @@ class updateDetails{
     var message = document.getElementById('pErrorMessage');
     var messageDiv= document.getElementById('pErrorDiv');
     messageDiv.style.display = 'block';
-    if (!isCurrentPass) {
+    if (!isCurrentPass && usingPass) {
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
       message.innerHTML = 'Check current password';
