@@ -175,7 +175,7 @@ class updateDetails{
         // Checking if password required or not
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
-        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] != 'Admin'){
+        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] == 'User'){
             $this->update($x);
         }else{
             $currentPassword = $data['currentPassword'];
