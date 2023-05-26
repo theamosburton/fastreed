@@ -192,7 +192,7 @@
                       </div>
 
                       <?php
-                      if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'{
+                      if($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('username', $this->otherUsername)['userType'] == 'Admin'){
                         echo <<<HTML
                             <span class="IndError" id="currentasswordError" style="display:none"></span>
                             <div class="inp" >
