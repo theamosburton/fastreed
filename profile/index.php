@@ -22,6 +22,7 @@ class showProfile {
     protected $extraScript;
     protected $adminIsEditing;
     function __construct() {
+        
         $this->const4Inherited();
         if ($this->adminLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
@@ -48,6 +49,7 @@ class showProfile {
         $this->FUNC = new BasicFunctions();
         $DB = new DataBase();
         $this->DB_CONN = $DB->DBConnection();
+        $this->AUTH = new Auth();
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
@@ -179,6 +181,7 @@ class loggedAdminVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
+        $ePID = $this->AUTH->encrypt($this->userData->getOtherData('username', $this->otherUsername)['dPID']);
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
@@ -188,7 +191,7 @@ class loggedAdminVother extends showProfile{
         $this->extraScript = '
         <script> 
             // other
-            var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['ePID'].'";
+            var ePID = "'.$ePID.'";
             var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';

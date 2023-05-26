@@ -200,13 +200,6 @@ class getLoggedData{
 
 
      public function getOtherData($type, $field){
-        if (isset($_COOKIE['UID'])) {
-            $ePID = $_COOKIE['UID'];
-        }elseif (isset($_COOKIE['AID'])) {
-            $ePID = $_COOKIE['AID'];
-        }else{
-            $ePID = false;
-        }
         $data = array();
         $sql = "SELECT * FROM account_details WHERE $type = '$field'";
         $result = mysqli_query($this->DB, $sql);
@@ -251,7 +244,7 @@ class getLoggedData{
                     'name' => $name,
                     'userType'=>$userType,
                     'email'=>$email,
-                    "ePID"=>$ePID,
+                    "dPID"=>$UID,
                     'websiteUrl' => $websiteUrl
                 );
             }
