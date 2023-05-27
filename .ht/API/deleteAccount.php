@@ -86,9 +86,9 @@ class deleteAccount {
         $dPID = $this->AUTH->decrypt($ePID);
         $username = $data['username'];
         if (empty($username)) {
-            showMessage(false, "Empty password given");
+            showMessage(false, "Empty Username given");
         }elseif(!$this->verifyUser($dPID, $username)) {
-            showMessage(false, "Incorrect password");
+            showMessage(false, "Incorrect Username");
         }else{
             $name = $data['name'];
             switch ($name) {
@@ -131,10 +131,10 @@ class deleteAccount {
         $sql = "SELECT * FROM account_details WHERE personID = '$dPID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-            if (mysqli_num_rows($result) < 1) {
+            if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
                 $usernameDb = $row['username'];
-                if ($username == $usernameDb) {
+                if ("$username" == "$usernameDb") {
                     $return = true;
                 }
             }
@@ -142,68 +142,158 @@ class deleteAccount {
         return $return;
     }
 
-    private function deletingUserdata($id){
-        // accounts details, accounts info, notifications
-        $deleteAccountDetails = "DELETE FROM account_details WHERE personID = '$id' IF EXISTS";
-        $deleteAccountInfo = "DELETE FROM accounts WHERE personID = '$id' IF EXISTS";
-        $deleteNotifications = "DELETE FROM notifications WHERE reciever = '$id' IF EXISTS";
-        $deleteDetailsResult = mysqli_query($this->DB, $deleteAccountDetails);
-        $deleteInfoResult = mysqli_query($this->DB, $deleteAccountInfo);
-        $deleteNotiResult = mysqli_query($this->DB, $deleteNotifications);
-        if ($deleteDetailsResult && $deleteInfoResult && $deleteNotiResult) {
-            showMessage(true, "Userdata deleted");
+   
+
+
+    private function deletingUserdata($id) {
+
+        $deleteAccountDetails = "DELETE FROM account_details WHERE personID = '$id'";
+        $deleteAccountInfo = "DELETE FROM accounts WHERE personID = '$id'";
+        $deleteNotifications = "DELETE FROM notifications WHERE reciever = '$id'";
+
+        $accountDetailsDeleted = false;
+        $accountInfoDeleted = false;
+        $notificationsDeleted = false;
+
+        /************************************/
+        // Check if rows exist before deleting in account_details table
+        $checkAccountDetailsQuery = "SELECT COUNT(*) FROM account_details WHERE personID = '$id'";
+        $result = mysqli_query($this->DB, $checkAccountDetailsQuery);
+        $rowCountAccountDetails = mysqli_fetch_row($result)[0];
+        mysqli_free_result($result);
+        // Delete rows from account_details table
+        if ($rowCountAccountDetails > 0) {
+            $deleteAccountDetailsResult = mysqli_query($this->DB, $deleteAccountDetails);
+            if ($deleteAccountDetailsResult) {
+                $accountDetailsDeleted = true;
+            }
+        }
+        /************************************/
+    
+
+        /************************************/
+        // Check if rows exist before deleting in accounts table
+        $checkAccountInfoQuery = "SELECT COUNT(*) FROM accounts WHERE personID = '$id'";
+        $result = mysqli_query($this->DB, $checkAccountInfoQuery);
+        $rowCountAccountInfo = mysqli_fetch_row($result)[0];
+        mysqli_free_result($result);
+        // Delete rows from accounts table
+        if ($rowCountAccountInfo > 0) {
+            $deleteAccountInfoResult = mysqli_query($this->DB, $deleteAccountInfo);
+            if ($deleteAccountInfoResult) {
+                $accountInfoDeleted = true;
+            }
+        }
+        /************************************/
+
+        /************************************/
+        // Check if rows exist before deleting in notifications table
+        $checkNotificationsQuery = "SELECT COUNT(*) FROM notifications WHERE reciever = '$id'";
+        $result = mysqli_query($this->DB, $checkNotificationsQuery);
+        $rowCountNotifications = mysqli_fetch_row($result)[0];
+        mysqli_free_result($result);
+        // Delete rows from notifications table
+        if ($rowCountNotifications > 0) {
+            $deleteNotificationsResult = mysqli_query($this->DB, $deleteNotifications);
+            if ($deleteNotificationsResult) {
+                $notificationsDeleted = true;
+            }
         }else{
+            $notificationsDeleted = true;
+        }
+        /************************************/
+        if ($accountDetailsDeleted && $accountInfoDeleted && $notificationsDeleted) {
+            showMessage(true, "Userdata deleted");
+        } else {
             showMessage(false, "Userdata not deleted");
         }
+ 
     }
+    
+    
 
-    private function deletingContents($id){
-        // posts, webstories, likes, follows, uploads details
-        $deleteUploads = "DELETE FROM uploads WHERE personID = '$id' IF EXISTS";
-        $deleteUploadResults = mysqli_query($this->DB, $deleteUploads);
-       
-        if ($deleteUploadResults) {
-            showMessage(true, "Contents deleted");
-        }else{
-            showMessage(false, "Contents not deleted");
+    private function deletingContents($id) {
+        $deleteUploads = "DELETE FROM uploads WHERE personID = '$id'";
+    
+        $deleteResult = mysqli_query($this->DB, $deleteUploads);
+    
+        if ($deleteResult !== false) {
+            if (mysqli_affected_rows($this->DB) > 0) {
+                showMessage(true, "All rows deleted");
+            } else {
+                showMessage(true, "No rows found");
+            }
+        } else {
+            showMessage(false, "Failed to delete rows");
         }
     }
+    
+    
 
     private function deletingUploads($id) {
         $photos = $this->_DOCROOT . '/fastreedusercontent/photos/' . $id;
         $videos = $this->_DOCROOT . '/fastreedusercontent/videos/' . $id;
         $audios = $this->_DOCROOT . '/fastreedusercontent/audios/' . $id;
     
-        $deleted = false;
-    
-        // Delete 'photos' directory if it exists
+        // Delete 'photos' directory and its contents
         if (is_dir($photos)) {
+            $files = glob($photos . '/*'); // Get all files within the directory
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file); // Delete each file
+                }
+            }
             if (rmdir($photos)) {
-                $deleted = true;
+                $photosDeleted = true;
+            }else{
+                $photosDeleted = false;
             }
+        }else{
+            $photosDeleted = true;
         }
     
-        // Delete 'videos' directory if it exists
+        // Delete 'videos' directory and its contents
         if (is_dir($videos)) {
-            if (rmdir($videos)) {
-                $deleted = true;
+            $files = glob($videos . '/*'); // Get all files within the directory
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file); // Delete each file
+                }
             }
+            if (rmdir($videos)) {
+                $videosDeleted = true;
+            }else{
+                $videosDeleted = false;
+            }
+        }else{
+            $videosDeleted = true;
         }
     
-        // Delete 'audios' directory if it exists
+        // Delete 'audios' directory and its contents
         if (is_dir($audios)) {
-            if (rmdir($audios)) {
-                $deleted = true;
+            $files = glob($audios . '/*'); // Get all files within the directory
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file); // Delete each file
+                }
             }
+            if (rmdir($audios)) {
+                $audioDeleted = true;
+            }else{
+                $audioDeleted = false;
+            }
+        }else{
+            $audioDeleted = true;
         }
     
         // Show appropriate message based on deletion status
-        if ($deleted) {
-            $this->showMessage(true, 'Uploads deleted');
+        if ($photosDeleted && $videosDeleted && $audioDeleted) {
+            showMessage(true, 'Uploads deleted');
         } else {
-            $this->showMessage(false, 'Uploads not deleted');
+            showMessage(false, 'Uploads not deleted');
         }
     }
+    
     
     
 }

@@ -11,9 +11,9 @@ class DeleteAccount{
     }
 
     deleteWithUsername(){
-        var uploadDel;
-        var contentDel;
-        var userDataDel;
+        var uploadDeleted;
+        var contentDeleted;
+        var userDataDeleted;
         var username = document.querySelector('.delete-account #currentUsernameDelete');
         if (username.value == currentUsername) {
             this.deletingDiv.style.display = 'block';
@@ -36,11 +36,11 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    uploadDel = true;
-                    document.querySelector('#deleteUploads i').style.display= 'block';
+                    uploadDeleted = true;
+                    document.querySelector('#deleteUploads i').style.display= 'inline';
                 }else{
-                    uploadDel = false;
-                    document.querySelector('#deleteUploads i').style.display= 'block';
+                    uploadDeleted = false;
+                    document.querySelector('#deleteUploads i').style.display= 'inline';
                     document.querySelector('#deleteUploads i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteUploads i').style.display.classList.add('fa-xmark');
                 }
@@ -63,11 +63,10 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                  contentDel = true;
-                    document.querySelector('#deleteContents i').style.display= 'block';
+                  contentDeleted = true;
+                    document.querySelector('#deleteContents i').style.display= 'inline';
                 }else{
-                  contentDel = false;
-                    document.querySelector('#deleteContents i').style.display= 'block';
+                    document.querySelector('#deleteContents i').style.display= 'inline';
                     document.querySelector('#deleteContents i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteContents i').style.display.classList.add('fa-xmark');
                 }
@@ -91,11 +90,10 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                  userDataDel = true;
-                    document.querySelector('#deleteUserData i').style.display= 'block';
+                  userDataDeleted = true;
+                    document.querySelector('#deleteUserData i').style.display= 'inline';
                 }else{
-                  userDataDel = false;
-                    document.querySelector('#deleteUserData i').style.display= 'block';
+                    document.querySelector('#deleteUserData i').style.display= 'inline';
                     document.querySelector('#deleteUserData i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
                 }
@@ -107,8 +105,10 @@ class DeleteAccount{
             deleteUserData();
 
             if (uploadDeleted && contentDeleted && userDataDeleted) {
-                document.querySelector('#deleteFinish i').style.display= 'block';
+                document.querySelector('#deleteFinish i').style.display= 'inline';
             }else{
+                this.deletingDiv.style.display = 'none';
+                this.deletingCriteria.style.display = 'block';
                 this.errorDiv.style.display = 'block';
                 this.dErrorDivInside.style.display = 'block';
                 this.dispMessage.innerHTML = 'Problem With deleting';
