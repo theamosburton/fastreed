@@ -299,7 +299,25 @@ background-color: transparent!important;
 }
 .gutters .btn-cancel{
     margin-right: 8px;
+    margin-top: 10px;
 }
+.delete-account .warning{
+    display: block;
+    margin: 5px 0px;
+}
+.delete-account .title{
+    color: #dc3545!important;
+}
+.delete-account .deleting-progress, .delete-account .deleting-progress .deleting i{
+    display: none;
+}
+.delete-account .deleting-progress .deleting{
+    display: block;
+    color: #dc3545;
+    margin: 5px;
+    font-style: italic;
+}
+
 
 .uploadDpDiv{
     margin: 0;

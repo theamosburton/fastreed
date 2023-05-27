@@ -163,7 +163,7 @@
                 <div class="title">Personal Details</div>
                 <div class="card-body edit-fields" id="edit_fields" style="display:block">
                   <div class="row gutters">
-
+                    <!-- Error Message -->
                     <div id="updateAlert" class="col-12">
                       <div id="uAlert" class="alert alert-danger alert-dismissible fade show">
                         <span id="editmessage"></span>
@@ -172,7 +172,7 @@
                         </button>
                       </div>
                     </div>
-      
+                    <!-- Error Message -->
                     <div class="col-lg-6 col-md-6">
                       <div class="form-group">
                         <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
@@ -256,25 +256,57 @@
                     <div class="row gutters">
                       <div class="col-12">
                         <div>
-                          <button type="button" onclick="update.cancelEditing()" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                          <button type="button" onclick="update.cancelEditing()" id="submit" name="submit" class="btn-cancel btn btn-secondary">Cancel</button>
                           <button type="button" onclick="update.editByUser()" id="submit" name="submit" class="btn btn-primary">Update Details</button>
                         </div>
                       </div>
                     </div>
                   HTML;
                   }?>
-
-                  
                 </div>
               </div>
-              
-
             </div>
+            <!-- Manage Accounts -->
+            <div class="contentTopics delete-account">
+              <div class="title">Delete Account</div>
+              <!-- Error Message -->
+              <div id="dErrorDiv" class="col-lg-8 col-md-8">
+                <div id="dErrorDivInside" class="alert alert-danger alert-dismissible fade show">
+                  <span id="editDelmessage"></span>
+                </div>
+              </div>
+              <!-- Error Message -->
+              <div class="col-lg-8 col-md-8">
+                <div class="form-group">
+                  <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+                    echo <<<HTML
+                      <div class="delete-criteria">
+                        <input type="text" class="form-control delete-criteria" id="currentUsernameDelete" placeholder="Enter username">
+                        <span class="warning">Once you delete your account, there is no going back. Please be certain.</span>
+                        <button type="button" onclick="deleteAccount.deleteWithUsername()" id="submit" name="submit" class="btn-cancel btn btn-danger">Delete Account</button>
+                      </div>
+                    HTML;
+                  }else{
+                    echo <<<HTML
+                      <div class="delete-criteria">
+                        <input type="password" class="delete-criteria form-control" id="currentPasswordDelete" placeholder="Enter password">
+                        <span class="warning">Once you delete your account, there is no going back. Please be certain.</span>
+                        <button type="button" onclick="deleteAccount.deleteWithPassword()" id="submit" name="submit" class="btn-cancel btn btn-danger">Delete Account</button>
+                      </div>
+                    HTML;
+                  }
+                  ?>
 
-           
+                  <div class="deleting-progress">
+                    <span class="deleting" id="deleteUploads">Deleting Uploads...............<i class="fa-solid fa-check"></i></span>
+                    <span class="deleting" id="deleteContents">Deleting Contents..............<i class="fa-solid fa-check"></i></span>
+                    <span class="deleting" id="deleteUserData">Deleting User Data............<i class="fa-solid fa-check"></i></span>
+                    <span class="deleting" id="deleteFinish">Finish Deleting....................<i class="fa-solid fa-check"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- Manage Accounts -->
-
         </div>
       </div>
     </div>

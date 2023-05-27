@@ -194,9 +194,11 @@ class updateDetails{
                 $row = mysqli_fetch_assoc($result);
                 $hashedPassword = $row['Password'];
             }
-    
-            if (password_verify($currentPassword, $hashedPassword)) {
-                $this->update();
+
+            if(empty($currentPassword)){
+                showMessage(false, "Empty password given");
+            }elseif (password_verify($currentPassword, $hashedPassword)) {
+                $this->pdate();
             } else {
                 showMessage(false, "Incorrect Password");
             }
