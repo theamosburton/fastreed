@@ -547,7 +547,7 @@ class updateDetails{
 
   updatePassword(){
     var message = document.querySelector('#pErrorMessage #editmessage');
-    var errorDiv = querySelector('#pErrorDiv');
+    var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
     if (!isCurrentPass && usingPass) {
