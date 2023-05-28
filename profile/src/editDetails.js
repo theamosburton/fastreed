@@ -546,26 +546,26 @@ class updateDetails{
   }
 
   updatePassword(){
-    var message = document.querySelector('.pErrorDiv #editmessage');
+    var erMessage = document.querySelector('.pErrorDiv #peditmessage');
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
     if (!isCurrentPass && usingPass) {
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Check current password';
+      erMessage.innerHTML = 'Check current password';
     }else if(!isNewPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Check new password';
+      erMessage.innerHTML = 'Check new password';
     }else if(!verifyPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Verify new password';
+      erMessage.innerHTML = 'Verify new password';
     }else{
       messageDiv.classList.remove('alert-danger');
       messageDiv.classList.add('alert-success');
-      message.innerHTML = 'Upadting password...';
+      erMessage.innerHTML = 'Upadting password...';
       const updatePassword = async () =>{
         const url = '/.ht/API/updateDetails.php?passwordRelated';
         var encyDat = {
@@ -588,19 +588,19 @@ class updateDetails{
           if (data.Result) {
             messageDiv.classList.remove('alert-danger');
             messageDiv.classList.add('alert-success');
-            message.innerHTML = 'Password Updated';
+            erMessage.innerHTML = 'Password Updated';
             // setTimeout(function(){
             //   location.reload();
             // }, 3000);
           }else{
             messageDiv.classList.add('alert-danger');
             messageDiv.classList.remove('alert-success');
-            message.innerHTML = `${data.message}`;
+            erMessage.innerHTML = `${data.message}`;
           }
         }else{
             messageDiv.classList.add('alert-danger');
             messageDiv.classList.remove('alert-success');
-            message.innerHTML = `${data.message}`;
+            erMessage.innerHTML = `${data.message}`;
         }
       }
       updatePassword();
