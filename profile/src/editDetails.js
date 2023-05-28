@@ -546,9 +546,10 @@ class updateDetails{
   }
 
   updatePassword(){
-    var message = document.getElementById('pErrorMessage');
-    var messageDiv= document.getElementById('pErrorDiv');
-    messageDiv.style.display = 'block';
+    var message = document.querySelector('#pErrorMessage #editmessage');
+    var errorDiv = querySelector('#pErrorDiv');
+    var messageDiv= document.getElementById('pErrorMessage');
+    errorDiv.style.display = 'block';
     if (!isCurrentPass && usingPass) {
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
@@ -586,7 +587,7 @@ class updateDetails{
           console.log(data);
           if (data.Result) {
             messageDiv.classList.remove('alert-danger');
-      messageDiv.classList.add('alert-success');
+            messageDiv.classList.add('alert-success');
             message.innerHTML = 'Password Updated';
             setTimeout(function(){
               location.reload();
