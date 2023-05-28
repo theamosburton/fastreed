@@ -107,7 +107,7 @@ class DeleteAccount{
               deleteContents();
               deleteUserData();
 
-              if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
+              if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   document.querySelector('#deleteFinish i').style.display= 'inline';
               }else{
                   this.deletingDiv.style.display = 'none';
