@@ -110,6 +110,9 @@ class DeleteAccount{
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   document.querySelector('#deleteFinish i').style.display = 'inline';
+                  setTimeout(function (){
+                    location.reload();
+                  }, 3000);
                 } else {
                   thisIs.deletingDiv.style.display = 'none';
                   thisIs.deletingCriteria.style.display = 'block';
@@ -224,18 +227,39 @@ class DeleteAccount{
                 }
             }
 
-            // Implementing
-            deleteUploads();
-            deleteContents();
-            deleteUserData();
-
-            if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
-                document.querySelector('#deleteFinish i').style.display= 'block';
-            }else{
-                this.errorDiv.style.display = 'block';
-                this.dErrorDivInside.style.display = 'block';
-                this.dispMessage.innerHTML = 'Problem With deleting';
+            var thisIs = this;
+            async function Implementing() {
+              thisIs.deletingCriteria.style.display = 'none';
+              thisIs.deletingDiv.style.display = 'block';
+            
+              try {
+                await deleteUploads();
+                await deleteContents();
+                await deleteUserData();
+            
+                if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
+                  document.querySelector('#deleteFinish i').style.display = 'inline';
+                  setTimeout(function (){
+                    location.reload();
+                  }, 3000);
+                } else {
+                  thisIs.deletingDiv.style.display = 'none';
+                  thisIs.deletingCriteria.style.display = 'block';
+                  thisIs.errorDiv.style.display = 'block';
+                  thisIs.dErrorDivInside.style.display = 'block';
+                  thisIs.dispMessage.innerHTML = 'Problem With deleting';
+                }
+              } catch (error) {
+                console.log(error); // Handle or log the error
+                thisIs.deletingDiv.style.display = 'none';
+                thisIs.deletingCriteria.style.display = 'block';
+                thisIs.errorDiv.style.display = 'block';
+                thisIs.dErrorDivInside.style.display = 'block';
+                thisIs.dispMessage.innerHTML = 'An error occurred while deleting';
+              }
             }
+            
+            Implementing();
         }
     }
 }
