@@ -98,9 +98,10 @@ class DeleteAccount{
                     document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
                 }
             }
+            var thisIs = this;
             function Implementing(){
-              this.deletingCriteria.style.display = 'none';
-              this.deletingDiv.style.display = 'block';
+              thisIs.deletingCriteria.style.display = 'none';
+              thisIs.deletingDiv.style.display = 'block';
                 // Implementing
               deleteUploads();
               deleteContents();
