@@ -176,8 +176,8 @@ class updateDetails{
         // If user password is not set or created
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
             $this->update($x);
-            // If admin is editing other password
-            // Present user is admin and editing is not admin
+            // If admin is editing other password not self
+            // Present user is admin and editing id should not admin
         }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] != 'Admin'){
             $this->update($x);
         }else{
@@ -198,7 +198,7 @@ class updateDetails{
             if(empty($currentPassword)){
                 showMessage(false, "Empty password given");
             }elseif (password_verify($currentPassword, $hashedPassword)) {
-                $this->update();
+                $this->update($x);
             } else {
                 showMessage(false, "Incorrect Password");
             }
