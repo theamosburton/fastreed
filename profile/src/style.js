@@ -247,7 +247,7 @@ class DeleteAccount{
                   thisIs.deletingCriteria.style.display = 'block';
                   thisIs.errorDiv.style.display = 'block';
                   thisIs.dErrorDivInside.style.display = 'block';
-                  thisIs.dispMessage.innerHTML = 'Problem With deleting';
+                  thisIs.dispMessage.innerHTML = 'Problem With deleting 1';
                 }
               } catch (error) {
                 console.log(error); // Handle or log the error
@@ -255,6 +255,7 @@ class DeleteAccount{
                 thisIs.deletingCriteria.style.display = 'block';
                 thisIs.errorDiv.style.display = 'block';
                 thisIs.dErrorDivInside.style.display = 'block';
+                thisIs.dispMessage.innerHTML = 'Problem With deleting 2';
               }
             }
             
