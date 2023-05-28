@@ -102,15 +102,15 @@ class DeleteAccount{
                 await deleteUserData();
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
-                  this.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
+                  thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                   setTimeout(function (){
                     location.reload();
                   }, 3000);
                 } else {
-                  this.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
+                  thisIs.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
               } catch (error) {
-                this.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
+                thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
             
@@ -216,15 +216,16 @@ class DeleteAccount{
                 await deleteUserData();
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
-                  this.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
+                  thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                   setTimeout(function (){
                     location.reload();
                   }, 3000);
                 } else {
-                  this.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
+                  thisIs.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
               } catch (error) {
-                this.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
+                console.log(error);
+                thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
             

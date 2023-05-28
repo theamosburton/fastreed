@@ -120,6 +120,7 @@ class deleteAccount {
                 $row = mysqli_fetch_assoc($result);
                 $hashedPass = $row['Password'];
                 if (password_verify($password, $hashedPass)) {
+                    echo 'verified';
                     $return = true;
                 }
             }

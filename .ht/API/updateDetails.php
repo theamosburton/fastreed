@@ -198,7 +198,7 @@ class updateDetails{
             if(empty($currentPassword)){
                 showMessage(false, "Empty password given");
             }elseif (password_verify($currentPassword, $hashedPassword)) {
-                $this->pdate();
+                $this->update();
             } else {
                 showMessage(false, "Incorrect Password");
             }
