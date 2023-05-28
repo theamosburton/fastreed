@@ -124,6 +124,7 @@ class deleteAccount {
                 }
             }
         }
+        var_dump($return);
         return $return;
     }
     private function verifyUser($dPID, $username){
