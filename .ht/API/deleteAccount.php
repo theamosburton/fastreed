@@ -45,6 +45,8 @@ class deleteAccount {
             $this->deleteUsingPassword();
         }elseif ($data['with'] == 'username') {
             $this->deleteUsingUsername();
+        }elseif ($data['with'] == 'none') {
+            $this->deleteUsingUsername();
         }else{
             showMessage(false, "Set relevent parameter");
         }
@@ -89,6 +91,8 @@ class deleteAccount {
             showMessage(false, "Empty Username given");
         }elseif(!$this->verifyUser($dPID, $username)) {
             showMessage(false, "Incorrect Username");
+        }elseif($this->userData->accountsByUser()['password'] !== null || !empty($this->userData->accountsByUser()['password'])){
+            showMessage(false, "Password required");
         }else{
             $name = $data['name'];
             switch ($name) {
@@ -142,7 +146,46 @@ class deleteAccount {
         return $return;
     }
 
-   
+   private function adminDeletingAccount(){
+    $data = json_decode(file_get_contents('php://input'), true);
+    $ePID = $data['personID'];
+    $dPID = $this->AUTH->decrypt($ePID);
+    $username = $data['username'];
+    $selfId = $_SESSION['LOGGED_USER'];
+    if (!isset($data['adminPassword'])) {
+        showMessage(false, "Admin password not provided");
+    }elseif (empty($data['adminPassword'])) {
+        showMessage(false, "Admin password empty");
+    }elseif (verifyPassword($selfId, $adminPassword)) {
+        showMessage(false, "Incorrect admin password");
+    }elseif (empty($username)) {
+        showMessage(false, "Empty Username given");
+    }elseif(!$this->verifyUser($dPID, $username)) {
+        showMessage(false, "Incorrect Username");
+    }elseif($this->userData->getSelfDetails()['userType'] != 'Admin'){
+        showMessage(false, "Not an admin");
+    }else{
+        $adminPassword = $data['adminPassword'];
+        $name = $data['name'];
+        switch ($name) {
+            case 'userData':
+                $this->deletingUserdata($dPID);
+                break;
+
+            case 'contents':
+                $this->deletingContents($dPID);
+                break;
+
+            case 'uploads':
+                $this->deletingUploads($dPID);
+                break;
+            
+            default:
+                showMessage(false, "Not mentioned what to delete");
+                break;
+        }
+    }
+   }
 
 
     private function deletingUserdata($id) {
