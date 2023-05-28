@@ -308,12 +308,12 @@ background-color: transparent!important;
 .delete-account .title{
     color: #dc3545!important;
 }
-.delete-account .deleting-progress, .delete-account .deleting-progress .deleting i{
+.delete-account .deleting-progress{
     display: none;
 }
 .delete-account .deleting-progress .deleting{
     display: block;
-    color: #dc3545;
+    color: limegreen;
     margin: 5px;
     font-style: italic;
 }

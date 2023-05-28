@@ -36,14 +36,11 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    this.uploadDeleted = true;
-                    document.querySelector('#deleteUploads i').style.display= 'inline';
-                }else{
-                    uploadDeleted = false;
-                    document.querySelector('#deleteUploads i').style.display= 'inline';
-                    document.querySelector('#deleteUploads i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteUploads i').style.display.classList.add('fa-xmark');
-                }
+                  this.uploadDeleted = true;
+                  this.deletingDiv.innerHTML += `<span class="deleting">Deleting Uploads...............<i class="fa-solid fa-check"></i></span>`;
+              }else{
+                this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
+              }
             }
             // deleting Contents
             const deleteContents = async()=>{
@@ -63,13 +60,11 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    this.contentDeleted = true;
-                    document.querySelector('#deleteContents i').style.display= 'inline';
-                }else{
-                    document.querySelector('#deleteContents i').style.display= 'inline';
-                    document.querySelector('#deleteContents i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteContents i').style.display.classList.add('fa-xmark');
-                }
+                  this.contentDeleted = true;
+                  this.deletingDiv.innerHTML += `<span class="deleting">Deleting User Contents...............<i class="fa-solid fa-check"></i></span>`;
+              }else{
+                this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
+              }
             }
 
             // Deleting User Data
@@ -91,12 +86,10 @@ class DeleteAccount{
                 var data = await response.json();
                 if (data.Result) {
                   this.userDataDeleted = true;
-                    document.querySelector('#deleteUserData i').style.display= 'inline';
-                }else{
-                    document.querySelector('#deleteUserData i').style.display= 'inline';
-                    document.querySelector('#deleteUserData i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
-                }
+                  this.deletingDiv.innerHTML += `<span class="deleting">Deleting User Data...............<i class="fa-solid fa-check"></i></span>`;
+              }else{
+                this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
+              }
             }
             var thisIs = this;
             async function Implementing() {
@@ -109,28 +102,19 @@ class DeleteAccount{
                 await deleteUserData();
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
-                  document.querySelector('#deleteFinish i').style.display = 'inline';
+                  this.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                   setTimeout(function (){
                     location.reload();
                   }, 3000);
                 } else {
-                  thisIs.deletingDiv.style.display = 'none';
-                  thisIs.deletingCriteria.style.display = 'block';
-                  thisIs.errorDiv.style.display = 'block';
-                  thisIs.dErrorDivInside.style.display = 'block';
-                  thisIs.dispMessage.innerHTML = 'Problem With deleting';
+                  this.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
               } catch (error) {
-                console.log(error); // Handle or log the error
-                thisIs.deletingDiv.style.display = 'none';
-                thisIs.deletingCriteria.style.display = 'block';
-                thisIs.errorDiv.style.display = 'block';
-                thisIs.dErrorDivInside.style.display = 'block';
-                thisIs.dispMessage.innerHTML = 'An error occurred while deleting';
+                this.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
             
-            Implementing();
+          Implementing();
             
         }else{
             this.errorDiv.style.display = 'block';
@@ -166,11 +150,9 @@ class DeleteAccount{
                 var data = await response.json();
                 if (data.Result) {
                     this.uploadDeleted = true;
-                    document.querySelector('#deleteUploads i').style.display= 'block';
+                    this.deletingDiv.innerHTML += `<span class="deleting">Deleting Uploads...............<i class="fa-solid fa-check"></i></span>`;
                 }else{
-                    document.querySelector('#deleteUploads i').style.display= 'block';
-                    document.querySelector('#deleteUploads i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteUploads i').style.display.classList.add('fa-xmark');
+                  this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
             }
             // deleting Contents
@@ -192,11 +174,9 @@ class DeleteAccount{
                 var data = await response.json();
                 if (data.Result) {
                     this.contentDeleted = true;
-                    document.querySelector('#deleteContents i').style.display= 'block';
+                    this.deletingDiv.innerHTML += `<span class="deleting">Deleting User Contents...............<i class="fa-solid fa-check"></i></span>`;
                 }else{
-                    document.querySelector('#deleteContents i').style.display= 'block';
-                    document.querySelector('#deleteContents i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteContents i').style.display.classList.add('fa-xmark');
+                  this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
             }
 
@@ -219,11 +199,9 @@ class DeleteAccount{
                 var data = await response.json();
                 if (data.Result) {
                     this.userDataDeleted = true;
-                    document.querySelector('#deleteUserData i').style.display= 'block';
+                    this.deletingDiv.innerHTML += `<span class="deleting">Deleting User Data...............<i class="fa-solid fa-check"></i></span>`;
                 }else{
-                    document.querySelector('#deleteUserData i').style.display= 'block';
-                    document.querySelector('#deleteUserData i').style.display.classList.remove('fa-check');
-                    document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
+                  this.deletingDiv.innerHTML += `<span class="deleting">${data.message}...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
             }
 
@@ -238,28 +216,19 @@ class DeleteAccount{
                 await deleteUserData();
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
-                  document.querySelector('#deleteFinish i').style.display = 'inline';
+                  this.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                   setTimeout(function (){
                     location.reload();
                   }, 3000);
                 } else {
-                  thisIs.deletingDiv.style.display = 'none';
-                  thisIs.deletingCriteria.style.display = 'block';
-                  thisIs.errorDiv.style.display = 'block';
-                  thisIs.dErrorDivInside.style.display = 'block';
-                  thisIs.dispMessage.innerHTML = 'Problem With deleting 1';
+                  this.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
               } catch (error) {
-                console.log(error); // Handle or log the error
-                thisIs.deletingDiv.style.display = 'none';
-                thisIs.deletingCriteria.style.display = 'block';
-                thisIs.errorDiv.style.display = 'block';
-                thisIs.dErrorDivInside.style.display = 'block';
-                thisIs.dispMessage.innerHTML = 'Problem With deleting 2';
+                this.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
             
-            Implementing();
+          Implementing();
         }
     }
 }
