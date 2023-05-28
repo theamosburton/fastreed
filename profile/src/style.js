@@ -110,11 +110,11 @@ class DeleteAccount{
               if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   document.querySelector('#deleteFinish i').style.display= 'inline';
               }else{
-                  this.deletingDiv.style.display = 'none';
-                  this.deletingCriteria.style.display = 'block';
-                  this.errorDiv.style.display = 'block';
-                  this.dErrorDivInside.style.display = 'block';
-                  this.dispMessage.innerHTML = 'Problem With deleting';
+                thisIs.deletingDiv.style.display = 'none';
+                thisIs.deletingCriteria.style.display = 'block';
+                thisIs.errorDiv.style.display = 'block';
+                thisIs.dErrorDivInside.style.display = 'block';
+                thisIs.dispMessage.innerHTML = 'Problem With deleting';
               }
             }
             Implementing();
