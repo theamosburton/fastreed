@@ -116,7 +116,7 @@ class deleteAccount {
         $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-            if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
                 $hashedPass = $row['Password'];
                 if (password_verify($password, $hashedPass)) {
