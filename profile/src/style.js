@@ -99,24 +99,36 @@ class DeleteAccount{
                 }
             }
             var thisIs = this;
-            function Implementing(){
+            async function Implementing() {
               thisIs.deletingCriteria.style.display = 'none';
               thisIs.deletingDiv.style.display = 'block';
-                // Implementing
-              deleteUploads();
-              deleteContents();
-              deleteUserData();
-              if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
-                  document.querySelector('#deleteFinish i').style.display= 'inline';
-              }else{
+            
+              try {
+                await deleteUploads();
+                await deleteContents();
+                await deleteUserData();
+            
+                if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
+                  document.querySelector('#deleteFinish i').style.display = 'inline';
+                } else {
+                  thisIs.deletingDiv.style.display = 'none';
+                  thisIs.deletingCriteria.style.display = 'block';
+                  thisIs.errorDiv.style.display = 'block';
+                  thisIs.dErrorDivInside.style.display = 'block';
+                  thisIs.dispMessage.innerHTML = 'Problem With deleting';
+                }
+              } catch (error) {
+                console.log(error); // Handle or log the error
                 thisIs.deletingDiv.style.display = 'none';
                 thisIs.deletingCriteria.style.display = 'block';
                 thisIs.errorDiv.style.display = 'block';
                 thisIs.dErrorDivInside.style.display = 'block';
-                thisIs.dispMessage.innerHTML = 'Problem With deleting';
+                thisIs.dispMessage.innerHTML = 'An error occurred while deleting';
               }
             }
+            
             Implementing();
+            
         }else{
             this.errorDiv.style.display = 'block';
             this.dErrorDivInside.style.display = 'block';
