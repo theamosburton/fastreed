@@ -304,6 +304,9 @@ background-color: transparent!important;
     margin-right: 8px;
     margin-top: 10px;
 }
+.gutters .btn-update{
+    margin-top: 10px;
+}
 .delete-account .warning{
     display: block;
     margin: 5px 0px;
