@@ -69,7 +69,7 @@
                   <div class="title">Update password</div>
                   <div class="setPassword">
                     <div class="password">
-                      <div id="pErrorDiv" class="col-12" style="display:none">
+                      <div id="pErrorDiv" class="col-12 pErrorDiv" style="display:none">
                         <div id="" class="alert alert-danger alert-dismissible fade show"><span id="pErrorMessage"> </span>
                         </div>
                       </div>
@@ -234,7 +234,6 @@
 
                   <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
                     echo <<<HTML
-                    <script> var usingPass = true; </script>
                       <div class="row gutters">
                         <div class="col-12">
                           <div>
@@ -246,7 +245,6 @@
                     HTML;
                   }else{
                     echo <<<HTML
-                    <script> var usingPass = true; </script>
                     <div class="col-lg-6 col-md-6">
                       <div class="form-group">
                         <label for="DOB">Enter Password</label><span class="errorMessage" id="passwordError"></span>
