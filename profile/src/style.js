@@ -98,21 +98,25 @@ class DeleteAccount{
                     document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
                 }
             }
+            function Implementing(){
+              this.deletingCriteria.style.display = 'none';
+              this.deletingDiv.style.display = 'block';
+                // Implementing
+              deleteUploads();
+              deleteContents();
+              deleteUserData();
 
-            // Implementing
-            deleteUploads();
-            deleteContents();
-            deleteUserData();
-
-            if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
-                document.querySelector('#deleteFinish i').style.display= 'inline';
-            }else{
-                this.deletingDiv.style.display = 'none';
-                this.deletingCriteria.style.display = 'block';
-                this.errorDiv.style.display = 'block';
-                this.dErrorDivInside.style.display = 'block';
-                this.dispMessage.innerHTML = 'Problem With deleting';
+              if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
+                  document.querySelector('#deleteFinish i').style.display= 'inline';
+              }else{
+                  this.deletingDiv.style.display = 'none';
+                  this.deletingCriteria.style.display = 'block';
+                  this.errorDiv.style.display = 'block';
+                  this.dErrorDivInside.style.display = 'block';
+                  this.dispMessage.innerHTML = 'Problem With deleting';
+              }
             }
+            Implementing();
         }else{
             this.errorDiv.style.display = 'block';
             this.dErrorDivInside.style.display = 'block';
