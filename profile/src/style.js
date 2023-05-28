@@ -8,12 +8,12 @@ class DeleteAccount{
         this.dispMessage = document.getElementById('editDelmessage');
         this.errorDiv.style.display = 'none';
         this.dErrorDivInside.style.display = 'none';
+        this.uploadDeleted;
+        this.contentDeleted;
+        this.userDataDeleted;
     }
 
     deleteWithUsername(){
-        var uploadDeleted;
-        var contentDeleted;
-        var userDataDeleted;
         var username = document.querySelector('.delete-account #currentUsernameDelete');
         if (username.value == currentUsername) {
             this.deletingDiv.style.display = 'block';
@@ -36,7 +36,7 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    uploadDeleted = true;
+                    this.uploadDeleted = true;
                     document.querySelector('#deleteUploads i').style.display= 'inline';
                 }else{
                     uploadDeleted = false;
@@ -63,7 +63,7 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                  contentDeleted = true;
+                    this.contentDeleted = true;
                     document.querySelector('#deleteContents i').style.display= 'inline';
                 }else{
                     document.querySelector('#deleteContents i').style.display= 'inline';
@@ -90,7 +90,7 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                  userDataDeleted = true;
+                  this.userDataDeleted = true;
                     document.querySelector('#deleteUserData i').style.display= 'inline';
                 }else{
                     document.querySelector('#deleteUserData i').style.display= 'inline';
@@ -104,7 +104,7 @@ class DeleteAccount{
             deleteContents();
             deleteUserData();
 
-            if (uploadDeleted && contentDeleted && userDataDeleted) {
+            if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
                 document.querySelector('#deleteFinish i').style.display= 'inline';
             }else{
                 this.deletingDiv.style.display = 'none';
@@ -122,9 +122,6 @@ class DeleteAccount{
 
 
     deleteWithPassword(){
-        var uploadDel;
-        var contentDel;
-        var userDataDel;
         var password = document.querySelector('.delete-account #currentPasswordDelete');
         if (password.value.length <= 1) {
             this.dispMessage.innerHTML = 'Password required';
@@ -149,10 +146,9 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    uploadDel = true;
+                    this.uploadDeleted = true;
                     document.querySelector('#deleteUploads i').style.display= 'block';
                 }else{
-                    uploadDel = false;
                     document.querySelector('#deleteUploads i').style.display= 'block';
                     document.querySelector('#deleteUploads i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteUploads i').style.display.classList.add('fa-xmark');
@@ -176,10 +172,9 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    contentDel = true;
+                    this.contentDeleted = true;
                     document.querySelector('#deleteContents i').style.display= 'block';
                 }else{
-                    contentDel = false;
                     document.querySelector('#deleteContents i').style.display= 'block';
                     document.querySelector('#deleteContents i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteContents i').style.display.classList.add('fa-xmark');
@@ -204,10 +199,9 @@ class DeleteAccount{
                   });
                 var data = await response.json();
                 if (data.Result) {
-                    userDataDel = true;
+                    this.userDataDeleted = true;
                     document.querySelector('#deleteUserData i').style.display= 'block';
                 }else{
-                    userDataDel = false;
                     document.querySelector('#deleteUserData i').style.display= 'block';
                     document.querySelector('#deleteUserData i').style.display.classList.remove('fa-check');
                     document.querySelector('#deleteUserData i').style.display.classList.add('fa-xmark');
@@ -219,7 +213,7 @@ class DeleteAccount{
             deleteContents();
             deleteUserData();
 
-            if (uploadDeleted && contentDeleted && userDataDeleted) {
+            if (this.uploadDeleted && this.contentDeleted && this.userDataDeleted) {
                 document.querySelector('#deleteFinish i').style.display= 'block';
             }else{
                 this.errorDiv.style.display = 'block';
