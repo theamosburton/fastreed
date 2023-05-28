@@ -127,6 +127,8 @@ class DeleteAccount{
     deleteWithPassword(){
         var password = document.querySelector('.delete-account #currentPasswordDelete');
         if (password.value.length <= 1) {
+            this.errorDiv.style.display = 'block';
+            this.dErrorDivInside.style.display = 'block';
             this.dispMessage.innerHTML = 'Password required';
         }else{
             this.deletingDiv.style.display = 'block';
