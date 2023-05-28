@@ -255,7 +255,6 @@ class DeleteAccount{
                 thisIs.deletingCriteria.style.display = 'block';
                 thisIs.errorDiv.style.display = 'block';
                 thisIs.dErrorDivInside.style.display = 'block';
-                thisIs.dispMessage.innerHTML = 'An error occurred while deleting';
               }
             }
             
