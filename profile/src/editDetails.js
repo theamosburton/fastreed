@@ -589,9 +589,9 @@ class updateDetails{
             messageDiv.classList.remove('alert-danger');
             messageDiv.classList.add('alert-success');
             message.innerHTML = 'Password Updated';
-            setTimeout(function(){
-              location.reload();
-            }, 3000);
+            // setTimeout(function(){
+            //   location.reload();
+            // }, 3000);
           }else{
             messageDiv.classList.add('alert-danger');
             messageDiv.classList.remove('alert-success');
