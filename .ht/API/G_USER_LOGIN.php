@@ -125,7 +125,7 @@ class gSignUpLogin{
       if (empty($file_ext)) {
         $file_ext = '.png';
       }else{
-        $file_ext = '.'.$file_ext;
+        $file_ext = $file_ext;
       }
       $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
       if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
