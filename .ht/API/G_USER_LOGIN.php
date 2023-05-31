@@ -168,9 +168,9 @@ class gSignUpLogin{
     }
 
   private function makeFileEntry($fileName, $id, $purpose, $type, $ext){
-    $return = array('Result'=> false);
+    $return = false;
     $date = date('Y-m-d');
-    $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension) Values('$date', '$fileName', '$purpose', '$id', '$type', '.$ext')";
+    $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension) Values('$date', '$fileName', '$purpose', '$id', '$type', '$ext')";
     $result = mysqli_query($this->DB,$sql);
     if ($result) {
         $return['Result'] = true;
@@ -188,8 +188,8 @@ class gSignUpLogin{
     $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
     $name = $_GET['name'];
     $profilePicLink = $_GET['profilePic'];
-    if($this->saveProfilePic($profilePicLink, $userID)['result']){
-      $profilePicLink = $this->saveProfilePic($profilePicLink, $userID)['link'];
+    if($link = $this->saveProfilePic($profilePicLink, $userID)){
+      $profilePicLink = $link;
     }
     $date = date('Y-m-d');
     // Checking If Reference Session Availabe or Not
