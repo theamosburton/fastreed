@@ -189,7 +189,7 @@ class gSignUpLogin{
     $name = $_GET['name'];
     $profilePicLink = $_GET['profilePic'];
     if($link = $this->saveProfilePic($profilePicLink, $userID)){
-      $profilePicLink = $link;
+      $profilePicLink = $link['link'];
     }
     $date = date('Y-m-d');
     // Checking If Reference Session Availabe or Not
