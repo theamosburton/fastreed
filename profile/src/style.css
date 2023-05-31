@@ -203,7 +203,7 @@
     flex-direction: row;
 }
 .privacySecurity .password .inp .eye-logo{
-    margin-left: 5px;
+    margin-left: 15px;
 }
 .privacySecurity .password .inp .eye-logo:hover{
     cursor: pointer;
