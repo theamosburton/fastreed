@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('content-type:application/json');
+// header('content-type:application/json');
 if (!isset($_SERVROOT)) {
   $_SERVROOT = '../../../';
 }
@@ -32,6 +32,7 @@ class gSignUpLogin{
     private $AUTH;
     private $BASIC_FUNC;
     private $DB;
+    private $_DOCROOT;
 
     function __construct()
     {
@@ -40,6 +41,7 @@ class gSignUpLogin{
       $this->BASIC_FUNC = new BasicFunctions();
       // Get Connection
       $this->DB = $this->DB_CONNECT->DBConnection();
+      $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
       if (!isset($_GET)) {
         $cantRead = array("Result"=>false, "message"=>"No Parameter Given");
@@ -115,6 +117,69 @@ class gSignUpLogin{
     setcookie("authStatus", "", time()-3600, '/');
   }
 
+
+  // Saving profilepic in server
+  public function saveProfilePic($downLink, $id){
+    $return = false;
+      $file_ext = pathinfo($downLink, PATHINFO_EXTENSION);
+      if (empty($file_ext)) {
+        $file_ext = '.png';
+      }else{
+        $file_ext = '.'.$file_ext;
+      }
+      $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+      if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
+        $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/';
+        $add = '/fastreedusercontent/photos/'.$id.'/';
+        // Create the directory if it doesn't exist
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+        $fileAddress = $directory.$fileName.$file_ext;
+        $address = $add.$fileName.$file_ext;
+
+          // Download the image
+          $imageData = file_get_contents($downLink);
+          // Save the image on the server
+          if (file_put_contents($fileAddress, $imageData)) {
+              // File moved successfully
+              if($this->resetDP($id, $address)){
+                $return['result'] = true;
+                $return['link'] = $address;
+              }
+
+          }
+      }
+   return $return;
+    
+  }
+
+  private function resetDP($id, $fileAddress){
+        $return = false;
+        $sql = "UPDATE account_details SET 
+        profilePic = '$fileAddress'
+        WHERE personID = '$id'
+        ";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $return = true;
+        }
+        return $return;
+    }
+
+  private function makeFileEntry($fileName, $id, $purpose, $type, $ext){
+    $return = array('Result'=> false);
+    $date = date('Y-m-d');
+    $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension) Values('$date', '$fileName', '$purpose', '$id', '$type', '.$ext')";
+    $result = mysqli_query($this->DB,$sql);
+    if ($result) {
+        $return['Result'] = true;
+        $return['fileName'] = $fileName;
+    }
+
+    return $return;
+  }
+
   // Deleting Other IDS and Making Reference //
   public function createNewAccount(){
     $email = $_GET['email'];
@@ -122,7 +187,10 @@ class gSignUpLogin{
     // Creating new Guest ID and encrypt
     $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
     $name = $_GET['name'];
-    $profilePic = $_GET['profilePic'];
+    $profilePicLink = $_GET['profilePic'];
+    if($this->saveProfilePic($profilePicLink, $userID)['result']){
+      $profilePicLink = $this->saveProfilePic($profilePicLink, $userID)['link'];
+    }
     $date = date('Y-m-d');
     // Checking If Reference Session Availabe or Not
     if (isset($_SESSION['refSession'])) {
@@ -140,13 +208,13 @@ class gSignUpLogin{
     // Inserting data into account_details table
     if ($result) {
       $userSince = time();
-      $sql1 = "INSERT INTO account_details (personID , fullName, username, emailID, profilePic, userSince, Referer) VALUES ('$userID','$name', '$username', '$email', '$profilePic', '$userSince', '$refID')";
+      $sql1 = "INSERT INTO account_details (personID , fullName, username, emailID, profilePic, userSince, Referer) VALUES ('$userID','$name', '$username', '$email', '$profilePicLink', '$userSince', '$refID')";
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
         $this->loginAccount($userID);
         $ePID = $this->AUTH->encrypt($userID);
-        $this->notifyAdmin($name, $profilePic, $userSince, $username);
+        $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
       }else {
         $cantRead = array("Result"=>false, "message"=>"Account Not Created 1");
         $cantReadDecode = json_encode($cantRead);
