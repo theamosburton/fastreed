@@ -21,6 +21,8 @@ class showProfile {
     protected $otherUsername;
     protected $extraScript;
     protected $adminIsEditing;
+    private $DOCROOT;
+    private $SERVROOT;
     function __construct() {
         
         $this->const4Inherited();
@@ -44,6 +46,9 @@ class showProfile {
         if (isset($_GET['u'])) {
             $this->otherUsername = $_GET['u'];
         }
+
+        $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+        
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
         $this->FUNC = new BasicFunctions();
@@ -240,20 +245,20 @@ class loggedVself extends showProfile{
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
          </script>';
         $this->addHead();
-        
+        $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
     //***************/ Main Container Starts /**********//
         echo <<<HTML
             <div class="main-content">
                 <div class="container">
                     <div class="row ">
         HTML."\n";
-        include "../.ht/views/homepage/dropdowns.html";
+        include $this->DOCROOT."/.ht/views/homepage/dropdowns.html";
 
 
         //***************/ Profile Section /**********//
         echo "\n";
         
-        include "../.ht/views/profile/loggedVself/index.html";
+        include $this->DOCROOT."/.ht/views/profile/loggedVself/index.html";
 
         // ***************************************** //
         
