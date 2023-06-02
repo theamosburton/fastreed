@@ -165,7 +165,7 @@ class getLoggedData{
      }
 
     // By user
-    public function accountsByAdmin(){
+    public function accountsByAdmin($typs, $field){
         if (isset($_COOKIE['UID'])) {
             $ePID = $_COOKIE['UID'];
         }elseif (isset($_COOKIE['AID'])) {

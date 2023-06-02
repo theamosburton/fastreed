@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row gutters profile">
+        <!-- Profile on left side -->
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
+            <div class="card h-100">
+                <div class="card-body">
+                <div class="account-settings">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
+                            <div onclick="new showMenus().uploadDp()" class="editPhotos" id="editPhotos">
+                                <i class="fa fa-pen fa-xs"></i>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="user-details">
+                            <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
+                            <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
+                        </div>
+                        </div>
+                        <div class="profileOptions">
+                            <a href="/users/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile on left side --> 
+
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
+            <div class="userContent">
+                <!-- Menus section -->
+                <div class="userContentMenus scrollbar-style">
+                    <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="/profile/">Dashboard</a>
+                    <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
+                    <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a>
+                    <a id="accountMenu" class="menus" onclick="new showMenus()" href="?opt=account">Account Setting</a>
+                    
+                </div>
+                <!-- Menus section -->
+
+                <!-- Dashboard Section -->
+                <div id="dashboardDiv" class="dashboardDiv contentView" style="display:none">
+                </div>
+                <!-- Dashboard Section -->
+
+                <!-- Media Library Section -->
+                <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
+                    <?php
+                        include 'media-library.html';
+                    ?>
+                </div>
+                <!-- Media Library Section -->
+
+                <!-- Privacy and security section -->
+                <div id="privacyDiv" class="privacyDiv contentView" style="display:none">
+                    <?php
+                        include 'privacy-security.html';
+                    ?>
+                </div>
+                <!-- Privacy and security section -->
+                
+                <!-- Accounts Related-->
+                <div id="accountDiv" class="accountDiv contentView" style="display:none">
+                    <?php
+                        include 'account-settings.html';
+                    ?>
+                </div>
+                <!-- Accounts Related-->
+            </div>
+        </div>
+    </div>
+</div>
+    

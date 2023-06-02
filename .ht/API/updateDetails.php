@@ -1,33 +1,8 @@
 <?php
-session_start();
-// header('content-type:application/json');
-$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-$_SERVROOT = '../../../';;
-$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
-$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
-
-include_once($GLOBALS['AUTH']);
-include_once($GLOBALS['DB']);
-include($GLOBALS['DEV_OPTIONS']);
-include($GLOBALS['LOGGED_DATA']);
-include($GLOBALS['BASIC_FUNC']);
-
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $referrer = $_SERVER['HTTP_REFERER'];
-    $urlParts = parse_url($referrer);
-    $refdomain = $urlParts['host'];
-    if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
-        new updateDetails();
-    }else{
-        showMessage(false, "Access Denied DA");
-    }
+include 'APIHEAD.php';
+if ($proceedAhead) {
+    new updateDetails();
 }
-
-
-
 class updateDetails{
     private $DB;
     private $AUTH;
@@ -63,8 +38,6 @@ class updateDetails{
             }else{
                 showMessage(true, "Exists");
             }
-        }elseif (isset($_GET['passwordRelated'])){
-            $this->passwordRelated();
         }else {
             showMessage(false, "Access Denied No Detail");
         }
@@ -86,126 +59,72 @@ class updateDetails{
             showMessage(false, "Id not given");
         }elseif(!isset($data['editor'])) {
             showMessage(false, "Editor not mentioned");
-            $this->editDetails('admin');
             //When admin try to update other or self detail
         }elseif($data['editor'] == 'admin') {
-            $this->editDetails('admin');
+            $this->adminEdit();
             //When admin try to update other or self detail
         }elseif ($data['editor'] == 'user') {
             //When user try to update his/her own detail
-            $this->editDetails('user');
+            $this->userEdit();
         }else{
             showMessage(false, "Access Denied DA");
         }
        
     }
 
-    private function passwordRelated(){
-        $data = json_decode(file_get_contents('php://input'), true);
-        if ($data['function'] == 'creation') {
-            $this->createPassword();
-        }elseif ($data['function'] == 'updation') {
-            $this->updatePassword();
-        }else {
-            showMessage(false, "function not mentioned");
-        }
-    }
-    private function createPassword(){
-        $data = json_decode(file_get_contents('php://input'), true);
-        $ePID = $data['ePID'];
-        $dPID = $this->AUTH->decrypt($ePID);
-        $newPassword = $data['newPassword'];
-        $newPassword = trim($newPassword);
-        $newPassword = strip_tags($newPassword);
-        $newPassword = htmlentities($newPassword, ENT_QUOTES, 'UTF-8');
-
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $sql = "UPDATE accounts SET 
-        Password = '$hashedPassword'
-        WHERE personID = '$dPID' 
-        ";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-            showMessage(true, "Password Created");
-        } else {
-            showMessage(false, "Can not create password");
-        }
-
-
-    }
-    private function updatePassword(){
-        $data = json_decode(file_get_contents('php://input'), true);
-        $currentPassword = $data['currentPassword'];
-        $ePID = $data['ePID'];
-        $dPID = $this->AUTH->decrypt($ePID);
-
-        $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
-        $result = mysqli_query($this->DB, $sql);
-        if (!$result) {
-            showMessage(false, "Problem with fetching password");
-        }else if(mysqli_num_rows($result) < 1) {
-            showMessage(false, "Problem with fetching password");
-        }else{
-            $row = mysqli_fetch_assoc($result);
-            $hashedPassword = $row['Password'];
-        }
-
-        if (password_verify($currentPassword, $hashedPassword)) {
-            // checking if current and new password are same
-            if (password_verify($data['newPassword'], $hashedPassword)) {
-                showMessage(false, "New and current can not be same");
-            }else{
-                $this->createPassword();
-            }
-           
-        } elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
-            $this->createPassword();
-        }else {
-            showMessage(false, "Incorrect Password");
-        }
-
-    }
-
-
-    private function editDetails($x) {
+    // Updating profile details
+    private function adminEdit(){
+        $x = $data['editor'];
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
-        $dPID = $this->AUTH->decrypt($ePID);
+        $userID = $this->AUTH->decrypt($ePID);
+        $adminID = $_SESSION['LOGGED_USER'];
+        $adminPassword = $data['adminPassword'];
+        if($this->userData->getSelfDetails()['userType'] != 'Admin'){
+            showMessage(false, "You are not an admin");
+        }else{
+            $adminPasswordDB  = $this->userData->accountsByUser()['Password'];
+            if (empty($adminPassword)) {
+                showMessage(false, "Empty password given");
+            }else{
+                if(password_verify($adminPassword, $adminPasswordDB)){
+                    $this->update($x);
+                }else{
+                    showMessage(false, "Wrong admin password");
+                }
+            }
 
-        // Checking if password required or not
-        // If user password is not set or created
+        }
+    }
+    private function userEdit(){
+        $x = $data['editor'];
+        $data = json_decode(file_get_contents('php://input'), true);
+        $ePID = $data['personID'];
+        $userID = $this->AUTH->decrypt($ePID);
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
-            $this->update($x);
-            // If admin is editing other password not self
-            // Present user is admin and editing id should not admin
-        }elseif($this->userData->getSelfDetails()['userType'] == 'Admin' && $this->userData->getOtherData('personID', $dPID)['userType'] != 'Admin'){
             $this->update($x);
         }else{
             $currentPassword = $data['currentPassword'];
-            
-    
             $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
             $result = mysqli_query($this->DB, $sql);
             if (!$result) {
-                showMessage(false, "Problem with fetching password");
+                showMessage(false, "Can't verify password");
             }else if(mysqli_num_rows($result) < 1) {
-                showMessage(false, "Problem with fetching password");
+                showMessage(false, "Can't verify password");
             }else{
                 $row = mysqli_fetch_assoc($result);
                 $hashedPassword = $row['Password'];
+                if(empty($currentPassword)){
+                    showMessage(false, "Empty password given");
+                }elseif (password_verify($currentPassword, $hashedPassword)) {
+                    $this->update($x);
+                } else {
+                    showMessage(false, "Incorrect Password");
+                }
             }
 
-            if(empty($currentPassword)){
-                showMessage(false, "Empty password given");
-            }elseif (password_verify($currentPassword, $hashedPassword)) {
-                $this->update($x);
-            } else {
-                showMessage(false, "Incorrect Password");
-            }
         }
-        
     }
-    
     private function update($x){
         $data = json_decode(file_get_contents('php://input'), true);
         $fullName = $data['fullName'] ?? null;
@@ -281,7 +200,7 @@ class updateDetails{
             }
         }
     }
-    
+    // Updating profile details / 
 
 
     private function updateGenderDob($gender, $dob){
@@ -297,18 +216,4 @@ class updateDetails{
     }
     
 }
-function showMessage($result, $message){
-    $data = array("Result"=>$result, "message"=>"$message");
-    $dataDecode = json_encode($data);
-    echo "$dataDecode";
-}
-
-
-
-
-
-
-
-
-
 ?>

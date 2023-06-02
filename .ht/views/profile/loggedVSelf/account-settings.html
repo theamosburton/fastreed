@@ -1,0 +1,220 @@
+<!-- Account Info -->
+<div class="contentTopics">
+  <!-- for showing info -->
+  <div class="personalInfoTab" id="personalInfoShow">
+    <div class="title">
+        Personal DetailsS
+    </div>
+
+    <div class="infoDiv">
+        <span class="infoType"> <i class="fa-solid fa-user fa-xl"></i></span>
+        <span class="infoValue"><?php echo $this->userData->getSelfDetails()['name'];
+        if($this->userData->getSelfDetails()['Gender'] != null){
+            echo ' ('.$this->userData->getSelfDetails()['Gender'].')';
+        }
+        ?>
+        </span>
+    </div>
+
+    <?php
+    if ($this->userData->getSelfDetails()['DOB'] != null) {
+    echo <<<HTML
+    <div class="infoDiv">
+        <span class="infoType"><i class="fa-solid fa-calendar fa-xl"></i></span>
+        <span class="infoValue">{$this->userData->getSelfDetails()['DOB']}</span>
+    </div>
+    HTML;
+    }
+    ?>
+
+    <div class="infoDiv">
+    <span class="infoType"><i class="fa-solid fa-hashtag fa-xl"></i></span>
+    <span class="infoValue"><?php echo $this->userData->getSelfDetails()['username'];?>
+    </span>
+    </div>
+
+    <div class="infoDiv">
+    <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
+    <span class="infoValue"><?php echo $this->userData->getSelfDetails()['email'];?>
+    </span>
+    </div>
+
+    <?php
+    if($this->userData->getSelfDetails()['websiteUrl'] != null){
+    echo <<<HTML
+    <div class="infoDiv">
+        <span class="infoType"><i class="fa-solid fa-earth-asia fa-xl"></i></span>
+        <span class="infoValue">{$this->userData->getSelfDetails()['websiteUrl']}
+        </span>
+    </div>
+    HTML;
+    }
+    ?>
+
+    <?php
+    if($this->userData->getSelfDetails()['bio'] != null){
+    echo <<<HTML
+    <div class="infoDiv">
+        <span class="infoType"><i class="fa-solid fa-circle-info fa-xl"></i></span>
+        <span class="infoValue">{$this->userData->getSelfDetails()['bio']}
+        </span>
+    </div>
+    HTML;
+    }
+    ?>   
+  
+    <span id="editDetailsButton" onclick="update.enableEditing()">Edit Details  
+        <i class="fa-solid fa-pen-to-square"></i>
+    </span>
+  </div>
+  <!-- /For showing Info -->
+  <!-- For Editing Info -->
+  <div class="personalInfoTab" id="personalInfoEdit" style="display:none">
+    <div class="title">
+      Edit Personal Details
+    </div>
+    <div class="card-body edit-fields" id="edit_fields" style="display:block">
+      <div class="row gutters">
+        <!-- Error Message -->
+        <div id="updateAlert" class="col-12">
+          <div id="uAlert" class="alert alert-danger alert-dismissible fade show">
+            <span id="editmessage"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <!-- Error Message -->
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="fullName">Full Name</label> <span class="errorMessage" id="nameErrorMessage"></span>
+            <input onkeyup="update.checkName()" value="<?php echo $this->userData->getSelfDetails()['name'];?>" type="text" class="form-control" id="fullName" placeholder="Enter full name" autocomplete="off">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="username">Username</label><span class="errorMessage" id="usernameErrorMessage"> </span>
+            <input onkeyup="update.checkUsername()" value="<?php echo $this->userData->getSelfDetails()['username'];?>" type="text" class="form-control" id="username" placeholder="Enter Username i.e. Jhon_doe, jhon.doe " autocomplete="off">
+          </div>
+        </div>
+
+        
+
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="DOB">Date of birth</label><span class="errorMessage" id="DOBErrorMessage"></span>
+            <input onkeyup="update.checkDOB()" onselect="update.checkDOB()" onchange="update.checkDOB()"value="<?php echo $this->userData->getSelfDetails()['DOB']?>" type="date" class="form-control" id="DOB" placeholder="Enter Date of birth">
+          </div>
+        </div>
+
+        <?php
+        $male = '';
+        $female = '';
+        $other = '';
+          if($this->userData->getSelfDetails()['Gender'] == 'Male'){
+            $male = 'selected';
+          }elseif($this->userData->getSelfDetails()['Gender'] == 'Female'){
+            $female = 'selected';
+          }elseif($this->userData->getSelfDetails()['Gender'] == 'Others'){
+            $other = 'selected';
+          }
+        ?>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="gender">Gender</label><span class="errorMessage" id="genderErrorMessage"></span>
+            <select onchange="update.validateGender()" class="form-control" name="Gender" id="gender">
+              <option value="none">Select</option>
+              <option value="Male" <?php echo $male;?>>Male</option>
+              <option value="Female" <?php echo $female;?>>Female</option>
+              <option value="Others" <?php echo $other;?>>Others</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="website">Website</label><span class="errorMessage" id="websiteErrorMessage"></span>
+            <input onkeyup="update.checkWebsite()" value="<?php echo $this->userData->getSelfDetails()['websiteUrl']?>" type="url" class="form-control" id="website" name="websiteUrl" placeholder="Enter Url" >
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xl">
+          <div class="form-group">
+            <label for="about">About</label><span class="errorMessage" id="aboutErrorMessage"></span>
+            <textarea value="" onkeyup="update.checkAbout()" class="form-control" name="about" id="about" rows="1" onfocus="this.setAttribute('autocomplete', 'off');" onblur="this.setAttribute('autocomplete', 'off');"><?php echo $this->userData->getSelfDetails()['bio'];?></textarea>
+          </div>
+        </div>
+        
+      </div>
+
+      <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+        echo <<<HTML
+          <div class="row gutters">
+            <div class="col-12">
+              <div>
+                <button type="button" onclick="update.cancelEditing()" id="submit" name="submit" class="btn btn-secondary btn-cancel">Cancel</button>
+                <button type="button" onclick="update.editByUser()" id="submit" name="submit" class="btn btn-primary btn-update">Update Details</button>
+              </div>
+            </div>
+          </div>
+        HTML;
+      }else{
+        echo <<<HTML
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="DOB">Enter Password</label><span class="errorMessage" id="passwordError"></span>
+            <input onkeyup="update.checkCurrentPassword1()" type="password" class="form-control" id="currentPasswordDet" placeholder="Enter current password">
+          </div>
+        </div>
+        <div class="row gutters">
+          <div class="col-12">
+            <div>
+              <button type="button" onclick="update.cancelEditing()" id="submit" name="submit" class="btn-cancel btn btn-secondary">Cancel</button>
+              <button type="button" onclick="update.editByUser()" id="submit" name="submit" class="btn btn-primary btn-update">Update Details</button>
+            </div>
+          </div>
+        </div>
+      HTML;
+      }?>
+    </div>
+  </div>
+  <!-- /For Editing Info -->
+</div>
+<!-- /Account Info -->
+
+<!-- Account Deleting -->
+<div class="contentTopics delete-account">
+  <div class="title">Delete Account</div>
+  <!-- Error Message -->
+  <div id="dErrorDiv" class="col-lg-8 col-md-8">
+    <div id="dErrorDivInside" class="alert alert-danger alert-dismissible fade show">
+      <span id="editDelmessage"></span>
+    </div>
+  </div>
+  <!-- Error Message -->
+  <div class="col-lg-8 col-md-8">
+    <div class="form-group">
+      <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+        echo <<<HTML
+          <div class="delete-criteria">
+            <input type="text" class="form-control delete-criteria" id="currentUsernameDelete" placeholder="Enter username">
+            <span class="warning">Once you delete your account, there is no going back. Please be certain.</span>
+            <button type="button" onclick="deleteAccount.deleteWithUsername()" id="submit" name="submit" class="btn-cancel btn btn-danger">Delete Account</button>
+          </div>
+        HTML;
+      }else{
+        echo <<<HTML
+          <div class="delete-criteria">
+            <input type="password" class="delete-criteria form-control" id="currentPasswordDelete" placeholder="Enter password">
+            <span class="warning">Once you delete your account, there is no going back. Please be certain.</span>
+            <button type="button" onclick="deleteAccount.deleteWithPassword()" id="submit" name="submit" class="btn-cancel btn btn-danger">Delete Account</button>
+          </div>
+        HTML;
+      }
+      ?>
+      <div class="deleting-progress">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Account Deleting -->

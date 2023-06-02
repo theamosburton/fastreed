@@ -1,40 +1,8 @@
 <?php
-session_start();
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-header('content-type:application/json');
-if (!isset($_SERVROOT)) {
-  $_SERVROOT = '../../../';
+include 'APIHEAD.php';
+if ($proceedAhead) {
+    new refreshSite();
 }
-$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
-include_once($GLOBALS['DEV_OPTIONS']);
-include($GLOBALS['LOGGED_DATA']);
-include_once($GLOBALS['DB']);
-
-
-
-
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $referrer = $_SERVER['HTTP_REFERER'];
-    $urlParts = parse_url($referrer);
-    $refdomain = $urlParts['host'];
-    if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
-        new refreshSite();
-    }else {
-        showError(false, "Access Denied 0");
-    }
-}else {
-    showError(false, "Access Denied 3");
-}
-
-
-
-
-
-
 class  refreshSite{
     private $DB_CONNECT;
     private $DB;
@@ -46,22 +14,22 @@ class  refreshSite{
 
         if ($this->userData->adminLogged) {
             if (!isset($_GET)) {
-                showError(false, "Request not Found");
+                showMessage(false, "Request not Found");
             }elseif (isset($_GET['intent'])) {
                 if (empty($_GET['intent'])) {
-                    showError(false, "Empty Request Found");
+                    showMessage(false, "Empty Request Found");
                 }elseif ($_GET['intent'] == 'refreshCSS') {
                     $this->refreshCSS();
                 }elseif ($_GET['intent'] == 'hardRefresh') {
                     $this->hardRefresh();
                 }else {
-                    showError(false, "Intent is empty");
+                    showMessage(false, "Intent is empty");
                 }
             }else {
-                showError(false, "Intent Required");
+                showMessage(false, "Intent Required");
             }
         }else{
-            showError(false, "Not an Admin");
+            showMessage(false, "Not an Admin");
         }
 
     }
@@ -73,9 +41,9 @@ class  refreshSite{
         $sql = "UPDATE webmeta SET optionValue = '$newVersion' WHERE optionName = 'cssJsVersion'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-            showError(true, "Version Update: $newVersion");
+            showMessage(true, "Version Update: $newVersion");
         }else {
-            showError(false, "Could Not Update Version");
+            showMessage(false, "Could Not Update Version");
         }
     }
 
@@ -92,18 +60,12 @@ class  refreshSite{
         // Execute the shell command and capture the output
         exec('git pull fastreed main', $output, $returnCode);
         if ($returnCode !== 0) {
-            showError(true, "Updated Now");
+            showMessage(true, "Updated Now");
         } else {
-            showError(false, "Not Updated");
+            showMessage(false, "Not Updated");
         }
     }
     
-}
-
-function showError($result, $message){
-    $data = array("Result"=>$result, "message"=>"$message");
-    $dataDecode = json_encode($data);
-    echo "$dataDecode";
 }
 
 ?>

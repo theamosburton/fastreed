@@ -206,7 +206,7 @@ class loggedAdminVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/adminVOther.html";
+        include "../.ht/views/profile/adminVOther/index.html";
 
         echo <<<HTML
                     </div>
@@ -253,7 +253,7 @@ class loggedVself extends showProfile{
         //***************/ Profile Section /**********//
         echo "\n";
         
-        include "../.ht/views/profile/loggedVself.html";
+        include "../.ht/views/profile/loggedVself/index.html";
 
         // ***************************************** //
         

@@ -162,7 +162,6 @@ class updateDetails{
     }
   }
   
-  
   checkDOB(){
     this.isDOB = false;
     this.DOB = document.querySelector('#DOB').value;
@@ -224,6 +223,7 @@ class updateDetails{
     var messageDiv = document.querySelector('#uAlert');
     var mainDiv = document.querySelector('#updateAlert');
     var dispMessage = document.querySelector('#uAlert #editmessage');
+    var adminPassword = document.getElementById('adminPasswordEdit').value;
     messageDiv.classList.remove('alert-success');
     messageDiv.classList.add('alert-danger');
     mainDiv.style.display = 'block';
@@ -232,53 +232,59 @@ class updateDetails{
       if (this.isUsername) {
         if (this.isEmail) {
           if (this.isDOB) {
-            messageDiv.classList.add('alert-success');
-            messageDiv.classList.remove('alert-danger');
-            dispMessage.innerHTML = 'Updating...';
-            const updateDetails = async () =>{
-              const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
-              var encyDat = {
-                'personID' : `${ePID}`,
-                'fullName' : `${this.fullName}`,
-                'username' : `${this.username}`,
-                'email': `${this.emailID}`,
-                'DOB': `${this.DOB}`,
-                'Gender' : `${this.Gender}`,
-                'website' : `${this.website}`,
-                'about' : `${this.about}`,
-                'cUsername': `${currentUsername}`,
-                'cEmail': `${currentEmail}`,
-                'editor':'admin',
-                'currentPassword': `${currentPassDet}`
-              };
-              const response = await fetch(url, {
-                  method: 'post',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(encyDat)
-                });
-              var data = await response.json();
-  
-              if (data) {
-                if (data.Result) {
-                  messageDiv.classList.add('alert-success');
-                  messageDiv.classList.remove('alert-danger');
-                  dispMessage.innerHTML = 'Updated Successfully';
-                  let urlPostfix = this.username;
-                  setTimeout(function(){
-                    window.location.href = `/users/${urlPostfix}`;
-                  }, 3000);
+            if (adminPassword < 8) {
+              mainDiv.style.display = 'block';
+              dispMessage.innerHTML = 'Admin password required';
+            }else{
+              messageDiv.classList.add('alert-success');
+              messageDiv.classList.remove('alert-danger');
+              dispMessage.innerHTML = 'Updating...';
+              const updateDetails = async () =>{
+                const url = '/.ht/API/updateDetails.php/?fullProfileUpdate';
+                var encyDat = {
+                  'personID' : `${ePID}`,
+                  'fullName' : `${this.fullName}`,
+                  'username' : `${this.username}`,
+                  'email': `${this.emailID}`,
+                  'DOB': `${this.DOB}`,
+                  'Gender' : `${this.Gender}`,
+                  'website' : `${this.website}`,
+                  'about' : `${this.about}`,
+                  'cUsername': `${currentUsername}`,
+                  'cEmail': `${currentEmail}`,
+                  'editor':'admin',
+                  'currentPassword': `${currentPassDet}`,
+                  'adminPassword' : `${adminPassword}`
+                };
+                const response = await fetch(url, {
+                    method: 'post',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(encyDat)
+                  });
+                var data = await response.json();
+    
+                if (data) {
+                  if (data.Result) {
+                    messageDiv.classList.add('alert-success');
+                    messageDiv.classList.remove('alert-danger');
+                    dispMessage.innerHTML = 'Updated Successfully';
+                    let urlPostfix = this.username;
+                    setTimeout(function(){
+                      window.location.href = `/users/${urlPostfix}`;
+                    }, 3000);
+                  }else{
+                    mainDiv.style.display = 'block';
+                    dispMessage.innerHTML = data.message;
+                  }
                 }else{
                   mainDiv.style.display = 'block';
                   dispMessage.innerHTML = data.message;
                 }
-              }else{
-                mainDiv.style.display = 'block';
-                dispMessage.innerHTML = data.message;
               }
+              updateDetails();
             }
-            updateDetails();
           }else{
             mainDiv.style.display = 'block';
             dispMessage.innerHTML = 'Problem With Date of Birth';
@@ -487,14 +493,40 @@ class updateDetails{
     }
   }
 
-  createNewPassword(){
-    var message = document.getElementById('pErrorMessage');
-    var messageDiv= document.getElementById('pErrorDiv');
-    messageDiv.style.display = 'block';
-    if (!isNewPass) {
+  createNewPassword(whoCreate){
+    var erMessage = document.querySelector('.pErrorDiv #peditmessage');
+    var errorDiv = document.querySelector('#pErrorDiv');
+    var messageDiv= document.getElementById('pErrorMessage');
+    errorDiv.style.display = 'block';
+    var adminPass;
+    var userOrAdmin;
+    var isCurrent;
+    if (whoCreate == 'user') {
+      adminPass = '';
+      userOrAdmin = 'current';
+      isCurrent = true;
+    }else if (whoCreate == 'admin') {
+      userOrAdmin = 'admin';
+      adminPass = document.getElementById('adminPassword').value;
+      if (currentPass.length < 8) {
+        isCurrent = false;
+      }else{
+        isCurrent = true;
+      }
+    }else{
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Check new password';
+      erMessage.innerHTML = 'Updater not known';
+    }
+
+    if(!isCurrent){
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = `Check ${userOrAdmin} password`;
+    }else if (!isNewPass) {
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      message.innerHTML = `Check new password`;
     }else if(!verifyPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
@@ -505,11 +537,13 @@ class updateDetails{
       message.innerHTML = 'Creating password';
 
       const createPassword = async () =>{
-        const url = '/.ht/API/updateDetails.php?passwordRelated';
+        const url = '/.ht/API/password.php?passwordRelated';
         var encyDat = {
           'ePID' : `${ePID}`,
           'newPassword' : `${newPass}`,
-          'function' : 'creation'
+          'function' : 'creation',
+          'adminPassword' : `${adminPass}`,
+          'editor' : `${whoCreate}`
         };
         const response = await fetch(url, {
             method: 'post',
@@ -545,15 +579,35 @@ class updateDetails{
     }
   }
 
-  updatePassword(){
+  updatePassword(whoUpdated){
     var erMessage = document.querySelector('.pErrorDiv #peditmessage');
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
-    if (!isCurrentPass && usingPass) {
+    var userOrAdmin;
+    var isCurrent;
+    if (whoUpdated == 'user') {
+      isCurrent = isCurrentPass;
+      userOrAdmin = 'current';
+    }else if (whoUpdated == 'admin') {
+      userOrAdmin = 'admin';
+      currentPass = document.getElementById('adminPassword').value;
+      curentPass = currentPass.value;
+      if (currentPass.length < 8) {
+        isCurrent = false;
+      }else{
+        isCurrent = true;
+      }
+    }else{
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      erMessage.innerHTML = 'Check current password';
+      erMessage.innerHTML = 'Updater not known';
+    }
+
+    if (!isCurrent) {
+      messageDiv.classList.add('alert-danger');
+      messageDiv.classList.remove('alert-success');
+      erMessage.innerHTML = `Check ${userOrAdmin} password`;
     }else if(!isNewPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
@@ -567,12 +621,13 @@ class updateDetails{
       messageDiv.classList.add('alert-success');
       erMessage.innerHTML = 'Upadting password...';
       const updatePassword = async () =>{
-        const url = '/.ht/API/updateDetails.php?passwordRelated';
+        const url = '/.ht/API/password.php?passwordRelated';
         var encyDat = {
           'ePID' : `${ePID}`,
           'newPassword' : `${newPass}`,
           'currentPassword' : `${currentPass}`,
-          'function' : 'updation'
+          'function' : 'updation',
+          'editor' : `${whoUpdated}`
         };
         const response = await fetch(url, {
             method: 'post',

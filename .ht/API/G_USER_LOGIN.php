@@ -1,32 +1,8 @@
 <?php
-session_start();
-// header('content-type:application/json');
-if (!isset($_SERVROOT)) {
-  $_SERVROOT = '../../../';
-}
-$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-
-
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
-
-$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
-include_once($GLOBALS['DEV_OPTIONS']);
-$refurl = $_SERVER['HTTP_HOST'];
-
-if ($refurl == DOMAIN || $refurl == DOMAIN_ALIAS) {
-    include_once($GLOBALS['DB']);
-    include_once($GLOBALS['AUTH']);
-    include_once($GLOBALS['BASIC_FUNC']);
+include 'APIHEAD.php';
+if ($proceedAhead) {
     new gSignUpLogin();
-}else {
-  $cantRead = array("Result"=>"Access Denied");
-  $cantReadDecode = json_encode($cantRead);
-  echo "$cantReadDecode";
 }
-
-
 class gSignUpLogin{
     private $DB_CONNECT;
     private $AUTH;
@@ -44,15 +20,11 @@ class gSignUpLogin{
       $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
       if (!isset($_GET)) {
-        $cantRead = array("Result"=>false, "message"=>"No Parameter Given");
-        $cantReadDecode = json_encode($cantRead);
-        echo "$cantReadDecode";
+        showMessage(false, 'No paramater given');
       }else if (isset($_GET['logout'])) {
         $this->logoutAccount();
       }else if(!isset($_GET['email'])){
-        $cantRead = array("Result"=>false, "message"=>"Email Not Provided");
-        $cantReadDecode = json_encode($cantRead);
-        echo "$cantReadDecode";
+        showMessage(false, 'Email not provided');
       }else {
         $email = $_GET['email'];
         $userExists = $this->checkUserExists($email)['status'];
@@ -87,9 +59,7 @@ class gSignUpLogin{
     setcookie('UID', $ePID, time()+(60 * 60 * 24 * 90), '/');
     setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/');
     $_SESSION['LOGGED_USER'] = $userID;
-    $cantRead = array("Result"=>true, "message"=>"Logged In");
-    $cantReadDecode = json_encode($cantRead);
-    echo "$cantReadDecode";
+    showMessage(true, 'Logged in');
   }  
 
   // Deleting Other IDS and Making Reference //
@@ -216,14 +186,10 @@ class gSignUpLogin{
         $ePID = $this->AUTH->encrypt($userID);
         $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
       }else {
-        $cantRead = array("Result"=>false, "message"=>"Account Not Created 1");
-        $cantReadDecode = json_encode($cantRead);
-        echo "$cantReadDecode";
+        showMessage(false, "Can't Log in");
       }
     }else {
-      $cantRead = array("Result"=>false, "message"=>"Account Not Created 2");
-      $cantReadDecode = json_encode($cantRead);
-      echo "$cantReadDecode";
+      showMessage(false, 'Account not created');
     }
   }
 
@@ -240,9 +206,7 @@ class gSignUpLogin{
     setcookie('UID', "", time()-3600);
     setcookie('RMM',  "", time()-3600);
     unset($_SESSION['LOGGED_USER']);
-    $cantRead = array("Result"=>true, "message"=>"Logged Out");
-    $cantReadDecode = json_encode($cantRead);
-    echo "$cantReadDecode";
+    showMessage(true, 'Logged out');
   }
 
 }

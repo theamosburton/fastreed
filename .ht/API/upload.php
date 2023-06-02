@@ -1,30 +1,8 @@
 <?php
-session_start();
-// header('content-type:application/json');
-if (!isset($_SERVROOT)) {
-  $_SERVROOT = '../../../';
-}
-$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-
-
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
-
-$GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
-$GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
-include_once($GLOBALS['DEV_OPTIONS']);
-$refurl = $_SERVER['HTTP_HOST'];
-
-if ($refurl == DOMAIN || $refurl == DOMAIN_ALIAS) {
-    include_once($GLOBALS['DB']);
-    include_once($GLOBALS['AUTH']);
-    include_once($GLOBALS['BASIC_FUNC']);
+include 'APIHEAD.php';
+if ($proceedAhead) {
     new uploadMedia();
-}else {
-    showMessage(false, 'Wrong Domain Used');
 }
-
-
 class uploadMedia{
     private $DB_CONNECT;
     private $DB;
@@ -63,11 +41,11 @@ class uploadMedia{
         }elseif($_POST['editor'] == 'user') {
             $dPID = $_SESSION['LOGGED_USER'];
             if ($_POST['type'] == 'image') {
-                $this->uploadImage($dPID);
+                // $this->uploadImage($dPID);
             }elseif ($_POST['type'] == 'video') {
-                $this->uploadVideo($dPID);
+                // $this->uploadVideo($dPID);
             }elseif ($_POST['type'] == 'audio') {
-                $this->uploadAudio($dPID);
+                // $this->uploadAudio($dPID);
             }elseif ($_POST['type'] == 'dpUpload') {
                 $this->uploadDP($dPID);
             }else {
@@ -138,23 +116,5 @@ class uploadMedia{
         }
         return $return;
     }
-    // private function uploadImage($id){
-
-    // }
-
-    // private function uploadVideo($id){
-
-    // }
-
-    // private function uploadAudio($id){
-
-    // }
-}
-
-
-function showMessage($result, $message){
-    $data = array("Result"=>$result, "message"=>$message);
-    $dataDecode = json_encode($data);
-    echo "$dataDecode";
 }
 ?>

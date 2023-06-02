@@ -1,0 +1,53 @@
+<!-- Privacy and Security Section -->
+<!-- Password Sub section -->
+<div class="privacySecurity contentTopics">
+  <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+    echo <<<HTML
+      <div class="title">Create password</div>
+      <div class="setPassword">
+        <div class="password">
+          <div id="pErrorDiv" class="col-12" style="display:none">
+            <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="editmessage"> </span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+          <span class="IndError" id="currentasswordError" style="display:none"></span>
+          <div class="inp" >
+            <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="adminPassword" placeholder="Current admin password" autocomplete="off"> 
+          </div>
+          <span class="IndError" id="newPasswordError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+          <span class="IndError" id="verifyError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+          <div class="inp button" onclick="update.createNewPassword('admin')"><span>Create Password</span></div>
+        </div>
+      </div>
+      HTML."\n";
+  }else{
+    echo <<<HTML
+      <div class="title">Update password</div>
+      <div class="setPassword">
+        <div class="password">
+          <div id="pErrorDiv" class="col-12 pErrorDiv" style="display:none">
+            <div id="pErrorMessage" class="alert alert-danger alert-dismissible fade show"><span id="peditmessage"> </span>
+            </div>
+          </div>
+          <span class="IndError" id="currentasswordError" style="display:none"></span>
+          <div class="inp" >
+            <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="adminPassword" placeholder="Current admin password" autocomplete="off"> 
+          </div>
+          <span class="IndError" id="newPasswordError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+          <span class="IndError" id="verifyError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password" autocomplete="off"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+          <div class="inp button" onclick="update.updatePassword('admin')"><span>Update Password</span></div>
+        </div>
+      </div>
+    HTML."\n";
+  }
+  ?>
+</div>
+<!-- /Password Sub section -->
+<!-- Password Creation and Updation -->
