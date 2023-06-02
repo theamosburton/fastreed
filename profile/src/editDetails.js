@@ -557,21 +557,21 @@ class updateDetails{
         if (data) {
           console.log(data);
           if (data.Result) {
-            messageDiv.classList.add('alert-success');
             messageDiv.classList.remove('alert-danger');
-            message.innerHTML = 'Password created';
+            messageDiv.classList.add('alert-success');
+            erMessage.innerHTML = `${data.message}`;
             setTimeout(function(){
               location.reload();
             }, 3000);
           }else{
             messageDiv.classList.add('alert-danger');
             messageDiv.classList.remove('alert-success');
-            message.innerHTML = `${data.message}`;
+            erMessage.innerHTML = `${data.message}`;
           }
         }else{
-            messageDiv.classList.add('alert-danger');
-            messageDiv.classList.remove('alert-success');
-            message.innerHTML = `${data.message}`;
+          messageDiv.classList.add('alert-danger');
+          messageDiv.classList.remove('alert-success');
+          erMessage.innerHTML = `${data.message}`;
         }
       }
       createPassword();
@@ -643,7 +643,7 @@ class updateDetails{
           if (data.Result) {
             messageDiv.classList.remove('alert-danger');
             messageDiv.classList.add('alert-success');
-            erMessage.innerHTML = 'Password Updated';
+            erMessage.innerHTML =`${data.message}`;
             setTimeout(function(){
               location.reload();
             }, 3000);
