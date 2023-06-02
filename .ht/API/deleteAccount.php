@@ -133,7 +133,7 @@ class deleteAccount {
         showMessage(false, "Admin password not provided");
     }elseif (empty($data['adminPassword'])) {
         showMessage(false, "Admin password empty");
-    }elseif (verifyPassword($selfId, $adminPassword)) {
+    }elseif (!verifyPassword($selfId, $adminPassword)) {
         showMessage(false, "Incorrect admin password");
     }elseif (empty($username)) {
         showMessage(false, "Empty Username given");
