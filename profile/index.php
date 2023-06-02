@@ -258,7 +258,7 @@ class loggedVself extends showProfile{
         //***************/ Profile Section /**********//
         echo "\n";
         
-        include $this->DOCROOT."/.ht/views/profile/loggedVself/index.html";
+        include $this->DOCROOT."/.ht/views/profile/loggedVSelf/index.html";
 
         // ***************************************** //
         
@@ -302,7 +302,7 @@ class loggedVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/loggedVother.html";
+        include "../.ht/views/profile/loggedVOther.html";
 
         echo <<<HTML
                     </div>
