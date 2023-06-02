@@ -580,7 +580,7 @@ class updateDetails{
   }
 
   updatePassword(whoUpdated){
-    var erMessage = document.querySelector('.pErrorDiv #peditmessage');
+    var erMessage = document.querySelector('.pErrorMessage #peditmessage');
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
@@ -655,7 +655,7 @@ class updateDetails{
         }else{
             messageDiv.classList.add('alert-danger');
             messageDiv.classList.remove('alert-success');
-            erMessage.innerHTML = `${data.message}`;
+            erMessage.innerHTML = 'There is an error';
         }
       }
       updatePassword();
