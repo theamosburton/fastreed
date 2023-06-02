@@ -494,7 +494,7 @@ class updateDetails{
   }
 
   createNewPassword(whoCreate){
-    var erMessage = document.querySelector('.pErrorMessage #peditmessage');
+    var erMessage = document.getElementById('peditmessage');
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
