@@ -22,8 +22,8 @@ class deleteAccount {
             $this->deleteUsingPassword();
         }elseif ($data['with'] == 'username') {
             $this->deleteUsingUsername();
-        }elseif ($data['with'] == 'none') {
-            $this->deleteUsingUsername();
+        }elseif ($data['with'] == 'admin') {
+            $this->adminDeletingAccount();
         }else{
             showMessage(false, "Set relevent parameter");
         }
@@ -32,10 +32,9 @@ class deleteAccount {
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
         $dPID = $this->AUTH->decrypt($ePID);
-        $password = $data['password'];
-        if (empty($password)) {
+        if (!isset($data['password'])|| empty($data['password'])) {
             showMessage(false, "Empty password given");
-        }elseif(!$this->verifyPassword($dPID, $password)) {
+        }elseif(!$this->verifyPassword($dPID, $data['password'])) {
             showMessage(false, "Incorrect password");
         }else{
             $name = $data['name'];
@@ -63,12 +62,11 @@ class deleteAccount {
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
         $dPID = $this->AUTH->decrypt($ePID);
-        $username = $data['username'];
-        if (empty($username)) {
+        if (!isset($data['username']) || empty($data['username'])) {
             showMessage(false, "Empty Username given");
-        }elseif(!$this->verifyUser($dPID, $username)) {
+        }elseif(!$this->verifyUser($dPID, $data['username'])) {
             showMessage(false, "Incorrect Username");
-        }elseif($this->userData->accountsByUser()['password'] !== null || !empty($this->userData->accountsByUser()['password'])){
+        }elseif($this->userData->accountsByUser()['password'] != null || !empty($this->userData->accountsByUser()['password'])){
             showMessage(false, "Password required");
         }else{
             $name = $data['name'];
@@ -132,20 +130,17 @@ class deleteAccount {
     $dPID = $this->AUTH->decrypt($ePID);
     $username = $data['username'];
     $selfId = $_SESSION['LOGGED_USER'];
-    if (!isset($data['adminPassword'])) {
+    if (!isset($data['adminPassword']) || empty($data['adminPassword'])) {
         showMessage(false, "Admin password not provided");
-    }elseif (empty($data['adminPassword'])) {
-        showMessage(false, "Admin password empty");
-    }elseif (!verifyPassword($selfId, $adminPassword)) {
+    }elseif (!$this->verifyPassword($selfId, $data['adminPassword'])) {
         showMessage(false, "Incorrect admin password");
-    }elseif (empty($username)) {
+    }elseif ($data['username'] || empty($data['username'])) {
         showMessage(false, "Empty Username given");
     }elseif(!$this->verifyUser($dPID, $username)) {
         showMessage(false, "Incorrect Username");
     }elseif($this->userData->getSelfDetails()['userType'] != 'Admin'){
         showMessage(false, "Not an admin");
     }else{
-        $adminPassword = $data['adminPassword'];
         $name = $data['name'];
         switch ($name) {
             case 'userData':

@@ -264,7 +264,7 @@ class DeleteAccount{
                 'adminPassword' : `${adminPassword}`,
                 'username' : `${username.value}`,
                 'name' : 'uploads',
-                'with': 'username'
+                'with': 'admin'
               };
               const response = await fetch(url, {
                   method: 'post',
