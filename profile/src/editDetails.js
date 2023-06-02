@@ -508,7 +508,7 @@ class updateDetails{
     }else if (whoCreate == 'admin') {
       userOrAdmin = 'admin';
       adminPass = document.getElementById('adminPassword').value;
-      if (currentPass.length < 8) {
+      if (adminPass.length < 8) {
         isCurrent = false;
       }else{
         isCurrent = true;
