@@ -522,19 +522,19 @@ class updateDetails{
     if(!isCurrent){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = `Check ${userOrAdmin} password`;
+      erMessage.innerHTML = `Check ${userOrAdmin} password`;
     }else if (!isNewPass) {
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = `Check new password`;
+      erMessage.innerHTML = `Check new password`;
     }else if(!verifyPass){
       messageDiv.classList.add('alert-danger');
       messageDiv.classList.remove('alert-success');
-      message.innerHTML = 'Verify new password';
+      erMessage.innerHTML = 'Verify new password';
     }else{
       messageDiv.classList.add('alert-success');
       messageDiv.classList.remove('alert-danger');
-      message.innerHTML = 'Creating password';
+      erMessage.innerHTML = 'Creating password';
 
       const createPassword = async () =>{
         const url = '/.ht/API/password.php?passwordRelated';
