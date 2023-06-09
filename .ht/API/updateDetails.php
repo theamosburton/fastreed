@@ -105,7 +105,7 @@ class updateDetails{
             $this->update($x);
         }else{
             $currentPassword = $data['currentPassword'];
-            $sql = "SELECT * FROM accounts WHERE personID = '$dPID'";
+            $sql = "SELECT * FROM accounts WHERE personID = '$userID'";
             $result = mysqli_query($this->DB, $sql);
             if (!$result) {
                 showMessage(false, "Can't verify password");
