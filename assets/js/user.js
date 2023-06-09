@@ -144,6 +144,8 @@ async function isUserlogged(){
                 }
             }
 
+
+            console.log(nonRead);
             // hide and show notification badge based on notifications
             var nonReadCount = nonRead.length;
             if (nonReadCount > 0) {
