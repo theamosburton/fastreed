@@ -105,12 +105,12 @@ class DeleteAccount{
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
-                  setTimeout(function (){
-                    location.reload();
-                  }, 3000);
                 } else {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
+                setTimeout(function (){
+                  location.reload();
+                }, 3000);
               } catch (error) {
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
@@ -223,12 +223,12 @@ class DeleteAccount{
             
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
-                  setTimeout(function (){
-                    location.reload();
-                  }, 3000);
                 } else {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
                 }
+                setTimeout(function (){
+                  location.reload();
+                }, 3000);
               } catch (error) {
                 console.log(error);
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
@@ -344,12 +344,13 @@ class DeleteAccount{
           
               if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
-                setTimeout(function (){
-                  location.reload();
-                }, 3000);
               } else {
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Problem in deleting...............<i class="fa-solid fa-xmark"></i></span>`;
               }
+              setTimeout(function (){
+                location.reload();
+              }, 3000);
+              
             } catch (error) {
               thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
             }
