@@ -639,11 +639,10 @@ class updateDetails{
         var data = await response.json();
 
         if (data) {
-          console.log(data);
           if (data.Result) {
             messageDiv.classList.remove('alert-danger');
             messageDiv.classList.add('alert-success');
-            erMessage.innerHTML =`${data.message}`;
+            erMessage.innerHTML ='Password updated ';
             setTimeout(function(){
               location.reload();
             }, 3000);
