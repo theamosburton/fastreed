@@ -91,8 +91,6 @@ class showMenus{
       });
     }
 
-
-
     uploadToServer(binaryImage) {
         var formData = new FormData();
 
