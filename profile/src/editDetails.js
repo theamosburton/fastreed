@@ -590,6 +590,7 @@ class updateDetails{
     if (whoUpdated == 'user') {
       isCurrent = isCurrentPass;
       userOrAdmin = 'current';
+      currentPassword = document.getElementById('currentPassword').value;
     }else if (whoUpdated == 'admin') {
       userOrAdmin = 'admin';
       currentPassword = document.getElementById('adminPassword').value;
