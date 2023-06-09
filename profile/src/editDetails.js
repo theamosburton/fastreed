@@ -501,8 +501,6 @@ class updateDetails{
     var userOrAdmin;
     var isCurrent;
     if (whoCreate == 'user') {
-      currentPassword = document.getElementById('currentPassword').value;
-      userOrAdmin = 'current';
       isCurrent = true;
     }else if (whoCreate == 'admin') {
       userOrAdmin = 'admin';
