@@ -584,6 +584,7 @@ class updateDetails{
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
+    var currentPassword;
     var userOrAdmin;
     var isCurrent;
     if (whoUpdated == 'user') {
@@ -591,7 +592,7 @@ class updateDetails{
       userOrAdmin = 'current';
     }else if (whoUpdated == 'admin') {
       userOrAdmin = 'admin';
-      var currentPassword = document.getElementById('adminPassword').value;
+      currentPassword = document.getElementById('adminPassword').value;
       if (currentPassword.length < 8) {
         isCurrent = false;
       }else{
@@ -624,7 +625,7 @@ class updateDetails{
         var encyDat = {
           'ePID' : `${ePID}`,
           'newPassword' : `${newPass}`,
-          'currentPassword' : `${currentPass}`,
+          'currentPassword' : `${currentPassword}`,
           'function' : 'updation',
           'editor' : `${whoUpdated}`
         };
