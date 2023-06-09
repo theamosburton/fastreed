@@ -83,7 +83,7 @@ class updateDetails{
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, "You are not an admin");
         }else{
-            $adminPasswordDB  = $this->userData->accountsByUser()['Password'];
+            $adminPasswordDB  = $this->userData->accountsByUser()['password'];
             if (empty($adminPassword)) {
                 showMessage(false, "Empty password given");
             }else{
