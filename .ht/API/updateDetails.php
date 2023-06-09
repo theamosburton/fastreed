@@ -97,8 +97,8 @@ class updateDetails{
         }
     }
     private function userEdit(){
-        $x = $data['editor'];
         $data = json_decode(file_get_contents('php://input'), true);
+        $x = $data['editor'];
         $ePID = $data['personID'];
         $userID = $this->AUTH->decrypt($ePID);
         if ($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])) {
