@@ -180,7 +180,7 @@ async function isUserlogged(){
 
 
                 // put green tag to know unread and read notifications
-                if(notificationData[g].isRead == '0'){
+                if(notificationData[g].isRead == 'f'){
                     var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
                 }else{
                     var showDot = `<i id="markedRead" class="fa fa-circle-dot"></i>`;
