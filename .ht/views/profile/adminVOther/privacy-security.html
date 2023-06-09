@@ -1,7 +1,8 @@
 <!-- Privacy and Security Section -->
 <!-- Password Sub section -->
 <div class="privacySecurity contentTopics">
-  <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
+  <?php
+  if($this->userData->accountsByAdmin('username', $this->otherUsername)['password'] === null || empty($this->userData->accountsByAdmin('username', $this->otherUsername)['password'])){
     echo <<<HTML
       <div class="title">Create password</div>
       <div class="setPassword">
