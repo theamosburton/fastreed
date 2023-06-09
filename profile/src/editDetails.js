@@ -591,8 +591,8 @@ class updateDetails{
       userOrAdmin = 'current';
     }else if (whoUpdated == 'admin') {
       userOrAdmin = 'admin';
-      currentPass = document.getElementById('adminPassword').value;
-      curentPass = currentPass.value;
+      var currentPassword = document.getElementById('adminPassword').value;
+      var curentPass = currentPassword.value;
       if (currentPass.length < 8) {
         isCurrent = false;
       }else{
