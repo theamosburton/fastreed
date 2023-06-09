@@ -167,12 +167,11 @@ class getLoggedData{
     // By user
     public function accountsByAdmin($type, $field){
         if ($type == 'username') {
-            $type == 'personID';
+            $type = 'personID';
             $field = $this->getUID($type, $field);
         }
         $data = array();
         $sql = "SELECT * FROM accounts WHERE $type = '$field'";
-        $result = mysqli_query($this->DB, $sql);
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
@@ -182,7 +181,6 @@ class getLoggedData{
                 $userSince = $row['tdate'];
                 $password = $row['Password'];
                 $accountWith = $row['accountWith'];   
-                $sql2 = "SELECT * FROM account_access WHERE personID = '$pID'";
 
                 $return = array(
                     'UID' => $UID,
