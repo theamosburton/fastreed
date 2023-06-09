@@ -177,6 +177,7 @@ class getLoggedData{
         }
         $data = array();
         $sql = "SELECT * FROM accounts WHERE $type = '$field'";
+        var_dump($sql);
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $isPresent = mysqli_num_rows($result);
