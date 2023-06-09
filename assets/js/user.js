@@ -139,7 +139,7 @@ async function isUserlogged(){
 
             var nonRead = [];
             for (let i= 0; i < notifiCount; i++) {
-                if (notificationData[i].isRead === false) {
+                if (notificationData[i].isRead == 'f') {
                     nonRead[i] = notificationData[i];
                 }
             }
