@@ -205,7 +205,7 @@
       }else{
         echo <<<HTML
           <div class="delete-criteria">
-            <input type="password" class="delete-criteria form-control" id="currentPasswordDelete" placeholder="Enter password">
+            <input type="password" class="delete-criteria form-control" id="currentPasswordDelete" placeholder="Enter password" autocomplete="off">
             <span class="warning">Once you delete your account, there is no going back. Please be certain.</span>
             <button type="button" onclick="deleteAccount.deleteWithPassword()" id="submit" name="submit" class="btn-cancel btn btn-danger">Delete Account</button>
           </div>
