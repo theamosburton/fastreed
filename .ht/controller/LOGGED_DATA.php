@@ -165,10 +165,15 @@ class getLoggedData{
      }
 
     // By user
-    public function accountsByAdmin($type, $field){
-        if ($type == 'username') {
+    public function accountsByAdmin($ftype, $ffield){
+        //  If argument are username then get UID from 
+        //  getUID function using former username
+        if ($ftype == 'username') {
             $type = 'personID';
-            $field = $this->getUID($type, $field);
+            $field = $this->getUID($ftype, $ffield);
+        }else {
+            $type = $ftype;
+            $field = $ffield;
         }
         $data = array();
         $sql = "SELECT * FROM accounts WHERE $type = '$field'";
