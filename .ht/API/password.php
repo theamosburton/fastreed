@@ -21,7 +21,7 @@ class passwordRelated{
                 # code...
             }elseif($data['editor'] == 'admin'){
                 $password = $this->userData->accountsByUser()['password'];
-                $adminPassword = $data['adminPassword'];
+                $adminPassword = $data['currentPassword'];
                 if ($password === null || empty($password)) {
                     showMessage(false, "Set admin password firstly");
                 }else {
