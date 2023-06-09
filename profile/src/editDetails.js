@@ -497,17 +497,17 @@ class updateDetails{
     var errorDiv = document.querySelector('#pErrorDiv');
     var messageDiv= document.getElementById('pErrorMessage');
     errorDiv.style.display = 'block';
-    var adminPass;
+    var currentPassword;
     var userOrAdmin;
     var isCurrent;
     if (whoCreate == 'user') {
-      adminPass = '';
+      currentPassword = document.getElementById('currentPassword').value;
       userOrAdmin = 'current';
       isCurrent = true;
     }else if (whoCreate == 'admin') {
       userOrAdmin = 'admin';
-      adminPass = document.getElementById('adminPassword').value;
-      if (adminPass.length < 8) {
+      currentPassword = document.getElementById('adminPassword').value;
+      if (currentPassword.length < 8) {
         isCurrent = false;
       }else{
         isCurrent = true;
@@ -541,7 +541,7 @@ class updateDetails{
           'ePID' : `${ePID}`,
           'newPassword' : `${newPass}`,
           'function' : 'creation',
-          'adminPassword' : `${adminPass}`,
+          'currentPassword' : `${currentPassword}`,
           'editor' : `${whoCreate}`
         };
         const response = await fetch(url, {
