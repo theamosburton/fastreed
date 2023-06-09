@@ -253,8 +253,7 @@ class updateDetails{
                   'cUsername': `${currentUsername}`,
                   'cEmail': `${currentEmail}`,
                   'editor':'admin',
-                  'currentPassword': `${currentPassDet}`,
-                  'adminPassword' : `${adminPassword}`
+                  'currentPassword' : `${adminPassword}`
                 };
                 const response = await fetch(url, {
                     method: 'post',
@@ -272,7 +271,7 @@ class updateDetails{
                     dispMessage.innerHTML = 'Updated Successfully';
                     let urlPostfix = this.username;
                     setTimeout(function(){
-                      window.location.href = `/users/${urlPostfix}`;
+                      location.reload();
                     }, 3000);
                   }else{
                     mainDiv.style.display = 'block';
