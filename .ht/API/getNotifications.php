@@ -55,7 +55,7 @@ class respondNotifications{
         // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
         $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
         $dataDecode = json_encode($mergedArray);
-        echo "$dataDecode";
+        echo $dataDecode;
         
     }
 
