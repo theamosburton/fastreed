@@ -74,8 +74,8 @@ class updateDetails{
 
     // Updating profile details
     private function adminEdit(){
-        $x = $data['editor'];
         $data = json_decode(file_get_contents('php://input'), true);
+        $x = $data['editor'];
         $ePID = $data['personID'];
         $userID = $this->AUTH->decrypt($ePID);
         $adminID = $_SESSION['LOGGED_USER'];
