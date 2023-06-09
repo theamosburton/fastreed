@@ -137,12 +137,15 @@ async function isUserlogged(){
             
             var notifiCount = notificationData.length;
 
-            var nonRead = [];
-            for (let i= 0; i < notifiCount; i++) {
-                if (notificationData[i].isRead == "f") {
-                    nonRead[i] = notificationData[i];
-                }
-            }
+            const alread = notificationData.filter(notification => notification.isRead === "1");
+            const nonRead = notificationData.filter(notification => notification.isRead === "0");
+
+            // var nonRead = [];
+            // for (let i= 0; i < notifiCount; i++) {
+            //     if (notificationData[i].isRead == "f") {
+            //         nonRead[i] = notificationData[i];
+            //     }
+            // }
 
 
             console.log(nonRead);
@@ -180,7 +183,7 @@ async function isUserlogged(){
 
 
                 // put green tag to know unread and read notifications
-                if(notificationData[g].isRead == 'f'){
+                if(notificationData[g].isRead == '0'){
                     var showDot = `<i id="markRead" class="fa fa-circle-dot"></i>`;
                 }else{
                     var showDot = `<i id="markedRead" class="fa fa-circle-dot"></i>`;
