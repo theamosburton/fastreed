@@ -3,4 +3,4 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/profile/index\.php$
-RewriteRule ^users/([^/]+)/?$ /profile/index.php?u=$1 [L,QSA]
+RewriteRule ^u/([^/]+)/?$ /profile/index.php?u=$1 [L,QSA]
