@@ -166,12 +166,9 @@ class getLoggedData{
 
     // By user
     public function accountsByAdmin($type, $field){
-        if (isset($_COOKIE['UID'])) {
-            $ePID = $_COOKIE['UID'];
-        }elseif (isset($_COOKIE['AID'])) {
-            $ePID = $_COOKIE['AID'];
-        }else{
-            $ePID = false;
+        if ($type == 'username') {
+            $type == 'personID';
+            $field = $this->getUID($type, $field);
         }
         $data = array();
         $sql = "SELECT * FROM accounts WHERE $type = '$field'";
@@ -251,6 +248,22 @@ class getLoggedData{
         }
         return $data;
      } 
+
+    //  get uid from username 
+    public function getUID($type, $field){
+        $data = false;
+        $sql = "SELECT * FROM account_details WHERE $type = '$field'";
+        $result = mysqli_query($this->DB, $sql);
+        if($result){
+            $isPresent = mysqli_num_rows($result);
+            if ($isPresent) {
+                $row = mysqli_fetch_assoc($result);
+                $UID = $row['personID'];
+                $data = $UID;
+            }
+        }
+        return $data;
+    }
 }
 
 ?>
