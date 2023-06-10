@@ -198,6 +198,18 @@ class getLoggedData{
     return $return;
     }
 
+    public function isFollowed($id1, $id2){
+        $return = false;
+        $sql = "SELECT * FROM followOthers WHERE firstPID = '$id1' and secondPID = '$id2'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $return = true;
+            }
+        }
+        return $return;
+    }
+
 
      public function getOtherData($type, $field){
         $data = array();

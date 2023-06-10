@@ -16,7 +16,20 @@
                             </div>
                         </div>
                         <div class="profileOptions">
-                            <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
+                            <?php
+                            $selfId = $this->userData->getSelfDetails()['UID'];
+                            $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+                            if($this->userData->isFollowed($selfId, $otherID)){
+                                echo <<<HTML
+                                <span onclick="unfollow()" class="profileActions" id="followButton">unfollow</span>
+                                HTML;
+                            }else{
+                                echo <<<HTML
+                                <span onclick="follow()" class="profileActions" id="followButton">follow</span>
+                                HTML;
+                            }
+                            ?>
+                            
                         </div>
                     </div>
                 </div>

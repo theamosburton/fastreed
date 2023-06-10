@@ -65,8 +65,42 @@ class follow{
         return $return;
     }
 
+    private function delEntry($id1, $id2){
+        $return = false;
+        $sql = "DELETE FROM followOthers WHERE firstPID = '$id1' and secondPID = '$id2'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $return = true;
+        }
+        return $return;
+    }
+
+    
     private function unfollow(){
         $data = json_decode(file_get_contents('php://input'), true);
+        if (!isset($data['username'])) {
+            showMessage(false, "Who to follow?");
+        }else{
+            // username of whom to follow
+            $username = $data['username'];
+            $userData = $this->userData->getOtherData('username', $username);
+            if (!empty($userData)) {
+                // UID1 = self uid
+                // UID2 = to follow uid
+                // UID1U = self username
+
+                $UID2 = $userData['UID'];
+                $UID1 = $_SESSION['LOGGED_USER'];
+                $UID1U = $this->userData->getSelfDetails()['username'];
+                if($this->delEntry($UID1, $UID2)){
+                    showMessage(true, "Unfollowed");
+                }else {
+                    showMessage(false, "Can not unfollow");
+                }
+            }else {
+                showMessage(false, "User not exists");
+            }
+        }
     }
 
     public function notifyUser($UID2, $UID1U){
