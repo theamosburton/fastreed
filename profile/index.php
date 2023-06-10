@@ -335,7 +335,7 @@ class nonLoggedVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/nonLoggedVother/index.html";
+        include "../.ht/views/profile/nonLoggedVOther/index.html";
 
         echo <<<HTML
                     </div>
