@@ -39,8 +39,6 @@ class follow{
 
                 $UID2 = $userData['UID'];
                 $UID1 = $_SESSION['LOGGED_USER'];
-                echo $UID1;
-                echo $UID2;
                 $UID1U = $this->userData->getSelfDetails()['username'];
                 if($this->makeEntry($UID1, $UID2)){
                     if($this->notifyUser($UID2, $UID1U)){
