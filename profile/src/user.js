@@ -219,7 +219,7 @@ function unfollow(){
   var followButton = document.getElementById('followButton');
   followButton.innerHTML = 'Wait...';
 
-  const followUser = async () =>{
+  const unfollowUser = async () =>{
       const url = '/.ht/API/follow.php/?unfollow';
       var encyDat = {
         'username': `${currentUsername}`
