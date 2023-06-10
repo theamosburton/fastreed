@@ -286,8 +286,7 @@ class loggedVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js'];
-
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/user.js'];
 
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
