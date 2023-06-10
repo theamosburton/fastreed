@@ -14,7 +14,7 @@ class markRead{
             $result = mysqli_query($DB, $sql);
             if ($result) {
                 $row = mysqli_fetch_assoc($result);
-                $status - $row['status'];
+                $status = $row['status'];
                 if ($status) {
                     $sql2 = "UPDATE notifications SET markRead = '1'  WHERE `s.no` = '$sno'";
                     $result2 = mysqli_query($DB, $sql2);
