@@ -8,7 +8,7 @@ class markRead{
         if (isset($_GET) && !empty($_GET['SNO'])) {
             $sno = $_GET['SNO'];
             // checking if it is permanent or temprory
-            $sql =  "SELECT * FROM notifications WHERE `s.no` = '$sno";
+            $sql =  "SELECT * FROM notifications WHERE `s.no` = '$sno'";
             $DB_CONNECT = new Database();
             $DB = $DB_CONNECT->DBConnection();
             $result = mysqli_query($DB, $sql);
