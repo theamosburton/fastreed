@@ -1,4 +1,4 @@
-class stylePage{
+class styleThisPage{
     constructor(){
       var params = new URLSearchParams(window.location.search);
         this.optValue = params.get('opt');
@@ -20,4 +20,4 @@ class stylePage{
         }
     }
 }
-var stylePage = new stylePage();
+new styleThisPage();
