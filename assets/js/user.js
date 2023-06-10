@@ -295,6 +295,40 @@ function timeAgo(timestamp) {
     }
     return `${Math.floor(seconds)} seconds ago`;
   }
+
+function follow(){
+    var followButton = document.getElementById('followButton');
+    followButton.innerHTML = 'Wait...';
+
+    const followUser = async () =>{
+        const url = '/.ht/API/follow.php/?follow';
+        var encyDat = {
+          'username': `${currentUsername}`
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+          });
+        var data = await response.json();
+
+        if (data) {
+          if (data.Result) {
+            followButton.innerHTML = 'Followed';
+            setTimeout(function(){
+              location.reload();
+            }, 3000);
+          }else{
+            followButton.innerHTML = 'Not followed';
+          }
+        }else{
+            followButton.innerHTML = 'Not followed';
+        }
+      }
+      followUser();
+}
   
   
   
