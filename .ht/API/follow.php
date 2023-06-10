@@ -15,9 +15,9 @@ class follow{
         $this->AUTH = new Auth();
         $this->BASIC_FUNC = new BasicFunctions(); 
 
-        if ($_GET['follow']) {
+        if (isset($_GET['follow'])) {
             $this->follow();
-        }elseif ($_GET['unfollow']) {
+        }elseif (isset($_GET['unfollow'])) {
             $this->unfollow();
         }else {
             showMessage(false, "Define what to do");
