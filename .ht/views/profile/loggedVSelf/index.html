@@ -4,19 +4,19 @@
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
             <div class="card h-100">
                 <div class="card-body">
-                <div class="account-settings">
-                    <div class="user-profile">
-                        <div class="user-avatar">
-                            <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
-                            <div onclick="new showMenus().uploadDp()" class="editPhotos" id="editPhotos">
-                                <i class="fa fa-pen fa-xs"></i>
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
+                                <div onclick="new showMenus().uploadDp()" class="editPhotos" id="editPhotos">
+                                    <i class="fa fa-pen fa-xs"></i>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="user-details">
-                            <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
-                            <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
-                        </div>
+                            <br>
+                            <div class="user-details">
+                                <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
+                                <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
+                            </div>
                         </div>
                         <div class="profileOptions">
                             <a href="/u/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
