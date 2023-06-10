@@ -75,7 +75,7 @@ class follow{
         return $return;
     }
 
-    
+
     private function unfollow(){
         $data = json_decode(file_get_contents('php://input'), true);
         if (!isset($data['username'])) {
@@ -110,7 +110,7 @@ class follow{
         $name = $this->userData->getSelfDetails()['name'];
         $profilePic = $this->userData->getSelfDetails()['profilePic'];
         $title = '<b> '.$name.' </b> followed you on fastreed';
-        $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url) VALUES ('$title', '$profilePic', '$UID2', 'self', '$time', 0, '$url')";
+        $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$UID2', 'self', '$time', 0, '$url', 0)";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $return = true;

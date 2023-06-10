@@ -6,16 +6,34 @@ if ($proceedAhead) {
 class markRead{
     function __construct(){
         if (isset($_GET) && !empty($_GET['SNO'])) {
-            $sno = $_GET['SNO'];
-            $sql = "UPDATE notifications SET markRead = '1'  WHERE `s.no` = '$sno'";
+            // checking if it is permanent or temprory
+            $sql =  "SELECT * FROM notifications WHERE `s.no` = '$sno";
             $DB_CONNECT = new Database();
             $DB = $DB_CONNECT->DBConnection();
-             $result = mysqli_query($DB, $sql);
-             if ($result) {
-                showMessage(true, "Marked Read");
+            $result = mysqli_query($DB, $sql);
+            if ($result) {
+                $row = mysqli_fetch_assoc($result);
+                $status - $row['status'];
+                if ($status) {
+                    $sql2 = "UPDATE notifications SET markRead = '1'  WHERE `s.no` = '$sno'";
+                    $result2 = mysqli_query($DB, $sql2);
+                    if ($result2) {
+                        showMessage(true, "Marked Read");
+                    }else {
+                        showMessage(false, "Not Marked Read");
+                    }
+                }else{
+                    $sql3 = "DELETE FROM notifications WHERE `s.no` = '$sno'";
+                    $result3 = mysqli_query($DB, $sql3);
+                    if ($result3) {
+                        showMessage(true, "Deleted");
+                    }else {
+                        showMessage(false, "Not Deleted");
+                    }
+                }
              }else {
-                showMessage(false, "Not Marked Read");
-            } 
+                showMessage(false, "Notification not exists");
+             } 
         }else {
             showMessage(false, "Access Denied DD");
         }
