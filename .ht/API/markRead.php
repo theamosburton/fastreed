@@ -6,6 +6,7 @@ if ($proceedAhead) {
 class markRead{
     function __construct(){
         if (isset($_GET) && !empty($_GET['SNO'])) {
+            $sno = $_GET['SNO'];
             // checking if it is permanent or temprory
             $sql =  "SELECT * FROM notifications WHERE `s.no` = '$sno";
             $DB_CONNECT = new Database();
