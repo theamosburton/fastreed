@@ -31,7 +31,7 @@ class follow{
         }else{
             // username of whom to follow
             $username = $data['username'];
-            $userData = $this->userData->accountsByUser('username', $username);
+            $userData = $this->userData->getOtherData('username', $username);
             if (!empty($userData)) {
                 // UID1 = self uid
                 // UID2 = to follow uid
