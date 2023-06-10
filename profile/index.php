@@ -192,7 +192,7 @@ class loggedAdminVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js'];
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js', '/profile/src/deleteAccount.js'];
         $this->extraScript = '
         <script> 
             // other
@@ -236,7 +236,7 @@ class loggedVself extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/profile/src/style.css'];
         
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js'];
+        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js', '/profile/src/deleteAccount.js'];
 
         $this->extraScript = 
         '<script> 
