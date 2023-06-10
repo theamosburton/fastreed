@@ -79,7 +79,7 @@ class updateDetails{
         $ePID = $data['personID'];
         $userID = $this->AUTH->decrypt($ePID);
         $adminID = $_SESSION['LOGGED_USER'];
-        $adminPassword = $data['adminPassword'];
+        $adminPassword = $data['currentPassword'];
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, "You are not an admin");
         }else{
