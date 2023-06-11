@@ -201,9 +201,9 @@ function follow(){
       if (data) {
         if (data.Result) {
           followButton.innerHTML = 'Followed';
-          setTimeout(function(){
-            location.reload();
-          }, 3000);
+          // setTimeout(function(){
+          //   location.reload();
+          // }, 3000);
         }else{
           followButton.innerHTML = 'Not followed';
         }
@@ -235,10 +235,10 @@ function unfollow(){
 
       if (data) {
         if (data.Result) {
-          followButton.innerHTML = 'follow';
-          setTimeout(function(){
-            location.reload();
-          }, 3000);
+          followButton.innerHTML = 'Follow';
+          // setTimeout(function(){
+          //   location.reload();
+          // }, 3000);
         }else{
           followButton.innerHTML = "Can't  unfollow";
         }
