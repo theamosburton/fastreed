@@ -79,7 +79,7 @@ class follow{
     private function makeEntry($id1, $id2){
         $return = false;
         $followTime = time();
-        $sql = "INSERT INTO followOthers (firstPID, secondPID, followTime) Values ('$id1', '$id2', '$followTime')";
+        $sql = "INSERT INTO followOthers (firstPID, secondPID, followTime, followBack) Values ('$id1', '$id2', '$followTime', 0)";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $return = true;
