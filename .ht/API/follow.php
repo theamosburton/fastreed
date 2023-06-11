@@ -125,12 +125,12 @@ class follow{
                         if ($result) {
                             showMessage(true, "Unfollowed");
                         }else {
-                            showMessage(false, "Can not unfollow");
+                            showMessage(false, "Can not unfollow back");
                         }
                     }elseif($this->delEntry($UID1, $UID2)){
                         showMessage(true, "Unfollowed");
                     }else {
-                        showMessage(false, "Can not follow");
+                        showMessage(false, "Can not unfollow");
                     }
                 }else if($this->delEntry($UID1, $UID2)){
                     showMessage(true, "Unfollowed");
