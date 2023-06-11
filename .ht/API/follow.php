@@ -124,7 +124,7 @@ class follow{
                         $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$UID2' and secondPID = '$UID1'";
                         $result2 = mysqli_query($this->DB, $sql2);
                         if ($result2) {
-                            showMessage(true, "Unfollowed");
+                            showMessage(true, "Unfollowed4");
                         }else {
                             showMessage(false, "Can not unfollow back");
                         }
@@ -138,17 +138,17 @@ class follow{
                         $sql2 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$UID1' and followee = '$UID2'";
                         $result2 = mysqli_query($this->DB, $sql2);
                         if ($result2) {
-                            showMessage(true, "Unfollowed");
+                            showMessage(true, "Unfollowed3");
                         }else {
                             showMessage(false, "Can not unfollow back");
                         }
                     }elseif($this->delEntry($UID1, $UID2)){
-                        showMessage(true, "Unfollowed");
+                        showMessage(true, "Unfollowed2");
                     }else {
                         showMessage(false, "Can not unfollow");
                     }
                 }else if($this->delEntry($UID1, $UID2)){
-                    showMessage(true, "Unfollowed");
+                    showMessage(true, "Unfollowed1");
                 }else {
                     showMessage(false, "Can not unfollow");
                 } 
