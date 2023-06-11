@@ -82,7 +82,7 @@ class follow{
     private function makeEntry($id1, $id2){
         $return = false;
         $followTime = time();
-        $sql = "INSERT INTO followOthers (firstPID, secondPID, followTime, followBack) Values ('$id1', '$id2', '$followTime', 0)";
+        $sql = "INSERT INTO followOthers (follower, followee, followTime, followBack) Values ('$id1', '$id2', '$followTime', 0)";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $return = true;
@@ -92,7 +92,7 @@ class follow{
 
     private function delEntry($id1, $id2){
         $return = false;
-        $sql = "DELETE FROM followOthers WHERE firstPID = '$id1' and secondPID = '$id2'";
+        $sql = "DELETE FROM followOthers WHERE follower = '$id1' and followee = '$id2'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $return = true;
