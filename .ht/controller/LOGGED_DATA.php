@@ -231,9 +231,10 @@ class getLoggedData{
         
         $sql1 = "SELECT * FROM followOthers WHERE firstPID = ? and secondPID = ? and followBack = 1";
         $stmt1 = mysqli_prepare($this->DB, $sql1);
-        var_dump($stmt1);
+        
         mysqli_stmt_bind_param($stmt1, "ss", $otherID, $selfID);
         mysqli_stmt_execute($stmt1);
+        var_dump($stmt1);
         $result1 = mysqli_stmt_get_result($stmt1);
         
         if ($result) {
