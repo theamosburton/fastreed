@@ -40,28 +40,25 @@ class follow{
         $username = $data['username'];
         $userData = $this->userData->getOtherData('username', $username);
         if (!empty($userData)) {
-            // UID1 = self uid
-            // UID2 = to follow uid
-            // UID1U = self username
 
-            $UID2 = $userData['UID'];
-            $UID1 = $_SESSION['LOGGED_USER'];
-            $UID1U = $this->userData->getSelfDetails()['username'];
+            $follweeUID = $userData['UID'];
+            $selfUID = $_SESSION['LOGGED_USER'];
+            $selfUNAME = $this->userData->getSelfDetails()['username'];
 
             // checking if the person already followed you or not
-            $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID2' and secondPID = '$UID1'";
+            $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
                 if (mysqli_num_rows($result)) {
-                    $sql2 = "UPDATE followOthers set followBack = 1 WHERE firstPID = '$UID2' and secondPID = '$UID1'";
+                    $sql2 = "UPDATE followOthers set followBack = 1 WHERE follower = '$follweeUID' and followee = '$selfUID'";
                     $result = mysqli_query($this->DB, $sql2);
                     if ($result) {
                         showMessage(true, "Followed back");
                     }else {
                         showMessage(false, "Can not follow back");
                     }
-                }elseif($this->makeEntry($UID1, $UID2)){
-                    if($this->notifyUser($UID2, $UID1U)){
+                }elseif($this->makeEntry($selfUID, $follweeUID)){
+                    if($this->notifyUser($follweeUID, $selfUNAME)){
                         showMessage(true, "Followed");
                     }else {
                         showMessage(true, "followed not notified");
@@ -69,8 +66,8 @@ class follow{
                 }else {
                     showMessage(false, "Can not follow first");
                 }
-            }elseif($this->makeEntry($UID1, $UID2)){
-                if($this->notifyUser($UID2, $UID1U)){
+            }elseif($this->makeEntry($selfUID, $follweeUID)){
+                if($this->notifyUser($follweeUID, $selfUNAME)){
                     showMessage(true, "Followed");
                 }else {
                     showMessage(true, "followed not notified");
@@ -110,19 +107,16 @@ class follow{
             $username = $data['username'];
             $userData = $this->userData->getOtherData('username', $username);
             if (!empty($userData)) {
-                // UID1 = self uid
-                // UID2 = to follow uid
-                // UID1U = self username
 
                 $UID2 = $userData['UID'];
                 $UID1 = $_SESSION['LOGGED_USER'];
                 $UID1U = $this->userData->getSelfDetails()['username'];
 
                  // checking if the person already followed you or not
-                 $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID2' and secondPID = '$UID1'";
+                 $sql = "SELECT * FROM followOthers WHERE follower = '$UID2' and followee = '$UID1' and followBack = 1";
                  $result = mysqli_query($this->DB, $sql);
 
-                 $sql1 = "SELECT * FROM followOthers WHERE firstPID = '$UID1' and secondPID = '$UID2' and followBack = 1";
+                 $sql1 = "SELECT * FROM followOthers WHERE follower = '$UID1' and followee = '$UID2' and followBack = 1";
                  $result1 = mysqli_query($this->DB, $sql1);
 
                  if ($result) {
