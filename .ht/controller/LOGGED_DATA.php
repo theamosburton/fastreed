@@ -198,25 +198,59 @@ class getLoggedData{
     return $return;
     }
 
-    public function isFollowed($id1, $id2){
+    // public function isFollowed($selfID, $otherID){
+    //     $return = false;
+    //     #If I followed visited user and doesnot matter he follow me or not
+    //     $sql = "SELECT * FROM followOthers WHERE firstPID = '$selfID' and secondPID = '$otherID'";
+    //     $result = mysqli_query($this->DB, $sql);
+
+    //     #Id the visited user followed me and I followed back
+    //     $sql1 = "SELECT * FROM followOthers WHERE firstPID = '$otherID' and secondPID = '$selfID' and followBack = 1";
+    //     $result1 = mysqli_query($this->DB, $sql1);
+
+    //     if ($result) {
+    //         if (mysqli_num_rows($result)) {
+    //             $return = true;
+    //         }
+    //     }elseif ($result1) {
+    //         if (mysqli_num_rows($result1)) {
+    //             $return = true;
+    //         }
+    //     }
+    //     return $return;
+    // }
+
+
+    public function isFollowed($selfID, $otherID){
         $return = false;
-        $sql = "SELECT * FROM followOthers WHERE firstPID = '$id1' and secondPID = '$id2'";
-        $result = mysqli_query($this->DB, $sql);
-
-        $sql1 = "SELECT * FROM followOthers WHERE firstPID = '$id2' and secondPID = '$id1' and followBack = 1";
-        $result1 = mysqli_query($this->DB, $sql1);
-
+        $sql = "SELECT * FROM followOthers WHERE firstPID = ? and secondPID = ?";
+        $stmt = mysqli_prepare($this->DB, $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $selfID, $otherID);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        $sql1 = "SELECT * FROM followOthers WHERE firstPID = ? and secondPID = ? and followBack = 1";
+        $stmt1 = mysqli_prepare($this->DB, $sql1);
+        mysqli_stmt_bind_param($stmt1, "ss", $otherID, $selfID);
+        mysqli_stmt_execute($stmt1);
+        $result1 = mysqli_stmt_get_result($stmt1);
+        
         if ($result) {
             if (mysqli_num_rows($result)) {
                 $return = true;
             }
-        }elseif ($result1) {
+        } elseif ($result1) {
             if (mysqli_num_rows($result1)) {
                 $return = true;
             }
         }
+        
+        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmt1);
+        
         return $return;
     }
+    
 
 
      public function getOtherData($type, $field){
