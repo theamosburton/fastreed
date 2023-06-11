@@ -202,7 +202,15 @@ class getLoggedData{
         $return = false;
         $sql = "SELECT * FROM followOthers WHERE firstPID = '$id1' and secondPID = '$id2'";
         $result = mysqli_query($this->DB, $sql);
+
+        $sql1 = "SELECT * FROM followOthers WHERE firstPID = '$id2' and secondPID = '$id1' and followBack = 1";
+        $result1 = mysqli_query($this->DB, $sql1);
+
         if ($result) {
+            if (mysqli_num_rows($result)) {
+                $return = true;
+            }
+        }elseif ($result1) {
             if (mysqli_num_rows($result)) {
                 $return = true;
             }
