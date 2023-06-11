@@ -46,7 +46,7 @@ class follow{
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
                     if (mysqli_num_rows($result)) {
-                        $sql2 = "UPDATE followOthers set followBack ='1' WHERE firstPID = '$UID2' and secondPID = '$UID1'";
+                        $sql2 = "UPDATE followOthers set followBack = 0 WHERE firstPID = '$UID2' and secondPID = '$UID1'";
                         $result = mysqli_query($this->DB, $sql2);
                         if ($result) {
                             showMessage(true, "Followed back");
