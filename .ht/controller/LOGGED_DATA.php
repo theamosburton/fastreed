@@ -211,7 +211,7 @@ class getLoggedData{
                 $return = true;
             }
         }elseif ($result1) {
-            if (mysqli_num_rows($result)) {
+            if (mysqli_num_rows($result1)) {
                 $return = true;
             }
         }
