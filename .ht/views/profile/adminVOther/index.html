@@ -20,6 +20,20 @@
                         </div>
                         <div class="profileOptions">
                             <a href="/u/<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>" class="profileActions">Public View</a>
+
+                            <?php
+                            $selfId = $this->userData->getSelfDetails()['UID'];
+                            $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+                            if($this->userData->isFollowed($selfId, $otherID)){
+                                echo <<<HTML
+                                <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
+                                HTML;
+                            }else{
+                                echo <<<HTML
+                                <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
+                                HTML;
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
