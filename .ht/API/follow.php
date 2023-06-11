@@ -40,7 +40,29 @@ class follow{
                 $UID2 = $userData['UID'];
                 $UID1 = $_SESSION['LOGGED_USER'];
                 $UID1U = $this->userData->getSelfDetails()['username'];
-                if($this->makeEntry($UID1, $UID2)){
+
+                // checking if the person already followed you or not
+                $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                $result = mysqli_query($this->DB, $sql);
+                if ($result) {
+                    if (mysqli_num_rows($result)) {
+                        $sql2 = "UPDATE followOthers set followBack ='1' WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                        $result = mysqli_query($this->DB, $sql2);
+                        if ($result) {
+                            showMessage(true, "Followed back");
+                        }else {
+                            showMessage(false, "Can not follow back");
+                        }
+                    }elseif($this->makeEntry($UID1, $UID2)){
+                        if($this->notifyUser($UID2, $UID1U)){
+                            showMessage(true, "Followed");
+                        }else {
+                            showMessage(true, "followed not notified");
+                        }
+                    }else {
+                        showMessage(false, "Can not follow");
+                    }
+                }elseif($this->makeEntry($UID1, $UID2)){
                     if($this->notifyUser($UID2, $UID1U)){
                         showMessage(true, "Followed");
                     }else {
@@ -92,11 +114,29 @@ class follow{
                 $UID2 = $userData['UID'];
                 $UID1 = $_SESSION['LOGGED_USER'];
                 $UID1U = $this->userData->getSelfDetails()['username'];
-                if($this->delEntry($UID1, $UID2)){
+
+                 // checking if the person already followed you or not
+                 $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                 $result = mysqli_query($this->DB, $sql);
+                 if ($result) {
+                    if (mysqli_num_rows($result)) {
+                        $sql2 = "UPDATE followOthers set followBack ='0' WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                        $result = mysqli_query($this->DB, $sql2);
+                        if ($result) {
+                            showMessage(true, "Unfollowed");
+                        }else {
+                            showMessage(false, "Can not unfollow");
+                        }
+                    }elseif($this->delEntry($UID1, $UID2)){
+                        showMessage(true, "Unfollowed");
+                    }else {
+                        showMessage(false, "Can not follow");
+                    }
+                }else if($this->delEntry($UID1, $UID2)){
                     showMessage(true, "Unfollowed");
                 }else {
                     showMessage(false, "Can not unfollow");
-                }
+                } 
             }else {
                 showMessage(false, "User not exists");
             }

@@ -21,11 +21,11 @@
                             $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
                             if($this->userData->isFollowed($selfId, $otherID)){
                                 echo <<<HTML
-                                <span onclick="unfollow()" class="profileActions" id="followButton">unfollow</span>
+                                <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
                                 HTML;
                             }else{
                                 echo <<<HTML
-                                <span onclick="follow()" class="profileActions" id="followButton">follow</span>
+                                <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
                                 HTML;
                             }
                             ?>
