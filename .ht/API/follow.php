@@ -128,8 +128,8 @@ class follow{
                  if ($result) {
                     if (mysqli_num_rows($result)) {
                         $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$UID2' and secondPID = '$UID1'";
-                        $result = mysqli_query($this->DB, $sql2);
-                        if ($result) {
+                        $result2 = mysqli_query($this->DB, $sql2);
+                        if ($result2) {
                             showMessage(true, "Unfollowed");
                         }else {
                             showMessage(false, "Can not unfollow back");
@@ -142,8 +142,8 @@ class follow{
                 }else if($result1){
                     if (mysqli_num_rows($result1)) {
                         $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$UID1' and secondPID = '$UID2'";
-                        $result = mysqli_query($this->DB, $sql2);
-                        if ($result) {
+                        $result2 = mysqli_query($this->DB, $sql2);
+                        if ($result2) {
                             showMessage(true, "Unfollowed");
                         }else {
                             showMessage(false, "Can not unfollow back");
