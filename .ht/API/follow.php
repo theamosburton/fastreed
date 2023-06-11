@@ -60,7 +60,7 @@ class follow{
                             showMessage(true, "followed not notified");
                         }
                     }else {
-                        showMessage(false, "Can not follow");
+                        showMessage(false, "Can not follow first");
                     }
                 }elseif($this->makeEntry($UID1, $UID2)){
                     if($this->notifyUser($UID2, $UID1U)){
