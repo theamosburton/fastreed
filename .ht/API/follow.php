@@ -42,11 +42,11 @@ class follow{
                 $UID1U = $this->userData->getSelfDetails()['username'];
 
                 // checking if the person already followed you or not
-                $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                $sql = "SELECT * FROM followOthers WHERE firstPID = '$UID2' and secondPID = '$UID1'";
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
                     if (mysqli_num_rows($result)) {
-                        $sql2 = "UPDATE followOthers set followBack ='1' WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                        $sql2 = "UPDATE followOthers set followBack ='1' WHERE firstPID = '$UID2' and secondPID = '$UID1'";
                         $result = mysqli_query($this->DB, $sql2);
                         if ($result) {
                             showMessage(true, "Followed back");
