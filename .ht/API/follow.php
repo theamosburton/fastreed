@@ -120,7 +120,7 @@ class follow{
                  $result = mysqli_query($this->DB, $sql);
                  if ($result) {
                     if (mysqli_num_rows($result)) {
-                        $sql2 = "UPDATE followOthers set followBack ='0' WHERE firstPID = '$UID1' and secondPID = '$UID2'";
+                        $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$UID1' and secondPID = '$UID2'";
                         $result = mysqli_query($this->DB, $sql2);
                         if ($result) {
                             showMessage(true, "Unfollowed");
