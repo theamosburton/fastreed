@@ -198,25 +198,24 @@ class getLoggedData{
     return $return;
     }
 
-    public function isFollowed($selfID, $otherID){
+    public function isFollowed($selfID, $follweeUID){
         $return = false;
-        #If I followed visited user and doesnot matter he follow me or not
-        $sql = "SELECT * FROM followOthers WHERE follower = '$selfID' and followee = '$otherID'";
+
+        // If second person is followed this person firstly
+        $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID'";
         $result = mysqli_query($this->DB, $sql);
 
-        #Id the visited user followed me and I followed back
-        $sql1 = "SELECT * FROM followOthers WHERE follower = '$otherID' and followee = '$selfID' and followBack = 1";
+        // If this person is followed second person firstly
+        // then he follows back
+        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
         $result1 = mysqli_query($this->DB, $sql1);
 
-        if ($result) {
-            if (mysqli_num_rows($result)) {
-                $return = true;
-            }
-        }elseif ($result1) {
-            if (mysqli_num_rows($result1)) {
-                $return = true;
-            }
+        if (mysqli_num_rows($result)) {
+            $return = true;
+        }elseif (mysqli_num_rows($result1)) {
+            $return = true;
         }
+       
         return $return;
     }
 
