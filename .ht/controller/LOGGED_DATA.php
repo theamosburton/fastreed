@@ -210,9 +210,7 @@ class getLoggedData{
         $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID'";
         $result1 = mysqli_query($this->DB, $sql1);
 
-        if (mysqli_num_rows($result)) {
-            $return = true;
-        }elseif (mysqli_num_rows($result1)) {
+        if (mysqli_num_rows($result) || mysqli_num_rows($result1)) {
             $return = true;
         }
        
