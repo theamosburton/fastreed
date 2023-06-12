@@ -198,7 +198,7 @@ class getLoggedData{
     return $return;
     }
 
-    public function isFollowed($selfID, $follweeUID){
+    public function isFollowed($selfUID, $follweeUID){
         $return = false;
 
         // If second person is followed this person firstly
