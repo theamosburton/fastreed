@@ -10,48 +10,47 @@ class gSignUpLogin{
     private $DB;
     private $_DOCROOT;
 
-    function __construct()
-    {
-      $this->DB_CONNECT = new Database();
-      $this->AUTH = new Auth();
-      $this->BASIC_FUNC = new BasicFunctions();
-      // Get Connection
-      $this->DB = $this->DB_CONNECT->DBConnection();
-      $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+  function __construct(){
+    $this->DB_CONNECT = new Database();
+    $this->AUTH = new Auth();
+    $this->BASIC_FUNC = new BasicFunctions();
+    // Get Connection
+    $this->DB = $this->DB_CONNECT->DBConnection();
+    $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 
-      if (!isset($_GET)) {
-        showMessage(false, 'No paramater given');
-      }else if (isset($_GET['logout'])) {
-        $this->logoutAccount();
-      }else if(!isset($_GET['email'])){
-        showMessage(false, 'Email not provided');
+    if (!isset($_GET)) {
+      showMessage(false, 'No paramater given');
+    }else if (isset($_GET['logout'])) {
+      $this->logoutAccount();
+    }else if(!isset($_GET['email'])){
+      showMessage(false, 'Email not provided');
+    }else {
+      $email = $_GET['email'];
+      $userExists = $this->checkUserExists($email)['status'];
+      if ($userExists) {
+        // Login
+        $this->loginAccount($this->checkUserExists($email)['id']);
       }else {
-        $email = $_GET['email'];
-        $userExists = $this->checkUserExists($email)['status'];
-        if ($userExists) {
-          // Login
-          $this->loginAccount($this->checkUserExists($email)['id']);
-        }else {
-          // create new account
-          $this->createNewAccount();
-        }
+        // create new account
+        $this->createNewAccount();
       }
     }
+  }
 
-    public function checkUserExists($email){
-      $email = mysqli_real_escape_string($this->DB,$email);
-      $sql = "SELECT * FROM account_details WHERE emailID = '$email'";
-      $result = mysqli_query($this->DB, $sql);
-   
-      if (mysqli_num_rows($result)) {
-        $data = $result->fetch_assoc();
-        $return['id'] = $data['personID'];
-        $return['status'] = true;
-      }else {
-        $return['status'] = false;
-      }
-      return $return;
+  public function checkUserExists($email){
+    $email = mysqli_real_escape_string($this->DB,$email);
+    $sql = "SELECT * FROM account_details WHERE emailID = '$email'";
+    $result = mysqli_query($this->DB, $sql);
+  
+    if (mysqli_num_rows($result)) {
+      $data = $result->fetch_assoc();
+      $return['id'] = $data['personID'];
+      $return['status'] = true;
+    }else {
+      $return['status'] = false;
     }
+    return $return;
+  }
 
   public function loginAccount($userID){
     $this->makeReference();
@@ -86,7 +85,6 @@ class gSignUpLogin{
     unset($_SESSION['GSI']);
     setcookie("authStatus", "", time()-3600, '/');
   }
-
 
   // Saving profilepic in server
   public function saveProfilePic($downLink, $id){
@@ -135,7 +133,7 @@ class gSignUpLogin{
             $return = true;
         }
         return $return;
-    }
+  }
 
   private function makeFileEntry($fileName, $id, $purpose, $type, $ext){
     $return = false;
@@ -200,8 +198,8 @@ class gSignUpLogin{
     $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', 0, '$url', 0)";
     $result = mysqli_query($this->DB, $sql);
   }
-  // This function is for logging out account
 
+  // This function is for logging out account
   public function logoutAccount(){
     setcookie('UID', "", time()-3600);
     setcookie('RMM',  "", time()-3600);
