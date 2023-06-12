@@ -121,40 +121,29 @@ class follow{
                 // then he follows back
                 $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
                 $result1 = mysqli_query($this->DB, $sql1);
-
-                 if ($result) {
-                    if (mysqli_num_rows($result)) {
-                        $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$follweeUID' and secondPID = '$selfUID'";
-                        $result2 = mysqli_query($this->DB, $sql2);
-                        if ($result2) {
-                            showMessage(true, "Unfollowed4");
-                        }else {
-                            showMessage(false, "Can not unfollow back");
-                        }
-                    }elseif($this->delEntry($selfUID, $follweeUID)){
-                        showMessage(true, "Unfollowed");
+                
+                if (mysqli_num_rows($result)) {
+                    $sql2 = "UPDATE followOthers SET followBack = 0 WHERE firstPID = '$follweeUID' and secondPID = '$selfUID'";
+                    $result2 = mysqli_query($this->DB, $sql2);
+                    if ($result2) {
+                        showMessage(true, "Unfollowed4");
                     }else {
-                        showMessage(false, "Can not unfollow");
+                        showMessage(false, "Can not unfollow back");
                     }
-                }else if($result1){
-                    if (mysqli_num_rows($result1)) {
-                        $sql2 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$selfUID' and followee = '$follweeUID'";
-                        $result2 = mysqli_query($this->DB, $sql2);
-                        if ($result2) {
-                            showMessage(true, "Unfollowed3");
-                        }else {
-                            showMessage(false, "Can not unfollow back");
-                        }
-                    }elseif($this->delEntry($selfUID, $follweeUID)){
-                        showMessage(true, "Unfollowed2");
+                }elseif (mysqli_num_rows($result1)) {
+                    $sql2 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$selfUID' and followee = '$follweeUID'";
+                    $result2 = mysqli_query($this->DB, $sql2);
+                    if ($result2) {
+                        showMessage(true, "Unfollowed3");
                     }else {
-                        showMessage(false, "Can not unfollow");
+                        showMessage(false, "Can not unfollow back");
                     }
-                }else if($this->delEntry($selfUID, $follweeUID)){
-                    showMessage(true, "Unfollowed1");
+                }elseif($this->delEntry($selfUID, $follweeUID)){
+                    showMessage(true, "Unfollowed");
                 }else {
                     showMessage(false, "Can not unfollow");
-                } 
+                }
+                
             }else {
                 showMessage(false, "User not exists");
             }
