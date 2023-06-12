@@ -128,7 +128,7 @@ class follow{
                     if ($result2) {
                         showMessage(true, "Unfollowed4");
                     }else {
-                        showMessage(false, "Can not unfollow back");
+                        showMessage(false, "Can not unfollow back131");
                     }
                 }elseif (mysqli_num_rows($result1)) {
                     $sql2 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$selfUID' and followee = '$follweeUID'";
@@ -136,7 +136,7 @@ class follow{
                     if ($result2) {
                         showMessage(true, "Unfollowed3");
                     }else {
-                        showMessage(false, "Can not unfollow back");
+                        showMessage(false, "Can not unfollow back139");
                     }
                 }elseif($this->delEntry($selfUID, $follweeUID)){
                     showMessage(true, "Unfollowed");
