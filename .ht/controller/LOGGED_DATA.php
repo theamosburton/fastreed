@@ -207,7 +207,7 @@ class getLoggedData{
 
         // If this person is followed second person firstly
         // then he follows back
-        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
+        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID'";
         $result1 = mysqli_query($this->DB, $sql1);
 
         if (mysqli_num_rows($result)) {
