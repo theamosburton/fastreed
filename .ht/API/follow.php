@@ -131,7 +131,7 @@ class follow{
                         showMessage(false, "Can not unfollow back");
                     }
                 }elseif (mysqli_num_rows($result1)) {
-                    $sql3 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$selfUID' and followee = '$follweeUID'";
+                    $sql3 = "UPDATE followOthers SET follower = '$follweeUID',followee = '$selfUID', followBack=0 WHERE follower = '$selfUID' and followee = '$follweeUID'";
                     $result3 = mysqli_query($this->DB, $sql3);
                     if ($result3) {
                         showMessage(true, "Unfollowed3");
