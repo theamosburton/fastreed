@@ -158,7 +158,7 @@ class follow{
         $time = time();
         $name = $this->userData->getSelfDetails()['name'];
         $profilePic = $this->userData->getSelfDetails()['profilePic'];
-        $title = 'Hey <b> '.$userName.', </b> '.$name. 'is now following you';
+        $title = 'Hey <b> '.$userName.', </b> '.$name. ' is now following you';
         $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$UID2', 'self', '$time', 0, '$url', 0)";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
