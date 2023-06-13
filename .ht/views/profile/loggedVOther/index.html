@@ -24,10 +24,7 @@
                                 echo <<<HTML
                                 <a href="/profile/" class="profileActions">Profile</a>
                                 HTML;
-                            }
-                    
-
-                            if($this->userData->isFollowed($selfId, $otherID)){
+                            }elseif($this->userData->isFollowed($selfId, $otherID)){
                                 echo <<<HTML
                                 <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
                                 HTML;
