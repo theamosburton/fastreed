@@ -293,7 +293,7 @@ class loggedVother extends showProfile{
          </script>';
         $selfId = $this->userData->getSelfDetails()['UID'];
         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
-        $userSettings = $this->userData->settings($otherID);
+        $userSettings = $this->userData->getSettings($otherID);
         $isFollowingMe = $this->userData->isFollowingMe($selfId, $otherID);
         $canViewMail = $userSettings['canViewMail'];
         $canViewAge = $userSettings['canViewAge'];
