@@ -19,6 +19,14 @@
                             <?php
                             $selfId = $this->userData->getSelfDetails()['UID'];
                             $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+ 
+                            if($selfId == $otherID ){
+                                echo <<<HTML
+                                <a href="/profile/" class="profileActions">Profile</a>
+                                HTML;
+                            }
+                    
+
                             if($this->userData->isFollowed($selfId, $otherID)){
                                 echo <<<HTML
                                 <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
