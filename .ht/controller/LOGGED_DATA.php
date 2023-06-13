@@ -358,6 +358,6 @@ class getLoggedData{
 
        return [$followerCount, $follower];
     }
-}
+}   
 
 ?>
