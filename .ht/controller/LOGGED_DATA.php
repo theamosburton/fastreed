@@ -331,10 +331,10 @@ class getLoggedData{
     }
 
     public function follower($id){
-        $followedBackNumber;
-        $followedFirstNumber;
-        $followedBackFollower;
-        $followedFirstFollower;
+        $followedBackNumber = 0;
+        $followedFirstNumber = 0;
+        $followedBackFollower = [];
+        $followedFirstFollower = [];
 
         // Check who followed back
         $followedbackSQL = "SELECT * FROM followOthers WHERE follower = '$id' and followBack = 1";
