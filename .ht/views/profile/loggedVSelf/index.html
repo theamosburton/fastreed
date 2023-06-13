@@ -19,10 +19,6 @@
                             </div>
                         </div>
                         <div class="profileOptions">
-                            <?php
-                            $selfId = $this->userData->getSelfDetails()['UID'];
-                            echo $this->userData->follower($selfId)[0];
-                            ?>
                             <a href="/u/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
                         </div>
                     </div>
