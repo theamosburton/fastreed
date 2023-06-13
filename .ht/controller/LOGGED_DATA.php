@@ -270,21 +270,21 @@ class getLoggedData{
 
 
     // Follow Functions
-    public function isFollowed($selfUID, $follweeUID){
+    public function isFollowed($selfUID, $followeeUID){
         $return = false;
 
         // If second person is followed this person firstly
-        $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID' and followBack = 1";
+        $sql = "SELECT * FROM followOthers WHERE follower = '$followeeUID' and followee = '$selfUID' and followBack = 1";
         $result = mysqli_query($this->DB, $sql);
 
         
 
         // If this person is followed second person firstly
         // then he follows back
-        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID'";
+        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$followeeUID'";
         $result1 = mysqli_query($this->DB, $sql1);
 
-        $sql2 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
+        $sql2 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$followeeUID' and followBack = 1";
         $result2 = mysqli_query($this->DB, $sql2);
 
         if (mysqli_num_rows($result) || mysqli_num_rows($result1) || mysqli_num_rows($result2)) {
@@ -324,7 +324,7 @@ class getLoggedData{
     }
 
 
-    public function isfollowingMe($selfUID, $follweeUID){
+    public function isfollowingMe($selfUID, $followeeUID){
         $return = false;
         // if he followed firslty
         $sql = "SELECT * FROM followOthers WHERE follower ='$followeeUID' and followee= '$selfUID'";
