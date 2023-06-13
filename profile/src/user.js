@@ -201,7 +201,7 @@ function follow(){
       if (data) {
         if (data.Result) {
           followButton.innerHTML = 'Followed';
-          followButton.onclick.setAttribute( "onClick", "javascript: unfollow();");
+          followButton.setAttribute( "onClick", "javascript: unfollow();");
         }else{
         followButton.innerHTML = `${data.message}`;
         }
@@ -234,7 +234,7 @@ function unfollow(){
       if (data) {
         if (data.Result) {
           followButton.innerHTML = 'Follow';
-          followButton.onclick.setAttribute( "onClick", "javascript: follow();");
+          followButton.setAttribute( "onClick", "javascript: follow();");
         }else{
           followButton.innerHTML = "Can't  unfollow";
         }
