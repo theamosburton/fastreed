@@ -19,8 +19,6 @@
                         </div>
                         </div>
                         <div class="profileOptions">
-                            <a href="/u/<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>" class="profileActions">Public View</a>
-
                             <?php
                             $selfId = $this->userData->getSelfDetails()['UID'];
                             $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
