@@ -80,7 +80,7 @@ class updateDetails{
     var validUsername = !/\s/.test(this.username) && usernameRegex.test(this.username)
     if(!validUsername){
       uError.innerHTML = ' Invalid Username ';
-    }else if (this.username.length <= 8) {
+    }else if (this.username.length <= 6) {
       uError.innerHTML = ' Short Username ';
     }else{
       
