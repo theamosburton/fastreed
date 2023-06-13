@@ -22,26 +22,24 @@
     <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>
     </span>
     </div>
-
-    <div class="infoDiv">
-    <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
     <?php
         if($canViewMail == 'everyone'){
             echo <<<HTML
-            <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?>
+                <div class="infoDiv">
+                    <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
+                    <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?></span>
+                </div>
             HTML;
         }elseif($canViewMail ==  'followers' && $isFollowingMe){
             echo <<<HTML
-            <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?>
-            HTML;
-        }else{
-            echo <<<HTML
-            <span class="infoValue"> <i>private email</i>
-            HTML;
+            <div class="infoDiv">
+                <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
+                <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?></span>
+            </div>
+        HTML;
         }
-        ?>
-    </span>
-    </div>
+    ?>
+
 
     <?php
     if($this->userData->getOtherData('username', $this->otherUsername)['websiteUrl'] != null){
