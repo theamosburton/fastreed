@@ -201,14 +201,11 @@ function follow(){
       if (data) {
         if (data.Result) {
           followButton.innerHTML = 'Followed';
-          // setTimeout(function(){
-          //   location.reload();
-          // }, 3000);
         }else{
-          followButton.innerHTML = 'Not followed';
+        followButton.innerHTML = `${data.message}`;
         }
       }else{
-          followButton.innerHTML = 'Not followed';
+          followButton.innerHTML = `${data.message}`;
       }
     }
     followUser();
