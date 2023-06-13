@@ -198,29 +198,7 @@ class getLoggedData{
     return $return;
     }
 
-    public function isFollowed($selfUID, $follweeUID){
-        $return = false;
-
-        // If second person is followed this person firstly
-        $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID' and followBack = 1";
-        $result = mysqli_query($this->DB, $sql);
-
-        
-
-        // If this person is followed second person firstly
-        // then he follows back
-        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID'";
-        $result1 = mysqli_query($this->DB, $sql1);
-
-        $sql2 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
-        $result2 = mysqli_query($this->DB, $sql2);
-
-        if (mysqli_num_rows($result) || mysqli_num_rows($result1) || mysqli_num_rows($result2)) {
-            $return = true;
-        }
-       
-        return $return;
-    }
+   
 
 
     // public function isFollowed($selfID, $otherID){
@@ -324,6 +302,61 @@ class getLoggedData{
             }
         }
         return $data;
+    }
+
+
+    // Follow Functions
+    public function isFollowed($selfUID, $follweeUID){
+        $return = false;
+
+        // If second person is followed this person firstly
+        $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID' and followBack = 1";
+        $result = mysqli_query($this->DB, $sql);
+
+        
+
+        // If this person is followed second person firstly
+        // then he follows back
+        $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID'";
+        $result1 = mysqli_query($this->DB, $sql1);
+
+        $sql2 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
+        $result2 = mysqli_query($this->DB, $sql2);
+
+        if (mysqli_num_rows($result) || mysqli_num_rows($result1) || mysqli_num_rows($result2)) {
+            $return = true;
+        }
+       
+        return $return;
+    }
+
+    public function follower($id){
+        $followedBackNumber;
+        $followedFirstNumber;
+        $followedBackFollower;
+        $followedFirstFollower;
+
+        // Check who followed back
+        $followedbackSQL = "SELECT * FROM followOthers WHERE follower = '$id' and followBack = 1";
+        $resultFB = mysqli_query($this->DB, $followedbackSQL);
+        if (mysqli_num_rows($followedbackSQL)) {
+            $followedBackNumber = mysqli_num_rows($followedbackSQL);
+            $followedBackFollower = mysqli_fetch_assoc($followedbackSQL);
+        }
+
+
+        // Check who followed firstly
+        $followedfirstSQL = "SELECT * FROM followOthers WHERE followee = '$id'";
+        $resultF = mysqli_query($this->DB, $followedfirstSQL);
+        if (mysqli_num_rows($followedfirstSQL)) {
+            $followedFirstNumber = mysqli_num_rows($followedfirstSQL);
+            $followedFirstFollower = mysqli_fetch_assoc($followedfirstSQL);
+        }
+
+       $followerCount = $followedBackNumber + $followedFirstNumber;
+       $follower = $followedBackFollower + $followedFirstFollower;
+
+       return [$followerCount, $follower];
     }
 }
 
