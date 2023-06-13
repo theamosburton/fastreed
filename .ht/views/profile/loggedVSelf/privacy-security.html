@@ -26,37 +26,72 @@
         </select>
       </div>
     </div>
-  
+    <?php
+    $eEveryone = '';
+    $efollowers = '';
+    $eself = '';
+    if($canViewMail == 'followers'){
+      $efollowers = 'selected';
+    }elseif($canViewMail == 'everyone'){
+      $eEveryone = 'selected';
+    }else{
+      $eself = 'selected';
+    }
+    ?>
     <div class="col-lg-8 col-md-8 col-12 mt-4">
       <span>Who can see your Email?</span>
       <div class=" mt-4 ml-4">
         <select class="form-control" name="" id="">
-          <option value="">Everyone</option>
-          <option value="">Followers</option>
-          <option value="">Only Me</option>
+          <option value="" <?php echo $eEveryone; ?> >Everyone</option>
+          <option value="" <?php echo $efollowers; ?> >Followers</option>
+          <option value="" <?php echo $eself; ?> >Only Me</option>
         </select>
       </div>
     </div>
   
+
+    <?php
+    $aEveryone = '';
+    $afollowers = '';
+    $aself = '';
+    if($canViewAge == 'followers'){
+      $afollowers = 'selected';
+    }elseif($canViewAge == 'everyone'){
+      $aEveryone = 'selected';
+    }else{
+      $aself = 'selected';
+    }
+    ?>
     <div class="col-lg-8 col-md-8 col-12 mt-4">
       <span>Who can see your Age?</span>
       <div class=" mt-4 ml-4">
         <select class="form-control" name="" id="">
-          <option value="">Everyone</option>
-          <option value="">Followers</option>
-          <option value="">Only Me</option>
+          <option value="" <?php echo $aEveryone; ?> >Everyone</option>
+          <option value="" <?php echo $afollowers; ?> >Followers</option>
+          <option value="" <?php echo $aself; ?> >Only Me</option>
         </select>
       </div>
   
     </div>
-  
+    <?php
+    $uEveryone = '';
+    $ufollowers = '';
+    $uself = '';
+    if($canViewMail == 'followers'){
+      $ufollowers = 'selected';
+    }elseif($canViewMail == 'everyone'){
+      $uEveryone = 'selected';
+    }else{
+      $uself = 'selected';
+    }
+    ?>
     <div class="col-lg-8 col-md-8 col-12 mt-4">
       <span>Who can see your Uploads?</span>
       <div class=" mt-4 ml-4">
         <select class="form-control" name="" id="">
-          <option value="">Everyone</option>
-          <option value="">Followers</option>
-          <option value="">Only Me</option>
+          <option value="" <?php echo $uEveryone; ?> >Everyone</option>
+          <option value="" <?php echo $ufollowers; ?> >Followers</option>
+          <option value="" <?php echo $uself; ?> >Only Me</option>
         </select>
       </div>
     </div>
