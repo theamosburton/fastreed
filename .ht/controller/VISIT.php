@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION)){session_start();}
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 if (!isset($_SERVROOT)) {
@@ -23,12 +23,13 @@ include_once($GLOBALS['DB']);
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['BASIC_FUNC']);
 include_once($GLOBALS['DEV_OPTIONS']);
-include_once($GLOBALS['FOLLOW']);
+
 
 include_once($GLOBALS['ADMIN_VISIT']);
 include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
 include_once($GLOBALS['LOGGED_DATA']);
+include_once($GLOBALS['FOLLOW']);
 
 if(HTTPS){
   $reqDomain = $_SERVER['HTTP_HOST'];

@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION)){session_start();}
 header('content-type:application/json');
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../../';
