@@ -339,7 +339,7 @@ class getLoggedData{
         // Check who followed back
         $followedbackSQL = "SELECT * FROM followOthers WHERE follower = '$id' and followBack = 1";
         $resultFB = mysqli_query($this->DB, $followedbackSQL);
-        if (mysqli_num_rows($followedbackSQL)) {
+        if (mysqli_num_rows($resultFB)) {
             $followedBackNumber = mysqli_num_rows($resultFB);
             $followedBackFollower = mysqli_fetch_assoc($resultFB);
         }
@@ -348,7 +348,7 @@ class getLoggedData{
         // Check who followed firstly
         $followedfirstSQL = "SELECT * FROM followOthers WHERE followee = '$id'";
         $resultF = mysqli_query($this->DB, $followedfirstSQL);
-        if (mysqli_num_rows($followedfirstSQL)) {
+        if (mysqli_num_rows($resultF)) {
             $followedFirstNumber = mysqli_num_rows($resultF);
             $followedFirstFollower = mysqli_fetch_assoc($resultF);
         }
