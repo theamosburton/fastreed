@@ -32,14 +32,14 @@
             echo <<<HTML
                 <div class="infoDiv">
                     <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
-                    <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?></span>
+                    <span class="infoValue">$this->userData->getOtherData('username', $this->otherUsername)['email']</span>
                 </div>
             HTML;
         }elseif($canViewMail ==  'followers' && $isFollowingMe){
             echo <<<HTML
             <div class="infoDiv">
                 <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>
-                <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?></span>
+                <span class="infoValue">$this->userData->getOtherData('username', $this->otherUsername)['email']</span>
             </div>
         HTML;
         }
