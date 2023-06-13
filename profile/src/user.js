@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function follow(){
   var followButton = document.getElementById('followButton');
-  followButton.innerHTML = 'Wait...';
+  followButton.innerHTML = '...';
 
   const followUser = async () =>{
       const url = '/.ht/API/follow.php/?follow';
@@ -215,7 +215,7 @@ function follow(){
 
 function unfollow(){
   var followButton = document.getElementById('followButton');
-  followButton.innerHTML = 'Wait...';
+  followButton.innerHTML = '...';
 
   const unfollowUser = async () =>{
       const url = '/.ht/API/follow.php/?unfollow';
