@@ -1,7 +1,7 @@
 <!-- Privacy and Security Section -->
-<!-- Password Sub section -->
+
 <div class="privacySecurity contentTopics">
-  <div class="title">Privacy</div>
+  <div onclick="new styleThisPage().exapndAndShrink('accessSettings')" style="margin:0" class="title">Info you can share with others &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
   <?php
   $fEveryone = '';
   $ffollowers = '';
@@ -15,7 +15,7 @@
   }
   
   ?>
-  <div class="form-group">
+  <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
     <div class="col-lg-8 col-md-8 col-12 mt-4">
       <span>Who can see your Posts and Webstories?</span>
       <div class=" mt-4 ml-4">
@@ -98,11 +98,13 @@
   </div>
 </div>
 
+
+<!-- Password Sub section -->
 <div class="privacySecurity contentTopics">
   <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
     echo <<<HTML
-      <div class="title">Create password</div>
-      <div class="setPassword">
+      <div class="title" onclick="new styleThisPage().exapndAndShrink('passwordCU')" style="margin:0">Create password &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="setPassword expandable" id="passwordCU" style="display: none; height:0;">
         <div class="password">
           <div id="pErrorDiv" class="col-12" style="display:none">
             <div id="pErrorMessage" class="alert alert-danger"><span id="peditmessage"> </span>
@@ -118,10 +120,10 @@
       HTML."\n";
   }else{
     echo <<<HTML
-      <div class="title">Update password</div>
-      <div class="setPassword">
+      <div class="title" onclick="new styleThisPage().exapndAndShrink('passwordCU')">Update password  &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="setPassword expandable" id="passwordCU" style="display: none; height:0;">
         <div class="password">
-          <div id="pErrorDiv" class="col-12 pErrorDiv" style="display:none">
+          <div id="pErrorDiv" class="col-12 pErrorDiv">
             <div id="pErrorMessage" class="alert alert-danger"><span id="peditmessage"> </span>
             </div>
           </div>

@@ -238,6 +238,12 @@ background-color: transparent!important;
 .privacySecurity .password input:hover,.privacySecurity .password input:focus{
     background-color: transparent;
 }
+.privacySecurity .expandable{
+    transition: all 2s linear 1s;
+    margin-top: 10px;
+    height:0;
+    display: none;
+}
 .setPassword .password{
     width: 70%;
 }
@@ -420,6 +426,9 @@ background-color: transparent!important;
 .uploadDpDiv .uploadDpContainer #message{
     display: none;
     padding: 4px 8px;
+}
+.privacySecurity .title:hover{
+    cursor: pointer;
 }
 @media (max-width: 990px) {
     

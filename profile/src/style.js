@@ -19,5 +19,21 @@ class styleThisPage{
             showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
+
+    exapndAndShrink(id){
+        let div = document.getElementById(`${id}`);
+        let title = document.querySelector('.privacySecurity .title');
+        let isDisplay = div.style.display;
+        if (isDisplay == 'none') {
+            div.style.display= 'block';
+            div.style.height= 'auto';
+        }else{
+            div.style.height= '0';
+            div.style.display= 'none';
+
+        }
+    }
+
+
 }
-new styleThisPage();
+var stylePage = new styleThisPage();
