@@ -180,9 +180,15 @@ class gSignUpLogin{
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
-        $this->loginAccount($userID);
-        $ePID = $this->AUTH->encrypt($userID);
-        $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
+        $sql2 = "INSERT INTO settings (personID , canViewContent, canViewMail, canViewAge, canViewUploads) VALUES ('$userID','everyone', 'self', 'followers', 'self')";
+        $result2 = mysqli_query($this->DB, $sql2);
+        if ($result2) {
+          $this->loginAccount($userID);
+          $ePID = $this->AUTH->encrypt($userID);
+          $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
+        }else {
+          showMessage(false, "Can't create settings");
+        }
       }else {
         showMessage(false, "Can't Log in");
       }
