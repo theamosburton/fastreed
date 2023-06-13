@@ -201,8 +201,6 @@ class updateDetails{
         }
     }
     // Updating profile details / 
-
-
     private function updateGenderDob($gender, $dob){
         $uid = $_SESSION['LOGGED_USER'];
         $sql = "UPDATE account_details SET gender = '$gender', DOB = '$dob' WHERE personID = '$uid'";

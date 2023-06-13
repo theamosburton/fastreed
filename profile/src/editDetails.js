@@ -232,7 +232,7 @@ class updateDetails{
       if (this.isUsername) {
         if (this.isEmail) {
           if (this.isDOB) {
-            if (adminPassword < 8) {
+            if (adminPassword < 6) {
               mainDiv.style.display = 'block';
               dispMessage.innerHTML = 'Admin password required';
             }else{
