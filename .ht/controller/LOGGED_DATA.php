@@ -198,42 +198,6 @@ class getLoggedData{
     return $return;
     }
 
-   
-
-
-    // public function isFollowed($selfID, $otherID){
-    //     $return = false;
-    //     $sql = "SELECT * FROM followOthers WHERE firstPID = ? and secondPID = ?";
-    //     $stmt = mysqli_prepare($this->DB, $sql);
-    //     mysqli_stmt_bind_param($stmt, "ss", $selfID, $otherID);
-    //     mysqli_stmt_execute($stmt);
-    //     $result = mysqli_stmt_get_result($stmt);
-        
-    //     $sql1 = "SELECT * FROM followOthers WHERE firstPID = ? and secondPID = ? and followBack = 1";
-    //     $stmt1 = mysqli_prepare($this->DB, $sql1);
-        
-    //     mysqli_stmt_bind_param($stmt1, "ss", $otherID, $selfID);
-    //     mysqli_stmt_execute($stmt1);
-    //     var_dump($stmt1);
-    //     $result1 = mysqli_stmt_get_result($stmt1);
-        
-    //     if ($result) {
-    //         if (mysqli_num_rows($result)) {
-    //             $return = true;
-    //         }
-    //     } elseif ($result1) {
-    //         if (mysqli_num_rows($result1)) {
-    //             $return = true;
-    //         }
-    //     }
-        
-    //     mysqli_stmt_close($stmt);
-    //     mysqli_stmt_close($stmt1);
-        
-    //     return $return;
-    // }
-    
-
 
      public function getOtherData($type, $field){
         $data = array();
@@ -357,6 +321,38 @@ class getLoggedData{
        $follower = $followedBackFollower + $followedFirstFollower;
 
        return [$followerCount, $follower];
+    }
+
+
+    public function isfollowingMe($selfUID, $follweeUID){
+        $return = false;
+        // if he followed firslty
+        $sql = "SELECT * FROM followOthers WHERE follower ='$followeeUID' and followee= '$selfUID'";
+        $result = mysqli_query($this->DB, $sql);
+
+        // if i followed him and he followed me back
+        $sql1 = "SELECT * FROM followOthers WHERE follower ='$selfUID' and followee= '$followeeUID' and followBack = 1";
+        $result1 = mysqli_query($this->DB, $sql1);
+
+        if (mysqli_num_rows($result) || mysqli_num_rows($result1)) {
+            $return = true;
+        }
+        return $return;
+    }
+
+    // Follow Functions //
+
+
+    // Settings //
+
+    public function getSettings($id){
+        $return = array();
+        $sql = "SELECT * FROM settings WHERE personID = '$id'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $return = mysqli_fetch_assoc($result);
+        }
+        return $return;
     }
 }   
 

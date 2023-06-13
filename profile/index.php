@@ -291,7 +291,14 @@ class loggedVother extends showProfile{
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
-        
+        $selfId = $this->userData->getSelfDetails()['UID'];
+        $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+        $userSettings = $this->userData->settings($otherID);
+        $isFollowingMe = $this->userData->isFollowingMe($selfId, $otherID);
+        $canViewMail = $userSettings['canViewMail'];
+        $canViewAge = $userSettings['canViewAge'];
+        $canViewContent = $userSettings['canViewContent'];
+        $canViewUploads = $userSettings['canViewUploads'];
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
