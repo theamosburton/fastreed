@@ -1,6 +1,56 @@
 <!-- Privacy and Security Section -->
 <!-- Password Sub section -->
 <div class="privacySecurity contentTopics">
+  <div class="title">Privacy</div>
+  <div class="form-group">
+    <div class="col-8 mt-4">
+      <span>Who can see your Posts and Webstories?</span>
+      <div class=" mt-4 ml-4">
+        <select class="form-control" name="" id="">
+          <option value="">Everyone</option>
+          <option value="">Followers</option>
+          <option value="">Only Me</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="col-8 mt-4">
+      <span>Who can see your Email?</span>
+      <div class=" mt-4 ml-4">
+        <select class="form-control" name="" id="">
+          <option value="">Everyone</option>
+          <option value="">Followers</option>
+          <option value="">Only Me</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="col-8 mt-4">
+      <span>Who can see your Age?</span>
+      <div class=" mt-4 ml-4">
+        <select class="form-control" name="" id="">
+          <option value="">Everyone</option>
+          <option value="">Followers</option>
+          <option value="">Only Me</option>
+        </select>
+      </div>
+  
+    </div>
+  
+    <div class="col-8 mt-4">
+      <span>Who can see your Uploads?</span>
+      <div class=" mt-4 ml-4">
+        <select class="form-control" name="" id="">
+          <option value="">Everyone</option>
+          <option value="">Followers</option>
+          <option value="">Only Me</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="privacySecurity contentTopics">
   <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
     echo <<<HTML
       <div class="title">Create password</div>
@@ -29,7 +79,7 @@
           </div>
           <span class="IndError" id="currentasswordError" style="display:none"></span>
           <div class="inp" >
-            <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off"> 
+            <input onkeyup="update.checkCurrentPassword2()" type="password" name="" id="currentPassword" placeholder="Current password" autocomplete="off">
           </div>
           <span class="IndError" id="newPasswordError" style="display:none"></span>
           <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
