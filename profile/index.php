@@ -21,7 +21,6 @@ class showProfile {
     protected $otherUsername;
     protected $extraScript;
     protected $adminIsEditing;
-    protected $follow;
     private $DOCROOT;
     private $SERVROOT;
     function __construct() {
@@ -73,7 +72,6 @@ class showProfile {
         }
         
         $this->userData = new getLoggedData();
-        $this->follow = new follow();
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
     } 
