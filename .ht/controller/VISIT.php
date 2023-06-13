@@ -17,11 +17,13 @@ $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.ht/controller/ADMIN_VISIT.php';
 $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.ht/controller/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.ht/controller/GUEST_VISIT.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
+$GLOBALS['FOLLOW'] = $_DOCROOT.'/.ht/API/follow.php';
 // Include Important File
 include_once($GLOBALS['DB']);
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['BASIC_FUNC']);
 include_once($GLOBALS['DEV_OPTIONS']);
+include_once($GLOBALS['FOLLOW']);
 
 include_once($GLOBALS['ADMIN_VISIT']);
 include_once($GLOBALS['USER_VISIT']);
