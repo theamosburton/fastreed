@@ -10,7 +10,12 @@
         <span class="infoValue"><?php echo $this->userData->getSelfDetails()['name'];?>
         <?php
         if ($this->userData->getOtherData('username', $this->otherUsername)['DOB'] != null) {
-        echo '('.$this->userData->getOtherData('username', $this->otherUsername)['age'].')';
+            if($canViewAge == 'everyone'){
+                echo '('.$this->userData->getOtherData('username', $this->otherUsername)['age'].')';
+            }elseif($canViewAge ==  'followers' && $isFollowingMe){
+                echo '('.$this->userData->getOtherData('username', $this->otherUsername)['age'].')';
+            HTML;
+            }
         }
         ?>
         </span>
@@ -22,6 +27,7 @@
     <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['username'];?>
     </span>
     </div>
+
     <?php
         if($canViewMail == 'everyone'){
             echo <<<HTML
