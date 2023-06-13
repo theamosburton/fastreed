@@ -244,6 +244,14 @@ class loggedVself extends showProfile{
             var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
          </script>';
+
+
+         $selfId = $_SESSION['LOGGED_USER'];
+         $userSettings = $this->userData->getSettings($selfId);
+         $canViewMail = $userSettings['canViewMail'];
+         $canViewAge = $userSettings['canViewAge'];
+         $canViewContent = $userSettings['canViewContent'];
+         $canViewUploads = $userSettings['canViewUploads'];
         $this->addHead();
         $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
     //***************/ Main Container Starts /**********//

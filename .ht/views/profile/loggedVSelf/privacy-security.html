@@ -2,14 +2,27 @@
 <!-- Password Sub section -->
 <div class="privacySecurity contentTopics">
   <div class="title">Privacy</div>
+  <?php
+  $fEveryone = '';
+  $ffollowers = '';
+  $fself = '';
+  if($canViewContent == 'followers'){
+    $ffollowers = 'selected';
+  }elseif($canViewContent == 'everyone'){
+    $fEveryone = 'selected';
+  }else{
+    $fself = 'selected';
+  }
+  
+  ?>
   <div class="form-group">
     <div class="col-lg-8 col-md-8 col-12 mt-4">
       <span>Who can see your Posts and Webstories?</span>
       <div class=" mt-4 ml-4">
         <select class="form-control" name="" id="">
-          <option value="">Everyone</option>
-          <option value="">Followers</option>
-          <option value="">Only Me</option>
+          <option value="" <?php echo $fEveryone; ?> >Everyone</option>
+          <option value="" <?php echo $ffollowers> >Followers</option>
+          <option value="" <?php echo $fself> >Only Me</option>
         </select>
       </div>
     </div>
