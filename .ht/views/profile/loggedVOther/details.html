@@ -34,6 +34,10 @@
             echo <<<HTML
             <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['email'];?>
             HTML;
+        }else{
+            echo <<<HTML
+            <span class="infoValue"> <i>private email</i>
+            HTML;
         }
         ?>
     </span>
