@@ -48,7 +48,7 @@ class follow{
             // checking if the person already followed you or not
             $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID'";
             $result = mysqli_query($this->DB, $sql);
-            if ($selfUID == $follweeUIDe) {
+            if ($selfUID == $follweeUID) {
                 showMessage(false, "Can't follow yourself");
             }elseif ($result) {
                 if (mysqli_num_rows($result)) {
