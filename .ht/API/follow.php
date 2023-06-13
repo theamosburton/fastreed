@@ -150,12 +150,15 @@ class follow{
     }
 
     public function notifyUser($UID2, $UID1U){
+        $data = json_decode(file_get_contents('php://input'), true);
+        // username of whom to follow
+        $userName = $this->userData->getOtherData('username', $data['username'])['name'];
         $return = false;
         $url = '/u/'.$UID1U;
         $time = time();
         $name = $this->userData->getSelfDetails()['name'];
         $profilePic = $this->userData->getSelfDetails()['profilePic'];
-        $title = '<b> '.$name.' </b> followed you on fastreed';
+        $title = 'Hey <b> '.$userName.', </b> '.$name. 'is now following you';
         $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$UID2', 'self', '$time', 0, '$url', 0)";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
