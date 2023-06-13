@@ -48,7 +48,9 @@ class follow{
             // checking if the person already followed you or not
             $sql = "SELECT * FROM followOthers WHERE follower = '$follweeUID' and followee = '$selfUID'";
             $result = mysqli_query($this->DB, $sql);
-            if ($result) {
+            if ($selfUID == $follweeUIDe) {
+                showMessage(false, "Can't follow yourself");
+            }elseif ($result) {
                 if (mysqli_num_rows($result)) {
                     $sql2 = "UPDATE followOthers set followBack = 1 WHERE follower = '$follweeUID' and followee = '$selfUID'";
                     $result = mysqli_query($this->DB, $sql2);
