@@ -18,8 +18,8 @@
   <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
     <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Posts and Webstories?</span>
-      <div class=" mt-2">
-        <select class="form-control" onchange="updateAccess('content')" id="contentAccess">
+      <div class=" mt-2" id="ContentSection">
+        <select class="form-control" onchange="updateAccess('Content')" id="ContentAccess">
           <option value="everyone" <?php echo $fEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $ffollowers; ?> >Followers</option>
         </select>
@@ -39,8 +39,8 @@
     ?>
     <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Email?</span>
-      <div class=" mt-2">
-        <select class="form-control" onchange="updateAccess('email')" id="emailAccess">
+      <div class=" mt-2" id= "MailSection">
+        <select class="form-control" onchange="updateAccess('Mail')" id="MailAccess">
           <option value="everyone" <?php echo $eEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $efollowers; ?> >Followers</option>
           <option value="self" <?php echo $eself; ?> >Only Me</option>
@@ -63,8 +63,8 @@
     ?>
     <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Age?</span>
-      <div class=" mt-2">
-        <select class="form-control" onchange="updateAccess('age')" id="ageAccess">
+      <div class=" mt-2" id="AgeSection">
+        <select class="form-control" onchange="updateAccess('Age')" id="AgeAccess">
           <option value="everyone" <?php echo $aEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $afollowers; ?> >Followers</option>
           <option value="self" <?php echo $aself; ?> >Only Me</option>
@@ -86,8 +86,8 @@
     ?>
     <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Uploads?</span>
-      <div class=" mt-2">
-        <select class="form-control" onchange="updateAccess('uploads')" id="uploadsAccess">
+      <div class="mt-2" id="UploadsSection">
+        <select class="form-control" onchange="updateAccess('Uploads')" id="UploadsAccess">
           <option value="everyone" <?php echo $uEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $ufollowers; ?> >Followers</option>
           <option value="self" <?php echo $uself; ?> >Only Me</option>

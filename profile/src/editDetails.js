@@ -697,6 +697,42 @@ function checkPasswordStrength(password) {
   return strength;
 }
 
+function updateAccess(id){
+  var fieldDiv = document.getElementById(`${id}Section`);
+  var field = document.getElementById(`${id}Access`);
+  field.style.display = 'none';
+  fieldDiv.innerHTML = '<div class="spinner"></div>';
+  var fieldValue = field.value;
+  const updateAccess = async () =>{
+    const url = '/.ht/API/editAccess.php';
+    var encyDat = {
+      'what' : `${id}`,
+      'personID' : `${ePID}`,
+      'value' : `${fieldValue}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+    if (data) {
+      if (data.result) {
+        field.style.display = 'block';
+      }else{
+        field.style.display = 'none';
+        fieldDiv.innerHTML = `<div> ${data.message}</div>`;
+      }
+    }else{
+      field.style.display = 'none';
+      fieldDiv.innerHTML = `<div> Can not update</div>`;
+    }
+  }
+  updateAccess();
+}
+
 
   
    
