@@ -2,29 +2,59 @@
 
 <div class="privacySecurity contentTopics">
   <div onclick="new styleThisPage().exapndAndShrink('accessSettings')" style="margin:0" class="title">Visibility settings &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
-  <?php
-  $fEveryone = '';
-  $ffollowers = '';
-  $fself = '';
-  if($canViewContent == 'followers'){
-    $ffollowers = 'selected';
-  }elseif($canViewContent == 'everyone'){
-    $fEveryone = 'selected';
-  }else{
-    $fself = 'selected';
-  }
+
+
   
-  ?>
+
+
   <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
-    <div class="col-lg-6 col-md-8 col-12 mt-4">
-      <span>Who can see your Posts and Webstories?</span>
-      <div class=" mt-2" id="ContentSection">
-        <select class="form-control" onchange="updateAccess('Content')" id="ContentAccess">
-          <option value="everyone" <?php echo $fEveryone; ?> >Everyone</option>
-          <option value="followers" <?php echo $ffollowers; ?> >Followers</option>
+
+    <?php
+    $uEveryone = '';
+    $ufollowers = '';
+    $uself = '';
+    if($canViewUploads == 'followers'){
+      $ufollowers = 'selected';
+    }elseif($canViewUploads == 'everyone'){
+      $uEveryone = 'selected';
+    }else{
+      $uself = 'selected';
+    }
+    ?>
+    <div class="col-12  mt-4">
+      <span>Manage the audience who can view your media library(photos, videos,audios etc.)</span>
+      <p>Embedded media in posts or web stories is publicly accessible by default, this settings is limited to the dashboard.</p>
+      <div class="mt-2" id="UploadsSection">
+        <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Uploads')" id="UploadsAccess">
+          <option value="everyone" <?php echo $uEveryone; ?> >Everyone</option>
+          <option value="followers" <?php echo $ufollowers; ?> >Following</option>
+          <option value="self" <?php echo $uself; ?> >Only Me</option>
         </select>
       </div>
     </div>
+    <?php
+    $fEveryone = '';
+    $ffollowers = '';
+    $fself = '';
+    if($canViewContent == 'followers'){
+      $ffollowers = 'selected';
+    }elseif($canViewContent == 'everyone'){
+      $fEveryone = 'selected';
+    }else{
+      $fself = 'selected';
+    }
+    
+    ?>
+    <div class="col-12  mt-4">
+      <span>Posts or webstories are publicly accessible by default, this settings is limited to the dashboard. Manage who can view it on dashboard</span>
+      <div class=" mt-2" id="ContentSection">
+        <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Content')" id="ContentAccess">
+          <option value="everyone" <?php echo $fEveryone; ?> >Everyone</option>
+          <option value="followers" <?php echo $ffollowers; ?> >Following</option>
+        </select>
+      </div>
+    </div>
+
     <?php
     $eEveryone = '';
     $efollowers = '';
@@ -37,17 +67,17 @@
       $eself = 'selected';
     }
     ?>
-    <div class="col-lg-6 col-md-8 col-12 mt-4">
-      <span>Who can see your Email?</span>
+    <div class="col-12 mt-4">
+      <span>Default email visibility: <i>"Only Me"</i> Control who can view it</span>
       <div class=" mt-2" id= "MailSection">
-        <select class="form-control" onchange="updateAccess('Mail')" id="MailAccess">
+        <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Mail')" id="MailAccess">
           <option value="everyone" <?php echo $eEveryone; ?> >Everyone</option>
-          <option value="followers" <?php echo $efollowers; ?> >Followers</option>
+          <option value="followers" <?php echo $efollowers; ?> >Following</option>
           <option value="self" <?php echo $eself; ?> >Only Me</option>
         </select>
       </div>
     </div>
-  
+
 
     <?php
     $aEveryone = '';
@@ -61,39 +91,18 @@
       $aself = 'selected';
     }
     ?>
-    <div class="col-lg-6 col-md-8 col-12 mt-4">
-      <span>Who can see your Age?</span>
+    <div class="col-12  mt-4">
+      <span>Manage who can see your Age on dashboard?</span>
       <div class=" mt-2" id="AgeSection">
-        <select class="form-control" onchange="updateAccess('Age')" id="AgeAccess">
+        <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Age')" id="AgeAccess">
           <option value="everyone" <?php echo $aEveryone; ?> >Everyone</option>
-          <option value="followers" <?php echo $afollowers; ?> >Followers</option>
+          <option value="followers" <?php echo $afollowers; ?> >Following</option>
           <option value="self" <?php echo $aself; ?> >Only Me</option>
         </select>
       </div>
   
     </div>
-    <?php
-    $uEveryone = '';
-    $ufollowers = '';
-    $uself = '';
-    if($canViewUploads == 'followers'){
-      $ufollowers = 'selected';
-    }elseif($canViewUploads == 'everyone'){
-      $uEveryone = 'selected';
-    }else{
-      $uself = 'selected';
-    }
-    ?>
-    <div class="col-lg-6 col-md-8 col-12 mt-4">
-      <span>Who can see your Uploads?</span>
-      <div class="mt-2" id="UploadsSection">
-        <select class="form-control" onchange="updateAccess('Uploads')" id="UploadsAccess">
-          <option value="everyone" <?php echo $uEveryone; ?> >Everyone</option>
-          <option value="followers" <?php echo $ufollowers; ?> >Followers</option>
-          <option value="self" <?php echo $uself; ?> >Only Me</option>
-        </select>
-      </div>
-    </div>
+  
   </div>
 </div>
 
