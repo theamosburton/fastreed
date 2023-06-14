@@ -721,6 +721,21 @@ function updateAccess(id){
     if (data) {
       if (data.Result) {
         field.style.display = 'block';
+        var everyoneSel ='';
+        var selfSel = ''; 
+        var followersSel ='';
+        if (fieldValue == 'everyone') {
+          everyoneSel = 'selected';
+        }else if(fieldValue == 'self'){
+          selfSel = 'selected';
+        }else if (fieldValue == 'followers') {
+          followersSel = 'selected';
+        }
+        fieldDiv.innerHTML = `<select class="form-control" onchange="updateAccess('${id}')" id="${id}Access">
+        <option value="everyone" ${everyoneSel} >Everyone</option>
+        <option value="followers" ${followersSel} >Followers</option>
+        <option value="self" ${selfSel}>Only Me</option>
+      </select>`;
       }else{
         field.style.display = 'none';
         fieldDiv.innerHTML = `<div> ${data.message}</div>`;

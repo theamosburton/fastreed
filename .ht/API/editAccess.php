@@ -19,33 +19,44 @@ class editAccess{
         $updatedValue = '';
         if (!isset($data['what']) || empty($data['what'])) {
             showMessage(false, "What to update");
-        }elseif (!isset($data['personID']) || empty($data['personID']) || !$this->checkUser()) {
+        }elseif (!isset($data['personID']) || empty($data['personID'])) {
             showMessage(false, "Not logged");
         }elseif(!isset($data['value']) || empty($data['value'])) {
             showMessage(false, "Value not defined");
-        }elseif ($data['value'] != 'everyone' || $data['value'] != 'self' || $data['value'] != 'followers') {
-            $updatedValue = 'self';
+        }elseif(!$this->checkUserE()){
+            showMessage(false, "User not verified");
         }else{
-            $updatedValue = $data['value'];
-            $this->updateAccess($updatedValue);
+            $this->updateAccess();
         }
     }
 
-    private function updateAccess($updatedValue){
+    private function updateAccess(){
         $data = json_decode(file_get_contents('php://input'), true);
-        $dat = 'canView'.$data['what'];
-        $eid = $data['personID'];
-        $dID = $this->AUTH->decrypt($eid);
-        $sql = "UPDATE settings set `$dat`= $updatedValue WHERE personID = '$dID'";
-        $result = mysqli_result($this->DB, $sql);
-        if ($result) {
-            showMessage(true, 'Updated');
-        }else {
-            showMessage(false, 'not Updated');
+        if (!isset($data['value']) || empty($data['value'])) {
+            showMessage(false, 'Value not set');
+        }else{
+            if ($data['value'] == 'self' || $data['value'] == 'followers' || $data['value'] == 'everyone') {
+                $updatedValue = $data['value'];
+            }else {
+                $updatedValue = 'self';
+            }
+
+            $dat = 'canView'.$data['what'];
+            $eid = $data['personID'];
+            $dID = $this->AUTH->decrypt($eid);
+            $sql = "UPDATE settings SET $dat = '$updatedValue' WHERE personID = '$dID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+                showMessage(true, 'Updated');
+            }else {
+                showMessage(false, 'Not Updated');
+            }
+
         }
+        
     }
 
-    private function checkUser(){
+    private function checkUserE(){
         $return = false;
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
