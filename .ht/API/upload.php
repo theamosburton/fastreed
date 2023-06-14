@@ -108,7 +108,7 @@ class uploadMedia{
 
     private function deleteOldDP($id){
         $getDPSQL = "SELECT * FROM uploads WHERE personID = '$id' and purpose = 'DP'";
-        $resultGet = mysqli_query($this->DB, $sql);
+        $resultGet = mysqli_query($this->DB, $getDPSQL);
         if (mysqli_num_rows($resultGet)) {
             $row = mysqli_fetch_assoc($resultGet);
             $uploadID = $row['uploadID'];
@@ -122,7 +122,7 @@ class uploadMedia{
             }
         }
     }
-    
+
     private function resetDP($id, $fileAddress){
         $return = false;
         $sql = "UPDATE account_details SET 
