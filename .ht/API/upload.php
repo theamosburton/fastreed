@@ -64,6 +64,7 @@ class uploadMedia{
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];
             if ($file_error === UPLOAD_ERR_OK) {
+                $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
                 if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
                     $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/';
@@ -104,6 +105,24 @@ class uploadMedia{
 
         return $return;
     }
+
+    private function deleteOldDP($id){
+        $getDPSQL = "SELECT * FROM uploads WHERE personID = '$id' and purpose = 'DP'";
+        $resultGet = mysqli_query($this->DB, $sql);
+        if (mysqli_num_rows($resultGet)) {
+            $row = mysqli_fetch_assoc($resultGet);
+            $uploadID = $row['uploadID'];
+            $extension = $row['extension'];
+            $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/'.$uploadID.$extension;
+            if (file_exists($path)) {
+                if (unlink($path)) {
+                    $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";
+                    $result = mysqli_query($this->DB, $sql);
+                }
+            }
+        }
+    }
+    
     private function resetDP($id, $fileAddress){
         $return = false;
         $sql = "UPDATE account_details SET 
