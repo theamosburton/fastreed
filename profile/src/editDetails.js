@@ -719,7 +719,7 @@ function updateAccess(id){
       });
     var data = await response.json();
     if (data) {
-      if (data.result) {
+      if (data.Result) {
         field.style.display = 'block';
       }else{
         field.style.display = 'none';
