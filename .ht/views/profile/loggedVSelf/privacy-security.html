@@ -1,7 +1,7 @@
 <!-- Privacy and Security Section -->
 
 <div class="privacySecurity contentTopics">
-  <div onclick="new styleThisPage().exapndAndShrink('accessSettings')" style="margin:0" class="title">Info you can share with others &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
+  <div onclick="new styleThisPage().exapndAndShrink('accessSettings')" style="margin:0" class="title">Visibility settings &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
   <?php
   $fEveryone = '';
   $ffollowers = '';
@@ -16,9 +16,9 @@
   
   ?>
   <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
-    <div class="col-lg-8 col-md-8 col-12 mt-4">
+    <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Posts and Webstories?</span>
-      <div class=" mt-4 ml-4">
+      <div class=" mt-2">
         <select class="form-control" onchange="updateAccess('content')" id="contentAccess">
           <option value="everyone" <?php echo $fEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $ffollowers; ?> >Followers</option>
@@ -37,9 +37,9 @@
       $eself = 'selected';
     }
     ?>
-    <div class="col-lg-8 col-md-8 col-12 mt-4">
+    <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Email?</span>
-      <div class=" mt-4 ml-4">
+      <div class=" mt-2">
         <select class="form-control" onchange="updateAccess('email')" id="emailAccess">
           <option value="everyone" <?php echo $eEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $efollowers; ?> >Followers</option>
@@ -61,9 +61,9 @@
       $aself = 'selected';
     }
     ?>
-    <div class="col-lg-8 col-md-8 col-12 mt-4">
+    <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Age?</span>
-      <div class=" mt-4 ml-4">
+      <div class=" mt-2">
         <select class="form-control" onchange="updateAccess('age')" id="ageAccess">
           <option value="everyone" <?php echo $aEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $afollowers; ?> >Followers</option>
@@ -84,9 +84,9 @@
       $uself = 'selected';
     }
     ?>
-    <div class="col-lg-8 col-md-8 col-12 mt-4">
+    <div class="col-lg-6 col-md-8 col-12 mt-4">
       <span>Who can see your Uploads?</span>
-      <div class=" mt-4 ml-4">
+      <div class=" mt-2">
         <select class="form-control" onchange="updateAccess('uploads')" id="uploadsAccess">
           <option value="everyone" <?php echo $uEveryone; ?> >Everyone</option>
           <option value="followers" <?php echo $ufollowers; ?> >Followers</option>

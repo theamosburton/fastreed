@@ -179,8 +179,6 @@
 .contentView .title{
     color: #b8bcc5;
     font-weight: bolder;
-    margin-bottom: 20px;
-
 }
 .contentView .contentTopics{
     margin: 0;
@@ -188,6 +186,9 @@
     border-radius: 15px;
     padding:20px;
     margin-bottom: 20px;
+}
+.contentView .expandable{
+    display: none;
 }
 .privacySecurity .password{
     margin-left: 5px;
@@ -427,7 +428,7 @@ background-color: transparent!important;
     display: none;
     padding: 4px 8px;
 }
-.privacySecurity .title:hover{
+.contentTopics .title:hover{
     cursor: pointer;
 }
 @media (max-width: 990px) {

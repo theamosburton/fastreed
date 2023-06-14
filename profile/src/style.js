@@ -22,7 +22,7 @@ class styleThisPage{
 
     exapndAndShrink(id){
         let div = document.getElementById(`${id}`);
-        let title = document.querySelector('.privacySecurity .title');
+        let title = document.querySelector('.contentTopics .title');
         let isDisplay = div.style.display;
         if (isDisplay == 'none') {
             div.style.display= 'block';

@@ -181,15 +181,15 @@
 
 <!-- Account Deleting -->
 <div class="contentTopics delete-account">
-  <div class="title">Delete Account</div>
+  <div class="title" onclick="new styleThisPage().exapndAndShrink('accountDelete')">Delete Account &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
   <!-- Error Message -->
-  <div id="dErrorDiv" class="col-lg-8 col-md-8">
+  <div id="dErrorDiv" class="col-lg-8 col-md-8 mt-2">
     <div id="dErrorDivInside" class="alert alert-danger alert-dismissible fade show">
       <span id="editDelmessage"></span>
     </div>
   </div>
   <!-- Error Message -->
-  <div class="col-lg-8 col-md-8">
+  <div class="col-lg-8 col-md-8 expandable mt-2" style="display: none;" id="accountDelete">
     <div class="form-group">
       <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
         echo <<<HTML
