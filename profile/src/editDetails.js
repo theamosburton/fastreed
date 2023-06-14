@@ -731,9 +731,13 @@ function updateAccess(id){
         }else if (fieldValue == 'followers') {
           followersSel = 'selected';
         }
+
+        if (id == 'Content') {
+          selfSel = 'hidden';
+        }
         fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
         <option value="everyone" ${everyoneSel} >Everyone</option>
-        <option value="followers" ${followersSel} >Followers</option>
+        <option value="followers" ${followersSel} >Following</option>
         <option value="self" ${selfSel}>Only Me</option>
       </select>`;
       }else{
