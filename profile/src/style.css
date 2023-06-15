@@ -470,6 +470,7 @@ background-color: transparent!important;
     flex-direction: column;
     position: relative;
     background-color: #cfd1d8;
+    border: 2px solid #cfd1d8;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions{
     position: absolute;
