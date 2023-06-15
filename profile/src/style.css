@@ -534,8 +534,9 @@ background-color: transparent!important;
 .imageShowDiv .imageContainer{
     border: 2px solid #b8bcc5;
     width: auto;
-    max-width: 90%;
-    height: 90%;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
     position: relative;
 }
 .imageShowDiv .imageContainer img{
