@@ -261,6 +261,7 @@ function showImage(path){
     var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
                                <img src="${path}" alt=""></img>`;
+    disbaleScroll();
   }
 }
 
@@ -270,6 +271,7 @@ function removeImage(){
     var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     showContainer.innerHTML = ``;
     showImageDiv.style.display = 'none';
+    enableScroll();
   }
 }
 
