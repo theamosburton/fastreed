@@ -6,7 +6,10 @@
     --f-card_med: 34;
     --f-card_large: 44;
   }
-  
+  *{
+    margin: 0;
+    padding: 0;
+  }
   body{
     margin: 0;
     padding: 0;

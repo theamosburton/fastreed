@@ -521,6 +521,9 @@ background-color: transparent!important;
     cursor: pointer;
     background-color: #2b2e36;
 }
+
+
+
 .imageShowDiv{
     position: absolute;
     width: 100%;
@@ -532,11 +535,8 @@ background-color: transparent!important;
     align-items: center;
 }
 .imageShowDiv .imageContainer{
-    border: 2px solid #b8bcc5;
-    width: auto;
-    max-width: 99%;
-    height: auto;
-    max-height: 99%;
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 .imageShowDiv .imageContainer img{
@@ -563,6 +563,7 @@ background-color: transparent!important;
     cursor: pointer;
     background-color: #202021;
 }
+
 @media (max-width: 990px) {
     
 
