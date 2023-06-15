@@ -486,6 +486,16 @@ background-color: transparent!important;
 }
 @media (max-width: 990px) {
     
+
+    .mediaDiv .uploadDiv .uploadFile{
+        width: 150px;
+        height: 110px;
+    }
+    
+    .mediaDiv .uploadDiv .uploadedFile{
+        width: 150px;
+        height: 110px;
+    }
     .contentView{
         border: 0;
         border-radius: 0;
