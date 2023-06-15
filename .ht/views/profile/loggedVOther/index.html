@@ -43,35 +43,13 @@
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
             <div class="userContent">
                 <!-- Menus section -->
-                <?php
-                if($canViewUploads == 'everyone'){
-                    echo <<<HTML
-                    <div class="userContentMenus scrollbar-style">
-                        <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
-                        <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt">About</a>
-                        <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
-                    </div>
-                    HTML;
-
-                }elseif($canViewUploads ==  'followers' && $isFollowingMe){
-                    echo <<<HTML
-                    <div class="userContentMenus scrollbar-style">
-                        <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
-                        <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt">About</a>
-                        <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
-                        
-                    </div>
-                    HTML;
-                }else{
-                    echo <<<HTML
-                    <div class="userContentMenus scrollbar-style">
-                        <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
-                        <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt=details">About</a>
-                    </div>
-                    HTML;
-                }
-                ?>
+                <div class="userContentMenus scrollbar-style">
+                    <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
+                    <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt">About</a>
+                    <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
+                </div>
                 <!-- Menus section -->
+
                 <!-- <div class="userContentMenus scrollbar-style">
                     <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
                     <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt">About</a>
@@ -96,15 +74,7 @@
                 <!-- Media Library Section -->
                 <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
                     <?php
-                        if($canViewUploads == 'everyone'){
-                            include 'media-library.html';
-                        }elseif($canViewUploads ==  'followers' && $isFollowingMe){
-                            include 'media-library.html';
-                        }else{
-                            echo <<<HTML
-                            <span>Sorry Uploads are private</span>
-                            HTML;
-                        }
+                        include 'media-library.html';
                     ?>
                 </div>
                 <!-- Media Library Section -->

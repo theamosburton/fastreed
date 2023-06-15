@@ -431,6 +431,59 @@ background-color: transparent!important;
 .contentTopics .title:hover{
     cursor: pointer;
 }
+
+.mediaDiv .uploadDiv{
+    padding: 10px;
+    margin: 0px 0px 10px 0;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+    
+}
+.mediaDiv .uploadDiv .uploadFile{
+    width: 190px;
+    height: 150px;
+    border: 1px dashed grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.mediaDiv .uploadDiv .uploadedFile{
+    width: 190px;
+    height: 150px;
+    /* border: 1px solid grey; */
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #cfd1d8;
+}
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .imgDiv{
+    height: 80%;
+    overflow: hidden;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions{
+    height: 20%;
+    background-color: #cfd1d8;
+}
 @media (max-width: 990px) {
     
     .contentView{
