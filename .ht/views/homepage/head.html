@@ -7,9 +7,7 @@
     <meta name="description" content="<?php echo$this->webDescription;?>">
     <meta name="keywords" content="<?php echo $this->webKeywords?>">
     <meta name="author" content="MD. Shafiq Malik">
-    
     <title><?php echo $this->webTitle;?></title>
-
     <!-- Gobal CSS -->
     <link rel="shortcut icon" href="/favicon.ico"> 
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -24,12 +22,11 @@
         }
     }
     ?>
-
     <!--Fonts Css-->
     <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -39,14 +36,12 @@
     }
     
     if ($this->adminLogged) {
-        echo '<script>var adminLogged = true;</script>'."\n";
+        echo '<script>var adminLogged = true;</script>';
     }elseif ($this->userLogged) {
-        echo '<script>var userLogged = true;</script>'."\n";
+        echo '<script>var userLogged = true;</script>';
     }else {
-        echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>
-        '."\n";
+        echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>';
     }
-
     if(isset($this->extraStyle)){
         echo $this->extraStyle;
     }

@@ -262,6 +262,10 @@ function showImage(path){
     showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
                                <img src="${path}" alt=""></img>`;
     disbaleScroll();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 }
 
