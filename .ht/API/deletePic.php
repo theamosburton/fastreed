@@ -40,13 +40,14 @@ class deletePic{
     }
 
     private function deleteByUser(){
+        
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
         $personID = $this->AUTH->decrypt($eid); 
-
+        $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$personID.'/'.$imgID.'.'.$ext;
+        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/'.$imgID.$ext;
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 6');
         }elseif (file_exists($path)) {
@@ -72,10 +73,10 @@ class deletePic{
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
         $personID = $this->AUTH->decrypt($eid); 
-
+        $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$personID.'/'.$imgID.'.'.$ext;
+        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/'.$imgID.$ext;
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, 'Not an admin');
         }elseif (file_exists($path)) {
