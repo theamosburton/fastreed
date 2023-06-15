@@ -36,7 +36,7 @@
                         </div>
                         <div class="picOptions" id="picOptions{$idn}" style="display:none" >
                             <div onclick="showImage('$path')">View</div>
-                            <div onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user')">Delete</div>
+                            <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user')">Delete</div>
                         </div>
                     </div>
                 </div>
