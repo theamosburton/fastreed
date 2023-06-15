@@ -43,7 +43,7 @@ class showMenus{
       enableScroll();
       
     }
-
+// For dp upload
     uploadImage() {
       document.querySelector('#uploadDbButton').innerHTML = `Upload`;
       var removeImageButton = document.querySelector('#removeImage');
@@ -86,15 +86,42 @@ class showMenus{
       uploadDbButton.addEventListener('click', () => {
         this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
           var binaryImage = this.dataURItoBlob(base64Image);
-          this.uploadToServer(binaryImage); // Pass the base64Image to uploadToServer()
+          this.uploadToServer(binaryImage, 'dpUpload'); // Pass the base64Image to uploadToServer()
         });
       });
     }
 
-    uploadToServer(binaryImage) {
+    // for image upload
+    uploadPhoto() {
+      var uploadBox = document.getElementById('uploadBox');
+      var fileInput = document.getElementById("uploadInputImage");
+      var imagePreview = document.getElementById("tempImage");
+      var tempBox = document.getElementById('tempUploadBox');
+      uploadBox.style.display = 'none';
+      tempBox.style.display = 'flex';
+      imagePreview.innerHTML = "";
+      var binaryImage;
+      if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        let self = this;
+        reader.onload = function (e) {
+          var imgElement = document.createElement("img");
+          imgElement.src = e.target.result;
+          imgElement.style.maxWidth = "100%";
+          imgElement.style.maxHeight = "100%";
+          imagePreview.appendChild(imgElement);
+          binaryImage = e.target.result;
+          var blobImage = self.dataURItoBlob(binaryImage)
+          self.uploadToServer(blobImage, 'image');
+          
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+
+
+    uploadToServer(binaryImage, utype) {
         var formData = new FormData();
-
-
         // Determine the file extension based on the MIME type
         var mimeString = binaryImage.type;
         var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
@@ -103,7 +130,7 @@ class showMenus{
         // Append other data to the FormData object
         formData.append('ePID', ePID);
         formData.append('ext', fileExtension);
-        formData.append('type', 'dpUpload');
+        formData.append('type', utype);
         formData.append('editor', this.whoIs);
         // Send the FormData object to the server using AJAX
         var xhr = new XMLHttpRequest();
@@ -111,22 +138,39 @@ class showMenus{
 
 
         // Track the progress of the upload
-        xhr.upload.addEventListener('progress', (event) => {
-          if (event.lengthComputable) {
-            var percentComplete = (event.loaded / event.total) * 100;
-            document.querySelector('#uploadDbButton').innerHTML = `Uploading ${percentComplete.toFixed(2)}%`;
-            // Update the UI or perform actions based on the progress
-          }
-        });
+        if (utype == 'dpUploads') {
+          xhr.upload.addEventListener('progress', (event) => {
+            if (event.lengthComputable) {
+              var percentComplete = (event.loaded / event.total) * 100;
+              document.querySelector('#uploadDbButton').innerHTML = `Uploading ${percentComplete.toFixed(2)}%`;
+              // Update the UI or perform actions based on the progress
+            }
+          });
+        }else if(utype == 'image'){
+          xhr.upload.addEventListener('progress', (event) => {
+            if (event.lengthComputable) {
+              var percentComplete = (event.loaded / event.total) * 100;
+              var progress = document.querySelector('#uploadProgressDiv');
+              progress.innerHTML = `${percentComplete.toFixed(2)}%`;
+              progress.style.width = `${percentComplete.toFixed(2)}%`;
+              // Update the UI or perform actions based on the progress
+            }
+          });
+        }
+      
 
-
-        // Handle the upload completion
         xhr.addEventListener('load', () => {
           if (xhr.status === 200) {
             // Upload successful, handle the response
             var response = JSON.parse(xhr.responseText);
             if (response.Result) {
-              location.reload();
+              if (utype == 'dpUploads') {
+                location.reload();
+              }else if (utype == 'image') {
+                setTimeout(function(){
+                  location.reload();
+                }, 3000);
+              }
             }else{
               document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
               document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
@@ -245,8 +289,8 @@ function unfollow(){
     unfollowUser();
 }
 
-function showPicOptions(id){
-  var options = document.querySelector(`.uploadedFile .uploadDivInside #${id}`);
+function showPicOptions(no){
+  var options = document.querySelector(`.uploadedFile .uploadDivInside #picOptions${no}`);
   var isDisp = options.style.display
   if(isDisp == 'none'){
       options.style.display = 'block';
@@ -278,6 +322,52 @@ function removeImage(){
     enableScroll();
   }
 }
+
+
+function deleteImage(imgID, ext, no, whois){
+  var delOpt = document.getElementById(`delOpt${no}`);
+  var pic = document.getElementById(`photo${no}`);
+  delOpt.innerHTML = 'Deleting...';
+  const deleteImageAPI = async () =>{
+    const url = '/.ht/API/deletePic.php';
+    var encyDat = {
+      'imgID': `${imgID}`,
+      'extension': `${ext}`,
+      'personID':`${ePID}`,
+      'whois':`${whois}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+
+    if (data) {
+      if (data.Result) {
+        delOpt.innerHTML = 'Removing';
+        setTimeout(function(){
+          pic.style.display = 'none';
+        }, 3000);
+        
+      }else{
+        delOpt.innerHTML = `${data.message}`;
+      }
+    }else{
+      delOpt.innerHTML = "Can't Delete";
+    }
+  }
+  deleteImageAPI();
+}
+
+
+
+
+
+
+
 
 
 

@@ -110,7 +110,7 @@ class getLoggedData{
        return $return;
      }
 
-     // This will work if user is super user oe admin
+     // This will work if user is super user or admin
      public function getAccess(){
         $data = array();
         $PID = $_SESSION['LOGGED_USER'];
@@ -164,7 +164,7 @@ class getLoggedData{
        return $return;
      }
 
-    // By user
+    // By admin
     public function accountsByAdmin($ftype, $ffield){
         //  If argument are username then get UID from 
         //  getUID function using former username
@@ -195,7 +195,7 @@ class getLoggedData{
                 );
             }
         }
-    return $return;
+         return $return;
     }
 
 

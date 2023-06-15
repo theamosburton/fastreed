@@ -1,41 +1,48 @@
 <div class="photosLibrary">
     <div class="title ml-2"> Photos</div>
+
     <div class="photosDiv uploadDiv">
-        <div class="uploadFile">
+        <div class="uploadFile" id="uploadBox">
             <i class="fa fa-cloud-arrow-up"></i>
-            <small>Upload Photos</small>
+            <label for="uploadInputImage" >Upload Photos</label>
+            <input onchange="new showMenus().uploadPhoto()" type="file" id="uploadInputImage" hidden>
         </div>
-        <div class="uploadedFile">
-            <div class="uploadDivInside">
-                <div class="imgDiv" onclick="showImage('/monaLisa.jpg')">
-                    <img src="/monaLisa.jpg" alt="">
-                </div>
-                <div class="fileOptions">
-                    <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('picOptions1')"></i>
-                </div>
 
-                <div class="picOptions" id="picOptions1" style="display:none" >
-                    <div onclick="showImage('/monaLisa.jpg')">View</div>
-                    <div>Delete</div>
+        <div class="uploadedFile" id="tempUploadBox" style="display: none;">
+            <div class="uploadDivInside">
+                <div class="imgDiv" id="tempImage">
+                </div>
+                <div class="uploadProgressDiv" id="uploadProgressDiv">
                 </div>
             </div>
         </div>
-        
-        <div class="uploadedFile">
-            <div class="uploadDivInside">
-                <div class="imgDiv" onclick="showImage('/favicon.ico')">
-                    <img src="/favicon.ico" alt="">
-                </div>
-                <div class="fileOptions">
-                    <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('picOptions2')"></i>
-                </div>
 
-                <div class="picOptions" id="picOptions2" style="display:none" >
-                    <div onclick="showImage('/favicon.ico')">View</div>
-                    <div>Delete</div>
+        <?php
+        $id = $this->userData->getSelfDetails()['UID'];
+        $data = $this->uploadData->getPhotos($id);
+        $data = array_reverse($data);
+        $length = count($data);
+        for($i=0;$i < $length; $i++ ){
+            $idn = $i+1;
+            $path = '/fastreedusercontent/photos/'.$data[$i][3].'/'.$data[$i][2].$data[$i][7];
+            echo <<<HTML
+                <div class="uploadedFile" id="photo{$idn}">
+                    <div class="uploadDivInside">
+                        <div class="imgDiv" onclick="showImage('$path')">
+                            <img src="$path" alt="">
+                        </div>
+                        <div class="fileOptions">
+                            <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
+                        </div>
+                        <div class="picOptions" id="picOptions{$idn}" style="display:none" >
+                            <div onclick="showImage('$path')">View</div>
+                            <div onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user')">Delete</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            HTML;
+        }
+        ?>
 
         <div class="uploadedFile"></div>
         <div class="uploadedFile"></div>

@@ -86,42 +86,6 @@ class gSignUpLogin{
     setcookie("authStatus", "", time()-3600, '/');
   }
 
-  // Saving profilepic in server
-  public function saveProfilePic($downLink, $id){
-    $return = false;
-      $file_ext = pathinfo($downLink, PATHINFO_EXTENSION);
-      if (empty($file_ext)) {
-        $file_ext = '.png';
-      }else{
-        $file_ext = $file_ext;
-      }
-      $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-      if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
-        $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/';
-        $add = '/fastreedusercontent/photos/'.$id.'/';
-        // Create the directory if it doesn't exist
-        if (!is_dir($directory)) {
-            mkdir($directory, 0777, true);
-        }
-        $fileAddress = $directory.$fileName.$file_ext;
-        $address = $add.$fileName.$file_ext;
-
-          // Download the image
-          $imageData = file_get_contents($downLink);
-          // Save the image on the server
-          if (file_put_contents($fileAddress, $imageData)) {
-              // File moved successfully
-              if($this->resetDP($id, $address)){
-                $return['result'] = true;
-                $return['link'] = $address;
-              }
-
-          }
-      }
-   return $return;
-    
-  }
-
   private function resetDP($id, $fileAddress){
         $return = false;
         $sql = "UPDATE account_details SET 
@@ -135,18 +99,6 @@ class gSignUpLogin{
         return $return;
   }
 
-  private function makeFileEntry($fileName, $id, $purpose, $type, $ext){
-    $return = false;
-    $date = date('Y-m-d');
-    $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension) Values('$date', '$fileName', '$purpose', '$id', '$type', '$ext')";
-    $result = mysqli_query($this->DB,$sql);
-    if ($result) {
-        $return['Result'] = true;
-        $return['fileName'] = $fileName;
-    }
-
-    return $return;
-  }
 
   // Deleting Other IDS and Making Reference //
   public function createNewAccount(){
@@ -156,9 +108,6 @@ class gSignUpLogin{
     $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
     $name = $_GET['name'];
     $profilePicLink = $_GET['profilePic'];
-    if($link = $this->saveProfilePic($profilePicLink, $userID)){
-      $profilePicLink = $link['link'];
-    }
     $date = date('Y-m-d');
     // Checking If Reference Session Availabe or Not
     if (isset($_SESSION['refSession'])) {

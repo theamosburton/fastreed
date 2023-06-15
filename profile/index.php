@@ -72,6 +72,7 @@ class showProfile {
         }
         
         $this->userData = new getLoggedData();
+        $this->uploadData = new getUploadData();
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
     } 

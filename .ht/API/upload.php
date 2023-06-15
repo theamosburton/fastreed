@@ -20,6 +20,7 @@ class uploadMedia{
         $this->DB = $this->DB_CONNECT->DBConnection();
         $this->BASIC_FUNC = new BasicFunctions(); 
         $this->AUTH = new Auth();
+        $this->userData = new getLoggedData();
         // Who is editing
 
         if (!isset($_POST['type'])) {
@@ -41,11 +42,11 @@ class uploadMedia{
         }elseif($_POST['editor'] == 'user') {
             $dPID = $_SESSION['LOGGED_USER'];
             if ($_POST['type'] == 'image') {
-                // $this->uploadImage($dPID);
+                $this->uploadImage($dPID);
             }elseif ($_POST['type'] == 'video') {
-                // $this->uploadVideo($dPID);
+                $this->uploadVideo($dPID);
             }elseif ($_POST['type'] == 'audio') {
-                // $this->uploadAudio($dPID);
+                $this->uploadAudio($dPID);
             }elseif ($_POST['type'] == 'dpUpload') {
                 $this->uploadDP($dPID);
             }else {
@@ -58,6 +59,7 @@ class uploadMedia{
     }
 
     private function uploadDP($id){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
         if(isset($_FILES['DPimage'])){
             $file = $_FILES['DPimage'];
             $file_tmp = $file['tmp_name'];
@@ -66,9 +68,9 @@ class uploadMedia{
             if ($file_error === UPLOAD_ERR_OK) {
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext)['Result']){
-                    $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/';
-                    $add = '/fastreedusercontent/photos/'.$id.'/';
+                if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext)['Result']){
+                    $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/';
+                    $add = '/fastreedusercontent/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
@@ -93,16 +95,53 @@ class uploadMedia{
             showMessage(false, 'No Image Found');
         }
     }
-    private function makeFileEntry($fileName, $id, $purpose, $type, $ext){
+
+    private function uploadImage($id){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
+        if(isset($_FILES['DPimage'])){
+            $file = $_FILES['DPimage'];
+            $file_tmp = $file['tmp_name'];
+            $file_error = $file['error'];
+            $file_ext = $_POST['ext'];
+            if ($file_error === UPLOAD_ERR_OK) {
+                $this->deleteOldDP($id);
+                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext)['Result']){
+                    $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/';
+                    $add = '/fastreedusercontent/photos/'.$username.'/';
+                    // Create the directory if it doesn't exist
+                    if (!is_dir($directory)) {
+                        mkdir($directory, 0777, true);
+                    }
+                    $fileAddress = $directory.$fileName.'.'.$file_ext;
+                    $address = $add.$fileName.'.'.$file_ext;
+                    if (move_uploaded_file($file_tmp, $fileAddress)) {
+                        // File moved successfully
+                        showMessage(true, 'File Uploaded');
+                    } else {
+                        // Failed to move the file
+                        showMessage(false, 'Error moving the file');
+                    }
+                }else {
+                    showMessage(false, 'File cannot entered in DB');
+                  }
+              }else {
+                showMessage(false, 'Problem with image');
+              }
+        }else {
+            showMessage(false, 'No Image Found');
+        }
+    }
+
+    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
-        $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension) Values('$date', '$fileName', '$purpose', '$id', '$type', '.$ext')";
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;
             $return['fileName'] = $fileName;
         }
-
         return $return;
     }
 

@@ -17,6 +17,7 @@ $GLOBALS['ADMIN_VISIT'] = $_DOCROOT.'/.ht/controller/ADMIN_VISIT.php';
 $GLOBALS['USER_VISIT'] = $_DOCROOT.'/.ht/controller/USER_VISIT.php';
 $GLOBALS['GUEST_VISIT'] = $_DOCROOT.'/.ht/controller/GUEST_VISIT.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
+$GLOBALS['UPLOADS'] = $_DOCROOT.'/.ht/controller/UPLOADS.php';
 // Include Important File
 include_once($GLOBALS['DB']);
 include_once($GLOBALS['AUTH']);
@@ -28,6 +29,7 @@ include_once($GLOBALS['ADMIN_VISIT']);
 include_once($GLOBALS['USER_VISIT']);
 include_once($GLOBALS['GUEST_VISIT']);
 include_once($GLOBALS['LOGGED_DATA']);
+include_once($GLOBALS['UPLOADS']);
 
 if(HTTPS){
   $reqDomain = $_SERVER['HTTP_HOST'];
