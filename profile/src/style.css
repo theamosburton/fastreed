@@ -468,11 +468,31 @@ background-color: transparent!important;
     height: 100%;
     display: flex;
     flex-direction: column;
-    border: 2px solid #cfd1d8;
+    position: relative;
+    background-color: #cfd1d8;
 }
-
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions{
+    position: absolute;
+    top: 30px;
+    right: 8px;
+    min-width: 100px;
+    background-color: #18191c;
+    border: 1px solid;
+}
+.uploadedFile .uploadDivInside .picOptions div{
+    padding: 1px 10px;
+    border-bottom: 1px solid;
+    color: #cfd1d8;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions div:hover{
+    background-color: #3a3d40;
+    cursor: pointer;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions div:last-child{
+    border: 0;
+}
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .imgDiv{
-    height: 80%;
+    height: 100%;
     overflow: hidden;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside img{
@@ -481,8 +501,66 @@ background-color: transparent!important;
     object-fit: contain;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions{
-    height: 20%;
-    background-color: #cfd1d8;
+    position: absolute;
+    top: 5px; /* Adjust the top position as needed */
+    right: 5px; /* Move the element to the right */
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3a3d40;
+    color: white;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon:hover{
+    cursor: pointer;
+    background-color: #2b2e36;
+}
+.imageShowDiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #050505be;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imageShowDiv .imageContainer{
+    border: 2px solid #b8bcc5;
+    width: auto;
+    max-width: 90%;
+    height: 90%;
+    position: relative;
+}
+.imageShowDiv .imageContainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.imageShowDiv .imageContainer i{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3a3d40;
+    color: white;
+}
+.imageShowDiv .imageContainer i:hover{
+    cursor: pointer;
+    background-color: #202021;
 }
 @media (max-width: 990px) {
     

@@ -1,5 +1,5 @@
 <div class="photosLibrary">
-    <div class="title ml-3"> Photos</div>
+    <div class="title ml-2"> Photos</div>
     <div class="photosDiv uploadDiv">
         <div class="uploadFile">
             <i class="fa fa-cloud-arrow-up"></i>
@@ -7,19 +7,33 @@
         </div>
         <div class="uploadedFile">
             <div class="uploadDivInside">
-                <div class="imgDiv">
+                <div class="imgDiv" onclick="showImage('/monaLisa.jpg')">
                     <img src="/monaLisa.jpg" alt="">
                 </div>
-                <div class="fileOptions"></div>
+                <div class="fileOptions">
+                    <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('picOptions1')"></i>
+                </div>
+
+                <div class="picOptions" id="picOptions1" style="display:none" >
+                    <div onclick="showImage('/monaLisa.jpg')">View</div>
+                    <div>Delete</div>
+                </div>
             </div>
         </div>
         
         <div class="uploadedFile">
             <div class="uploadDivInside">
-                <div class="imgDiv">
-                    <img src="/monaLisa.jpg" alt="">
+                <div class="imgDiv" onclick="showImage('/favicon.ico')">
+                    <img src="/favicon.ico" alt="">
                 </div>
-                <div class="fileOptions"></div>
+                <div class="fileOptions">
+                    <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('picOptions2')"></i>
+                </div>
+
+                <div class="picOptions" id="picOptions2" style="display:none" >
+                    <div onclick="showImage('/favicon.ico')">View</div>
+                    <div>Delete</div>
+                </div>
             </div>
         </div>
 

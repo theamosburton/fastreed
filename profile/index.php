@@ -109,6 +109,10 @@ class showProfile {
                         </form>
                         </div>
                     </div>
+                    <div class="imageShowDiv" id="imageShowDiv" style="display:none">
+                        <div class="imageContainer">
+                        </div>
+                    </div>
             HTML;
 
 

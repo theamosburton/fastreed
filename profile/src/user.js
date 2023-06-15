@@ -245,5 +245,33 @@ function unfollow(){
     unfollowUser();
 }
 
+function showPicOptions(id){
+  var options = document.querySelector(`.uploadedFile .uploadDivInside #${id}`);
+  var isDisp = options.style.display
+  if(isDisp == 'none'){
+      options.style.display = 'block';
+  }else{
+      options.style.display = 'none';
+  }
+}
+function showImage(path){
+  var showImageDiv = document.getElementById('imageShowDiv');
+  if (showImageDiv.style.display == 'none') {
+    showImageDiv.style.display = 'flex';
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
+    showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
+                               <img src="${path}" alt=""></img>`;
+  }
+}
+
+function removeImage(){
+  var showImageDiv = document.getElementById('imageShowDiv');
+  if (showImageDiv.style.display != 'none') {
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
+    showContainer.innerHTML = ``;
+    showImageDiv.style.display = 'none';
+  }
+}
+
 
 
