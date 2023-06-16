@@ -481,7 +481,7 @@ background-color: transparent!important;
     border: 1px solid;
 }
 .uploadedFile .uploadDivInside .picOptions div{
-    padding: 1px 10px;
+    padding: 1px 25px 1px 10px;
     border-bottom: 1px solid;
     color: #cfd1d8;
 }
@@ -527,7 +527,6 @@ background-color: transparent!important;
     border-radius: 40px;
     height: 20px;
     width: 0%;
-    border: 1px solid;
     display: flex;
     justify-content: center;
     align-items: center;

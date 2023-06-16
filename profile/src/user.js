@@ -165,8 +165,12 @@ class showMenus{
             var response = JSON.parse(xhr.responseText);
             if (response.Result) {
               if (utype == 'dpUploads') {
-                location.reload();
+                document.querySelector('#uploadDbButton').innerHTML = `Processing`;
+                setTimeout(function(){
+                  location.reload();
+                }, 3000);
               }else if (utype == 'image') {
+                document.querySelector('#uploadProgressDiv').innerHTML = `processing`;
                 setTimeout(function(){
                   location.reload();
                 }, 3000);
@@ -291,7 +295,7 @@ function unfollow(){
 
 function showPicOptions(no){
   var options = document.querySelector(`.uploadedFile .uploadDivInside #picOptions${no}`);
-  var isDisp = options.style.display
+  var isDisp = options.style.display;
   if(isDisp == 'none'){
       options.style.display = 'block';
   }else{
@@ -323,6 +327,42 @@ function removeImage(){
   }
 }
 
+function changeImageVisibility(imgID, no, whois){
+  var field = document.getElementById(`visibilityAccess${no}`);
+
+  const changeVisibility = async () =>{
+    const url = '/.ht/API/deletePic.php';
+    var encyDat = {
+      'purpose': 'visibility',
+      'imgID': `${imgID}`,
+      'personID':`${ePID}`,
+      'whois':`${whois}`,
+      'value':`${field.value}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+
+    if (data) {
+      if (data.Result) {
+        setTimeout(function(){
+          pic.style.display = 'none';
+        }, 3000);
+        
+      }else{
+        alert(`${data.message}`);
+      }
+    }else{
+      alert( "Can't Delete");
+    }
+  }
+  changeVisibility();
+}
 
 function deleteImage(imgID, ext, no, whois){
   var delOpt = document.getElementById(`delOpt${no}`);
@@ -331,6 +371,7 @@ function deleteImage(imgID, ext, no, whois){
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';
     var encyDat = {
+      'purpose':'delete',
       'imgID': `${imgID}`,
       'extension': `${ext}`,
       'personID':`${ePID}`,

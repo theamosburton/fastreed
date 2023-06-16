@@ -19,12 +19,27 @@
 
         <?php
         $id = $this->userData->getSelfDetails()['UID'];
+        $username = $this->userData->getSelfDetails()['username'];
         $data = $this->uploadData->getPhotos($id);
         $data = array_reverse($data);
         $length = count($data);
         for($i=0;$i < $length; $i++ ){
             $idn = $i+1;
-            $path = '/fastreedusercontent/photos/'.$data[$i][3].'/'.$data[$i][2].$data[$i][7];
+            $none = '';
+            $self = '';
+            $everyone = '';
+            $followers = '';
+            $self = '';
+            if($data[$i][8] == 'followers'){
+              $followers = 'selected';
+            }elseif($data[$i][8] == 'everyone'){
+              $everyone = 'selected';
+            }elseif($data[$i][8] == 'self'){
+                $self = 'selected';
+            }else{
+                $none = 'selected';
+            }
+            $path = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
             echo <<<HTML
                 <div class="uploadedFile" id="photo{$idn}">
                     <div class="uploadDivInside">
@@ -37,6 +52,12 @@
                         <div class="picOptions" id="picOptions{$idn}" style="display:none" >
                             <div onclick="showImage('$path')">View</div>
                             <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user')">Delete</div>
+                            <select onchange="changeImageVisibility('{$data[$i][2]}','{$idn}', 'user')" class="form-control form-control-sm" style="background-color: transparent; color: #cfd1d8;" id="visibilityAccess{$idn}">
+                                <option style="background-color: #18191c; color: #cfd1d8;" {$none} value="none" disabled>Change Visibility</option>
+                                <option style="background-color: #18191c; color: #cfd1d8;" {$self} value="self">Only me</option>
+                                <option  style="background-color: #18191c; color: #cfd1d8;" {$followers} value="followers">Following</option>
+                                <option style="background-color: #18191c; color: #cfd1d8;" {$everyone} value="everyone">Everyone</option>
+                            </select>
                         </div>
                     </div>
                 </div>
