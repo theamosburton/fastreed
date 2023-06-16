@@ -59,6 +59,10 @@ class uploadMedia{
 
     }
 
+    private function uploadVideo($dPID){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
+    }
+
     private function uploadDP($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
         if(isset($_FILES['media'])){
