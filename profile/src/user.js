@@ -137,7 +137,7 @@ class showMenus{
         // var fileName = fileInput.files[0].name;
         var blobVideo = new Blob([videoData], { type: 'video/mp4' });
     
-        self.uploadToServer(blobVideo, 'video');
+        self.uploadToServerVideo(blobVideo, 'video');
       };
     }
     
@@ -198,19 +198,7 @@ class showMenus{
               // Update the UI or perform actions based on the progress
             }
           });
-        }else if(utype == 'video'){
-          xhr.upload.addEventListener('progress', (event) => {
-            if (event.lengthComputable) {
-              var percentComplete = (event.loaded / event.total) * 100;
-              var progress = document.querySelector('#uploadProgressDivVideo');
-              progress.innerHTML = `${percentComplete.toFixed(2)}%`;
-              progress.style.width = `${percentComplete.toFixed(2)}%`;
-              // Update the UI or perform actions based on the progress
-            }
-          });
         }
-      
-
         xhr.addEventListener('load', () => {
           if (xhr.status === 200) {
             // Upload successful, handle the response
@@ -223,11 +211,6 @@ class showMenus{
                 }, 3000);
               }else if (utype == 'image') {
                 document.querySelector('#uploadProgressDiv').innerHTML = `processing`;
-                setTimeout(function(){
-                  location.reload();
-                }, 3000);
-              }else if (utype == 'video') {
-                document.querySelector('#uploadProgressDivVideo').innerHTML = `processing`;
                 setTimeout(function(){
                   location.reload();
                 }, 3000);
@@ -244,7 +227,56 @@ class showMenus{
     
         xhr.send(formData);
     }
-    
+
+  uploadToServerVideo(blobVideo, utype) {
+    var mimeString = blobVideo.type;
+    var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
+    var formData = new FormData();
+    formData.append('media', blobVideo, 'uploadVideo.'+fileExtension); // Replace 'uploadVideo.mp4' with the desired file name
+
+    // Append other data to the FormData object
+    formData.append('ePID', ePID);
+    formData.append('ext', fileExtension);
+    formData.append('type', utype);
+    formData.append('editor', this.whoIs);
+
+    // Send the FormData object to the server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../.ht/API/upload.php', true);
+
+    // Track the progress of the upload
+    xhr.upload.addEventListener('progress', (event) => {
+      if (event.lengthComputable) {
+        var percentComplete = (event.loaded / event.total) * 100;
+        var progress = document.querySelector('#uploadProgressDivVideo');
+        progress.innerHTML = `${percentComplete.toFixed(2)}%`;
+        progress.style.width = `${percentComplete.toFixed(2)}%`;
+      }
+    });
+
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        // Upload successful, handle the response
+        var response = JSON.parse(xhr.responseText);
+        if (response.Result) {
+          document.querySelector('#uploadProgressDivVideo').innerHTML = `processing`;
+          setTimeout(function(){
+          location.reload();
+        }, 3000);
+        }else{
+          document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
+          document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
+        }
+      } else {
+        document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
+        document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
+        console.log('Upload failed. Error: ' + xhr.status);
+      }
+    });
+
+    xhr.send(formData);
+  }
+
     dataURItoBlob(dataURI) {
       // Convert base64 to raw binary data held in a string
       var byteString = atob(dataURI.split(',')[1]);
