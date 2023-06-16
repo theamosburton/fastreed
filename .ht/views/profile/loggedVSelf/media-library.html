@@ -4,8 +4,8 @@
     <div class="photosDiv uploadDiv">
         <div class="uploadFile" id="uploadBox">
             <i class="fa fa-cloud-arrow-up"></i>
-            <label for="uploadInputImage" >Upload Photos</label>
-            <input onchange="new showMenus().uploadPhoto()" type="file" id="uploadInputImage" hidden>
+            <label for="uploadInputImage" id="uploadMessage" >Upload</label>
+            <input onchange="new showMenus().uploadMedia()" type="file" id="uploadInputImage" hidden>
         </div>
 
         <div class="uploadedFile" id="tempUploadBox" style="display: none;">
@@ -13,6 +13,16 @@
                 <div class="imgDiv" id="tempImage">
                 </div>
                 <div class="uploadProgressDiv" id="uploadProgressDiv">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="uploadedFile" id="tempUploadBoxVideo" style="display: none;">
+            <div class="uploadDivInside">
+                <div class="imgDiv" id="tempVideo">
+                </div>
+                <div class="uploadProgressDiv" id="uploadProgressDivVideo">
                 </div>
             </div>
         </div>

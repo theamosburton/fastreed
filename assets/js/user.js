@@ -140,15 +140,6 @@ async function isUserlogged(){
             const alread = notificationData.filter(notification => notification.isRead === "1");
             const nonRead = notificationData.filter(notification => notification.isRead === "0");
 
-            // var nonRead = [];
-            // for (let i= 0; i < notifiCount; i++) {
-            //     if (notificationData[i].isRead == "f") {
-            //         nonRead[i] = notificationData[i];
-            //     }
-            // }
-
-
-            console.log(nonRead);
             // hide and show notification badge based on notifications
             var nonReadCount = nonRead.length;
             if (nonReadCount > 0) {

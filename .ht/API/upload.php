@@ -22,9 +22,10 @@ class uploadMedia{
         $this->AUTH = new Auth();
         $this->userData = new getLoggedData();
         // Who is editing
-
         if (!isset($_POST['type'])) {
-            showMessage(false, 'Sepcify type to upload');
+            showMessage(false, 'Sepcify type to upload 1');
+        }elseif (!isset($_POST['editor'])) {
+            showMessage(false, 'Sepcify editor');
         }elseif($_POST['editor'] == 'admin') {
             $ePID = $_POST['ePID'];
             $dPID = $this->AUTH->decrypt($ePID);
@@ -37,7 +38,7 @@ class uploadMedia{
             }elseif ($_POST['type'] == 'dpUpload') {
                 $this->uploadDP($dPID);
             }else {
-                showMessage(false, 'Sepcify what to upload');
+                showMessage(false, 'Sepcify what to upload 2');
             }
         }elseif($_POST['editor'] == 'user') {
             $dPID = $_SESSION['LOGGED_USER'];
@@ -60,8 +61,8 @@ class uploadMedia{
 
     private function uploadDP($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
-        if(isset($_FILES['DPimage'])){
-            $file = $_FILES['DPimage'];
+        if(isset($_FILES['media'])){
+            $file = $_FILES['media'];
             $file_tmp = $file['tmp_name'];
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];
@@ -98,8 +99,8 @@ class uploadMedia{
 
     private function uploadImage($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
-        if(isset($_FILES['DPimage'])){
-            $file = $_FILES['DPimage'];
+        if(isset($_FILES['media'])){
+            $file = $_FILES['media'];
             $file_tmp = $file['tmp_name'];
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];

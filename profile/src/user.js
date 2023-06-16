@@ -91,41 +91,83 @@ class showMenus{
       });
     }
 
-    // for image upload
-    uploadPhoto() {
+    // other media upload
+    uploadMedia() {
       var uploadBox = document.getElementById('uploadBox');
       var fileInput = document.getElementById("uploadInputImage");
-      var imagePreview = document.getElementById("tempImage");
-      var tempBox = document.getElementById('tempUploadBox');
-      uploadBox.style.display = 'none';
-      tempBox.style.display = 'flex';
-      imagePreview.innerHTML = "";
-      var binaryImage;
+      var uploadMessage = document.getElementById('uploadMessage');
+
       if (fileInput.files && fileInput.files[0]) {
         var reader = new FileReader();
-        let self = this;
-        reader.onload = function (e) {
-          var imgElement = document.createElement("img");
-          imgElement.src = e.target.result;
-          imgElement.style.maxWidth = "100%";
-          imgElement.style.maxHeight = "100%";
-          imagePreview.appendChild(imgElement);
-          binaryImage = e.target.result;
-          var blobImage = self.dataURItoBlob(binaryImage)
-          self.uploadToServer(blobImage, 'image');
-          
-        };
+        if (fileInput.files[0].type.startsWith('image/')) {
+          this.uploadImages(reader);
+        }else if(fileInput.files[0].type.startsWith('video/')){
+          this.uploadVideo(reader, fileInput);
+        }else{
+          uploadBox.style.display = 'flex';
+          uploadMessage.innerHTML = 'Video or Image';
+          uploadMessage.style.color = 'red';
+        }
         reader.readAsDataURL(fileInput.files[0]);
       }
     }
 
 
-    uploadToServer(binaryImage, utype) {
+
+    uploadVideo(reader, fileInput) {
+      var self = this;
+      var videoPreview = document.getElementById('tempVideo');
+      var tempBoxVideo = document.getElementById('tempUploadBoxVideo');
+      videoPreview.innerHTML = '';
+      tempBoxVideo.style.display = 'flex';
+    
+      // Read the video file using the FileReader
+      reader.onload = function (e) {
+        var videoElement = document.createElement("video");
+        videoElement.style.maxWidth = "100%";
+        videoElement.style.maxHeight = "100%";
+    
+        // Generate a temporary URL for the video file
+        var videoURL = URL.createObjectURL(fileInput.files[0]);
+        videoElement.src = videoURL;
+        videoPreview.appendChild(videoElement);
+        
+        // Perform the video upload
+        var videoData = e.target.result;
+        // var fileName = fileInput.files[0].name;
+        var blobVideo = new Blob([videoData], { type: 'video/mp4' });
+    
+        self.uploadToServer(blobVideo, 'video');
+      };
+    }
+    
+
+    uploadImages(reader){
+      var self = this;
+      var binaryImage;
+      var imagePreview = document.getElementById("tempImage");
+      imagePreview.innerHTML = '';
+      var tempBox = document.getElementById('tempUploadBox');
+      uploadBox.style.display = 'none';
+      tempBox.style.display = 'flex';
+      reader.onload = function (e) {
+        var imgElement = document.createElement("img");
+        imgElement.src = e.target.result;
+        imgElement.style.maxWidth = "100%";
+        imgElement.style.maxHeight = "100%";
+        imagePreview.appendChild(imgElement);
+        binaryImage = e.target.result;
+        var blobImage = self.dataURItoBlob(binaryImage)
+        self.uploadToServer(blobImage, 'image');
+      };
+    }
+
+    uploadToServer(binaryFile, utype) {
         var formData = new FormData();
         // Determine the file extension based on the MIME type
-        var mimeString = binaryImage.type;
+        var mimeString = binaryFile.type;
         var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
-        formData.append('DPimage', binaryImage, 'image'+fileExtension);
+        formData.append('media', binaryFile, 'uploadFile.'+fileExtension);
     
         // Append other data to the FormData object
         formData.append('ePID', ePID);
@@ -156,6 +198,16 @@ class showMenus{
               // Update the UI or perform actions based on the progress
             }
           });
+        }else if(utype == 'video'){
+          xhr.upload.addEventListener('progress', (event) => {
+            if (event.lengthComputable) {
+              var percentComplete = (event.loaded / event.total) * 100;
+              var progress = document.querySelector('#uploadProgressDivVideo');
+              progress.innerHTML = `${percentComplete.toFixed(2)}%`;
+              progress.style.width = `${percentComplete.toFixed(2)}%`;
+              // Update the UI or perform actions based on the progress
+            }
+          });
         }
       
 
@@ -174,13 +226,16 @@ class showMenus{
                 setTimeout(function(){
                   location.reload();
                 }, 3000);
+              }else if (utype == 'video') {
+                document.querySelector('#uploadProgressDivVideo').innerHTML = `processing`;
+                setTimeout(function(){
+                  location.reload();
+                }, 3000);
               }
             }else{
               document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
               document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
             }
-            
-            // Do something with the response
           } else {
             // Upload failed, handle the error
             console.log('Upload failed. Error: ' + xhr.status);
