@@ -216,6 +216,8 @@ class showMenus{
         var videoElement = document.createElement("video");
         videoElement.style.maxWidth = "100%";
         videoElement.style.maxHeight = "100%";
+        videoElement.style.width = "100%";
+        videoElement.style.height = "100%";
         var videoURL = URL.createObjectURL(fileInput.files[0]);
         videoElement.src = videoURL;
         videoPreview.appendChild(videoElement);
