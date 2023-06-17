@@ -32,6 +32,7 @@ class deleteAccount {
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];
         $dPID = $this->AUTH->decrypt($ePID);
+        $username = $this->userData->getOtherData('personID', $dPID)['username'];
         if (!isset($data['password'])|| empty($data['password'])) {
             showMessage(false, "Empty password given");
         }elseif(!$this->verifyPassword($dPID, $data['password'])) {
@@ -80,7 +81,7 @@ class deleteAccount {
                     break;
 
                 case 'uploads':
-                    $this->deletingUploads($dPID, $usernamePID);
+                    $this->deletingUploads($dPID, $data['username']);
                     break;
                 
                 default:
