@@ -25,26 +25,10 @@ class styleThisPage{
         let title = document.querySelector('.contentTopics .title');
         let isDisplay = div.style.display;
         if (isDisplay == 'none') {
+            div.scrollIntoView({ behavior: 'smooth', top: '0' });
 
-            const parentContainer = div.parentElement;
-            const parentHeight = parentContainer.clientHeight;
-            const elementHeight = div.clientHeight;
-          
-            // Expand the element
-            // element.style.display = 'block';
             div.style.display= 'block';
             div.style.height= 'auto';
-          
-            // Calculate the scroll position to center the element within the parent container
-            const scrollPosition = div.offsetTop - (parentHeight / 2) + (elementHeight / 2);
-          
-            // Scroll to the calculated position within the parent container
-            parentContainer.scrollTo({
-              top: scrollPosition,
-              behavior: 'smooth'
-            });
-
-            
         }else{
             div.style.height= '0';
             div.style.display= 'none';
