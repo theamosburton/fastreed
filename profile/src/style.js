@@ -20,23 +20,22 @@ class styleThisPage{
         }
     }
 
-    exapndAndShrink(id){
-        let div = document.getElementById(`${id}`);
-        let title = document.querySelector('.contentTopics .title');
-        let isDisplay = div.style.display;
-        if (isDisplay == 'none') {
-            div.scrollIntoView({ behavior: 'smooth', top: '0' });
-
-            div.style.display= 'block';
-            div.style.height= 'auto';
-        }else{
-            div.style.height= '0';
-            div.style.display= 'none';
-
-        }
-    }
+    
 
 
 }
 var stylePage = new styleThisPage();
 
+function exapndAndShrink(id){
+    let div = document.getElementById(`${id}`);
+    let isDisplay = div.style.display;
+    if (isDisplay == 'none') {
+
+        div.style.display= 'block';
+        div.style.height= 'auto';
+    }else{
+        div.style.height= '0';
+        div.style.display= 'none';
+
+    }
+}
