@@ -470,7 +470,7 @@ function deleteImage(imgID, ext, no, whois, what){
   
     function updateDots() {
       document.getElementById(`delOpt${no}`).innerHTML = 'deleting'+ dots;
-      dots += ' . '; // Increase the number of dots
+      dots += '&nbsp;.'; // Increase the number of dots
       if (dots.length > 5) {
         dots = ''; // Reset the dots to start again
       }
