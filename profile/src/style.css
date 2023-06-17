@@ -532,6 +532,10 @@ background-color: transparent!important;
     color: white;
 }
 
+
+.changeAccess div span{
+    color: #9fa8b9;
+}
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileInfo .whatIcon{
     display: flex;
     justify-content: center;
