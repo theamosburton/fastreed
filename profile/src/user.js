@@ -463,7 +463,26 @@ function changeImageVisibility(imgID, no, whois){
 function deleteImage(imgID, ext, no, whois, what){
   var delOpt = document.getElementById(`delOpt${no}`);
   var pic = document.getElementById(`photo${no}`);
-  delOpt.innerHTML = 'Deleting...';
+  
+
+  function loadingAnimation() {
+    let dots = ''; // Initialize the dots
+  
+    function updateDots() {
+      delOpt.innerHTML = 'deleting'+ dots;
+      dots += '.'; // Increase the number of dots
+      if (dots.length > 5) {
+        dots = ''; // Reset the dots to start again
+      }
+    }
+  
+    setInterval(updateDots, 1000); // Call updateDots every 300ms
+  }
+  
+  loadingAnimation();
+
+ 
+ 
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';
     var encyDat = {
@@ -481,11 +500,8 @@ function deleteImage(imgID, ext, no, whois, what){
         },
         body: JSON.stringify(encyDat)
       });
-    var data = await response.json();
-
     if (data) {
       if (data.Result) {
-        delOpt.innerHTML = 'Removing';
         setTimeout(function(){
           pic.style.display = 'none';
         }, 3000);
