@@ -26,19 +26,21 @@ class styleThisPage{
         let isDisplay = div.style.display;
         if (isDisplay == 'none') {
 
-            const windowHeight = window.innerHeight;
+            const parentContainer = div.parentElement;
+            const parentHeight = parentContainer.clientHeight;
             const elementHeight = div.clientHeight;
-            
-            // Calculate the scroll position to center the element
-            const scrollPosition = div.offsetTop - (windowHeight / 2) + (elementHeight / 2);
-            
-            // Scroll to the calculated position
-            window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
+          
+            // Expand the element
+            element.style.display = 'block';
+          
+            // Calculate the scroll position to center the element within the parent container
+            const scrollPosition = div.offsetTop - (parentHeight / 2) + (elementHeight / 2);
+          
+            // Scroll to the calculated position within the parent container
+            parentContainer.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
             });
-
-            div.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             div.style.display= 'block';
             div.style.height= 'auto';
