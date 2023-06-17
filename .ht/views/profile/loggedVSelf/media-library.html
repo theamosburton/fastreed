@@ -65,6 +65,7 @@
                 HTML;
                 $what = 'photos';
                 $onclick = 'showImage('.$pathImg.')';
+                $icon = 'image';
             }elseif($data[$i][6] == 'videos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showVideo('$pathVid')">
@@ -75,6 +76,7 @@
                 HTML;
                 $what = 'videos';
                 $onclick = 'showVideo('.$pathVid.')';
+                $icon = 'film';
             }
             
             echo <<<HTML
@@ -83,6 +85,7 @@
                         {$whatToShow}
                         <div class="fileOptions">
                             <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
+                            <i class="fa fa-'{$icon}' optIcon"></i>
                         </div>
                         <div class="picOptions" id="picOptions{$idn}" style="display:none" >
                             <div onclick="{$onclick}">View</div>
