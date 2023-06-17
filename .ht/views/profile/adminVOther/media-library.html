@@ -1,0 +1,110 @@
+<div class="photosLibrary">
+    <div class="title ml-2"> Media Library</div>
+    
+    <div class="photosDiv uploadDiv">
+        <form enctype="multipart/form-data">
+            <div class="uploadFile" id="uploadBox">
+                <i class="fa fa-cloud-arrow-up"></i>
+                <label for="uploadInputImage" id="uploadMessage" >Upload</label>
+                <input onchange="new showMenus().uploadMedia()" type="file" id="uploadInputImage" hidden>
+            </div>
+        </form>
+        
+
+        <div class="uploadedFile" id="tempUploadBox" style="display: none;">
+            <div class="uploadDivInside">
+                <div class="imgDiv" id="tempImage">
+                </div>
+                <div class="uploadProgressDiv" id="uploadProgressDiv">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="uploadedFile" id="tempUploadBoxVideo" style="display: none;">
+            <div class="uploadDivInside">
+                <div class="imgDiv" id="tempVideo">
+                </div>
+                <div class="uploadProgressDiv" id="uploadProgressDivVideo">
+                </div>
+            </div>
+        </div>
+
+        <?php
+        $username = $this->userData->getOtherData('username', $this->otherUsername)['username'];
+        $id = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+        $username = $this->userData->getSelfDetails()['username'];
+        $data = $this->uploadData->getAllData($id);
+        $data = array_reverse($data);
+        $length = count($data);
+        for($i=0;$i < $length; $i++ ){
+            $idn = $i+1;
+            $none = '';
+            $self = '';
+            $everyone = '';
+            $followers = '';
+            $self = '';
+            if($data[$i][8] == 'followers'){
+              $followers = 'selected';
+            }elseif($data[$i][8] == 'everyone'){
+              $everyone = 'selected';
+            }elseif($data[$i][8] == 'self'){
+                $self = 'selected';
+            }else{
+                $none = 'selected';
+            }
+            $pathImg = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $pathVid = '/fastreedusercontent/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $whatToShow;
+            $onclick;
+            $what = '';
+            if($data[$i][6] == 'photos'){
+                $whatToShow = <<<HTML
+                    <div class="imgDiv" onclick="showImage('{$pathImg}')">
+                        <img src="$pathImg" alt="">
+                    </div>
+                HTML;
+                $what = 'photos';
+                $onclick = 'showImage("'.$pathImg.'")';
+                $icon = 'image';
+            }elseif($data[$i][6] == 'videos'){
+                $whatToShow = <<<HTML
+                    <div class="imgDiv" onclick="showVideo('{$pathVid}')">
+                        <video>
+                            <source src="{$pathVid}" type="video/mp4">
+                        </video>
+                    </div>
+                HTML;
+                $what = 'videos';
+                $onclick = 'showVideo("'.$pathVid.'")';
+                $icon = 'film';
+            }
+            
+            echo <<<HTML
+                <div class="uploadedFile" id="photo{$idn}">
+                    <div class="uploadDivInside">
+                        {$whatToShow}
+                        <div class="fileInfo">
+                            <i class="fa fa-{$icon} fa-sm whatIcon"></i>
+                        </div>
+
+                        <div class="fileOptions">
+                            <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
+                        </div>
+                        <div class="picOptions" id="picOptions{$idn}" style="display:none" >
+                            <div onclick='{$onclick}'>View</div>
+                            <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user', '{$what}')">Delete</div>
+                            <select class="changeVisibility" onchange="changeImageVisibility('{$data[$i][2]}','{$idn}', 'user')" class="form-control form-control-sm" style="background-color: transparent; color: #cfd1d8;" id="visibilityAccess{$idn}">
+                                <option {$none} value="none" disabled>Change Visibility</option>
+                                <option  {$self} value="self">Only me</option>
+                                <option {$followers} value="followers">Following</option>
+                                <option {$everyone} value="everyone">Everyone</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            HTML;
+        }
+        ?>
+    </div>
+</div>
