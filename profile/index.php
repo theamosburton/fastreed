@@ -206,13 +206,14 @@ class loggedAdminVother extends showProfile{
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
        
-         $selfId = $_SESSION['LOGGED_USER'];
-         $userSettings = $this->userData->getSettings($selfId);
+         $selfId = $this->userData->getSelfDetails()['UID'];
+         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+         $userSettings = $this->userData->getSettings($otherID);
+         $isFollowingMe = $this->userData->isFollowingMe($selfId, $otherID);
          $canViewMail = $userSettings['canViewMail'];
          $canViewAge = $userSettings['canViewAge'];
          $canViewContent = $userSettings['canViewContent'];
          $canViewUploads = $userSettings['canViewUploads'];
-         $isFollowingMe = $this->userData->isFollowingMe($selfId, $otherID);
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
