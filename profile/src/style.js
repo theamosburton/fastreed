@@ -25,6 +25,7 @@ class styleThisPage{
         let title = document.querySelector('.contentTopics .title');
         let isDisplay = div.style.display;
         if (isDisplay == 'none') {
+            div.scrollIntoView({ behavior: 'smooth', block: 'center' });
             div.style.display= 'block';
             div.style.height= 'auto';
         }else{
