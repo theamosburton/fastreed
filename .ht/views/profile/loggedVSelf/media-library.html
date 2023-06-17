@@ -33,7 +33,7 @@
         <?php
         $id = $this->userData->getSelfDetails()['UID'];
         $username = $this->userData->getSelfDetails()['username'];
-        $data = $this->uploadData->getPhotos($id);
+        $data = $this->uploadData->getAllData($id);
         $data = array_reverse($data);
         $length = count($data);
         for($i=0;$i < $length; $i++ ){
@@ -53,12 +53,27 @@
                 $none = 'selected';
             }
             $path = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $whatToShow;
+            if($data[$i][6] == 'photos'){
+                $whatToShow = <<<HTML
+                    <div class="imgDiv" onclick="showImage('$path')">
+                        <img src="$path" alt="">
+                    </div>
+                HTML;
+            }elseif($data[$i][6] == 'videos'){
+                $whatToShow = <<<HTML
+                    <div class="imgDiv" onclick="showVideo('$path')">
+                        <video width="320" height="240" controls>
+                            <source src="{$path}" type="video/mp4">
+                        </video>
+                    </div>
+                HTML;
+            }
+            
             echo <<<HTML
                 <div class="uploadedFile" id="photo{$idn}">
                     <div class="uploadDivInside">
-                        <div class="imgDiv" onclick="showImage('$path')">
-                            <img src="$path" alt="">
-                        </div>
+                        {$whatToShow}
                         <div class="fileOptions">
                             <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
                         </div>

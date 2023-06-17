@@ -398,6 +398,21 @@ function showImage(path){
   }
 }
 
+function showVideo(path){
+  var showImageDiv = document.getElementById('imageShowDiv');
+  if (showImageDiv.style.display == 'none') {
+    showImageDiv.style.display = 'flex';
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
+    showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
+                               <video width="100%" height="100%" controls> <source src="${path}" type="video/mp4"></vide>`;
+    disbaleScroll();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+}
+
 function removeImage(){
   var showImageDiv = document.getElementById('imageShowDiv');
   if (showImageDiv.style.display != 'none') {

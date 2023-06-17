@@ -6,9 +6,9 @@ class getUploadData{
         $this->DB = $DB_CONNECT->DBConnection();
     }
 
-    public function getPhotos($id){
+    public function getAllData($id){
         $return = array();
-        $sql = "SELECT * FROM uploads WHERE personID = '$id' and purpose ='UP' and type = 'photos'";
+        $sql = "SELECT * FROM uploads WHERE personID = '$id' and purpose ='UP'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $rowCount = mysqli_num_rows($result);
@@ -19,6 +19,7 @@ class getUploadData{
         }
         return $return;
     }
+
 
     
 }
