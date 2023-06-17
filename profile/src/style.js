@@ -31,7 +31,7 @@ class styleThisPage{
             const elementHeight = div.clientHeight;
           
             // Expand the element
-            element.style.display = 'block';
+            // element.style.display = 'block';
           
             // Calculate the scroll position to center the element within the parent container
             const scrollPosition = div.offsetTop - (parentHeight / 2) + (elementHeight / 2);
