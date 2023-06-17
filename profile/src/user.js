@@ -469,14 +469,14 @@ function deleteImage(imgID, ext, no, whois, what){
     let dots = ''; // Initialize the dots
   
     function updateDots() {
-      delOpt.innerHTML = 'deleting'+ dots;
+      document.getElementById(`delOpt${no}`).innerHTML = 'deleting'+ dots;
       dots += '.'; // Increase the number of dots
       if (dots.length > 5) {
         dots = ''; // Reset the dots to start again
       }
     }
   
-    setInterval(updateDots, 1000); // Call updateDots every 300ms
+    setInterval(updateDots, 200); // Call updateDots every 300ms
   }
   
   loadingAnimation();
