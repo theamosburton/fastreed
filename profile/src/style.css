@@ -417,6 +417,18 @@ background-color: transparent!important;
 #removeImage:hover{
     cursor: pointer;
 }
+
+.noUpload{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    border: 1px solid;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+}
 .uploadDpDiv .uploadDpContainer #errorMessage{
     color: red;
     background-color: bisque;
