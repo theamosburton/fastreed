@@ -427,7 +427,6 @@ function removeImage(){
 
 function changeImageVisibility(imgID, no, whois){
   var field = document.getElementById(`visibilityAccess${no}`);
-  document.getElementById(`visibilityAccess${no}`).innerHTML = '<option>Changing...</options>';
   const changeVisibility = async () =>{
     const url = '/.ht/API/deletePic.php';
     var encyDat = {
@@ -449,22 +448,6 @@ function changeImageVisibility(imgID, no, whois){
     if (data) {
       if (data.Result) {
         location.reload();
-        // if (field.value == 'everyone') {
-        //   field.innerHTML = `<option value="none" disabled>Change Visibility</option>
-        //   <option  value="self">Only me</option>
-        //   <option value="followers">Following</option>
-        //   <option selected value="everyone">Everyone</option>`;
-        // }else if(field.value == 'followers'){
-        //   field.innerHTML = `<option value="none" disabled>Change Visibility</option>
-        //   <option value="self">Only me</option>
-        //   <option selected value="followers">Following</option>
-        //   <option value="everyone">Everyone</option>`;
-        // }else{
-        //   field.innerHTML = `<option value="none" disabled>Change Visibility</option>
-        //   <option value="self">Only me</option>
-        //   <option value="followers">Following</option>
-        //   <option selected value="everyone">Everyone</option>`;
-        // }
       }else{
         alert(`${data.message}`);
       }
