@@ -449,17 +449,17 @@ function changeImageVisibility(imgID, no, whois){
     if (data) {
       if (data.Result) {
         if (field.value == 'everyone') {
-          field.innerHTML = `<option {$none} value="none" disabled>Change Visibility</option>
+          field.innerHTML = `<option value="none" disabled>Change Visibility</option>
           <option  value="self">Only me</option>
           <option value="followers">Following</option>
           <option selected value="everyone">Everyone</option>`;
         }else if(field.value == 'followers'){
-          field.innerHTML = `<option {$none} value="none" disabled>Change Visibility</option>
+          field.innerHTML = `<option value="none" disabled>Change Visibility</option>
           <option value="self">Only me</option>
           <option selected value="followers">Following</option>
           <option value="everyone">Everyone</option>`;
         }else{
-          field.innerHTML = `<option {$none} value="none" disabled>Change Visibility</option>
+          field.innerHTML = `<option value="none" disabled>Change Visibility</option>
           <option value="self">Only me</option>
           <option value="followers">Following</option>
           <option selected value="everyone">Everyone</option>`;
