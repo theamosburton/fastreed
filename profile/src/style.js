@@ -25,7 +25,21 @@ class styleThisPage{
         let title = document.querySelector('.contentTopics .title');
         let isDisplay = div.style.display;
         if (isDisplay == 'none') {
+
+            const windowHeight = window.innerHeight;
+            const elementHeight = div.clientHeight;
+            
+            // Calculate the scroll position to center the element
+            const scrollPosition = div.offsetTop - (windowHeight / 2) + (elementHeight / 2);
+            
+            // Scroll to the calculated position
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+
             div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
             div.style.display= 'block';
             div.style.height= 'auto';
         }else{
