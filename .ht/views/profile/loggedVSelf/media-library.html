@@ -52,19 +52,20 @@
             }else{
                 $none = 'selected';
             }
-            $path = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $pathImg = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $pathVid = '/fastreedusercontent/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $whatToShow;
             if($data[$i][6] == 'photos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showImage('$path')">
-                        <img src="$path" alt="">
+                    <div class="imgDiv" onclick="showImage('$pathImg')">
+                        <img src="$pathImg" alt="">
                     </div>
                 HTML;
             }elseif($data[$i][6] == 'videos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showVideo('$path')">
+                    <div class="imgDiv" onclick="showVideo('$pathVid')">
                         <video width="320" height="240" controls>
-                            <source src="{$path}" type="video/mp4">
+                            <source src="{$pathVid}" type="video/mp4">
                         </video>
                     </div>
                 HTML;
