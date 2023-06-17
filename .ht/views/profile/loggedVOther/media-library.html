@@ -60,20 +60,6 @@
                         <div class="fileInfo">
                             <i class="fa fa-{$icon} fa-sm whatIcon"></i>
                         </div>
-
-                        <div class="fileOptions">
-                            <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
-                        </div>
-                        <div class="picOptions" id="picOptions{$idn}" style="display:none" >
-                            <div onclick='{$onclick}'>View</div>
-                            <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user', '{$what}')">Delete</div>
-                            <select class="changeVisibility" onchange="changeImageVisibility('{$data[$i][2]}','{$idn}', 'user')" class="form-control form-control-sm" style="background-color: transparent; color: #cfd1d8;" id="visibilityAccess{$idn}">
-                                <option {$none} value="none" disabled>Change Visibility</option>
-                                <option  {$self} value="self">Only me</option>
-                                <option {$followers} value="followers">Following</option>
-                                <option {$everyone} value="everyone">Everyone</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             HTML;
