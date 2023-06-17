@@ -6,7 +6,7 @@
 
         <div class="infoDiv">
             <span class="infoType"> <i class="fa-solid fa-user fa-xl"></i></span>
-            <span class="infoValue"><?php echo $this->userData->getSelfDetails()['name'];?>
+            <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];?>
             <?php
             if ($this->userData->getOtherData('username', $this->otherUsername)['DOB'] != null) {
                 if($canViewAge == 'everyone'){
