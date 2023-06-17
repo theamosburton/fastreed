@@ -404,7 +404,7 @@ function showVideo(path){
     showImageDiv.style.display = 'flex';
     var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
-                               <video width="100%" height="100%" controls> <source src="${path}" type="video/mp4"></vide>`;
+                               <video controls> <source src="${path}" type="video/mp4"></vide>`;
     disbaleScroll();
     window.scrollTo({
       top: 0,
