@@ -83,8 +83,6 @@ class deletePic{
         $value = $data['value'];
         if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
             showMessage(false, 'Error 7');
-        }elseif($value != 'everyone' || $value != 'self' || $value != 'followers'){
-            $value = 'none';
         }else{
             $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'"; 
             $result = mysqli_query($this->DB, $sql);
