@@ -33,8 +33,6 @@
         <?php
         $username = $this->userData->getOtherData('username', $this->otherUsername)['username'];
         $id = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
-        $username = $this->userData->getSelfDetails()['username'];
-        $data = $this->uploadData->getAllData($id);
         $data = array_reverse($data);
         $length = count($data);
         for($i=0;$i < $length; $i++ ){
