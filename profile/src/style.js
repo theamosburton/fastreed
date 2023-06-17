@@ -32,6 +32,8 @@ class styleThisPage{
           
             // Expand the element
             // element.style.display = 'block';
+            div.style.display= 'block';
+            div.style.height= 'auto';
           
             // Calculate the scroll position to center the element within the parent container
             const scrollPosition = div.offsetTop - (parentHeight / 2) + (elementHeight / 2);
@@ -42,8 +44,7 @@ class styleThisPage{
               behavior: 'smooth'
             });
 
-            div.style.display= 'block';
-            div.style.height= 'auto';
+            
         }else{
             div.style.height= '0';
             div.style.display= 'none';
