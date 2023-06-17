@@ -94,7 +94,6 @@ class showMenus{
 
     //*******Photo/Video Upload************/
     uploadMedia() {
-      var uploadBox = document.getElementById('uploadBox');
       var fileInput = document.getElementById("uploadInputImage");
       var uploadMessage = document.getElementById('uploadMessage');
 
@@ -118,6 +117,7 @@ class showMenus{
       var self = this;
       var binaryImage;
       var imagePreview = document.getElementById("tempImage");
+      var uploadBox = document.getElementById('uploadBox');
       imagePreview.innerHTML = '';
       var tempBox = document.getElementById('tempUploadBox');
       uploadBox.style.display = 'none';
@@ -209,8 +209,10 @@ class showMenus{
       var self = this;
       var videoPreview = document.getElementById('tempVideo');
       var tempBoxVideo = document.getElementById('tempUploadBoxVideo');
+      var uploadBox = document.getElementById('uploadBox');
       videoPreview.innerHTML = '';
       tempBoxVideo.style.display = 'flex';
+      uploadBox.style.display = 'none';
       var reader = new FileReader();
       reader.onload = function (e) {
         var videoElement = document.createElement("video");
