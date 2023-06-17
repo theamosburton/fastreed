@@ -427,6 +427,21 @@ function removeImage(){
 
 function changeImageVisibility(imgID, no, whois){
   var field = document.getElementById(`visibilityAccess${no}`);
+  function loadingAnimation() {
+    let dots = ''; // Initialize the dots
+  
+    function updateDots() {
+      document.getElementById(`visibilityAccess${no}`).innerHTML = 'Changing'+ dots;
+      dots += '.'; // Increase the number of dots
+      if (dots.length > 5) {
+        dots = ''; // Reset the dots to start again
+      }
+    }
+  
+    setInterval(updateDots, 100); // Call updateDots every 300ms
+  }
+  
+  loadingAnimation();
 
   const changeVisibility = async () =>{
     const url = '/.ht/API/deletePic.php';
@@ -449,14 +464,14 @@ function changeImageVisibility(imgID, no, whois){
     if (data) {
       if (data.Result) {
         setTimeout(function(){
-          pic.style.display = 'none';
+          window.reload();
         }, 3000);
         
       }else{
         alert(`${data.message}`);
       }
     }else{
-      alert( "Can't Delete");
+      alert( "Can't Change");
     }
   }
   changeVisibility();
