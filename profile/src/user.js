@@ -463,10 +463,7 @@ function changeImageVisibility(imgID, no, whois){
 
     if (data) {
       if (data.Result) {
-        setTimeout(function(){
-          document.reload();
-        }, 3000);
-        
+        location.reload();
       }else{
         alert(`${data.message}`);
       }
