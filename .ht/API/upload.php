@@ -198,7 +198,7 @@ class uploadMedia{
     private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'none')";
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'everyone')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;

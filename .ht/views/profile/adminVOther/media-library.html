@@ -38,7 +38,6 @@
         $length = count($data);
         for($i=0;$i < $length; $i++ ){
             $idn = $i+1;
-            $none = '';
             $self = '';
             $everyone = '';
             $followers = '';
@@ -49,8 +48,6 @@
               $everyone = 'selected';
             }elseif($data[$i][8] == 'self'){
                 $self = 'selected';
-            }else{
-                $none = 'selected';
             }
             $pathImg = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $pathVid = '/fastreedusercontent/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
@@ -94,7 +91,6 @@
                             <div onclick='{$onclick}'>View</div>
                             <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'admin', '{$what}')">Delete</div>
                             <select class="changeVisibility" onchange="changeImageVisibility('{$data[$i][2]}','{$idn}', 'admin')" class="form-control form-control-sm" style="background-color: transparent; color: #cfd1d8;" id="visibilityAccess{$idn}">
-                                <option {$none} value="none" disabled>Change Visibility</option>
                                 <option  {$self} value="self">Only me</option>
                                 <option {$followers} value="followers">Following</option>
                                 <option {$everyone} value="everyone">Everyone</option>
