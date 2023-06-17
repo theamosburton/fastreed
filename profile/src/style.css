@@ -520,6 +520,10 @@ background-color: transparent!important;
     background-color: #3a3d40;
     color: white;
 }
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .whatIcon{
+    color: #3a3d40;
+}
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon:hover{
     cursor: pointer;
     background-color: #2b2e36;
