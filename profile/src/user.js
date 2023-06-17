@@ -431,7 +431,7 @@ function changeImageVisibility(imgID, no, whois){
     let dots = ''; // Initialize the dots
   
     function updateDots() {
-      document.getElementById(`visibilityAccess${no}`).innerHTML = 'Changing'+ dots;
+      document.getElementById(`visibilityAccess${no}`).innerHTML = '<option>'+'Changing' + dots'</options>';
       dots += '.'; // Increase the number of dots
       if (dots.length > 5) {
         dots = ''; // Reset the dots to start again
@@ -464,7 +464,7 @@ function changeImageVisibility(imgID, no, whois){
     if (data) {
       if (data.Result) {
         setTimeout(function(){
-          window.reload();
+          document.reload();
         }, 3000);
         
       }else{
