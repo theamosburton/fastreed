@@ -2,33 +2,6 @@
     <div class="title ml-2"> Media Library</div>
     
     <div class="photosDiv uploadDiv">
-        <form enctype="multipart/form-data">
-            <div class="uploadFile" id="uploadBox">
-                <i class="fa fa-cloud-arrow-up"></i>
-                <label for="uploadInputImage" id="uploadMessage" >Upload</label>
-                <input onchange="new showMenus().uploadMedia()" type="file" id="uploadInputImage" hidden>
-            </div>
-        </form>
-        
-
-        <div class="uploadedFile" id="tempUploadBox" style="display: none;">
-            <div class="uploadDivInside">
-                <div class="imgDiv" id="tempImage">
-                </div>
-                <div class="uploadProgressDiv" id="uploadProgressDiv">
-                </div>
-            </div>
-        </div>
-
-
-        <div class="uploadedFile" id="tempUploadBoxVideo" style="display: none;">
-            <div class="uploadDivInside">
-                <div class="imgDiv" id="tempVideo">
-                </div>
-                <div class="uploadProgressDiv" id="uploadProgressDivVideo">
-                </div>
-            </div>
-        </div>
 
         <?php
         $username = $this->userData->getOtherData('username', $this->otherUsername)['username'];
