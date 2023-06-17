@@ -83,9 +83,12 @@
                 <div class="uploadedFile" id="photo{$idn}">
                     <div class="uploadDivInside">
                         {$whatToShow}
+                        <div class="fileInfo">
+                            <i class="fa fa-{$icon} fa-sm whatIcon"></i>
+                        </div>
+                        
                         <div class="fileOptions">
                             <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
-                            <i class="fa fa-{$icon} fa-sm whatIcon"></i>
                         </div>
                         <div class="picOptions" id="picOptions{$idn}" style="display:none" >
                             <div onclick="{$onclick}">View</div>

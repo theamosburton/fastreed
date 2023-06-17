@@ -508,6 +508,12 @@ background-color: transparent!important;
     top: 5px; /* Adjust the top position as needed */
     right: 5px; /* Move the element to the right */
 }
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileInfo{
+    position: absolute;
+    top: 5px; /* Adjust the top position as needed */
+    left: 5px; /* Move the element to the right */
+}
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon{
     display: flex;
     justify-content: center;
@@ -521,7 +527,7 @@ background-color: transparent!important;
     color: white;
 }
 
-.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .whatIcon{
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileInfo .whatIcon{
     display: flex;
     justify-content: center;
     align-items: center;
