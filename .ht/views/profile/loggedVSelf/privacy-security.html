@@ -1,6 +1,6 @@
 <!-- Privacy and Security Section -->
 <div class="privacySecurity contentTopics">
-  <div onclick="new styleThisPage().exapndAndShrink('accessSettings')" style="margin:0" class="title">Visibility settings &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
+  <div onclick="exapndAndShrink('accessSettings')" style="margin:0" class="title">Visibility settings &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
   <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
 
     <?php
@@ -120,7 +120,7 @@
 <div class="privacySecurity contentTopics">
   <?php if($this->userData->accountsByUser()['password'] === null || empty($this->userData->accountsByUser()['password'])){
     echo <<<HTML
-      <div class="title" onclick="new styleThisPage().exapndAndShrink('passwordCU')" style="margin:0">Create password &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="title" onclick="exapndAndShrink('passwordCU')" style="margin:0">Create password &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
       <div class="setPassword expandable" id="passwordCU" style="display: none; height:0;">
         <div class="password">
           <div id="pErrorDiv" class="col-12" style="display:none">
@@ -137,7 +137,7 @@
       HTML."\n";
   }else{
     echo <<<HTML
-      <div class="title" onclick="new styleThisPage().exapndAndShrink('passwordCU')">Update password  &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="title" onclick="exapndAndShrink('passwordCU')">Update password  &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
       <div class="setPassword expandable" id="passwordCU" style="display: none; height:0;">
         <div class="password">
           <div id="pErrorDiv" class="col-12 pErrorDiv">
