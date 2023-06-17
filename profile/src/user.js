@@ -500,6 +500,7 @@ function deleteImage(imgID, ext, no, whois, what){
         },
         body: JSON.stringify(encyDat)
       });
+      var data = await response.json();
     if (data) {
       if (data.Result) {
         setTimeout(function(){
