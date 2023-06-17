@@ -59,7 +59,7 @@
             $what = '';
             if($data[$i][6] == 'photos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showImage('$pathImg')">
+                    <div class="imgDiv" onclick="showImage('{$pathImg}')">
                         <img src="$pathImg" alt="">
                     </div>
                 HTML;
@@ -68,7 +68,7 @@
                 $icon = 'image';
             }elseif($data[$i][6] == 'videos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showVideo('$pathVid')">
+                    <div class="imgDiv" onclick="showVideo('{$pathVid}')">
                         <video>
                             <source src="{$pathVid}" type="video/mp4">
                         </video>
@@ -86,7 +86,7 @@
                         <div class="fileInfo">
                             <i class="fa fa-{$icon} fa-sm whatIcon"></i>
                         </div>
-                        
+
                         <div class="fileOptions">
                             <i class="fa fa-ellipsis-v optIcon" onclick="showPicOptions('{$idn}')"></i>
                         </div>
