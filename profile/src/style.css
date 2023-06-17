@@ -496,7 +496,9 @@ background-color: transparent!important;
     height: 100%;
     overflow: hidden;
 }
-.mediaDiv .uploadDiv .uploadedFile .uploadDivInside img{
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside img, .mediaDiv .uploadDiv .uploadedFile .uploadDivInside video{
+    max-height: 100%;
+    max-width: 100%;
     height: 100%;
     width: 100%;
     object-fit: contain;
