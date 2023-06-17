@@ -485,6 +485,11 @@ background-color: transparent!important;
     border-bottom: 1px solid;
     color: #cfd1d8;
 }
+
+.uploadedFile .uploadDivInside .picOptions .changeVisibility option{
+    background-color: #18191c;
+    color: #cfd1d8;
+}
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions div:hover{
     background-color: #3a3d40;
     cursor: pointer;
