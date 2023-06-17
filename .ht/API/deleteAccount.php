@@ -48,7 +48,7 @@ class deleteAccount {
                     break;
 
                 case 'uploads':
-                    $this->deletingUploads($dPID);
+                    $this->deletingUploads($dPID, $username);
                     break;
                 
                 default:
@@ -80,7 +80,7 @@ class deleteAccount {
                     break;
 
                 case 'uploads':
-                    $this->deletingUploads($dPID);
+                    $this->deletingUploads($dPID, $usernamePID);
                     break;
                 
                 default:
@@ -248,7 +248,7 @@ class deleteAccount {
     
     
 
-    private function deletingUploads($id, $username) {
+    private function deletingUploads($username) {
         $photos = $this->_DOCROOT . '/fastreedusercontent/photos/' . $username;
         $videos = $this->_DOCROOT . '/fastreedusercontent/videos/' . $username;
         $audios = $this->_DOCROOT . '/fastreedusercontent/audios/' . $username;
