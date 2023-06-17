@@ -55,7 +55,7 @@
             $pathImg = '/fastreedusercontent/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $pathVid = '/fastreedusercontent/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $whatToShow;
-            $onclick
+            $onclick;
             if($data[$i][6] == 'photos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showImage('$pathImg')">
@@ -71,7 +71,6 @@
                         </video>
                     </div>
                 HTML;
-
                 $onclick = 'showVideo('.$pathVid.')';
             }
             
