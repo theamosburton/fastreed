@@ -429,6 +429,12 @@ background-color: transparent!important;
     padding: 20px;
     flex-direction: column;
 }
+.noUpload div:first-child{
+    margin-top: 0px;
+}
+.noUpload div{
+margin-top: 10px;
+}
 .uploadDpDiv .uploadDpContainer #errorMessage{
     color: red;
     background-color: bisque;

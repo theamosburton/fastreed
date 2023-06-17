@@ -88,7 +88,9 @@
 
             if(!$uploadCount){
                 echo <<<HTML
-                <div class="noUpload"> <span>Nothing to view</span></div>
+                <div class="noUpload"> 
+                    <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+                    <div> <p>Nothing to display</p></div> </div>
                 HTML;
             }
         }
