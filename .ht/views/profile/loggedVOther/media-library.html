@@ -78,11 +78,9 @@
                 </div>
             HTML;
         }
-
-
-        if($data[$i][10] == 'everyone' || $data[$i][10] == 'none'){
+        if($data[$i][8] == 'everyone' || $data[$i][8] == 'none'){
             echo $showUpload;
-        }elseif($data[$i][10] ==  'followers' && $isFollowingMe){
+        }elseif($data[$i][8] ==  'followers' && $isFollowingMe){
             echo $showUpload;
         }
         ?>
