@@ -132,7 +132,7 @@ class showMenus{
         binaryImage = e.target.result;
         var blobImage = self.dataURItoBlob(binaryImage)
         console.log(blobImage);
-        // self.uploadImageToServer(blobImage, 'image');
+        self.uploadImageToServer(blobImage, 'image');
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
