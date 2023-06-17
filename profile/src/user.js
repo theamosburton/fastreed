@@ -460,7 +460,7 @@ function changeImageVisibility(imgID, no, whois){
   changeVisibility();
 }
 
-function deleteImage(imgID, ext, no, whois){
+function deleteImage(imgID, ext, no, whois, what){
   var delOpt = document.getElementById(`delOpt${no}`);
   var pic = document.getElementById(`photo${no}`);
   delOpt.innerHTML = 'Deleting...';
@@ -471,7 +471,8 @@ function deleteImage(imgID, ext, no, whois){
       'imgID': `${imgID}`,
       'extension': `${ext}`,
       'personID':`${ePID}`,
-      'whois':`${whois}`
+      'whois':`${whois}`,
+      'what' : `${what}`
     };
     const response = await fetch(url, {
         method: 'post',

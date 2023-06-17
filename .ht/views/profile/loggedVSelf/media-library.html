@@ -83,7 +83,7 @@
                         </div>
                         <div class="picOptions" id="picOptions{$idn}" style="display:none" >
                             <div onclick="{$onclick}">View</div>
-                            <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user')">Delete</div>
+                            <div id="delOpt{$idn}" onclick="deleteImage('{$data[$i][2]}', '{$data[$i][7]}', '{$idn}', 'user', {$data[$i][2]})">Delete</div>
                             <select onchange="changeImageVisibility('{$data[$i][2]}','{$idn}', 'user')" class="form-control form-control-sm" style="background-color: transparent; color: #cfd1d8;" id="visibilityAccess{$idn}">
                                 <option style="background-color: #18191c; color: #cfd1d8;" {$none} value="none" disabled>Change Visibility</option>
                                 <option style="background-color: #18191c; color: #cfd1d8;" {$self} value="self">Only me</option>

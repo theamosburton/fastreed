@@ -41,10 +41,12 @@ class deletePic{
         }elseif ($data['purpose'] == 'delete') {
             if (!isset($data['extension']) || empty($data['extension'])) {
                 showMessage(false, 'Error 3');
+            }elseif (!isset($data['what']) || empty($data['what'])) {
+                showMessage(false, 'Error 10');
             }elseif ($data['whois'] == 'user') {
-                $this->deleteByUser();
+                $this->deleteByUser($data['what']);
             }elseif ($data['whois'] == 'admin') {
-                $this->deleteByAdmin();
+                $this->deleteByAdmin($data['what']);
             }else{
                 showMessage(false, 'Error 5');
             }
@@ -94,14 +96,14 @@ class deletePic{
         }
     }
 
-    private function deleteByUser(){
+    private function deleteByUser($what){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
         $personID = $this->AUTH->decrypt($eid); 
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/'.$imgID.$ext;
+        $path = $this->_DOCROOT.'/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 7');
         }elseif (file_exists($path)) {
@@ -122,7 +124,7 @@ class deletePic{
     }
 
 
-    private function deleteByAdmin(){
+    private function deleteByAdmin($what){
 
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
@@ -130,7 +132,7 @@ class deletePic{
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/'.$imgID.$ext;
+        $path = $this->_DOCROOT.'/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, 'Not an admin');
         }elseif (file_exists($path)) {
