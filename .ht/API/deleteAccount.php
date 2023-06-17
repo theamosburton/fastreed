@@ -152,7 +152,7 @@ class deleteAccount {
                 break;
 
             case 'uploads':
-                $this->deletingUploads($dPID);
+                $this->deletingUploads($dPID, $username);
                 break;
             
             default:
@@ -248,10 +248,10 @@ class deleteAccount {
     
     
 
-    private function deletingUploads($id) {
-        $photos = $this->_DOCROOT . '/fastreedusercontent/photos/' . $id;
-        $videos = $this->_DOCROOT . '/fastreedusercontent/videos/' . $id;
-        $audios = $this->_DOCROOT . '/fastreedusercontent/audios/' . $id;
+    private function deletingUploads($id, $username) {
+        $photos = $this->_DOCROOT . '/fastreedusercontent/photos/' . $username;
+        $videos = $this->_DOCROOT . '/fastreedusercontent/videos/' . $username;
+        $audios = $this->_DOCROOT . '/fastreedusercontent/audios/' . $username;
     
         // Delete 'photos' directory and its contents
         if (is_dir($photos)) {

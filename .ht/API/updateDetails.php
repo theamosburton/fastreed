@@ -164,7 +164,7 @@ class updateDetails{
     
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
-                        showMessage(true, "Updated by admin");
+                        $this->renameUploadFolder($cUsername, $Username);
                     } else {
                         showMessage(false, "Not Updated 2");
                     }
@@ -190,7 +190,7 @@ class updateDetails{
     
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
-                        showMessage(true, "Updated by self");
+                        $this->renameUploadFolder($cUsername, $Username);
                     } else {
                         showMessage(false, "Not Updated 1");
                     }
@@ -198,6 +198,58 @@ class updateDetails{
             } else {
                 showMessage(false, "Not all value set user");
             }
+        }
+    }
+
+
+    // Renaming upload folder 
+    private function renameUploadFolder($cUsername, $Username){
+        $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+        $pDirectory = $_DOCROOT.'/fastreedusercontent/photos/'.$cUsername;
+        $vDirectory = $_DOCROOT.'/fastreedusercontent/videos/'.$cUsername;
+        $aDirectory = $_DOCROOT.'/fastreedusercontent/audios/'.$cUsername;
+
+        $pnDirectory = $_DOCROOT.'/fastreedusercontent/photos/'.$Username;
+        $vnDirectory = $_DOCROOT.'/fastreedusercontent/videos/'.$Username;
+        $anDirectory = $_DOCROOT.'/fastreedusercontent/audios/'.$Username;
+
+        $pDir;
+        if (is_dir($pDirectory)) {
+            if (rename($pDirectory, $pnDirectory)) {
+                $pDir = true;
+            } else {
+                $pDir = false;
+            }
+        }else{
+            $pDir = true;
+        }
+
+        $vDir;
+        if (is_dir($vDirectory)) {
+            if (rename($pDirectory, $vnDirectory)) {
+                $vDir = true;
+            } else {
+                $vDir = false;
+            }
+        }else{
+            $vDir = true;
+        }
+
+        $aDir;
+        if (is_dir($aDirectory)) {
+            if (rename($aDirectory, $anDirectory)) {
+                $aDir = true;
+            } else {
+                $aDir = false;
+            }
+        }else{
+            $aDir = true;
+        }
+
+        if ($pDir && $vDir && $aDir) {
+            showMessage(true, "Updated");
+        }else{
+            showMessage(false, "Upload problem");
         }
     }
     // Updating profile details / 
