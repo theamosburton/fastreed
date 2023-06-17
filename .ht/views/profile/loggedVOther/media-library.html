@@ -81,7 +81,7 @@
         }
 
 
-        if($data[$i][10] == 'everyone'){
+        if($data[$i][10] == 'everyone' || $data[$i][10] == 'none'){
             echo $showUpload;
         }elseif($data[$i][10] ==  'followers' && $isFollowingMe){
             echo $showUpload;
