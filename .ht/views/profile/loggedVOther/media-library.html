@@ -77,12 +77,13 @@
                     </div>
                 </div>
             HTML;
+            if($data[$i][8] == 'everyone' || $data[$i][8] == 'none'){
+                echo $showUpload;
+            }elseif($data[$i][8] ==  'followers' && $isFollowingMe){
+                echo $showUpload;
+            }
         }
-        if($data[$i][8] == 'everyone' || $data[$i][8] == 'none'){
-            echo $showUpload;
-        }elseif($data[$i][8] ==  'followers' && $isFollowingMe){
-            echo $showUpload;
-        }
+      
         ?>
     </div>
 </div>
