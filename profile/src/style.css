@@ -12,6 +12,8 @@
     padding: 6px 25px;
     border: 1px solid grey;
     border-radius: 35px;
+    display: inline-block;
+    margin-top: 5px;
 }
 .edit-fields{
    padding: 0;
