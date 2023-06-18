@@ -11,7 +11,7 @@
         $length = count($data);
         
         if(($canViewUploads == 'everyone')||$canViewUploads == 'followers' && $isFollowingMe){
-            showUploads($data, $length, $username, $id);
+            showUploads($data, $length, $username, $id,  $isFollowingMe);
         }else{
             echo <<<HTML
             <div class="noUpload">
