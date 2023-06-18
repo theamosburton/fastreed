@@ -18,11 +18,8 @@
                             <br>
                             <div class="user-details">
                                 <h3 class="user-name"><?php echo $this->userData->getSelfDetails()['name']?></h3>
-                                <h4 class="user-email">@<?php echo $this->userData->getSelfDetails()['username']?></h4>
+                                <a href="/u/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
                             </div>
-                        </div>
-                        <div class="profileOptions">
-                            <a href="/u/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
                         </div>
                     </div>
                 </div>

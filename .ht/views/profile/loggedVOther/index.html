@@ -12,27 +12,23 @@
                             <br>
                             <div class="user-details">
                                 <h3 class="user-name"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name']?></h3>
-                                <h4 class="user-email">@<?php echo $this->userData->getOtherData('username', $this->otherUsername)['username']?></h4>
-                            </div>
-                        </div>
-                        <div class="profileOptions">
-                            <?php
+                                <?php
  
-                            if($selfId == $otherID ){
-                                echo <<<HTML
-                                <a href="/profile/" class="profileActions">Profile</a>
-                                HTML;
-                            }elseif($this->userData->isFollowed($selfId, $otherID)){
-                                echo <<<HTML
-                                <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
-                                HTML;
-                            }else{
-                                echo <<<HTML
-                                <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
-                                HTML;
-                            }
-                            ?>
-                            
+                                if($selfId == $otherID ){
+                                    echo <<<HTML
+                                    <a href="/profile/" class="profileActions">Profile</a>
+                                    HTML;
+                                }elseif($this->userData->isFollowed($selfId, $otherID)){
+                                    echo <<<HTML
+                                    <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
+                                    HTML;
+                                }else{
+                                    echo <<<HTML
+                                    <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
+                                    HTML;
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>

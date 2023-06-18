@@ -7,21 +7,11 @@
 .profile{
     margin: 15px 0px;
 }
-.profileOptions .profileActions{
+.user-profile .profileActions{
     cursor: pointer;
     padding: 6px 25px;
     border: 1px solid grey;
     border-radius: 35px;
-    margin-left: 20px;
-}
-.profileOptions{
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.profileOptions .profileActions:first-child{
-    margin-left: 0px;
 }
 .edit-fields{
    padding: 0;
@@ -58,9 +48,6 @@
 
 .personalInfoTab .infoDiv{
     margin: 15px 10px;
-}
-.personalInfoTab .infoDiv .infoType{
-
 }
 .personalInfoTab .infoDiv .infoValue{
     margin-left: 10px;
