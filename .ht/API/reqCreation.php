@@ -74,8 +74,8 @@ class authorReqRes{
 
 
                 // notify user
+                $name = $this->userData->getOtherData('personID', $dID)['name'];
                 if ($updatedValue == 'ACC') {
-                    $name = $this->userData->getOtherData('personID', $dID)['name'];
                     $message = 'Congratulations! '.$name.' you are creator. Go to profile and write webstories and posts';
                 }elseif ($updatedValue == 'REJ') {
                     $message = 'Sorry! '.$name.' your request is rejected. Try again after some time';
