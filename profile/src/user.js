@@ -535,6 +535,7 @@ function requestCreation(){
     if (data) {
       if (data.Result) {
         field.innerHTML = 'Requested';
+        location.reload();
       }else{
         field.innerHTML = `${data.message}`;
       }
@@ -571,6 +572,7 @@ function responseCreation(val){
         }else{
           button.innerHTML = 'Rejected';
         }
+        location.reload();
       }else{
         button.innerHTML = `${data.message}`;
       }
