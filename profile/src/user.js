@@ -547,6 +547,42 @@ function requestCreation(){
 }
 
 
+function responseCreation(val){
+  var button = document.querySelector(`.reqCreationButton.${val}button`);
+  const responseCreate = async () =>{
+    const url = '/.ht/API/reqCreation.php';
+    var encyDat = {
+      'purpose' : 'response',
+      'personID' : `${ePID}`,
+      'value' : `${val}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+    if (data) {
+      if (data.Result) {
+        if (val == 'ACC') {
+          button.innerHTML = 'Accepted';
+        }else{
+          button.innerHTML = 'Rejected';
+        }
+      }else{
+        button.innerHTML = `${data.message}`;
+      }
+    }else{
+      button.innerHTML = 'Something went wrong';
+    }
+  }
+
+  responseCreate();
+}
+
+
 
 
 

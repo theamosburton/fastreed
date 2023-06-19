@@ -65,20 +65,30 @@ class authorReqRes{
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, "You are not an admin");
         }else{
-            if (!isset($data['value']) || empty($data['value'])) {
-                $updatedValue = 'NOR';
-            }elseif($data['value'] != 'REQ' || $data['value'] != 'NOR' || $data['value'] != 'ACC' || $data['value'] != 'REJ'){
-                $updatedValue = 'REQ';
-            }else{
-                $eid = $data['personID'];
-                $dID = $this->AUTH->decrypt($eid);
-                $sql = "UPDATE settings SET canCreate = '$updatedValue' WHERE personID = '$dID'";
-                $result = mysqli_query($this->DB, $sql);
-                if ($result) {
-                    showMessage(true, 'Updated');
-                }else {
-                    showMessage(false, 'Not Updated');
+            $updatedValue = $data['value'];
+            $eid = $data['personID'];
+            $dID = $this->AUTH->decrypt($eid);
+            $sql = "UPDATE settings SET canCreate = '$updatedValue' WHERE personID = '$dID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+
+
+                // notify user
+                if ($updatedValue == 'ACC') {
+                    $name = $this->userData->getOtherData('personID', $dID)['name'];
+                    $message = 'Congratulations! '.$name.' you are creator. Go to profile and write webstories and posts';
+                }elseif ($updatedValue == 'REJ') {
+                    $message = 'Sorry! '.$name.' your request is rejected. Try again after some time';
                 }
+                $profilePic = $this->userData->getSelfData()['profilePic'];
+                $time = time();
+                $url = '/profile/';
+                $title = $message;
+                $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$dID', 'self', '$time', 0, '$url', 0)";
+                $result2 = mysqli_query($this->DB, $sql);
+                showMessage(true, 'Updated');
+            }else {
+                showMessage(false, 'Not Updated');
             }
         }
     }
