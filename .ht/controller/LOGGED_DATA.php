@@ -23,6 +23,21 @@ class getLoggedData{
        
     }
 
+    public function getAdminID(){
+        $return = false;
+        $adminSql = "SELECT * FROM account_access WHERE accType = 'Admin'";
+        $result1 = mysqli_query($this->DB,$adminSql);
+        if ($result1) {
+            if (mysqli_num_rows($result1) == 1) {
+                $row = mysqli_fetch_assoc($result1);
+                // var_dump($row);
+                $adminID = $row['personID'];
+                $return = $adminID;
+            }
+        }
+        return $return;
+    }
+
      private function whoVisited($PID){
         $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM account_details WHERE personID = '$PID'";

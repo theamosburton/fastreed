@@ -516,6 +516,37 @@ function deleteImage(imgID, ext, no, whois, what){
 }
 
 
+function requestCreation(){
+  var field =  document.getElementById('reqCreation');
+  const requestCreate = async () =>{
+    const url = '/.ht/API/reqCreation.php';
+    var encyDat = {
+      'purpose' : 'request',
+      'personID' : `${ePID}`,
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+    if (data) {
+      if (data.Result) {
+        field.innerHTML = 'Requested';
+      }else{
+        field.innerHTML = `${data.message}`;
+      }
+    }else{
+      field.innerHTML = 'Something went wrong';
+    }
+  }
+
+  requestCreate();
+}
+
+
 
 
 

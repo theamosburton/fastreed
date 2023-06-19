@@ -626,6 +626,15 @@ margin-top: 10px;
     background-color: #202021;
 }
 
+
+/* Dashboard */
+.reqCreation{
+    padding: 10px 20px!important;
+    display: inline-block!important;
+}
+.reqCreation:hover{
+    cursor: pointer;
+}
 @media (max-width: 990px) {
     
 

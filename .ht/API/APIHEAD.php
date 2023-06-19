@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION)){session_start();}
-header('content-type:application/json');
+// header('content-type:application/json');
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../../';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
