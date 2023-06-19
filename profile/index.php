@@ -264,6 +264,7 @@ class loggedVself extends showProfile{
          $canViewAge = $userSettings['canViewAge'];
          $canViewContent = $userSettings['canViewContent'];
          $canViewUploads = $userSettings['canViewUploads'];
+         $canCreate = $userSettings['canCreate'];
         $this->addHead();
         $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
     //***************/ Main Container Starts /**********//

@@ -34,6 +34,19 @@ class editAccess{
         $data = json_decode(file_get_contents('php://input'), true);
         if (!isset($data['value']) || empty($data['value'])) {
             showMessage(false, 'Value not set');
+        }elseif (!isset($data['what']) || empty($data['what'])) {
+            showMessage(false, 'what not set');
+        }elseif ($data['what'] == 'canCreate') {
+            $updatedValue = $data['value'];
+            $eid = $data['personID'];
+            $dID = $this->AUTH->decrypt($eid);
+            $sql = "UPDATE settings SET canCreate = '$updatedValue' WHERE personID = '$dID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+                showMessage(true, 'Updated');
+            }else {
+                showMessage(false, 'Not Updated');
+            }
         }else{
             if ($data['value'] == 'self' || $data['value'] == 'followers' || $data['value'] == 'everyone') {
                 $updatedValue = $data['value'];
