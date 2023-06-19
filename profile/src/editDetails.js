@@ -720,8 +720,7 @@ function updateAccess(id){
     var data = await response.json();
     if (data) {
       if (data.Result) {
-
-        if (what == 'canCreate') {
+        if (id == 'canCreate') {
           field.style.display = 'block';
           var requested ='';
           var rejected = ''; 
