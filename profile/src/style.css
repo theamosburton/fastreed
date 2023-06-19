@@ -636,13 +636,14 @@ margin-top: 10px;
     margin: 10px;
     padding: 10px 20px!important;
     display: inline-block;
-    border: 1px solid;
     border-radius: 10px;
 }
 .reqCreation .reqCreationButton{
     background-color: gainsboro;
     padding: 8px 15px!important;
     border-radius: 20px;
+    color: #18191c;
+    font-weight: bold;
 }
 
 .reqCreation #requested{

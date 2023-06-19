@@ -6,16 +6,12 @@
         HTML;
     }elseif($canCreate == 'REQ'){
         echo <<<HTML
-        <div>
-            <span id="requested" >You have applied for creator</span>
-        </div>
+        <span id="requested" >You have applied for creator</span>
         <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Request Again</span>
         HTML;
     }elseif($canCreate == 'REJ'){
         echo <<<HTML
-        <div>
-            <span  id="rejected" >Rejected as creator</span>
-        </div>
+        <span  id="rejected" >Rejected as creator</span>
         <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Request Again</span>
         HTML;
     }elseif($canCreate == 'ACC'){
