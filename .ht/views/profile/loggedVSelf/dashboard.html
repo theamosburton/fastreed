@@ -1,27 +1,39 @@
-<div class="contentTopics resCreation row">
-<div class="title col-12 mb-3">Creator Request</div>
-    <?php
-    if($canCreate == 'NOR'){
-        echo <<<HTML
-           <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Request to become creator</span>
-        HTML;
-    }elseif($canCreate == 'REQ'){
-        echo <<<HTML
+
+<?php
+if($canCreate == 'NOR'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Request to become creator</span>
+    </div>
+    HTML;
+}elseif($canCreate == 'REQ'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
         <span id="requested" class="ml-3" >You have already requested for creator access</span>
-        HTML;
-    }elseif($canCreate == 'REJ'){
-        echo <<<HTML
+    </div>
+    HTML;
+}elseif($canCreate == 'REJ'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
         <div class="ml-3 col-12 d-inline">
             <span id="rejected" class="font-weight-bold" >Creator access rejected by admin</span>
         </div>
         <div class="ml-3 col-12 d-inline mt-1 ">
             <span id="reqCreation" class="reqCreationButton ml-6" onclick="requestCreation()">Request Again</span>
         </div>
-        
-        HTML;
-    }elseif($canCreate == 'ACC'){
-
-    }
-    ?>
+    </div>
+    HTML;
+}elseif($canCreate == 'ACC'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row ">
+        <!-- <div class="title col-12 mb-3">Create</div> -->
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Create Webstories <i class="ml-1 fa fa-solid fa-circle-plus"></i></span>
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Create Posts  <i class="ml-1 fa fa-solid fa-circle-plus"></i></span>
+    </div>
+    HTML;
+}
+?>
     
-</div>
