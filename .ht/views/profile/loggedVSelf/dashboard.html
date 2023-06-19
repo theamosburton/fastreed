@@ -1,16 +1,23 @@
-<div class="contentTopics reqCreation">
+<div class="contentTopics resCreation row">
+<div class="title col-12 mb-3">Creator Request</div>
     <?php
     if($canCreate == 'NOR'){
         echo <<<HTML
-           <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Request to become creator</span>
+           <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Request to become creator</span>
         HTML;
     }elseif($canCreate == 'REQ'){
         echo <<<HTML
-        <span id="requested" >You have already requested for creator access</span>
+        <span id="requested" class="ml-3" >You have already requested for creator access</span>
         HTML;
     }elseif($canCreate == 'REJ'){
         echo <<<HTML
-        <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Request Again</span>
+        <div class="ml-3 col-12 d-inline">
+            <span id="rejected" class="font-weight-bold" >Creator access rejected by admin</span>
+        </div>
+        <div class="ml-3 col-12 d-inline mt-1 ">
+            <span id="reqCreation" class="reqCreationButton ml-6" onclick="requestCreation()">Request Again</span>
+        </div>
+        
         HTML;
     }elseif($canCreate == 'ACC'){
 

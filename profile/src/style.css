@@ -629,36 +629,46 @@ margin-top: 10px;
 
 /* Dashboard */
 .reqCreation{
-    padding: 10px 20px!important;
+    padding: 8px 20px 10px 20px!important;
     border: none!important;
 }
-.reqCreation span{
-    padding: 10px 20px!important;
+
+.reqCreation span, .resCreation span{
+    padding: 8px 20px!important;
     display: inline-block;
     border-radius: 10px;
 }
-.reqCreation .reqCreationButton{
+.reqCreation .reqCreationButton, .resCreation .reqCreationButton{
     background-color: gainsboro;
-    padding: 8px 15px!important;
+    padding: 8px 20px!important;
     border-radius: 20px;
     color: #18191c;
     font-weight: bold;
+    margin-right: 20px;
+    margin-top: 5px;
 }
 
-.reqCreation #requested{
+.reqCreation #requested, .resCreation #requested{
     background-color: blueviolet;
     color: white;
 }
-
-
-.reqCreation #rejected{
-    background-color: orangered;
+.reqCreation #requested:hover, .resCreation #requested:hover{
+    background-color: rgb(111, 28, 189);
 }
 
-.reqCreation .reqCreationButton:hover{
+.reqCreation #rejected, .resCreation #rejected{
+    background-color: tomato;
+    color:white;
+}
+
+
+.reqCreation #rejected:hover, .resCreation #rejected:hover{
+    background-color: rgb(232, 79, 52);
+}
+
+.reqCreation .reqCreationButton:hover, .resCreation .reqCreationButton:hover{
     cursor: pointer;
     background-color: rgb(182, 182, 182);
-
 }
 @media (max-width: 990px) {
     
