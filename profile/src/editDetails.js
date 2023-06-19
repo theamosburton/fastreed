@@ -729,8 +729,6 @@ function updateAccess(id){
           var followersSel ='';
           if (fieldValue == 'ACC') {
             accepted = 'selected';
-          }else if(fieldValue == 'REQ'){
-            requested = 'selected';
           }else if (fieldValue == 'REJ') {
             rejected = 'selected';
           }else{
@@ -739,7 +737,6 @@ function updateAccess(id){
 
           fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
           <option value="NOR" ${notReq} >Not Requested</option>
-          <option value="REQ" ${requested} >Requested</option>
           <option value="REJ" ${rejected}>Rejected</option>
           <option value="ACC" ${accepted}>Accepted</option>
           </select>`;
