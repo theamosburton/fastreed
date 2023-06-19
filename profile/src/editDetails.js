@@ -720,26 +720,52 @@ function updateAccess(id){
     var data = await response.json();
     if (data) {
       if (data.Result) {
-        field.style.display = 'block';
-        var everyoneSel ='';
-        var selfSel = ''; 
-        var followersSel ='';
-        if (fieldValue == 'everyone') {
-          everyoneSel = 'selected';
-        }else if(fieldValue == 'self'){
-          selfSel = 'selected';
-        }else if (fieldValue == 'followers') {
-          followersSel = 'selected';
-        }
 
-        if (id == 'Content') {
-          selfSel = 'hidden';
+        if (what == 'canCreate') {
+          field.style.display = 'block';
+          var requested ='';
+          var rejected = ''; 
+          var notReq = ''; 
+          var accepted = ''; 
+          var followersSel ='';
+          if (fieldValue == 'ACC') {
+            accepted = 'selected';
+          }else if(fieldValue == 'REQ'){
+            requested = 'selected';
+          }else if (fieldValue == 'REJ') {
+            rejected = 'selected';
+          }else{
+            notReq = 'selected'; 
+          }
+
+          fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
+          <option value="NOR" ${notReq} >Not Requested</option>
+          <option value="REQ" ${requested} >Requested</option>
+          <option value="REJ" ${rejected}>Rejected</option>
+          <option value="ACC" ${accepted}>Accepted</option>
+          </select>`;
+        }else{
+          field.style.display = 'block';
+          var everyoneSel ='';
+          var selfSel = ''; 
+          var followersSel ='';
+          if (fieldValue == 'everyone') {
+            everyoneSel = 'selected';
+          }else if(fieldValue == 'self'){
+            selfSel = 'selected';
+          }else if (fieldValue == 'followers') {
+            followersSel = 'selected';
+          }
+
+          if (id == 'Content') {
+            selfSel = 'hidden';
+          }
+          fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
+          <option value="everyone" ${everyoneSel} >Everyone</option>
+          <option value="followers" ${followersSel} >Following</option>
+          <option value="self" ${selfSel}>Only Me</option>
+          </select>`;
         }
-        fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
-        <option value="everyone" ${everyoneSel} >Everyone</option>
-        <option value="followers" ${followersSel} >Following</option>
-        <option value="self" ${selfSel}>Only Me</option>
-      </select>`;
       }else{
         field.style.display = 'none';
         fieldDiv.innerHTML = `<div> ${data.message}</div>`;
