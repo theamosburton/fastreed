@@ -630,10 +630,35 @@ margin-top: 10px;
 /* Dashboard */
 .reqCreation{
     padding: 10px 20px!important;
-    display: inline-block!important;
+    border: none!important;
 }
-.reqCreation:hover{
+.reqCreation span{
+    margin: 10px;
+    padding: 10px 20px!important;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.reqCreation .reqCreationButton{
+    background-color: gainsboro;
+    padding: 8px 15px!important;
+    border-radius: 20px;
+}
+
+.reqCreation #requested{
+    background-color: blueviolet;
+    color: white;
+}
+
+
+.reqCreation #rejected{
+    background-color: orangered;
+}
+
+.reqCreation .reqCreationButton:hover{
     cursor: pointer;
+    background-color: rgb(182, 182, 182);
+
 }
 @media (max-width: 990px) {
     
