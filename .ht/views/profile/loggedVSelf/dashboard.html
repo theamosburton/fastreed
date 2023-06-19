@@ -1,3 +1,20 @@
 <div class="contentTopics reqCreation">
-    <span id="reqCreation" onclick="requestCreation()">Request to create content</span>
+    <?php
+    if($canCreate == 'NOR'){
+        echo <<<HTML
+           <span id="reqCreation" onclick="requestCreation()">Request to become creator</span>
+        HTML;
+    }elseif($canCreate == 'REQ'){
+        echo <<<HTML
+        <span id="reqCreation"">You have applied for creator</span>
+        HTML;
+    }elseif($canCreate == 'REJ'){
+        echo <<<HTML
+        <span id="reqCreation"">Application Rejected</span>
+        HTML;
+    }elseif($canCreate == 'ACC'){
+
+    }
+    ?>
+    
 </div>
