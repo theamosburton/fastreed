@@ -1,15 +1,16 @@
 <?php
 if($canCreate == 'REQ'){
     echo <<<HTML
-    <div class="contentTopics  resCreation row">
+    <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            <span id="requested" class="reqCreationButton" onclick="reponseCreation('ACC')">Accept Request</span>
+        <div class="col-lg-5 col-md-5 col-sm-12">
+            <span id="requested" class="reqCreationButton" onclick="reponseCreation('ACC')">Accept request</span>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            <span id="rejected" class="reqCreationButton" onclick="reponseCreation('REJ')">Accept Request</span>
+        <div class="col-lg-5 col-md-5 col-sm-12 mt-sm-3">
+            <span id="rejected" class="reqCreationButton" onclick="reponseCreation('REJ')">Reject request</span>
         </div>
     </div>
-    HTML;
+HTML;
+
 }
 ?>
