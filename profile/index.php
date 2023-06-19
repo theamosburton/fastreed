@@ -214,6 +214,7 @@ class loggedAdminVother extends showProfile{
          $canViewAge = $userSettings['canViewAge'];
          $canViewContent = $userSettings['canViewContent'];
          $canViewUploads = $userSettings['canViewUploads'];
+         $canCreate = $userSettings['canCreate'];
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
