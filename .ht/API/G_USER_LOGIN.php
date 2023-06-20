@@ -144,7 +144,7 @@ class gSignUpLogin{
 
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
-        $sql2 = "INSERT INTO settings (personID , canViewContent, canViewMail, canViewAge, canViewUploads) VALUES ('$userID','everyone', 'self', 'followers', 'self')";
+        $sql2 = "INSERT INTO settings (personID , canViewContent, canViewMail, canViewAge, canViewUploads, canCreate) VALUES ('$userID','everyone', 'self', 'followers', 'self', 'NOR')";
         $result2 = mysqli_query($this->DB, $sql2);
         if ($result2) {
           $this->loginAccount($userID);
