@@ -45,7 +45,6 @@ class getFastreedContent {
             if (!$this->checkPersmission()) {
                 $this->renderError();
             }elseif(!$this->checkUpload()){
-                echo 'upload';
                 $this->renderError();
             }else{
                 $EXT = $_GET['EXT'];
@@ -67,11 +66,10 @@ class getFastreedContent {
 
     private function renderError(){
         $filepath =$this->_DOCROOT.'/assets/img/warning.png';
-        echo $filepath;
-        // header('Content-Type: image/PNG');
-        // header('Content-Length: ' . filesize($filepath));
-        // header('Content-Disposition: inline'); // Set to inline instead of attachment
-        // readfile($filepath);
+        header('Content-Type: image/png');
+        header('Content-Length: ' . filesize($filepath));
+        header('Content-Disposition: inline'); // Set to inline instead of attachment
+        readfile($filepath);
     }
 
     private function checkUpload(){
