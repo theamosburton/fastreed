@@ -55,7 +55,7 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                echo 'fileError';
+                $filepath;
                 // header('Content-Type: '.$contentType);
                 // header('Content-Length: ' . filesize($filepath));
                 // header('Content-Disposition: inline'); // Set to inline instead of attachment
