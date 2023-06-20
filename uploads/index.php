@@ -45,7 +45,7 @@ class getFastreedContent {
             if (!$this->checkPersmission()) {
                 $this->renderError();
             }elseif(!$this->checkUpload()){
-                $this->renderError();
+                // $this->renderError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
@@ -79,6 +79,7 @@ class getFastreedContent {
         $IMGID = $_GET['ID'];
         $EXT = $_GET['EXT'];
         $filepath =$this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
+        echo $filepath;
         if (file_exists($filepath)) {
             $return = $filepath;
         }
