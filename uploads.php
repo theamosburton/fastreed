@@ -33,6 +33,7 @@ class getFastreedContent {
         // Vars
 
 
+        var_dump($_GET);
         if (!isset($_GET['type']) || empty($_GET['type'])) {
             echo 'Type error';
         }elseif (!isset($_GET['ID']) || empty($_GET['ID'])) {
@@ -42,25 +43,26 @@ class getFastreedContent {
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
             echo 'Ext error';
         }else {
-            if (false) {
+            if (!$this->checkPersmission()) {
                 echo 'Permission error';
-            }elseif(false){
+            }elseif(!$this->checkUpload()){
                 echo 'Upload error';
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
+
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
+
                 // Send appropriate headers
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline'); // Set to inline instead of attachment
                 readfile($filepath);
-                // echo $filepath;
             }
         }
     }
