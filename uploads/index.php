@@ -57,7 +57,7 @@ class getFastreedContent {
                 }
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
-                header('Content-Disposition: inline; filename=/favicon.ico');
+                header('Content-Disposition: inline; filename=favicon.ico');
                 ob_clean();
                 flush();
                 readfile($filepath);
@@ -81,7 +81,7 @@ class getFastreedContent {
         $filepath =$this->_DOCROOT.'/assets/img/permissionError.png';
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
-        header('Content-Disposition: inline; filename=/favicon.ico'); // Set to inline instead of attachment
+        header('Content-Disposition: inline'); // Set to inline instead of attachment
         ob_clean();
         flush();
         readfile($filepath);
