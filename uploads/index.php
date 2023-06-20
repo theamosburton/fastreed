@@ -42,7 +42,7 @@ class getFastreedContent {
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
             $this->renderError();
         }else {
-            if (!$this->checkPersmission()) {
+            if (!$this->checkPermission()) {
                 $this->renderPError();
             }elseif(!$this->checkUpload()){
                 $this->renderUError();
@@ -55,6 +55,7 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
+               
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline; filename=favicon.ico');
@@ -111,7 +112,7 @@ class getFastreedContent {
         return $return;
     }
 
-    private function checkPersmission(){
+    private function checkPermission(){
         $return = false;
         $ownerUID = $this->userData->getUID('username', $_GET['UN']);
         $IMGID = $_GET['ID'];
@@ -122,7 +123,18 @@ class getFastreedContent {
             if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
                 $access = $row['access'];
-                if ($access == 'everyone') {
+                $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+                $host = $_SERVER['HTTP_HOST'];
+                $basePath = dirname($_SERVER['PHP_SELF']);
+                $baseUrl = $protocol . '://' . $host . $basePath . '/';
+
+                $forDomain = ($baseUrl == 'https://'.DOMAIN.'/webstories' || $baseUrl == 'https://'.DOMAIN.'/posts');
+                $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/webstories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
+
+
+                if ($forDomain ||  $forDomainAlias) {
+                    $return = true;
+                }elseif ($access == 'everyone') {
                     $return = true;
                 }elseif (isset($_SESSION['LOGGED_USER'])) {
                     if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
