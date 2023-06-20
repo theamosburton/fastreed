@@ -4,9 +4,9 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-$GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
+// $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
+// $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
 
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['DB']);
@@ -19,8 +19,8 @@ new getFastreedContent();
 class getFastreedContent {
     private $DB;
     private $userData;
-    private $AUTH;
-    private $BASIC_FUNC;
+    // private $AUTH;
+    // private $BASIC_FUNC;
     private $_DOCROOT;
     function __construct(){
 
@@ -50,13 +50,11 @@ class getFastreedContent {
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
-
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline'); // Set to inline instead of attachment
@@ -68,7 +66,6 @@ class getFastreedContent {
 
     private function renderError(){
         $filepath =$this->_DOCROOT.'/assets/img/warning.png';
-        // Send appropriate headers
         header('Content-Type: image/PNG');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
