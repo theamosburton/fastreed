@@ -55,10 +55,17 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                header('Content-Type: '.$contentType);
+
+                $filepath = $_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg';
+                // echo $filepath;
+                header('Content-Type: image/png');
                 header('Content-Length: ' . filesize($filepath));
-                header('Content-Disposition: inline');
+                header('Content-Disposition: inline'); // Set to inline instead of attachment
                 readfile($filepath);
+                // header('Content-Type: '.$contentType);
+                // header('Content-Length: ' . filesize($filepath));
+                // header('Content-Disposition: inline');
+                // readfile($filepath);
             }
         }
     }
