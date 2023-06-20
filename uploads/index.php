@@ -55,17 +55,16 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-
-                $filepath = $_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg';
-                // echo $filepath;
-                header('Content-Type: image/png');
+                header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
-                header('Content-Disposition: inline'); // Set to inline instead of attachment
-                readfile($filepath);
-                // header('Content-Type: '.$contentType);
-                // header('Content-Length: ' . filesize($filepath));
-                // header('Content-Disposition: inline');
-                // readfile($filepath);
+                header('Content-Disposition: inline');
+                ob_clean();
+                flush();
+                if(readfile($filepath)){
+                    exit();
+                }else{
+                    echo " cann not create ";
+                }
             }
         }
     }
