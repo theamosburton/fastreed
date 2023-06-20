@@ -60,6 +60,7 @@ class getFastreedContent {
                 // header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline'); // Set to inline instead of attachment
                 // readfile($filepath);
+                echo $filepath;
             }
         }
     }
