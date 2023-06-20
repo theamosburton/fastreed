@@ -47,16 +47,15 @@ class getFastreedContent {
             }elseif(!$this->checkUpload()){
                 echo 'Upload error';
             }else{
+                echo $filepath;
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
-
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-
                 // Send appropriate headers
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
