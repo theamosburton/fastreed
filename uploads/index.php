@@ -115,8 +115,6 @@ class getFastreedContent {
                 }
             }
         }
-
-        
         return $return;
     }
 }
