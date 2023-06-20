@@ -4,9 +4,9 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 $_SERVROOT = '../../';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
-// $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
+$GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
-// $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
+$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
 
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['DB']);
@@ -19,8 +19,8 @@ new getFastreedContent();
 class getFastreedContent {
     private $DB;
     private $userData;
-    // private $AUTH;
-    // private $BASIC_FUNC;
+    private $AUTH;
+    private $BASIC_FUNC;
     private $_DOCROOT;
     function __construct(){
 
