@@ -60,11 +60,7 @@ class getFastreedContent {
                 header('Content-Disposition: inline');
                 ob_clean();
                 flush();
-                if(readfile($filepath)){
-                    exit();
-                }else{
-                    echo " cann not create ";
-                }
+                readfile($filepath);
             }
         }
     }
@@ -75,6 +71,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
+        ob_clean();
+        flush();
         readfile($filepath);
     }
 
@@ -84,6 +82,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
+        ob_clean();
+        flush();
         readfile($filepath);
     }
 
@@ -93,6 +93,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
+        ob_clean();
+        flush();
         readfile($filepath);
     }
 
