@@ -48,7 +48,7 @@ class getFastreedContent {
                 $this->renderUError();
             }else{
                 $EXT = $_GET['EXT'];
-                $filepath =$_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg';
+                $filepath = $this->checkUpload();
                 $type = $_GET['type'];
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
