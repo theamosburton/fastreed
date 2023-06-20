@@ -43,9 +43,9 @@ class getFastreedContent {
             $this->renderError();
         }else {
             if (!$this->checkPersmission()) {
-                $this->renderError();
+                $this->renderPError();
             }elseif(!$this->checkUpload()){
-                $this->renderError();
+                $this->renderUError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
@@ -66,6 +66,24 @@ class getFastreedContent {
 
     private function renderError(){
         $filepath =$this->_DOCROOT.'/assets/img/warning.png';
+        header('Content-Type: image/png');
+        header('Content-Length: ' . filesize($filepath));
+        header('Content-Disposition: inline'); // Set to inline instead of attachment
+        readfile($filepath);
+    }
+
+
+    private function renderPError(){
+        $filepath =$this->_DOCROOT.'/assets/img/permissionError.png.png';
+        header('Content-Type: image/png');
+        header('Content-Length: ' . filesize($filepath));
+        header('Content-Disposition: inline'); // Set to inline instead of attachment
+        readfile($filepath);
+    }
+
+
+    private function renderUError(){
+        $filepath =$this->_DOCROOT.'/assets/img/notFound.png';
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
@@ -99,7 +117,7 @@ class getFastreedContent {
                 if ($access == 'everyone') {
                     $return = true;
                 }elseif (isset($_SESSION['LOGGED_USER'])) {
-                    if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+                    if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
                         $return = true;
                     }elseif ($access == 'followers') {
                         if ($this->userData->isfollowingMe($_SESSION['LOGGED_USER'], $ownerUID)) {
