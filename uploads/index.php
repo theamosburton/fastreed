@@ -81,6 +81,7 @@ class getFastreedContent {
         $filepath =$this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
         echo $filepath;
 
+        var_dump(file_exists('/var/www/.ht/fastreedusercontent/photos/mdshafiqmalik98/IMG202306200000001.jpeg'));
         if (file_exists($filepath)) {
             $return = $filepath;
         }
