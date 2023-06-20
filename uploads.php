@@ -44,10 +44,9 @@ class getFastreedContent {
         }else {
             if (false) {
                 echo 'Permission error';
-            }elseif(!$this->checkUpload()){
+            }elseif(false){
                 echo 'Upload error';
             }else{
-                echo $filepath;
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
