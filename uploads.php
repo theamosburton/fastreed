@@ -49,7 +49,6 @@ class getFastreedContent {
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
-                echo $filepath;
                 $type = $_GET['type'];
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
@@ -60,7 +59,7 @@ class getFastreedContent {
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline'); // Set to inline instead of attachment
-                readfile($filepath);
+                // readfile($filepath);
             }
         }
     }
