@@ -164,9 +164,11 @@ class gSignUpLogin{
   public function notifyAdmin($name, $profilePic, $userSince, $pID){
     $url = '/u/'.$pID;
     $adminID = $this->getAdminID();
-    $title = '<b> '.$name.' </b> created account on Fastreed using google';
-    $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', 0, '$url', 0)";
-    $result = mysqli_query($this->DB, $sql);
+    if($adminID){
+      $title = '<b> '.$name.' </b> created account on Fastreed using google';
+      $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', 0, '$url', 0)";
+      $result = mysqli_query($this->DB, $sql);
+    }
   }
 
   // This function is for logging out account
