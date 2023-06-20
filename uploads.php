@@ -42,7 +42,7 @@ class getFastreedContent {
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
             echo 'Ext error';
         }else {
-            if (!$this->checkPersmission()) {
+            if (false) {
                 echo 'Permission error';
             }elseif(!$this->checkUpload()){
                 echo 'Upload error';
