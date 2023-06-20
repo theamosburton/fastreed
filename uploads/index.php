@@ -45,7 +45,8 @@ class getFastreedContent {
             if (!$this->checkPersmission()) {
                 $this->renderPError();
             }elseif(!$this->checkUpload()){
-                $this->renderUError();
+                echo 'sdf';
+                // $this->renderUError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
