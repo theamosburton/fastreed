@@ -37,6 +37,21 @@ class gSignUpLogin{
     }
   }
 
+  public function getAdminID(){
+      $return = false;
+      $adminSql = "SELECT * FROM account_access WHERE accType = 'Admin'";
+      $result1 = mysqli_query($this->DB,$adminSql);
+      if ($result1) {
+          if (mysqli_num_rows($result1) == 1) {
+              $row = mysqli_fetch_assoc($result1);
+              // var_dump($row);
+              $adminID = $row['personID'];
+              $return = $adminID;
+          }
+      }
+      return $return;
+  }
+
   public function checkUserExists($email){
     $email = mysqli_real_escape_string($this->DB,$email);
     $sql = "SELECT * FROM account_details WHERE emailID = '$email'";
@@ -148,7 +163,7 @@ class gSignUpLogin{
 
   public function notifyAdmin($name, $profilePic, $userSince, $pID){
     $url = '/u/'.$pID;
-    $adminID = ADMINID;
+    $adminID = $this->getAdminID();
     $title = '<b> '.$name.' </b> created account on Fastreed using google';
     $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$adminID', 'self', '$userSince', 0, '$url', 0)";
     $result = mysqli_query($this->DB, $sql);
