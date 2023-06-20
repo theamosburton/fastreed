@@ -48,7 +48,7 @@ class getFastreedContent {
                 $this->renderUError();
             }else{
                 $EXT = $_GET['EXT'];
-                $filepath = $this->checkUpload();
+                $filepath =$_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg';
                 $type = $_GET['type'];
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
@@ -58,7 +58,7 @@ class getFastreedContent {
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline');
-                readfile($_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg');
+                readfile($filepath);
             }
         }
     }
