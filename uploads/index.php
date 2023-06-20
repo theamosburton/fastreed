@@ -13,6 +13,7 @@ include_once($GLOBALS['DB']);
 include($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
 include($GLOBALS['BASIC_FUNC']);
+
 new getFastreedContent();
 
 class getFastreedContent {
@@ -80,28 +81,29 @@ class getFastreedContent {
 
     private function checkPersmission(){
         $return = false;
-        $vistorUID = $_SESSION['LOGGED_USER'];
         $ownerUID = $this->userData->getUID('username', $_GET['UN']);
-        if ($vistorUID == $ownerUID) {
-            $return = true;
-        }else{
-            $IMGID = $_GET['ID'];
-            $sql = "SELECT * FROM uploads WHERE uploadId = '$IMGID' and personID = '$ownerUID'";
-            $result = mysqli_query($this->DB, $sql);
-            if ($result) {
-                if (mysqli_num_rows($result)) {
-                    $row = mysqli_fetch_assoc($result);
-                    $access = $row['access'];
-                    if ($access == 'everyone') {
-                        $return = true;
-                    }elseif ($access == 'followers') {
-                        $isFollowingMe = $this->userData->isfollowingMe($vistorUID, $ownerUID);
-                    }else{
-                        $return = false;
+        $IMGID = $_GET['ID'];
+        $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
+        $result = mysqli_query($this->DB, $sql);
+        
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $row = mysqli_fetch_assoc($result);
+                $access = $row['access'];
+                if ($access == 'everyone') {
+                    $return = true;
+                }elseif ($access == 'followers') {
+                    if (isset($_SESSION['LOGGED_USER'])) {
+                        $isFollowingMe = $this->userData->isfollowingMe($_SESSION['LOGGED_USER'], $ownerUID);
+                        if ($isFollowingMe) {
+                            $return = true;
+                        }
                     }
                 }
             }
         }
+
+        
         return $return;
     }
 }
