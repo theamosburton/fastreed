@@ -103,7 +103,9 @@ class getFastreedContent {
                 if ($access == 'everyone') {
                     $return = true;
                 }elseif (isset($_SESSION['LOGGED_USER'])) {
-                    if ($access == 'followers') {
+                    if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+                        $return = true;
+                    }elseif ($access == 'followers') {
                         if ($this->userData->isfollowingMe($_SESSION['LOGGED_USER'], $ownerUID)) {
                             $return = true;
                         }elseif($_SESSION['LOGGED_USER'] == $ownerUID){
