@@ -74,7 +74,7 @@ class getFastreedContent {
 
 
     private function renderPError(){
-        $filepath =$this->_DOCROOT.'/assets/img/permissionError.png.png';
+        $filepath =$this->_DOCROOT.'/assets/img/permissionError.png';
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
