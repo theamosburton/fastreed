@@ -45,6 +45,7 @@ class getFastreedContent {
             if (!$this->checkPersmission()) {
                 $this->renderError();
             }elseif(!$this->checkUpload()){
+                echo 'upload';
                 $this->renderError();
             }else{
                 $EXT = $_GET['EXT'];
@@ -55,11 +56,10 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                echo $filepath;
-                // header('Content-Type: '.$contentType);
-                // header('Content-Length: ' . filesize($filepath));
-                // header('Content-Disposition: inline'); // Set to inline instead of attachment
-                // readfile($filepath);
+                header('Content-Type: '.$contentType);
+                header('Content-Length: ' . filesize($filepath));
+                header('Content-Disposition: inline'); // Set to inline instead of attachment
+                readfile($filepath);
             }
         }
     }
