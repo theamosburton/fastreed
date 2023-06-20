@@ -71,8 +71,8 @@ class uploadMedia{
             if ($file_error === UPLOAD_ERR_OK) {
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
                 if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext)['Result']){
-                    $directory = $this->_DOCROOT.'/fastreedusercontent/videos/'.$username.'/';
-                    $add = '/fastreedusercontent/videos/'.$username.'/';
+                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
+                    $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
@@ -131,8 +131,8 @@ class uploadMedia{
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
                 if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext)['Result']){
-                    $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/';
-                    $add = '/fastreedusercontent/photos/'.$username.'/';
+                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
+                    $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
@@ -169,8 +169,8 @@ class uploadMedia{
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
                 if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext)['Result']){
-                    $directory = $this->_DOCROOT.'/fastreedusercontent/photos/'.$username.'/';
-                    $add = '/fastreedusercontent/photos/'.$username.'/';
+                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
+                    $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
@@ -214,7 +214,7 @@ class uploadMedia{
             $row = mysqli_fetch_assoc($resultGet);
             $uploadID = $row['uploadID'];
             $extension = $row['extension'];
-            $path = $this->_DOCROOT.'/fastreedusercontent/photos/'.$id.'/'.$uploadID.$extension;
+            $path = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$id.'/'.$uploadID.$extension;
             if (file_exists($path)) {
                 if (unlink($path)) {
                     $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";

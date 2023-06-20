@@ -101,7 +101,7 @@ class deletePic{
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
+        $path = $this->_DOCROOT.'/.ht/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 7');
         }elseif (file_exists($path)) {

@@ -34,18 +34,18 @@ class getFastreedContent {
         // Vars
 
         if (!isset($_GET['type']) || empty($_GET['type'])) {
-            echo 'Type error';
+            $this->renderError();
         }elseif (!isset($_GET['ID']) || empty($_GET['ID'])) {
-            echo 'ID error';
+            $this->renderError();
         }elseif (!isset($_GET['UN']) || empty($_GET['UN'])) {
-            echo 'Username error';
+            $this->renderError();
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
-            echo 'Ext error';
+            $this->renderError();
         }else {
             if (!$this->checkPersmission()) {
-                echo 'Permission error';
+                $this->renderError();
             }elseif(!$this->checkUpload()){
-                echo 'Upload error';
+                $this->renderError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
@@ -64,6 +64,16 @@ class getFastreedContent {
                 readfile($filepath);
             }
         }
+    }
+
+
+    private function renderError(){
+        $filepath =$this->_DOCROOT.'/assets/img/warning.png';
+        // Send appropriate headers
+        header('Content-Type: image/PNG');
+        header('Content-Length: ' . filesize($filepath));
+        header('Content-Disposition: inline'); // Set to inline instead of attachment
+        readfile($filepath);
     }
 
     private function checkUpload(){
@@ -92,12 +102,15 @@ class getFastreedContent {
                 $access = $row['access'];
                 if ($access == 'everyone') {
                     $return = true;
-                }elseif ($access == 'followers') {
-                    if (isset($_SESSION['LOGGED_USER'])) {
-                        $isFollowingMe = $this->userData->isfollowingMe($_SESSION['LOGGED_USER'], $ownerUID);
-                        if ($isFollowingMe) {
+                }elseif (isset($_SESSION['LOGGED_USER'])) {
+                    if ($access == 'followers') {
+                        if ($this->userData->isfollowingMe($_SESSION['LOGGED_USER'], $ownerUID)) {
+                            $return = true;
+                        }elseif($_SESSION['LOGGED_USER'] == $ownerUID){
                             $return = true;
                         }
+                    }elseif($_SESSION['LOGGED_USER'] == $ownerUID){
+                        $return = true;
                     }
                 }
             }

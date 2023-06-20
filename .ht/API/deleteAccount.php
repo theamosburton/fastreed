@@ -250,9 +250,9 @@ class deleteAccount {
     
 
     private function deletingUploads($username) {
-        $photos = $this->_DOCROOT . '/fastreedusercontent/photos/' . $username;
-        $videos = $this->_DOCROOT . '/fastreedusercontent/videos/' . $username;
-        $audios = $this->_DOCROOT . '/fastreedusercontent/audios/' . $username;
+        $photos = $this->_DOCROOT . '/.ht/fastreedusercontent/photos/' . $username;
+        $videos = $this->_DOCROOT . '/.ht/fastreedusercontent/videos/' . $username;
+        $audios = $this->_DOCROOT . '/.ht/fastreedusercontent/audios/' . $username;
     
         // Delete 'photos' directory and its contents
         if (is_dir($photos)) {
