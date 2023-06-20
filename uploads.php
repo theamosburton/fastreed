@@ -49,6 +49,7 @@ class getFastreedContent {
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
+                echo $filepath;
                 $type = $_GET['type'];
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
