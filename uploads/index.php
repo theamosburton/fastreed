@@ -67,7 +67,7 @@ class getFastreedContent {
     private function renderError(){
         $filepath =$this->_DOCROOT.'/assets/img/warning.png';
         // header('Content-Type: image/png');
-        header('Content-Length: ' . filesize($filepath));
+        // header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
         readfile($filepath);
     }
