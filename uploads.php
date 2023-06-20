@@ -56,11 +56,11 @@ class getFastreedContent {
                     $contentType = 'video/'.$EXT;
                 }
                 // Send appropriate headers
-                // header('Content-Type: '.$contentType);
-                // header('Content-Length: ' . filesize($filepath));
+                header('Content-Type: '.$contentType);
+                header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline'); // Set to inline instead of attachment
-                // readfile($filepath);
-                echo $filepath;
+                readfile($filepath);
+                // echo $filepath;
             }
         }
     }
