@@ -45,8 +45,7 @@ class getFastreedContent {
             if (!$this->checkPersmission()) {
                 $this->renderPError();
             }elseif(!$this->checkUpload()){
-                echo 'sdf';
-                // $this->renderUError();
+                $this->renderUError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
@@ -56,11 +55,11 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                echo $filepath;
-                // header('Content-Type: '.$contentType);
-                // header('Content-Length: ' . filesize($filepath));
-                // header('Content-Disposition: inline');
-                // readfile($filepath);
+                // echo $filepath;
+                header('Content-Type: '.$contentType);
+                header('Content-Length: ' . filesize($filepath));
+                header('Content-Disposition: inline');
+                readfile($filepath);
             }
         }
     }
