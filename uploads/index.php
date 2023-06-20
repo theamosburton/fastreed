@@ -55,11 +55,10 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                // echo $filepath;
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline');
-                readfile($filepath);
+                readfile($_SERVER['DOCUMENT_ROOT'].'/.ht/fastreedusercontent/photos/faastreed/IMG202306200000000.jpeg');
             }
         }
     }
