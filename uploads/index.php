@@ -56,7 +56,7 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-                $filepath;
+                echo $filepath;
                 // header('Content-Type: '.$contentType);
                 // header('Content-Length: ' . filesize($filepath));
                 // header('Content-Disposition: inline');
