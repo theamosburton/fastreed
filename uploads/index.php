@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION)){session_start();}
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-$_SERVROOT = '../';
+$_SERVROOT = '../../';
 $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
