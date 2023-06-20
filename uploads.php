@@ -32,8 +32,6 @@ class getFastreedContent {
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
         // Vars
 
-
-        var_dump($_GET);
         if (!isset($_GET['type']) || empty($_GET['type'])) {
             echo 'Type error';
         }elseif (!isset($_GET['ID']) || empty($_GET['ID'])) {
