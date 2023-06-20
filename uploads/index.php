@@ -58,7 +58,7 @@ class getFastreedContent {
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline');
-                readlink($filepath);
+                readfile($filepath);
             }
         }
     }
