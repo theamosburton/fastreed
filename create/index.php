@@ -84,13 +84,14 @@ class createContent{
         </div>
         <div class="hideShow hideShowLeft" id="hsLeft">
             <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'hsLeft', 'lefthideMe')"></i>
+
         </div>
         <!-- Left Section -->
 
         <!-- Editor Section -->
         <div class="sections editorSection">
             <div class="editorBox" id="editTab" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
-                <!-- <span > Add media</span> -->
+                <span > Add media</span>
             </div>
             <div class="editorNav">
                 <div class="navs backArrow"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
