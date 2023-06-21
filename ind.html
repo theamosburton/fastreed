@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <style>
+.hemi-circle {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100px 100px 0 0;
+  background-color: #f00;
+  animation: wave 2s linear infinite;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes wave {
+  0% {
+    transform: scaleY(0.1);
+  }
+  50% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="hemi-circle"></div>
+
+       
+    </body>
+</html>

@@ -24,6 +24,7 @@ html{
 }
 
 .editContainer .rightSection{
+    animation: grow .5s ease forwards;
     width: 25%;
     background-color: #1c1c22;
 }
@@ -80,6 +81,7 @@ html{
 
 
 .editContainer .leftSection{
+    animation: grow .5s ease forwards;
     background-color: #1c1c22;
     /* position: absolute; */
     width: 25%;
@@ -88,6 +90,14 @@ html{
     /* align-items: center; */
     padding-right: 0!important;
 }
+@keyframes grow {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
 .editContainer .leftSection .uploadsDiv, .rightDiv{
     margin: 10px;
     width: 100%;
@@ -228,8 +238,8 @@ html{
     display: none;
     background-color: transparent;
     left: 0px;
-    top: 10px;
-    padding:4px 5px 4px 0px;
+    top: 20px;
+    padding:8px 6px 8px 0px;
     background-color: blueviolet;
     border-radius: 0px 20px 20px 0px;
 }
@@ -237,8 +247,8 @@ html{
     display: none;
     background-color: transparent;
     right :0px;
-    top: 10px;
-    padding:4px 0px 4px 5px;
+    top: 20px;
+    padding:8px 0px 8px 6px;
     background-color: aqua;
     border-radius: 20px 0px 0px 20px;
 }
