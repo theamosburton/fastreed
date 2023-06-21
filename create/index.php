@@ -75,6 +75,10 @@ class createContent{
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
+                    <div class="uploadContent"></div>
+                    <div class="uploadContent"></div>
+                    <div class="uploadContent"></div>
+                    <div class="uploadContent"></div>
                 </div>
                 <div class="buttons">
                     <div class="selectButton uploadNew">Upload New</div>
