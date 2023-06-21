@@ -319,4 +319,8 @@ html{
         width: calc(9*1.6rem);
         height: calc(16*1.6rem);
     }
+    .editContainer .editorSection {
+        justify-content: flex-start;
+        padding-top: 12%;
+    }
 }
