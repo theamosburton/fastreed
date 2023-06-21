@@ -734,8 +734,6 @@ margin-top: 10px;
 }
 
 @media (max-width: 500px){
-
-
     .leftSide{
         border: none!important;
         margin-top: 5px;
@@ -782,5 +780,23 @@ margin-top: 10px;
 @media (max-width: 990px) {
     .profileOptions .profileActions{
         font-size: 13px;
+    }
+}
+
+@media (max-width: 350px){
+    .account-settings .user-profile h3.user-name{
+        font-size: 18px;
+    }
+    .user-profile .profileActions{
+        font-size: 12px;
+    }
+    .account-settings .user-profile .user-avatar img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-avatar .editPhotos {
+        margin-top: -34px;
+        margin-left: 38px;
     }
 }

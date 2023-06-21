@@ -101,6 +101,7 @@
   z-index: 9999;
   right: 10px;
   top: 65px;
+  margin-left: 10px;
 }
 
 #accounts .continueEmail{
