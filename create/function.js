@@ -42,11 +42,13 @@ function dragStartHandler(event) {
     if (type == 'image') {
       var leftSection = document.getElementById('leftSection');
       var hsLeft = document.getElementById('hsLeft');
+      var hsRight = document.getElementById('hsRight');
       var imgElement = document.createElement('img');
       imgElement.src = link;
       editorId.appendChild(imgElement);
       leftSection.style.display = 'none';
-      hsLeft.style.display = 'none';
+      hsLeft.style.display = 'flex';
+      hsRight.style.display = 'flex';
     }else if(type == 'video'){
 
     }
