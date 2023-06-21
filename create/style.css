@@ -103,6 +103,10 @@ html{
 }
 .editContainer .leftSection .uploadsDiv .buttons{
     margin-top: 10px;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .editContainer .leftSection .uploadsDiv .buttons .selectButton{
     transition: all .5s;
@@ -110,7 +114,7 @@ html{
     display: inline;
     background-color: #3a3d40;
     width: 100px;
-    padding: 3px 10px;
+    padding: 5px 12px;
     color: rgb(186, 180, 180);
     border-radius: 5px;
     font-weight: bold;
@@ -161,6 +165,7 @@ html{
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: auto;
+    height: 90%;
 }
 
 .editContainer .leftSection .uploadsDiv .uploadContent{
@@ -281,7 +286,7 @@ html{
 
 @media (max-width: 600px){
     .editContainer .leftSection .uploadsDiv, .rightDiv {
-        
+
     }
     .hideShowRight{
         display: flex;
