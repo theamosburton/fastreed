@@ -45,6 +45,7 @@ function dragStartHandler(event) {
       var hsRight = document.getElementById('hsRight');
       var imgElement = document.createElement('img');
       imgElement.src = link;
+      editorId.innerHTML = '';
       editorId.appendChild(imgElement);
       leftSection.style.display = 'none';
       hsLeft.style.display = 'flex';
