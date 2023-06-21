@@ -1,20 +1,14 @@
 <?php
-$_SERVROOT = '../';
+$_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include ".ht/controller/VISIT.php";
+include "../.ht/controller/VISIT.php";
 
 new createContent();
 
 class createContent{
     public $version;
     public $captureVisit;
-
-    private $adminLogged = false;
-    private $userLogged = false;
-    private $webTitle;
-    private $webDescription;
-    private $webKeywords;
-
+    private $userData;
     private $DB_CONN;
     private $AUTH;
     private $FUNC;
@@ -43,7 +37,7 @@ class createContent{
     <title></title>
     <!-- Gobal CSS -->
     <link rel="shortcut icon" href="/favicon.ico"> 
-    <link href="style.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <link href="style.css?v=<?php $v = new createContent(); echo $v->version; ?>" rel="stylesheet">
     <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
