@@ -313,14 +313,18 @@ html{
         max-width: 350px;
     }
 }
+@media (max-width: 380px){
+    .editContainer .editorSection {
+        justify-content: flex-start;
+        padding-top: 12%;
+    }
+}
+
 @media (max-width: 350px){
     .editContainer .editorSection .editorBox {
         margin: 20px 40px 10px 40px;
         width: calc(9*1.6rem);
         height: calc(16*1.6rem);
     }
-    .editContainer .editorSection {
-        justify-content: flex-start;
-        padding-top: 12%;
-    }
+   
 }
