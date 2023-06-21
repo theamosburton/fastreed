@@ -37,8 +37,8 @@ html{
 }
 .editContainer .editorSection .editorBox{
     margin: 20px 40px 10px 40px;
-    width: calc(9*2rem);
-    height: calc(16*2rem);
+    width: calc(9*1.8rem);
+    height: calc(16*1.8rem);
     box-shadow: 0px 0px 2px 2px grey;
     display: flex;
     justify-content: center;
@@ -49,6 +49,7 @@ html{
     width: 100%;
     height: 100%;
     object-fit: contain;
+    overflow: hidden;
 }
 .editContainer .editorSection .editorBox:hover{
    cursor: pointer;
