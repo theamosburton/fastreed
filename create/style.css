@@ -37,8 +37,8 @@ html{
 }
 .editContainer .editorSection .editorBox{
     margin: 20px 40px 10px 40px;
-    width: calc(9*1.5rem);
-    height: calc(16*1.5rem);
+    width: calc(9*2rem);
+    height: calc(16*2rem);
     box-shadow: 0px 0px 2px 2px grey;
     display: flex;
     justify-content: center;
