@@ -127,5 +127,5 @@ class createContent{
        
     </div>
 </body>
-<script src="function.js"></script>
+<script src="function.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 </html>
