@@ -37,7 +37,7 @@ function dragStartHandler(event) {
   }
 
   function selectMedia(selfId, link, type){
-    // var selfID = document.getElementById(`media${selfId}`);
+    var selfID = document.getElementById(`media${selfId}`);
     var editorId = document.getElementById(`editTab`);
     if (type == 'image') {
       var leftSection = document.getElementById('leftSection');
@@ -47,11 +47,30 @@ function dragStartHandler(event) {
       imgElement.src = link;
       editorId.innerHTML = '';
       editorId.appendChild(imgElement);
-      leftSection.style.display = 'none';
-      hsLeft.style.display = 'flex';
-      hsRight.style.display = 'flex';
+      var screenWidth = window.innerWidth;
+      if (screenWidth < 600) {
+        if (leftSection.style.display = 'flex') {
+          leftSection.style.display = 'none';
+          hsLeft.style.display = 'flex';
+          hsRight.style.display = 'flex';
+        }
+      }
+      
+      
+      
     }else if(type == 'video'){
-
+      var imgElement = document.createElement('video');
+      imgElement.src = link;
+      editorId.innerHTML = '';
+      editorId.appendChild(imgElement);
+      var screenWidth = window.innerWidth;
+      if (screenWidth < 600) {
+        if (leftSection.style.display = 'flex') {
+          leftSection.style.display = 'none';
+          hsLeft.style.display = 'flex';
+          hsRight.style.display = 'flex';
+        }
+      }
     }
 
   }

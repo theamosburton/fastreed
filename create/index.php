@@ -3,15 +3,16 @@ $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include "../.ht/controller/VISIT.php";
 
-new createContent();
+$createContent = new createContent();
 
 class createContent{
     public $version;
     public $captureVisit;
-    private $userData;
-    private $DB_CONN;
-    private $AUTH;
-    private $FUNC;
+    public $userData;
+    protected $DB_CONN;
+    protected $AUTH;
+    protected $FUNC;
+    public $uploadData;
    function __construct() {
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
@@ -20,6 +21,7 @@ class createContent{
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
         $this->userData = new getLoggedData();
+        $this->uploadData = new getUploadData();
     }
 }
 
@@ -54,19 +56,61 @@ class createContent{
                         <i class="fa-solid fa-x whatIcon"></i>
                     </div>
                 </div>
+
                 <div class="uploads">
-                    <div draggable="true" class="uploadContent" id="media1" onclick="selectMedia('1', '/assets/img/thumb3.png', 'image')">
-                        <img  src="/assets/img/thumb3.png">
-                        <div class="fileInfo">
-                            <i class="fa fa-image fa-sm whatIcon"></i>
-                        </div>
-                    </div>
-                    <div class="uploadContent">
-                        <!-- <video src="/assets/VID202306210000000.mp4" draggable="true"></video> -->
-                        <div class="fileInfo">
-                            <i class="fa fa-film fa-sm whatIcon"></i>
-                        </div>
-                    </div>
+                <?php
+                    $id = $createContent->userData->getSelfDetails()['UID'];
+                    $username = $createContent->userData->getSelfDetails()['username'];
+                    $data = $createContent->uploadData->getAllData($id);
+                    $data = array_reverse($data);
+                    $length = count($data);
+                    for($i=0;$i < $length; $i++ ){
+                        $idn = $i+1;
+                        $self = '';
+                        $everyone = '';
+                        $followers = '';
+                        $self = '';
+                        if($data[$i][8] == 'followers'){
+                        $followers = 'selected';
+                        }elseif($data[$i][8] == 'everyone'){
+                        $everyone = 'selected';
+                        }elseif($data[$i][8] == 'self'){
+                            $self = 'selected';
+                        }
+                        $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                        $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                        $whatToShow;
+                        $onclick;
+                        $what = '';
+                        if($data[$i][6] == 'photos'){
+                            $whatToShow = <<<HTML
+                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathImg}', 'image')">
+                                    <img src="{$pathImg}" alt="">
+                            HTML;
+                            $what = 'image';
+                            $icon = 'image';
+                        }elseif($data[$i][6] == 'videos'){
+                            $whatToShow = <<<HTML
+                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathImg}', 'image')">
+                                    <video>
+                                        <source src="{$pathVid}" type="video/mp4">
+                                    </video>
+                            HTML;
+                            $what = 'video';
+                            $icon = 'film';
+                        }
+                        
+                        echo <<<HTML
+                                {$whatToShow}
+                                <div class="fileInfo">
+                                    <i class="fa fa-{$what} fa-sm whatIcon"></i>
+                                </div>
+                            </div>
+                        HTML;
+                    }
+                ?>
+
+                
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
