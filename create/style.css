@@ -288,6 +288,9 @@ html{
     .editContainer .leftSection .uploadsDiv, .rightDiv {
 
     }
+    .editContainer .leftSection .uploadsDiv, .rightDiv{
+        height: 80%;
+    }
     .hideShowRight{
         display: flex;
     }
