@@ -1,7 +1,34 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include "../.ht/controller/VISIT.php";
+include ".ht/controller/VISIT.php";
+
+new createContent();
+
+class createContent{
+    public $version;
+    public $captureVisit;
+
+    private $adminLogged = false;
+    private $userLogged = false;
+    private $webTitle;
+    private $webDescription;
+    private $webKeywords;
+
+    private $DB_CONN;
+    private $AUTH;
+    private $FUNC;
+   function __construct() {
+        // Create an instance to create/save activity
+        $this->captureVisit = new VisitorActivity();
+        $this->FUNC = new BasicFunctions();
+        // Get css,js version from captureVisit
+        $this->version = $this->captureVisit->VERSION;
+        $this->version = implode('.', str_split($this->version, 1));
+        $this->userData = new getLoggedData();
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +43,7 @@ include "../.ht/controller/VISIT.php";
     <title></title>
     <!-- Gobal CSS -->
     <link rel="shortcut icon" href="/favicon.ico"> 
-    <link href="style.css" rel="stylesheet">
+    <link href="style.css?v=<?php echo $this->version;?>" rel="stylesheet">
     <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
