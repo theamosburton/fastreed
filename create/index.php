@@ -83,7 +83,7 @@ class createContent{
             </div>
         </div>
         <div class="hideShow hideShowLeft" id="hsLeft">
-            <i class="fa-solid fa-upload whatIcon" onclick="showSection('leftSection', 'hsLeft', 'lefthideMe')"></i>
+            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'hsLeft', 'lefthideMe')"></i>
         </div>
         <!-- Left Section -->
 

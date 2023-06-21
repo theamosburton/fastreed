@@ -220,7 +220,6 @@ html{
     height: 25px;
     color: #1c1c22;
     background-color: transparent;
-    border: 2px solid #1c1c22;
 }
 .hideShow{
     position: absolute;
@@ -228,14 +227,20 @@ html{
 .hideShowLeft{
     display: none;
     background-color: transparent;
-    left: 10px;
+    left: 0px;
     top: 10px;
+    padding:4px 5px 4px 0px;
+    background-color: blueviolet;
+    border-radius: 0px 20px 20px 0px;
 }
 .hideShowRight{
     display: none;
     background-color: transparent;
-    right :10px;
+    right :0px;
     top: 10px;
+    padding:4px 0px 4px 5px;
+    background-color: aqua;
+    border-radius: 20px 0px 0px 20px;
 }
 
 .lefthideMe, .righthideMe{
