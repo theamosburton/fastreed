@@ -45,7 +45,7 @@ function dragStartHandler(event) {
       var imgElement = document.createElement('img');
       imgElement.src = link;
       editorId.appendChild(imgElement);
-      leftSection.style.display == 'none';
+      leftSection.style.display = 'none';
       hsLeft.style.display = 'none';
     }else if(type == 'video'){
 
