@@ -8,7 +8,8 @@ html{
 }
 
 .editContainer{
-    background-color: #1c1c22;
+    position: relative;
+    
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -24,6 +25,7 @@ html{
 
 .editContainer .rightSection{
     width: 25%;
+    background-color: #1c1c22;
 }
 .editContainer .editorSection{
     width: 50%;
@@ -78,21 +80,26 @@ html{
 
 
 .editContainer .leftSection{
+    background-color: #1c1c22;
+    /* position: absolute; */
     width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding-right: 0!important;
 }
-.editContainer .leftSection .uploadsDiv{
+.editContainer .leftSection .uploadsDiv, .rightDiv{
     margin: 10px;
     width: 100%;
     height: 95%;
     display: flex;
     flex-direction: column;
     position: relative;
-    /* justify-content: center; */
     align-items: center;
+}
+.rightDiv{
+    margin: 0;
+    padding: 10px ;
 }
 .editContainer .leftSection .uploadsDiv .buttons{
     margin-top: 10px;
@@ -123,15 +130,21 @@ html{
 .editContainer .leftSection .uploadsDiv .selectButton:hover{
   cursor: pointer;
 }
-
-.editContainer .leftSection .uploadsDiv .uploadsTitle{
-    background-color: #28282e;
+.editContainer .leftSection .uploadsDiv .uploadHead, .rightDiv .rightHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+}
+.editContainer .leftSection .uploadsDiv .uploadHead .uploadsTitle{
+    background-color: #28282e;
     height: auto;
+    width: 100%;
     display: flex;
     border: 1px solid grey;
     color: grey;
-    padding: 8px 0px;
+    padding: 8px 14px;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
@@ -165,7 +178,7 @@ html{
     left: 5px;
 }
 
-.editContainer .leftSection .uploadsDiv .uploadContent .fileInfo .whatIcon {
+.uploadContent .fileInfo .whatIcon, .hideShow .whatIcon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,24 +206,87 @@ html{
 }
 
 
-@media (max-width: 800px){
+.hideShow .whatIcon{
+    width: 25px;
+    height: 25px;
+    color: #1c1c22;
+    background-color: transparent;
+    border: 2px solid #1c1c22;
+}
+.hideShow{
+    position: absolute;
+}
+.hideShowLeft{
+    display: none;
+    background-color: transparent;
+    left: 10px;
+    top: 10px;
+}
+.hideShowRight{
+    display: none;
+    background-color: transparent;
+    right :10px;
+    top: 10px;
+}
+
+.lefthideMe, .righthideMe{
+    margin-left: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    width: auto;
+    height: auto;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 30px;
+    background-color: #28282e;
+}
+.righthideMe{
+    display: flex;
+}
+.lefthideMe .whatIcon, .righthideMe .whatIcon{
+    color: white;
+}
+.lefthideMe:hover, .righthideMe:hover{
+    background-color: #1c1c22;
+    cursor: pointer;
+}
+
+@media (max-width: 850px){
     .editContainer .leftSection{
         display: none;
+        position: absolute;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .hideShowLeft{
+        display: flex;
+    }
+
+    .editContainer{
+        justify-content: left;
     }
 
     .editContainer .editorSection{
-        width: 70%;
+        width: 60%;
     }
 
     .editContainer .rightSection{
-        width: 30%;
+        width: 40%;
     }
 }
 
 
 @media (max-width: 600px){
+    .hideShowRight{
+        display: flex;
+    }
     .editContainer .leftSection{
         display: none;
+        position: absolute;
+        width: 100%;
     }
 
     .editContainer .editorSection{
@@ -219,5 +295,9 @@ html{
 
     .editContainer .rightSection{
         display: none;
+        position: absolute;
+        right: 0;
+        width: 100%;
+        max-width: 350px;
     }
 }

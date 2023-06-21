@@ -15,3 +15,24 @@ function dragStartHandler(event) {
     event.target.appendChild(img);
   }
   
+
+  function hideSection(id, icon){
+    var sectionID = document.getElementById(`${id}`);
+    sectionID.style.display = 'none';
+    var hsLeft = document.getElementById('hsLeft');
+    var hsRight = document.getElementById('hsRight');
+    hsLeft.style.display = 'flex';
+    hsRight.style.display = 'flex';
+  }
+
+  function showSection(section, id, id2){
+    var Section = document.getElementById(`${section}`);
+    var hsLeft = document.getElementById('hsLeft');
+    var hsRight = document.getElementById('hsRight');
+    var lefthideMe = document.getElementById(`${id2}`);
+    lefthideMe.style.display = 'flex';
+    hsLeft.style.display = 'none';
+    hsRight.style.display = 'none';
+    Section.style.display = 'flex';
+
+  }

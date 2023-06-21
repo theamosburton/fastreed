@@ -45,9 +45,15 @@ class createContent{
 </head>
 <body>
     <div class="editContainer">
-        <div class="sections leftSection">
+        <!-- Left Section -->
+        <div class="sections leftSection" id="leftSection">
             <div class="uploadsDiv">
-                <div class="uploadsTitle">Media Library</div>
+                <div class="uploadHead">
+                    <div class="uploadsTitle">Media Library</div>
+                    <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection', 'hsLeft')">
+                        <i class="fa-solid fa-x whatIcon"></i>
+                    </div>
+                </div>
                 <div class="uploads">
                     <div draggable="true" class="uploadContent">
                         <img  src="/assets/img/port11.png">
@@ -73,13 +79,15 @@ class createContent{
                 <div class="buttons">
                     <div class="selectButton uploadNew">Upload New</div>
                     <div class="selectButton">Select</div>
-                    
                 </div>
-                
             </div>
         </div>
+        <div class="hideShow hideShowLeft" id="hsLeft">
+            <i class="fa-solid fa-upload whatIcon" onclick="showSection('leftSection', 'hsLeft', 'lefthideMe')"></i>
+        </div>
+        <!-- Left Section -->
 
-
+        <!-- Editor Section -->
         <div class="sections editorSection">
             <div class="editorBox" id="editTab" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
                 <span> Add media</span>
@@ -92,8 +100,25 @@ class createContent{
                 <div class="navs frontArrow"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
             </div>
         </div>
-        <div class="sections rightSection">
+        <!-- Editor Section -->
+
+        <!-- Right Section -->
+        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'hsRight', 'righthideMe')">
+            <i class="fa-solid fa-bars whatIcon"></i>
         </div>
+        <div class="sections rightSection" id="rightSection">
+            <div class="rightDiv">
+                <div class="rightHead">
+                    <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection', 'hsRight')">
+                        <i class="fa-solid fa-x whatIcon"></i>
+                    </div>
+                </div>
+            </div>
+           
+
+        </div>
+        <!-- Right Section -->
+       
     </div>
 </body>
 <script src="function.js"></script>
