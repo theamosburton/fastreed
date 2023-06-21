@@ -55,8 +55,8 @@ class createContent{
                     </div>
                 </div>
                 <div class="uploads">
-                    <div draggable="true" class="uploadContent" id="media1" onclick="selectMedia('1', '/assets/img/port11.png', 'image')">
-                        <img  src="/assets/img/port11.png">
+                    <div draggable="true" class="uploadContent" id="media1" onclick="selectMedia('1', '/assets/img/thumb3.png', 'image')">
+                        <img  src="/assets/img/thumb3.png">
                         <div class="fileInfo">
                             <i class="fa fa-image fa-sm whatIcon"></i>
                         </div>

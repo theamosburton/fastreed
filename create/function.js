@@ -37,12 +37,16 @@ function dragStartHandler(event) {
   }
 
   function selectMedia(selfId, link, type){
-    var selfID = document.getElementById(`media${selfId}`);
+    // var selfID = document.getElementById(`media${selfId}`);
     var editorId = document.getElementById(`editTab`);
     if (type == 'image') {
+      var leftSection = document.getElementById('leftSection');
+      var hsLeft = document.getElementById('hsLeft');
       var imgElement = document.createElement('img');
       imgElement.src = link;
       editorId.appendChild(imgElement);
+      leftSection.style.display == 'none';
+      hsLeft.style.display = 'none';
     }else if(type == 'video'){
 
     }
