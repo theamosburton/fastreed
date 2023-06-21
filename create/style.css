@@ -281,7 +281,7 @@ html{
 
 @media (max-width: 600px){
     .editContainer .leftSection .uploadsDiv, .rightDiv {
-        height: 100%;
+        
     }
     .hideShowRight{
         display: flex;
