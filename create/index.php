@@ -62,7 +62,7 @@ class createContent{
                         </div>
                     </div>
                     <div class="uploadContent">
-                        <video src="/assets/VID202306210000000.mp4" draggable="true"></video>
+                        <!-- <video src="/assets/VID202306210000000.mp4" draggable="true"></video> -->
                         <div class="fileInfo">
                             <i class="fa fa-film fa-sm whatIcon"></i>
                         </div>
