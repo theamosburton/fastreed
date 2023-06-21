@@ -24,7 +24,6 @@ html{
 }
 
 .editContainer .rightSection{
-    animation: grow .5s ease forwards;
     width: 25%;
     background-color: #1c1c22;
 }
@@ -38,15 +37,19 @@ html{
 }
 .editContainer .editorSection .editorBox{
     margin: 20px 40px 10px 40px;
-    width: calc(9*2rem);
-    height: calc(16*2rem);
+    width: calc(9*1.5rem);
+    height: calc(16*1.5rem);
     box-shadow: 0px 0px 2px 2px grey;
     display: flex;
     justify-content: center;
     align-items: center;
     color: grey;
 }
-
+.editContainer .editorSection .editorBox img, .editContainer .editorSection .editorBox video{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 .editContainer .editorSection .editorBox:hover{
    cursor: pointer;
 }
@@ -81,7 +84,6 @@ html{
 
 
 .editContainer .leftSection{
-    animation: grow .5s ease forwards;
     background-color: #1c1c22;
     /* position: absolute; */
     width: 25%;
@@ -90,14 +92,7 @@ html{
     /* align-items: center; */
     padding-right: 0!important;
 }
-@keyframes grow {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
+
 .editContainer .leftSection .uploadsDiv, .rightDiv{
     margin: 10px;
     width: 100%;
@@ -147,7 +142,7 @@ html{
 .editContainer .leftSection .uploadsDiv .uploadHead, .rightDiv .rightHead{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     width: 100%;
 }
@@ -267,7 +262,8 @@ html{
     background-color: #28282e;
 }
 .righthideMe{
-    display: flex;
+    display: none;
+    margin: 0 0 10px 0;
 }
 .lefthideMe .whatIcon, .righthideMe .whatIcon{
     color: white;
@@ -277,7 +273,32 @@ html{
     cursor: pointer;
 }
 
+.rightDiv .rightHead{
+    overflow: auto;
+    border-bottom: 1px solid grey;
+}
+.rightHead .buttonsDiv{
+    width: 80%;
+    display: flex;
+    
+    padding-bottom: 10px;
+}
+.rightHead .buttonsDiv .buttons{
+    padding: 6px 13px;
+    border: 1px solid grey;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: grey;
+}
+.rightHead .buttonsDiv .buttons:hover{
+    background-color: #28282e;
+    cursor: pointer;
+}
 @media (max-width: 850px){
+    .editContainer .leftSection{
+        animation: grow .5s ease forwards;
+    }
     .editContainer .leftSection{
         display: none;
         position: absolute;
@@ -304,6 +325,10 @@ html{
 
 
 @media (max-width: 600px){
+   
+    .editContainer .rightSection{
+        animation: grow .5s ease forwards;
+    }
     .editContainer .leftSection .uploadsDiv, .rightDiv {
 
     }
@@ -329,6 +354,8 @@ html{
     }
 }
 @media (max-width: 400px){
+   
+    
     .editContainer .editorSection {
         justify-content: flex-start;
         padding-top: 12%;
@@ -343,3 +370,13 @@ html{
     }
    
 }
+
+
+@keyframes grow {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }

@@ -55,7 +55,7 @@ class createContent{
                     </div>
                 </div>
                 <div class="uploads">
-                    <div draggable="true" class="uploadContent">
+                    <div draggable="true" class="uploadContent" id="media1" onclick="selectMedia('1', '/assets/img/port11.png', 'image')">
                         <img  src="/assets/img/port11.png">
                         <div class="fileInfo">
                             <i class="fa fa-image fa-sm whatIcon"></i>
@@ -90,7 +90,7 @@ class createContent{
         <!-- Editor Section -->
         <div class="sections editorSection">
             <div class="editorBox" id="editTab" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
-                <span> Add media</span>
+                <!-- <span > Add media</span> -->
             </div>
             <div class="editorNav">
                 <div class="navs backArrow"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
@@ -109,8 +109,14 @@ class createContent{
         <div class="sections rightSection" id="rightSection">
             <div class="rightDiv">
                 <div class="rightHead">
+                    
                     <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection', 'hsRight')">
                         <i class="fa-solid fa-x whatIcon"></i>
+                    </div>
+                    <div class="buttonsDiv">
+                        <div class="buttons">Draft</div>
+                        <div class="buttons">Save</div>
+                        <div class="buttons">Publish</div>
                     </div>
                 </div>
             </div>

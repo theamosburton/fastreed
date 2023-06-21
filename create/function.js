@@ -34,5 +34,17 @@ function dragStartHandler(event) {
     hsLeft.style.display = 'none';
     hsRight.style.display = 'none';
     Section.style.display = 'flex';
+  }
+
+  function selectMedia(selfId, link, type){
+    var selfID = document.getElementById(`media${selfId}`);
+    var editorId = document.getElementById(`editTab`);
+    if (type == 'image') {
+      var imgElement = document.createElement('img');
+      imgElement.src = link;
+      editorId.appendChild(imgElement);
+    }else if(type == 'video'){
+
+    }
 
   }
