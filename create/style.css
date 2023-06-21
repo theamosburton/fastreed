@@ -313,7 +313,7 @@ html{
         max-width: 350px;
     }
 }
-@media (max-width: 380px){
+@media (max-width: 400px){
     .editContainer .editorSection {
         justify-content: flex-start;
         padding-top: 12%;
