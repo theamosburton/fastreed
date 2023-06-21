@@ -1,0 +1,223 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    overflow: hidden;
+    
+}
+
+.editContainer{
+    background-color: #1c1c22;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+.editContainer .sections{
+    height: 100vh;
+}
+
+.editContainer .rightSection{
+    width: 25%;
+}
+.editContainer .editorSection{
+    width: 50%;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.editContainer .editorSection .editorBox{
+    margin: 20px 40px 10px 40px;
+    width: calc(9*2rem);
+    height: calc(16*2rem);
+    box-shadow: 0px 0px 2px 2px grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+}
+
+.editContainer .editorSection .editorBox:hover{
+   cursor: pointer;
+}
+
+.editContainer .editorSection .editorNav{
+    margin-bottom: 10px;
+    width: calc(10*25px);
+    display: flex;
+    flex-direction: row;
+}
+.editContainer .editorSection .editorNav .navs{
+    margin: 0px 8px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .7s;
+}
+.editContainer .editorSection .editorNav .navs:hover{
+    background-color: silver;
+    cursor: pointer;
+}
+
+.editContainer .editorSection .editorNav .deleteAdd:hover{
+    background-color: transparent;
+    color: rgb(196, 61, 11);
+}
+
+
+
+
+.editContainer .leftSection{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0!important;
+}
+.editContainer .leftSection .uploadsDiv{
+    margin: 10px;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* justify-content: center; */
+    align-items: center;
+}
+.editContainer .leftSection .uploadsDiv .buttons{
+    margin-top: 10px;
+}
+.editContainer .leftSection .uploadsDiv .buttons .selectButton{
+    transition: all .5s;
+    text-align: center;
+    display: inline;
+    background-color: #3a3d40;
+    width: 100px;
+    padding: 3px 10px;
+    color: rgb(186, 180, 180);
+    border-radius: 5px;
+    font-weight: bold;
+    margin-left: 5px;
+    width: auto;
+}
+
+.editContainer .leftSection .uploadsDiv .buttons .uploadNew{
+    background-color: aqua;
+    color: #28282e;
+}
+
+.editContainer .leftSection .uploadsDiv .buttons .uploadNew:hover{
+    background-color: rgb(8, 166, 166);
+}
+
+.editContainer .leftSection .uploadsDiv .selectButton:hover{
+  cursor: pointer;
+}
+
+.editContainer .leftSection .uploadsDiv .uploadsTitle{
+    background-color: #28282e;
+    width: 100%;
+    height: auto;
+    display: flex;
+    border: 1px solid grey;
+    color: grey;
+    padding: 8px 0px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+.editContainer .leftSection .uploadsDiv .uploads{
+    background-color: #28282e;
+    width: 100%;
+    display: flex;
+    color: grey;
+    padding: 8px 0px;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.editContainer .leftSection .uploadsDiv .uploadContent{
+    width: 44%;
+    height: 100px;
+    margin: 2%;
+    border: 1px solid grey;
+    display: inline-block;
+    position: relative;
+}
+
+.editContainer .leftSection .uploadsDiv .uploadContent .fileInfo{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.editContainer .leftSection .uploadsDiv .uploadContent .fileInfo .whatIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 21px;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3a3d40;
+    color: white;
+}
+
+
+
+.editContainer .leftSection .uploadsDiv .uploadContent img, .editContainer .leftSection .uploadsDiv .uploadContent video {
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    cursor:grab;
+}
+.editContainer .leftSection .uploadsDiv .uploadContent img:hover, .editContainer .leftSection .uploadsDiv .uploadContent video:hover{
+    cursor: grab;
+}
+
+
+@media (max-width: 800px){
+    .editContainer .leftSection{
+        display: none;
+    }
+
+    .editContainer .editorSection{
+        width: 70%;
+    }
+
+    .editContainer .rightSection{
+        width: 30%;
+    }
+}
+
+
+@media (max-width: 600px){
+    .editContainer .leftSection{
+        display: none;
+    }
+
+    .editContainer .editorSection{
+        width: 100%;
+    }
+
+    .editContainer .rightSection{
+        display: none;
+    }
+}

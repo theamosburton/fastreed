@@ -128,8 +128,8 @@ class getFastreedContent {
                 $basePath = dirname($_SERVER['PHP_SELF']);
                 $baseUrl = $protocol . '://' . $host . $basePath . '/';
 
-                $forDomain = ($baseUrl == 'https://'.DOMAIN.'/webstories' || $baseUrl == 'https://'.DOMAIN.'/posts');
-                $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/webstories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
+                $forDomain = ($baseUrl == 'https://'.DOMAIN.'/web-stories' || $baseUrl == 'https://'.DOMAIN.'/posts');
+                $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/web-stories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
 
 
                 if ($forDomain ||  $forDomainAlias) {
