@@ -85,7 +85,7 @@ html{
     width: 25%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     padding-right: 0!important;
 }
 .editContainer .leftSection .uploadsDiv, .rightDiv{
@@ -289,7 +289,7 @@ html{
 
     }
     .editContainer .leftSection .uploadsDiv, .rightDiv{
-        height: 80%;
+        /* height: 80%; */
     }
     .hideShowRight{
         display: flex;
