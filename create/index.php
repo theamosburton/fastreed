@@ -49,7 +49,7 @@ class createContent{
         <div class="sections leftSection" id="leftSection">
             <div class="uploadsDiv">
                 <div class="uploadHead">
-                    <div class="uploadsTitle">Media Library</div>
+                    <div class="uploadsTitle">Upload New &nbsp;&nbsp;<i class="fa-solid fa-arrow-up-from-bracket"></i></div>
                     <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection', 'hsLeft')">
                         <i class="fa-solid fa-x whatIcon"></i>
                     </div>
@@ -79,10 +79,6 @@ class createContent{
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
                     <div class="uploadContent"></div>
-                </div>
-                <div class="buttons">
-                    <div class="selectButton uploadNew">Upload New</div>
-                    <div class="selectButton">Select</div>
                 </div>
             </div>
         </div>

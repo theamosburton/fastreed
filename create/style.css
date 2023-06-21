@@ -153,8 +153,12 @@ html{
     align-items: center;
     margin-bottom: 10px;
     border-radius: 20px;
+    font-weight: bold;
 }
-
+.editContainer .leftSection .uploadsDiv .uploadHead .uploadsTitle:hover{
+    background-color: #1c1c22;
+    cursor: pointer;
+}
 .editContainer .leftSection .uploadsDiv .uploads{
     background-color: #28282e;
     width: 100%;
