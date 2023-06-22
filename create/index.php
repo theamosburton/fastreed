@@ -57,7 +57,7 @@ class createContent{
                     </div>
                 </div>
 
-                <div class="uploads">
+                
                 <?php
                     $id = $createContent->userData->getSelfDetails()['UID'];
                     $username = $createContent->userData->getSelfDetails()['username'];
@@ -101,16 +101,18 @@ class createContent{
                         }
                         
                         echo <<<HTML
+                            <div class="uploads">
                                 {$whatToShow}
-                                <div class="fileInfo">
-                                    <i class="fa fa-{$what} fa-sm whatIcon"></i>
+                                    <div class="fileInfo">
+                                        <i class="fa fa-{$what} fa-sm whatIcon"></i>
+                                    </div>
                                 </div>
                             </div>
                         HTML;
                     }
                 ?>
+
                 
-                </div>
             </div>
         </div>
         <div class="hideShow hideShowLeft" id="hsLeft">
