@@ -1,4 +1,26 @@
-console.log(uploads);
+document.onload(function(){
+  var uploadsCount = uploads.length;
+  for (let u = 0; u <uploadsCount; u++) {
+    var link = uploads.up`${u}`.link;
+    var type = uploads.up`${u}`.type;
+    if (type == 'photos') {
+      fetch(link)
+        .then(response => response.blob())
+        .then(blob => {
+          var imgURL = URL.createObjectURL(blob);
+          console.log(imgURL);
+        });
+
+    }else if(type == 'videos'){
+      fetch(link)
+      .then(response => response.blob())
+      .then(blob => {
+        var videoURL = URL.createObjectURL(blob);
+        console.log(videoURL);
+      });
+    }
+  }
+});
 
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
