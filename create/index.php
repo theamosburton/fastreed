@@ -45,7 +45,7 @@ class createContent{
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <script>
-        var uploads;
+        var uploads = [];
     <?php
         $id = $createContent->userData->getSelfDetails()['UID'];
         $username = $createContent->userData->getSelfDetails()['username'];
@@ -82,6 +82,7 @@ class createContent{
             echo 'uploads['.$i.'].link = "'.$path.'";';
             echo "\n";
             echo 'uploads['.$i.'].type = "'.$data[$i][6].'";';
+            echo "\n";
         }
     ?>
     
