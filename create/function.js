@@ -39,10 +39,10 @@ function dragStartHandler(event) {
   function selectMedia(selfId, link, type){
     var selfID = document.getElementById(`media${selfId}`);
     var editorId = document.getElementById(`editTab`);
+    var hsLeft = document.getElementById('hsLeft');
+    var hsRight = document.getElementById('hsRight');
     if (type == 'image') {
       var leftSection = document.getElementById('leftSection');
-      var hsLeft = document.getElementById('hsLeft');
-      var hsRight = document.getElementById('hsRight');
       var imgElement = document.createElement('img');
       imgElement.src = link;
       editorId.innerHTML = '';
