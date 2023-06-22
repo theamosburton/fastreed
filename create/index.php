@@ -45,6 +45,7 @@ class createContent{
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <script>
+        var uploads;
     <?php
         $id = $createContent->userData->getSelfDetails()['UID'];
         $username = $createContent->userData->getSelfDetails()['username'];
@@ -77,9 +78,9 @@ class createContent{
                 $what = 'video';
                 $icon = 'film';
             }
-            
-            echo 'var upload'.$i.' = '.' " '.$path.'";';
-            echo "\n";
+
+            echo 'uploads.['.$i.'].link = "'.$path.'"; \n
+             uploads.['.$i.'].type = "'.$data[$i][6].'";';
         }
     ?>
     
