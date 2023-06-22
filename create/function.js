@@ -56,15 +56,18 @@ function dragStartHandler(event) {
       }
     }else if(type == 'video'){
       var videoElement = document.createElement('video');
-      // var link = 'your_video_url_here';
-
-      videoElement.src = `${link}`;
+      var sourceElement = document.createElement('source');
+      sourceElement.src = link;
+      sourceElement.type = 'video/mp4';
+      videoElement.appendChild(sourceElement);
+      
       videoElement.addEventListener('loadeddata', function() {
-        videoElement.src = videoElement.currentSrc;
+        videoElement.src = link;
       });
-
+      
       editorId.innerHTML = '';
       editorId.appendChild(videoElement);
+      
 
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
