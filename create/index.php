@@ -78,7 +78,7 @@ class createContent{
                 $what = 'video';
                 $icon = 'film';
             }
-
+            echo 'uploads.up'.$i.' = '.'{};';
             echo 'uploads.up'.$i.'.link = "'.$path.'";';
             echo "\n";
             echo 'uploads.up'.$i.'.type = "'.$data[$i][6].'";';
