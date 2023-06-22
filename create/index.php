@@ -92,7 +92,11 @@ class createContent{
                         }elseif($data[$i][6] == 'videos'){
                             $whatToShow = <<<HTML
                                 <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
-                                    <video><source src="{$pathVid}" type="video/mp4"></video>
+                                    <video>
+                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="1000">
+                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="720">
+                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="480">
+                                    </video>
                             HTML;
                             $what = 'video';
                             $icon = 'film';
