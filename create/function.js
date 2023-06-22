@@ -84,6 +84,7 @@ var uploadsDataClass = new uploadsData();
       editorId.removeChild(editorId.firstChild);
     }
     if (type == 'image') {
+      console.log('h');
       var imageElement = document.createElement('img');
       imageElement.src = link;
       editorId.appendChild(imageElement);
