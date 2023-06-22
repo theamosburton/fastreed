@@ -55,7 +55,8 @@ class getFastreedContent {
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
                 }
-               
+                header('Cache-Control: max-age=2592000'); // Cache for 1 hour
+                header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2592000).' GMT'); // Cache for 1 hour
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline; filename=favicon.ico');
