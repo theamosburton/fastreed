@@ -44,6 +44,46 @@ class createContent{
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+    <?php
+        $id = $createContent->userData->getSelfDetails()['UID'];
+        $username = $createContent->userData->getSelfDetails()['username'];
+        $data = $createContent->uploadData->getAllData($id);
+        $data = array_reverse($data);
+        $length = count($data);
+        for($i=0;$i < $length; $i++ ){
+            $idn = $i+1;
+            $self = '';
+            $everyone = '';
+            $followers = '';
+            $self = '';
+            if($data[$i][8] == 'followers'){
+            $followers = 'selected';
+            }elseif($data[$i][8] == 'everyone'){
+            $everyone = 'selected';
+            }elseif($data[$i][8] == 'self'){
+                $self = 'selected';
+            }
+            
+            $whatToShow;
+            $onclick;
+            $what = '';
+            if($data[$i][6] == 'photos'){
+                $path = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                $what = 'image';
+                $icon = 'image';
+            }elseif($data[$i][6] == 'videos'){
+                $path = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                $what = 'video';
+                $icon = 'film';
+            }
+            
+            echo 'var upload'.$i.' = '.' " '.$path.'";';
+        }
+    ?>
+    
+                    
+</script>
 </head>
 <body>
     <div class="editContainer">
