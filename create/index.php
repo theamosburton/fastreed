@@ -57,8 +57,8 @@ class createContent{
                     </div>
                 </div>
 
-                
-                <?php
+                <div class="uploads">
+                    <?php
                     $id = $createContent->userData->getSelfDetails()['UID'];
                     $username = $createContent->userData->getSelfDetails()['username'];
                     $data = $createContent->uploadData->getAllData($id);
@@ -92,27 +92,32 @@ class createContent{
                         }elseif($data[$i][6] == 'videos'){
                             $whatToShow = <<<HTML
                                 <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
-                                    <video>
-                                        <source src="{$pathVid}" type="video/mp4">
-                                    </video>
+                                    <video><source src="{$pathVid}" type="video/mp4"></video>
                             HTML;
                             $what = 'video';
                             $icon = 'film';
                         }
                         
                         echo <<<HTML
-                            <div class="uploads">
                                 {$whatToShow}
                                     <div class="fileInfo">
                                         <i class="fa fa-{$what} fa-sm whatIcon"></i>
                                     </div>
                                 </div>
-                            </div>
                         HTML;
                     }
-                ?>
+                    ?>
 
+                    <div class="uploads">
+                        <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
+                            <video><source src="{$pathVid}" type="video/mp4"></video>
+                            <div class="fileInfo">
+                                <i class="fa fa-{$what} fa-sm whatIcon"></i>
+                            </div>
+                        </div>
+                    </div>
                 
+                </div>
             </div>
         </div>
         <div class="hideShow hideShowLeft" id="hsLeft">
