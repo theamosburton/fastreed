@@ -175,7 +175,7 @@ html{
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: auto;
-    height: 90%;
+    max-height: 90%;
 }
 
 .editContainer .leftSection .uploadsDiv .uploadContent{
