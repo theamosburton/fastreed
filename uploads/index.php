@@ -60,7 +60,7 @@ class getFastreedContent {
                 header('Content-Type: '.$contentType);
                 header('Content-Length: ' . filesize($filepath));
                 header('Content-Disposition: inline; filename=favicon.ico');
-                // ob_clean();
+                ob_clean();
                 flush();
                 readfile($filepath);
             }
