@@ -1,4 +1,4 @@
-document.onload(function(){
+window.onload = function() {
   var uploadsCount = uploads.length;
   for (let u = 0; u <uploadsCount; u++) {
     var link = uploads.up`${u}`.link;
@@ -20,7 +20,7 @@ document.onload(function(){
       });
     }
   }
-});
+};
 
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
