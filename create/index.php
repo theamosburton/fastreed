@@ -94,83 +94,21 @@ class createContent{
     <div class="editContainer">
         <!-- Left Section -->
         <div class="sections leftSection" id="leftSection">
-            <div class="uploadsDiv">
+            <div class="uploadsDiv" id="uploadDiv">
                 <div class="uploadHead">
                     <div class="uploadsTitle">Upload New &nbsp;&nbsp;<i class="fa-solid fa-arrow-up-from-bracket"></i></div>
-                    <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection', 'hsLeft')">
+                    <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
                         <i class="fa-solid fa-x whatIcon"></i>
                     </div>
                 </div>
-
-                <div class="uploads">
-                    <?php
-                    $id = $createContent->userData->getSelfDetails()['UID'];
-                    $username = $createContent->userData->getSelfDetails()['username'];
-                    $data = $createContent->uploadData->getAllData($id);
-                    $data = array_reverse($data);
-                    $length = count($data);
-                    for($i=0;$i < $length; $i++ ){
-                        $idn = $i+1;
-                        $self = '';
-                        $everyone = '';
-                        $followers = '';
-                        $self = '';
-                        if($data[$i][8] == 'followers'){
-                        $followers = 'selected';
-                        }elseif($data[$i][8] == 'everyone'){
-                        $everyone = 'selected';
-                        }elseif($data[$i][8] == 'self'){
-                            $self = 'selected';
-                        }
-                        $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
-                        $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
-                        $whatToShow;
-                        $onclick;
-                        $what = '';
-                        if($data[$i][6] == 'photos'){
-                            $whatToShow = <<<HTML
-                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathImg}', 'image')">
-                                    <img src="{$pathImg}" alt="">
-                            HTML;
-                            $what = 'image';
-                            $icon = 'image';
-                        }elseif($data[$i][6] == 'videos'){
-                            $whatToShow = <<<HTML
-                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
-                                    <video>
-                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="1000">
-                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="720">
-                                        <source src="{$pathVid}" type="video/mp4" data-bitrate="480">
-                                    </video>
-                            HTML;
-                            $what = 'video';
-                            $icon = 'film';
-                        }
-                        
-                        echo <<<HTML
-                                {$whatToShow}
-                                    <div class="fileInfo">
-                                        <i class="fa fa-{$what} fa-sm whatIcon"></i>
-                                    </div>
-                                </div>
-                        HTML;
-                    }
-                    ?>
-
-                    <div class="uploads">
-                        <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
-                            <!-- <video><source src="{$pathVid}" type="video/mp4"></video> -->
-                            <div class="fileInfo">
-                                <i class="fa fa-{$what} fa-sm whatIcon"></i>
-                            </div>
-                        </div>
-                    </div>
-                
+                <div class="uploads" id="uploads">
+                    <!-- Uploads will be set here -->
                 </div>
+                
             </div>
         </div>
         <div class="hideShow hideShowLeft" id="hsLeft">
-            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'hsLeft', 'lefthideMe')"></i>
+            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'lefthideMe')"></i>
 
         </div>
         <!-- Left Section -->
@@ -191,14 +129,14 @@ class createContent{
         <!-- Editor Section -->
 
         <!-- Right Section -->
-        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'hsRight', 'righthideMe')">
+        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'righthideMe')">
             <i class="fa-solid fa-bars whatIcon"></i>
         </div>
         <div class="sections rightSection" id="rightSection">
             <div class="rightDiv">
                 <div class="rightHead">
                     
-                    <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection', 'hsRight')">
+                    <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
                         <i class="fa-solid fa-x whatIcon"></i>
                     </div>
                     <div class="buttonsDiv">

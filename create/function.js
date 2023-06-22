@@ -1,46 +1,61 @@
-window.onload = function() {
-  var uploadsCount = uploads.length;
-  for (let u = 0; u <uploadsCount; u++) {
-    var link = uploads.up`${u}`.link;
-    var type = uploads.up`${u}`.type;
-    if (type == 'photos') {
-      fetch(link)
-        .then(response => response.blob())
-        .then(blob => {
-          var imgURL = URL.createObjectURL(blob);
-          console.log(imgURL);
-        });
+class uploadsData{
+  constructor(){
+    window.onload = function() {
+      this.uploadsData = {};
+      this.uploadsCount = Object.keys(uploads).length;
+      for (let u = 0; u < this.uploadsCount; u++) {
+        var ulink = uploads['up' + u].link;
+        var type = uploads['up' + u].type;
+        if (type == 'photos') {
+          const fetchPhtos = async()  =>{
+            fetch(ulink)
+            .then(response => response.blob())
+            .then(blob => {
+              var imgURL = URL.createObjectURL(blob);
+              this.uploadsData['upload' + u] = {};
+              this.uploadsData['upload' + u].orglink = ulink;
+              var uploadedDiv = document.getElementById('uploads');
+              uploadedDiv.innerHTML += ` 
+              <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image')">
+                  <img src="${imgURL}">
+                  <div class="fileInfo">
+                      <i class="fa fa-image fa-sm whatIcon"></i>
+                  </div>
+              </div>
+              `;
+            });
+          }
+          fetchPhtos();
+        }else if(type == 'videos'){
+          const fetchVideos = async() =>{
+            fetch(ulink)
+            .then(response => response.blob())
+            .then(blob => {
+              var videoURL = URL.createObjectURL(blob);
+              this.uploadsData['upload' + u] = {};
+              this.uploadsData['upload' + u].orglink = ulink;
+              var uploadedDiv = document.getElementById('uploads');
+              uploadedDiv.innerHTML += `
+                  <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video')">
+                      <video><source src="${videoURL}" type="video/mp4"></video>
+                      <div class="fileInfo">
+                          <i class="fa fa-video fa-sm whatIcon"></i>
+                      </div>
+                  </div>
+              `;
+            });
+          }
+          fetchVideos();
+        }
+      }
+    };
+  }
+}
 
-    }else if(type == 'videos'){
-      fetch(link)
-      .then(response => response.blob())
-      .then(blob => {
-        var videoURL = URL.createObjectURL(blob);
-        console.log(videoURL);
-      });
-    }
-  }
-};
+var uploadsDataClass = new uploadsData();
 
-function dragStartHandler(event) {
-    event.dataTransfer.setData("text/plain", event.target.id);
-  }
-  
-  function dragOverHandler(event) {
-    event.preventDefault();
-  }
-  
-  function dropHandler(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text/plain");
-    const draggedElement = document.getElementById(data);
-    const img = draggedElement.querySelector("img");
-    event.target.innerHTML = "";
-    event.target.appendChild(img);
-  }
-  
 
-  function hideSection(id, icon){
+  function hideSection(id){
     var sectionID = document.getElementById(`${id}`);
     sectionID.style.display = 'none';
     var hsLeft = document.getElementById('hsLeft');
@@ -49,7 +64,7 @@ function dragStartHandler(event) {
     hsRight.style.display = 'flex';
   }
 
-  function showSection(section, id, id2){
+  function showSection(section, id2){
     var Section = document.getElementById(`${section}`);
     var hsLeft = document.getElementById('hsLeft');
     var hsRight = document.getElementById('hsRight');
@@ -60,26 +75,16 @@ function dragStartHandler(event) {
     Section.style.display = 'flex';
   }
 
-  function selectMedia(selfId, link, type){
+  function selectMedia(link, type){
     var editorId = document.getElementById(`editTab`);
     var hsLeft = document.getElementById('hsLeft');
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
     if (type == 'image') {
-
-
       var imageElement = document.createElement('img');
-
-      fetch(link)
-        .then(response => response.blob())
-        .then(blob => {
-          var imgURL = URL.createObjectURL(blob);
-          imageElement.src = imgURL;
-          editorId.innerHTML = '';
-          editorId.appendChild(imageElement);
-        });
-
-
+      imageElement.src = link;
+      editorId.innerHTML = '';
+      editorId.appendChild(imageElement);
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
         if (leftSection.style.display = 'flex') {
@@ -88,27 +93,14 @@ function dragStartHandler(event) {
           hsRight.style.display = 'flex';
         }
       }
+
+
     }else if(type == 'video'){
       var videoElement = document.createElement('video');
-      var sourceElement = document.createElement('source');
-
-      fetch(link)
-        .then(response => response.blob())
-        .then(blob => {
-          var videoURL = URL.createObjectURL(blob);
-          sourceElement.src = videoURL;
-          sourceElement.type = 'video/mp4';
-      
-          // Append the source element to the video element
-          videoElement.appendChild(sourceElement);
-      
-          // Append the video element to the editorId element
-          editorId.innerHTML = '';
-          editorId.appendChild(videoElement);
-        });
-      
-      
-
+      videoElement.src = link;
+      videoElement.type = 'video/mp4';
+      editorId.innerHTML = '';
+      editorId.appendChild(videoElement);
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
         if (leftSection.style.display = 'flex') {
