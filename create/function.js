@@ -42,10 +42,20 @@ function dragStartHandler(event) {
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
     if (type == 'image') {
-      var imgElement = document.createElement('img');
-      imgElement.src = link;
-      editorId.innerHTML = '';
-      editorId.appendChild(imgElement);
+
+
+      var imageElement = document.createElement('img');
+
+      fetch(link)
+        .then(response => response.blob())
+        .then(blob => {
+          var imgURL = URL.createObjectURL(blob);
+          imageElement.src = imgURL;
+          editorId.innerHTML = '';
+          editorId.appendChild(imageElement);
+        });
+
+
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
         if (leftSection.style.display = 'flex') {
@@ -57,12 +67,11 @@ function dragStartHandler(event) {
     }else if(type == 'video'){
       var videoElement = document.createElement('video');
       var sourceElement = document.createElement('source');
-      
+
       fetch(link)
         .then(response => response.blob())
         .then(blob => {
           var videoURL = URL.createObjectURL(blob);
-          videoElement.src = videoURL;
           sourceElement.src = videoURL;
           sourceElement.type = 'video/mp4';
       
