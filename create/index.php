@@ -79,9 +79,9 @@ class createContent{
                 $icon = 'film';
             }
 
-            echo 'uploads.'.$i.'.link = "'.$path.'";';
+            echo 'uploads.up'.$i.'.link = "'.$path.'";';
             echo "\n";
-            echo 'uploads.'.$i.'.type = "'.$data[$i][6].'";';
+            echo 'uploads.up'.$i.'.type = "'.$data[$i][6].'";';
             echo "\n";
         }
     ?>
