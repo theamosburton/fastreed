@@ -57,16 +57,23 @@ function dragStartHandler(event) {
     }else if(type == 'video'){
       var videoElement = document.createElement('video');
       var sourceElement = document.createElement('source');
-      sourceElement.src = link;
-      sourceElement.type = 'video/mp4';
-      videoElement.appendChild(sourceElement);
       
-      videoElement.addEventListener('loadeddata', function() {
-        videoElement.src = link;
-      });
+      fetch(link)
+        .then(response => response.blob())
+        .then(blob => {
+          var videoURL = URL.createObjectURL(blob);
+          videoElement.src = videoURL;
+          sourceElement.src = videoURL;
+          sourceElement.type = 'video/mp4';
       
-      editorId.innerHTML = '';
-      editorId.appendChild(videoElement);
+          // Append the source element to the video element
+          videoElement.appendChild(sourceElement);
+      
+          // Append the video element to the editorId element
+          editorId.innerHTML = '';
+          editorId.appendChild(videoElement);
+        });
+      
       
 
       var screenWidth = window.innerWidth;
