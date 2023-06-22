@@ -55,9 +55,6 @@ function dragStartHandler(event) {
           hsRight.style.display = 'flex';
         }
       }
-      
-      
-      
     }else if(type == 'video'){
       var imgElement = document.createElement('video');
       imgElement.src = link;

@@ -91,7 +91,7 @@ class createContent{
                             $icon = 'image';
                         }elseif($data[$i][6] == 'videos'){
                             $whatToShow = <<<HTML
-                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathImg}', 'image')">
+                                <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathImg}', 'video')">
                                     <video>
                                         <source src="{$pathVid}" type="video/mp4">
                                     </video>
@@ -109,20 +109,6 @@ class createContent{
                         HTML;
                     }
                 ?>
-
-                
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
-                    <div class="uploadContent"></div>
                 </div>
             </div>
         </div>
