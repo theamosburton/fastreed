@@ -78,7 +78,7 @@ class createContent{
                 $icon = 'film';
             }
             
-            echo 'var upload'.$i.' = '.' " '.$path.'";';
+            echo 'var upload'.$i.' = '.' " '.$path.'";\n';
         }
     ?>
     
