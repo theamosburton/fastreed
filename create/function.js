@@ -56,7 +56,11 @@ function dragStartHandler(event) {
       }
     }else if(type == 'video'){
       var imgElement = document.createElement('video');
-      imgElement.src = link;
+      imgElement.innerHTML = `
+        <source src="${link}" type="video/mp4" data-bitrate="1000">
+        <source src="${$link}" type="video/mp4" data-bitrate="720">
+        <source src="${$link}" type="video/mp4" data-bitrate="480">
+      `;
       editorId.innerHTML = '';
       editorId.appendChild(imgElement);
       var screenWidth = window.innerWidth;
