@@ -110,7 +110,7 @@ class createContent{
 
                     <div class="uploads">
                         <div draggable="true" class="uploadContent" id="media{$i}" onclick="selectMedia('{$i}', '{$pathVid}', 'video')">
-                            <video><source src="{$pathVid}" type="video/mp4"></video>
+                            <!-- <video><source src="{$pathVid}" type="video/mp4"></video> -->
                             <div class="fileInfo">
                                 <i class="fa fa-{$what} fa-sm whatIcon"></i>
                             </div>
