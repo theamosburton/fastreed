@@ -80,10 +80,12 @@ var uploadsDataClass = new uploadsData();
     var hsLeft = document.getElementById('hsLeft');
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
+    while (editorId.firstChild) {
+      editorId.removeChild(editorId.firstChild);
+    }
     if (type == 'image') {
       var imageElement = document.createElement('img');
       imageElement.src = link;
-      editorId.innerHTML = '';
       editorId.appendChild(imageElement);
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
@@ -93,13 +95,10 @@ var uploadsDataClass = new uploadsData();
           hsRight.style.display = 'flex';
         }
       }
-
-
     }else if(type == 'video'){
       var videoElement = document.createElement('video');
       videoElement.src = link;
       videoElement.type = 'video/mp4';
-      editorId.innerHTML = '';
       editorId.appendChild(videoElement);
       var screenWidth = window.innerWidth;
       if (screenWidth < 600) {
@@ -110,5 +109,4 @@ var uploadsDataClass = new uploadsData();
         }
       }
     }
-
   }

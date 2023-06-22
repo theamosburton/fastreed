@@ -115,7 +115,7 @@ class createContent{
 
         <!-- Editor Section -->
         <div class="sections editorSection">
-            <div class="editorBox" id="editTab" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+            <div class="editorBox" id="editTab">
                 <span > Add media</span>
             </div>
             <div class="editorNav">
