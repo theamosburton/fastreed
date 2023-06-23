@@ -478,8 +478,6 @@ function deleteImage(imgID, ext, no, whois, what){
   }
   
   loadingAnimation();
-
- 
  
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';

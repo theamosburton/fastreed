@@ -102,6 +102,7 @@ class createContent{
                     </div>
                 </div>
                 <div class="uploads" id="uploads">
+                
                     <!-- Uploads will be set here -->
                 </div>
                 
@@ -116,14 +117,13 @@ class createContent{
         <!-- Editor Section -->
         <div class="sections editorSection">
             <div class="editorBox" id="editTab">
-                <span > Add media</span>
             </div>
             <div class="editorNav">
-                <div class="navs backArrow"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
-                <div class="navs backPlus"><i class="fa fa-plus"></i></div>
-                <div class="navs deleteAdd"><i class="fa-regular fa-trash fa-2x"></i></div>
-                <div class="navs frontPlus"><i class="fa fa-plus"></i></div>
-                <div class="navs frontArrow"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
+                <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
+                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus"></i></div>
+                <div class="navs deleteAdd" onclick="layers.deleteMedia()"><i class="fa-regular fa-trash fa-2x"></i></div>
+                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus"></i></div>
+                <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
             </div>
         </div>
         <!-- Editor Section -->
@@ -153,5 +153,6 @@ class createContent{
        
     </div>
 </body>
+<script src="layers.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 <script src="function.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 </html>

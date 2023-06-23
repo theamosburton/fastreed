@@ -476,8 +476,6 @@ margin-top: 10px;
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: #cfd1d8;
-    border: 2px solid #cfd1d8;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions{
     position: absolute;
@@ -513,7 +511,7 @@ margin-top: 10px;
     max-width: 100%;
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions{
     position: absolute;

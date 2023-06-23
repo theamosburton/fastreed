@@ -16,7 +16,7 @@ class uploadsData{
               this.uploadsData['upload' + u].orglink = ulink;
               var uploadedDiv = document.getElementById('uploads');
               uploadedDiv.innerHTML += ` 
-              <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image')">
+              <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
                   <img src="${imgURL}">
                   <div class="fileInfo">
                       <i class="fa fa-image fa-sm whatIcon"></i>
@@ -36,8 +36,10 @@ class uploadsData{
               this.uploadsData['upload' + u].orglink = ulink;
               var uploadedDiv = document.getElementById('uploads');
               uploadedDiv.innerHTML += `
-                  <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video')">
-                      <video><source src="${videoURL}" type="video/mp4"></video>
+                  <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
+                      <video>
+                          <source src="${videoURL}" type="video/mp4">
+                      </video>
                       <div class="fileInfo">
                           <i class="fa fa-video fa-sm whatIcon"></i>
                       </div>
@@ -51,7 +53,6 @@ class uploadsData{
     };
   }
 }
-
 var uploadsDataClass = new uploadsData();
 
 
@@ -75,24 +76,26 @@ var uploadsDataClass = new uploadsData();
     Section.style.display = 'flex';
   }
 
-  function selectMedia(link, type){
+  function selectMedia(link, type,olink){
     var editorId = document.getElementById(`editTab`);
     var hsLeft = document.getElementById('hsLeft');
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
-    while (editorId.firstChild) {
-      editorId.removeChild(editorId.firstChild);
-    }
     if (type == 'image') {
-      console.log('h');
+      layers.modifyMedia('image', link, olink);
+      var layerId =  layers.presentLayer;
+      var layer = document.getElementById(`layer${layerId}`);
       var imageElement = document.createElement('img');
       imageElement.src = link;
-      editorId.appendChild(imageElement);
+      layer.appendChild(imageElement);
+
       var screenWidth = window.innerWidth;
-      if (screenWidth < 600) {
+      if (screenWidth < 800) {
         if (leftSection.style.display = 'flex') {
           leftSection.style.display = 'none';
           hsLeft.style.display = 'flex';
+        }
+        if (screenWidth < 600) {
           hsRight.style.display = 'flex';
         }
       }
@@ -102,10 +105,12 @@ var uploadsDataClass = new uploadsData();
       videoElement.type = 'video/mp4';
       editorId.appendChild(videoElement);
       var screenWidth = window.innerWidth;
-      if (screenWidth < 600) {
+      if (screenWidth < 800) {
         if (leftSection.style.display = 'flex') {
           leftSection.style.display = 'none';
           hsLeft.style.display = 'flex';
+        }
+        if (screenWidth < 600) {
           hsRight.style.display = 'flex';
         }
       }
