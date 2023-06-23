@@ -67,7 +67,7 @@ class Layers{
     }
 
     deleteLayer(){
-        if (this.presentLayer+1 == this.totalLayers) {
+        if (this.presentLayer+1 == this.totalLayers && this.presentLayer != 0) {
             this.layers.splice(this.presentLayer, 1);
             this.totalLayers -= 1;
             this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);

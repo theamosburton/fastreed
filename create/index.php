@@ -120,9 +120,9 @@ class createContent{
             </div>
             <div class="editorNav">
                 <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
-                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus"></i></div>
+                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
                 <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
-                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus"></i></div>
+                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
                 <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
             </div>
         </div>
@@ -143,6 +143,54 @@ class createContent{
                         <div class="buttons">Draft</div>
                         <div class="buttons">Save</div>
                         <div class="buttons">Publish</div>
+                    </div>
+
+                </div>
+                <div id="selectedObject" class="selectedObject">
+                    <div class="objectHead">
+                        <span>LAYER 1</span>
+                    </div>
+
+                    <div class="objectOptions">
+                        <div class="objectOptionsmenus">
+                            <div class="objectImage">MEDIA</div>
+                            <div class="objectText">TEXT</div>
+                            <div class="objectCaption">CAPTION</div>
+                        </div>
+
+                        <div class="objectOptionsbody" style="display:flex;">
+                            <div class="options">
+                                <span class="property">Text</span>
+                                <input type="text" class="value inputText">
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Weight</span>
+                                <input type="text" class="value inputText">
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Color</span>
+                                <input type="text" class="value inputText">
+                            </div>
+                        </div>
+
+
+                        <div class="objectOptionsbody" style="display:none;">
+                            <div class="options">
+                                <span class="property">Object Fit</span>
+                                <select name="" class="value" id="">
+                                    <option value="">Contain</option>
+                                    <option value="">Cover</option>
+                                </select>
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Overlay Opacity</span>
+                                <input type="text" class="value inputText">
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

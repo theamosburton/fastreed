@@ -133,6 +133,7 @@ html{
     flex-direction: column;
     position: relative;
     align-items: center;
+   
 }
 .rightDiv{
     margin: 0;
@@ -308,16 +309,10 @@ html{
     background-color: #1c1c22;
     cursor: pointer;
 }
-
-.rightDiv .rightHead{
-    overflow: auto;
-    border-bottom: 1px solid grey;
-}
 .rightHead .buttonsDiv{
     width: 80%;
     display: flex;
-    
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 .rightHead .buttonsDiv .buttons{
     padding: 6px 13px;
@@ -330,6 +325,79 @@ html{
 .rightHead .buttonsDiv .buttons:hover{
     background-color: #28282e;
     cursor: pointer;
+}
+
+.rightDiv .selectedObject{
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    flex-direction: column;
+}
+.rightDiv .selectedObject .objectHead{
+    display: flex;
+    background-color: #28282e;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    color: rgb(194, 197, 201);
+    border-bottom: 1px solid grey;
+}
+.rightDiv .selectedObject .objectOptions{
+    display: flex;
+    background-color: #28282e;
+    width: 100%;
+    padding: 10px;
+    color: rgb(194, 197, 201);
+    flex-direction: column;
+}
+
+.rightDiv .selectedObject .objectOptions .objectOptionsmenus{
+    display: flex;
+    overflow: auto;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsmenus div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px 5px;
+    background-color: #1c1c22;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: 1px solid grey;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover{
+    cursor: pointer;
+    background-color: #28282e;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    border-top: 1px solid grey;
+}
+
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .options{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #3a3d40;
+    border-radius: 10px;
+    margin-top: 10px;
+
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .options .property{
+    padding: 0px 10px;
+    font-weight: bold;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .options .value{
+    background-color: transparent;
+    border: 1px solid grey;
+    color: rgb(202, 195, 195);
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin: 10px 15px 15px 25px;
 }
 @media (max-width: 850px){
     .editContainer .leftSection{
