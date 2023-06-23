@@ -96,7 +96,7 @@ class createContent{
         <div class="sections leftSection" id="leftSection">
             <div class="uploadsDiv" id="uploadDiv">
                 <div class="uploadHead">
-                    <div class="uploadsTitle">Upload New &nbsp;&nbsp;<i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+                    <div class="uploadsTitle">Media Library</div>
                     <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
                         <i class="fa-solid fa-x whatIcon"></i>
                     </div>
@@ -121,7 +121,7 @@ class createContent{
             <div class="editorNav">
                 <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
                 <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus"></i></div>
-                <div class="navs deleteAdd" onclick="layers.deleteMedia()"><i class="fa-regular fa-trash fa-2x"></i></div>
+                <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
                 <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus"></i></div>
                 <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
             </div>

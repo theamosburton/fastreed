@@ -100,10 +100,24 @@ var uploadsDataClass = new uploadsData();
         }
       }
     }else if(type == 'video'){
+      layers.modifyMedia('video', link, olink);
+      var layerId =  layers.presentLayer;
+      var layer = document.getElementById(`layer${layerId}`);
+
       var videoElement = document.createElement('video');
       videoElement.src = link;
       videoElement.type = 'video/mp4';
-      editorId.appendChild(videoElement);
+      var contorlsElements = document.createElement('div');
+      contorlsElements.id = `videoControls${layers.presentLayer}`;
+      contorlsElements.className = 'videoControls';
+      contorlsElements.innerHTML = `
+      <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="layers.muteUnmute()"></i>
+      <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="layers.playPauseMedia()"></i>
+      `;
+      layer.appendChild(contorlsElements);
+      layer.appendChild(videoElement);
+      layers.playPauseMedia();
+      layers. muteUnmute();
       var screenWidth = window.innerWidth;
       if (screenWidth < 800) {
         if (leftSection.style.display = 'flex') {

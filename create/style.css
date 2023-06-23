@@ -20,6 +20,7 @@ html{
     justify-content: center;
 }
 .editContainer .sections{
+    position: relative;
     height: 100vh;
 }
 
@@ -44,6 +45,8 @@ html{
     justify-content: center;
     align-items: center;
     color: grey;
+    position: relative;
+    z-index: 9;
 }
 .editContainer .editorSection .editorBox img, .editContainer .editorSection .editorBox video{
     width: 100%;
@@ -60,6 +63,10 @@ html{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.editContainer .editorSection .editorBox .placeholder p{
+    margin: 0px;
 }
 .editContainer .editorSection .editorNav{
     margin-bottom: 10px;
@@ -87,7 +94,24 @@ html{
     background-color: transparent;
     color: rgb(196, 61, 11);
 }
-
+.editContainer .editorSection .editorBox .layers{
+    position: relative;
+    z-index: 999;
+}
+.editContainer .editorSection .editorBox .layers .videoControls{
+    position: absolute;
+    z-index: 999;
+    color: white;
+    display: flex;
+    right: 0px;
+    top: 0px;
+    /* background-color: #1c1c2224; */
+   /* background-image: linear-gradient(rgb(86 72 72 / 20%), rgba(85, 83, 83, 20%), #5f5757); */
+    padding: 10px 10px 5px 5px;
+}
+.editContainer .editorSection .editorBox .layers .videoControls i{
+    margin-left: 15px;
+}
 
 
 
@@ -241,6 +265,8 @@ html{
 }
 .hideShowLeft{
     display: none;
+    position: absolute;
+    z-index: 999;
     background-color: transparent;
     left: 0px;
     top: 20px;
@@ -362,6 +388,7 @@ html{
         right: 0;
         width: 100%;
         max-width: 350px;
+        z-index: 999;
     }
 }
 @media (max-width: 400px){
