@@ -27,57 +27,77 @@ class Layers{
         }
 
         this.presentLayerDiv.style.display = 'flex';
-        // this.updatePlusButton();
-        // this.updateMinusButton();
     }
 
     
 
     createNewLayer(){  
-        if (this.presentLayer+1 == this.totalLayers) {
-            this.totalLayers += 1;
-            this.presentLayer += 1;
-            this.layers[this.presentLayer] = {
-                'media': {},
-                'title':{},
-                'description': {},
-                'caption' :{}
-            };
-            var newLayer = document.createElement('div');
-            newLayer.id = `layer${this.presentLayer}`;
-            newLayer.className = 'layers';
-            
-            this.editorId.appendChild(newLayer);
-            this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
-            for (var i = 0; i < this.totalLayers; i++) {
-                document.getElementById(`layer${i}`).style.display = 'none';
-            }
-            newLayer.innerHTML = `<div class="placeholder">
-                <p> Add</p>
-                <p> Photos/Videos</p>
-                <small> Expected ratio 9:16 </small>
-                <small> Screen: ${this.presentLayer+1}</small>
-            </div>`;
-            this.presentLayerDiv.style.display = 'flex';
-        } 
-
-        this.updatePlusButton();
-        this.updateMinusButton();
+        this.inBetweenLayersAdd();
+        this.totalLayers += 1;
+        this.presentLayer += 1;
+        this.layers[this.presentLayer] = {
+            'media': {},
+            'title':{},
+            'description': {},
+            'caption' :{}
+        };
+        var newLayer = document.createElement('div');
+        newLayer.id = `layer${this.presentLayer}`;
+        newLayer.className = 'layers';
         
+        this.editorId.appendChild(newLayer);
+        this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+        for (var i = 0; i < this.totalLayers; i++) {
+            document.getElementById(`layer${i}`).style.display = 'none';
+        }
+        newLayer.innerHTML = `<div class="placeholder">
+            <p> Add</p>
+            <p> Photos/Videos</p>
+            <small> Expected ratio 9:16 </small>
+            <small> Screen: ${this.presentLayer+1}</small>
+        </div>`;
+        this.presentLayerDiv.style.display = 'flex';
+        this.playPauseLastMedia('add');
+    }
+
+    inBetweenLayersAdd(){
+        if (this.presentLayer+1 != this.totalLayers) {
+            var PL  = this.presentLayer + 1 ;
+            var layersAhead = this.totalLayers - PL;
+            for (let i = layersAhead; i >= 1; i--) {
+                var layersIndex = PL + i - 1;
+                console.log(`Current layersIndex: ${layersIndex}`);
+                document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex + 1}`;
+                console.log(`Updated id: layer${layersIndex + 1}`);
+            }
+
+        }
     }
 
     deleteLayer(){
-        if (this.presentLayer+1 == this.totalLayers && this.presentLayer != 0) {
+        if (this.totalLayers > 1 && this.presentLayer != 0) {
+            this.inBetweenLayersDel();
             this.layers.splice(this.presentLayer, 1);
             this.totalLayers -= 1;
             this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
             this.presentLayerDiv.remove();
             this.moveBackward();
+
         }
-        this.updatePlusButton();
-        this.updateMinusButton();
     }
 
+    inBetweenLayersDel(){
+        if (this.presentLayer+1 != this.totalLayers) {
+            var PL  = this.presentLayer + 1 ;
+            var layersAhead = this.totalLayers - PL;
+            for (let i = layersAhead; i >= 1; i--) {
+                var layersIndex = PL + i - 1;
+                console.log(`Current layersIndex: ${layersIndex}`);
+                document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex - 1}`;
+                console.log(`Updated id: layer${layersIndex - 1}`);
+            }
+        }
+    }
     moveForward(){
         var endOfLayers  = this.totalLayers <= this.presentLayer +1;
         if (!endOfLayers) {
@@ -86,26 +106,23 @@ class Layers{
             for (var i = 0; i < this.totalLayers; i++) {
                 document.getElementById(`layer${i}`).style.display = 'none';
             }
-
             this.presentLayerDiv.style.display = 'flex';
+            this.playPauseLastMedia('forward');
         }
-        this.updatePlusButton();
-        this.updateMinusButton();
+        
     }
+
     moveBackward(){    
         if (this.presentLayer > 0) {
-            
             this.presentLayer -= 1;
             this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
             for (var i = 0; i < this.totalLayers; i++) {
                 document.getElementById(`layer${i}`).style.display = 'none';
             }
-    
             this.presentLayerDiv.style.display = 'flex';
+            this.playPauseLastMedia('backward');
         }
-
-        this.updatePlusButton();
-        this.updateMinusButton();
+        
        
     }
     modifyMedia(type, blobUrl, url){
@@ -171,8 +188,6 @@ class Layers{
             playPauseMedia.classList.remove("fa-pause");
             playPauseMedia.classList.add("fa-play");
         }
-
-
         if (status == 'paused') {
             video.play();
             playPauseMedia.dataset.status = 'playing';
@@ -219,6 +234,28 @@ class Layers{
             minusIcon.style.color = 'coral';
             minusIcon.removeAttribute('onclick');
         }
+    }
+
+
+    playPauseLastMedia(direction){
+        let presentLayer = this.presentLayer-1;
+        if (direction == 'add') {
+            let presentLayerMedia = document.querySelector(`#layer${presentLayer} video`);
+            if (presentLayerMedia) {
+                presentLayerMedia.pause();
+            }
+        }else if(direction == 'forward'){
+            let presentLayerMedia = document.querySelector(`#layer${presentLayer} video`);
+            if (presentLayerMedia) {
+                presentLayerMedia.pause();
+            }
+        }else{
+            let presentLayerMedia = document.querySelector(`#layer${presentLayer+2} video`);
+            if (presentLayerMedia) {
+                presentLayerMedia.pause();
+            }
+        }
+        
     }
 }
 let layers = new Layers();

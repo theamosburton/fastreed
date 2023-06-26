@@ -360,15 +360,19 @@ html{
     justify-content: center;
     align-items: center;
     margin: 2px 5px;
-    background-color: #1c1c22;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-weight: bold;
-    border: 1px solid grey;
-}
-.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover{
-    cursor: pointer;
     background-color: #28282e;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    /* border: 1px solid grey; */
+    transition: all .3s;
+}
+
+.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover, .rightDiv .selectedObject .objectOptions .objectOptionsmenus div .active{
+    cursor: pointer;
+    background-color: #40404b;
+    border: 0;
+    /* border: 1px solid grey; */
 }
 .rightDiv .selectedObject .objectOptions .objectOptionsbody{
     display: flex;
