@@ -116,6 +116,7 @@ class createContent{
 
         <!-- Editor Section -->
         <div class="sections editorSection">
+            <div class="layersNumber" id="layerCount">1/1</div>
             <div class="editorBox" id="editTab">
             </div>
             <div class="editorNav">

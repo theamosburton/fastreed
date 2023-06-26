@@ -3,6 +3,7 @@ class Layers{
         this.editorId = document.getElementById('editTab');
         this.presentLayer = 0;
         this.totalLayers = 1;
+        this.layersCount = `${this.presentLayer+1} - ${this.totalLayers}`;
         this.layers = [];
         this.layers[0] = {
             'media': {},
@@ -16,8 +17,8 @@ class Layers{
         newLayer.innerHTML = `<div class="placeholder">
             <p> Add</p>
             <p> Photos/Videos</p>
-            <small> Expected ratio 9:16 </small>
-            <small> Screen: ${this.presentLayer+1}</small>
+            <small> Recomended ratios are </small>
+            <small> 9:16, 3:4 and 2:3 </small>
         </div>`;
         this.editorId.appendChild(newLayer);
         this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
@@ -25,6 +26,7 @@ class Layers{
         for (var i = 0; i < otherLayers.length; i++) {
             otherLayers[i].style.display = "none";
         }
+        document.getElementById('layerCount').innerHTML = this.layersCount;
 
         this.presentLayerDiv.style.display = 'flex';
     }
@@ -53,11 +55,12 @@ class Layers{
         newLayer.innerHTML = `<div class="placeholder">
             <p> Add</p>
             <p> Photos/Videos</p>
-            <small> Expected ratio 9:16 </small>
-            <small> Screen: ${this.presentLayer+1}</small>
+            <small> Recomended ratios are </small>
+            <small> 9:16, 3:4 and 2:3 </small>
         </div>`;
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
+        document.getElementById('layerCount').innerHTML = `${this.presentLayer+1} - ${this.totalLayers}`;
     }
 
     inBetweenLayersAdd(){
@@ -109,7 +112,7 @@ class Layers{
             this.presentLayerDiv.style.display = 'flex';
             this.playPauseLastMedia('forward');
         }
-        
+        document.getElementById('layerCount').innerHTML =  `${this.presentLayer+1} - ${this.totalLayers}`;
     }
 
     moveBackward(){    
@@ -122,7 +125,7 @@ class Layers{
             this.presentLayerDiv.style.display = 'flex';
             this.playPauseLastMedia('backward');
         }
-        
+        document.getElementById('layerCount').innerHTML = `${this.presentLayer+1} - ${this.totalLayers}`;
        
     }
     modifyMedia(type, blobUrl, url){
