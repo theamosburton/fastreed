@@ -5,7 +5,7 @@ class uploadMedia{
     var fileInput = document.getElementById("uploadNewMedia");
     this.uploadingBar = document.getElementById('uploadingBar');
     this.uploadingMessage = document.querySelector('#uploadingBar #uploadMessage');
-    this.uploadProgress = document.querySelector('#uploadingBar #uploadProgress');
+    this.uploadProgress = document.querySelector('#uploadingBar #uploadProgress div');
     this.uploadingBar.style.display = 'block';
     this.uploadNew = document.querySelector('.refreshUpload #uploadNew input');
 
