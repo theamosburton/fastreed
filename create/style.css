@@ -427,7 +427,7 @@ html{
   }
   
   .infinite-rotation {
-    animation: rotate infinite 2s linear;
+    animation: rotate infinite .8s linear;
   }
 
 @media (max-width: 850px){

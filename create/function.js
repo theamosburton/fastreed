@@ -43,10 +43,14 @@ class uploadsData{
     var uploadedDiv = document.getElementById('uploads');
     if (x) {
       uploadedDiv.innerHTML = '';
-      uploadedDiv.innerHTML = `<div class="refresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate"  id="rotateRefresh"></i></div>`;
+      uploadedDiv.innerHTML = `<div class="refresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate infinite-rotation"  id="rotateRefresh"></i></div>`;
+    }else{
+      var refresh = document.getElementById('rotateRefresh');
+      refresh.classList.add('infinite-rotation');
     }
-    var refresh = document.getElementById('rotateRefresh');
-    refresh.classList.add('infinite-rotation');
+    
+    
+
     this.uploadsCount = Object.keys(this.uploads).length;
     for (let u = 0; u < this.uploadsCount; u++) {
       var ulink = this.uploads['up' + u].link;
@@ -95,14 +99,12 @@ class uploadsData{
         fetchVideos();
       }
     }
+    var refresh = document.getElementById('rotateRefresh');
     refresh.classList.remove('infinite-rotation');
   }
 
 }
 var uploadsDataClass = new uploadsData();
-
-
-
 
 
   function hideSection(id){
