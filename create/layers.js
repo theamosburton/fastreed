@@ -156,8 +156,8 @@ class Layers{
             <div class="placeholder">
                 <p> Add</p>
                 <p> Photos/Videos</p>
-                <small> Expected ratio 9:16 </small>
-                <small> Screen: ${this.presentLayer+1}</small>
+                <small> Recomended ratios are </small>
+            <small> 9:16, 3:4 and 2:3 </small>
             </div>`;
         media.remove();
         this.layers[this.presentLayer].media = {};

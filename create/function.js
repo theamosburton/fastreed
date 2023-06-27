@@ -1,59 +1,107 @@
 class uploadsData{
   constructor(){
-    window.onload = function() {
-      this.uploadsData = {};
-      this.uploadsCount = Object.keys(uploads).length;
-      for (let u = 0; u < this.uploadsCount; u++) {
-        var ulink = uploads['up' + u].link;
-        var type = uploads['up' + u].type;
-        if (type == 'photos') {
-          const fetchPhtos = async()  =>{
-            fetch(ulink)
-            .then(response => response.blob())
-            .then(blob => {
-              var imgURL = URL.createObjectURL(blob);
-              this.uploadsData['upload' + u] = {};
-              this.uploadsData['upload' + u].orglink = ulink;
-              var uploadedDiv = document.getElementById('uploads');
-              uploadedDiv.innerHTML += ` 
-              <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
-                  <img src="${imgURL}">
-                  <div class="fileInfo">
-                      <i class="fa fa-image fa-sm whatIcon"></i>
-                  </div>
-              </div>
-              `;
-            });
-          }
-          fetchPhtos();
-        }else if(type == 'videos'){
-          const fetchVideos = async() =>{
-            fetch(ulink)
-            .then(response => response.blob())
-            .then(blob => {
-              var videoURL = URL.createObjectURL(blob);
-              this.uploadsData['upload' + u] = {};
-              this.uploadsData['upload' + u].orglink = ulink;
-              var uploadedDiv = document.getElementById('uploads');
-              uploadedDiv.innerHTML += `
-                  <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
-                      <video>
-                          <source src="${videoURL}" type="video/mp4">
-                      </video>
-                      <div class="fileInfo">
-                          <i class="fa fa-video fa-sm whatIcon"></i>
-                      </div>
-                  </div>
-              `;
-            });
-          }
-          fetchVideos();
-        }
-      }
-    };
+    this.uploadsData = {};
+    this.uploads = {};
+    this.uploadsCount;
+    this.fetchUploads(null);
   }
+
+
+
+  fetchUploads(x){
+    var refresh = document.getElementById('rotateRefresh');
+    refresh.classList.add('infinite-rotation');
+    var self = this;
+    async function getUploadsData(){
+      const logUrl = '/.ht/API/getUploads.php';
+      var encyDat = {};
+      const response = await fetch(logUrl, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+        });
+      var upData = await response.json();
+      if (upData) {
+        self.uploadsCount = upData.length;
+        for (let i = 0; i < upData.length; i++) {
+          self.uploads['up'+ i] = {};
+          self.uploads['up' + i].link = upData[i].path;
+          self.uploads['up' + i].type = upData[i].what;
+        }
+        self.showUploads(x);
+      }else{
+
+      }
+    }
+    getUploadsData();
+ }
+
+
+ showUploads(x){
+    var refresh = document.getElementById('rotateRefresh');
+    var uploadedDiv = document.getElementById('uploads');
+    if (x) {
+      uploadedDiv.innerHTML = '';
+      uploadedDiv.innerHTML = `<div class="refresh" id="rotateRefresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate"></i></div>`;
+    }
+    this.uploadsCount = Object.keys(this.uploads).length;
+    for (let u = 0; u < this.uploadsCount; u++) {
+      var ulink = this.uploads['up' + u].link;
+      var type = this.uploads['up' + u].type;
+      if (type == 'image') {
+        const fetchPhotos = async()  =>{
+          fetch(ulink)
+          .then(response => response.blob())
+          .then(blob => {
+            var imgURL = URL.createObjectURL(blob);
+            this.uploadsData['upload' + u] = {};
+            this.uploadsData['upload' + u].orglink = ulink;
+            var uploadedDiv = document.getElementById('uploads');
+            uploadedDiv.innerHTML += ` 
+            <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
+                <img src="${imgURL}">
+                <div class="fileInfo">
+                    <i class="fa fa-image fa-sm whatIcon"></i>
+                </div>
+            </div>
+            `;
+          });
+        }
+        fetchPhotos();
+      }else if(type == 'video'){
+        const fetchVideos = async() =>{
+          fetch(ulink)
+          .then(response => response.blob())
+          .then(blob => {
+            var videoURL = URL.createObjectURL(blob);
+            this.uploadsData['upload' + u] = {};
+            this.uploadsData['upload' + u].orglink = ulink;
+            var uploadedDiv = document.getElementById('uploads');
+            uploadedDiv.innerHTML += `
+                <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
+                    <video>
+                        <source src="${videoURL}" type="video/mp4">
+                    </video>
+                    <div class="fileInfo">
+                        <i class="fa fa-video fa-sm whatIcon"></i>
+                    </div>
+                </div>
+            `;
+          });
+        }
+        fetchVideos();
+      }
+    }
+    refresh.classList.remove('infinite-rotation');
+  }
+
 }
 var uploadsDataClass = new uploadsData();
+
+
+
 
 
   function hideSection(id){

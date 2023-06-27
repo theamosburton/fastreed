@@ -133,7 +133,8 @@ html{
     flex-direction: column;
     position: relative;
     align-items: center;
-   
+    overflow: hidden;
+   overflow-y: auto;
 }
 .rightDiv{
     margin: 0;
@@ -209,6 +210,15 @@ html{
     overflow-y: auto;
     max-height: 90%;
     border-radius: 10px;
+}
+.editContainer .leftSection .uploadsDiv .uploads .refresh{
+    display: flex;
+    width: 100%;
+    margin: 5px 12px;
+    align-items: center;
+}
+.editContainer .leftSection .uploadsDiv .uploads .refresh i{
+    margin-left: 10px;
 }
 
 .editContainer .leftSection .uploadsDiv .uploadContent{
@@ -391,6 +401,9 @@ html{
     margin-top: 10px;
 
 }
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .options div{
+    margin: 5px 10px 0px 20px;
+}
 .rightDiv .selectedObject .objectOptions .objectOptionsbody .options .property{
     padding: 0px 10px;
     font-weight: bold;
@@ -403,6 +416,20 @@ html{
     border-radius: 4px;
     margin: 10px 15px 15px 25px;
 }
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .infinite-rotation {
+    animation: rotate infinite 2s linear;
+  }
+
 @media (max-width: 850px){
     .editContainer .leftSection{
         animation: grow .5s ease forwards;

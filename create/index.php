@@ -44,51 +44,6 @@ class createContent{
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        var uploads = {};
-    <?php
-        $id = $createContent->userData->getSelfDetails()['UID'];
-        $username = $createContent->userData->getSelfDetails()['username'];
-        $data = $createContent->uploadData->getAllData($id);
-        $data = array_reverse($data);
-        $length = count($data);
-        for($i=0;$i < $length; $i++ ){
-            $idn = $i+1;
-            $self = '';
-            $everyone = '';
-            $followers = '';
-            $self = '';
-            if($data[$i][8] == 'followers'){
-            $followers = 'selected';
-            }elseif($data[$i][8] == 'everyone'){
-            $everyone = 'selected';
-            }elseif($data[$i][8] == 'self'){
-                $self = 'selected';
-            }
-            
-            $whatToShow;
-            $onclick;
-            $what = '';
-            if($data[$i][6] == 'photos'){
-                $path = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
-                $what = 'image';
-                $icon = 'image';
-            }elseif($data[$i][6] == 'videos'){
-                $path = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
-                $what = 'video';
-                $icon = 'film';
-            }
-            echo 'uploads.up'.$i.' = '.'{};';
-            echo "\n";
-            echo 'uploads.up'.$i.'.link = "'.$path.'";';
-            echo "\n";
-            echo 'uploads.up'.$i.'.type = "'.$data[$i][6].'";';
-            echo "\n";
-        }
-    ?>
-    
-                    
-</script>
 </head>
 <body>
     <div class="editContainer">
@@ -102,6 +57,7 @@ class createContent{
                     </div>
                 </div>
                 <div class="uploads" id="uploads">
+                <div class="refresh" onclick="uploadsDataClass.showUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
                 
                     <!-- Uploads will be set here -->
                 </div>
@@ -166,13 +122,34 @@ class createContent{
                             </div>
 
                             <div class="options">
-                                <span class="property">Font Weight</span>
-                                <input type="text" class="value inputText">
+                                <span class="property">Colors</span>
+                                <div class="div">
+                                    <span>Text</span>
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" value="#000">
+                                </div>
+                                <div class="div">
+                                    <span>Background</span>
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" value="#ff0000">
+                                </div>
                             </div>
 
                             <div class="options">
-                                <span class="property">Font Color</span>
-                                <input type="text" class="value inputText">
+                                <span class="property">Background Opacity</span>
+                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Wieght</span>
+                                <select name="" id="" class="value inputText">
+                                    <option value="">Light</option>
+                                    <option value="">Bold</option>
+                                    <option value="">Bolder</option>
+                                </select>
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Size</span>
+                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
                             </div>
                         </div>
 
@@ -188,7 +165,7 @@ class createContent{
 
                             <div class="options">
                                 <span class="property">Overlay Opacity</span>
-                                <input type="text" class="value inputText">
+                                <input class="value inputText" type="range" id="fontSize" name="points" min="-4" max="4">
                             </div>
 
                         </div>

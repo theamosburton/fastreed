@@ -8,12 +8,14 @@ $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
 $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
+$GLOBALS['UPLOADS'] = $_DOCROOT.'/.ht/controller/UPLOADS.php';
 
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['DB']);
 include($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
 include($GLOBALS['BASIC_FUNC']);
+include($GLOBALS['UPLOADS']);
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
