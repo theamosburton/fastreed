@@ -31,8 +31,6 @@ class uploadsData{
           self.uploads['up' + i].type = upData[i].what;
         }
         self.showUploads();
-        // var refresh = document.getElementById('rotateRefresh');
-        refresh.classList.remove('infinite-rotation');
       }else{
 
       }
