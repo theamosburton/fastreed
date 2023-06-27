@@ -9,6 +9,8 @@ class uploadMedia{
     this.uploadingBar.style.display = 'block';
     this.uploadNew = document.querySelector('.refreshUpload #uploadNew input');
 
+    console.log(this.uploadProgress);
+
     if (fileInput.files && fileInput.files[0]) {
       if (fileInput.files[0].type.startsWith('image/')) {
         this.uploadImages(fileInput);
@@ -63,8 +65,7 @@ class uploadMedia{
         if (event.lengthComputable) {
           var percentComplete = (event.loaded / event.total) * 100;
           self.uploadProgress.style.display = 'block';
-          self.uploadProgress.width = `${percentComplete.toFixed(2)}%`;
-          self.uploadNew.style.display = 'flex';
+          self.uploadProgress.style.width = `${percentComplete.toFixed(2)}%`;
         }
       });
 
@@ -127,7 +128,7 @@ class uploadMedia{
     xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
         var percentComplete = (event.loaded / event.total) * 100;
-        self.uploadProgress.width = `${percentComplete.toFixed(2)}%`;
+        self.uploadProgress.style.width = `${percentComplete.toFixed(2)}%`;
       }
     });
 
