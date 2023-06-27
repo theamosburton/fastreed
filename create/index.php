@@ -57,7 +57,7 @@ class createContent{
                             <i class="fa-solid fa-x whatIcon"></i>
                         </div>
                     </div>
-                    <div class="refresh" onclick="uploadsDataClass.showUploads()">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
+                    <div class="refresh" onclick="uploadsDataClass.fetchUploads()">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
                 </div>
                 <div class="uploads" id="uploads">
                 
