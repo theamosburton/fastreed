@@ -9,8 +9,7 @@ class uploadsData{
 
 
   fetchUploads(x){
-    var refresh = document.getElementById('rotateRefresh');
-    refresh.classList.add('infinite-rotation');
+    
     var self = this;
     async function getUploadsData(){
       const logUrl = '/.ht/API/getUploads.php';
@@ -40,12 +39,14 @@ class uploadsData{
 
 
  showUploads(x){
-    var refresh = document.getElementById('rotateRefresh');
+    
     var uploadedDiv = document.getElementById('uploads');
     if (x) {
       uploadedDiv.innerHTML = '';
-      uploadedDiv.innerHTML = `<div class="refresh" id="rotateRefresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate"></i></div>`;
+      uploadedDiv.innerHTML = `<div class="refresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate"  id="rotateRefresh"></i></div>`;
     }
+    var refresh = document.getElementById('rotateRefresh');
+    refresh.classList.add('infinite-rotation');
     this.uploadsCount = Object.keys(this.uploads).length;
     for (let u = 0; u < this.uploadsCount; u++) {
       var ulink = this.uploads['up' + u].link;
