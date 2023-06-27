@@ -3,13 +3,12 @@ class uploadsData{
     this.uploadsData = {};
     this.uploads = {};
     this.uploadsCount;
-    this.fetchUploads(null);
+    this.fetchUploads();
   }
 
 
 
-  fetchUploads(x){
-    
+  fetchUploads(){
     var self = this;
     async function getUploadsData(){
       const logUrl = '/.ht/API/getUploads.php';
@@ -29,7 +28,7 @@ class uploadsData{
           self.uploads['up' + i].link = upData[i].path;
           self.uploads['up' + i].type = upData[i].what;
         }
-        self.showUploads(x);
+        self.showUploads();
       }else{
 
       }
@@ -38,69 +37,60 @@ class uploadsData{
  }
 
 
- showUploads(x){
-    
-    var uploadedDiv = document.getElementById('uploads');
-    if (x) {
-      uploadedDiv.innerHTML = '';
-      uploadedDiv.innerHTML = `<div class="refresh" onclick="uploadsDataClass.fetchUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate infinite-rotation"  id="rotateRefresh"></i></div>`;
-    }else{
-      var refresh = document.getElementById('rotateRefresh');
-      refresh.classList.add('infinite-rotation');
-    }
-    
-    
-
-    this.uploadsCount = Object.keys(this.uploads).length;
-    for (let u = 0; u < this.uploadsCount; u++) {
-      var ulink = this.uploads['up' + u].link;
-      var type = this.uploads['up' + u].type;
-      if (type == 'image') {
-        const fetchPhotos = async()  =>{
-          fetch(ulink)
-          .then(response => response.blob())
-          .then(blob => {
-            var imgURL = URL.createObjectURL(blob);
-            this.uploadsData['upload' + u] = {};
-            this.uploadsData['upload' + u].orglink = ulink;
-            var uploadedDiv = document.getElementById('uploads');
-            uploadedDiv.innerHTML += ` 
-            <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
-                <img src="${imgURL}">
-                <div class="fileInfo">
-                    <i class="fa fa-image fa-sm whatIcon"></i>
-                </div>
-            </div>
-            `;
-          });
-        }
-        fetchPhotos();
-      }else if(type == 'video'){
-        const fetchVideos = async() =>{
-          fetch(ulink)
-          .then(response => response.blob())
-          .then(blob => {
-            var videoURL = URL.createObjectURL(blob);
-            this.uploadsData['upload' + u] = {};
-            this.uploadsData['upload' + u].orglink = ulink;
-            var uploadedDiv = document.getElementById('uploads');
-            uploadedDiv.innerHTML += `
-                <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
-                    <video>
-                        <source src="${videoURL}" type="video/mp4">
-                    </video>
-                    <div class="fileInfo">
-                        <i class="fa fa-video fa-sm whatIcon"></i>
-                    </div>
-                </div>
-            `;
-          });
-        }
-        fetchVideos();
+ showUploads(){
+  var uploadedDiv = document.getElementById('uploads');
+  uploadedDiv.innerHTML = '';
+  var refresh = document.getElementById('rotateRefresh');
+  refresh.classList.add('infinite-rotation');
+  this.uploadsCount = Object.keys(this.uploads).length;
+  for (let u = 0; u < this.uploadsCount; u++) {
+    var ulink = this.uploads['up' + u].link;
+    var type = this.uploads['up' + u].type;
+    if (type == 'image') {
+      const fetchPhotos = async()  =>{
+        fetch(ulink)
+        .then(response => response.blob())
+        .then(blob => {
+          var imgURL = URL.createObjectURL(blob);
+          this.uploadsData['upload' + u] = {};
+          this.uploadsData['upload' + u].orglink = ulink;
+          var uploadedDiv = document.getElementById('uploads');
+          uploadedDiv.innerHTML += ` 
+          <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
+              <img src="${imgURL}">
+              <div class="fileInfo">
+                  <i class="fa fa-image fa-sm whatIcon"></i>
+              </div>
+          </div>
+          `;
+        });
       }
+      fetchPhotos();
+    }else if(type == 'video'){
+      const fetchVideos = async() =>{
+        fetch(ulink)
+        .then(response => response.blob())
+        .then(blob => {
+          var videoURL = URL.createObjectURL(blob);
+          this.uploadsData['upload' + u] = {};
+          this.uploadsData['upload' + u].orglink = ulink;
+          var uploadedDiv = document.getElementById('uploads');
+          uploadedDiv.innerHTML += `
+              <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
+                  <video>
+                      <source src="${videoURL}" type="video/mp4">
+                  </video>
+                  <div class="fileInfo">
+                      <i class="fa fa-video fa-sm whatIcon"></i>
+                  </div>
+              </div>
+          `;
+        });
+      }
+      fetchVideos();
     }
-    var refresh = document.getElementById('rotateRefresh');
-    refresh.classList.remove('infinite-rotation');
+  }
+  refresh.classList.remove('infinite-rotation');
   }
 
 }

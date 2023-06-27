@@ -175,9 +175,13 @@ html{
 }
 .editContainer .leftSection .uploadsDiv .uploadHead, .rightDiv .rightHead{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    width: 100%;
+}
+.editContainer .leftSection .uploadsDiv .uploadHead .top{
+    display: flex;
     width: 100%;
 }
 .editContainer .leftSection .uploadsDiv .uploadHead .uploadsTitle{
@@ -211,13 +215,18 @@ html{
     max-height: 90%;
     border-radius: 10px;
 }
-.editContainer .leftSection .uploadsDiv .uploads .refresh{
+.editContainer .leftSection .uploadsDiv .uploadHead .refresh{
     display: flex;
     width: 100%;
     margin: 5px 12px;
     align-items: center;
+    background-color: #28282e;
+    color: grey;
+    padding: 3px 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
-.editContainer .leftSection .uploadsDiv .uploads .refresh i{
+.editContainer .leftSection .uploadsDiv .uploadHead .refresh i{
     margin-left: 10px;
 }
 

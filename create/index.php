@@ -51,13 +51,15 @@ class createContent{
         <div class="sections leftSection" id="leftSection">
             <div class="uploadsDiv" id="uploadDiv">
                 <div class="uploadHead">
+                    <div class="top">
                     <div class="uploadsTitle">Media Library</div>
-                    <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
-                        <i class="fa-solid fa-x whatIcon"></i>
+                        <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
+                            <i class="fa-solid fa-x whatIcon"></i>
+                        </div>
                     </div>
+                    <div class="refresh" onclick="uploadsDataClass.showUploads()">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
                 </div>
                 <div class="uploads" id="uploads">
-                <div class="refresh" onclick="uploadsDataClass.showUploads('1')">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
                 
                     <!-- Uploads will be set here -->
                 </div>
