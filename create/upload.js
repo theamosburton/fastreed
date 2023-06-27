@@ -5,7 +5,7 @@ class uploadMedia{
     var fileInput = document.getElementById("uploadNewMedia");
     this.uploadingBar = document.getElementById('uploadingBar');
     this.uploadingMessage = document.querySelector('#uploadingBar #uploadMessage');
-    this.uploadProgress = document.querySelector('#uploadingBar #uploadProgress div');
+    this.uploadProgress = document.querySelector('#uploadingBar #uploadProgress #progress');
     this.uploadingBar.style.display = 'block';
     this.uploadNew = document.querySelector('.refreshUpload #uploadNew input');
 
@@ -29,6 +29,7 @@ class uploadMedia{
     }
     self.uploadingMessage.innerHTML = 'Uploading...';
     self.uploadNew.style.display = 'none';
+    self.uploadProgress.style.display = 'block';
     var binaryImage;
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -40,7 +41,7 @@ class uploadMedia{
   }
 
   uploadImageToServer(binaryFile) {
-    var self =this;
+    var self = this;
       var formData = new FormData();
       // Determine the file extension based on the MIME type
       var mimeString = binaryFile.type;
@@ -102,6 +103,7 @@ class uploadMedia{
     }
     self.uploadingMessage.innerHTML = 'Uploading...';
     self.uploadNew.style.display = 'none';
+    self.uploadProgress.style.display = 'block';
     var reader = new FileReader();
     reader.onload = function (e) {
       var file = fileInput.files[0];
@@ -125,7 +127,6 @@ class uploadMedia{
     xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
         var percentComplete = (event.loaded / event.total) * 100;
-        self.uploadProgress.style.display = 'block';
         self.uploadProgress.width = `${percentComplete.toFixed(2)}%`;
       }
     });

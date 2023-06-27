@@ -82,7 +82,7 @@ class createContent{
                     <div class="uploadingBar" id="uploadingBar" style="display:none">
                         <div class="uploadMessage" id="uploadMessage"></div>
                         <div class="uploadProgress" id="uploadProgress" >
-                            <div style="display:none"></div>
+                            <div id="progress" style="display:none"></div>
                         </div> 
                     </div>
                 </div>
