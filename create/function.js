@@ -41,23 +41,26 @@ class uploadsData{
  }
 
 
- showUploads(){
+ showUploads() {
+  return new Promise((resolve) => {
     var uploadedDiv = document.getElementById('uploads');
     uploadedDiv.innerHTML = '';
     this.uploadsCount = Object.keys(this.uploads).length;
+    var promises = [];
+
     for (let u = 0; u < this.uploadsCount; u++) {
       var ulink = this.uploads['up' + u].link;
       var type = this.uploads['up' + u].type;
+
       if (type == 'image') {
-        const fetchPhotos = async()  =>{
-          fetch(ulink)
-          .then(response => response.blob())
-          .then(blob => {
-            var imgURL = URL.createObjectURL(blob);
-            this.uploadsData['upload' + u] = {};
-            this.uploadsData['upload' + u].orglink = ulink;
-            var uploadedDiv = document.getElementById('uploads');
-            uploadedDiv.innerHTML += ` 
+        const fetchPhotos = async () => {
+          const response = await fetch(ulink);
+          const blob = await response.blob();
+          var imgURL = URL.createObjectURL(blob);
+          this.uploadsData['upload' + u] = {};
+          this.uploadsData['upload' + u].orglink = ulink;
+          var uploadedDiv = document.getElementById('uploads');
+          uploadedDiv.innerHTML += `
             <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${imgURL}', 'image', '${ulink}')">
                 <img src="${imgURL}">
                 <div class="fileInfo">
@@ -65,19 +68,18 @@ class uploadsData{
                 </div>
             </div>
             `;
-          });
-        }
-        fetchPhotos();
-      }else if(type == 'video'){
-        const fetchVideos = async() =>{
-          fetch(ulink)
-          .then(response => response.blob())
-          .then(blob => {
-            var videoURL = URL.createObjectURL(blob);
-            this.uploadsData['upload' + u] = {};
-            this.uploadsData['upload' + u].orglink = ulink;
-            var uploadedDiv = document.getElementById('uploads');
-            uploadedDiv.innerHTML += `
+        };
+
+        promises.push(fetchPhotos());
+      } else if (type == 'video') {
+        const fetchVideos = async () => {
+          const response = await fetch(ulink);
+          const blob = await response.blob();
+          var videoURL = URL.createObjectURL(blob);
+          this.uploadsData['upload' + u] = {};
+          this.uploadsData['upload' + u].orglink = ulink;
+          var uploadedDiv = document.getElementById('uploads');
+          uploadedDiv.innerHTML += `
                 <div draggable="true" class="uploadContent" id="media${u}" onclick="selectMedia('${videoURL}', 'video', '${ulink}')">
                     <video>
                         <source src="${videoURL}" type="video/mp4">
@@ -87,12 +89,20 @@ class uploadsData{
                     </div>
                 </div>
             `;
-          });
-        }
-        fetchVideos();
+        };
+
+        promises.push(fetchVideos());
       }
     }
-  }
+
+    Promise.all(promises).then(() => {
+      var refreshElement = document.getElementById('rotateRefresh');
+      refreshElement.classList.remove('infinite-rotation');
+      resolve(); // Resolving the promise when all uploads are loaded and displayed
+    });
+  });
+}
+
 
 }
 var uploadsDataClass = new uploadsData();
