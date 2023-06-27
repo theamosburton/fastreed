@@ -179,12 +179,12 @@ class showMenus{
             var response = JSON.parse(xhr.responseText);
             if (response.Result) {
               if (utype == 'dpUploads') {
-                document.querySelector('#uploadDbButton').innerHTML = `Processing`;
+                document.querySelector('#uploadDbButton').innerHTML = `Processing...`;
                 setTimeout(function(){
                   location.reload();
                 }, 3000);
               }else if (utype == 'image') {
-                document.querySelector('#uploadProgressDiv').innerHTML = `processing`;
+                document.querySelector('#uploadProgressDiv').innerHTML = `Processing...`;
                 setTimeout(function(){
                   location.reload();
                 }, 3000);
@@ -253,7 +253,7 @@ class showMenus{
           // Upload successful, handle the response
           var response = JSON.parse(xhr.responseText);
           if (response.Result) {
-            document.querySelector('#uploadProgressDivVideo').innerHTML = `processing`;
+            document.querySelector('#uploadProgressDivVideo').innerHTML = `Processing...`;
             setTimeout(function(){
             location.reload();
           }, 3000);
@@ -292,6 +292,8 @@ class showMenus{
       // Create a Blob object from the ArrayBuffer
       return new Blob([ab], { type: mimeString });
     }
+
+
     removeImage() {
       document.querySelector('#uploadDbButton').style.display = 'none';
       document.querySelector('#removeImage').style.display = 'none';

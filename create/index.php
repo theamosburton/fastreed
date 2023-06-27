@@ -21,7 +21,6 @@ class createContent{
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
         $this->userData = new getLoggedData();
-        $this->uploadData = new getUploadData();
     }
 }
 
@@ -44,6 +43,17 @@ class createContent{
     <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        <?php
+            $v = new createContent();
+            echo 'var ePID = "'.$v->userData->getSelfDetails()['ePID'].'";';
+            if ($v->userData->getSelfDetails()['userType'] == 'Admin') {
+                echo 'var whoIs = "admin"';
+            }elseif ($v->userData->getSelfDetails()['userType'] == 'User') {
+                echo 'var whoIs = "user"';
+            }
+        ?>
+    </script>
 </head>
 <body>
     <div class="editContainer">
@@ -52,20 +62,36 @@ class createContent{
             <div class="uploadsDiv" id="uploadDiv">
                 <div class="uploadHead">
                     <div class="top">
-                    <div class="uploadsTitle">Media Library</div>
-                        <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
-                            <i class="fa-solid fa-x whatIcon"></i>
+                        <div class="uploadsTitle">Media Library</div>
+                            <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
+                                <i class="fa-solid fa-x whatIcon"></i>
+                            </div>
+                        </div>
+                    <div class="refreshUpload" >
+                        <div class="uploadNew" id="uploadNew">
+                            <div>
+                                <label for="uploadNewMedia">Upload New</label>
+                                <input onchange="new uploadMedia()" type="file" id="uploadNewMedia" hidden="">
+                                <i class="fa fa-plus-square"></i>
+                            </div>
+                        </div>
+                        <div class="refreshDiv">
+                            <i onclick="uploadsDataClass.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
                         </div>
                     </div>
-                    <div class="refresh" onclick="uploadsDataClass.fetchUploads()">Refresh <i class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i></div>
+                    <div class="uploadingBar" id="uploadingBar" style="display:none">
+                        <div class="uploadMessage" id="uploadMessage"></div>
+                        <div class="uploadProgress" id="uploadProgress" >
+                            <div style="display:none"></div>
+                        </div> 
+                    </div>
                 </div>
                 <div class="uploads" id="uploads">
-                
                     <!-- Uploads will be set here -->
                 </div>
-                
             </div>
         </div>
+
         <div class="hideShow hideShowLeft" id="hsLeft">
             <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'lefthideMe')"></i>
 
@@ -94,15 +120,17 @@ class createContent{
         <div class="sections rightSection" id="rightSection">
             <div class="rightDiv">
                 <div class="rightHead">
+                    <div class="top">
+                        <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
+                            <i class="fa-solid fa-x whatIcon"></i>
+                        </div>
+                        <div class="buttonsDiv">
+                            <div class="buttons">Draft</div>
+                            <div class="buttons">Save</div>
+                            <div class="buttons">Publish</div>
+                        </div>
+                    </div>
                     
-                    <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
-                        <i class="fa-solid fa-x whatIcon"></i>
-                    </div>
-                    <div class="buttonsDiv">
-                        <div class="buttons">Draft</div>
-                        <div class="buttons">Save</div>
-                        <div class="buttons">Publish</div>
-                    </div>
 
                 </div>
                 <div id="selectedObject" class="selectedObject">
@@ -127,11 +155,11 @@ class createContent{
                                 <span class="property">Colors</span>
                                 <div class="div">
                                     <span>Text</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" value="#000">
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
                                 </div>
                                 <div class="div">
                                     <span>Background</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" value="#ff0000">
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
                                 </div>
                             </div>
 
@@ -183,4 +211,5 @@ class createContent{
 </body>
 <script src="layers.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 <script src="function.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
+<script src="upload.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 </html>

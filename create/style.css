@@ -215,19 +215,83 @@ html{
     max-height: 90%;
     border-radius: 10px;
 }
-.editContainer .leftSection .uploadsDiv .uploadHead .refresh{
+.editContainer .leftSection .uploadsDiv .uploadHead .refreshUpload{
     display: flex;
     width: 100%;
     margin: 5px 12px;
-    align-items: center;
     background-color: #28282e;
     color: grey;
-    padding: 3px 10px;
+    padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
+    flex-direction: row;
+    align-items: center;
 }
-.editContainer .leftSection .uploadsDiv .uploadHead .refresh i{
-    margin-left: 10px;
+.editContainer .leftSection .uploadsDiv .uploadHead .uploadingBar{
+    margin: 5px;
+    background-color: #28282e;
+    padding: 4px 15px;
+    width: 100%;
+    border-radius: 5px;
+    color: grey;
+}
+.editContainer .leftSection .uploadsDiv .uploadHead .warning{
+    background-color: rgba(189, 97, 64, 0.798);
+    color: white;
+}
+.uploadHead .uploadingBar .uploadProgress{
+    width: 100%;
+    height: 13px;
+    background-color: rgb(78, 85, 85);
+    margin: 10px 0;
+    border-radius: 20px;
+}
+.uploadHead .uploadingBar .uploadProgress div{
+    width: 0%;
+    height: 13px;
+    background-color: rgb(8, 159, 159);
+    margin: 10px 0;
+    border-radius: 20px;
+}
+.uploadHead .uploadingBar .success{
+    color: rgb(10, 180, 10);
+}
+.refreshUpload label{
+    margin: 0 10px 0 5px;
+    cursor: pointer;
+}
+.refreshUpload .refreshDiv{
+    width: max-content;
+    display: flex;
+    justify-content: right;
+}
+.refreshUpload .uploadNew{
+    display: flex;
+    width: 100%;
+    min-width: 60%;
+    align-items: center;
+    padding: 3px 8px;
+    justify-content: flex-start;
+}
+.refreshUpload .uploadNew div{
+    background-color: #40404b;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+.refreshUpload .uploadNew .status{
+    margin-left: 5px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 30px;
+}
+.refreshUpload .uploadNew .status:hover{
+    background-color: #40404b;
+}
+.refreshUpload .uploadNew div:hover{
+    background-color: #111113;
 }
 
 .editContainer .leftSection .uploadsDiv .uploadContent{
@@ -319,7 +383,7 @@ html{
 }
 .righthideMe{
     display: none;
-    margin: 0 0 10px 0;
+    margin: 0;
 }
 .lefthideMe .whatIcon, .righthideMe .whatIcon{
     color: white;
@@ -340,6 +404,12 @@ html{
     font-weight: bold;
     margin-left: 10px;
     color: grey;
+}
+.rightHead .top {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 .rightHead .buttonsDiv .buttons:hover{
     background-color: #28282e;
