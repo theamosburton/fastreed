@@ -30,7 +30,14 @@ class uploadsData{
           self.uploads['up' + i].link = upData[i].path;
           self.uploads['up' + i].type = upData[i].what;
         }
-        self.showUploads();
+
+        if (self.uploadsCount != layers.presentLayer) {
+          self.showUploads();
+        }else{
+          var refreshElement = document.getElementById('rotateRefresh');
+          refreshElement.classList.remove('infinite-rotation');
+        }
+        
       }else{
 
       }
