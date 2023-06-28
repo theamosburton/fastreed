@@ -3,6 +3,7 @@ class uploadsData{
     this.uploadsData = {};
     this.uploads = {};
     this.uploadsCount;
+    this.totalMedia = 0;
     this.fetchUploads();
   }
 
@@ -31,7 +32,7 @@ class uploadsData{
           self.uploads['up' + i].type = upData[i].what;
         }
 
-        if (self.uploadsCount != layers.presentLayer) {
+        if (self.totalMedia != layers.presentLayer) {
           self.showUploads();
         }else{
           var refreshElement = document.getElementById('rotateRefresh');
@@ -99,6 +100,8 @@ class uploadsData{
         promises.push(fetchVideos());
       }
     }
+
+    this.totalMedia = this.uploadsCount;
 
     Promise.all(promises).then(() => {
       var refreshElement = document.getElementById('rotateRefresh');
