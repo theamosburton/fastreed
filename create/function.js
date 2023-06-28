@@ -101,9 +101,10 @@ class uploadsData{
       }
     }
 
-    this.totalMedia = this.uploadsCount;
+    
 
     Promise.all(promises).then(() => {
+      this.totalMedia = this.uploadsCount;
       var refreshElement = document.getElementById('rotateRefresh');
       refreshElement.classList.remove('infinite-rotation');
       resolve(); // Resolving the promise when all uploads are loaded and displayed
