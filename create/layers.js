@@ -169,16 +169,7 @@ class Layers{
         };
     }
 
-    updatePlusButton(){
-        var plusIcon = document.getElementById('plusIcon');
-        if (this.presentLayer+1 == this.totalLayers) {
-            plusIcon.style.color= 'darkgreen';
-            plusIcon.setAttribute('onclick', 'layers.createNewLayer()');
-        }else{
-            plusIcon.style.color = 'coral';
-            plusIcon.removeAttribute('onclick');
-        }
-    }
+  
 
     playPauseMedia(){
         var playPauseMedia = document.querySelector(`#layer${this.presentLayer} #playPauseMedia`);
@@ -228,17 +219,6 @@ class Layers{
         }
     }
 
-    updateMinusButton(){
-        var minusIcon = document.getElementById('minusIcon');
-        if (this.presentLayer+1 == this.totalLayers) {
-            minusIcon.style.color= 'darkgreen';
-            minusIcon.setAttribute('onclick', 'layers.deleteLayer()');
-        }else{
-            minusIcon.style.color = 'coral';
-            minusIcon.removeAttribute('onclick');
-        }
-    }
-
 
     playPauseLastMedia(direction){
         let presentLayer = this.presentLayer-1;
@@ -262,5 +242,6 @@ class Layers{
     }
 }
 let layers = new Layers();
+
 
     

@@ -37,11 +37,12 @@ html{
     justify-content: center;
 }
 .editContainer .editorSection .editorBox{
-    margin: 20px 40px 10px 40px;
-    width: calc(9*1.8rem);
-    height: calc(16*1.8rem);
-    box-shadow: 0px 0px 2px 2px grey;
+    margin: 5px 40px 5px 40px;
+    width: calc(9*1.7rem);
+    height: calc(16*1.7rem);
+    box-shadow: 0px 0px 1px 1px grey;
     display: flex;
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
     color: grey;
@@ -53,6 +54,7 @@ html{
     height: 100%;
     object-fit: cover;
     overflow: hidden;
+    border-radius: 10px;
 }
 .editContainer .editorSection .editorBox:hover{
    cursor: pointer;
@@ -97,6 +99,9 @@ html{
 .editContainer .editorSection .editorBox .layers{
     position: relative;
     z-index: 999;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
 }
 .editContainer .editorSection .editorBox .layers .videoControls{
     position: absolute;
@@ -457,7 +462,7 @@ html{
     transition: all .3s;
 }
 
-.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover, .rightDiv .selectedObject .objectOptions .objectOptionsmenus div .active{
+.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover, .rightDiv .selectedObject .objectOptions .objectOptionsmenus .active{
     cursor: pointer;
     background-color: #40404b;
     border: 0;

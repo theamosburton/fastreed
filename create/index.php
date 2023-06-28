@@ -130,26 +130,21 @@ class createContent{
                             <div class="buttons">Publish</div>
                         </div>
                     </div>
-                    
-
                 </div>
-                <div id="selectedObject" class="selectedObject">
-                    <div class="objectHead">
-                        <span>LAYER 1</span>
+
+                <div id="selectedObject" class="selectedObject" style="display:">
+                    <div class="objectHead" id="objectHead">
+                        <span>Layer 1</span>
                     </div>
 
-                    <div class="objectOptions">
+                    <div class="objectOptions" >
                         <div class="objectOptionsmenus">
-                            <div class="objectImage">MEDIA</div>
-                            <div class="objectText">TEXT</div>
-                            <div class="objectCaption">CAPTION</div>
+                            <div class="objectMedia active" id="objectMedia">Media</div>
+                            <div class="objectText" id="objectText">Text</div>
+                            <div class="objectCaption" id="objectCaption">Caption</div>
                         </div>
 
                         <div class="objectOptionsbody" style="display:flex;">
-                            <div class="options">
-                                <span class="property">Text</span>
-                                <input type="text" class="value inputText">
-                            </div>
 
                             <div class="options">
                                 <span class="property">Colors</span>
@@ -159,7 +154,7 @@ class createContent{
                                 </div>
                                 <div class="div">
                                     <span>Background</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
                                 </div>
                             </div>
 
@@ -182,23 +177,6 @@ class createContent{
                                 <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
                             </div>
                         </div>
-
-
-                        <div class="objectOptionsbody" style="display:none;">
-                            <div class="options">
-                                <span class="property">Object Fit</span>
-                                <select name="" class="value" id="">
-                                    <option value="">Contain</option>
-                                    <option value="">Cover</option>
-                                </select>
-                            </div>
-
-                            <div class="options">
-                                <span class="property">Overlay Opacity</span>
-                                <input class="value inputText" type="range" id="fontSize" name="points" min="-4" max="4">
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -212,4 +190,5 @@ class createContent{
 <script src="layers.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 <script src="function.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 <script src="upload.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
+<script src="editing.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
 </html>

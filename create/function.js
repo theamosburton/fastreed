@@ -127,7 +127,6 @@ var uploadsDataClass = new uploadsData();
   }
 
   function selectMedia(link, type,olink){
-    var editorId = document.getElementById(`editTab`);
     var hsLeft = document.getElementById('hsLeft');
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
