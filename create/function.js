@@ -32,7 +32,7 @@ class uploadsData{
           self.uploads['up' + i].type = upData[i].what;
         }
 
-        if (self.totalMedia != layers.presentLayer) {
+        if (self.totalMedia != self.uploadsCount) {
           self.showUploads();
         }else{
           var refreshElement = document.getElementById('rotateRefresh');
