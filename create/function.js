@@ -1,3 +1,6 @@
+// Developer: Mohd Shafiq Malik
+// Last Edit: 28-07-2023
+// Non Copyrighted
 class uploadsData{
   constructor(){
     this.uploadsData = {};
@@ -6,8 +9,6 @@ class uploadsData{
     this.totalMedia = 0;
     this.fetchUploads();
   }
-
-
 
   fetchUploads(){
     var refresh = document.getElementById('rotateRefresh');
