@@ -6,6 +6,7 @@ class uploadsData{
     this.uploadsData = {};
     this.uploads = {};
     this.uploadsCount;
+    this.allMediaIDs = [];
     this.totalMedia = 0;
     this.fetchUploads();
   }
@@ -31,9 +32,10 @@ class uploadsData{
           self.uploads['up'+ i] = {};
           self.uploads['up' + i].link = upData[i].path;
           self.uploads['up' + i].type = upData[i].what;
+          self.allMediaIDs[i] = upData[i].mediaID;
         }
-
         if (self.totalMedia != self.uploadsCount) {
+          
           self.showUploads();
         }else{
           var refreshElement = document.getElementById('rotateRefresh');

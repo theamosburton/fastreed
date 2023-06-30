@@ -26,15 +26,18 @@ class respondUploads{
                 $path = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
                 $what = 'image';
                 $icon = 'image';
+                $mediaId = $data[$i][2];
             }elseif($data[$i][6] == 'videos'){
                 $path = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
                 $what = 'video';
                 $icon = 'film';
+                $mediaId = $data[$i][2];
             }
             $uploads[$i] = [
                 'path'=>$path,
                 'what'=>$what,
-                'icon'=>$icon
+                'icon'=>$icon,
+                'id' => $mediaId
             ];
         }
 

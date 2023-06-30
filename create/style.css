@@ -42,7 +42,7 @@ html{
     height: calc(16*1.7rem);
     box-shadow: 0px 0px 1px 1px grey;
     display: flex;
-    border-radius: 10px;
+    border-radius: 20px;
     justify-content: center;
     align-items: center;
     color: grey;
@@ -54,7 +54,7 @@ html{
     height: 100%;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 .editContainer .editorSection .editorBox:hover{
    cursor: pointer;
@@ -97,11 +97,13 @@ html{
     color: rgb(196, 61, 11);
 }
 .editContainer .editorSection .editorBox .layers{
+    /* animation: enterAnimation 1s forwards; */
     position: relative;
     z-index: 999;
     width: 100%;
     height: 100%;
     justify-content: center;
+    transition: all .7s;
 }
 .editContainer .editorSection .editorBox .layers .videoControls{
     position: absolute;
@@ -337,6 +339,7 @@ html{
     width: 100%;
     object-fit: cover;
     cursor:grab;
+    
 }
 .editContainer .leftSection .uploadsDiv .uploadContent img:hover, .editContainer .leftSection .uploadsDiv .uploadContent video:hover{
     cursor: grab;
@@ -500,6 +503,9 @@ html{
     border-radius: 4px;
     margin: 10px 15px 15px 25px;
 }
+  
+
+
 
 @keyframes rotate {
     from {
