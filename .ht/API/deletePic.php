@@ -123,14 +123,13 @@ class deletePic{
 
 
     private function deleteByAdmin($what){
-
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
         $personID = $this->AUTH->decrypt($eid); 
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
-        $path = $this->_DOCROOT.'/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
+        $path = $this->_DOCROOT.'/.ht/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, 'Not an admin');
         }elseif (file_exists($path)) {
