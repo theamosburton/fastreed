@@ -205,13 +205,13 @@ class updateDetails{
     // Renaming upload folder 
     private function renameUploadFolder($cUsername, $Username){
         $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-        $pDirectory = $_DOCROOT.'/fastreedusercontent/photos/'.$cUsername;
-        $vDirectory = $_DOCROOT.'/fastreedusercontent/videos/'.$cUsername;
-        $aDirectory = $_DOCROOT.'/fastreedusercontent/audios/'.$cUsername;
+        $pDirectory = $_DOCROOT.'/.ht/fastreedusercontent/photos/'.$cUsername;
+        $vDirectory = $_DOCROOT.'/.ht/fastreedusercontent/videos/'.$cUsername;
+        $aDirectory = $_DOCROOT.'/.ht/fastreedusercontent/audios/'.$cUsername;
 
-        $pnDirectory = $_DOCROOT.'/fastreedusercontent/photos/'.$Username;
-        $vnDirectory = $_DOCROOT.'/fastreedusercontent/videos/'.$Username;
-        $anDirectory = $_DOCROOT.'/fastreedusercontent/audios/'.$Username;
+        $pnDirectory = $_DOCROOT.'/.ht/fastreedusercontent/photos/'.$Username;
+        $vnDirectory = $_DOCROOT.'/.ht/fastreedusercontent/videos/'.$Username;
+        $anDirectory = $_DOCROOT.'/.ht/fastreedusercontent/audios/'.$Username;
 
         $pDir;
         if (is_dir($pDirectory)) {
