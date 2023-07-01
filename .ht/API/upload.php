@@ -132,7 +132,7 @@ class uploadMedia{
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
                 if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext)['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
-                    $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
+                    $add = '/uploads/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
                     if (!is_dir($directory)) {
                         mkdir($directory, 0777, true);
