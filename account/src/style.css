@@ -743,15 +743,21 @@ margin-top: 10px;
     /* background-color: ; */
 }
 .webstoriesDiv .webstories .webstory .title{
-    padding: 5px 10px;
-    margin-bottom: 20px;
+    padding: 5px 10px 10px 10px;
     color: black;
+    background-color: #eeee;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .webstoriesDiv .webstories .webstory .options{
     display: flex;
+    justify-content: center;
     height: 10%;
-   margin-bottom: 10px;
+    width: 100%;
    color: #050505;
+   background-color: #eeee;
+   border-radius: 0 0 20px 20px;
 }
 .webstoriesDiv .webstories .webstory .options div{
     display: flex;
