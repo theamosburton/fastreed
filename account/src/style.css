@@ -745,12 +745,13 @@ margin-top: 10px;
 .webstoriesDiv .webstories .webstory .title{
     padding: 5px 10px;
     margin-bottom: 20px;
-    background-color: #99b3a4;
+    color: black;
 }
 .webstoriesDiv .webstories .webstory .options{
     display: flex;
     height: 10%;
    margin-bottom: 10px;
+   color: #050505;
 }
 .webstoriesDiv .webstories .webstory .options div{
     display: flex;
