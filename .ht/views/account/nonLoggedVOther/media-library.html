@@ -1,0 +1,83 @@
+<div class="photosLibrary">
+    <div class="title ml-2"> Media Library</div>
+    
+    <div class="photosDiv uploadDiv">
+
+        <?php
+        $username = $this->userData->getOtherData('username', $this->otherUsername)['username'];
+        $id = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+        $data = $this->uploadData->getAllData($id);
+        $data = array_reverse($data);
+        $length = count($data);
+        
+        if($canViewUploads == 'everyone'){
+            showUploads($data, $length, $username, $id);
+        }else{
+            echo <<<HTML
+            <div class="noUpload">
+                <div><i class="fa fa-lock"></i></div>
+                <div> <p>Uploads are private</p></div> 
+            </div>
+            HTML;
+        }
+
+        function showUploads($data, $length, $username, $id){
+            $uploadCount = 0;
+            for($i=0;$i < $length; $i++ ){
+                $idn = $i+1;
+                $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+                $whatToShow;
+                $onclick;
+                $what = '';
+                if($data[$i][6] == 'photos'){
+                    $whatToShow = <<<HTML
+                        <div class="imgDiv" onclick="showImage('{$pathImg}')">
+                            <img src="$pathImg" alt="">
+                        </div>
+                    HTML;
+                    $what = 'photos';
+                    $onclick = 'showImage("'.$pathImg.'")';
+                    $icon = 'image';
+                }elseif($data[$i][6] == 'videos'){
+                    $whatToShow = <<<HTML
+                        <div class="imgDiv" onclick="showVideo('{$pathVid}')">
+                            <video>
+                                <source src="{$pathVid}" type="video/mp4">
+                            </video>
+                        </div>
+                    HTML;
+                    $what = 'videos';
+                    $onclick = 'showVideo("'.$pathVid.'")';
+                    $icon = 'film';
+                }
+                
+            
+                $showUpload =  <<<HTML
+                    <div class="uploadedFile" id="photo{$idn}">
+                        <div class="uploadDivInside">
+                            {$whatToShow}
+                            <div class="fileInfo">
+                                <i class="fa fa-{$icon} fa-sm whatIcon"></i>
+                            </div>
+                        </div>
+                    </div>
+                HTML;
+                if($data[$i][8] == 'everyone'){
+                    echo $showUpload;
+                    $uploadCount += 1;
+                }
+            }
+
+            if(!$uploadCount){
+                echo <<<HTML
+                <div class="noUpload"> 
+                    <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+                    <div> <p>Nothing to display</p></div> </div>
+                HTML;
+            }
+        }
+      
+        ?>
+    </div>
+</div>

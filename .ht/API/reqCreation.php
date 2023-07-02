@@ -26,6 +26,8 @@ class authorReqRes{
             $this->creationRequest();
         }elseif ($data['purpose'] == 'response') {
             $this->adminResponse();
+        }elseif ($data['purpose'] == 'check') {
+            $this->checkCanCreate();
         }
     }
 
@@ -105,6 +107,30 @@ class authorReqRes{
             $return = true;
         }
         return $return;
+    }
+
+    private function checkCanCreate(){
+        $return = false;
+        $data = json_decode(file_get_contents('php://input'), true);
+        $eid = $data['personID'];
+        $dID = $this->AUTH->decrypt($eid);
+        $sql = "SELECT * FROM settings WHERE personID = '$dID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $row = mysqli_fetch_assoc($result);
+                $canCreate = $row['canCreate'];
+                if ($canCreate == 'ACC') {
+                    $return = true;
+                }
+            }
+        }
+
+        if ($return) {
+            showMessage(true, 'Can Create');
+        }else{
+            showMessage(false, 'Cannot Create');
+        }
     }
 }
 

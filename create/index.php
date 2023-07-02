@@ -3,192 +3,183 @@ $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include "../.ht/controller/VISIT.php";
 
-$createContent = new createContent();
+new createContent();
 
 class createContent{
     public $version;
     public $captureVisit;
-    public $userData;
+    protected $adminLogged = false;
+    protected $userLogged = false;
     protected $DB_CONN;
     protected $AUTH;
     protected $FUNC;
-    public $uploadData;
-   function __construct() {
-        // Create an instance to create/save activity
-        $this->captureVisit = new VisitorActivity();
-        $this->FUNC = new BasicFunctions();
-        // Get css,js version from captureVisit
-        $this->version = $this->captureVisit->VERSION;
-        $this->version = implode('.', str_split($this->version, 1));
-        $this->userData = new getLoggedData();
+    protected $userData;
+    protected $pageCss;
+    protected $extraStyle;
+    protected $blackMode;
+    protected $whiteMode;
+    protected $pageJs;
+    protected $extraScript;
+    protected $adminIsEditing;
+    private $DOCROOT;
+    private $SERVROOT;
+
+    function __construct() {
+         // Create an instance to create/save activity
+         $this->captureVisit = new VisitorActivity();
+         $this->BASIC_FUNC = new BasicFunctions();
+         $DB = new DataBase();
+         $this->DB_CONN = $DB->DBConnection();
+         $this->AUTH = new Auth();
+         // Get css,js version from captureVisit
+         $this->version = $this->captureVisit->VERSION;
+         $this->version = implode('.', str_split($this->version, 1));
+         $this->userData = new getLoggedData();
+         $this->uploadData = new getUploadData();
+        if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+            new userEditor();
+        }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='admin') {
+            new userEditor();
+        }else if(!isset($_GET['username']) || empty($_GET['username'])){
+            new userEditor();
+        }else{
+            new adminEditor();
+        }
+    }
+
+
+    protected function checkID($ID, $who, $type){
+        $return = false;
+        if ($who == 'admin') {
+            $dID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
+        }else{
+            $dID = $_SESSION['LOGGED_USER'];
+        }
+        $sql = "SELECT * FROM $type WHERE personID = '$dID' and storyID =  '$ID'";
+        $result = mysqli_query($this->DB_CONN, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $return = true;
+            }
+        }
+
+        return $return;
+    }
+
+    protected function checkCanCreate($who){
+        $return = false;
+        if ($who == 'admin') {
+            $dID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
+        }else{
+            $dID = $_SESSION['LOGGED_USER'];
+        }
+        $sql = "SELECT * FROM settings WHERE personID = '$dID'";
+        $result = mysqli_query($this->DB_CONN, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $row = mysqli_fetch_assoc($result);
+                $canCreate = $row['canCreate'];
+                if ($canCreate == 'ACC') {
+                    $return = true;
+                }
+            }
+        }
+        return $return;
+    }
+    protected function checkStories($who){
+        $return = 0;
+        if ($who == 'admin') {
+            $dID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
+        }else{
+            $dID = $_SESSION['LOGGED_USER'];
+        }
+        $sql = "SELECT * FROM stories WHERE personID = '$dID'";
+        $result = mysqli_query($this->DB_CONN, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $return = mysqli_num_rows($result);
+            }
+        }
+        return $return;
     }
 }
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Cache-Control" content="public, max-age=3600">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="MD. Shafiq Malik">
-    <title></title>
-    <!-- Gobal CSS -->
-    <link rel="shortcut icon" href="/favicon.ico"> 
-    <link href="style.css?v=<?php $v = new createContent(); echo $v->version; ?>" rel="stylesheet">
-    <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-    <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
-    <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        <?php
-            $v = new createContent();
-            echo 'var ePID = "'.$v->userData->getSelfDetails()['ePID'].'";';
-            if ($v->userData->getSelfDetails()['userType'] == 'Admin') {
-                echo 'var whoIs = "admin"';
-            }elseif ($v->userData->getSelfDetails()['userType'] == 'User') {
-                echo 'var whoIs = "user"';
+class userEditor extends createContent{
+    function __construct(){
+
+         // Create an instance to create/save activity
+         $this->captureVisit = new VisitorActivity();
+         $this->BASIC_FUNC = new BasicFunctions();
+         $DB = new DataBase();
+         $this->DB_CONN = $DB->DBConnection();
+         $this->AUTH = new Auth();
+         // Get css,js version from captureVisit
+         $this->version = $this->captureVisit->VERSION;
+         $this->version = implode('.', str_split($this->version, 1));
+         $this->userData = new getLoggedData();
+         $this->uploadData = new getUploadData();
+        // $this->const4Inherited();
+        if (isset($_GET['type']) && !empty($_GET['type'])) {
+            if ($_GET['type'] != 'webstory') {
+                $this->createWebstory();
+            }else if (!isset($_GET['ID']) || empty($_GET['ID'])) {
+                $this->createWebstory();
+            }else if($this->checkID($_GET['ID'], 'user', 'stories')){
+                $this->editWebstory();
+            }else{
+                $this->createWebstory();
             }
-        ?>
-    </script>
-</head>
-<body>
-    <div class="editContainer">
-        <!-- Left Section -->
-        <div class="sections leftSection" id="leftSection">
-            <div class="uploadsDiv" id="uploadDiv">
-                <div class="uploadHead">
-                    <div class="top">
-                        <div class="uploadsTitle">Media Library</div>
-                            <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
-                                <i class="fa-solid fa-x whatIcon"></i>
-                            </div>
-                        </div>
-                    <div class="refreshUpload" >
-                        <div class="uploadNew" id="uploadNew">
-                            <div>
-                                <label for="uploadNewMedia">Upload New</label>
-                                <input onchange="new uploadMedia()" type="file" id="uploadNewMedia" hidden="">
-                                <i class="fa fa-plus-square"></i>
-                            </div>
-                        </div>
-                        <div class="refreshDiv">
-                            <i onclick="uploadsDataClass.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
-                        </div>
-                    </div>
-                    <div class="uploadingBar" id="uploadingBar" style="display:none">
-                        <div class="uploadMessage" id="uploadMessage"></div>
-                        <div class="uploadProgress" id="uploadProgress" >
-                            <div id="progress" style="display:none"></div>
-                        </div> 
-                    </div>
-                </div>
-                <div class="uploads" id="uploads">
-                    <!-- Uploads will be set here -->
-                </div>
-            </div>
-        </div>
+        }
+    }
+    private function createWebstory(){
+        if (!$this->checkCanCreate('user')) {
+            header('Location:/account/?message=cannot create stories');
+        }else{
+            if ($this->checkStories('user')) {
+                $number = $this->checkStories('user')+1;
+            }else{
+                $number = 1;
+            }
+            $ordinal = $this->BASIC_FUNC->convertToOrdinal($number);
 
-        <div class="hideShow hideShowLeft" id="hsLeft">
-            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'lefthideMe')"></i>
+            $title = 'My '.$ordinal. ' webstory';
+            
+            $personID = $_SESSION['LOGGED_USER'];
+            $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
+            $firstEdit = time();
+            $tdate = date('Y-m-d');
+            $status = 'drafted ';
+            $access = 'self';
+            $storyData = '{}';
+            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
+            $result = mysqli_query($this->DB_CONN, $sql);
+            if ($result) {
+                header("Location:/create/?type=webstory&ID=".$storyID);
+            }else{
+                header('Location:/account/');
+            }
+        } 
+    }
 
-        </div>
-        <!-- Left Section -->
 
-        <!-- Editor Section -->
-        <div class="sections editorSection">
-            <div class="layersNumber" id="layerCount">1/1</div>
-            <div class="editorBox" id="editTab">
-            </div>
-            <div class="editorNav">
-                <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
-                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
-                <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
-                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
-                <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
-            </div>
-        </div>
-        <!-- Editor Section -->
 
-        <!-- Right Section -->
-        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'righthideMe')">
-            <i class="fa-solid fa-bars whatIcon"></i>
-        </div>
-        <div class="sections rightSection" id="rightSection">
-            <div class="rightDiv">
-                <div class="rightHead">
-                    <div class="top">
-                        <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
-                            <i class="fa-solid fa-x whatIcon"></i>
-                        </div>
-                        <div class="buttonsDiv">
-                            <div class="buttons">Draft</div>
-                            <div class="buttons">Save</div>
-                            <div class="buttons">Publish</div>
-                        </div>
-                    </div>
-                </div>
+    private function editWebstory(){
+        echo <<<HTML
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        HTML;
 
-                <div id="selectedObject" class="selectedObject" style="display:">
-                    <div class="objectHead" id="objectHead">
-                        <span>Layer 1</span>
-                    </div>
+        include '../.ht/views/create/head.html';
 
-                    <div class="objectOptions" >
-                        <div class="objectOptionsmenus">
-                            <div class="objectMedia active" id="objectMedia">Media</div>
-                            <div class="objectText" id="objectText">Text</div>
-                            <div class="objectCaption" id="objectCaption">Caption</div>
-                        </div>
+        include '../.ht/views/create/body.html';
 
-                        <div class="objectOptionsbody" style="display:flex;">
+        include '../.ht/views/create/foot.html';
 
-                            <div class="options">
-                                <span class="property">Colors</span>
-                                <div class="div">
-                                    <span>Text</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
-                                </div>
-                                <div class="div">
-                                    <span>Background</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
-                                </div>
-                            </div>
 
-                            <div class="options">
-                                <span class="property">Background Opacity</span>
-                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
-                            </div>
-
-                            <div class="options">
-                                <span class="property">Font Wieght</span>
-                                <select name="" id="" class="value inputText">
-                                    <option value="">Light</option>
-                                    <option value="">Bold</option>
-                                    <option value="">Bolder</option>
-                                </select>
-                            </div>
-
-                            <div class="options">
-                                <span class="property">Font Size</span>
-                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-
-        </div>
-        <!-- Right Section -->
-       
-    </div>
-</body>
-<script src="layers.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
-<script src="function.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
-<script src="upload.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
-<script src="editing.js?v=<?php $v = new createContent(); echo $v->version; ?>"></script>
-</html>
+        echo <<<HTML
+        </html>
+        HTML;
+    }
+}
+?>

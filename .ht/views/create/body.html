@@ -1,0 +1,131 @@
+<body>
+    <div class="editContainer">
+        <!-- Left Section -->
+        <div class="sections leftSection" id="leftSection">
+            <div class="uploadsDiv" id="uploadDiv">
+                <div class="uploadHead">
+                    <div class="top">
+                        <div class="uploadsTitle">Media Library</div>
+                            <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
+                                <i class="fa-solid fa-x whatIcon"></i>
+                            </div>
+                        </div>
+                    <div class="refreshUpload" >
+                        <div class="uploadNew" id="uploadNew">
+                            <div>
+                                <label for="uploadNewMedia">Upload New</label>
+                                <input onchange="new uploadMedia()" type="file" id="uploadNewMedia" hidden="">
+                                <i class="fa fa-plus-square"></i>
+                            </div>
+                        </div>
+                        <div class="refreshDiv">
+                            <i onclick="uploadsDataClass.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
+                        </div>
+                    </div>
+                    <div class="uploadingBar" id="uploadingBar" style="display:none">
+                        <div class="uploadMessage" id="uploadMessage"></div>
+                        <div class="uploadProgress" id="uploadProgress" >
+                            <div id="progress" style="display:none"></div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="uploads" id="uploads">
+                    <!-- Uploads will be set here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="hideShow hideShowLeft" id="hsLeft">
+            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'lefthideMe')"></i>
+
+        </div>
+        <!-- Left Section -->
+
+        <!-- Editor Section -->
+        <div class="sections editorSection">
+            <div class="layersNumber" id="layerCount">1/1</div>
+            <div class="editorBox" id="editTab">
+            </div>
+            <div class="editorNav">
+                <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
+                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
+                <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
+                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
+                <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
+            </div>
+        </div>
+        <!-- Editor Section -->
+
+        <!-- Right Section -->
+        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'righthideMe')">
+            <i class="fa-solid fa-bars whatIcon"></i>
+        </div>
+        <div class="sections rightSection" id="rightSection">
+            <div class="rightDiv">
+                <div class="rightHead">
+                    <div class="top">
+                        <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
+                            <i class="fa-solid fa-x whatIcon"></i>
+                        </div>
+                        <div class="buttonsDiv">
+                            <div class="buttons">Draft</div>
+                            <div class="buttons">Save</div>
+                            <div class="buttons">Publish</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="selectedObject" class="selectedObject" style="display:">
+                    <div class="objectHead" id="objectHead">
+                        <span>Layer 1</span>
+                    </div>
+
+                    <div class="objectOptions" >
+                        <div class="objectOptionsmenus">
+                            <div class="objectMedia active" id="objectMedia">Media</div>
+                            <div class="objectText" id="objectText">Text</div>
+                            <div class="objectCaption" id="objectCaption">Caption</div>
+                        </div>
+
+                        <div class="objectOptionsbody" style="display:flex;">
+
+                            <div class="options">
+                                <span class="property">Colors</span>
+                                <div class="div">
+                                    <span>Text</span>
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
+                                </div>
+                                <div class="div">
+                                    <span>Background</span>
+                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
+                                </div>
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Background Opacity</span>
+                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Wieght</span>
+                                <select name="" id="" class="value inputText">
+                                    <option value="">Light</option>
+                                    <option value="">Bold</option>
+                                    <option value="">Bolder</option>
+                                </select>
+                            </div>
+
+                            <div class="options">
+                                <span class="property">Font Size</span>
+                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+
+        </div>
+        <!-- Right Section -->
+    </div>
+</body>

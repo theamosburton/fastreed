@@ -148,8 +148,23 @@ function enableLightMode(){
 }
 
 
-
-
+function disbaleScroll() {
+    // Get the current Y scroll position
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    // Set the body to hide overflow and record the previous scroll position
+    document.body.style.overflow = 'hidden';
+    document.body.dataset.scrollY = scrollY;
+  }
+  
+  // Enable scrolling on the webpage
+  function enableScroll() {
+    // Get the previous Y scroll position
+    var scrollY = parseInt(document.body.dataset.scrollY || '0');
+    // Remove the overflow style from the body
+    document.body.style.overflow = '';
+    // Scroll back to the previous position
+    window.scrollTo(0, scrollY);
+  }
 
 function str_obj(str) {
     str = str.split('; ');

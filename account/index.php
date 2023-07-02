@@ -61,7 +61,7 @@ class showProfile {
 
         //Create an instance to get logged data
         // This will check weather user is logged or not
-        include "../.ht/views/profile/colorMode.html";
+        include "../.ht/views/account/colorMode.html";
 
         if (!isset($_COOKIE['colorMode'])) {
             $this->extraStyle = $this->blackMode;
@@ -136,7 +136,7 @@ class showProfile {
     protected function addFooter(){
         //***************/ Footer Section /*****************//
         echo <<<HTML
-        <!-- Global jQuery -->
+        <!-- Global jS -->
         <script type="text/javascript" src="/assets/js/jquery-1.12.3.min.js"></script>
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
@@ -195,9 +195,9 @@ class loggedAdminVother extends showProfile{
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageCss = ['/profile/src/style.css'];
+        $this->pageCss = ['/account/src/style.css'];
         
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js', '/profile/src/deleteAccount.js'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
         $this->extraScript = '
         <script> 
             // other
@@ -224,7 +224,7 @@ class loggedAdminVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/adminVOther/index.html";
+        include "../.ht/views/account/adminVOther/index.html";
 
         echo <<<HTML
                     </div>
@@ -247,9 +247,9 @@ class loggedVself extends showProfile{
         $this->webTitle = "Add and Edit Your Profile Info";
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageCss = ['/profile/src/style.css'];
+        $this->pageCss = ['/account/src/style.css'];
         
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/editDetails.js', '/assets/js/cropper.js','/profile/src/user.js', '/profile/src/deleteAccount.js'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
 
         $this->extraScript = 
         '<script> 
@@ -280,7 +280,7 @@ class loggedVself extends showProfile{
         //***************/ Profile Section /**********//
         echo "\n";
         
-        include $this->DOCROOT."/.ht/views/profile/loggedVSelf/index.html";
+        include $this->DOCROOT."/.ht/views/account/loggedVSelf/index.html";
 
         // ***************************************** //
         
@@ -307,8 +307,8 @@ class loggedVother extends showProfile{
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js', '/profile/src/user.js'];
+        $this->pageCss = ['/account/src/style.css'];
+        $this->pageJs = ['/account/src/style.js', '/profile/src/user.js'];
 
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
@@ -330,7 +330,7 @@ class loggedVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/loggedVOther/index.html";
+        include "../.ht/views/account/loggedVOther/index.html";
 
         echo <<<HTML
                     </div>
@@ -352,8 +352,17 @@ class nonLoggedVother extends showProfile{
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
-        $this->pageCss = ['/profile/src/style.css'];
-        $this->pageJs = ['/profile/src/style.js'];
+        $this->pageCss = ['/account/src/style.css'];
+        $this->pageJs = ['/account/src/style.js'];
+
+
+        $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
+        $userSettings = $this->userData->getSettings($otherID);
+        $canViewMail = $userSettings['canViewMail'];
+        $canViewAge = $userSettings['canViewAge'];
+        $canViewContent = $userSettings['canViewContent'];
+        $canViewUploads = $userSettings['canViewUploads'];
+
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
@@ -363,7 +372,7 @@ class nonLoggedVother extends showProfile{
                     <div class="row ">
         HTML."\n";
         include "../.ht/views/homepage/dropdowns.html";
-        include "../.ht/views/profile/nonLoggedVOther/index.html";
+        include "../.ht/views/account/nonLoggedVOther/index.html";
 
         echo <<<HTML
                     </div>

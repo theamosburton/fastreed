@@ -17,7 +17,7 @@
  
                                 if($selfId == $otherID ){
                                     echo <<<HTML
-                                    <a href="/profile/" class="profileActions">Profile</a>
+                                    <a href="/account/" class="profileActions">Profile</a>
                                     HTML;
                                 }elseif($this->userData->isFollowed($selfId, $otherID)){
                                     echo <<<HTML

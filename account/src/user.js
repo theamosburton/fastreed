@@ -387,45 +387,9 @@ function showPicOptions(no){
       options.style.display = 'none';
   }
 }
-function showImage(path){
-  var showImageDiv = document.getElementById('imageShowDiv');
-  if (showImageDiv.style.display == 'none') {
-    showImageDiv.style.display = 'flex';
-    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-    showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
-                               <img src="${path}" alt=""></img>`;
-    disbaleScroll();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-}
 
-function showVideo(path){
-  var showImageDiv = document.getElementById('imageShowDiv');
-  if (showImageDiv.style.display == 'none') {
-    showImageDiv.style.display = 'flex';
-    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-    showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
-                               <video controls controlsList="nodownload"> <source src="${path}" type="video/mp4"></vide>`;
-    disbaleScroll();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-}
 
-function removeImage(){
-  var showImageDiv = document.getElementById('imageShowDiv');
-  if (showImageDiv.style.display != 'none') {
-    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-    showContainer.innerHTML = ``;
-    showImageDiv.style.display = 'none';
-    enableScroll();
-  }
-}
+
 
 function changeImageVisibility(imgID, no, whois){
   var field = document.getElementById(`visibilityAccess${no}`);
@@ -583,6 +547,43 @@ function responseCreation(val){
 
   responseCreate();
 }
+
+
+function InitializeWebstory(){
+  var reqCreation = document.querySelector('#reqCreation');
+  reqCreation.querySelector('i').style.display = 'none';
+  reqCreation.innerHTML = 'Initializing...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
+
+  // Checking if he can create stories or not
+  const canCreateStories = async() => {
+    const url = '/.ht/API/reqCreation.php';
+    var encyDat = {
+      'purpose' : 'check',
+      'personID' : `${ePID}`,
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+    if (data) {
+      if (data.Result) { 
+        reqCreation.innerHTML='Creating...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
+        window.location.href = "/create/?type=webstory";
+      }else{
+        reqCreation.innerHTML= `${data.message}`;
+      }
+    }else{
+      reqCreation.innerHTML= `${data.message}`;
+    }
+  }
+  canCreateStories();
+}
+
+
 
 
 

@@ -11,7 +11,7 @@ if($canCreate == 'NOR'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <span id="requested" class="ml-3" >You have already requested for creator access</span>
+        <span id="requested" class="ml-3" >You have requested for creator access</span>
     </div>
     HTML;
 }elseif($canCreate == 'REJ'){
@@ -30,7 +30,7 @@ if($canCreate == 'NOR'){
     echo <<<HTML
     <div class="contentTopics resCreation row ">
         <div class="title col-12 mb-3">Create</div>
-        <span id="reqCreation" class="reqCreationButton ml-3" onclick="createWebstories()">Create Webstories <i class="ml-1 fa fa-solid fa-circle-plus"></i></span>
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="InitializeWebstory()">Create Webstories <i class="ml-1 fa fa-solid fa-circle-plus"></i></span>
     </div>
     HTML;
 }

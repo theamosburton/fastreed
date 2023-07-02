@@ -82,6 +82,22 @@ class BasicFunctions
     return $y;
   }
 
+
+  public function convertToOrdinal($number) {
+    $suffix = 'th'; // Default suffix is 'th'
+
+    // Exceptions for 1st, 2nd, and 3rd
+    if ($number % 10 == 1 && $number % 100 != 11) {
+        $suffix = 'st';
+    } elseif ($number % 10 == 2 && $number % 100 != 12) {
+        $suffix = 'nd';
+    } elseif ($number % 10 == 3 && $number % 100 != 13) {
+        $suffix = 'rd';
+    }
+
+    return $number . $suffix;
+}
+
   public function generateOTP($y){
     $DB = $this->DB_CONNECT->DBConnection();
     $randOTP ="";
