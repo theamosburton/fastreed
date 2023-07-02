@@ -583,6 +583,10 @@ function InitializeWebstory(){
   canCreateStories();
 }
 
+function editStory(x){
+  window.location.href = `/create/?type=webstory&ID=${x}`;
+}
+
 
 
 
