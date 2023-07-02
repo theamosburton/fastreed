@@ -37,9 +37,13 @@
     }
     
     if ($this->adminLogged) {
-        echo '<script>var adminLogged = true;</script>';
+        echo '<script>var adminLogged = true;
+        var userLogged = false;
+        </script>';
     }elseif ($this->userLogged) {
-        echo '<script>var userLogged = true;</script>';
+        echo '<script>var userLogged = true;
+        var adminLogged = false;
+        </script>';
     }else {
         echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>';
     }
