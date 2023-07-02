@@ -767,9 +767,11 @@ margin-top: 10px;
     border-radius: 10px;
     padding: 5px;
 }
-
+.webstoriesDiv .webstories .webstory .options div i{
+    margin-bottom: 10px;
+}
 .webstoriesDiv .webstories .webstory .options div:hover{
-   color: #3a3d40;
+   color:#28a745;
    cursor: pointer;
 }
 @media (max-width: 990px) {
