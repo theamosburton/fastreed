@@ -73,7 +73,7 @@ if($canCreate == 'NOR'){
             $setUrl = $webstories['firstImage'];
         }
 
-        echo '
+        $webstories[$i] = '
         <div class="webstory">
             <div class="background" style="background-image: url(' . $setUrl . ');">
                 <div class="title">' . $stories[$i][8] . '</div>
@@ -86,6 +86,10 @@ if($canCreate == 'NOR'){
                 </div>
             </div>
         </div>';
+    }
+    $webstories = array_reverse($webstories);
+    for($j=0; $j<count($webstories); $j++){
+        echo $webstories[$j];
     }
     ?>
     </div>
