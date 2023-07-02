@@ -619,10 +619,15 @@ function deleteStory(storyID, divID){
     }else if(!data.Result){
       alert(`${data.message}`);
     }else{
-      storyDIV.style.marginLeft = '-210px';
+      storyDIV.querySelector('.background .title').innerHTML = 'Deleting...';
+      
       setTimeout(function(){
-        storyDIV.style.display = 'none';
-      }, 500);
+        setTimeout(function(){
+          storyDIV.style.display = 'none';
+        }, 300);
+        storyDIV.style.marginLeft = '-210px';
+        
+      }, 1000);
      
     }
   }
