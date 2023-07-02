@@ -619,7 +619,7 @@ function deleteStory(storyID, divID){
     }else if(!data.Result){
       alert(`${data.message}`);
     }else{
-      storyDIV.style.transform = 'translateX(-20px)';
+      storyDIV.style.transform = 'translateX(-100px)';
       setTimeout(function(){
         storyDIV.style.display = 'none';
       }, 500);
