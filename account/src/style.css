@@ -729,6 +729,10 @@ margin-top: 10px;
     align-items: center;
 }
 
+.webstoriesDiv .webstories .webstory:first-child{
+   margin-left: 0px;
+}
+
 .webstoriesDiv .webstories .webstory .background{
     display: flex;
     flex-direction: column;
