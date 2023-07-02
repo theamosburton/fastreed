@@ -1,5 +1,5 @@
 <?php
-class getUploadData{
+class getStoriesData{
     private $DB;
     function __construct(){
         $DB_CONNECT = new Database();
@@ -8,7 +8,7 @@ class getUploadData{
 
     public function getAllData($id){
         $return = array();
-        $sql = "SELECT * FROM uploads WHERE personID = '$id' and purpose ='UP'";
+        $sql = "SELECT * FROM stories WHERE personID = '$id'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $rowCount = mysqli_num_rows($result);

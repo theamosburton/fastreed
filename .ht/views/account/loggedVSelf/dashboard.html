@@ -1,5 +1,6 @@
 
 <?php
+$showCreation = false;
 if($canCreate == 'NOR'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
@@ -27,12 +28,54 @@ if($canCreate == 'NOR'){
     </div>
     HTML;
 }elseif($canCreate == 'ACC'){
-    echo <<<HTML
-    <div class="contentTopics resCreation row ">
-        <div class="title col-12 mb-3">Create</div>
-        <span id="reqCreation" class="reqCreationButton ml-3" onclick="InitializeWebstory()">Create Webstories <i class="ml-1 fa fa-solid fa-circle-plus"></i></span>
-    </div>
-    HTML;
+    $showCreation = true;
 }
 ?>
+
+<div class="contentTopics resCreation row webstoriesDiv">
+    <div class="mtitle col-12 mb-3">
+        <div>
+            <span>Web Stories</span>
+        </div>
+        <?php
+        if($showCreation){
+            echo <<<HTML
+            <div>
+                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory()">New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                </span>
+            </div>
+            HTML;
+        }
+        ?>
+    </div>
+    
+    <div class="webstories">
+        <div class="webstory">
+            <div class="background">
+                <div class="title">My 1st webstory</div>
+                <div class="options">
+                    <div> <i class="fa fa-pen"></i></div>
+                    <div> <i class="fa fa-paper-plane"></i></div>
+                    <div> <i class="fa fa-trash"></i></div>
+                    <div> <i class="fa fa-ellipsis-v"></i></div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="webstory">
+            <div class="background">
+                <div class="title">My 2nd webstory</div>
+                <div class="options">
+                    <div> <i class="fa fa-pen"></i></div>
+                    <div> <i class="fa fa-paper-plane"></i></div>
+                    <div> <i class="fa fa-trash"></i></div>
+                    <div> <i class="fa fa-ellipsis-v"></i></div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
     

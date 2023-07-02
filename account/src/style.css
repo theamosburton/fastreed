@@ -670,6 +670,93 @@ margin-top: 10px;
     cursor: pointer;
     background-color: rgb(182, 182, 182);
 }
+
+
+.webstoriesDiv .mtitle{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(65, 160, 173)!important;
+    
+    color: black;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.webstoriesDiv .mtitle div{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bolder;
+    padding:0;
+}
+.webstoriesDiv .mtitle div #reqCreation{
+    margin: 5px 10px;
+    padding: 0px 20px!important;
+    background-color: rgb(157, 212, 212)!important;
+    border-radius: 5px;
+}
+.webstoriesDiv .mtitle div:first-child{
+    justify-content: flex-start;
+}
+
+.webstoriesDiv .mtitle span{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent!important;
+    color: inherit;
+}
+.webstoriesDiv .webstories{
+    display: flex;
+    flex-direction: row;
+    overflow:auto;
+    height: 100%;
+}
+.webstoriesDiv .webstories .webstory{
+
+    margin: 10px 10px 20px 15px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    width: 200px;
+    height: 280px;
+    justify-content: center;
+    align-items: center;
+}
+
+.webstoriesDiv .webstories .webstory .background{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+.webstoriesDiv .webstories .webstory .title{
+    padding: 5px 10px;
+    margin-bottom: 20px;
+}
+.webstoriesDiv .webstories .webstory .options{
+    display: flex;
+    height: 10%;
+   margin-bottom: 10px;
+}
+.webstoriesDiv .webstories .webstory .options div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.webstoriesDiv .webstories .webstory .options div:hover{
+   color: #3a3d40;
+   cursor: pointer;
+}
 @media (max-width: 990px) {
     .leftSide{
         border: none!important;
