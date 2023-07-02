@@ -588,6 +588,48 @@ function editStory(x){
 }
 
 
+function deleteStory(storyID, divID){
+  var storyDIV = document.querySelector(`#webstory${divID}`);
+  if (adminLogged) {
+    whoIs = 'admin';
+  }else{
+    whoIs = 'user';
+    currentUsername = '';
+  }
+  
+  const deleteS = async ()=>{
+    const url = '/.ht/API/webstories.php';
+    var encyDat = {
+      'whois':`${whoIs}`,
+      'purpose' : 'delete',
+      'username' : `${currentUsername}`,
+      'storyID':`${storyID}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+    var data = await response.json();
+
+    if (!data) {
+      alert('Something went wrong');
+    }else if(!data.Result){
+      alert(`${data.message}`);
+    }else{
+      storyDIV.style.transform = 'translateX(-20px)';
+      setTimeout(function(){
+        storyDIV.style.display = 'none';
+      }, 500);
+     
+    }
+  }
+  deleteS();
+}
+
+
 
 
 

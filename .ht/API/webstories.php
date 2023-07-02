@@ -1,0 +1,129 @@
+<?php
+include 'APIHEAD.php';
+if ($proceedAhead) {
+    new Webstories();
+}
+
+class Webstories{
+    private $DB_CONNECT;
+    private $DB;
+    private $userData;
+    private $AUTH;
+    private $UID;
+    private $BASIC_FUNC;
+    private $_DOCROOT;
+    function __construct(){
+        $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
+        $this->BASIC_FUNC = new BasicFunctions(); 
+        $this->AUTH = new Auth();
+        $this->userData = new getLoggedData();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!isset($data['whois']) || empty($data['whois'])) {
+            showMessage(false, 'Specify Who are you?');
+        }elseif (!isset($data['storyID']) || empty($data['storyID'])) {
+            showMessage(false, 'Story ID not found');
+        }elseif (!isset($data['purpose']) || empty($data['purpose'])) {
+            showMessage(false, 'Purpose not found');
+        }elseif ($data['purpose'] == 'delete') {
+            $this->deleteStory();
+        }elseif ($data['purpose'] == 'update') {
+            $this->updateStory();
+        }
+    }
+
+    private function deleteStory(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($data['whois'] == 'admin') {
+            if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+                if (!isset($data['username']) || empty($data['username'])) {
+                    showMessage(false, 'Username needed');
+                }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
+                    $storyID = $data['storyID'];
+                    $sql = "DELETE FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        showMessage(true, 'Deleted');
+                    }else{
+                        showMessage(false, 'Can not Delete');
+                    }
+                }else{
+                    showMessage(false, 'Incorrect Username');
+                }
+            }else{
+                showMessage(false, 'Not an admin');
+            }
+        }else if($data['whois'] == 'user'){
+            if ($UID = $this->userData->getSelfDetails()['UID']) {
+                $storyID = $data['storyID'];
+                $sql = "DELETE FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+                $result = mysqli_query($this->DB, $sql);
+                if ($result) {
+                    showMessage(true, 'Deleted');
+                }else{
+                    showMessage(false, 'Can not Delete');
+                }
+            }else{
+                showMessage(false, 'Incorrect Username');
+            }
+        }else{
+            showMessage(false, 'Specify who are you?');
+        }
+    }
+
+
+    private function updateStory(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($data['whois'] == 'admin') {
+            if ($this->userData->getSelfDetails()['accType'] == 'Admin') {
+                if (!isset($data['username']) || empty($data['username'])) {
+                    if ($UID = $this->userData->getOtherData('username', $data['username'])) {
+                        if (!isset($data['data']) || empty($data['data'])) {
+                            $storyData = $data['data'];
+                            $storyID = $data['storyID'];
+                            $sql = "UPDATE stories set storyData = '$storyData' WHERE personID = '$UID' and storyID = '$storyID'";
+                            $result = mysqli_query($this->DB, $sql);
+                            if ($result) {
+                                showMessage(true, 'Edited');
+                            }else{
+                                showMessage(false, 'Can not Edit');
+                            }
+                        }else{
+                            showMessage(false, 'No updated data');
+                        }
+                        
+                    }else{
+                        showMessage(false, 'Incorrect Username');
+                    }
+                }else{
+                    showMessage(false, 'Username needed');
+                }
+            }else{
+                showMessage(false, 'Not an admin');
+            }
+        }else if($data['whois'] == 'user'){
+            if ($UID = $this->userData->getSelfDetails()['UID']) {
+                if (!isset($data['data']) || empty($data['data'])) {
+                    $storyID = $data['storyID'];
+                    $storyData = $data['data'];
+                    $sql = "UPDATE stories set storyData = '$storyData' WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        showMessage(true, 'Edited');
+                    }else{
+                        showMessage(false, 'Can not Edit');
+                    }
+                }else{
+                    showMessage(false, 'No updated data');
+                }
+            }else{
+                showMessage(false, 'Incorrect Username');
+            }
+        }else{
+            showMessage(false, 'Specify who are you?');
+        }
+    }
+}
+?>
