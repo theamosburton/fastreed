@@ -23,6 +23,7 @@ class showProfile {
     protected $adminIsEditing;
     private $DOCROOT;
     private $SERVROOT;
+    protected $getStoriesData;
     function __construct() {
         
         $this->const4Inherited();
@@ -75,6 +76,7 @@ class showProfile {
         $this->uploadData = new getUploadData();
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
+        $this->getStoriesData = new getStoriesData();
     } 
     protected function addHead(){
         // *************/ Head Section /**************** //
