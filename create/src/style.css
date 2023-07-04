@@ -33,12 +33,14 @@ html{
     background-color: white;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    padding:10px 0;
+    overflow: auto;
 }
 .editContainer .editorSection .editorBox{
     margin: 5px 40px 5px 40px;
-    width: calc(9*1.7rem);
-    height: calc(16*1.7rem);
+    width: calc(9*1.75rem);
+    height: calc(16*1.8rem);
+    min-height: calc(16*1.8rem);
     box-shadow: 0px 0px 1px 1px grey;
     display: flex;
     border-radius: 20px;
