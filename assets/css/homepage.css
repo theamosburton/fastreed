@@ -479,6 +479,7 @@
 }
 .profile-info .info-div #myEmail{
   font-size: smaller;
+  min-width: 200px;
 }
 
 .profile-bottom .menus{
@@ -782,6 +783,7 @@ header #nav #profileImage{
 @media (max-width: 530px) {
   .profile-info .info-div #myEmail{
     font-size: small;
+    min-width: 100;
   }
   .profileUpdateShade .wrapper form #errorMessage{
     margin-left:0px;
