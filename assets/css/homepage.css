@@ -833,7 +833,9 @@ header #nav #profileImage{
 }
   
    @media (max-width: 350px) {
-    
+    .profile-info .info-div #myEmail{
+      min-width: none;
+    }
     .f-card_large .image, .f-card_medium .image{
       height: 400px;
      }
