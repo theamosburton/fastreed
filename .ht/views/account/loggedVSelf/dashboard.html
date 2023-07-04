@@ -34,15 +34,19 @@ if($canCreate == 'NOR'){
 
 <div class="contentTopics resCreation row webstoriesDiv">
     <div class="mtitle col-12 mb-3">
-        <div>
-            <span>Web Stories</span>
-        </div>
+        
         <?php
         if($showCreation){
             echo <<<HTML
             <div>
                 <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory()">New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
                 </span>
+            </div>
+            HTML;
+        }else{
+            echo <<<HTML
+            <div>
+                <span>Web Stories</span>
             </div>
             HTML;
         }
