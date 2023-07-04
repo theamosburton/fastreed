@@ -570,6 +570,7 @@ html{
 
     .editContainer .editorSection{
         width: 100%;
+        margin-top: 10%;
     }
 
     .editContainer .rightSection{
@@ -583,10 +584,14 @@ html{
 }
 @media (max-width: 400px){
    
-    
+    .editContainer .editorSection .editorBox{
+        width: calc(9*2rem);
+        height: calc(16*1.95rem);
+        min-height: calc(16*1.95rem);
+    }
     .editContainer .editorSection {
         justify-content: flex-start;
-        padding-top: 20%;
+        padding-top: 10%;
     }
 }
 
