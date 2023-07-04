@@ -146,7 +146,7 @@ var uploadsDataClass = new uploadsData();
     var leftSection = document.getElementById('leftSection');
     if (type == 'image') {
       layers.modifyMedia('image', link, olink);
-      var layerId =  layers.presentLayer;
+      var layerId =  layers.presentLayerIndex;
       var layer = document.getElementById(`layer${layerId}`);
       var imageElement = document.createElement('img');
       imageElement.src = link;
@@ -164,7 +164,7 @@ var uploadsDataClass = new uploadsData();
       }
     }else if(type == 'video'){
       layers.modifyMedia('video', link, olink);
-      var layerId =  layers.presentLayer;
+      var layerId =  layers.presentLayerIndex;
       var layer = document.getElementById(`layer${layerId}`);
 
       var videoElement = document.createElement('video');

@@ -43,15 +43,16 @@
 
         <!-- Editor Section -->
         <div class="sections editorSection">
-            <div class="layersNumber" id="layerCount">1/1</div>
-            <div class="editorBox" id="editTab">
-            </div>
+            <!-- <div class="layersNumber" id="layerCount">1/1</div> -->
+            
             <div class="editorNav">
-                <div class="navs backArrow" onclick="layers.moveBackward()"> <i class="fa-sharp fa-solid fa-angle-left"></i> </div>
+                <div class="navs backArrow"  onclick="layers.moveBackward()"> <i id="backwardIcon" class="fa-sharp fa-solid fa-angle-left"></i> </div>
                 <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
                 <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
                 <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
-                <div class="navs frontArrow" onclick="layers.moveForward()"><i class="fa-sharp fa-solid fa-angle-right"></i></div>
+                <div class="navs frontArrow"  onclick="layers.moveForward()"><i id="forwardIcon" class="fa-sharp fa-solid fa-angle-right"></i></div>
+            </div>
+            <div class="editorBox" id="editTab">
             </div>
         </div>
         <!-- Editor Section -->

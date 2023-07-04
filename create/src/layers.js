@@ -1,9 +1,9 @@
 class Layers{
     constructor(){
         this.editorId = document.getElementById('editTab');
-        this.presentLayer = 0;
+        this.presentLayerIndex = 0;
+        this.presentLayer  = this.presentLayerIndex + 1 ;
         this.totalLayers = 1;
-        this.layersCount = `${this.presentLayer+1} - ${this.totalLayers}`;
         this.layers = [];
         this.layers[0] = {
             'media': {},
@@ -12,7 +12,7 @@ class Layers{
             'caption' :{}
         };
         var newLayer = document.createElement('div');
-        newLayer.id = `layer${this.presentLayer}`;
+        newLayer.id = `layer${this.presentLayerIndex}`;
         newLayer.className = 'layers';
         newLayer.innerHTML = `<div class="placeholder">
             <p> Add</p>
@@ -21,13 +21,20 @@ class Layers{
             <small> 9:16, 3:4 and 2:3 </small>
         </div>`;
         this.editorId.appendChild(newLayer);
-        this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+        this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
         var otherLayers = document.querySelector("#editTab .layers");
         for (var i = 0; i < otherLayers.length; i++) {
             otherLayers[i].style.display = "none";
         }
-        document.getElementById('layerCount').innerHTML = this.layersCount;
-
+        
+        this.layersAhead = this.totalLayers - this.presentLayer;
+        if (this.layersAhead) {
+            this.layersBack = this.totalLayers-this.layersAhead-1;
+        }else{
+            this.layersBack = 0;
+        }
+        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
+        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
         this.presentLayerDiv.style.display = 'flex';
     }
 
@@ -36,19 +43,20 @@ class Layers{
     createNewLayer(){  
         this.inBetweenLayersAdd();
         this.totalLayers += 1;
-        this.presentLayer += 1;
-        this.layers[this.presentLayer] = {
+        this.presentLayerIndex += 1;
+        this.presentLayer  = this.presentLayerIndex + 1 ;
+        this.layers[this.presentLayerIndex] = {
             'media': {},
             'title':{},
             'description': {},
             'caption' :{}
         };
         var newLayer = document.createElement('div');
-        newLayer.id = `layer${this.presentLayer}`;
+        newLayer.id = `layer${this.presentLayerIndex}`;
         newLayer.className = 'layers';
         
         this.editorId.appendChild(newLayer);
-        this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+        this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
         for (var i = 0; i < this.totalLayers; i++) {
             document.getElementById(`layer${i}`).style.display = 'none';
         }
@@ -60,16 +68,19 @@ class Layers{
         </div>`;
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
-        document.getElementById('layerCount').innerHTML = `${this.presentLayer+1} - ${this.totalLayers}`;
+        this.layersAhead = this.totalLayers - this.presentLayer;
+        this.layersBack = this.totalLayers-this.layersAhead-1;
+        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
+        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
     }
 
     inBetweenLayersAdd(){
-        if (this.presentLayer+1 != this.totalLayers) {
-            var PL  = this.presentLayer + 1 ;
-            var layersAhead = this.totalLayers - PL;
+        if (this.presentLayerIndex+1 != this.totalLayers) {
+            var presentLayer  = this.presentLayerIndex + 1 ;
+            var layersAhead = this.totalLayers - presentLayer;
             for (let i = layersAhead; i >= 1; i--) {
-                var layersIndex = PL + i - 1;
-                console.log(`Current layersIndex: ${layersIndex}`);
+                var layersIndex = presentLayer + i - 1;
+                // console.log(`Current layersIndex: ${layersIndex}`);
                 document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex + 1}`;
                 console.log(`Updated id: layer${layersIndex + 1}`);
             }
@@ -78,11 +89,11 @@ class Layers{
     }
 
     deleteLayer(){
-        if (this.totalLayers > 1 && this.presentLayer != 0) {
+        if (this.totalLayers > 1 && this.presentLayerIndex != 0) {
             this.inBetweenLayersDel();
-            this.layers.splice(this.presentLayer, 1);
+            this.layers.splice(this.presentLayerIndex, 1);
             this.totalLayers -= 1;
-            this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+            this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
             this.presentLayerDiv.remove();
             this.moveBackward();
 
@@ -90,42 +101,52 @@ class Layers{
     }
 
     inBetweenLayersDel(){
-        if (this.presentLayer+1 != this.totalLayers) {
-            var PL  = this.presentLayer + 1 ;
-            var layersAhead = this.totalLayers - PL;
+        if (this.presentLayerIndex+1 != this.totalLayers) {
+            var presentLayer  = this.presentLayerIndex + 1 ;
+            var layersAhead = this.totalLayers - presentLayer;
             for (let i = layersAhead; i >= 1; i--) {
-                var layersIndex = PL + i - 1;
+                var layersIndex = presentLayer + i - 1;
                 console.log(`Current layersIndex: ${layersIndex}`);
                 document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex - 1}`;
                 console.log(`Updated id: layer${layersIndex - 1}`);
             }
         }
     }
+
+
     moveForward(){
-        var endOfLayers  = this.totalLayers <= this.presentLayer +1;
+        var endOfLayers  = this.totalLayers <= this.presentLayerIndex +1;
         if (!endOfLayers) {
-            this.presentLayer  += 1;
-            this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+            this.presentLayerIndex  += 1;
+            this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
             for (var i = 0; i < this.totalLayers; i++) {
                 document.getElementById(`layer${i}`).style.display = 'none';
-            }
+            }   
             this.presentLayerDiv.style.display = 'flex';
             this.playPauseLastMedia('forward');
         }
-        document.getElementById('layerCount').innerHTML =  `${this.presentLayer+1} - ${this.totalLayers}`;
+        this.presentLayer  = this.presentLayerIndex + 1 ;
+        this.layersAhead = this.totalLayers - this.presentLayer;
+        this.layersBack = this.totalLayers-this.layersAhead-1;
+        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
+        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
     }
 
     moveBackward(){    
-        if (this.presentLayer > 0) {
-            this.presentLayer -= 1;
-            this.presentLayerDiv = document.getElementById(`layer${this.presentLayer}`);
+        if (this.presentLayerIndex > 0) {
+            this.presentLayerIndex -= 1;
+            this.presentLayer  = this.presentLayerIndex + 1 ;
+            this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
             for (var i = 0; i < this.totalLayers; i++) {
                 document.getElementById(`layer${i}`).style.display = 'none';
             }
             this.presentLayerDiv.style.display = 'flex';
             this.playPauseLastMedia('backward');
         }
-        document.getElementById('layerCount').innerHTML = `${this.presentLayer+1} - ${this.totalLayers}`;
+        this.layersAhead = this.totalLayers - this.presentLayer;
+        this.layersBack = this.totalLayers-this.layersAhead-1;
+        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
+        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
        
     }
     modifyMedia(type, blobUrl, url){
@@ -139,7 +160,7 @@ class Layers{
         }
 
         this.presentLayerDiv.innerHTML = '';
-        this.layers[this.presentLayer].media = {
+        this.layers[this.presentLayerIndex].media = {
             'type': type,
             'blobUrl' : blobUrl,
             'url' : url,
@@ -160,11 +181,11 @@ class Layers{
             <small> 9:16, 3:4 and 2:3 </small>
             </div>`;
         media.remove();
-        this.layers[this.presentLayer].media = {};
+        this.layers[this.presentLayerIndex].media = {};
     }
 
     modifyTitle(text){
-        this.layers[this.presentLayer].title = {
+        this.layers[this.presentLayerIndex].title = {
             'text': text
         };
     }
@@ -172,8 +193,8 @@ class Layers{
   
 
     playPauseMedia(){
-        var playPauseMedia = document.querySelector(`#layer${this.presentLayer} #playPauseMedia`);
-        var video = document.querySelector(`#layer${this.presentLayer} video`);
+        var playPauseMedia = document.querySelector(`#layer${this.presentLayerIndex} #playPauseMedia`);
+        var video = document.querySelector(`#layer${this.presentLayerIndex} video`);
         var status = playPauseMedia.dataset.status;
         if (playPauseMedia.classList.contains("fa-play")) {
             playPauseMedia.classList.remove("fa-play");
@@ -195,8 +216,8 @@ class Layers{
         }
     }
     muteUnmute(){
-        var muteUnmute = document.querySelector(`#layer${this.presentLayer} #muteUnmute`);
-        var video = document.querySelector(`#layer${this.presentLayer} video`);
+        var muteUnmute = document.querySelector(`#layer${this.presentLayerIndex} #muteUnmute`);
+        var video = document.querySelector(`#layer${this.presentLayerIndex} video`);
         var status = muteUnmute.dataset.status;
 
         if (muteUnmute.classList.contains("fa-volume-high")) {
@@ -221,19 +242,19 @@ class Layers{
 
 
     playPauseLastMedia(direction){
-        let presentLayer = this.presentLayer-1;
+        let presentLayerIndex = this.presentLayerIndex-1;
         if (direction == 'add') {
-            let presentLayerMedia = document.querySelector(`#layer${presentLayer} video`);
+            let presentLayerMedia = document.querySelector(`#layer${presentLayerIndex} video`);
             if (presentLayerMedia) {
                 presentLayerMedia.pause();
             }
         }else if(direction == 'forward'){
-            let presentLayerMedia = document.querySelector(`#layer${presentLayer} video`);
+            let presentLayerMedia = document.querySelector(`#layer${presentLayerIndex} video`);
             if (presentLayerMedia) {
                 presentLayerMedia.pause();
             }
         }else{
-            let presentLayerMedia = document.querySelector(`#layer${presentLayer+2} video`);
+            let presentLayerMedia = document.querySelector(`#layer${presentLayerIndex+2} video`);
             if (presentLayerMedia) {
                 presentLayerMedia.pause();
             }
