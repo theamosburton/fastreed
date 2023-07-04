@@ -91,17 +91,22 @@ if($canCreate == 'NOR'){
             </div>
         </div>';
     }
-    echo <<<HTML
-    <div class="webstories">
-    HTML;
+   
     $webstories = array_reverse($webstories);
-    for($j=0; $j<count($webstories); $j++){
-        echo $webstories[$j];
-    }
+    if(count($webstories) <= 0){
 
-    echo <<<HTML
-    </div>
-    HTML;
+    }else{
+        echo <<<HTML
+        <div class="webstories">
+        HTML;
+        for($j=0; $j<count($webstories); $j++){
+            echo $webstories[$j];
+        }
+        echo <<<HTML
+        </div>
+        HTML;
+    }
+    
     ?>
     
 </div>
