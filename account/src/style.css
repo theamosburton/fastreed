@@ -676,10 +676,9 @@ margin-top: 10px;
     border: 0!important;
 }
 .webstoriesDiv .mtitle{
-    display: flex;
+    display: block;
     flex-direction: row;
-    background-color: rgb(65, 160, 173)!important;
-    
+    width: 100%;
     color: black;
     border-radius: 5px;
     padding: 0;
@@ -687,26 +686,25 @@ margin-top: 10px;
 
 .webstoriesDiv .mtitle div{
     display: flex;
-    justify-content: flex-end;
     font-weight: bolder;
     padding:0;
 }
 .webstoriesDiv .mtitle div #reqCreation{
     margin: 5px 10px;
-    padding: 0px 20px!important;
-    background-color: rgb(157, 212, 212)!important;
     border-radius: 5px;
 }
-.webstoriesDiv .mtitle div:first-child{
-    justify-content: flex-start;
+.webstoriesDiv .mtitle div #reqCreation:hover{
+    color: #3a3d40;
 }
+
+
 
 .webstoriesDiv .mtitle span{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: transparent!important;
+    background-color: rgb(92, 201, 216)!important;
     color: inherit;
 }
 .webstoriesDiv .webstories{

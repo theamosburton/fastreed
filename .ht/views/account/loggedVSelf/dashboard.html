@@ -33,13 +33,13 @@ if($canCreate == 'NOR'){
 ?>
 
 <div class="contentTopics resCreation row webstoriesDiv">
-    <div class="mtitle col-12 mb-3">
+    <div class="mtitle mb-3">
         
         <?php
         if($showCreation){
             echo <<<HTML
             <div>
-                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory()">New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory()">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
                 </span>
             </div>
             HTML;
@@ -94,7 +94,11 @@ if($canCreate == 'NOR'){
    
     $webstories = array_reverse($webstories);
     if(count($webstories) <= 0){
-
+        echo <<<HTML
+        <div class="noUpload"> 
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>Nothing to display</p></div> </div>
+        HTML;
     }else{
         echo <<<HTML
         <div class="webstories">

@@ -572,7 +572,7 @@ function InitializeWebstory(){
     if (data) {
       if (data.Result) { 
         reqCreation.innerHTML='Creating...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
-        window.location.href = "/create/?type=webstory";
+        // window.location.href = "/create/?type=webstory";
       }else{
         reqCreation.innerHTML= `${data.message}`;
       }
