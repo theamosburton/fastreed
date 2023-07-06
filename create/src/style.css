@@ -136,7 +136,7 @@ html{
 .editContainer .leftSection .uploadsDiv, .rightDiv{
     margin: 10px;
     width: 100%;
-    height: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -409,15 +409,15 @@ html{
 .rightHead .buttonsDiv .buttons{
     padding: 6px 13px;
     border: 1px solid grey;
-    border-radius: 30px;
+    border-radius: 5px;
     font-weight: bold;
     margin-left: 10px;
-    color: grey;
+    color: rgb(194, 197, 201);
 }
 .rightHead .top {
     display: flex;
     width: 100%;
-    justify-content: center;
+    overflow-y: auto;
     align-items: center;
 }
 .rightHead .buttonsDiv .buttons:hover{
@@ -427,19 +427,37 @@ html{
 
 .rightDiv .selectedObject{
     display: flex;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     width: 100%;
     flex-direction: column;
 }
 .rightDiv .selectedObject .objectHead{
     display: flex;
     background-color: #28282e;
-    width: 100%;
+    /* width: 100%; */
     padding: 10px;
     font-weight: bold;
     color: rgb(194, 197, 201);
-    border-bottom: 1px solid grey;
+    overflow-y: auto;
+    border-radius: 10px;
 }
+
+.rightDiv .selectedObject .objectHead span{
+    margin: 0 8px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.rightDiv .selectedObject .objectHead span:first-child{
+    margin-left: 5px;
+}
+.rightDiv .selectedObject .objectHead .active, .rightDiv .selectedObject .objectHead span:hover{
+    cursor: pointer;
+    background-color: #40404b;
+    border: 0;
+}
+
 .rightDiv .selectedObject .objectOptions{
     display: flex;
     background-color: #28282e;
@@ -447,56 +465,49 @@ html{
     padding: 10px;
     color: rgb(194, 197, 201);
     flex-direction: column;
-}
-
-.rightDiv .selectedObject .objectOptions .objectOptionsmenus{
-    display: flex;
-    overflow: auto;
-}
-.rightDiv .selectedObject .objectOptions .objectOptionsmenus div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2px 5px;
-    background-color: #28282e;
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    /* border: 1px solid grey; */
-    transition: all .3s;
-}
-
-.rightDiv .selectedObject .objectOptions .objectOptionsmenus div:hover, .rightDiv .selectedObject .objectOptions .objectOptionsmenus .active{
-    cursor: pointer;
-    background-color: #40404b;
-    border: 0;
-    /* border: 1px solid grey; */
+    margin-top: 10px;
+    border-radius: 10px;
 }
 .rightDiv .selectedObject .objectOptions .objectOptionsbody{
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    border-top: 1px solid grey;
+    padding: 0px 10px 10px 10px;
 }
 
-.rightDiv .selectedObject .objectOptions .objectOptionsbody .options{
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv{
     display: flex;
     flex-direction: column;
     padding: 10px;
     background-color: #3a3d40;
     border-radius: 10px;
     margin-top: 10px;
-
 }
-.rightDiv .selectedObject .objectOptions .objectOptionsbody .options div{
-    margin: 5px 10px 0px 20px;
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .objectName{
+    display: flex;
+    cursor: pointer;
 }
-.rightDiv .selectedObject .objectOptions .objectOptionsbody .options .property{
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .objectName span{
+    display: flex;
+    width: 50%;
+    font-weight: bolder;
+    align-items: center;
+    margin-left: 10px;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .objectName i{
+    display: flex;
+    width: 50%;
+    justify-content: right;
+    margin-right: 10px;
+    align-items: center;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .options div{
+    margin: 10px 10px 0px 20px;
+}
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .options .property{
     padding: 0px 10px;
     font-weight: bold;
 }
-.rightDiv .selectedObject .objectOptions .objectOptionsbody .options .value{
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .options .value{
     background-color: transparent;
     border: 1px solid grey;
     color: rgb(202, 195, 195);
@@ -504,7 +515,9 @@ html{
     border-radius: 4px;
     margin: 10px 15px 15px 25px;
 }
-  
+.rightDiv .selectedObject .objectOptions .objectOptionsbody .optionsDIv .options .text{
+    width: -webkit-fill-available;
+}
 
 .fa-angle-right:before {
     content: ""!important;

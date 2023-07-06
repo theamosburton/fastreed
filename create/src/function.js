@@ -145,8 +145,8 @@ var uploadsDataClass = new uploadsData();
     var hsRight = document.getElementById('hsRight');
     var leftSection = document.getElementById('leftSection');
     if (type == 'image') {
-      layers.modifyMedia('image', link, olink);
-      var layerId =  layers.presentLayerIndex;
+      edits.modifyMedia('image', link, olink);
+      var layerId =  editor.presentLayerIndex;
       var layer = document.getElementById(`layer${layerId}`);
       var imageElement = document.createElement('img');
       imageElement.src = link;
@@ -163,15 +163,15 @@ var uploadsDataClass = new uploadsData();
         }
       }
     }else if(type == 'video'){
-      layers.modifyMedia('video', link, olink);
-      var layerId =  layers.presentLayerIndex;
+      edits.modifyMedia('video', link, olink);
+      var layerId =  editor.presentLayerIndex;
       var layer = document.getElementById(`layer${layerId}`);
 
       var videoElement = document.createElement('video');
       videoElement.src = link;
       videoElement.type = 'video/mp4';
       var contorlsElements = document.createElement('div');
-      contorlsElements.id = `videoControls${layers.presentLayer}`;
+      contorlsElements.id = `videoControls${editor.presentLayer}`;
       contorlsElements.className = 'videoControls';
       contorlsElements.innerHTML = `
       <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="layers.muteUnmute()"></i>
@@ -179,8 +179,8 @@ var uploadsDataClass = new uploadsData();
       `;
       layer.appendChild(contorlsElements);
       layer.appendChild(videoElement);
-      layers.playPauseMedia();
-      layers. muteUnmute();
+      editor.playPauseMedia();
+      editor. muteUnmute();
       var screenWidth = window.innerWidth;
       if (screenWidth < 800) {
         if (leftSection.style.display = 'flex') {
@@ -192,4 +192,31 @@ var uploadsDataClass = new uploadsData();
         }
       }
     }
+  }
+
+  function openOptions(x){
+    let layerName = document.getElementById('layerNumber');
+    let metaDataName = document.getElementById('metaDataName');
+    let metaData = document.getElementById('metaData');
+    let objectOptions = document.getElementById('objectOptions');
+
+    if (x == 'layers') {
+      metaData.style.display = 'none';
+      if (metaDataName.classList.contains("active")) {
+        metaDataName.classList.remove('active');
+      }
+
+      layerName.classList.add('active');
+      objectOptions.style.display = 'block';
+      
+    }else if(x == 'metadata'){
+      objectOptions.style.display = 'none';
+      if (layerName.classList.contains("active")) {
+        layerName.classList.remove('active');
+      }
+
+      metaDataName.classList.add('active');
+      metaData.style.display = 'block';
+    }
+
   }

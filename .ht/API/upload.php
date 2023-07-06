@@ -26,7 +26,7 @@ class uploadMedia{
             showMessage(false, 'Sepcify type to upload 1');
         }elseif (!isset($_POST['editor'])) {
             showMessage(false, 'Sepcify editor');
-        }elseif($_POST['editor'] == 'admin') {
+        }elseif($_POST['editor'] == 'Admin') {
             $ePID = $_POST['ePID'];
             $dPID = $this->AUTH->decrypt($ePID);
             if ($_POST['type'] == 'image') {
@@ -40,7 +40,7 @@ class uploadMedia{
             }else {
                 showMessage(false, 'Sepcify what to upload 2');
             }
-        }elseif($_POST['editor'] == 'user') {
+        }elseif($_POST['editor'] == 'User') {
             $dPID = $_SESSION['LOGGED_USER'];
             if ($_POST['type'] == 'image') {
                 $this->uploadImage($dPID);

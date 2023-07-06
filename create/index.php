@@ -169,6 +169,13 @@ class userEditor extends createContent{
         <html lang="en">
         <head>
         HTML;
+        echo  
+        '<script> 
+            var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
+            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
+            var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
+            var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
+         </script>';
 
         include '../.ht/views/create/head.html';
 

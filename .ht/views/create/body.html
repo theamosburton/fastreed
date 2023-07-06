@@ -46,11 +46,11 @@
             <!-- <div class="layersNumber" id="layerCount">1/1</div> -->
             
             <div class="editorNav">
-                <div class="navs backArrow"  onclick="layers.moveBackward()"> <i id="backwardIcon" class="fa-sharp fa-solid fa-angle-left"></i> </div>
-                <div class="navs minus" id="minusIcon" onclick="layers.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
+                <div class="navs backArrow"  onclick="editor.moveBackward()"> <i id="backwardIcon" class="fa-sharp fa-solid fa-angle-left"></i> </div>
+                <div class="navs minus" id="minusIcon" onclick="editor.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
                 <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
-                <div class="navs frontPlus" id="plusIcon" onclick="layers.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
-                <div class="navs frontArrow"  onclick="layers.moveForward()"><i id="forwardIcon" class="fa-sharp fa-solid fa-angle-right"></i></div>
+                <div class="navs frontPlus" id="plusIcon" onclick="editor.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
+                <div class="navs frontArrow"  onclick="editor.moveForward()"><i id="forwardIcon" class="fa-sharp fa-solid fa-angle-right"></i></div>
             </div>
             <div class="editorBox" id="editTab">
             </div>
@@ -76,51 +76,166 @@
                     </div>
                 </div>
 
-                <div id="selectedObject" class="selectedObject" style="display:">
+                <div id="selectedObject" class="selectedObject" >
                     <div class="objectHead" id="objectHead">
-                        <span>Layer 1</span>
+                        <span class="active" id="layerNumber" onclick="openOptions('layers')" >Layer 1</span>
+                        <span class="" id="metaDataName" onclick="openOptions('metadata')">Metadata</span>
                     </div>
 
-                    <div class="objectOptions" >
-                        <div class="objectOptionsmenus">
-                            <div class="objectMedia active" id="objectMedia">Media</div>
-                            <div class="objectText" id="objectText">Text</div>
-                            <div class="objectCaption" id="objectCaption">Caption</div>
-                        </div>
-
-                        <div class="objectOptionsbody" style="display:flex;">
-
-                            <div class="options">
-                                <span class="property">Colors</span>
-                                <div class="div">
-                                    <span>Text</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor">
+                    <div class="objectOptions" id="metaData" style="display: none;">
+                        <div class="objectOptionsbody">
+                            <div class="optionsDIv" id="">
+                                <div class="options" style="">
+                                    <div>
+                                        <span>URL</span>
+                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="https://fastreed.com/web-stories/[Your Url]">
+                                    </div>
                                 </div>
-                                <div class="div">
-                                    <span>Background</span>
-                                    <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
+
+                                <div class="options">
+                                    <div>
+                                        <span>Title</span>
+                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="Add Title">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="options">
-                                <span class="property">Background Opacity</span>
-                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
-                            </div>
+                                <div class="options">
+                                    <div>
+                                        <span>Description</span>
+                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Describe your story"></textarea>
+                                    </div>
+                                </div>
 
-                            <div class="options">
-                                <span class="property">Font Wieght</span>
-                                <select name="" id="" class="value inputText">
-                                    <option value="">Light</option>
-                                    <option value="">Bold</option>
-                                    <option value="">Bolder</option>
-                                </select>
-                            </div>
-
-                            <div class="options">
-                                <span class="property">Font Size</span>
-                                <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
+                                <div class="options">
+                                    <div>
+                                        <span>Keywords</span>
+                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Keywords"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="objectOptions" id="objectOptions">
+                        <div class="objectOptionsbody">
+                            <!-- Media Options -->
+                            <div class="optionsDIv" id="mediaStyles">
+                                <span class="objectName" onclick="edits.expandOptions('mediaStyles','')">
+                                    <span>Layer Media</span>  
+                                    <i class="fa fa-caret-right"></i>
+                                </span>
+                                <div class="options" style="display: none;">
+                                    <div class="div">
+                                        <span>Media Fit</span>
+                                        <select onchange="edits.mediaFit()" id="mediaFit" class="value inputText">
+                                            <option value="Cover">Cover</option>
+                                            <option value="Contain">Contain</option>
+                                        </select>
+                                    </div>
+                                    <div class="div">
+                                        <span>Overlay Colour</span>
+                                        <select onchange="edits.mediaOverlayColor()" id="mediaOverlayColor" class="value inputText">
+                                            <option value="Black">Black</option>
+                                            <option value="white">white</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="div">
+                                        <span>Overlay Opacity</span>
+                                        <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity" value="10">
+                                    </div>
+
+                                    <div class="div">
+                                        <span>Caption</span>
+                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="Captions">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Media Options -->
+                            
+                            <!-- Text Styles -->
+                            <div class="optionsDIv" id="titleStyles">
+                                <span class="objectName" onclick="edits.expandOptions('titleStyles', '')"> 
+                                    <span>Layer Title</span>  
+                                    <i class="fa fa-caret-right"></i>
+                                </span>
+                                <div class="options" style="display:none;">
+                                    <div class="div">
+                                        <span>Text</span>
+                                        <input class="value inputText text" type="text" id="titleText" placeholder="Title">
+                                    </div>
+                                    <div class="div">
+                                        <span>Font Weight</span>
+                                        <select name="" id="titleFontWeight" class="value inputText">
+                                            <option value="">Light</option>
+                                            <option value="">Bold</option>
+                                            <option value="">Bolder</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="div">
+                                        <span>Font Size</span>
+                                        <input class="value inputText" type="range" id="titleFontSize" name="points" min="-2" max="4">
+                                    </div>
+    
+                                    <div class="div">
+                                        <span>Text Color</span>
+                                        <input class="value inputText" type="color" id="titleColor" name="favcolor">
+                                    </div>
+                                    <div class="div">
+                                        <span>Text Background Color</span>
+                                        <input class="value inputText" type="color" id="titleBgColor" name="favcolor" style="margin-left:5px">
+                                    </div>
+    
+                                    <div class="div">
+                                        <span>Background Opacity</span>
+                                        <input class="value inputText" type="range" id="titleBgOpacity" name="points" value="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Text Styles -->
+
+
+
+                            <!-- Layer Text Styles -->
+                            <div class="optionsDIv" id="aboutStyles">
+                                <span class="objectName" onclick="edits.expandOptions('aboutStyles', '')">
+                                    <span>Layer Text</span>  
+                                    <i class="fa fa-caret-right"></i>
+                                </span>
+                                <div class="options" style="display:none;">
+                                    <div class="div">
+                                        <span>Text</span>
+                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Write text about this media"></textarea>
+                                    </div>
+                                    <div class="div">
+                                        <span>Font Weight</span>
+                                        <select name="" id="" class="value inputText">
+                                            <option value="">Light</option>
+                                            <option value="">Bold</option>
+                                            <option value="">Bolder</option>
+                                        </select>
+                                    </div>
+                                    <div class="div">
+                                        <span>Font Size</span>
+                                        <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
+                                    </div>
+                                    <div class="div">
+                                        <span>Text Color</span>
+                                        <input class="value inputText" type="color" id="favcolor" name="favcolor">
+                                    </div>
+                                    <div class="div">
+                                        <span>Background Color</span>
+                                        <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
+                                    </div>
+    
+                                    <div class="div">
+                                        <span>Background Opacity</span>
+                                        <input class="value inputText" type="range" id="fontSize" name="points" value="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Description Styles -->
                     </div>
                 </div>
             </div>

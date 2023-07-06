@@ -1,4 +1,4 @@
-class Layers{
+class Editor{
     constructor(){
         this.editorId = document.getElementById('editTab');
         this.presentLayerIndex = 0;
@@ -11,16 +11,20 @@ class Layers{
             'description': {},
             'caption' :{}
         };
-        var newLayer = document.createElement('div');
-        newLayer.id = `layer${this.presentLayerIndex}`;
-        newLayer.className = 'layers';
-        newLayer.innerHTML = `<div class="placeholder">
-            <p> Add</p>
-            <p> Photos/Videos</p>
-            <small> Recomended ratios are </small>
-            <small> 9:16, 3:4 and 2:3 </small>
-        </div>`;
-        this.editorId.appendChild(newLayer);
+
+        if (this.editorId.children.length <= 0) {
+            var newLayer = document.createElement('div');
+            newLayer.id = `layer${this.presentLayerIndex}`;
+            newLayer.className = 'layers';
+            newLayer.innerHTML = `<div class="placeholder">
+                <p> Add</p>
+                <p> Photo/Video</p>
+                <small> Recomended ratios are </small>
+                <small> 9:16, 3:4 and 2:3 </small>
+            </div>`;
+            this.editorId.appendChild(newLayer);
+        }
+       
         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
         var otherLayers = document.querySelector("#editTab .layers");
         for (var i = 0; i < otherLayers.length; i++) {
@@ -36,9 +40,8 @@ class Layers{
         document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
         document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
         this.presentLayerDiv.style.display = 'flex';
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
-
-    
 
     createNewLayer(){  
         this.inBetweenLayersAdd();
@@ -62,7 +65,7 @@ class Layers{
         }
         newLayer.innerHTML = `<div class="placeholder">
             <p> Add</p>
-            <p> Photos/Videos</p>
+            <p> Photo/Video</p>
             <small> Recomended ratios are </small>
             <small> 9:16, 3:4 and 2:3 </small>
         </div>`;
@@ -72,6 +75,7 @@ class Layers{
         this.layersBack = this.totalLayers-this.layersAhead-1;
         document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
         document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
 
     inBetweenLayersAdd(){
@@ -130,6 +134,7 @@ class Layers{
         this.layersBack = this.totalLayers-this.layersAhead-1;
         document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
         document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
 
     moveBackward(){    
@@ -147,42 +152,10 @@ class Layers{
         this.layersBack = this.totalLayers-this.layersAhead-1;
         document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
         document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
        
     }
-    modifyMedia(type, blobUrl, url){
-        var deleteMediaButton = document.getElementById('deleteMedia');
-        if (type == 'image') {
-            deleteMediaButton.setAttribute("onclick", "layers.deleteMedia('image')");
-        }else if(type == 'video'){
-            deleteMediaButton.setAttribute("onclick", "layers.deleteMedia('video')");
-        }else{
-            deleteMediaButton.removeAttribute("onclick");
-        }
-
-        this.presentLayerDiv.innerHTML = '';
-        this.layers[this.presentLayerIndex].media = {
-            'type': type,
-            'blobUrl' : blobUrl,
-            'url' : url,
-        };
-    }
-
-    deleteMedia(type){
-        if(type == 'image'){
-            var media = document.querySelector(`#${this.presentLayerDiv.id} img`);
-        }else if(type == 'video'){
-            var media = document.querySelector(`#${this.presentLayerDiv.id} video`);
-        }
-        this.presentLayerDiv.innerHTML =`
-            <div class="placeholder">
-                <p> Add</p>
-                <p> Photos/Videos</p>
-                <small> Recomended ratios are </small>
-            <small> 9:16, 3:4 and 2:3 </small>
-            </div>`;
-        media.remove();
-        this.layers[this.presentLayerIndex].media = {};
-    }
+   
 
     modifyTitle(text){
         this.layers[this.presentLayerIndex].title = {
@@ -262,7 +235,9 @@ class Layers{
         
     }
 }
-let layers = new Layers();
+let editor = new Editor();
+
+
 
 
     
