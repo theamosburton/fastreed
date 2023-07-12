@@ -121,9 +121,10 @@ html{
     display: flex;
     border-radius: 20px;
     flex-direction: column;
+    justify-content: flex-end;
+    background-image: linear-gradient(rgba(85, 83, 83, 20%), rgba(85, 83, 83, 20%),#00000080, black);
 }
 .editorSection .editorBox .layers .layersTop div{
-    height: 45%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -131,6 +132,12 @@ html{
     color: white;
     padding: 0px 10px;
     margin-top: 10px;
+}
+
+.editorSection .editorBox .layers .layersTop .text{
+    border-radius: 0px 0px 20px 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
 }
 .editorSection .editorBox .layers .layersTop div span{
     height: 45%;

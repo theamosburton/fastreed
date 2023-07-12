@@ -57,9 +57,7 @@ class Edits{
           <div class="text" id="text${editor.presentLayerIndex}">
             <span class="titleText" >Enter more text..</span>
           </div>
-          <div class="caption" id="caption${editor.presentLayerIndex}">
-            <span>Caption(optional)</span>
-          </div>
+
           `;
     
           layer.appendChild(imageElement);
@@ -97,24 +95,10 @@ class Edits{
           overlay.classList.add('overlay');
           overlay.id = `overlay${layerId}`;
           
-          var layersTop = document.createElement('div');
-          layersTop.classList.add('layersTop');
-          layersTop.innerHTML = `
-          <div class="title" id="title${editor.presentLayerIndex}">
-            <span class="titleText" >Enter Title/heading</span>
-          </div>
-          <div class="text" id="text${editor.presentLayerIndex}">
-            <span class="titleText" >Enter more text..</span>
-          </div>
-          <div class="caption" id="caption${editor.presentLayerIndex}">
-            <span>Caption(optional)</span>
-          </div>
-          `;
     
           layer.appendChild(contorlsElements);
           layer.appendChild(videoElement);
           layer.appendChild(overlay);
-          layer.appendChild(layersTop);
           editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
           editor.playPauseMedia();
           editor. muteUnmute();

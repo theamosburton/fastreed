@@ -128,7 +128,9 @@
                                     <div class="div">
                                         <span>Media Fit</span>
                                         <select onchange="edits.mediaFit()" id="mediaFit" class="value inputText">
-                                            <option value="cover">Cover</option>
+                                            <option value="fill">Fill</option>
+                                            <option value="none">None</option>
+                                            <option value="cover" selected>Cover</option>
                                             <option value="contain">Contain</option>
                                         </select>
                                     </div>
@@ -140,11 +142,6 @@
                                     <div class="div">
                                         <span>Overlay Opacity</span>
                                         <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity" value="1">
-                                    </div>
-
-                                    <div class="div">
-                                        <span>Caption</span>
-                                        <input class="value inputText text" onkeyup="edits.editCaption()" type="text" id="mediaCaption" placeholder="Captions">
                                     </div>
                                 </div>
                             </div>
@@ -169,24 +166,16 @@
                                             <option value="">Bolder</option>
                                         </select>
                                     </div>
-    
+
+
                                     <div class="div">
                                         <span>Font Size</span>
-                                        <input class="value inputText" type="range" id="titleFontSize" name="points" min="-2" max="4">
-                                    </div>
-    
-                                    <div class="div">
-                                        <span>Text Color</span>
-                                        <input class="value inputText" type="color" id="titleColor" name="favcolor">
-                                    </div>
-                                    <div class="div">
-                                        <span>Text Background Color</span>
-                                        <input class="value inputText" type="color" id="titleBgColor" name="favcolor" style="margin-left:5px">
-                                    </div>
-    
-                                    <div class="div">
-                                        <span>Background Opacity</span>
-                                        <input class="value inputText" type="range" id="titleBgOpacity" name="points" value="10">
+                                        <select name="" id="titleFontSize" class="value inputText">
+                                            <option value="medium">Medium</option>
+                                            <option value="large">Large</option>
+                                            <option value="larger">Larger</option>
+                                            <option value="x-large">X-Larger</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -215,20 +204,12 @@
                                     </div>
                                     <div class="div">
                                         <span>Font Size</span>
-                                        <input class="value inputText" type="range" id="fontSize" name="points" min="-2" max="4">
-                                    </div>
-                                    <div class="div">
-                                        <span>Text Color</span>
-                                        <input class="value inputText" type="color" id="favcolor" name="favcolor">
-                                    </div>
-                                    <div class="div">
-                                        <span>Background Color</span>
-                                        <input class="value inputText" type="color" id="favcolor" name="favcolor" style="margin-left:5px">
-                                    </div>
-    
-                                    <div class="div">
-                                        <span>Background Opacity</span>
-                                        <input class="value inputText" type="range" id="fontSize" name="points" value="10">
+                                        <select name="" id="textFontSize" class="value inputText">
+                                            <option value="medium">Medium</option>
+                                            <option value="large">Large</option>
+                                            <option value="small">Small</option>
+                                            <option value="x-smaller">X-Smaller</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
