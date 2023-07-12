@@ -360,6 +360,8 @@ class Editor{
             document.getElementById(`layer${this.presentLayerIndex}`).remove();
             this.moveBackward();
 
+        }else{
+            alert('Can\'t delete first layer')
         }
     }
 
