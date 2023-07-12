@@ -31,9 +31,63 @@ class Webstories{
             $this->deleteStory();
         }elseif ($data['purpose'] == 'update') {
             $this->updateStory();
+        }elseif ($data['purpose'] == 'fetch') {
+            $this->fetchStory();
         }
     }
 
+    private function fetchStory(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($data['whois'] == 'Admin') {
+            if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+                if (!isset($data['username']) || empty($data['username'])) {
+                    showMessage(false, 'Username needed');
+                }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
+                    $storyID = $data['storyID'];
+                    $sql = "SELECT FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        if ( $row = mysqli_fetch_assoc($result)) {
+                            $storyData = $row['storyData'];
+                            showMessage(true, $storyData);
+                        }else{
+                            showMessage(false, 'No story with this id');
+                        }
+                    }else{
+                        showMessage(false, 'Can not find story');
+                    }
+                }else{
+                    showMessage(false, 'Incorrect Username');
+                }
+            }else{
+                showMessage(false, 'Not an admin');
+            }
+        }else if($data['whois'] == 'User'){
+            if ($UID = $this->userData->getSelfDetails()['UID']) {
+                if (!isset($data['data']) || empty($data['data'])) {
+                    $storyID = $data['storyID'];
+                    $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                        if ( $row = mysqli_fetch_assoc($result)) {
+                            $storyData = $row['storyData'];
+                            showMessage(true, $storyData);
+                        }else{
+                            showMessage(false, 'No story with this id');
+                        }
+                    }else{
+                        showMessage(false, 'Can not find story');
+                    }
+                }else{
+                    showMessage(false, 'Updated Data malfunctioned');
+                }
+            }else{
+                showMessage(false, 'Incorrect Username');
+            }
+        }else{
+            showMessage(false, 'Specify who are you?');
+        }
+    }
     private function deleteStory(){
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'admin') {

@@ -1,46 +1,89 @@
 class Editor{
     constructor(){
-        this.editorId = document.getElementById('editTab');
-        this.presentLayerIndex = 0;
-        this.presentLayer  = this.presentLayerIndex + 1 ;
-        this.totalLayers = 1;
-        this.layers = [];
-        this.layers[0] = {
-            'media': {},
-            'title':{},
-            'description': {},
-            'caption' :{}
-        };
-
-        if (this.editorId.children.length <= 0) {
-            var newLayer = document.createElement('div');
-            newLayer.id = `layer${this.presentLayerIndex}`;
-            newLayer.className = 'layers';
-            newLayer.innerHTML = `<div class="placeholder">
-                <p> Add</p>
-                <p> Photo/Video</p>
-                <small> Recomended ratios are </small>
-                <small> 9:16, 3:4 and 2:3 </small>
-            </div>`;
-            this.editorId.appendChild(newLayer);
-        }
-       
-        this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
-        var otherLayers = document.querySelector("#editTab .layers");
-        for (var i = 0; i < otherLayers.length; i++) {
-            otherLayers[i].style.display = "none";
-        }
-        
-        this.layersAhead = this.totalLayers - this.presentLayer;
-        if (this.layersAhead) {
-            this.layersBack = this.totalLayers-this.layersAhead-1;
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('username')) {
+            this.whoIs = whoIs;
         }else{
-            this.layersBack = 0;
+            this.whoIs = 'User';
         }
-        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
-        this.presentLayerDiv.style.display = 'flex';
-        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+        this.storyID = params.get('ID');
+        this.editorId = document.getElementById('editTab');
+
+        const fetchWebstoryData = async () =>{
+            const url = '/.ht/API/webstories.php';
+            var encyDat = {
+            'purpose' : 'fetch',
+            'whois': `${this.whoIs}`,
+            'storyID': `${this.storyID}`
+            };
+            const response = await fetch(url, {
+                method: 'post',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(encyDat)
+            });
+            var data = await response.json();
+            if (data) {
+                if (data.Result) { 
+                    this.webstoryData = data.message;
+                    if (this.webstoryData == '{}') {
+                        this.presentLayerIndex = 0;
+                        this.presentLayer  = this.presentLayerIndex + 1 ;
+                        this.totalLayers = 1;
+                        this.layers = [];
+                        this.layers[0] = {
+                            'media': {},
+                            'title':{},
+                            'description': {},
+                            'caption' :{}
+                        };
+
+                        if (this.editorId.children.length <= 0) {
+                            var newLayer = document.createElement('div');
+                            newLayer.id = `layer${this.presentLayerIndex}`;
+                            newLayer.className = 'layers';
+                            newLayer.innerHTML = `<div class="placeholder">
+                                <p> Add</p>
+                                <p> Photo/Video</p>
+                                <small> Recomended ratios are </small>
+                                <small> 9:16, 3:4 and 2:3 </small>
+                            </div>`;
+                            this.editorId.appendChild(newLayer);
+                        }
+                    
+                        this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
+                        var otherLayers = document.querySelector("#editTab .layers");
+                        for (var i = 0; i < otherLayers.length; i++) {
+                            otherLayers[i].style.display = "none";
+                        }
+                        
+                        this.layersAhead = this.totalLayers - this.presentLayer;
+                        if (this.layersAhead) {
+                            this.layersBack = this.totalLayers-this.layersAhead-1;
+                        }else{
+                            this.layersBack = 0;
+                        }
+                        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
+                        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
+                        this.presentLayerDiv.style.display = 'flex';
+                        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+                    }else{
+                        this.createExistedLayers();
+                    }
+                }else{
+                    alert(data.message);
+                }
+            }else{
+                alert("Somoething went Wrong");
+            }
+        }
+        fetchWebstoryData();
+    }
+
+    createExistedLayers(){
+        var jsonString = this.webstoryData;
+        var jsObject = JSON.parse(jsonString);
     }
 
     createNewLayer(){  
@@ -156,12 +199,6 @@ class Editor{
        
     }
    
-
-    modifyTitle(text){
-        this.layers[this.presentLayerIndex].title = {
-            'text': text
-        };
-    }
 
   
 

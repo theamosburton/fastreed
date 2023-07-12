@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="refreshDiv">
-                            <i onclick="uploadsDataClass.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
+                            <i onclick="fetchMultimedia.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
                         </div>
                     </div>
                     <div class="uploadingBar" id="uploadingBar" style="display:none">
@@ -85,10 +85,10 @@
                     <div class="objectOptions" id="metaData" style="display: none;">
                         <div class="objectOptionsbody">
                             <div class="optionsDIv" id="">
-                                <div class="options" style="">
+                                <div class="options">
                                     <div>
                                         <span>URL</span>
-                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="https://fastreed.com/web-stories/[Your Url]">
+                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="type-your-webstory-link">
                                     </div>
                                 </div>
 
@@ -128,26 +128,23 @@
                                     <div class="div">
                                         <span>Media Fit</span>
                                         <select onchange="edits.mediaFit()" id="mediaFit" class="value inputText">
-                                            <option value="Cover">Cover</option>
-                                            <option value="Contain">Contain</option>
+                                            <option value="cover">Cover</option>
+                                            <option value="contain">Contain</option>
                                         </select>
                                     </div>
                                     <div class="div">
                                         <span>Overlay Colour</span>
-                                        <select onchange="edits.mediaOverlayColor()" id="mediaOverlayColor" class="value inputText">
-                                            <option value="Black">Black</option>
-                                            <option value="white">white</option>
-                                        </select>
+                                        <input onchange="edits.mediaOverlayColor()" class="value inputText" type="color" id="mediaOverlayColor" name="favcolor" value="#000000">
                                     </div>
     
                                     <div class="div">
                                         <span>Overlay Opacity</span>
-                                        <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity" value="10">
+                                        <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity" value="1">
                                     </div>
 
                                     <div class="div">
                                         <span>Caption</span>
-                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="Captions">
+                                        <input class="value inputText text" onkeyup="edits.editCaption()" type="text" id="mediaCaption" placeholder="Captions">
                                     </div>
                                 </div>
                             </div>

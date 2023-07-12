@@ -8,7 +8,6 @@ html{
 
 .editContainer{
     position: relative;
-    
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -107,8 +106,9 @@ html{
     transition: all .7s;
 }
 
-.editContainer .editorSection .editorBox .layers .overlay{  
-    display: flex;
+.editContainer .editorSection .editorBox .layers .overlay{
+    background: black;
+    opacity: 1%;
     position: absolute;
     width: 100%;
     height: 100%;
