@@ -351,7 +351,7 @@ class Editor{
     }
 
     deleteLayer(){
-        if (this.totalLayers > 1 && this.presentLayerIndex != 0) {
+        if (this.totalLayers > 1) {
             this.inBetweenLayersDel();
             this.layers.splice(this.presentLayerIndex, 1);
             this.totalLayers -= 1;
