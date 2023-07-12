@@ -122,7 +122,7 @@ html{
     border-radius: 20px;
     flex-direction: column;
     justify-content: flex-end;
-    background-image: linear-gradient(rgba(85, 83, 83, 20%), rgba(85, 83, 83, 20%),#00000080, black);
+    background-image: linear-gradient(rgba(85, 83, 83, 0), rgba(85, 83, 83, 0),#00000080, black);
 }
 .editorSection .editorBox .layers .layersTop div{
     width: 100%;
