@@ -102,13 +102,30 @@ class Edits{
         }else if(type == 'video'){
             var media = document.querySelector(`#${this.editor.presentLayerDiv.id} video`);
         }
-        this.editor.presentLayerDiv.innerHTML =`
-            <div class="placeholder">
-                <p> Add</p>
-                <p> Photo/Video</p>
-                <small> Recomended ratios are </small>
+
+        var overlay = document.createElement('div');
+        overlay.classList.add('overlay');
+        overlay.id = `overlay${this.presentLayerIndex}`;
+
+        var layersTop = document.createElement('div');
+        layersTop.classList.add('layersTop');
+        layersTop.innerHTML = `
+        <div class="title" id="title${this.presentLayerIndex}">
+        <span class="titleText" >Enter Title/heading</span>
+        </div>
+        <div class="text" id="text${this.presentLayerIndex}">
+        <span class="titleText" >Enter more text..</span>
+        </div>`;
+        
+        this.editor.presentLayerDiv.innerHTML = `<div class="placeholder" id="placeholder${this.editor.presentLayerIndex}">
+            <p> Add</p>
+            <p> Photo/Video</p>
+            <small> Recomended ratios are </small>
             <small> 9:16, 3:4 and 2:3 </small>
-            </div>`;
+        </div>`;
+        
+        this.editor.presentLayerDiv.appendChild(overlay);
+        this.editor.presentLayerDiv.appendChild(layersTop);
         media.remove();
         this.editor.layers[this.editor.presentLayerIndex].media = {};
     }
