@@ -157,9 +157,9 @@ class Webstories{
             }else{
                 showMessage(false, 'Not an admin');
             }
-        }else if($data['whois'] == 'user'){
+        }else if($data['whois'] == 'User'){
             if ($UID = $this->userData->getSelfDetails()['UID']) {
-                if (!isset($data['data']) || empty($data['data'])) {
+                if (isset($data['data']) && !empty($data['data'])) {
                     $storyID = $data['storyID'];
                     $storyData = $data['data'];
                     $sql = "UPDATE stories set storyData = '$storyData' WHERE personID = '$UID' and storyID = '$storyID'";

@@ -69,8 +69,8 @@
                             <i class="fa-solid fa-x whatIcon"></i>
                         </div>
                         <div class="buttonsDiv">
-                            <div class="buttons">Draft</div>
-                            <div class="buttons">Save</div>
+                            <div class="buttons">Preview</div>
+                            <div class="buttons" id="saveStory" onclick="editor.saveStory()">Save</div>
                             <div class="buttons">Publish</div>
                         </div>
                     </div>
@@ -117,105 +117,8 @@
                     </div>
 
                     <div class="objectOptions" id="objectOptions">
-                        <div class="objectOptionsbody">
-                            <!-- Media Options -->
-                            <div class="optionsDIv" id="mediaStyles">
-                                <span class="objectName" onclick="edits.expandOptions('mediaStyles','')">
-                                    <span>Layer Media</span>  
-                                    <i class="fa fa-caret-right"></i>
-                                </span>
-                                <div class="options" style="display: none;">
-                                    <div class="div">
-                                        <span>Media Fit</span>
-                                        <select onchange="edits.mediaFit()" id="mediaFit" class="value inputText">
-                                            <option value="fill">Fill</option>
-                                            <option value="none">None</option>
-                                            <option value="cover" selected>Cover</option>
-                                            <option value="contain">Contain</option>
-                                        </select>
-                                    </div>
-                                    <div class="div">
-                                        <span>Overlay Colour</span>
-                                        <input onchange="edits.mediaOverlayColor()" class="value inputText" type="color" id="mediaOverlayColor" name="favcolor" value="#000000">
-                                    </div>
-    
-                                    <div class="div">
-                                        <span>Overlay Opacity</span>
-                                        <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity" value="1">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Media Options -->
-                            
-                            <!-- Text Styles -->
-                            <div class="optionsDIv" id="titleStyles">
-                                <span class="objectName" onclick="edits.expandOptions('titleStyles', '')"> 
-                                    <span>Layer Title</span>  
-                                    <i class="fa fa-caret-right"></i>
-                                </span>
-                                <div class="options" style="display:none;">
-                                    <div class="div">
-                                        <span>Text</span>
-                                        <input class="value inputText text" type="text" id="titleText" placeholder="Title">
-                                    </div>
-                                    <div class="div">
-                                        <span>Font Weight</span>
-                                        <select name="" id="titleFontWeight" class="value inputText">
-                                            <option value="">Light</option>
-                                            <option value="">Bold</option>
-                                            <option value="">Bolder</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="div">
-                                        <span>Font Size</span>
-                                        <select name="" id="titleFontSize" class="value inputText">
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
-                                            <option value="larger">Larger</option>
-                                            <option value="x-large">X-Larger</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Text Styles -->
-
-
-
-                            <!-- Layer Text Styles -->
-                            <div class="optionsDIv" id="aboutStyles">
-                                <span class="objectName" onclick="edits.expandOptions('aboutStyles', '')">
-                                    <span>Layer Text</span>  
-                                    <i class="fa fa-caret-right"></i>
-                                </span>
-                                <div class="options" style="display:none;">
-                                    <div class="div">
-                                        <span>Text</span>
-                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Write text about this media"></textarea>
-                                    </div>
-                                    <div class="div">
-                                        <span>Font Weight</span>
-                                        <select name="" id="" class="value inputText">
-                                            <option value="">Light</option>
-                                            <option value="">Bold</option>
-                                            <option value="">Bolder</option>
-                                        </select>
-                                    </div>
-                                    <div class="div">
-                                        <span>Font Size</span>
-                                        <select name="" id="textFontSize" class="value inputText">
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
-                                            <option value="small">Small</option>
-                                            <option value="x-smaller">X-Smaller</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Description Styles -->
                     </div>
-                </div>
+                        
             </div>
            
 
