@@ -27,7 +27,7 @@ class Editor{
             if (data) {
                 if (data.Result) { 
                     this.webstoryData = data.message;
-                    if (this.webstoryData != '{}') {
+                    if (this.webstoryData != '{0}') {
                         this.presentLayerIndex = 0;
                         this.presentLayer  = this.presentLayerIndex + 1 ;
                         this.totalLayers = 1;
