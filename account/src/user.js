@@ -7,9 +7,9 @@ class showMenus{
         this.croppie = null;
         this.whoIs = null;
         if (adminLogged) {
-          this.whoIs = 'admin';
+          this.whoIs = 'Admin';
         }else{
-          this.whoIs = 'user';
+          this.whoIs = 'User';
         }
         // check the hash and display what to show
         if (this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
