@@ -6,14 +6,10 @@ class showMenus{
         this.dashboardDiv = document.querySelector('#dashboardDiv');
         this.croppie = null;
         this.whoIs = null;
-        if (typeof adminLogged !== 'undefined') {
-          if (adminLogged) {
-            this.whoIs = 'admin';
-          }
-        }else if(typeof userLogged !== 'undefined'){
-          if (userLogged) {
-            this.whoIs = 'user';
-          }
+        if (adminLogged) {
+          this.whoIs = 'admin';
+        }else{
+          this.whoIs = 'user';
         }
         // check the hash and display what to show
         if (this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
