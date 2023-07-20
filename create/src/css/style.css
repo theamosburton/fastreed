@@ -199,6 +199,7 @@ html{
     align-items: center;
     overflow: hidden;
    overflow-y: auto;
+   margin-bottom: 20px;
 }
 .rightDiv{
     margin: 0;
