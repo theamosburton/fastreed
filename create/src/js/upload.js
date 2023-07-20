@@ -253,7 +253,7 @@ class fetchMedia{
           var uploadedDiv = document.getElementById('uploads');
           uploadedDiv.innerHTML += `
             <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
-                <img src="${imgURL}">
+                <img class="lazyload" src="${imgURL}">
                 <div class="fileInfo">
                     <i class="fa fa-image fa-sm whatIcon"></i>
                 </div>
@@ -272,7 +272,7 @@ class fetchMedia{
           var uploadedDiv = document.getElementById('uploads');
           uploadedDiv.innerHTML += `
                 <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${videoURL}', 'video', '${ulink}')">
-                    <video>
+                    <video  class="lazyload">
                         <source src="${videoURL}" type="video/mp4">
                     </video>
                     <div class="fileInfo">
