@@ -59,7 +59,7 @@
             if($data[$i][6] == 'photos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showImage('{$pathImg}')">
-                        <img src="$pathImg" alt="">
+                        <img class="lazyload" src="$pathImg" alt="">
                     </div>
                 HTML;
                 $what = 'photos';
@@ -68,7 +68,7 @@
             }elseif($data[$i][6] == 'videos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showVideo('{$pathVid}')">
-                        <video>
+                        <video class="lazyload">
                             <source src="{$pathVid}" type="video/mp4">
                         </video>
                     </div>

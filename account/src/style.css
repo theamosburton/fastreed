@@ -451,8 +451,7 @@ margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-   
-    
+    margin-bottom: 10px;
 }
 .mediaDiv .uploadDiv .uploadFile{
     width: 190px;
