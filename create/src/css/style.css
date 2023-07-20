@@ -279,6 +279,7 @@ html{
     overflow-y: auto;
     max-height: 90%;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 .editContainer .leftSection .uploadsDiv .uploadHead .refreshUpload{
     display: flex;
