@@ -272,7 +272,7 @@ html{
     width: 100%;
     display: flex;
     color: grey;
-    padding: 8px 0px;
+    padding: 8px 0px 12px 0px;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
