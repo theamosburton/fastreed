@@ -371,8 +371,8 @@ html{
 
 .editContainer .leftSection .uploadsDiv .uploadContent .fileInfo{
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 0px;
+    right: 5px;
 }
 
 .uploadContent .fileInfo .whatIcon, .hideShow .whatIcon {
