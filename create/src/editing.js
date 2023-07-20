@@ -44,8 +44,12 @@ class Edits{
         }
         
         if (type == 'image') {
-          edits.modifyMedia('image', link, olink);
           var layerId =  editor.presentLayerIndex;
+          if (document.getElementById(`videoControls${layerId+1}`)) {
+            document.getElementById(`videoControls${layerId+1}`).remove();
+          }
+          edits.modifyMedia('image', link, olink);
+          
           var layer = document.getElementById(`layer${layerId}`);
           var imageElement = document.createElement('img');
           imageElement.id = `mediaContent${editor.presentLayerIndex}`;
@@ -111,10 +115,10 @@ class Edits{
         layersTop.classList.add('layersTop');
         layersTop.innerHTML = `
         <div class="title" id="title${this.presentLayerIndex}">
-        <span class="titleText" >Enter Title/heading</span>
+        <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editTitle('titleText${this.presentLayerIndex}')">Enter Title/heading</span>
         </div>
         <div class="text" id="text${this.presentLayerIndex}">
-        <span class="titleText" >Enter more text..</span>
+        <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editText('otherText${this.presentLayerIndex}')">Enter more text..</span>
         </div>`;
         
         this.editor.presentLayerDiv.innerHTML = `<div class="placeholder" id="placeholder${this.editor.presentLayerIndex}">
@@ -142,7 +146,6 @@ class Edits{
         this.editor.layers[this.editor.presentLayerIndex].media.type = type;
         this.editor.layers[this.editor.presentLayerIndex].media.blobUrl = blobUrl;
         this.editor.layers[this.editor.presentLayerIndex].media.url = url;
-
     }
 
     overlayOpacity(){
@@ -217,11 +220,9 @@ class Edits{
       }
     }
   }
-    changeText(){
-      var text = document.getElementById(`titleText${this.editor.presentLayerIndex}`);
-      var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-      applyto.innerHTML = `${text.value}`;
-      this.editor.layers[this.editor.presentLayerIndex].title.text = `${text.value}`;
+    editTitle(x){
+      var text = document.getElementById(`${x}`);
+      this.editor.layers[this.editor.presentLayerIndex].title.text = `${text.innerHTML}`;
     }
     changeFontWeight(){
       if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -257,11 +258,9 @@ class Edits{
       }
     }
 
-    changeOtherText(){
-      var text = document.getElementById(`otherText${this.editor.presentLayerIndex}`);
-      var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-      applyto.innerHTML = `${text.value}`;
-      this.editor.layers[this.editor.presentLayerIndex].otherText.text = `${text.value}`;
+    editText(x){
+      var text = document.getElementById(`${x}`);
+      this.editor.layers[this.editor.presentLayerIndex].otherText.text = `${text.innerHTML}`;
     }
     changeOtherFontWeight(){
       if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {

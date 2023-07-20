@@ -66,10 +66,10 @@ class Editor{
                             layersTop.classList.add('layersTop');
                             layersTop.innerHTML = `
                             <div class="title" id="title${this.presentLayerIndex}">
-                            <span class="titleText" >Enter Title/heading</span>
+                            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editTitle('titleText${this.presentLayerIndex}')">Enter Title/heading</span>
                             </div>
                             <div class="text" id="text${this.presentLayerIndex}">
-                            <span class="titleText" >Enter more text..</span>
+                            <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Enter more text..</span>
                             </div>`;
                             var newLayer = document.createElement('div');
                             newLayer.id = `layer${this.presentLayerIndex}`;
@@ -169,10 +169,10 @@ class Editor{
         layersTop.classList.add('layersTop');
         layersTop.innerHTML = `
         <div class="title" id="title${this.presentLayerIndex}">
-        <span class="titleText" >Enter Title/heading</span>
+        <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editTitle('titleText${this.presentLayerIndex}')">Enter Title/heading</span>
         </div>
         <div class="text" id="text${this.presentLayerIndex}">
-        <span class="titleText" >Enter more text..</span>
+        <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editText('otherText${this.presentLayerIndex}')">Enter more text..</span>
         </div>`;
 
         newLayer.innerHTML = `<div class="placeholder" id="placeholder${this.presentLayerIndex}">
@@ -237,9 +237,6 @@ class Editor{
                         </span>
                         <div class="options" style="display:none;">
                             <div class="div">
-                                <input class="value inputText text" type="text" id="titleText${this.presentLayerIndex}" placeholder="Add title" onkeyup="edits.changeText()">
-                            </div>
-                            <div class="div">
                                 <span>Font weight</span>
                                 <select id="titleFontWeight${this.presentLayerIndex}" onchange="edits.changeFontWeight()" class="value inputText">
                                     <option value="100">Light</option>
@@ -287,9 +284,6 @@ class Editor{
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
-                            <div class="div">
-                                <textarea  onkeyup="edits.changeOtherText()" class="value inputText text" name="" id="otherText${this.presentLayerIndex}" cols="22" placeholder="Add text"></textarea>
-                            </div>
 
 
                             <div class="div">
