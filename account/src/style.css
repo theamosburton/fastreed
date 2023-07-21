@@ -183,14 +183,16 @@
 }
 .photosLibrary .uploadsHead .labelUpload{
     margin-bottom: 0px;
-    background-color: #076a79;
-    padding: 5px 10px;
+    background-color: rgb(92, 201, 216);
+    padding: 6px 16px;
     margin-bottom: 5px;
-    border-radius: px;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
 }
 .photosLibrary .uploadsHead .labelUpload:hover{
-    background-color: #17a2b8;
     cursor: pointer;
+    color: #3a3d40;
 }
 .contentView .contentTopics{
     margin: 0;
