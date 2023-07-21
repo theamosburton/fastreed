@@ -67,11 +67,11 @@ function showImage(path, visibility, ID, ext, imgID){
             <div class="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
-              <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
+              <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self', '${imgID}', '${visibility}')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
 
-              <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
+              <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${imgID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
 
-              <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+              <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone', '${imgID}', '${visibility}')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
@@ -109,11 +109,11 @@ function showImage(path, visibility, ID, ext, imgID){
               <div class="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
-                <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
+                <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self', '${vidID}', '${visibility}')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
 
-                <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
+                <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${vidID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
 
-                <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+                <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone', '${vidID}', '${visibility}')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
 
               </div>
             </div>

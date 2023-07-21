@@ -402,7 +402,7 @@ function showPicOptions(what){
 
 
 
-function changeImageVisibility(imgID, value){
+function changeImageVisibility(imgID, value, divID, OLDvisible){
   if (adminLogged) {
     var whoIs = 'Admin';
   }else{
@@ -472,7 +472,7 @@ function changeImageVisibility(imgID, value){
     }
     everyone.classList.add('fa-square');
   }
-    // var field = document.getElementById(`visibilityAccess${no}`);
+    var field = document.querySelector(`#${divID} .imgDiv`);
     const changeVisibility = async () =>{
       const url = '/.ht/API/deletePic.php';
       var encyDat = {
@@ -496,6 +496,7 @@ function changeImageVisibility(imgID, value){
           impactId.classList.add('fa-square-check');
           impactId.innerHTML = '';
           impactId.style.display = 'flex';
+          field.setAttribute('onclick', field.getAttribute('onclick').replace(OLDvisible,value ));
         }else{
           alert(`${data.message}`);
         }
