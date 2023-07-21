@@ -527,6 +527,7 @@ margin-top: 10px;
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside .imgDiv{
     height: 100%;
     overflow: hidden;
+    background-color: #9fa8b9;
 }
 .mediaDiv .uploadDiv .uploadedFile .uploadDivInside img, .mediaDiv .uploadDiv .uploadedFile .uploadDivInside video{
     max-height: 100%;
