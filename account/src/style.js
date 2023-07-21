@@ -41,7 +41,14 @@ function exapndAndShrink(id){
 }
 
 
-function showImage(path, visibility, ID, ext, imgID){
+function showImage(path, visibility, ID, ext, imgID, time, size){
+  if (size >= 1024) {
+    size = size/1024;
+    size = size.toFixed(2);
+    size = size+'MB';
+  }else{
+    size = size+'KB';
+  }
     var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     var showImageDiv = document.getElementById('imageShowDiv');
     if (showImageDiv.style.display == 'none') {
@@ -67,12 +74,22 @@ function showImage(path, visibility, ID, ext, imgID){
         var everyoneA = 'fa-square';
         var self = 'fa-square';
       }
+      var t = new Intl.DateTimeFormat('en', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }).format(new Date(time * 1000));
+      
       
       showContainer.innerHTML = `
           <div class="imgOptions">
             <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
             <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'photos', '${imgID}')"></i>
             <i class="fa fa-earth optIcons" id="earthIcon" onclick="showPicOptions('')"></i>
+            <i class="fa fa-info optIcons" id="infoIcon" onclick="showInfo('')"></i>
             <div class="optionDropdown" id="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
@@ -83,6 +100,24 @@ function showImage(path, visibility, ID, ext, imgID){
               <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${imgID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
 
               <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${imgID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
+            </div>
+
+
+            <div class="optionDropdown" id="optionDropdownDetails" style="display:none;">
+              <div class="details size">
+                <span class="property">File Size: </span>
+                <span class="value">${size}</span>
+              </div>
+              <div class="details">
+                <span class="property">Link:</span>
+                <textarea id="linkToCopy" style="position: absolute; top: -9999px;"></textarea>
+                <span class="value copylink" onclick="copyLink('${path}')">Copy <i class="fa fa-solid fa-copy"></i></span>
+              </div>
+              <div class="details uploadDT">
+                <span class="property">Upload Time:</span>
+                <span class="value">${t} (IST)</span>
+              </div>
+              
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
@@ -101,7 +136,7 @@ function showImage(path, visibility, ID, ext, imgID){
     }
   }
   
-  function showVideo(path, visibility, ID, ext, vidID){
+  function showVideo(path, visibility, ID, ext, vidID, time, size){
     var showImageDiv = document.getElementById('imageShowDiv');
     if (showImageDiv.style.display == 'none') {
       showImageDiv.style.display = 'flex';
@@ -127,11 +162,20 @@ function showImage(path, visibility, ID, ext, imgID){
         var everyoneA = 'fa-square';
         var self = 'fa-square';
       }
+      var t = new Intl.DateTimeFormat('en', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }).format(new Date(time * 1000));
       showContainer.innerHTML = `
               <div class="imgOptions">
               <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
               <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'videos', '${vidID}')"></i>
               <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
+              <i class="fa fa-info optIcons" onclick="showInfo('${ID}')"></i>
               <div class="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
@@ -141,7 +185,7 @@ function showImage(path, visibility, ID, ext, imgID){
 
                 <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${vidID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
 
-              <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
+                <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
 
               </div>
             </div>

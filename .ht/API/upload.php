@@ -69,8 +69,11 @@ class uploadMedia{
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];
             if ($file_error === UPLOAD_ERR_OK) {
+                $sizeB = $file['size'];
+                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+                $sizeKB = round($sizeB / 1024, 2);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext)['Result']){
+                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext, $sizeKB)['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
                     $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
                     // Create the directory if it doesn't exist
@@ -128,9 +131,13 @@ class uploadMedia{
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];
             if ($file_error === UPLOAD_ERR_OK) {
+                $sizeB = $file['size'];
+                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+                $sizeKB = round($sizeB / 1024, 2);
+
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext)['Result']){
+                if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB)['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
                     $add = '/uploads/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
@@ -166,9 +173,12 @@ class uploadMedia{
             $file_error = $file['error'];
             $file_ext = $_POST['ext'];
             if ($file_error === UPLOAD_ERR_OK) {
+                $sizeB = $file['size'];
+                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+                $sizeKB = round($sizeB / 1024, 2);
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext)['Result']){
+                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext, $sizeKB)['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
                     $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
@@ -195,10 +205,11 @@ class uploadMedia{
         }
     }
 
-    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext){
+    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext, $sizeKB){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users')";
+        $time =  time();
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;

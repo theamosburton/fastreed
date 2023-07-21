@@ -323,12 +323,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function showPicOptions(what){
   var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
+  var details = document.getElementById('optionDropdownDetails');
   var isDisp = options.style.display;
   if (what == 'none') {
     options.style.display = 'none';
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
   }else if(what == 'block'){
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
     options.style.display = 'block';
   }else if(isDisp == 'none'){
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
       options.style.display = 'block';
   }else{
       options.style.display = 'none';   
@@ -336,7 +346,47 @@ function showPicOptions(what){
   
 }
 
+function showInfo(what){
+  var options = document.getElementById('optionDropdownDetails');
+  var options1 = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
+  var isDisp = options.style.display;
+  if (what == 'none') {
+    options.style.display = 'none';
+  }else if(what == 'block'){
+    if (options1.style.display == 'block') {
+      options1.style.display = 'none'
+    }
+    options.style.display = 'block';
+  }else if(isDisp == 'none'){
+    if (options1.style.display == 'block') {
+      options1.style.display = 'none'
+    }
+      options.style.display = 'block';
+  }else{
+      options.style.display = 'none';   
+  }
+}
 
+
+function copyLink(path){
+   // The link to be copied
+   const linkToCopy = "https://www.fastreed.com/"+path;
+
+   // Create a hidden textarea element
+   const textarea = document.getElementById("linkToCopy");
+   textarea.value = linkToCopy;
+
+   // Select the text inside the textarea
+   textarea.select();
+
+   // Copy the selected text to the clipboard
+   document.execCommand("copy");
+
+   // Deselect the textarea to avoid displaying the selection
+   window.getSelection().removeAllRanges();
+
+  alert('Link copied');
+}
 
 
 function changeImageVisibility(imgID, value, divID, OLDvisible){

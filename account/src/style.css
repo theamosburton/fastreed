@@ -611,6 +611,7 @@ margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+   
 }
 #editMediaOptions{
     background-color: transparent;
@@ -659,6 +660,7 @@ margin-top: 10px;
     text-align: center;
     border-radius: 50%;
     margin: 10px 0px;
+    box-shadow: 0 0 10px;
 }
 
 .optionDropdown{
@@ -672,6 +674,29 @@ margin-top: 10px;
     padding: 10px;
     background-color: #a3a5ac;
     border-radius: 15px;
+}
+#optionDropdownDetails{
+    background-color: white;
+
+}
+#optionDropdownDetails .details{
+    max-width: 200px;
+}
+
+#optionDropdownDetails .details .copylink:hover{
+    cursor:copy;
+}
+#optionDropdownDetails .details .property{
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+    
+}
+#optionDropdownDetails .details .value{
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
+    overflow-wrap: break-word;
 }
 .optionDropdown .options{
     font-size: 20px;
