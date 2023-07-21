@@ -63,7 +63,7 @@ function showImage(path, visibility, ID, ext, imgID){
           <div class="imgOptions">
             <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
             <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'photos', '${imgID}')"></i>
-            <i class="fa fa-earth optIcons" onclick="showPicOptions()"></i>
+            <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
             <div class="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
@@ -74,7 +74,7 @@ function showImage(path, visibility, ID, ext, imgID){
               <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
             </div>
           </div>
-            <img src="${path}" alt=""></img>`;
+            <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
       disbaleScroll();
       window.scrollTo({
         top: 0,
@@ -105,7 +105,7 @@ function showImage(path, visibility, ID, ext, imgID){
               <div class="imgOptions">
               <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
               <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'videos', '${vidID}')"></i>
-              <i class="fa fa-earth optIcons" onclick="showPicOptions()"></i>
+              <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
               <div class="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
@@ -117,7 +117,7 @@ function showImage(path, visibility, ID, ext, imgID){
 
               </div>
             </div>
-            <video controls controlsList="nodownload"> <source src="${path}" type="video/mp4"></vide>`;
+            <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></vide>`;
       disbaleScroll();
       window.scrollTo({
         top: 0,

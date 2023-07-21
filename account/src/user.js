@@ -374,14 +374,19 @@ function unfollow(){
     unfollowUser();
 }
 
-function showPicOptions(){
+function showPicOptions(what){
   var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
   var isDisp = options.style.display;
-  if(isDisp == 'none'){
+  if (what == 'none') {
+    options.style.display = 'none';
+  }else if(what == 'block'){
+    options.style.display = 'block';
+  }else if(isDisp == 'none'){
       options.style.display = 'block';
   }else{
       options.style.display = 'none';   
   }
+  
 }
 
 
@@ -539,8 +544,8 @@ function deleteImage(imgID, ext, what, ID){
             var showImageDiv = document.getElementById('imageShowDiv');
             showImageDiv.style.display = "none";
             document.getElementById(`${ID}`).remove();
-          }, 1000);
-        }, 1000);
+          }, 300);
+        }, 500);
         
       }else{
         if (delIcon.classList.contains('fa-circle-info')) {
