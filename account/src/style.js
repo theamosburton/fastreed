@@ -41,13 +41,40 @@ function exapndAndShrink(id){
 }
 
 
-function showImage(path){
+function showImage(path, visibility, ID, ext, imgID){
     var showImageDiv = document.getElementById('imageShowDiv');
     if (showImageDiv.style.display == 'none') {
       showImageDiv.style.display = 'flex';
       var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-      showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
-                                 <img src="${path}" alt=""></img>`;
+      if (visibility == 'self') {
+        var self = 'fa-square-check';
+        var everyone = 'fa-square';
+        var following = 'fa-square';
+      }else if(visibility == 'followers'){
+        var following = 'fa-square-check';
+        var everyone = 'fa-square';
+        var self = 'fa-square';
+      }else if(visibility == 'everyone'){
+        var everyone = 'fa-square-check';
+        var following = 'fa-square';
+        var self = 'fa-square';
+      }
+      showContainer.innerHTML = `
+          <div class="imgOptions">
+            <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
+            <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'photos', '${imgID}')"></i>
+            <i class="fa fa-earth optIcons" onclick="showPicOptions()"></i>
+            <div class="optionDropdown" style="display:none;">
+              <span class="title">Who can view?</span>
+
+              <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
+
+              <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
+
+              <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+            </div>
+          </div>
+            <img src="${path}" alt=""></img>`;
       disbaleScroll();
       window.scrollTo({
         top: 0,
@@ -56,13 +83,41 @@ function showImage(path){
     }
   }
   
-  function showVideo(path){
+  function showVideo(path, visibility, ID, ext, vidID){
     var showImageDiv = document.getElementById('imageShowDiv');
     if (showImageDiv.style.display == 'none') {
       showImageDiv.style.display = 'flex';
       var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-      showContainer.innerHTML = `<i class="fa fa-times fa-xl" onclick="removeImage()"></i>
-                                 <video controls controlsList="nodownload"> <source src="${path}" type="video/mp4"></vide>`;
+      if (visibility == 'self') {
+        var self = 'fa-square-check';
+        var everyone = 'fa-square';
+        var following = 'fa-square';
+      }else if(visibility == 'followers'){
+        var following = 'fa-square-check';
+        var everyone = 'fa-square';
+        var self = 'fa-square';
+      }else if(visibility == 'everyone'){
+        var everyone = 'fa-square-check';
+        var following = 'fa-square';
+        var self = 'fa-square';
+      }
+      showContainer.innerHTML = `
+              <div class="imgOptions">
+              <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
+              <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'videos', '${vidID}')"></i>
+              <i class="fa fa-earth optIcons" onclick="showPicOptions()"></i>
+              <div class="optionDropdown" style="display:none;">
+              <span class="title">Who can view?</span>
+
+                <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
+
+                <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
+
+                <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+
+              </div>
+            </div>
+            <video controls controlsList="nodownload"> <source src="${path}" type="video/mp4"></vide>`;
       disbaleScroll();
       window.scrollTo({
         top: 0,

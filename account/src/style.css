@@ -3,7 +3,7 @@
     /* max-width: max-content!important; */
 }
 .profileMainDiv{
-    max-width: none;
+    max-width: 1200px;
 }
 .leftSide{
     border: 1px solid grey;
@@ -575,6 +575,12 @@ margin-top: 10px;
 }
 
 
+
+
+
+
+
+
 .imageShowDiv{
     position: absolute;
     width: 100%;
@@ -584,6 +590,9 @@ margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#editMediaOptions{
+    background-color: transparent;
 }
 .imageShowDiv .imageContainer{
     display: flex;
@@ -607,25 +616,76 @@ margin-top: 10px;
     max-height: 100vh;
     object-fit: contain;
 }
-.imageShowDiv .imageContainer i{
+.imageShowDiv .imageContainer .imgOptions{
     position: absolute;
     right: 10px;
     top: 10px;
+    display: flex;
+    align-items: flex-end;
+    z-index: 999;
+    flex-direction: column;
+}
+
+.imageShowDiv .imageContainer .imgOptions .optIcons{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 30px;
     height: 30px;
+    background-color: white;
+    color: #3a3d40;
     line-height: 30px;
     text-align: center;
     border-radius: 50%;
-    background-color: #3a3d40;
-    color: white;
-    z-index: 999;
+    margin: 10px 0px;
 }
-.imageShowDiv .imageContainer i:hover{
+
+.optionDropdown{
+    display: flex;
+    color: rgb(52, 49, 49);
+    flex-direction: column;
+    margin-right: 40px;
+    margin-top: -39px;
+    box-shadow: 0 0 17px 5px;
+    background-color: transparent;
+    padding: 10px;
+    background-color: #a3a5ac;
+    border-radius: 15px;
+}
+.optionDropdown .options{
+    font-size: 20px;
+    padding: 3px 15px;
     cursor: pointer;
-    background-color: #202021;
+    font-weight: bolder;
+    margin-top: 3px;
+    background-color: rgb(232, 233, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.optionDropdown .options span{
+    margin-right: 15px;
+    min-width: 100px;
+}
+.optionDropdown .title{
+    margin: 5px;
+    font-weight: bold;
+}
+.optionDropdown .options:nth-child(2){
+    border-radius: 15px 15px 0px 0px;
+}
+.optionDropdown .options:last-child{
+    border-radius: 0px 0px 15px 15px;
+}
+.imageShowDiv .imageContainer .delete{
+    top: 50px;
+}
+.imageShowDiv .imageContainer .privacy{
+    top: 90px;
+}
+.imageShowDiv .imageContainer .imgOptions .optIcons:hover{
+    cursor: pointer;
+    background-color: #adadb4;
 }
 
 

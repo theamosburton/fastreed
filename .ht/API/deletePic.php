@@ -31,9 +31,9 @@ class deletePic{
         }elseif ($data['purpose'] == 'visibility') {
             if (!isset($data['value']) || empty($data['value'])) {
                 showMessage(false, 'Error 6');
-            }elseif ($data['whois'] == 'user') {
+            }elseif ($data['whois'] == 'User') {
                 $this->changeByUser();
-            }elseif ($data['whois'] == 'admin') {
+            }elseif ($data['whois'] == 'Admin') {
                 $this->changeByAdmin();
             }else{
                 showMessage(false, 'Error 5');
@@ -43,9 +43,9 @@ class deletePic{
                 showMessage(false, 'Error 3');
             }elseif (!isset($data['what']) || empty($data['what'])) {
                 showMessage(false, 'Error 10');
-            }elseif ($data['whois'] == 'user') {
+            }elseif ($data['whois'] == 'User') {
                 $this->deleteByUser($data['what']);
-            }elseif ($data['whois'] == 'admin') {
+            }elseif ($data['whois'] == 'Admin') {
                 $this->deleteByAdmin($data['what']);
             }else{
                 showMessage(false, 'Error 5');

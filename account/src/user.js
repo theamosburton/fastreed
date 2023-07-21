@@ -374,72 +374,135 @@ function unfollow(){
     unfollowUser();
 }
 
-function showPicOptions(no){
-  var options = document.querySelector(`.uploadedFile .uploadDivInside #picOptions${no}`);
+function showPicOptions(){
+  var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
   var isDisp = options.style.display;
   if(isDisp == 'none'){
       options.style.display = 'block';
   }else{
-      options.style.display = 'none';
+      options.style.display = 'none';   
   }
 }
 
 
 
 
-function changeImageVisibility(imgID, no, whois){
-  var field = document.getElementById(`visibilityAccess${no}`);
-  const changeVisibility = async () =>{
-    const url = '/.ht/API/deletePic.php';
-    var encyDat = {
-      'purpose': 'visibility',
-      'imgID': `${imgID}`,
-      'personID':`${ePID}`,
-      'whois':`${whois}`,
-      'value':`${field.value}`
-    };
-    const response = await fetch(url, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(encyDat)
-      });
-    var data = await response.json();
+function changeImageVisibility(imgID, value){
+  if (adminLogged) {
+    var whoIs = 'Admin';
+  }else{
+    var whoIs = 'User';
+  }
+  var impactId;
+  var foll = document.querySelector('#followersOption i');
+  var self = document.querySelector('#selfOption i');
+  var everyone = document.querySelector('#everyoneOption i');
+  var spinner = '<div class="spinner" style="margin-right:0px"></div>';
+  if (foll.innerHTML == spinner || self.innerHTML == spinner || everyone.innerHTML == spinner) {
+    alert('Already Editing');
+  }else if (value == 'followers') {
+    impactId = foll;
+    if (foll.classList.contains('fa-square')) {
+      foll.classList.remove('fa-square');
+    }
+    foll.style.display = 'block';
+    foll.innerHTML = spinner;
 
-    if (data) {
-      if (data.Result) {
-        location.reload();
+    if (self.classList.contains('fa-square-check')) {
+      self.classList.remove('fa-square-check');
+    }
+    self.classList.add('fa-square');
+
+
+    if (everyone.classList.contains('fa-square-check')) {
+      everyone.classList.remove('fa-square-check');
+    }
+    everyone.classList.add('fa-square');
+
+  }else if(value == 'everyone'){
+
+    impactId = everyone;
+    if (everyone.classList.contains('fa-square')) {
+      everyone.classList.remove('fa-square');
+    }
+    everyone.style.display = 'block';
+    everyone.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
+
+    if (self.classList.contains('fa-square-check')) {
+      self.classList.remove('fa-square-check');
+    }
+    self.classList.add('fa-square');
+
+
+    if (foll.classList.contains('fa-square-check')) {
+      foll.classList.remove('fa-square-check');
+    }
+    foll.classList.add('fa-square');
+  }else{
+    impactId = self;
+    if (self.classList.contains('fa-square')) {
+      self.classList.remove('fa-square');
+    }
+    self.style.display = 'block';
+    self.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
+
+    if (foll.classList.contains('fa-square-check')) {
+      foll.classList.remove('fa-square-check');
+    }
+    foll.classList.add('fa-square');
+
+
+    if (everyone.classList.contains('fa-square-check')) {
+      everyone.classList.remove('fa-square-check');
+    }
+    everyone.classList.add('fa-square');
+  }
+    // var field = document.getElementById(`visibilityAccess${no}`);
+    const changeVisibility = async () =>{
+      const url = '/.ht/API/deletePic.php';
+      var encyDat = {
+        'purpose': 'visibility',
+        'imgID': `${imgID}`,
+        'personID':`${ePID}`,
+        'whois':`${whoIs}`,
+        'value':`${value}`
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+        });
+      var data = await response.json();
+  
+      if (data) {
+        if (data.Result) {
+          impactId.classList.add('fa-square-check');
+          impactId.innerHTML = '';
+          impactId.style.display = 'flex';
+        }else{
+          alert(`${data.message}`);
+        }
       }else{
-        alert(`${data.message}`);
+        alert( "Can't Change");
       }
-    }else{
-      alert( "Can't Change");
     }
-  }
-  changeVisibility();
+    changeVisibility();
+
 }
 
-function deleteImage(imgID, ext, no, whois, what){
-  var delOpt = document.getElementById(`delOpt${no}`);
-  var pic = document.getElementById(`photo${no}`);
-  
-
-  function loadingAnimation() {
-    let dots = ''; // Initialize the dots
-  
-    function updateDots() {
-      document.getElementById(`delOpt${no}`).innerHTML = 'deleting'+ dots;
-      dots += '.'; // Increase the number of dots
-      if (dots.length > 5) {
-        dots = ''; // Reset the dots to start again
-      }
-    }
-  
-    setInterval(updateDots, 100); // Call updateDots every 300ms
+function deleteImage(imgID, ext, what, ID){
+  if (adminLogged) {
+    var whoIs = 'Admin';
+  }else{
+    var whoIs = 'User';
   }
-  
-  loadingAnimation();
+  var delIcon = document.querySelector('.imgOptions #deleteImageIcon');
+  delIcon.classList.remove('fa-trash');
+  delIcon.innerHTML = '<div class="spinner"></div>';
+  delIcon.style.display = "block";
+  delIcon.style.backgroundColor = "transparent";
  
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';
@@ -448,7 +511,7 @@ function deleteImage(imgID, ext, no, whois, what){
       'imgID': `${imgID}`,
       'extension': `${ext}`,
       'personID':`${ePID}`,
-      'whois':`${whois}`,
+      'whois':`${whoIs}`,
       'what' : `${what}`
     };
     const response = await fetch(url, {
@@ -462,11 +525,34 @@ function deleteImage(imgID, ext, no, whois, what){
     if (data) {
       if (data.Result) {
         setTimeout(function(){
-          pic.style.display = 'none';
-        }, 3000);
+          delIcon.innerHTML = '';
+          if (delIcon.classList.contains('fa-circle-info')) {
+              delIcon.classList.remove('fa-circle-info');
+          }
+          if (delIcon.classList.contains('fa-trash')) {
+            delIcon.classList.remove('fa-trash');
+          }
+          delIcon.classList.add('fa-check');
+          delIcon.style.backgroundColor = "lime";
+          
+          setTimeout(function(){
+            var showImageDiv = document.getElementById('imageShowDiv');
+            showImageDiv.style.display = "none";
+            document.getElementById(`${ID}`).remove();
+          }, 1000);
+        }, 1000);
         
       }else{
-        delOpt.innerHTML = `${data.message}`;
+        if (delIcon.classList.contains('fa-circle-info')) {
+            delIcon.classList.remove('fa-circle-info');
+        }
+        if (delIcon.classList.contains('fa-trash')) {
+          delIcon.classList.remove('fa-trash');
+        }
+        delIcon.classList.add('fa-circle-info');
+        delIcon.innerHTML = "";
+        delIcon.style.display = 'flex';
+        delIcon.style.backgroundColor = 'red';
       }
     }else{
       delOpt.innerHTML = "Can't Delete";
