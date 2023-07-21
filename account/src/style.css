@@ -924,6 +924,10 @@ transition: all .4s;
 }
 
 @media (max-width: 500px){
+    .mediaDiv .uploadDiv .uploadedFile {
+        margin-right: 10px;
+        margin-top: 10px;
+    }
     .leftSide{
         border: none!important;
         margin-top: 5px;
@@ -974,6 +978,10 @@ transition: all .4s;
 }
 
 @media (max-width: 350px){
+    .mediaDiv .uploadDiv .uploadedFile {
+        margin-right: 5px;
+        margin-top:5px;
+    }
     .account-settings .user-profile h3.user-name{
         font-size: 18px;
     }
