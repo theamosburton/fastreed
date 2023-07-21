@@ -34,6 +34,15 @@
         $data = $this->uploadData->getAllData($id);
         $data = array_reverse($data);
         $length = count($data);
+
+        if(!$length){
+            echo <<<HTML
+            <div class="noUpload"> 
+                <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+                <div> <p>No Media Uploaded!</p></div> </div>
+            HTML;
+        }
+
         for($i=0;$i < $length; $i++ ){
             $idn = $i+1;
             $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
@@ -44,7 +53,7 @@
             if($data[$i][6] == 'photos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showImage('{$pathImg}', '{$data[$i][8]}', '{$data[$i][2]}', '{$data[$i][7]}', 'photo{$idn}')">
-                        <img class="lazyload" src="$pathImg" alt="">
+                        <img class="lazyload" data-src="$pathImg" alt="">
                     </div>
                 HTML;
                 $what = 'photos';
