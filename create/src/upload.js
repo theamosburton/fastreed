@@ -253,7 +253,7 @@ class fetchMedia{
           var uploadedDiv = document.getElementById('uploads');
           uploadedDiv.innerHTML += `
             <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
-                <img data-src="${imgURL}" class="lazyload" >
+                <img src="${imgURL}" class="lazyload" >
             </div>
             `;
         };
