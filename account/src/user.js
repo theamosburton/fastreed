@@ -92,6 +92,9 @@ class showMenus{
     uploadMedia() {
       var fileInput = document.getElementById("uploadInputImage");
       var uploadMessage = document.getElementById('uploadMessage');
+      if (document.getElementById('noUploads')) {
+        document.getElementById('noUploads').remove();
+      }
 
       if (fileInput.files && fileInput.files[0]) {
        

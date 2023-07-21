@@ -37,7 +37,7 @@
 
         if(!$length){
             echo <<<HTML
-            <div class="noUpload"> 
+            <div class="noUpload" id="noUploads"> 
                 <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
                 <div> <p>No Media Uploaded!</p></div> </div>
             HTML;
@@ -62,7 +62,7 @@
             }elseif($data[$i][6] == 'videos'){
                 $whatToShow = <<<HTML
                     <div class="imgDiv" onclick="showVideo('{$pathVid}', '{$data[$i][8]}', '{$data[$i][2]}', '{$data[$i][7]}', 'photo{$idn}')">
-                        <video class="lazyload">
+                        <video class="lazyload" data-src="$pathVid">
                             <source src="{$pathVid}" type="video/mp4">
                         </video>
                     </div>
