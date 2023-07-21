@@ -40,7 +40,7 @@ if(HTTPS){
   isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&   
   $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'))
  {
-   $redirect = 'https://'.$reqDomain.$_SERVER['REQUEST_URI'];
+   $redirect = 'https://www'.$reqDomain.$_SERVER['REQUEST_URI'];
    header('HTTP/1.1 301 Moved Permanently');
    header('Location: ' . $redirect);
    exit();
