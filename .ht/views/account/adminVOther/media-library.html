@@ -38,6 +38,19 @@
         $length = count($data);
         for($i=0;$i < $length; $i++ ){
             $idn = $i+1;
+            $self = '';
+            $everyone = '';
+            $followers = '';
+            $self = '';
+            if($data[$i][8] == 'followers'){
+            $followers = 'selected';
+            }elseif($data[$i][8] == 'everyone'){
+            $everyone = 'selected';
+            }elseif($data[$i][8] == 'self'){
+                $self = 'selected';
+            }else{
+                $none = 'selected';
+            }
             $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
             $whatToShow;
