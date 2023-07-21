@@ -9,7 +9,7 @@
             <span class="infoValue"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];?>
             <?php
             if ($this->userData->getOtherData('username', $this->otherUsername)['DOB'] != null) {
-                if($canViewAge == 'everyone'){
+                if($canViewAge == 'users'){
                     echo '('.$this->userData->getOtherData('username', $this->otherUsername)['age'].')';
                 }elseif($canViewAge ==  'followers' && $isFollowingMe){
                     echo '('.$this->userData->getOtherData('username', $this->otherUsername)['age'].')';
@@ -27,7 +27,7 @@
         </div>
 
         <?php
-        if($canViewMail == 'everyone'){
+        if($canViewMail == 'users'){
             echo <<<HTML
                 <div class="infoDiv">
                     <span class="infoType"><i class="fa-solid fa-at fa-xl"></i></span>

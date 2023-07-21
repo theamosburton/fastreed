@@ -42,36 +42,47 @@ function exapndAndShrink(id){
 
 
 function showImage(path, visibility, ID, ext, imgID){
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     var showImageDiv = document.getElementById('imageShowDiv');
     if (showImageDiv.style.display == 'none') {
       showImageDiv.style.display = 'flex';
-      var showContainer = document.querySelector('#imageShowDiv .imageContainer');
       if (visibility == 'self') {
         var self = 'fa-square-check';
-        var everyone = 'fa-square';
+        var everyoneU = 'fa-square';
+        var everyoneA = 'fa-square';
         var following = 'fa-square';
       }else if(visibility == 'followers'){
         var following = 'fa-square-check';
-        var everyone = 'fa-square';
+        var everyoneU = 'fa-square';
+        var everyoneA = 'fa-square';
         var self = 'fa-square';
-      }else if(visibility == 'everyone'){
-        var everyone = 'fa-square-check';
+      }else if(visibility == 'anon'){
+        var everyoneA = 'fa-square-check';
         var following = 'fa-square';
+        var everyoneU = 'fa-square';
+        var self = 'fa-square';
+      }else if(visibility == 'users'){
+        var everyoneU = 'fa-square-check';
+        var following = 'fa-square';
+        var everyoneA = 'fa-square';
         var self = 'fa-square';
       }
+      
       showContainer.innerHTML = `
           <div class="imgOptions">
             <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
             <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'photos', '${imgID}')"></i>
-            <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
-            <div class="optionDropdown" style="display:none;">
+            <i class="fa fa-earth optIcons" id="earthIcon" onclick="showPicOptions('')"></i>
+            <div class="optionDropdown" id="optionDropdown" style="display:none;">
               <span class="title">Who can view?</span>
 
               <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self', '${imgID}', '${visibility}')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
 
               <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${imgID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
 
-              <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone', '${imgID}', '${visibility}')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+              <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${imgID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
+
+              <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${imgID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
@@ -80,6 +91,13 @@ function showImage(path, visibility, ID, ext, imgID){
         top: 0,
         behavior: 'smooth'
       });
+      
+    }
+
+    if (visibility == 'none') {
+      document.getElementById('earthIcon').remove();
+      document.getElementById('deleteImageIcon').remove();
+      document.getElementById('optionDropdown').remove();
     }
   }
   
@@ -90,15 +108,23 @@ function showImage(path, visibility, ID, ext, imgID){
       var showContainer = document.querySelector('#imageShowDiv .imageContainer');
       if (visibility == 'self') {
         var self = 'fa-square-check';
-        var everyone = 'fa-square';
+        var everyoneU = 'fa-square';
+        var everyoneA = 'fa-square';
         var following = 'fa-square';
       }else if(visibility == 'followers'){
         var following = 'fa-square-check';
-        var everyone = 'fa-square';
+        var everyoneU = 'fa-square';
+        var everyoneA = 'fa-square';
         var self = 'fa-square';
-      }else if(visibility == 'everyone'){
-        var everyone = 'fa-square-check';
+      }else if(visibility == 'anon'){
+        var everyoneA = 'fa-square-check';
         var following = 'fa-square';
+        var everyoneU = 'fa-square';
+        var self = 'fa-square';
+      }else if(visibility == 'users'){
+        var everyoneU = 'fa-square-check';
+        var following = 'fa-square';
+        var everyoneA = 'fa-square';
         var self = 'fa-square';
       }
       showContainer.innerHTML = `
@@ -113,7 +139,9 @@ function showImage(path, visibility, ID, ext, imgID){
 
                 <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${vidID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
 
-                <div class="options" id="everyoneOption" onclick="changeImageVisibility('${ID}', 'everyone', '${vidID}', '${visibility}')"><span>Everyone</span> <i class=" checkbox fa-regular ${everyone}"></i></div>
+                <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${vidID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
+
+              <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
 
               </div>
             </div>
@@ -123,6 +151,11 @@ function showImage(path, visibility, ID, ext, imgID){
         top: 0,
         behavior: 'smooth'
       });
+      if (visibility == 'none') {
+        document.getElementById('earthIcon').remove();
+        document.getElementById('deleteImageIcon').remove();
+        document.getElementById('optionDropdown').remove();
+      }
     }
   }
 
@@ -134,4 +167,70 @@ function showImage(path, visibility, ID, ext, imgID){
       showImageDiv.style.display = 'none';
       enableScroll();
     }
+  }
+
+
+  function follow(){
+    var followButton = document.getElementById('followButton');
+    followButton.innerHTML = '...';
+  
+    const followUser = async () =>{
+        const url = '/.ht/API/follow.php/?follow';
+        var encyDat = {
+          'username': `${currentUsername}`
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+          });
+        var data = await response.json();
+  
+        if (data) {
+          if (data.Result) {
+            followButton.innerHTML = 'Followed';
+            followButton.setAttribute( "onClick", "javascript: unfollow();");
+          }else{
+          followButton.innerHTML = `${data.message}`;
+          }
+        }else{
+            followButton.innerHTML = `${data.message}`;
+        }
+      }
+      followUser();
+  }
+  
+  
+  function unfollow(){
+    var followButton = document.getElementById('followButton');
+    followButton.innerHTML = '...';
+  
+    const unfollowUser = async () =>{
+        const url = '/.ht/API/follow.php/?unfollow';
+        var encyDat = {
+          'username': `${currentUsername}`
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+          });
+        var data = await response.json();
+  
+        if (data) {
+          if (data.Result) {
+            followButton.innerHTML = 'Follow';
+            followButton.setAttribute( "onClick", "javascript: follow();");
+          }else{
+            followButton.innerHTML = "Can't  unfollow";
+          }
+        }else{
+            followButton.innerHTML = "Can't  unfollow";
+        }
+      }
+      unfollowUser();
   }

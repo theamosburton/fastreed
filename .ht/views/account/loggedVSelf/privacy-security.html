@@ -5,12 +5,15 @@
 
     <?php
     $uEveryone = '';
+    $auEveryone = '';
     $ufollowers = '';
     $uself = '';
-    if($canViewUploads == 'followers'){
-      $ufollowers = 'selected';
-    }elseif($canViewUploads == 'everyone'){
+    if($canViewUploads == 'anon'){
+      $auEveryone = 'selected';
+    }elseif($canViewUploads == 'users'){
       $uEveryone = 'selected';
+    }elseif($canViewUploads == 'followers'){
+      $ufollowers = 'selected';
     }else{
       $uself = 'selected';
     }
@@ -22,7 +25,8 @@
         <span>Manage who can view your photos, videos,audios etc. Embedded media in posts or webstories is publicly accessible by default, this settings is limited to the dashboard.</span>
         <div class="mt-2" id="UploadsSection">
           <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Uploads')" id="UploadsAccess">
-            <option value="everyone" <?php echo $uEveryone; ?> >Everyone</option>
+            <option value="users" <?php echo $uEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $auEveryone; ?> >Anonymous</option>
             <option value="followers" <?php echo $ufollowers; ?> >Following</option>
             <option value="self" <?php echo $uself; ?> >Only Me</option>
           </select>
@@ -32,14 +36,15 @@
     </div>
     <?php
     $fEveryone = '';
+    $afEveryone = '';
     $ffollowers = '';
     $fself = '';
-    if($canViewContent == 'followers'){
-      $ffollowers = 'selected';
-    }elseif($canViewContent == 'everyone'){
+    if($canViewContent == 'anon'){
+      $afEveryone = 'selected';
+    }elseif($canViewContent == 'users'){
       $fEveryone = 'selected';
-    }else{
-      $fself = 'selected';
+    }elseif($canViewContent == 'followers'){
+      $ffollowers = 'selected';
     }
     
     ?>
@@ -49,7 +54,8 @@
         <span >Posts or webstories are publicly accessible by default, this settings is limited to the dashboard. Manage who can view it on dashboard</span>
         <div class="mt-2" id="ContentSection">
           <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Content')" id="ContentAccess">
-            <option value="everyone" <?php echo $fEveryone; ?> >Everyone</option>
+            <option value="users" <?php echo $fEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $afEveryone; ?> >Anonymous</option>
             <option value="followers" <?php echo $ffollowers; ?> >Following</option>
           </select>
         </div>
@@ -60,11 +66,14 @@
     <?php
     $eEveryone = '';
     $efollowers = '';
+    $aeEveryone = '';
     $eself = '';
-    if($canViewMail == 'followers'){
-      $efollowers = 'selected';
-    }elseif($canViewMail == 'everyone'){
+    if($canViewMail == 'anon'){
+      $aeEveryone = 'selected';
+    }elseif($canViewMail == 'users'){
       $eEveryone = 'selected';
+    }elseif($canViewMail == 'followers'){
+      $efollowers = 'selected';
     }else{
       $eself = 'selected';
     }
@@ -76,7 +85,8 @@
         <span>Default email visibility: <i>"Only Me"</i> you can manage who can view it</span>
         <div class=" mt-2" id= "MailSection">
           <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Mail')" id="MailAccess">
-            <option value="everyone" <?php echo $eEveryone; ?> >Everyone</option>
+            <option value="users" <?php echo $eEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $aeEveryone; ?> >Anonymous</option>
             <option value="followers" <?php echo $efollowers; ?> >Following</option>
             <option value="self" <?php echo $eself; ?> >Only Me</option>
           </select>
@@ -89,11 +99,14 @@
     <?php
     $aEveryone = '';
     $afollowers = '';
+    $aaEveryone = '';
     $aself = '';
-    if($canViewAge == 'followers'){
-      $afollowers = 'selected';
-    }elseif($canViewAge == 'everyone'){
+    if($canViewAge == 'anon'){
+      $aaEveryone = 'selected';
+    }elseif($canViewAge == 'users'){
       $aEveryone = 'selected';
+    }elseif($canViewAge == 'followers'){
+      $afollowers = 'selected';
     }else{
       $aself = 'selected';
     }
@@ -105,7 +118,8 @@
         <span>Manage who can see your Age on dashboard?</span>
         <div class=" mt-2" id="AgeSection">
           <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Age')" id="AgeAccess">
-            <option value="everyone" <?php echo $aEveryone; ?> >Everyone</option>
+            <option value="users" <?php echo $aEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $aaEveryone; ?> >Anonymous</option>
             <option value="followers" <?php echo $afollowers; ?> >Following</option>
             <option value="self" <?php echo $aself; ?> >Only Me</option>
           </select>

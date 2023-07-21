@@ -48,6 +48,7 @@
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
                     <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Content</a>
+                    <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt=details">About</a>
                     <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
                     
                 </div>
@@ -57,6 +58,14 @@
                 <div id="dashboardDiv" class="dashboardDiv contentView" style="display:none">
                 </div>
                 <!-- Dashboard Section -->
+
+                   <!-- Details Section -->
+                   <div id="detailsDiv" class="detailsDiv contentView" style="display:none">
+                    <?php
+                    include 'details.html';
+                    ?>
+                </div>
+                <!-- Details Section -->
 
                 <!-- Media Library Section -->
                 <div id="mediaDiv" class="mediaDiv contentView" style="display:none">

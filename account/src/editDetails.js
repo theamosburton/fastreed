@@ -745,13 +745,16 @@ function updateAccess(id){
           </select>`;
         }else{
           field.style.display = 'block';
-          var everyoneSel ='';
           var selfSel = ''; 
           var followersSel ='';
-          if (fieldValue == 'everyone') {
-            everyoneSel = 'selected';
+          var anonSel = '';
+          var usersSel = '';
+          if (fieldValue == 'anon') {
+            anonSel = 'selected';
           }else if(fieldValue == 'self'){
             selfSel = 'selected';
+          }else if(fieldValue == 'users'){
+            usersSel = 'selected';
           }else if (fieldValue == 'followers') {
             followersSel = 'selected';
           }
@@ -760,7 +763,8 @@ function updateAccess(id){
             selfSel = 'hidden';
           }
           fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
-          <option value="everyone" ${everyoneSel} >Everyone</option>
+          <option value="users" ${usersSel} >All Users</option>
+          <option value="anon" ${anonSel} >Anonymous</option>
           <option value="followers" ${followersSel} >Following</option>
           <option value="self" ${selfSel}>Only Me</option>
           </select>`;

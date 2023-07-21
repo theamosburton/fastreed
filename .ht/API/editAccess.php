@@ -48,7 +48,7 @@ class editAccess{
                 showMessage(false, 'Not Updated');
             }
         }else{
-            if ($data['value'] == 'self' || $data['value'] == 'followers' || $data['value'] == 'everyone') {
+            if ($data['value'] == 'self' || $data['value'] == 'followers' || $data['value'] == 'anon' || $data['value'] == 'users') {
                 $updatedValue = $data['value'];
             }else {
                 $updatedValue = 'self';

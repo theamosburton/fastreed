@@ -319,70 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function follow(){
-  var followButton = document.getElementById('followButton');
-  followButton.innerHTML = '...';
 
-  const followUser = async () =>{
-      const url = '/.ht/API/follow.php/?follow';
-      var encyDat = {
-        'username': `${currentUsername}`
-      };
-      const response = await fetch(url, {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(encyDat)
-        });
-      var data = await response.json();
-
-      if (data) {
-        if (data.Result) {
-          followButton.innerHTML = 'Followed';
-          followButton.setAttribute( "onClick", "javascript: unfollow();");
-        }else{
-        followButton.innerHTML = `${data.message}`;
-        }
-      }else{
-          followButton.innerHTML = `${data.message}`;
-      }
-    }
-    followUser();
-}
-
-
-function unfollow(){
-  var followButton = document.getElementById('followButton');
-  followButton.innerHTML = '...';
-
-  const unfollowUser = async () =>{
-      const url = '/.ht/API/follow.php/?unfollow';
-      var encyDat = {
-        'username': `${currentUsername}`
-      };
-      const response = await fetch(url, {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(encyDat)
-        });
-      var data = await response.json();
-
-      if (data) {
-        if (data.Result) {
-          followButton.innerHTML = 'Follow';
-          followButton.setAttribute( "onClick", "javascript: follow();");
-        }else{
-          followButton.innerHTML = "Can't  unfollow";
-        }
-      }else{
-          followButton.innerHTML = "Can't  unfollow";
-      }
-    }
-    unfollowUser();
-}
 
 function showPicOptions(what){
   var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
@@ -411,9 +348,10 @@ function changeImageVisibility(imgID, value, divID, OLDvisible){
   var impactId;
   var foll = document.querySelector('#followersOption i');
   var self = document.querySelector('#selfOption i');
-  var everyone = document.querySelector('#everyoneOption i');
+  var everyoneA = document.querySelector('#everyoneOptionA i');
+  var everyoneU = document.querySelector('#everyoneOptionU i');
   var spinner = '<div class="spinner" style="margin-right:0px"></div>';
-  if (foll.innerHTML == spinner || self.innerHTML == spinner || everyone.innerHTML == spinner) {
+  if (foll.innerHTML == spinner || self.innerHTML == spinner || everyoneU.innerHTML == spinner || everyoneA.innerHTML == spinner) {
     alert('Already Editing');
   }else if (value == 'followers') {
     impactId = foll;
@@ -429,25 +367,58 @@ function changeImageVisibility(imgID, value, divID, OLDvisible){
     self.classList.add('fa-square');
 
 
-    if (everyone.classList.contains('fa-square-check')) {
-      everyone.classList.remove('fa-square-check');
+    if (everyoneU.classList.contains('fa-square-check')) {
+      everyoneU.classList.remove('fa-square-check');
     }
-    everyone.classList.add('fa-square');
+    everyoneU.classList.add('fa-square');
 
-  }else if(value == 'everyone'){
-
-    impactId = everyone;
-    if (everyone.classList.contains('fa-square')) {
-      everyone.classList.remove('fa-square');
+    if (everyoneA.classList.contains('fa-square-check')) {
+      everyoneA.classList.remove('fa-square-check');
     }
-    everyone.style.display = 'block';
-    everyone.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
+    everyoneA.classList.add('fa-square');
+
+  }else if(value == 'anon'){
+    impactId = everyoneA;
+    if (everyoneA.classList.contains('fa-square')) {
+      everyoneA.classList.remove('fa-square');
+    }
+    everyoneA.style.display = 'block';
+    everyoneA.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
 
     if (self.classList.contains('fa-square-check')) {
       self.classList.remove('fa-square-check');
     }
     self.classList.add('fa-square');
 
+
+    if (everyoneU.classList.contains('fa-square-check')) {
+      everyoneU.classList.remove('fa-square-check');
+    }
+    everyoneU.classList.add('fa-square');
+
+    if (foll.classList.contains('fa-square-check')) {
+      foll.classList.remove('fa-square-check');
+    }
+    foll.classList.add('fa-square');
+  }else if(value == 'users'){
+
+    impactId = everyoneU;
+    if (everyoneU.classList.contains('fa-square')) {
+      everyoneU.classList.remove('fa-square');
+    }
+    everyoneU.style.display = 'block';
+    everyoneU.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
+
+    if (self.classList.contains('fa-square-check')) {
+      self.classList.remove('fa-square-check');
+    }
+    self.classList.add('fa-square');
+
+
+    if (everyoneA.classList.contains('fa-square-check')) {
+      everyoneA.classList.remove('fa-square-check');
+    }
+    everyoneA.classList.add('fa-square');
 
     if (foll.classList.contains('fa-square-check')) {
       foll.classList.remove('fa-square-check');
@@ -467,10 +438,15 @@ function changeImageVisibility(imgID, value, divID, OLDvisible){
     foll.classList.add('fa-square');
 
 
-    if (everyone.classList.contains('fa-square-check')) {
-      everyone.classList.remove('fa-square-check');
+    if (everyoneU.classList.contains('fa-square-check')) {
+      everyoneU.classList.remove('fa-square-check');
     }
-    everyone.classList.add('fa-square');
+    everyoneU.classList.add('fa-square');
+
+    if (everyoneA.classList.contains('fa-square-check')) {
+      everyoneA.classList.remove('fa-square-check');
+    }
+    everyoneA.classList.add('fa-square');
   }
     var field = document.querySelector(`#${divID} .imgDiv`);
     const changeVisibility = async () =>{

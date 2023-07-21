@@ -135,7 +135,7 @@ class getFastreedContent {
 
                 if ($forDomain ||  $forDomainAlias) {
                     $return = true;
-                }elseif ($access == 'everyone') {
+                }elseif ($access == 'anon') {
                     $return = true;
                 }elseif (isset($_SESSION['LOGGED_USER'])) {
                     if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
@@ -147,6 +147,8 @@ class getFastreedContent {
                             $return = true;
                         }
                     }elseif($_SESSION['LOGGED_USER'] == $ownerUID){
+                        $return = true;
+                    }elseif ($access == 'users') {
                         $return = true;
                     }
                 }
