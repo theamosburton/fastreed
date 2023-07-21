@@ -1,16 +1,12 @@
 <div class="photosLibrary">
-    <div class="title ml-2"> Media Library</div>
+    <div class="uploadsHead" id="uploadHead">
+        <label  for="uploadInputImage" class="labelUpload" >Upload New&nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+        <input onchange="new showMenus().uploadMedia()" type="file" id="uploadInputImage" hidden>
+        </label>
+    </div>
+    
     
     <div class="photosDiv uploadDiv">
-
-        <!-- <form enctype="multipart/form-data">
-            <div class="uploadFile" id="uploadBox">
-                <i class="fa fa-cloud-arrow-up"></i>
-                <label for="uploadInputImage" id="uploadMessage" >Upload</label>
-                <input onchange="new showMenus().uploadMedia()" type="file" id="uploadInputImage" hidden>
-            </div>
-        </form> -->
-        
 
         <div class="uploadedFile" id="tempUploadBox" style="display: none;">
             <div class="uploadDivInside">

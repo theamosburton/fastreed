@@ -176,6 +176,22 @@
     color: #b8bcc5;
     font-weight: bolder;
 }
+.photosLibrary .uploadsHead{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.photosLibrary .uploadsHead .labelUpload{
+    margin-bottom: 0px;
+    background-color: #076a79;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: px;
+}
+.photosLibrary .uploadsHead .labelUpload:hover{
+    background-color: #17a2b8;
+    cursor: pointer;
+}
 .contentView .contentTopics{
     margin: 0;
     border: 1px solid grey;
@@ -562,8 +578,10 @@ margin-top: 10px;
     background-color: #2b2e36;
 }
 .uploadProgressDiv{
+    position: absolute;
+    bottom: 0px;
     background-color: #28a745;
-    border-radius: 40px;
+    /* border-radius: 40px; */
     height: 20px;
     width: 0%;
     display: flex;

@@ -113,10 +113,8 @@ class showMenus{
       var self = this;
       var binaryImage;
       var imagePreview = document.getElementById("tempImage");
-      var uploadBox = document.getElementById('uploadBox');
       imagePreview.innerHTML = '';
       var tempBox = document.getElementById('tempUploadBox');
-      uploadBox.style.display = 'none';
       tempBox.style.display = 'flex';
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -128,11 +126,11 @@ class showMenus{
         binaryImage = e.target.result;
         var blobImage = self.dataURItoBlob(binaryImage)
         console.log(blobImage);
-        self.uploadImageToServer(blobImage, 'image');
+        self.uploadImageToServer(blobImage, 'image', tempBox);
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
-    uploadImageToServer(binaryFile, utype) {
+    uploadImageToServer(binaryFile, utype, tempBox) {
         var formData = new FormData();
         // Determine the file extension based on the MIME type
         var mimeString = binaryFile.type;
@@ -186,12 +184,18 @@ class showMenus{
                 }, 3000);
               }
             }else{
-              document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
-              document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
+              document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
+              document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
+              setTimeout(function(){
+                tempBox.style.display = "none";
+              }, 3000);
             }
           } else {
-            // Upload failed, handle the error
-            console.log('Upload failed. Error: ' + xhr.status);
+            document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
+            document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
+            setTimeout(function(){
+              tempBox.style.display = "none";
+            }, 3000);
           }
         });
     
@@ -205,10 +209,8 @@ class showMenus{
       var self = this;
       var videoPreview = document.getElementById('tempVideo');
       var tempBoxVideo = document.getElementById('tempUploadBoxVideo');
-      var uploadBox = document.getElementById('uploadBox');
       videoPreview.innerHTML = '';
       tempBoxVideo.style.display = 'flex';
-      uploadBox.style.display = 'none';
       var reader = new FileReader();
       reader.onload = function (e) {
         var videoElement = document.createElement("video");
@@ -220,11 +222,11 @@ class showMenus{
         videoElement.src = videoURL;
         videoPreview.appendChild(videoElement);
         var file = fileInput.files[0];
-        self.uploadVideoToServer(file, 'video');
+        self.uploadVideoToServer(file, 'video', tempBoxVideo);
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
-    uploadVideoToServer(file, utype) {
+    uploadVideoToServer(file, utype, tempBoxVideo) {
       var filename = file.name;
       var extension = filename.split('.').pop();
       var formData = new FormData();
@@ -251,16 +253,21 @@ class showMenus{
           if (response.Result) {
             document.querySelector('#uploadProgressDivVideo').innerHTML = `Processing...`;
             setTimeout(function(){
-            location.reload();
+              location.reload();
           }, 3000);
           }else{
-            document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
-            document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
+            document.querySelector('#uploadProgressDivVideo').innerHTML = 'Someting Went Wrong' ;
+            document.querySelector('#uploadProgressDivVideo').style.backgroundColor = 'red';
+            setTimeout(function(){
+              tempBoxVideo.style.display = 'none';
+            }, 3000);
           }
         } else {
-          document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').style.display = 'block' ;
-          document.querySelector('.uploadDpDiv .uploadDpContainer #errorMessage').innerHTML = 'Someting Went Wrong' ;
-          console.log('Upload failed. Error: ' + xhr.status);
+          document.querySelector('#uploadProgressDivVideo').innerHTML = 'Someting Went Wrong' ;
+          document.querySelector('#uploadProgressDivVideo').style.backgroundColor = 'red';
+          setTimeout(function(){
+            tempBoxVideo.style.display = 'none';
+          }, 3000);
         }
       });
       xhr.send(formData);
