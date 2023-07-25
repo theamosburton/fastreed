@@ -851,7 +851,7 @@ transition: all .4s;
     border-radius: 20px;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-color: ; */
+    background-position: center;
 }
 .webstoriesDiv .webstories .webstory .title{
     padding: 5px 10px 10px 10px;
@@ -860,6 +860,7 @@ transition: all .4s;
     width: 100%;
     display: flex;
     justify-content: center;
+    max-width: 210px;
 }
 .webstoriesDiv .webstories .webstory .options{
     display: flex;

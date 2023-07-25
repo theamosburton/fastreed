@@ -43,9 +43,9 @@ class Editor{
                                 "blobUrl":'',
                                 "styles":{
                                     "overlayColor": "#000000",
-                                    "overlayOpacity": "1",
+                                    "overlayOpacity": "50",
                                     "mediaFit":"cover",
-                                    "overlayArea": "25%"
+                                    "overlayArea": "35%"
                                 },
                                 "type":'',
                                 "url":''
@@ -65,9 +65,7 @@ class Editor{
                         };
 
                         if (this.editorId.children.length <= 0) {
-                            var overlay = document.createElement('div');
-                            overlay.classList.add('overlay');
-                            overlay.id = `overlay${this.presentLayerIndex}`;
+                            
 
                             var layersTop = document.createElement('div');
                             layersTop.classList.add('layersTop');
@@ -88,7 +86,6 @@ class Editor{
                                 <small> 9:16, 3:4 and 2:3 </small>
                             </div>`;
                             this.editorId.appendChild(newLayer);
-                            newLayer.appendChild(overlay);
                             newLayer.appendChild(layersTop);
                         }
                     
@@ -140,9 +137,9 @@ class Editor{
                 "blobUrl":'',
                 "styles":{
                     "overlayColor": "#000000",
-                    "overlayOpacity": "1",
+                    "overlayOpacity": "50",
                     "mediaFit":"cover",
-                    "overlayArea": "25%"
+                    "overlayArea": "35%"
                 },
                 "type":'',
                 "url":''
@@ -170,9 +167,6 @@ class Editor{
             document.getElementById(`layer${i}`).style.display = 'none';
         }
 
-        var overlay = document.createElement('div');
-        overlay.classList.add('overlay');
-        overlay.id = `overlay${this.presentLayerIndex}`;
 
         var layersTop = document.createElement('div');
         layersTop.classList.add('layersTop');
@@ -191,7 +185,6 @@ class Editor{
             <small> 9:16, 3:4 and 2:3 </small>
         </div>
         `;
-        newLayer.appendChild(overlay);
         newLayer.appendChild(layersTop);
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
@@ -232,12 +225,12 @@ class Editor{
 
                             <div class="div">
                                 <span>Overlay Opacity</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="100">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="50">
                             </div>
 
                             <div class="div">
                                 <span>Overlay Area</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="20">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="35">
                             </div>
                         </div>
                     </div>
@@ -501,9 +494,9 @@ class Editor{
             "layers":editor.layers,
             "metaData":editor.metaData
         };
-        console.log(jsObject);
+        var metadata = editor.metaData;
         var jsonData = JSON.stringify(jsObject);
-        
+        metadata = JSON.stringify(metadata);
         var self = this;
         var saving = document.getElementById('saveStory');
         saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
@@ -513,7 +506,8 @@ class Editor{
             'purpose' : 'update',
             'whois': `${self.whoIs}`,
             'storyID': `${self.storyID}`,
-            'data': `${jsonData}`
+            'data': `${jsonData}`,
+            'metaData': `${metadata}`
             };
             const response = await fetch(url, {
                 method: 'post',

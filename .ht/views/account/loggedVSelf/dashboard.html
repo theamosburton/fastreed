@@ -74,13 +74,17 @@ if($canCreate == 'NOR'){
         if($stories[$i][7] == '{}'){
             $setUrl = '/assets/img/nothing.png';
         }else{
-            $setUrl = $webstories['firstImage'];
+            $setUrl = $webstoryData['layers'][$i]['media']['url'];
         }
-
+        if(!empty($webstoryData['metaData']['title'])){
+            $title = $webstoryData['metaData']['title'];
+        }else{
+            $title = $stories[$i][8];
+        }
         $webstories[$i] = '
         <div class="webstory" id="webstory'.$i.'">
             <div class="background" style="background-image: url(' . $setUrl . ');">
-                <div class="title">' . $stories[$i][8] . '</div>
+                <div class="title">' . $title . '</div>
                 <div class="options">
                     <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\')"> <i class="fa fa-pen"></i></div>
                     <div class="publish"> <i class="fa fa-paper-plane"></i></div>
