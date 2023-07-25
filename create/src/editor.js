@@ -58,7 +58,7 @@ class Editor{
                             'otherText': {
                                 "text":'',
                                 "fontFamily":"inherit",
-                                "fontWeight":"100",
+                                "fontWeight":"400",
                                 "fontSize":"medium"
                             }
                         };
@@ -246,7 +246,7 @@ class Editor{
                             <div class="div">
                                 <span>Font weight</span>
                                 <select id="titleFontWeight${this.presentLayerIndex}" onchange="edits.changeFontWeight()" class="value inputText">
-                                    <option value="100">Light</option>
+                                    <option value="400">Light</option>
                                     <option value="700" >Bold</option>
                                     <option value="1000" selected>Bolder</option>
                                 </select>
@@ -706,7 +706,7 @@ class Editor{
                 tffcs = this.layers[j].title.fontFamily;
             }
 
-            if (this.layers[j].title.fontWeight == '100') {
+            if (this.layers[j].title.fontWeight == '400') {
                 tfwl = 'selected';
             } else if (this.layers[j].title.fontWeight == '600') {
                 tfwb = 'selected';
@@ -740,7 +740,7 @@ class Editor{
                 offcs = this.layers[j].otherText.fontFamily;
             }
 
-            if (this.layers[j].otherText.fontWeight == '100') {
+            if (this.layers[j].otherText.fontWeight == '400') {
                 ofwl = 'selected';
             } else if (this.layers[j].otherText.fontWeight == '600') {
                 ofwb = 'selected';
@@ -792,7 +792,7 @@ class Editor{
                             <div class="div">
                                 <span>Font weight</span>
                                 <select id="titleFontWeight${j}" onchange="edits.changeFontWeight()" class="value inputText">
-                                    <option  ${tfwl} value="100">Light</option>
+                                    <option  ${tfwl} value="400">Light</option>
                                     <option  ${tfwb} value="600" >Bold</option>
                                     <option  ${tfwbr} value="1000">Bolder</option>
                                 </select>
