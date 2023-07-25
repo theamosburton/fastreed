@@ -898,7 +898,7 @@ class Editor{
             document.getElementById(`otherText${j}`).style.fontFamily = this.layers[j].otherText.fontFamily; 
             document.getElementById(`otherText${j}`).style.fontWeight = this.layers[j].otherText.fontWeight; 
 
-            // console.log(document.getElementById(`mediaContent${j}`));
+            
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers[j].media.styles.mediaFit}`;
             }
