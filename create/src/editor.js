@@ -154,7 +154,7 @@ class Editor{
             'otherText': {
                 "text":'',
                 "fontFamily":"inherit",
-                "fontWeight":"100",
+                "fontWeight":"400",
                 "fontSize":"medium"
             }
         };
