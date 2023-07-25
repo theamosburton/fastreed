@@ -160,27 +160,36 @@ class Edits{
       }
   }
 
-    overlayOpacity(){
-      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
-        alert('Add photo or video');
-      }else{
-        var mediaOverlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`);
-        this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = `${mediaOverlayOpacity.value}`;
-        document.getElementById(`overlay${this.editor.presentLayerIndex}`).style.opacity = `${mediaOverlayOpacity.value}%`;
-      }
-        
+
+  overlayEdit(){
+    var overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`);
+    var overlayColor = document.getElementById(`mediaOverlayColor${this.editor.presentLayerIndex}`);
+    
+    var overlayArea = document.getElementById(`overlayArea${this.editor.presentLayerIndex}`);
+
+    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = `${overlayOpacity.value}`;
+    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayColor = overlayColor.value;
+    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayArea = overlayArea.value;
+    overlayColor = this.hexToRgb(overlayColor.value);
+
+    if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
+      alert('Add photo or video');
+    }else if (overlayArea.value == '100%') {
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity.value-10}%), rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
+      
+    }else if(overlayArea.value >= '80%'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity.value-50}%), rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
+      
+    }else if(overlayArea.value >= '60%'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity.value-50}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
+    }else if(overlayArea.value >= '40%'){
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity.value-50}%),rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%))`;
+    }
+    else if(overlayArea.value >= '20%'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(${overlayColor}, ${overlayOpacity.value-50}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
     }
 
-    mediaOverlayColor(){
-      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
-        alert('Add photo or video');
-      }else{
-        var overlayColor = document.getElementById(`mediaOverlayColor${this.editor.presentLayerIndex}`);
-        this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayColor = overlayColor.value;
-        
-        document.getElementById(`overlay${this.editor.presentLayerIndex}`).style.backgroundColor = `${overlayColor.value}`;
-      }
-    }
+  }
 
     mediaFit(){
       if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
@@ -320,6 +329,19 @@ class Edits{
   }
   // Meta Data //
 
+
+hexToRgb(hexColor) {
+    // Remove the # symbol if present
+    hexColor = hexColor.replace("#", "");
+  
+    // Convert the hex values to decimal values
+    const r = parseInt(hexColor.substring(0, 2), 16);
+    const g = parseInt(hexColor.substring(2, 4), 16);
+    const b = parseInt(hexColor.substring(4, 6), 16);
+  
+    // Return the RGB format with commas
+    return `${r}, ${g}, ${b}`;
+  } 
 }
 
 let edits = new Edits();

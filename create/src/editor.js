@@ -44,7 +44,8 @@ class Editor{
                                 "styles":{
                                     "overlayColor": "#000000",
                                     "overlayOpacity": "1",
-                                    "mediaFit":"cover"
+                                    "mediaFit":"cover",
+                                    "overlayArea": "25%"
                                 },
                                 "type":'',
                                 "url":''
@@ -140,7 +141,8 @@ class Editor{
                 "styles":{
                     "overlayColor": "#000000",
                     "overlayOpacity": "1",
-                    "mediaFit":"cover"
+                    "mediaFit":"cover",
+                    "overlayArea": "25%"
                 },
                 "type":'',
                 "url":''
@@ -225,12 +227,17 @@ class Editor{
                             </div>
                             <div class="div">
                                 <span>Overlay Colour</span>
-                                <input onchange="edits.mediaOverlayColor()" class="value inputText" type="color" id="mediaOverlayColor${this.presentLayerIndex}" name="favcolor" value="#000000">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="color" id="mediaOverlayColor${this.presentLayerIndex}" name="favcolor" value="#000000">
                             </div>
 
                             <div class="div">
                                 <span>Overlay Opacity</span>
-                                <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="1">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="100">
+                            </div>
+
+                            <div class="div">
+                                <span>Overlay Area</span>
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="20">
                             </div>
                         </div>
                     </div>
@@ -664,21 +671,24 @@ class Editor{
     updateStylesheet(){
         var styleBox = document.getElementById('objectOptions');
         for (let j = 0; j < this.layers.length; j++) {
-            var mfc = '', mff = '', mfn = '', mfcn = '', moc = '', moo = '';
+            var mfc = '', mff = '', mfn = '', mfcn = '', moc = '', moo = '', moa = '';
 
             var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '';
             var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offcs = '';
             
             // Media //
-            if (this.layers[j].media.mediaFit == 'cover') {
+            if (this.layers[j].media.styles.mediaFit == 'cover') {
                 mfc = 'selected';
-            } else if (this.layers[j].media.mediaFit == 'fill') {
+            } else if (this.layers[j].media.styles.mediaFit == 'fill') {
                 mff = 'selected';
-            } else if (this.layers[j].media.mediaFit == 'none') {
+            } else if (this.layers[j].media.styles.mediaFit == 'none') {
                 mfn = 'selected';
-            } else if(this.layers[j].media.mediaFit == 'contain') {
+            } else if(this.layers[j].media.styles.mediaFit == 'contain') {
                 mfcn = 'selected';
             }
+
+           
+            moa = this.layers[j].media.styles.overlayArea;
             moc = this.layers[j].media.styles.overlayColor;
             moo = this.layers[j].media.styles.overlayOpacity;
             // Media //
@@ -771,12 +781,17 @@ class Editor{
                             </div>
                             <div class="div">
                                 <span>Overlay Colour</span>
-                                <input onchange="edits.mediaOverlayColor()" class="value inputText" type="color" id="mediaOverlayColor${j}" name="favcolor" value="${moc}">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="color" id="mediaOverlayColor${j}" name="favcolor" value="${moc}">
                             </div>
 
                             <div class="div">
                                 <span>Overlay Opacity</span>
-                                <input onchange="edits.overlayOpacity()" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
+                            </div>
+
+                            <div class="div">
+                                <span>Overlay Area</span>
+                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${j}" value="${moa}">
                             </div>
                         </div>
                     </div>
@@ -902,13 +917,38 @@ class Editor{
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers[j].media.styles.mediaFit}`;
             }
-            document.getElementById(`overlay${j}`).style.opacity  = `${this.layers[j].media.styles.overlayOpacity}%`;
-            document.getElementById(`overlay${j}`).style.backgroundColor  = this.layers[j].media.styles.overlayColor;
-
-        }
+            var overlayColor = this.hexToRgb(this.layers[j].media.styles.overlayColor);
+            var overlayOpacity = parseInt(this.layers[j].media.styles.overlayOpacity, 10);
+            var overlayArea = this.layers[j].media.styles.overlayArea;
+            if (overlayArea == '100%') {
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity-10}%), rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+                
+            }else if(overlayArea >= '80%'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity-50}%), rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+                
+            }else if(overlayArea >= '60%'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity-50}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+            }else if(overlayArea >= '40%'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity-50}%),rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%))`;
+            }
+            else if(overlayArea >= '20%'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(${overlayColor}, ${overlayOpacity-50}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+            }
+            }
         
     }
-
+    hexToRgb(hexColor) {
+        // Remove the # symbol if present
+        hexColor = hexColor.replace("#", "");
+      
+        // Convert the hex values to decimal values
+        const r = parseInt(hexColor.substring(0, 2), 16);
+        const g = parseInt(hexColor.substring(2, 4), 16);
+        const b = parseInt(hexColor.substring(4, 6), 16);
+      
+        // Return the RGB format with commas
+        return `${r}, ${g}, ${b}`;
+      } 
 
 }
 let editor = new Editor();
