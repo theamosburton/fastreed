@@ -43,7 +43,7 @@ class Editor{
                                 "blobUrl":'',
                                 "styles":{
                                     "overlayColor": "#000000",
-                                    "overlayCapacity": "1",
+                                    "overlayOapacity": "1",
                                     "mediaFit":"cover"
                                 },
                                 "type":'',
@@ -139,7 +139,7 @@ class Editor{
                 "blobUrl":'',
                 "styles":{
                     "overlayColor": "#000000",
-                    "overlayCapacity": "1",
+                    "overlayOapacity": "1",
                     "mediaFit":"cover"
                 },
                 "type":'',
