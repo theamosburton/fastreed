@@ -88,28 +88,28 @@
                                 <div class="options">
                                     <div>
                                         <span>URL</span>
-                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="type-your-webstory-link">
+                                        <input onkeypress="edits.updateMetaData('')" class="value inputText text" type="text" id="storyUrl" placeholder="type-your-webstory-link" value="">
                                     </div>
                                 </div>
 
                                 <div class="options">
                                     <div>
                                         <span>Title</span>
-                                        <input class="value inputText text" type="text" id="mediaCaption" placeholder="Add Title">
+                                        <input onkeypress="edits.updateMetaData('')" class="value inputText text" type="text" id="storyTitle" placeholder="Add Title" value="">
                                     </div>
                                 </div>
 
                                 <div class="options">
                                     <div>
                                         <span>Description</span>
-                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Describe your story"></textarea>
+                                        <textarea onkeypress="edits.updateMetaData('')" class="value inputText text" name="" id="storyDescription" cols="22" placeholder="Describe your story" value=""></textarea>
                                     </div>
                                 </div>
 
                                 <div class="options">
                                     <div>
                                         <span>Keywords</span>
-                                        <textarea class="value inputText text" name="" id="" cols="22" placeholder="Keywords"></textarea>
+                                        <textarea onkeypress="edits.updateMetaData('')" class="value inputText text" name="" id="storyKeywords" cols="22" placeholder="Keywords" value=""></textarea>
                                     </div>
                                 </div>
                             </div>

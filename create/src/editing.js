@@ -148,14 +148,25 @@ class Edits{
         this.editor.layers[this.editor.presentLayerIndex].media.url = url;
     }
 
+
+    updateMedia(type){
+      var deleteMediaButton = document.getElementById('deleteMedia');
+      if (type == 'image') {
+          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
+      }else if(type == 'video'){
+          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('video')");
+      }else{
+          deleteMediaButton.removeAttribute("onclick");
+      }
+  }
+
     overlayOpacity(){
       if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
         alert('Add photo or video');
       }else{
         var mediaOverlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`);
         this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = `${mediaOverlayOpacity.value}`;
-        this.editor.mediaOverlayDiv.style.opacity =`${mediaOverlayOpacity.value}%`;
-        console.log(this.editor.mediaOverlayDiv.style.opacity);
+        document.getElementById(`overlay${this.editor.presentLayerIndex}`).style.opacity = `${mediaOverlayOpacity.value}%`;
       }
         
     }
@@ -165,10 +176,9 @@ class Edits{
         alert('Add photo or video');
       }else{
         var overlayColor = document.getElementById(`mediaOverlayColor${this.editor.presentLayerIndex}`);
-        console.log(this.editor.layers[this.editor.presentLayerIndex]);
         this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayColor = overlayColor.value;
         
-       this.editor.mediaOverlayDiv.style.backgroundColor =`${overlayColor.value}`;
+        document.getElementById(`overlay${this.editor.presentLayerIndex}`).style.backgroundColor = `${overlayColor.value}`;
       }
     }
 
@@ -191,7 +201,7 @@ class Edits{
       if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
         alert('Add Title!');
       }else{
-        if (x == 'self') {
+        if (x == 'select') {
           var fontSize = document.getElementById(`titleFontSize${this.editor.presentLayerIndex}`);
           var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
           applyto.style.fontSize = `${fontSize.value}`;
@@ -209,7 +219,7 @@ class Edits{
         alert('Add Title!');
       }else{
         var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-        if (x == 'self') {
+        if (x == 'custom') {
           var fontFamily = document.getElementById(`customFontFamily${this.editor.presentLayerIndex}`);
           applyto.style.fontFamily = `${fontFamily.value}`;
           this.editor.layers[this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
@@ -243,7 +253,7 @@ class Edits{
       if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
         alert('Add text!');
       }else{
-        if (x == self) {
+        if (x == 'select') {
           var fontSize = document.getElementById(`otherFontSize${this.editor.presentLayerIndex}`);
           var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
           applyto.style.fontSize = `${fontSize.value}`;
@@ -254,10 +264,8 @@ class Edits{
           applyto.style.fontSize = `${fontSize.value}`;
           this.editor.layers[this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
         }
-        
       }
     }
-
     editText(x){
       var text = document.getElementById(`${x}`);
       this.editor.layers[this.editor.presentLayerIndex].otherText.text = `${text.innerHTML}`;
@@ -277,7 +285,7 @@ class Edits{
         alert('Add text!');
       }else{
         var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-        if (x == 'self') {
+        if (x == 'custom') {
           var fontFamily = document.getElementById(`otherCustomFontFamily${this.editor.presentLayerIndex}`);
           applyto.style.fontFamily = `${fontFamily.value}`;
           this.editor.layers[this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
@@ -291,6 +299,26 @@ class Edits{
     // Text Editing
 
 
+     // Meta Data //
+     updateMetaData(x){
+      var url = document.getElementById("storyUrl");
+      var title = document.getElementById("storyTitle");
+      var description = document.getElementById("storyDescription");
+      var keywords = document.getElementById("storyKeywords");
+    if (x == 'update') {
+      url.value = this.editor.metaData.url;
+      title.value =  this.editor.metaData.title
+      description.value =  this.editor.metaData.description;
+      keywords.value = this.editor.metaData.keywords;
+    }else{
+      this.editor.metaData.url = url.value;
+      this.editor.metaData.title = title.value;
+      this.editor.metaData.description = description.value;
+      this.editor.metaData.keywords =keywords.value;
+    }
+    
+  }
+  // Meta Data //
 
 }
 

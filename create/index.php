@@ -189,4 +189,94 @@ class userEditor extends createContent{
         HTML;
     }
 }
+
+
+
+
+
+class adminEditor extends createContent{
+    function __construct(){
+
+         // Create an instance to create/save activity
+         $this->captureVisit = new VisitorActivity();
+         $this->BASIC_FUNC = new BasicFunctions();
+         $DB = new DataBase();
+         $this->DB_CONN = $DB->DBConnection();
+         $this->AUTH = new Auth();
+         // Get css,js version from captureVisit
+         $this->version = $this->captureVisit->VERSION;
+         $this->version = implode('.', str_split($this->version, 1));
+         $this->userData = new getLoggedData();
+         $this->uploadData = new getUploadData();
+        // $this->const4Inherited();
+        if (isset($_GET['type']) && !empty($_GET['type'])) {
+            if ($_GET['type'] != 'webstory') {
+                $this->createWebstory();
+            }else if (!isset($_GET['ID']) || empty($_GET['ID'])) {
+                $this->createWebstory();
+            }else if($this->checkID($_GET['ID'], 'user', 'stories')){
+                $this->editWebstory();
+            }else{
+                $this->createWebstory();
+            }
+        }
+    }
+    private function createWebstory(){
+        if (!$this->checkCanCreate('user')) {
+            header('Location:/account/?message=cannot create stories');
+        }else{
+            if ($this->checkStories('user')) {
+                $number = $this->checkStories('user')+1;
+            }else{
+                $number = 1;
+            }
+            $ordinal = $this->BASIC_FUNC->convertToOrdinal($number);
+
+            $title = 'My '.$ordinal. ' webstory';
+            
+            $personID = $_SESSION['LOGGED_USER'];
+            $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
+            $firstEdit = time();
+            $tdate = date('Y-m-d');
+            $status = 'drafted ';
+            $access = 'self';
+            $storyData = '{}';
+            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
+            $result = mysqli_query($this->DB_CONN, $sql);
+            if ($result) {
+                header("Location:/create/?type=webstory&ID=".$storyID);
+            }else{
+                header('Location:/account/');
+            }
+        } 
+    }
+
+
+
+    private function editWebstory(){
+        echo <<<HTML
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        HTML;
+        echo  
+        '<script> 
+            var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
+            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
+            var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
+            var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
+         </script>';
+
+        include '../.ht/views/create/head.html';
+
+        include '../.ht/views/create/body.html';
+
+        include '../.ht/views/create/foot.html';
+
+
+        echo <<<HTML
+        </html>
+        HTML;
+    }
+}
 ?>

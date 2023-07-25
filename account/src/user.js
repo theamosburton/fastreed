@@ -545,6 +545,7 @@ function deleteImage(imgID, ext, what, ID){
   delIcon.innerHTML = '<div class="spinner"></div>';
   delIcon.style.display = "block";
   delIcon.style.backgroundColor = "transparent";
+  delIcon.style.boxShadow = "none";
  
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';
@@ -576,6 +577,7 @@ function deleteImage(imgID, ext, what, ID){
           }
           delIcon.classList.add('fa-check');
           delIcon.style.backgroundColor = "lime";
+          delIcon.style.boxShadow = "0 0 10px";
           
           setTimeout(function(){
             var showImageDiv = document.getElementById('imageShowDiv');
