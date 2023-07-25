@@ -597,7 +597,7 @@ class Editor{
                     
                     var layer = document.getElementById(`layer${layerId}`);
                     var imageElement = document.createElement('img');
-                    imageElement.id = `mediaContent${editor.presentLayerIndex}`;
+                    imageElement.id = `mediaContent${i}`;
                     imageElement.src = this.layers[i].media.url;
                     layer.appendChild(imageElement);
                     editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
