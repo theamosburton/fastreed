@@ -172,7 +172,6 @@ class showProfile {
         // ********************************************** //
     }   
 
-
     protected function checkUserExits($x){
         $return = false;
         $sql = "SELECT * FROM account_details WHERE username = '$x'";
@@ -185,6 +184,13 @@ class showProfile {
         }
         return $return;
     }
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
+
 }
 
 class loggedAdminVother extends showProfile{
@@ -236,6 +242,7 @@ class loggedAdminVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+        $this->closeConnection();
    }
 }
 
@@ -295,9 +302,8 @@ class loggedVself extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+        $this->closeConnection();
    }
-
-
 }
 
 class loggedVother extends showProfile{ 
@@ -342,7 +348,9 @@ class loggedVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+        $this->closeConnection();
    }
+   
 }
 
 class nonLoggedVother extends showProfile{
@@ -384,7 +392,9 @@ class nonLoggedVother extends showProfile{
         HTML;    
     // ********************************************** //
         $this->addFooter();
+        $this->closeConnection();
    }
+   
 }
 
 ?>
