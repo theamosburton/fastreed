@@ -45,7 +45,6 @@ if (HTTPS) {
     }
     
   }
-}
 
 function getFullSelfURL() {
   $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
