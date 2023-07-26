@@ -35,22 +35,23 @@ include_once($GLOBALS['STORIES']);
 
 if (HTTPS) {
   $reqDomain = $_SERVER['HTTP_HOST'];
-  if (!(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) {
-    // Redirect to HTTPS version
-    $redirect = 'https://' . $reqDomain . $_SERVER['REQUEST_URI'];
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location: ' . $redirect);
-    exit();
-  }
-
   // Check if the domain starts with 'www.'
-  if (strpos($reqDomain, 'www.') !== 0) {
-    // Redirect to www version
-    $redirect = 'https://www.' . $reqDomain . $_SERVER['REQUEST_URI'];
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location: ' . $redirect);
-    exit();
+  if (strpos(getFullSelfURL(), 'https') !== 0) {
+      // Redirect to www version
+      $redirect = 'https://www.' . $reqDomain . $_SERVER['REQUEST_URI'];
+      header('HTTP/1.1 301 Moved Permanently');
+      header('Location: ' . $redirect);
+      exit();
+    }
+    
   }
+}
+
+function getFullSelfURL() {
+  $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+  $host = $_SERVER['HTTP_HOST'];
+  $uri = $_SERVER['REQUEST_URI'];
+  return $protocol . '://' . $host . $uri;
 }
 
 
