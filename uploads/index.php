@@ -81,7 +81,7 @@ class getFastreedContent {
         header('Content-Disposition: inline'); // Set to inline instead of attachment
         ob_clean();
         flush();
-        readfile($filepath);
+        // readfile($filepath);
     }
 
 
@@ -92,7 +92,7 @@ class getFastreedContent {
         header('Content-Disposition: inline'); // Set to inline instead of attachment
         ob_clean();
         flush();
-        readfile($filepath);
+        // readfile($filepath);
     }
 
 
@@ -103,7 +103,7 @@ class getFastreedContent {
         header('Content-Disposition: inline'); // Set to inline instead of attachment
         ob_clean();
         flush();
-        readfile($filepath);
+        // readfile($filepath);
     }
 
     private function checkUpload(){
