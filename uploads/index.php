@@ -80,8 +80,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
-        ob_clean();
-        flush();
+        // ob_clean();
+        // flush();
         readfile($filepath);
     }
 
@@ -91,8 +91,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
-        ob_clean();
-        flush();
+        // ob_clean();
+        // flush();
         readfile($filepath);
     }
 
@@ -102,8 +102,8 @@ class getFastreedContent {
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
-        ob_clean();
-        flush();
+        // ob_clean();
+        // flush();
         readfile($filepath);
     }
 
