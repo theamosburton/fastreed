@@ -99,8 +99,13 @@ class getLoggedData{
                 $bio = $row['bio'];
                 $name = $row['fullName'];
                 $today = new DateTime();
-                $diff = $today->diff(new DateTime($DOB));
-                $age = $diff->y;
+                if ($DOB) {
+                    $diff = $today->diff(new DateTime($DOB));
+                    $age = $diff->y;
+                }else{
+                    $age = null;
+                }
+                
                 $email = $row['emailID'];
                 $userType = 'User';
                 $websiteUrl = $row['websiteUrl'];
