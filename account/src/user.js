@@ -370,7 +370,7 @@ function showInfo(what){
 
 function copyLink(path){
    // The link to be copied
-   const linkToCopy = domainName+path;
+   const linkToCopy = 'https://'+domainName+path;
 
    // Create a hidden textarea element
    const textarea = document.getElementById("linkToCopy");
