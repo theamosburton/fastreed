@@ -51,8 +51,6 @@ class createContent{
         $this->BASIC_FUNC->closeConnection();
         $this->captureVisit->closeConnection();
     }
-
-
     protected function checkID($ID, $who, $type){
         $return = false;
         if ($who == 'admin') {
@@ -70,7 +68,6 @@ class createContent{
 
         return $return;
     }
-
     protected function checkCanCreate($who){
         $return = false;
         if ($who == 'admin') {
@@ -148,9 +145,9 @@ class userEditor extends createContent{
         $this->captureVisit->closeConnection();
     }
     public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
+        if ($this->DB_CONN) {
+            mysqli_close($this->DB_CONN);
+            $this->DB_CONN = null; // Set the connection property to null after closing
         }
     }
     private function createWebstory(){
