@@ -531,9 +531,7 @@ class Editor{
 
 
     updateStory(){
-        
         this.totalLayers = this.layers.length;
-       
         for (let  i= 0; i < this.totalLayers; i++) {
             if (this.layers[i].title.text == '') {
                 if (i == 0) {
@@ -556,9 +554,6 @@ class Editor{
             }else{
                 var othertext = this.layers[i].otherText.text;
             }
-           
-
-            
 
             this.presentLayerIndex = 0;
             this.presentLayer  = this.presentLayerIndex + 1 ;
@@ -569,9 +564,6 @@ class Editor{
             this.editorId.appendChild(newLayer);
             this.presentLayerDiv = document.getElementById('layer0');
             document.getElementById(`layer${i}`).style.display = 'none';
-            var overlay = document.createElement('div');
-            overlay.classList.add('overlay');
-            overlay.id = `overlay${i}`;
     
             var layersTop = document.createElement('div');
             layersTop.classList.add('layersTop');
@@ -593,7 +585,7 @@ class Editor{
                 </div>`;
             }
             
-            if (this.layers[i].media == '{}') {
+            if (Object.keys(this.layers[i].media).length  === 0) {
                 if (i == 0) {
                     newLayer.innerHTML = `
                     <div class="placeholder" id="placeholder${i}">
@@ -612,66 +604,63 @@ class Editor{
                     </div>
                     `;
                 }
-            }else{
-                if (this.layers[i].media.type == 'image') {
-                    var layerId =  i;
-                    if (document.getElementById(`videoControls${layerId+1}`)) {
-                      document.getElementById(`videoControls${layerId+1}`).remove();
+            }else if (this.layers[i].media.type == 'image') {
+                var layerId =  i;
+                if (document.getElementById(`videoControls${layerId+1}`)) {
+                    document.getElementById(`videoControls${layerId+1}`).remove();
+                }
+                edits.updateMedia('image');
+                
+                var layer = document.getElementById(`layer${layerId}`);
+                var imageElement = document.createElement('img');
+                imageElement.id = `mediaContent${i}`;
+                imageElement.src = this.layers[i].media.url;
+                layer.appendChild(imageElement);
+                editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
+                var screenWidth = window.innerWidth;
+                if (screenWidth < 800) {
+                    if (leftSection.style.display = 'flex') {
+                    leftSection.style.display = 'none';
+                    hsLeft.style.display = 'flex';
                     }
-                    edits.updateMedia('image');
-                    
-                    var layer = document.getElementById(`layer${layerId}`);
-                    var imageElement = document.createElement('img');
-                    imageElement.id = `mediaContent${i}`;
-                    imageElement.src = this.layers[i].media.url;
-                    layer.appendChild(imageElement);
-                    editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
-                    var screenWidth = window.innerWidth;
-                    if (screenWidth < 800) {
-                      if (leftSection.style.display = 'flex') {
-                        leftSection.style.display = 'none';
-                        hsLeft.style.display = 'flex';
-                      }
-                      if (screenWidth < 600) {
-                        hsRight.style.display = 'flex';
-                      }
+                    if (screenWidth < 600) {
+                    hsRight.style.display = 'flex';
                     }
-                  }else if(this.layers[i].media.type  == 'video'){
-                    edits.updateMedia('video');
-                    var layerId =  editor.presentLayerIndex;
-                    var layer = document.getElementById(`layer${layerId}`);
-              
-                    var videoElement = document.createElement('video');
-                    videoElement.src = this.layers[i].media.url;
-                    videoElement.type = 'video/mp4';
-                    videoElement.id = `mediaContent${editor.presentLayerIndex}`;
-                    var contorlsElements = document.createElement('div');
-                    contorlsElements.id = `videoControls${editor.presentLayer}`;
-                    contorlsElements.className = 'videoControls';
-                    contorlsElements.innerHTML = `
-                    <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
-                    <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
-                    `;
-              
-                    layer.appendChild(contorlsElements);
-                    layer.appendChild(videoElement);
-                    editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
-                    editor.playPauseMedia();
-                    editor. muteUnmute();
-                    var screenWidth = window.innerWidth;
-                    if (screenWidth < 800) {
-                      if (leftSection.style.display = 'flex') {
-                        leftSection.style.display = 'none';
-                        hsLeft.style.display = 'flex';
-                      }
-                      if (screenWidth < 600) {
-                        hsRight.style.display = 'flex';
-                      }
+                }
+            }else if(this.layers[i].media.type  == 'video'){
+                edits.updateMedia('video');
+                var layerId =  editor.presentLayerIndex;
+                var layer = document.getElementById(`layer${layerId}`);
+            
+                var videoElement = document.createElement('video');
+                videoElement.src = this.layers[i].media.url;
+                videoElement.type = 'video/mp4';
+                videoElement.id = `mediaContent${editor.presentLayerIndex}`;
+                var contorlsElements = document.createElement('div');
+                contorlsElements.id = `videoControls${editor.presentLayer}`;
+                contorlsElements.className = 'videoControls';
+                contorlsElements.innerHTML = `
+                <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
+                <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
+                `;
+            
+                layer.appendChild(contorlsElements);
+                layer.appendChild(videoElement);
+                editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
+                editor.playPauseMedia();
+                editor. muteUnmute();
+                var screenWidth = window.innerWidth;
+                if (screenWidth < 800) {
+                    if (leftSection.style.display = 'flex') {
+                    leftSection.style.display = 'none';
+                    hsLeft.style.display = 'flex';
+                    }
+                    if (screenWidth < 600) {
+                    hsRight.style.display = 'flex';
                     }
                 }
             }
-            
-            newLayer.appendChild(overlay);
+        
             newLayer.appendChild(layersTop);
             this.presentLayerDiv.style.display = 'flex';
             this.playPauseLastMedia('add');
@@ -681,7 +670,6 @@ class Editor{
             document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
             document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
         }
-       
         this.updateStylesheet();
         edits.updateMetaData('update');
     }
@@ -696,20 +684,24 @@ class Editor{
             var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offcs = '';
             
             // Media //
-            if (this.layers[j].media.styles.mediaFit == 'cover') {
-                mfc = 'selected';
-            } else if (this.layers[j].media.styles.mediaFit == 'fill') {
-                mff = 'selected';
-            } else if (this.layers[j].media.styles.mediaFit == 'none') {
-                mfn = 'selected';
-            } else if(this.layers[j].media.styles.mediaFit == 'contain') {
-                mfcn = 'selected';
+            if (Object.keys(this.layers[j].media).length  != 0) {
+                if (this.layers[j].media.styles.mediaFit == 'cover') {
+                    mfc = 'selected';
+                } else if (this.layers[j].media.styles.mediaFit == 'fill') {
+                    mff = 'selected';
+                } else if (this.layers[j].media.styles.mediaFit == 'none') {
+                    mfn = 'selected';
+                } else if(this.layers[j].media.styles.mediaFit == 'contain') {
+                    mfcn = 'selected';
+                }
+                moa = this.layers[j].media.styles.overlayArea;
+                moc = this.layers[j].media.styles.overlayColor;
+                moo = this.layers[j].media.styles.overlayOpacity;
             }
+           
 
            
-            moa = this.layers[j].media.styles.overlayArea;
-            moc = this.layers[j].media.styles.overlayColor;
-            moo = this.layers[j].media.styles.overlayOpacity;
+            
             // Media //
             
             // Title //
@@ -931,37 +923,28 @@ class Editor{
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers[j].media.styles.mediaFit}`;
             }
-            var overlayOpacity = parseInt(this.layers[j].media.styles.overlayOpacity, 10);
-            var overlayArea = this.layers[j].media.styles.overlayArea;
-            if (overlayArea == '100') {
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                
-            }else if(overlayArea >= '80'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                
-            }else if(overlayArea >= '60'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-            }else if(overlayArea >= '40'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
+            if (Object.keys(this.layers[j].media).length  != 0) {
+                var overlayOpacity = parseInt(this.layers[j].media.styles.overlayOpacity, 10);
+                var overlayArea = this.layers[j].media.styles.overlayArea;
+                if (overlayArea == '100') {
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    
+                }else if(overlayArea >= '80'){
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    
+                }else if(overlayArea >= '60'){
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                }else if(overlayArea >= '40'){
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
+                }
+                else if(overlayArea >= '20'){
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                }
             }
-            else if(overlayArea >= '20'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-            }
+            
             }
         
     }
-    hexToRgb(hexColor) {
-        // Remove the # symbol if present
-        hexColor = hexColor.replace("#", "");
-      
-        // Convert the hex values to decimal values
-        const r = parseInt(hexColor.substring(0, 2), 16);
-        const g = parseInt(hexColor.substring(2, 4), 16);
-        const b = parseInt(hexColor.substring(4, 6), 16);
-      
-        // Return the RGB format with commas
-        return `${r}, ${g}, ${b}`;
-      } 
 
 }
 let editor = new Editor();

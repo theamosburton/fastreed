@@ -193,7 +193,7 @@ class Edits{
       if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
         alert('Add photo or video');
       }else{
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity+5}%),rgba(0, 0, 0, ${overlayOpacity+10}%),rgba(0, 0, 0, ${overlayOpacity+20}%))`;
       }
     }else{
       if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
