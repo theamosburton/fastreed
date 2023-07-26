@@ -105,9 +105,9 @@ class createContent{
         return $return;
     }
     public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
+        if ($this->DB_CONN) {
+            mysqli_close($this->DB_CONN);
+            $this->DB_CONN = null; // Set the connection property to null after closing
         }
     }
 }
