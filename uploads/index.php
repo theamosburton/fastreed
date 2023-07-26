@@ -137,8 +137,6 @@ class getFastreedContent {
 
                 $forDomain = ($baseUrl == 'https://'.DOMAIN.'/web-stories' || $baseUrl == 'https://'.DOMAIN.'/posts');
                 $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/web-stories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
-
-                    var_dump($_SESSION['LOGGED_USER']);
                 if ($forDomain ||  $forDomainAlias) {
                     $return = true;
                 }elseif ($access == 'anon') {
