@@ -605,60 +605,37 @@ class Editor{
                     `;
                 }
             }else if (this.layers[i].media.type == 'image') {
-                var layerId =  i;
-                if (document.getElementById(`videoControls${layerId+1}`)) {
-                    document.getElementById(`videoControls${layerId+1}`).remove();
+                if (document.getElementById(`videoControls${i+1}`)) {
+                    document.getElementById(`videoControls${i+1}`).remove();
                 }
                 edits.updateMedia('image');
                 
-                var layer = document.getElementById(`layer${layerId}`);
+                var layer = document.getElementById(`layer${i}`);
                 var imageElement = document.createElement('img');
                 imageElement.id = `mediaContent${i}`;
                 imageElement.src = this.layers[i].media.url;
                 layer.appendChild(imageElement);
-                editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
-                var screenWidth = window.innerWidth;
-                if (screenWidth < 800) {
-                    if (leftSection.style.display = 'flex') {
-                    leftSection.style.display = 'none';
-                    hsLeft.style.display = 'flex';
-                    }
-                    if (screenWidth < 600) {
-                    hsRight.style.display = 'flex';
-                    }
-                }
+            
             }else if(this.layers[i].media.type  == 'video'){
                 edits.updateMedia('video');
                 var layerId =  editor.presentLayerIndex;
-                var layer = document.getElementById(`layer${layerId}`);
+                var layer = document.getElementById(`layer${i}`);
             
                 var videoElement = document.createElement('video');
                 videoElement.src = this.layers[i].media.url;
                 videoElement.type = 'video/mp4';
-                videoElement.id = `mediaContent${editor.presentLayerIndex}`;
+                videoElement.id = `mediaContent${i}`;
                 var contorlsElements = document.createElement('div');
-                contorlsElements.id = `videoControls${editor.presentLayer}`;
+                contorlsElements.id = `videoControls${i+1}`;
                 contorlsElements.className = 'videoControls';
                 contorlsElements.innerHTML = `
                 <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
                 <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
                 `;
-            
                 layer.appendChild(contorlsElements);
                 layer.appendChild(videoElement);
-                editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
                 editor.playPauseMedia();
-                editor. muteUnmute();
-                var screenWidth = window.innerWidth;
-                if (screenWidth < 800) {
-                    if (leftSection.style.display = 'flex') {
-                    leftSection.style.display = 'none';
-                    hsLeft.style.display = 'flex';
-                    }
-                    if (screenWidth < 600) {
-                    hsRight.style.display = 'flex';
-                    }
-                }
+                editor.muteUnmute();
             }
         
             newLayer.appendChild(layersTop);
