@@ -478,7 +478,6 @@ class Editor{
                 presentLayerMedia.pause();
             }
         }
-        
     }
 
     saveStory(){
@@ -635,12 +634,12 @@ class Editor{
                 layer.appendChild(contorlsElements);
                 layer.appendChild(videoElement);
                 // editor.playPauseMedia();
-                editor.muteUnmute();
+                // editor.muteUnmute();
             }
         
             newLayer.appendChild(layersTop);
             this.presentLayerDiv.style.display = 'flex';
-            this.playPauseLastMedia('add');
+            // this.playPauseLastMedia('add');
             this.layersAhead = this.totalLayers - this.presentLayer;
             this.layersBack = this.totalLayers - this.layersAhead-1;
             document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
