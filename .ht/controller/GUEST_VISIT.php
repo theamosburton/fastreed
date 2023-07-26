@@ -44,6 +44,7 @@ class GuestsVisits
       }else {
         $this->addNewVisitor();
       }
+      $this->closeConnection();
   }
 
   public function addNewVisitor()
@@ -181,8 +182,7 @@ class GuestsVisits
     $result = mysqli_query($this->DB, $sql);
   }
 
-  public function closeConnection()
-  {
+  public function closeConnection(){
       if ($this->DB) {
           mysqli_close($this->DB);
           $this->DB = null; // Set the connection property to null after closing

@@ -17,6 +17,7 @@ class getStoriesData{
                 $return = $row;
             }
         }
+        $this->closeConnection();
         return $return;
     }
     public function closeConnection()

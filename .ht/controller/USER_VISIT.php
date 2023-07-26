@@ -35,6 +35,7 @@ class UsersVisits
         }
       }
     }
+    $this->closeConnection();
   }
 
   public function sessionExist(){

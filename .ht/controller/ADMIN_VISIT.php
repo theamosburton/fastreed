@@ -45,6 +45,7 @@ class AdminVisits
         }
       }
     }
+    $this->closeConnection();
   }
 
 

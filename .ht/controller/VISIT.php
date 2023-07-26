@@ -138,19 +138,16 @@ class VisitorActivity
               unset($_SESSION['GSI']);
             }
             $this->USER_VISITED->userVisited();
-            $this->USER_VISITED->closeConnection();
           }else {
             setcookie("authStatus","UserID Not Found", time()+10, '/');
             setcookie("UID",FALSE,time()-3600);
             $this->GUEST_VISITED->guestVisited();
-            $this->GUEST_VISITED->closeConnection();
           }
       }else {
         // No Cookie value Mean an anonymous user
         setcookie("authStatus","Cookie Not Found", time()+10, '/');
         setcookie("UID",FALSE,time()-3600);
         $this->GUEST_VISITED->guestVisited();
-        $this->GUEST_VISITED->closeConnection();
       }
     }elseif (isset($_COOKIE['AID'])) {
       if (!empty($_COOKIE['AID'])) {
@@ -165,23 +162,19 @@ class VisitorActivity
             unset($_SESSION['GSI']);
           }
           $this->ADMIN_VISITED->adminVisited();
-          $this->ADMIN_VISITED->closeConnection();
         }else {
           // Wrong Cookie means anonymous User
           setcookie("AID",FALSE,time()-3600);
           $this->GUEST_VISITED->guestVisited();
-          $this->GUEST_VISITED->closeConnection();
         }
       }else {
         // Empty Cookie value means anonymous user
         setcookie("AID",FALSE,time()-3600);
         $this->GUEST_VISITED->guestVisited();
-        $this->GUEST_VISITED->closeConnection();
       }
     }else {
       // No Cookie means anonymous user
       $this->GUEST_VISITED->guestVisited();
-      $this->GUEST_VISITED->closeConnection();
     }
   }
 
