@@ -17,8 +17,9 @@ class getUploadData{
                 $return = $row;
             }
         }
-        $this->closeConnection();
+        
         return $return;
+        $this->closeConnection();
         
     }
     public function closeConnection(){

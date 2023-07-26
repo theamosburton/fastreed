@@ -60,12 +60,13 @@ class getFastreedContent {
                 header('Content-Disposition: inline; filename=favicon.ico');
                 ob_clean();
                 flush();
-                readfile($filepath);
+                // readfile($filepath);
             }
         }
         $this->closeConnection();
         $this->userData->closeConnection();
     }
+
     public function closeConnection(){
         if ($this->DB) {
             mysqli_close($this->DB);
