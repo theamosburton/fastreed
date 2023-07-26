@@ -235,18 +235,27 @@ createImageElement(imgURL, ulink, u) {
   this.uploadsData['upload' + u] = {};
   this.uploadsData['upload' + u].orglink = ulink;
   var uploadedDiv = document.getElementById('uploads');
-  uploadedDiv.innerHTML += `
-    <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
-      <img src="${imgURL}" class="lazyload">
-    </div>
-  `;
+  if (uploadedDiv.innerHTML == '') {
+    uploadedDiv.innerHTML = `
+      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
+        <img src="${imgURL}" class="lazyload">
+      </div>
+    `;
+  }else{
+    uploadedDiv.innerHTML += `
+      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
+        <img src="${imgURL}" class="lazyload">
+      </div>
+    `;
+  }
 }
 
 createVideoElement(videoURL, ulink, u) {
   this.uploadsData['upload' + u] = {};
   this.uploadsData['upload' + u].orglink = ulink;
   var uploadedDiv = document.getElementById('uploads');
-  uploadedDiv.innerHTML += `
+  if (uploadedDiv.innerHTML == '') {
+    uploadedDiv.innerHTML = `
     <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${videoURL}', 'video', '${ulink}')">
       <video class="lazyload">
         <source src="${videoURL}" type="video/mp4">
@@ -258,6 +267,20 @@ createVideoElement(videoURL, ulink, u) {
       </div>
     </div>
   `;
+  }else{
+    uploadedDiv.innerHTML += `
+      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${videoURL}', 'video', '${ulink}')">
+        <video class="lazyload">
+          <source src="${videoURL}" type="video/mp4">
+        </video>
+        <div class="fileInfo">
+          <svg aria-label="Clip" color="rgb(255, 255, 255)" fill="rgb(255, 255, 255)" height="18" role="img" viewBox="0 0 24 24" width="18">
+            <path d="..."></path>
+          </svg>
+        </div>
+      </div>
+    `;
+  }  
 }
 
 async fetchAndDisplayMedia(u) {
