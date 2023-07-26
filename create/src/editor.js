@@ -64,8 +64,6 @@ class Editor{
                         };
 
                         if (this.editorId.children.length <= 0) {
-                            
-
                             var layersTop = document.createElement('div');
                             layersTop.classList.add('layersTop');
                             layersTop.innerHTML = `
@@ -79,8 +77,7 @@ class Editor{
                             newLayer.id = `layer${this.presentLayerIndex}`;
                             newLayer.className = 'layers';
                             newLayer.innerHTML = `<div class="placeholder" id="placeholder${this.presentLayerIndex}">
-                                <p> Add thumbnail</p>
-                                <p> Photo/Video</p>
+                                <p> Add thumbnail photo</p>
                                 <small> Recomended ratios are </small>
                                 <small> 9:16, 3:4 and 2:3 </small>
                             </div>`;
@@ -600,8 +597,7 @@ class Editor{
                 if (i == 0) {
                     newLayer.innerHTML = `
                     <div class="placeholder" id="placeholder${i}">
-                        <p> Add thumbnail</p>
-                        <p> Photo/Video</p>
+                        <p> Add thumbnail Photo</p>
                         <small> Recomended ratios are </small>
                         <small> 9:16, 3:4 and 2:3 </small>
                     </div>
