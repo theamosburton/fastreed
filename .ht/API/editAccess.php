@@ -24,7 +24,7 @@ class editAccess{
         }else{
             $this->updateAccess();
         }
-        $this.closeConnection();
+        $this->closeConnection();
     }
     public function closeConnection()
     {
