@@ -3,6 +3,11 @@ class Edits{
         this.editor = editor;
     }
 
+    initializeVars(){
+      this.overlayArea = this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayArea;
+      this.overlayOpacity = this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity;
+    }
+
 
     //Expanding Options
     expandOptions(id, func){
@@ -149,7 +154,7 @@ class Edits{
     }
 
 
-    updateMedia(type){
+  updateMedia(type){
       var deleteMediaButton = document.getElementById('deleteMedia');
       if (type == 'image') {
           deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
@@ -161,46 +166,55 @@ class Edits{
   }
 
 
-  overlayEdit(){
-    var overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`);
-    var overlayColor = document.getElementById(`mediaOverlayColor${this.editor.presentLayerIndex}`);
-    
-    var overlayArea = document.getElementById(`overlayArea${this.editor.presentLayerIndex}`);
-
-    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = `${overlayOpacity.value}`;
-    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayColor = overlayColor.value;
-    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayArea = overlayArea.value;
-    overlayColor = this.hexToRgb(overlayColor.value);
-
-    if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
-      alert('Add photo or video');
-    }else if (overlayArea.value == '100%') {
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity.value-10}%), rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
-      
-    }else if(overlayArea.value >= '80%'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity.value-50}%), rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
-      
-    }else if(overlayArea.value >= '60%'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity.value-50}%), rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
-    }else if(overlayArea.value >= '40%'){
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity.value-50}%),rgba(${overlayColor}, ${overlayOpacity.value}%), rgba(${overlayColor}, ${overlayOpacity.value}%))`;
+  overlayEdit(x){
+    this.initializeVars();
+    if (x == 'overlayArea') {
+      this.overlayArea = document.getElementById(`overlayArea${this.editor.presentLayerIndex}`).value;
+    }else if(x == 'overlayOpacity'){
+      this.overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`).value;
     }
-    else if(overlayArea.value >= '20%'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(${overlayColor}, ${overlayOpacity.value-50}%),rgba(${overlayColor}, ${overlayOpacity.value}%))`;
-    }
+   
 
-  }
-
-    mediaFit(){
-      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
+    var overlayArea = this.overlayArea;
+    var overlayOpacity = this.overlayOpacity;
+    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
+    this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayArea = overlayArea;
+    if (this.editor.presentLayerIndex == 0) {
+      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
         alert('Add photo or video');
       }else{
-        var mediaFit = document.getElementById(`mediaFit${this.editor.presentLayerIndex}`);
-        var mediaContent = document.getElementById(`mediaContent${this.editor.presentLayerIndex}`);
-        this.editor.layers[this.editor.presentLayerIndex].media.styles.mediaFit = mediaFit.value;
-        mediaContent.style.objectFit = `${mediaFit.value}`;
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+      }
+    }else{
+      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
+        alert('Add photo or video');
+      }else if (overlayArea == '100') {
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity+3}%),rgba(0, 0, 0, ${overlayOpacity+6}%),rgba(0, 0, 0, ${overlayOpacity+9}%))`;
+        
+      }else if(overlayArea >= '80'){
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
+        
+      }else if(overlayArea >= '60'){
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
+      }else if(overlayArea >= '40'){
+          document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
+      }else if(overlayArea >= '20'){
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
       }
     }
+    
+  }
+
+  mediaFit(){
+    if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined) {
+      alert('Add photo or video');
+    }else{
+      var mediaFit = document.getElementById(`mediaFit${this.editor.presentLayerIndex}`);
+      var mediaContent = document.getElementById(`mediaContent${this.editor.presentLayerIndex}`);
+      this.editor.layers[this.editor.presentLayerIndex].media.styles.mediaFit = mediaFit.value;
+      mediaContent.style.objectFit = `${mediaFit.value}`;
+    }
+  }
     // Media Editing
 
 
@@ -238,7 +252,7 @@ class Edits{
           this.editor.layers[this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
       }
     }
-  }
+    }
     editTitle(x){
       var text = document.getElementById(`${x}`);
       this.editor.layers[this.editor.presentLayerIndex].title.text = `${text.innerHTML}`;
@@ -307,27 +321,49 @@ class Edits{
     }
     // Text Editing
 
-
      // Meta Data //
-     updateMetaData(x){
+    updateMetaData(x){
       var url = document.getElementById("storyUrl");
       var title = document.getElementById("storyTitle");
       var description = document.getElementById("storyDescription");
       var keywords = document.getElementById("storyKeywords");
-    if (x == 'update') {
-      url.value = this.editor.metaData.url;
-      title.value =  this.editor.metaData.title
-      description.value =  this.editor.metaData.description;
-      keywords.value = this.editor.metaData.keywords;
-    }else{
-      this.editor.metaData.url = url.value;
-      this.editor.metaData.title = title.value;
-      this.editor.metaData.description = description.value;
-      this.editor.metaData.keywords =keywords.value;
+      if (x == 'update') {
+        url.value = this.editor.metaData.url;
+        title.value =  this.editor.metaData.title
+        description.value =  this.editor.metaData.description;
+        keywords.value = this.editor.metaData.keywords;
+      }else{
+        this.editor.metaData.url = url.value;
+        this.editor.metaData.title = title.value;
+        this.editor.metaData.description = description.value;
+        this.editor.metaData.keywords =keywords.value;
+        if (description.value == '') {
+          document.getElementById('otherText0').innerHTML = 'Enter story description..';
+          document.getElementById('titleText0').innerHTML = title.value;
+        }else if(title.value == ''){
+          document.getElementById('otherText0').innerHTML = description.value;
+          document.getElementById('titleText0').innerHTML = 'Enter Story Title';
+        }else{
+          document.getElementById('otherText0').innerHTML = description.value;
+          document.getElementById('titleText0').innerHTML = title.value;
+        }
+      }
     }
-    
-  }
-  // Meta Data //
+
+     editStoryDescription(x){
+      var descriptionIn = document.getElementById("storyDescription");
+      var description = document.getElementById(`${x}`);
+      this.editor.metaData.description = description.innerHTML;
+      descriptionIn.value = description.innerHTML;
+     }
+
+     editStoryTitle(x){
+      var titleIn = document.getElementById("storyTitle");
+      var title = document.getElementById(`${x}`);
+      this.editor.metaData.title = title.innerHTML;
+      titleIn.value = title.innerHTML;
+     }
+     // Meta Data //
 
 
 hexToRgb(hexColor) {

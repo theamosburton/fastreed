@@ -42,10 +42,9 @@ class Editor{
                             'media': {
                                 "blobUrl":'',
                                 "styles":{
-                                    "overlayColor": "#000000",
                                     "overlayOpacity": "50",
                                     "mediaFit":"cover",
-                                    "overlayArea": "35%"
+                                    "overlayArea": "40"
                                 },
                                 "type":'',
                                 "url":''
@@ -71,16 +70,16 @@ class Editor{
                             layersTop.classList.add('layersTop');
                             layersTop.innerHTML = `
                             <div class="title" id="title${this.presentLayerIndex}">
-                            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editTitle('titleText${this.presentLayerIndex}', '')">Enter Title/heading</span>
+                            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Enter Post Title</span>
                             </div>
                             <div class="text" id="text${this.presentLayerIndex}">
-                            <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}', '')">Enter more text..</span>
+                            <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryDesciption('otherText${this.presentLayerIndex}')">Enter story description...</span>
                             </div>`;
                             var newLayer = document.createElement('div');
                             newLayer.id = `layer${this.presentLayerIndex}`;
                             newLayer.className = 'layers';
                             newLayer.innerHTML = `<div class="placeholder" id="placeholder${this.presentLayerIndex}">
-                                <p> Add</p>
+                                <p> Add thumbnail</p>
                                 <p> Photo/Video</p>
                                 <small> Recomended ratios are </small>
                                 <small> 9:16, 3:4 and 2:3 </small>
@@ -136,10 +135,9 @@ class Editor{
             'media': {
                 "blobUrl":'',
                 "styles":{
-                    "overlayColor": "#000000",
                     "overlayOpacity": "50",
                     "mediaFit":"cover",
-                    "overlayArea": "35%"
+                    "overlayArea": "40"
                 },
                 "type":'',
                 "url":''
@@ -218,19 +216,16 @@ class Editor{
                                     <option value="contain">Contain</option>
                                 </select>
                             </div>
+                           
+
                             <div class="div">
-                                <span>Overlay Colour</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="color" id="mediaOverlayColor${this.presentLayerIndex}" name="favcolor" value="#000000">
+                                <span>Shade Opacity</span>
+                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="50">
                             </div>
 
                             <div class="div">
-                                <span>Overlay Opacity</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="50">
-                            </div>
-
-                            <div class="div">
-                                <span>Overlay Area</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="35">
+                                <span>Shade Area</span>
+                                <input onchange="edits.overlayEdit('overlayArea')" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="40">
                             </div>
                         </div>
                     </div>
@@ -539,21 +534,32 @@ class Editor{
 
 
     updateStory(){
-        edits.updateMetaData('update');
+        
         this.totalLayers = this.layers.length;
        
         for (let  i= 0; i < this.totalLayers; i++) {
             if (this.layers[i].title.text == '') {
-                var text = "Enter Title/heading";
+                if (i == 0) {
+                    var text = "Enter Story Title";
+                }else{
+                    var text = "Enter Title/heading";
+                }
             }else{
                 var text = this.layers[i].title.text;
             }
 
-            if (this.layers[i].otherText.text == '') {
+            if (i == 0) {
+                if (this.layers[i].otherText.text == '') {
+                    var othertext = 'Enter story description...';
+                }else{
+                    var othertext = this.layers[i].otherText.text;
+                }
+            }else if (this.layers[i].otherText.text == '') {
                 var othertext = "Enter more text..";
             }else{
                 var othertext = this.layers[i].otherText.text;
             }
+           
 
             
 
@@ -572,22 +578,44 @@ class Editor{
     
             var layersTop = document.createElement('div');
             layersTop.classList.add('layersTop');
-            layersTop.innerHTML = `
-            <div class="title" id="title${this.presentLayerIndex}" >
-            <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
-            </div>
-            <div class="text" id="text${i}">
-            <span class="titleText" contenteditable="true" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-            </div>`;
-            if (this.layers[i].media == '{}') {
-                newLayer.innerHTML = `
-                <div class="placeholder" id="placeholder${i}">
-                    <p> Add</p>
-                    <p> Photo/Video</p>
-                    <small> Recomended ratios are </small>
-                    <small> 9:16, 3:4 and 2:3 </small>
+            if ( i == 0) {
+                layersTop.innerHTML = `
+                <div class="title" id="title0" >
+                <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0')">${text}</span>
                 </div>
-            `;
+                <div class="text" id="text0">
+                <span class="titleText" contenteditable="true" id="otherText0" contenteditable="true" onkeyup="edits.editStoryDescription('otherText0')">${othertext}</span>
+                </div>`;
+            }else{
+                layersTop.innerHTML = `
+                <div class="title" id="title${this.presentLayerIndex}" >
+                <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
+                </div>
+                <div class="text" id="text${i}">
+                <span class="titleText" contenteditable="true" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
+                </div>`;
+            }
+            
+            if (this.layers[i].media == '{}') {
+                if (i == 0) {
+                    newLayer.innerHTML = `
+                    <div class="placeholder" id="placeholder${i}">
+                        <p> Add thumbnail</p>
+                        <p> Photo/Video</p>
+                        <small> Recomended ratios are </small>
+                        <small> 9:16, 3:4 and 2:3 </small>
+                    </div>
+                    `; 
+                }else{
+                     newLayer.innerHTML = `
+                    <div class="placeholder" id="placeholder${i}">
+                        <p> Add</p>
+                        <p> Photo/Video</p>
+                        <small> Recomended ratios are </small>
+                        <small> 9:16, 3:4 and 2:3 </small>
+                    </div>
+                    `;
+                }
             }else{
                 if (this.layers[i].media.type == 'image') {
                     var layerId =  i;
@@ -659,6 +687,7 @@ class Editor{
         }
        
         this.updateStylesheet();
+        edits.updateMetaData('update');
     }
 
 
@@ -774,18 +803,13 @@ class Editor{
                                 </select>
                             </div>
                             <div class="div">
-                                <span>Overlay Colour</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="color" id="mediaOverlayColor${j}" name="favcolor" value="${moc}">
+                                <span>Shade Opacity</span>
+                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
                             </div>
 
                             <div class="div">
-                                <span>Overlay Opacity</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
-                            </div>
-
-                            <div class="div">
-                                <span>Overlay Area</span>
-                                <input onchange="edits.overlayEdit()" class="value inputText" type="range" id="overlayArea${j}" value="${moa}">
+                                <span>Shade Area</span>
+                                <input onchange="edits.overlayEdit('overlayArea')" class="value inputText" type="range" id="overlayArea${j}" value="${moa}">
                             </div>
                         </div>
                     </div>
@@ -911,22 +935,21 @@ class Editor{
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers[j].media.styles.mediaFit}`;
             }
-            var overlayColor = this.hexToRgb(this.layers[j].media.styles.overlayColor);
             var overlayOpacity = parseInt(this.layers[j].media.styles.overlayOpacity, 10);
             var overlayArea = this.layers[j].media.styles.overlayArea;
-            if (overlayArea == '100%') {
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity-10}%), rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+            if (overlayArea == '100') {
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 
-            }else if(overlayArea >= '80%'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(${overlayColor}, ${overlayOpacity-50}%), rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+            }else if(overlayArea >= '80'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 
-            }else if(overlayArea >= '60%'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity-50}%), rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
-            }else if(overlayArea >= '40%'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(${overlayColor}, ${overlayOpacity-50}%),rgba(${overlayColor}, ${overlayOpacity}%), rgba(${overlayColor}, ${overlayOpacity}%))`;
+            }else if(overlayArea >= '60'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+            }else if(overlayArea >= '40'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
             }
-            else if(overlayArea >= '20%'){
-                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(${overlayColor}, ${overlayOpacity-50}%),rgba(${overlayColor}, ${overlayOpacity}%))`;
+            else if(overlayArea >= '20'){
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
             }
             }
         
