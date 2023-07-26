@@ -35,7 +35,9 @@
     if(isset($this->extraScript)){
         echo $this->extraScript;
     }
-    
+    echo '<script>var domainName = "'.DOMAIN.'";
+        </script>';
+
     if ($this->adminLogged) {
         echo '<script>var adminLogged = true;
         var userLogged = false;
