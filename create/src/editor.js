@@ -634,7 +634,7 @@ class Editor{
                 `;
                 layer.appendChild(contorlsElements);
                 layer.appendChild(videoElement);
-                editor.playPauseMedia();
+                // editor.playPauseMedia();
                 editor.muteUnmute();
             }
         
