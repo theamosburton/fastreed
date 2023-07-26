@@ -243,9 +243,13 @@ class getLoggedData{
                 $Gender = $row['gender'];
                 $userSince = $row['userSince'];
                 $bio = $row['bio'];
-                $today = new DateTime();
-                $diff = $today->diff(new DateTime($DOB));
-                $age = $diff->y;
+                if ($DOB) {
+                    $today = new DateTime();
+                    $diff = $today->diff(new DateTime($DOB));
+                    $age = $diff->y;
+                }else{
+                    $age = null;
+                }
                 $userType = 'User';
                 $email = $row['emailID'];
                 $name = $row['fullName'];
