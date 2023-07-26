@@ -45,6 +45,11 @@ class createContent{
         }else{
             new adminEditor();
         }
+        $this->closeConnection();
+        $this->userData->closeConnection();
+        $this->uploadData->closeConnection();
+        $this->BASIC_FUNC->closeConnection();
+        $this->captureVisit->closeConnection();
     }
 
 
@@ -102,6 +107,12 @@ class createContent{
         }
         return $return;
     }
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
 }
 
 class userEditor extends createContent{
@@ -129,6 +140,17 @@ class userEditor extends createContent{
             }else{
                 $this->createWebstory();
             }
+        }
+        $this->closeConnection();
+        $this->userData->closeConnection();
+        $this->uploadData->closeConnection();
+        $this->BASIC_FUNC->closeConnection();
+        $this->captureVisit->closeConnection();
+    }
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
         }
     }
     private function createWebstory(){
