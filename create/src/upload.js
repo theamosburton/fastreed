@@ -235,52 +235,32 @@ createImageElement(imgURL, ulink, u) {
   this.uploadsData['upload' + u] = {};
   this.uploadsData['upload' + u].orglink = ulink;
   var uploadedDiv = document.getElementById('uploads');
-  if (uploadedDiv.innerHTML == '') {
-    uploadedDiv.innerHTML = `
-      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
-        <img src="${imgURL}" class="lazyload">
-      </div>
-    `;
-  }else{
-    uploadedDiv.innerHTML += `
-      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${imgURL}', 'image', '${ulink}')">
-        <img src="${imgURL}" class="lazyload">
-      </div>
-    `;
-  }
+  var uploadedContent = document.createElement('div');
+  uploadedContent.id = `media${u}`;
+  uploadedContent.classList.add('uploadContent');
+  uploadedContent.setAttribute("onclick", `"edits.selectMedia('${imgURL}', 'video', '${ulink}')"`);
+  uploadedContent.innerHTML = `<img src="${imgURL}" class="lazyload">`;
+  uploadedDiv.appendChild(uploadedContent);
 }
 
 createVideoElement(videoURL, ulink, u) {
   this.uploadsData['upload' + u] = {};
   this.uploadsData['upload' + u].orglink = ulink;
   var uploadedDiv = document.getElementById('uploads');
-  if (uploadedDiv.innerHTML == '') {
-    uploadedDiv.innerHTML = `
-    <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${videoURL}', 'video', '${ulink}')">
-      <video class="lazyload">
-        <source src="${videoURL}" type="video/mp4">
-      </video>
-      <div class="fileInfo">
-        <svg aria-label="Clip" color="rgb(255, 255, 255)" fill="rgb(255, 255, 255)" height="18" role="img" viewBox="0 0 24 24" width="18">
-          <path d="..."></path>
-        </svg>
-      </div>
-    </div>
-  `;
-  }else{
-    uploadedDiv.innerHTML += `
-      <div draggable="true" class="uploadContent" id="media${u}" onclick="edits.selectMedia('${videoURL}', 'video', '${ulink}')">
-        <video class="lazyload">
-          <source src="${videoURL}" type="video/mp4">
-        </video>
-        <div class="fileInfo">
-          <svg aria-label="Clip" color="rgb(255, 255, 255)" fill="rgb(255, 255, 255)" height="18" role="img" viewBox="0 0 24 24" width="18">
-            <path d="..."></path>
-          </svg>
-        </div>
-      </div>
-    `;
-  }  
+  var uploadedContent = document.createElement('div');
+  uploadedContent.id = `media${u}`;
+  uploadedContent.classList.add('uploadContent');
+  uploadedContent.setAttribute("onclick", `"edits.selectMedia('${videoURL}', 'video', '${ulink}')"`);
+  uploadedContent.innerHTML = `
+  <video class="lazyload">
+    <source src="${videoURL}" type="video/mp4">
+  </video>
+  <div class="fileInfo">
+    <svg aria-label="Clip" color="rgb(255, 255, 255)" fill="rgb(255, 255, 255)" height="18" role="img" viewBox="0 0 24 24" width="18">
+      <path d="..."></path>
+    </svg>
+  </div>`;
+  uploadedDiv.appendChild(uploadedContent);
 }
 
 async fetchAndDisplayMedia(u) {
