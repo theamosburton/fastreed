@@ -17,24 +17,16 @@ class showIndex{
 
     private $DB_CONN;
     private $AUTH;
-    private $FUNC;
    function __construct() {
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
-        $this->FUNC = new BasicFunctions();
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
         $this->version = implode('.', str_split($this->version, 1));
 
-
-        //Create an instance to get logged data
-        // This will check weather user is logged or not
-        $loggedData = new getLoggedData();
-
-        $this->adminLogged = $loggedData->adminLogged;
-        $this->userLogged = $loggedData->userLogged;
-
         $this->userData = new getLoggedData();
+        $this->adminLogged = $this->userData->adminLogged;
+        $this->userLogged = $this->userData->userLogged;
 
         $this->webTitle = $this->captureVisit->webTitle;
         $this->webDescription = $this->captureVisit->webDescription;;
@@ -128,6 +120,8 @@ class showIndex{
         </body>
         </html>
         HTML."\n";
+        $this->userData->closeConnection();
+        $this->captureVisit->closeConnection();
     }
 // ********************************************** //
 }

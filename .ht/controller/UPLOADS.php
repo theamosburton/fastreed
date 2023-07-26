@@ -19,8 +19,7 @@ class getUploadData{
         }
         return $return;
     }
-    public function closeConnection()
-    {
+    public function closeConnection(){
         if ($this->DB) {
             mysqli_close($this->DB);
             $this->DB = null; // Set the connection property to null after closing
