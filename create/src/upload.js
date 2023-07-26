@@ -238,7 +238,7 @@ createImageElement(imgURL, ulink, u) {
   var uploadedContent = document.createElement('div');
   uploadedContent.id = `media${u}`;
   uploadedContent.classList.add('uploadContent');
-  uploadedContent.setAttribute("onclick", `edits.selectMedia('${imgURL}', 'video', '${ulink}')`);
+  uploadedContent.setAttribute("onclick", `edits.selectMedia('${imgURL}', 'image', '${ulink}')`);
   uploadedContent.innerHTML = `<img src="${imgURL}" class="lazyload">`;
   uploadedDiv.appendChild(uploadedContent);
 }
