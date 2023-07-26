@@ -42,13 +42,14 @@ class Edits{
         var hsLeft = document.getElementById('hsLeft');
         var hsRight = document.getElementById('hsRight');
         var leftSection = document.getElementById('leftSection');
-        if (document.getElementById(`placeholder${editor.presentLayerIndex}`)) {
-          document.getElementById(`placeholder${editor.presentLayerIndex}`).remove();
-        }else if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
-          document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
-        }
+        
         
         if (type == 'image') {
+          if (document.getElementById(`placeholder${editor.presentLayerIndex}`)) {
+            document.getElementById(`placeholder${editor.presentLayerIndex}`).remove();
+          }else if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
+            document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
+          }
           var layerId =  editor.presentLayerIndex;
           if (document.getElementById(`videoControls${layerId+1}`)) {
             document.getElementById(`videoControls${layerId+1}`).remove();
@@ -75,6 +76,11 @@ class Edits{
           if (editor.presentLayerIndex == 0) {
             alert('Please use photo for thumbnail');
           }else{
+            if (document.getElementById(`placeholder${editor.presentLayerIndex}`)) {
+              document.getElementById(`placeholder${editor.presentLayerIndex}`).remove();
+            }else if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
+              document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
+            }
             edits.modifyMedia('video', link, olink);
             var layerId =  editor.presentLayerIndex;
             var layer = document.getElementById(`layer${layerId}`);
