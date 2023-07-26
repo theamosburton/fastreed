@@ -123,6 +123,7 @@ html{
     flex-direction: column;
     justify-content: flex-end;
     background-image: linear-gradient(rgba(255,255,255, 0), rgba(255,255,255, 0),rgba(0, 0, 0, 0), rgba(0, 0, 0 ,0.5), rgba(0, 0, 0));
+    z-index: 999;
 }
 #layer0 .layersTop{
     background-image: linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.1),rgba(0,0,0, 0.1), rgba(0, 0, 0 ,0.1), rgba(0, 0, 0, 0.1));
