@@ -72,35 +72,39 @@ class Edits{
             }
           }
         }else if(type == 'video'){
-          edits.modifyMedia('video', link, olink);
-          var layerId =  editor.presentLayerIndex;
-          var layer = document.getElementById(`layer${layerId}`);
-    
-          var videoElement = document.createElement('video');
-          videoElement.src = link;
-          videoElement.type = 'video/mp4';
-          videoElement.id = `mediaContent${editor.presentLayerIndex}`;
-          var contorlsElements = document.createElement('div');
-          contorlsElements.id = `videoControls${editor.presentLayer}`;
-          contorlsElements.className = 'videoControls';
-          contorlsElements.innerHTML = `
-          <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
-          <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
-          `;
-    
-          layer.appendChild(contorlsElements);
-          layer.appendChild(videoElement);
-          editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
-          editor.playPauseMedia();
-          editor. muteUnmute();
-          var screenWidth = window.innerWidth;
-          if (screenWidth < 800) {
-            if (leftSection.style.display = 'flex') {
-              leftSection.style.display = 'none';
-              hsLeft.style.display = 'flex';
-            }
-            if (screenWidth < 600) {
-              hsRight.style.display = 'flex';
+          if (editor.presentLayerIndex == 0) {
+            alert('Please use photo for thumbnail');
+          }else{
+            edits.modifyMedia('video', link, olink);
+            var layerId =  editor.presentLayerIndex;
+            var layer = document.getElementById(`layer${layerId}`);
+      
+            var videoElement = document.createElement('video');
+            videoElement.src = link;
+            videoElement.type = 'video/mp4';
+            videoElement.id = `mediaContent${editor.presentLayerIndex}`;
+            var contorlsElements = document.createElement('div');
+            contorlsElements.id = `videoControls${editor.presentLayer}`;
+            contorlsElements.className = 'videoControls';
+            contorlsElements.innerHTML = `
+            <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
+            <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
+            `;
+      
+            layer.appendChild(contorlsElements);
+            layer.appendChild(videoElement);
+            editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
+            editor.playPauseMedia();
+            editor. muteUnmute();
+            var screenWidth = window.innerWidth;
+            if (screenWidth < 800) {
+              if (leftSection.style.display = 'flex') {
+                leftSection.style.display = 'none';
+                hsLeft.style.display = 'flex';
+              }
+              if (screenWidth < 600) {
+                hsRight.style.display = 'flex';
+              }
             }
           }
         }
