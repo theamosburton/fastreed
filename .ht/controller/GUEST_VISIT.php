@@ -50,6 +50,7 @@ class GuestsVisits
   {
     // Extract Data
     $ipAddress = $this->BASIC_FUNC->getIp();
+    $this->BASIC_FUNC->closeConnection();
     $userDevice = get_browser(null, true);
     $browserInfo = serialize($userDevice);
     $deviceType = $userDevice['device_type'];
@@ -60,6 +61,7 @@ class GuestsVisits
 
     // Creating new Guest ID and encrypt
     $guestID = $this->BASIC_FUNC->createNewID("guests", "GID");
+    $this->BASIC_FUNC->closeConnection();
     $encryptedID = $this->AUTH->encrypt($guestID);
 
     // Set cookie
@@ -151,6 +153,7 @@ class GuestsVisits
   public function makeSession($guestID){
     $thisPage = $_SERVER["REQUEST_URI"];
     $sessionID = $this->BASIC_FUNC->createNewID("fast_session", "GSI");
+    $this->BASIC_FUNC->closeConnection();
     $_SESSION["GSI"] = $sessionID;
     $guestIP = $this->BASIC_FUNC->getIp();
     $date = date('Y-m-d');
@@ -176,6 +179,14 @@ class GuestsVisits
     $visitedPage = $_SERVER["REQUEST_URI"];
     $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson, referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
+  }
+
+  public function closeConnection()
+  {
+      if ($this->DB) {
+          mysqli_close($this->DB);
+          $this->DB = null; // Set the connection property to null after closing
+      }
   }
 }
  ?>

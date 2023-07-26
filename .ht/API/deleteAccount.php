@@ -27,6 +27,16 @@ class deleteAccount {
         }else{
             showMessage(false, "Set relevent parameter");
         }
+        $this->userData->closeConnection();
+        $this.closeConnection();
+    }
+
+    public function closeConnection()
+    {
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
     }
     private function deleteUsingPassword(){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -57,6 +67,7 @@ class deleteAccount {
                     break;
             }
         }
+       
     }
 
     private function deleteUsingUsername(){

@@ -17,6 +17,13 @@ class BasicFunctions
     $this->DB = $this->DB_CONNECT->DBConnection();
   }
 
+  public function closeConnection()
+    {
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
 
   public function getIP(){
     $IP_ADDRESS = $_SERVER['REMOTE_ADDR'];

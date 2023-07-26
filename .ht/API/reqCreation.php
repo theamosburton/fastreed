@@ -8,13 +8,11 @@ class authorReqRes{
     private $DB;
     private $userData;
     private $AUTH;
-    private $BASIC_FUNC;
     function __construct(){
         $DB_CONNECT = new Database();
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
-        $this->BASIC_FUNC = new BasicFunctions(); 
         $data = json_decode(file_get_contents('php://input'), true);
         if (!isset($data['purpose']) || empty($data['purpose'])) {
             showMessage(false, "purpose needed");
@@ -29,8 +27,16 @@ class authorReqRes{
         }elseif ($data['purpose'] == 'check') {
             $this->checkCanCreate();
         }
-    }
+        $this->closeConnection();
+        $this->userData->closeConnection();
 
+    }
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
 
     private function creationRequest(){
         $data = json_decode(file_get_contents('php://input'), true);

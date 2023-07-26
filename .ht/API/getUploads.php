@@ -11,6 +11,7 @@ class respondUploads{
         $this->userData = new getLoggedData();
         $this->uploadData = new getUploadData();
         $this->responseUploads();
+        $this->userData->closeConnection();
     }
 
 

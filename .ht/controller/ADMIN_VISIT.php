@@ -16,6 +16,14 @@ class AdminVisits
     $this->DB = $this->DB_CONNECT->DBConnection();
   }
 
+  public function closeConnection()
+  {
+      if ($this->DB) {
+          mysqli_close($this->DB);
+          $this->DB = null; // Set the connection property to null after closing
+      }
+  }
+
   public function adminVisited(){
       $encAdminID = $_COOKIE['AID'];
       $decAdminID = $this->AUTH->decrypt($encAdminID);
@@ -86,6 +94,7 @@ class AdminVisits
       $refByGuestID = "";
     }
     $adminIP = $this->BASIC_FUNC->getIp();
+    $this->BASIC_FUNC->closeConnection();
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];

@@ -23,6 +23,14 @@ class getLoggedData{
        
     }
 
+    public function closeConnection()
+    {
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
+
     public function getAdminID(){
         $return = false;
         $adminSql = "SELECT * FROM account_access WHERE accType = 'Admin'";

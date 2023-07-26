@@ -6,14 +6,11 @@ if ($proceedAhead) {
 class follow{
     private $DB;
     private $userData;
-    private $AUTH;
-    private $BASIC_FUNC;
     function __construct(){
         $DB_CONNECT = new Database();
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
-        $this->AUTH = new Auth();
-        $this->BASIC_FUNC = new BasicFunctions(); 
+       
 
         if (isset($_GET['follow'])) {
             $data = json_decode(file_get_contents('php://input'), true);
@@ -31,6 +28,16 @@ class follow{
             }
         }else {
             showMessage(false, "Define what to do");
+        }
+        $this->userData->closeConnection();
+        $this->closeConnection();
+    }
+
+    public function closeConnection()
+    {
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
         }
     }
 
@@ -80,6 +87,7 @@ class follow{
         }else {
             showMessage(false, "User not exists");
         }
+        $this->userData->closeConnection();
     }
     private function makeEntry($id1, $id2){
         $return = false;
@@ -149,6 +157,7 @@ class follow{
             }else {
                 showMessage(false, "User not exists");
             }
+            $this->userData->closeConnection();
     }
 
     public function notifyUser($UID2, $UID1U){
@@ -166,6 +175,7 @@ class follow{
         if ($result) {
             $return = true;
         }
+        $this->userData->closeConnection();
         return $return;
     }
 

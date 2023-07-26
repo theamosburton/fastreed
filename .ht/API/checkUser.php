@@ -25,6 +25,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         $isLogged = $loggedData->userLogged;
         if ($isLogged) {
             showMessage(true, array("PID"=>$loggedData->PID,"NAME"=>$loggedData->getSelfDetails()['name']));
+            $loggedData->closeConnection();
         }else {
             showMessage(false, 'User is not logged');
         }

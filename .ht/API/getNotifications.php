@@ -9,6 +9,7 @@ class respondNotifications{
     function __construct(){
         $this->userData = new getLoggedData();
         $this->responseNotifications();
+        $this->userData->closeConnection();
     }
 
     private function responseNotifications(){

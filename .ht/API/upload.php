@@ -57,8 +57,16 @@ class uploadMedia{
             showMessage(false, 'Can not upload');
         }
 
+        $this->closeConnection();
+        $this->userData->closeConnection();
+        $this->BASIC_FUNC->closeConnection();
     }
-
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
     private function uploadVideo($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
         if (!isset($_FILES['media'])) {

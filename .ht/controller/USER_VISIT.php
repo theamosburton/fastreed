@@ -80,6 +80,7 @@ class UsersVisits
       $refByGuestID = "";
     }
     $userIP = $this->BASIC_FUNC->getIp();
+    $this->BASIC_FUNC->closeConnection();
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];
@@ -108,6 +109,14 @@ class UsersVisits
     $visitedPage = $_SERVER["REQUEST_URI"];
     $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson,referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
+  }
+
+  public function closeConnection()
+  {
+      if ($this->DB) {
+          mysqli_close($this->DB);
+          $this->DB = null; // Set the connection property to null after closing
+      }
   }
 }
  ?>

@@ -41,7 +41,15 @@ class updateDetails{
         }else {
             showMessage(false, "Access Denied No Detail");
         }
+        $this->closeConnection();
+        $this->userData->closeConnection();
 
+    }
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
     }
     public function checkExcept($f, $p, $newValue, $currentValue){
         $p = $this->AUTH->decrypt($p);

@@ -77,8 +77,15 @@ class passwordRelated{
         }else {
             showMessage(false, "Access Denied No Detail");
         }
+        $this->closeConnection();
+        $this->userData->closeConnection();
     }
-
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
     private function createPassword(){
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['ePID'];

@@ -10,13 +10,11 @@ class Webstories{
     private $userData;
     private $AUTH;
     private $UID;
-    private $BASIC_FUNC;
     private $_DOCROOT;
     function __construct(){
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
-        $this->BASIC_FUNC = new BasicFunctions(); 
         $this->AUTH = new Auth();
         $this->userData = new getLoggedData();
 
@@ -34,8 +32,15 @@ class Webstories{
         }elseif ($data['purpose'] == 'fetch') {
             $this->fetchStory();
         }
+        $this->closeConnection();
+        $this->userData->closeConnection();
     }
-
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
     private function fetchStory(){
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'Admin') {

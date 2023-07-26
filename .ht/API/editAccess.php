@@ -6,15 +6,11 @@ if ($proceedAhead) {
 
 class editAccess{
     private $DB;
-    private $userData;
     private $AUTH;
-    private $BASIC_FUNC;
     function __construct(){
         $DB_CONNECT = new Database();
         $this->DB = $DB_CONNECT->DBConnection();
-        $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
-        $this->BASIC_FUNC = new BasicFunctions(); 
         $data = json_decode(file_get_contents('php://input'), true);
         $updatedValue = '';
         if (!isset($data['what']) || empty($data['what'])) {
@@ -28,8 +24,15 @@ class editAccess{
         }else{
             $this->updateAccess();
         }
+        $this.closeConnection();
     }
-
+    public function closeConnection()
+    {
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
     private function updateAccess(){
         $data = json_decode(file_get_contents('php://input'), true);
         if (!isset($data['value']) || empty($data['value'])) {
