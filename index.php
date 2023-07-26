@@ -14,7 +14,6 @@ class showIndex{
     private $webTitle;
     private $webDescription;
     private $webKeywords;
-
     private $DB_CONN;
     private $AUTH;
    function __construct() {

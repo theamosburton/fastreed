@@ -6,13 +6,13 @@ $GLOBALS['DEV_OPTIONS'] = $_SERVROOT.'/secrets/DEV_OPTIONS.php';
 $GLOBALS['DB'] = $_SERVROOT.'/secrets/DB_CONNECT.php';
 $GLOBALS['AUTH'] = $_SERVROOT.'/secrets/AUTH.php';
 $GLOBALS['LOGGED_DATA'] = $_DOCROOT.'/.ht/controller/LOGGED_DATA.php';
-$GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
+// $GLOBALS['BASIC_FUNC'] = $_DOCROOT.'/.ht/controller/BASIC_FUNC.php';
 
 include_once($GLOBALS['AUTH']);
 include_once($GLOBALS['DB']);
 include($GLOBALS['DEV_OPTIONS']);
 include($GLOBALS['LOGGED_DATA']);
-include($GLOBALS['BASIC_FUNC']);
+// include($GLOBALS['BASIC_FUNC']);
 
 new getFastreedContent();
 
@@ -20,7 +20,6 @@ class getFastreedContent {
     private $DB;
     private $userData;
     private $AUTH;
-    private $BASIC_FUNC;
     private $_DOCROOT;
     function __construct(){
 
@@ -29,7 +28,6 @@ class getFastreedContent {
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
-        $this->BASIC_FUNC = new BasicFunctions(); 
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
         // Vars
 
@@ -65,8 +63,15 @@ class getFastreedContent {
                 readfile($filepath);
             }
         }
+        $this->closeConnection();
+        $this->userData->closeConnection();
     }
-
+    public function closeConnection(){
+        if ($this->DB) {
+            mysqli_close($this->DB);
+            $this->DB = null; // Set the connection property to null after closing
+        }
+    }
 
     private function renderError(){
         $filepath =$this->_DOCROOT.'/assets/img/warning.png';
