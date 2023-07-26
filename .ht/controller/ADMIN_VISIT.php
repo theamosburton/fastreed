@@ -95,7 +95,6 @@ class AdminVisits
       $refByGuestID = "";
     }
     $adminIP = $this->BASIC_FUNC->getIp();
-    $this->BASIC_FUNC->closeConnection();
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];

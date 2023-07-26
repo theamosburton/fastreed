@@ -36,6 +36,7 @@ class UsersVisits
       }
     }
     $this->closeConnection();
+    $this->BASIC_FUNC->closeConnection();
   }
 
   public function sessionExist(){
@@ -81,7 +82,6 @@ class UsersVisits
       $refByGuestID = "";
     }
     $userIP = $this->BASIC_FUNC->getIp();
-    $this->BASIC_FUNC->closeConnection();
     $date = date('Y-m-d');
     $dateTime = time();
     $thisPage = $_SERVER["REQUEST_URI"];

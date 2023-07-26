@@ -51,7 +51,6 @@ class GuestsVisits
   {
     // Extract Data
     $ipAddress = $this->BASIC_FUNC->getIp();
-    $this->BASIC_FUNC->closeConnection();
     $userDevice = get_browser(null, true);
     $browserInfo = serialize($userDevice);
     $deviceType = $userDevice['device_type'];
@@ -154,7 +153,6 @@ class GuestsVisits
   public function makeSession($guestID){
     $thisPage = $_SERVER["REQUEST_URI"];
     $sessionID = $this->BASIC_FUNC->createNewID("fast_session", "GSI");
-    $this->BASIC_FUNC->closeConnection();
     $_SESSION["GSI"] = $sessionID;
     $guestIP = $this->BASIC_FUNC->getIp();
     $date = date('Y-m-d');

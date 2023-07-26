@@ -88,16 +88,9 @@ class VisitorActivity
     $this->handleActivity();
   }
 
-  public function closeConnection()
-  {
-      if ($this->DB) {
-          mysqli_close($this->DB);
-          $this->DB = null; // Set the connection property to null after closing
-      }
-  }
+  
 
-  public function metaData()
-  {
+  public function metaData(){
     $sql = "SELECT * FROM webmeta";
     $result = mysqli_query($this->DB, $sql);
     $rows = [];
@@ -116,8 +109,7 @@ class VisitorActivity
     // Fourth should be keywords
     $this->webKeywords = $rows[3]['optionValue'];
   }
-
-
+  
   public function getVersions(){
     $sql = "SELECT * FROM webmeta WHERE optionName = 'cssJsVersion'";
     $result = mysqli_query($this->DB, $sql);
@@ -154,8 +146,8 @@ class VisitorActivity
         $adminID = $_COOKIE['AID'];
         
         $decAdminID = $this->AUTH->decrypt($adminID);
-        $authAdmin = $this->checkAuthVisitor($decAdminID, "accounts", "personID");
-        if ($authAdmin) {
+        // $authAdmin = $this->checkAuthVisitor($decAdminID, "accounts", "personID");
+        if ($this->checkAuthVisitor($decAdminID, "accounts", "personID")) {
           if (isset($_SESSION['USI'])) {
             unset($_SESSION['USI']);
           }elseif (isset($_SESSION['GSI'])) {
@@ -176,6 +168,7 @@ class VisitorActivity
       // No Cookie means anonymous user
       $this->GUEST_VISITED->guestVisited();
     }
+    $this->closeConnection();
   }
 
   private function checkAuthVisitor($id, $table, $parameter){
@@ -188,6 +181,12 @@ class VisitorActivity
       $status = false;
     }
     return $status;
+  }
+  public function closeConnection(){
+      if ($this->DB) {
+          mysqli_close($this->DB);
+          $this->DB = null; // Set the connection property to null after closing
+      }
   }
 }
  ?>
