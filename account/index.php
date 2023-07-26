@@ -185,8 +185,8 @@ class showProfile {
         return $return;
     }
     public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
+        if ($this->DB_CONN) {
+            mysqli_close($this->DB_CONN);
             $this->DB = null; // Set the connection property to null after closing
         }
     }
