@@ -38,7 +38,7 @@ if (HTTPS) {
   // Check if the domain starts with 'www.'
   if (strpos(getFullSelfURL(), 'https') !== 0) {
       // Redirect to www version
-      $redirect = 'https://www.' . $reqDomain . $_SERVER['REQUEST_URI'];
+      $redirect = 'https://' . $reqDomain . $_SERVER['REQUEST_URI'];
       header('HTTP/1.1 301 Moved Permanently');
       header('Location: ' . $redirect);
       exit();
