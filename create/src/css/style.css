@@ -175,7 +175,7 @@ html{
 }
 .editContainer .editorSection .editorBox .layers .videoControls{
     position: absolute;
-    z-index: 999;
+    z-index: 9999;
     color: white;
     display: flex;
     right: 0px;
