@@ -762,7 +762,7 @@ class Editor{
                                 <select onchange="edits.mediaFit()" id="mediaFit${j}" class="value inputText">
                                     <option ${mff} value="fill">Fill</option>
                                     <option ${mfn} value="none">None</option>
-                                    <option ${mfc} value="cover" selected>Cover</option>
+                                    <option ${mfc} value="cover">Cover</option>
                                     <option ${mfcn} value="contain">Contain</option>
                                 </select>
                             </div>

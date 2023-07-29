@@ -189,28 +189,20 @@ class Edits{
     var overlayOpacity = this.overlayOpacity;
     this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
     this.editor.layers[this.editor.presentLayerIndex].media.styles.overlayArea = overlayArea;
-    if (this.editor.presentLayerIndex == 0) {
-      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
-        alert('Add photo or video');
-      }else{
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity+5}%),rgba(0, 0, 0, ${overlayOpacity+10}%),rgba(0, 0, 0, ${overlayOpacity+20}%))`;
-      }
-    }else{
-      if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
-        alert('Add photo or video');
-      }else if (overlayArea == '100') {
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity+3}%),rgba(0, 0, 0, ${overlayOpacity+6}%),rgba(0, 0, 0, ${overlayOpacity+9}%))`;
-        
-      }else if(overlayArea >= '80'){
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
-        
-      }else if(overlayArea >= '60'){
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
-      }else if(overlayArea >= '40'){
-          document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
-      }else if(overlayArea >= '20'){
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-      }
+    if (this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers[this.editor.presentLayerIndex].media.blobUrl == '') {
+      alert('Add photo or video');
+    }else if (overlayArea == '100') {
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity+3}%),rgba(0, 0, 0, ${overlayOpacity+6}%),rgba(0, 0, 0, ${overlayOpacity+9}%))`;
+      
+    }else if(overlayArea >= '80'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
+      
+    }else if(overlayArea >= '60'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity+10}%))`;
+    }else if(overlayArea >= '40'){
+        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
+    }else if(overlayArea >= '20'){
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
     }
     
   }
