@@ -61,7 +61,6 @@ class GuestsVisits
 
     // Creating new Guest ID and encrypt
     $guestID = $this->BASIC_FUNC->createNewID("guests", "GID");
-    $this->BASIC_FUNC->closeConnection();
     $encryptedID = $this->AUTH->encrypt($guestID);
 
     // Set cookie
