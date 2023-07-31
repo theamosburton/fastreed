@@ -73,7 +73,7 @@
 }
 .personalInfoTab #editDetailsButton:hover{
     cursor: pointer;
-    
+
 }
 .personalInfoTab #editDetailsButton i{
     margin-left: 10px;
@@ -611,7 +611,7 @@ margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
 }
 #editMediaOptions{
     background-color: transparent;
@@ -690,7 +690,7 @@ margin-top: 10px;
     font-size: 12px;
     line-height: 12px;
     font-weight: bold;
-    
+
 }
 #optionDropdownDetails .details .value{
     font-size: 12px;
@@ -826,12 +826,12 @@ margin-top: 10px;
 
     margin: 10px 10px 20px 15px;
     border-radius: 20px;
-transition: all .4s;
+    transition: all .4s;
     display: flex;
     flex-direction: column;
     border: 1px solid grey;
     min-width: 210px;
-    min-height: 300px;
+    min-height: 320px;
     justify-content: center;
     align-items: center;
 }
@@ -895,7 +895,7 @@ transition: all .4s;
         width: 150px;
         height: 120px;
     }
-    
+
     .mediaDiv .uploadDiv .uploadedFile{
         width: 150px;
         height: 120px;
