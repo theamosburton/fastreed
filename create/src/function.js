@@ -30,7 +30,7 @@ function openOptions(x){
 
     layerName.classList.add('active');
     objectOptions.style.display = 'block';
-    
+
   }else if(x == 'metadata'){
     objectOptions.style.display = 'none';
     if (layerName.classList.contains("active")) {

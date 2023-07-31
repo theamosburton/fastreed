@@ -37,7 +37,7 @@ class showMenus{
     cancelDpUpload(){
       document.getElementById('uploadDP').style.display = 'none';
       enableScroll();
-      
+
     }
 
     // For dp upload only
@@ -46,7 +46,7 @@ class showMenus{
       var removeImageButton = document.querySelector('#removeImage');
       var uploadDbButton = document.querySelector('#uploadDbButton');
       document.querySelector('.uploadDpDiv .uploadDpContainer #message').style.display = 'block';
-      
+
       removeImageButton.style.display = 'block';
       removeImageButton.addEventListener('click', () => {
         this.removeImage();
@@ -57,21 +57,21 @@ class showMenus{
       var aspectRatio = 1; // Specify your desired aspect ratio here
       var boundaryWidth = 230; // Width of the boundary
       var boundaryHeight = boundaryWidth / aspectRatio; // Calculate height based on the aspect ratio
-  
+
       this.croppie = new Croppie(document.getElementById('croppieContainer'), {
         viewport: { width: '100%', height: '100%', type: 'free' },
         boundary: { width: boundaryWidth, height: boundaryHeight },
         enableOrientation: true
       });
-  
+
       var fileInput = document.getElementById('uploadInputFile');
       var file = fileInput.files[0];
       var reader = new FileReader();
-  
+
       reader.onload = (e) => {
         var image = new Image();
         image.src = e.target.result;
-  
+
         image.onload = () => {
           this.croppie.bind({
             url: image.src,
@@ -97,7 +97,7 @@ class showMenus{
       }
 
       if (fileInput.files && fileInput.files[0]) {
-       
+
         if (fileInput.files[0].type.startsWith('image/')) {
           this.uploadImages(fileInput);
         }else if(fileInput.files[0].type.startsWith('video/')){
@@ -107,11 +107,11 @@ class showMenus{
           uploadMessage.innerHTML = 'Video or Image';
           uploadMessage.style.color = 'red';
         }
-        
+
       }
     }
 
-    //*******Image Upload************/ 
+    //*******Image Upload************/
     uploadImages(fileInput){
       var self = this;
       var binaryImage;
@@ -139,7 +139,7 @@ class showMenus{
         var mimeString = binaryFile.type;
         var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
         formData.append('media', binaryFile, 'uploadFile.'+fileExtension);
-    
+
         // Append other data to the FormData object
         formData.append('ePID', ePID);
         formData.append('ext', fileExtension);
@@ -201,13 +201,13 @@ class showMenus{
             }, 3000);
           }
         });
-    
+
         xhr.send(formData);
     }
-    //*******Image Upload************/ 
+    //*******Image Upload************/
 
 
-    //*******Video Upload************/ 
+    //*******Video Upload************/
     uploadVideo(fileInput) {
       var self = this;
       var videoPreview = document.getElementById('tempVideo');
@@ -277,24 +277,24 @@ class showMenus{
 
     }
 
-    
-    //*******Video Upload************/ 
+
+    //*******Video Upload************/
 
     //*******Photo/Video Upload************/
     dataURItoBlob(dataURI) {
       // Convert base64 to raw binary data held in a string
       var byteString = atob(dataURI.split(',')[1]);
-    
+
       // Separate the MIME type from the base64 data
       var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    
+
       // Write the bytes of the string to an ArrayBuffer
       var ab = new ArrayBuffer(byteString.length);
       var ia = new Uint8Array(ab);
       for (var i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
       }
-    
+
       // Create a Blob object from the ArrayBuffer
       return new Blob([ab], { type: mimeString });
     }
@@ -311,8 +311,8 @@ class showMenus{
       document.getElementById('uploadFileLabel').style.display = 'flex'; // Show the upload file label
       // Add any additional code to reset the UI or perform other tasks
     }
-    
-      
+
+
 }
 document.addEventListener('DOMContentLoaded', function() {
     new showMenus();
@@ -341,9 +341,9 @@ function showPicOptions(what){
     }
       options.style.display = 'block';
   }else{
-      options.style.display = 'none';   
+      options.style.display = 'none';
   }
-  
+
 }
 
 function showInfo(what){
@@ -363,7 +363,7 @@ function showInfo(what){
     }
       options.style.display = 'block';
   }else{
-      options.style.display = 'none';   
+      options.style.display = 'none';
   }
 }
 
@@ -516,7 +516,7 @@ function changeImageVisibility(imgID, value, divID, OLDvisible){
           body: JSON.stringify(encyDat)
         });
       var data = await response.json();
-  
+
       if (data) {
         if (data.Result) {
           impactId.classList.add('fa-square-check');
@@ -546,7 +546,7 @@ function deleteImage(imgID, ext, what, ID){
   delIcon.style.display = "block";
   delIcon.style.backgroundColor = "transparent";
   delIcon.style.boxShadow = "none";
- 
+
   const deleteImageAPI = async () =>{
     const url = '/.ht/API/deletePic.php';
     var encyDat = {
@@ -578,14 +578,14 @@ function deleteImage(imgID, ext, what, ID){
           delIcon.classList.add('fa-check');
           delIcon.style.backgroundColor = "lime";
           delIcon.style.boxShadow = "0 0 10px";
-          
+
           setTimeout(function(){
             var showImageDiv = document.getElementById('imageShowDiv');
             showImageDiv.style.display = "none";
             document.getElementById(`${ID}`).remove();
           }, 300);
         }, 500);
-        
+
       }else{
         if (delIcon.classList.contains('fa-circle-info')) {
             delIcon.classList.remove('fa-circle-info');
@@ -696,7 +696,7 @@ function InitializeWebstory(){
       });
     var data = await response.json();
     if (data) {
-      if (data.Result) { 
+      if (data.Result) {
         reqCreation.innerHTML='Creating...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
         window.location.href = "/create/?type=webstory";
       }else{
@@ -722,7 +722,7 @@ function deleteStory(storyID, divID){
     whoIs = 'user';
     currentUsername = '';
   }
-  
+
   const deleteS = async ()=>{
     const url = '/.ht/API/webstories.php';
     var encyDat = {
@@ -746,28 +746,16 @@ function deleteStory(storyID, divID){
       alert(`${data.message}`);
     }else{
       storyDIV.querySelector('.background .title').innerHTML = 'Deleting...';
-      
+
       setTimeout(function(){
         setTimeout(function(){
           storyDIV.style.display = 'none';
         }, 300);
         storyDIV.style.marginLeft = '-210px';
-        
+
       }, 1000);
-     
+
     }
   }
   deleteS();
 }
-
-
-
-
-
-
-
-
-
-
-
-

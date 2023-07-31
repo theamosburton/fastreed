@@ -25,8 +25,8 @@ class Editor{
             });
             var data = await response.json();
             if (data) {
-                if (data.Result) { 
-                    this.layers = [];
+                if (data.Result) {
+                    this.layers = {};
                     this.metaData = {};
                     this.metaData.title = "";
                     this.metaData.description = "";
@@ -37,8 +37,7 @@ class Editor{
                         this.presentLayerIndex = 0;
                         this.presentLayer  = this.presentLayerIndex + 1 ;
                         this.totalLayers = 1;
-                        
-                        this.layers[0] = {
+                        this.layers['L0'] = {
                             'media': {
                                 "blobUrl":'',
                                 "styles":{
@@ -84,13 +83,13 @@ class Editor{
                             this.editorId.appendChild(newLayer);
                             newLayer.appendChild(layersTop);
                         }
-                    
+
                         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
                         var otherLayers = document.querySelector("#editTab .layers");
                         for (var i = 0; i < otherLayers.length; i++) {
                             otherLayers[i].style.display = "none";
                         }
-                        
+
                         this.layersAhead = this.totalLayers - this.presentLayer;
                         if (this.layersAhead) {
                             this.layersBack = this.totalLayers-this.layersAhead-1;
@@ -123,12 +122,12 @@ class Editor{
         this.updateStory();
     }
 
-    createNewLayer(){  
+    createNewLayer(){
         this.inBetweenLayersAdd();
         this.totalLayers += 1;
         this.presentLayerIndex += 1;
         this.presentLayer  = this.presentLayerIndex + 1 ;
-        this.layers[this.presentLayerIndex] = {
+        this.layers['L'+ this.presentLayerIndex] = {
             'media': {
                 "blobUrl":'',
                 "styles":{
@@ -155,7 +154,7 @@ class Editor{
         var newLayer = document.createElement('div');
         newLayer.id = `layer${this.presentLayerIndex}`;
         newLayer.className = 'layers';
-        
+
         this.editorId.appendChild(newLayer);
         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
         for (var i = 0; i < this.totalLayers; i++) {
@@ -200,7 +199,7 @@ class Editor{
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${this.presentLayerIndex}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${this.presentLayerIndex}','')">
-                            <span>Layer Media</span>  
+                            <span>Layer Media</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display: none;">
@@ -213,7 +212,7 @@ class Editor{
                                     <option value="contain">Contain</option>
                                 </select>
                             </div>
-                           
+
 
                             <div class="div">
                                 <span>Shade Opacity</span>
@@ -227,11 +226,11 @@ class Editor{
                         </div>
                     </div>
                     <!-- Media Options -->
-                    
+
                     <!-- Text Styles -->
                     <div class="optionsDIv" id="titleStyles${this.presentLayerIndex}">
-                        <span class="objectName" onclick="edits.expandOptions('titleStyles${this.presentLayerIndex}')"> 
-                            <span>Title</span>  
+                        <span class="objectName" onclick="edits.expandOptions('titleStyles${this.presentLayerIndex}')">
+                            <span>Title</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
@@ -279,7 +278,7 @@ class Editor{
                     <!-- Other Text Styles -->
                     <div class="optionsDIv" id="aboutStyles${this.presentLayerIndex}">
                         <span class="objectName" onclick="edits.expandOptions('aboutStyles${this.presentLayerIndex}')">
-                            <span>Text</span>  
+                            <span>Text</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
@@ -326,7 +325,7 @@ class Editor{
         styleBox.appendChild(styleBoxn);
         for (var i = 0; i < this.totalLayers; i++) {
             document.getElementById(`styleBox${i}`).style.display = 'none';
-        } 
+        }
         document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
     }
 
@@ -379,7 +378,7 @@ class Editor{
             for (var i = 0; i < this.totalLayers; i++) {
                 document.getElementById(`layer${i}`).style.display = 'none';
                 document.getElementById(`styleBox${i}`).style.display = 'none';
-            }   
+            }
             this.presentLayerDiv.style.display = 'flex';
             document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
             this.playPauseLastMedia('forward');
@@ -392,7 +391,7 @@ class Editor{
         document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
 
-    moveBackward(){    
+    moveBackward(){
         if (this.presentLayerIndex > 0) {
             this.presentLayerIndex -= 1;
             this.presentLayer  = this.presentLayerIndex + 1 ;
@@ -528,42 +527,46 @@ class Editor{
     }
 
 
-
     updateStory(){
-        this.totalLayers = this.layers.length;
+        this.totalLayers = Object.keys(this.layers).length;
         for (let  i= 0; i < this.totalLayers; i++) {
-            if (this.layers[i].title.text == '') {
-                if (i == 0) {
-                    var text = "Enter Story Title";
-                }else{
-                    var text = "Enter Title/heading";
-                }
-            }else{
-                var text = this.layers[i].title.text;
-            }
 
-            if (i == 0) {
-                if (this.layers[i].otherText.text == '') {
-                    var othertext = 'Enter story description...';
-                }else{
-                    var othertext = this.layers[i].otherText.text;
-                }
-            }else if (this.layers[i].otherText.text == '') {
-                var othertext = "Enter more text..";
-            }else{
-                var othertext = this.layers[i].otherText.text;
-            }
+           if (i == 0) {
+             if (this.metaData.title == '') {
+               var text = "Enter Story Title";
+             }else{
+               var text = this.metaData.title;
+             }
+
+             if (this.metaData.description == '') {
+               var othertext = 'Enter story description...';
+             }else{
+               var othertext = this.metaData.description;
+             }
+           }else{
+             if (this.layers['L'+ i].title.text == '') {
+                var text = "Enter Title/Heading...";
+             }else{
+                 var text = this.layers['L'+ i].title.text;
+             }
+
+             if (this.layers['L'+ i].otherText.text == '') {
+               var othertext ="Enter more text..";
+             }else{
+               var othertext =this.layers['L'+ i].otherText.text;
+             }
+           }
 
             this.presentLayerIndex = 0;
             this.presentLayer  = this.presentLayerIndex + 1 ;
             var newLayer = document.createElement('div');
             newLayer.id = `layer${i}`;
             newLayer.className = 'layers';
-            
+
             this.editorId.appendChild(newLayer);
             this.presentLayerDiv = document.getElementById('layer0');
             document.getElementById(`layer${i}`).style.display = 'none';
-    
+
             var layersTop = document.createElement('div');
             layersTop.classList.add('layersTop');
             if ( i == 0) {
@@ -583,8 +586,8 @@ class Editor{
                 <span class="titleText" contenteditable="true" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
                 </div>`;
             }
-            
-            if (Object.keys(this.layers[i].media).length  === 0) {
+
+            if (Object.keys(this.layers['L'+ i].media).length  === 0) {
                 if (i == 0) {
                     newLayer.innerHTML = `
                     <div class="placeholder" id="placeholder${i}">
@@ -592,7 +595,7 @@ class Editor{
                         <small> Recomended ratios are </small>
                         <small> 9:16, 3:4 and 2:3 </small>
                     </div>
-                    `; 
+                    `;
                 }else{
                      newLayer.innerHTML = `
                     <div class="placeholder" id="placeholder${i}">
@@ -603,25 +606,25 @@ class Editor{
                     </div>
                     `;
                 }
-            }else if (this.layers[i].media.type == 'image') {
+            }else if (this.layers['L'+ i].media.type == 'image') {
                 if (document.getElementById(`videoControls${i+1}`)) {
                     document.getElementById(`videoControls${i+1}`).remove();
                 }
                 edits.updateMedia('image');
-                
+
                 var layer = document.getElementById(`layer${i}`);
                 var imageElement = document.createElement('img');
                 imageElement.id = `mediaContent${i}`;
-                imageElement.src = this.layers[i].media.url;
+                imageElement.src = this.layers['L'+ i].media.url;
                 layer.appendChild(imageElement);
-            
-            }else if(this.layers[i].media.type  == 'video'){
+
+            }else if(this.layers['L'+ i].media.type  == 'video'){
                 edits.updateMedia('video');
                 var layerId =  editor.presentLayerIndex;
                 var layer = document.getElementById(`layer${i}`);
-            
+
                 var videoElement = document.createElement('video');
-                videoElement.src = this.layers[i].media.url;
+                videoElement.src = this.layers['L'+ i].media.url;
                 videoElement.type = 'video/mp4';
                 videoElement.id = `mediaContent${i}`;
                 var contorlsElements = document.createElement('div');
@@ -636,7 +639,7 @@ class Editor{
                 // editor.playPauseMedia();
                 // editor.muteUnmute();
             }
-        
+
             newLayer.appendChild(layersTop);
             this.presentLayerDiv.style.display = 'flex';
             // this.playPauseLastMedia('add');
@@ -650,98 +653,97 @@ class Editor{
         edits.updateMetaData('update');
     }
 
-
     updateStylesheet(){
         var styleBox = document.getElementById('objectOptions');
-        for (let j = 0; j < this.layers.length; j++) {
+        for (let j = 0; j < Object.keys(this.layers).length; j++) {
             var mfc = '', mff = '', mfn = '', mfcn = '', moc = '', moo = '', moa = '';
 
             var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '';
             var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offcs = '';
-            
+
             // Media //
-            if (Object.keys(this.layers[j].media).length  != 0) {
-                if (this.layers[j].media.styles.mediaFit == 'cover') {
+            if (Object.keys(this.layers['L'+ j].media).length  != 0) {
+                if (this.layers['L'+ j].media.styles.mediaFit == 'cover') {
                     mfc = 'selected';
-                } else if (this.layers[j].media.styles.mediaFit == 'fill') {
+                } else if (this.layers['L'+ j].media.styles.mediaFit == 'fill') {
                     mff = 'selected';
-                } else if (this.layers[j].media.styles.mediaFit == 'none') {
+                } else if (this.layers['L'+ j].media.styles.mediaFit == 'none') {
                     mfn = 'selected';
-                } else if(this.layers[j].media.styles.mediaFit == 'contain') {
+                } else if(this.layers['L'+ j].media.styles.mediaFit == 'contain') {
                     mfcn = 'selected';
                 }
-                moa = this.layers[j].media.styles.overlayArea;
-                moc = this.layers[j].media.styles.overlayColor;
-                moo = this.layers[j].media.styles.overlayOpacity;
+                moa = this.layers['L'+ j].media.styles.overlayArea;
+                moc = this.layers['L'+ j].media.styles.overlayColor;
+                moo = this.layers['L'+ j].media.styles.overlayOpacity;
             }
-           
 
-           
-            
+
+
+
             // Media //
-            
+
             // Title //
-            if (this.layers[j].title.fontSize == 'larger') {
+            if (this.layers['L'+ j].title.fontSize == 'larger') {
                 tfsxl = 'selected';
-            } else if (this.layers[j].title.fontSize == 'large') {
+            } else if (this.layers['L'+ j].title.fontSize == 'large') {
                 tfsl = 'selected';
-            } else if (this.layers[j].title.fontSize == 'medium') {
+            } else if (this.layers['L'+ j].title.fontSize == 'medium') {
                 tfsm = 'selected';
             } else {
-                tfsc = this.layers[j].title.fontSize;
+                tfsc = this.layers['L'+ j].title.fontSize;
             }
 
-            if (this.layers[j].title.fontFamily == 'cursive') {
+            if (this.layers['L'+ j].title.fontFamily == 'cursive') {
                 tffc = 'selected';
-            } else if (this.layers[j].title.fontFamily == 'inherit') {
+            } else if (this.layers['L'+ j].title.fontFamily == 'inherit') {
                 tffa = 'selected';
-            } else if (this.layers[j].title.fontFamily == 'monospace') {
+            } else if (this.layers['L'+ j].title.fontFamily == 'monospace') {
                 tffm = 'selected';
-            } else if (this.layers[j].title.fontFamily == 'sans-serif') {
+            } else if (this.layers['L'+ j].title.fontFamily == 'sans-serif') {
                 tffs = 'selected';
             } else {
-                tffcs = this.layers[j].title.fontFamily;
+                tffcs = this.layers['L'+ j].title.fontFamily;
             }
 
-            if (this.layers[j].title.fontWeight == '400') {
+            if (this.layers['L'+ j].title.fontWeight == '400') {
                 tfwl = 'selected';
-            } else if (this.layers[j].title.fontWeight == '600') {
+            } else if (this.layers['L'+ j].title.fontWeight == '600') {
                 tfwb = 'selected';
-            } else if (this.layers[j].title.fontWeight == '1000') {
+            } else if (this.layers['L'+ j].title.fontWeight == '1000') {
                 tfwbr = 'selected';
             }
             // Title //
 
             // Text //
-            if (this.layers[j].otherText.fontSize == 'medium') {
+            if (this.layers['L'+ j].otherText.fontSize == 'medium') {
                 ofsm = 'selected';
-            } else if (this.layers[j].otherText.fontSize == 'large') {
+            } else if (this.layers['L'+ j].otherText.fontSize == 'large') {
                 ofsl = 'selected';
-            } else if (this.layers[j].otherText.fontSize == 'small') {
+            } else if (this.layers['L'+ j].otherText.fontSize == 'small') {
                 ofss = 'selected';
-            } else if (this.layers[j].otherText.fontSize == 'x-small') {
+            } else if (this.layers['L'+ j].otherText.fontSize == 'x-small') {
                 ofsxs = 'selected';
             } else {
-                ofsc = this.layers[j].otherText.fontSize;
+                ofsc = this.layers['L'+ j].otherText.fontSize;
             }
 
-            if (this.layers[j].otherText.fontFamily == 'cursive') {
+            if (this.layers['L'+ j].otherText.fontFamily == 'cursive') {
                 offc = 'selected';
-            } else if (this.layers[j].otherText.fontFamily == 'inherit') {
+            } else if (this.layers['L'+ j].otherText.fontFamily == 'inherit') {
                 offa = 'selected';
-            } else if (this.layers[j].otherText.fontFamily == 'monospace') {
+            } else if (this.layers['L'+ j].otherText.fontFamily == 'monospace') {
                 offm = 'selected';
-            } else if (this.layers[j].otherText.fontFamily == 'sans-serif') {
+            } else if (this.layers['L'+ j].otherText.fontFamily == 'sans-serif') {
                 offs = 'selected';
             } else {
-                offcs = this.layers[j].otherText.fontFamily;
+                offcs = this.layers['L'+ j].otherText.fontFamily;
             }
 
-            if (this.layers[j].otherText.fontWeight == '400') {
+            if (this.layers['L'+ j].otherText.fontWeight == '400') {
                 ofwl = 'selected';
-            } else if (this.layers[j].otherText.fontWeight == '600') {
+            } else if (this.layers['L'+ j].otherText.fontWeight == '600') {
                 ofwb = 'selected';
-            } else if (this.layers[j].otherText.fontWeight == '1000') {
+            } else if (this.layers['L'+ j].otherText.fontWeight == '1000') {
                 ofwbr = 'selected';
             }
             // Text //
@@ -753,7 +755,7 @@ class Editor{
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${j}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${j}','')">
-                            <span>Layer Media</span>  
+                            <span>Layer Media</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display: none;">
@@ -778,11 +780,11 @@ class Editor{
                         </div>
                     </div>
                     <!-- Media Options -->
-                    
+
                     <!-- Text Styles -->
                     <div class="optionsDIv" id="titleStyles${j}">
-                        <span class="objectName" onclick="edits.expandOptions('titleStyles${j}')"> 
-                            <span>Title</span>  
+                        <span class="objectName" onclick="edits.expandOptions('titleStyles${j}')">
+                            <span>Title</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
@@ -830,7 +832,7 @@ class Editor{
                     <!-- Other Text Styles -->
                     <div class="optionsDIv" id="aboutStyles${j}">
                         <span class="objectName" onclick="edits.expandOptions('aboutStyles${j}')">
-                            <span>Text</span>  
+                            <span>Text</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
@@ -876,10 +878,10 @@ class Editor{
         `;
         styleBox.appendChild(styleBoxn);
         }
-        
+
         for (var i = 0; i < this.totalLayers; i++) {
             document.getElementById(`styleBox${i}`).style.display = 'none';
-        } 
+        }
         document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
         this.applyStyleSheet();
 
@@ -887,27 +889,27 @@ class Editor{
 
     applyStyleSheet(){
         for (let j = 0; j < this.layers.length; j++) {
-            document.getElementById(`titleText${j}`).style.fontSize = this.layers[j].title.fontSize; 
-            document.getElementById(`titleText${j}`).style.fontFamily = this.layers[j].title.fontFamily; 
-            document.getElementById(`titleText${j}`).style.fontWeight = this.layers[j].title.fontWeight; 
+            document.getElementById(`titleText${j}`).style.fontSize = this.layers['L'+ j].title.fontSize;
+            document.getElementById(`titleText${j}`).style.fontFamily = this.layers['L'+ j].title.fontFamily;
+            document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
 
-            document.getElementById(`otherText${j}`).style.fontSize = this.layers[j].otherText.fontSize; 
-            document.getElementById(`otherText${j}`).style.fontFamily = this.layers[j].otherText.fontFamily; 
-            document.getElementById(`otherText${j}`).style.fontWeight = this.layers[j].otherText.fontWeight; 
+            document.getElementById(`otherText${j}`).style.fontSize = this.layers['L'+ j].otherText.fontSize;
+            document.getElementById(`otherText${j}`).style.fontFamily = this.layers['L'+ j].otherText.fontFamily;
+            document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
 
-            
+
             if (document.getElementById(`mediaContent${j}`)) {
-                document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers[j].media.styles.mediaFit}`;
+                document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
             }
-            if (Object.keys(this.layers[j].media).length  != 0) {
-                var overlayOpacity = parseInt(this.layers[j].media.styles.overlayOpacity, 10);
-                var overlayArea = this.layers[j].media.styles.overlayArea;
+            if (Object.keys(this.layers['L'+ j].media).length  != 0) {
+                var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);
+                var overlayArea = this.layers['L'+ j].media.styles.overlayArea;
                 if (overlayArea == '100') {
                     document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                    
+
                 }else if(overlayArea >= '80'){
                     document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                    
+
                 }else if(overlayArea >= '60'){
                     document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }else if(overlayArea >= '40'){
@@ -917,15 +919,10 @@ class Editor{
                     document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }
             }
-            
+
             }
-        
+
     }
 
 }
 let editor = new Editor();
-
-
-
-
-    
