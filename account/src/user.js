@@ -1,29 +1,44 @@
 class showMenus{
-    constructor(x){
-        var params = new URLSearchParams(window.location.search);
-        this.optValue = params.get('opt');
-        this.dashboardMenu = document.querySelector('#dashboardMenu');
-        this.dashboardDiv = document.querySelector('#dashboardDiv');
-        this.croppie = null;
-        this.whoIs = null;
-        if (adminLogged) {
-          this.whoIs = 'Admin';
-        }else{
-          this.whoIs = 'User';
-        }
-        // check the hash and display what to show
-        if (this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
-            // Stay on dashboard
-            this.dashboardMenu.classList.add('active');
-            this.dashboardDiv.style.display = 'block';
-            this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }else{
-            var showDiv = document.getElementById(`${this.optValue}Div`);
-            var showMenu = document.getElementById(`${this.optValue}Menu`);
-            showMenu.classList.add('active');
-            showDiv.style.display = 'block';
-            showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+    constructor(){
+      this.hashValue = window.location.hash.substr(1);
+      // var params = new URLSearchParams(window.location.search);
+      this.optValue = this.hashValue;
+      this.dashboardMenu = document.querySelector('#dashboardMenu');
+      this.dashboardDiv = document.querySelector('#dashboardDiv');
+      this.othersMenus = document.getElementsByClassName('menus');
+      this.othersDivs = document.getElementsByClassName('contentView');
+
+      this.croppie = null;
+      this.whoIs = null;
+      if (adminLogged) {
+        this.whoIs = 'Admin';
+      }else{
+        this.whoIs = 'User';
+      }
+  }
+
+    updateMenus(x){
+      for (var i = 0; i < this.othersMenus.length; i++) {
+          // othersDivs[i].style.display = 'none';
+          if (this.othersMenus[i].classList.contains('active')) {
+            this.othersMenus[i].classList.remove('active');
+          }
+      }
+      for (var i = 0; i < this.othersDivs.length; i++) {
+          this.othersDivs[i].style.display = 'none';
+      }
+      // check the hash and display what to show
+      if (x == 'opt' || x == '' || x === null || x === 'undefined') {
+        this.dashboardMenu.classList.add('active');
+        this.dashboardDiv.style.display = 'block';
+        this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }else{
+        var showDiv = document.getElementById(`${x}Div`);
+        var showMenu = document.getElementById(`${x}Menu`);
+        showMenu.classList.add('active');
+        showDiv.style.display = 'block';
+        showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     reload(){
@@ -312,10 +327,10 @@ class showMenus{
       // Add any additional code to reset the UI or perform other tasks
     }
 
-
 }
+
 document.addEventListener('DOMContentLoaded', function() {
-    new showMenus();
+    var showMenu = new showMenus();
 });
 
 

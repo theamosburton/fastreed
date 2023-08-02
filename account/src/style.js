@@ -1,12 +1,23 @@
 class styleThisPage{
     constructor(){
-      var params = new URLSearchParams(window.location.search);
-        this.optValue = params.get('opt');
+        this.hashValue = window.location.hash.substr(1);
+        this.optValue = this.hashValue;
         this.dashboardMenu = document.querySelector('#dashboardMenu');
         this.dashboardDiv = document.querySelector('#dashboardDiv');
-       
+        this.othersMenus = document.getElementsByClassName('menus');
+        this.othersDivs = document.getElementsByClassName('contentView');
+        for (var i = 0; i < this.othersMenus.length; i++) {
+            // othersDivs[i].style.display = 'none';
+            if (this.othersMenus[i].classList.contains('active')) {
+              this.othersMenus[i].classList.remove('active');
+            }
+        }
+        for (var i = 0; i < this.othersDivs.length; i++) {
+            this.othersDivs[i].style.display = 'none';
+        }
+
         // check the hash and display what to show
-        if (this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
+        if (this.optValue == 'opt' || this.optValue == '' || this.optValue === null || this.optValue === 'undefined') {
             // Stay on dashboard
             this.dashboardMenu.classList.add('active');
             this.dashboardDiv.style.display = 'block';
@@ -20,7 +31,7 @@ class styleThisPage{
         }
     }
 
-    
+
 
 
 }
@@ -39,7 +50,6 @@ function exapndAndShrink(id){
 
     }
 }
-
 
 function showImage(path, visibility, ID, ext, imgID, time, size){
   if (size >= 1024) {
@@ -82,8 +92,8 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
         minute: '2-digit',
         hour12: true,
       }).format(new Date(time * 1000));
-      
-      
+
+
       showContainer.innerHTML = `
           <div class="imgOptions">
             <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
@@ -117,7 +127,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
                 <span class="property">Upload Time:</span>
                 <span class="value">${t} (IST)</span>
               </div>
-              
+
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
@@ -126,7 +136,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
         top: 0,
         behavior: 'smooth'
       });
-      
+
     }
 
     if (visibility == 'none') {
@@ -135,146 +145,144 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
       document.getElementById('optionDropdown').remove();
     }
   }
-  
-  function showVideo(path, visibility, ID, ext, vidID, time, size){
-    var showImageDiv = document.getElementById('imageShowDiv');
-    if (showImageDiv.style.display == 'none') {
-      showImageDiv.style.display = 'flex';
-      var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-      if (visibility == 'self') {
-        var self = 'fa-square-check';
-        var everyoneU = 'fa-square';
-        var everyoneA = 'fa-square';
-        var following = 'fa-square';
-      }else if(visibility == 'followers'){
-        var following = 'fa-square-check';
-        var everyoneU = 'fa-square';
-        var everyoneA = 'fa-square';
-        var self = 'fa-square';
-      }else if(visibility == 'anon'){
-        var everyoneA = 'fa-square-check';
-        var following = 'fa-square';
-        var everyoneU = 'fa-square';
-        var self = 'fa-square';
-      }else if(visibility == 'users'){
-        var everyoneU = 'fa-square-check';
-        var following = 'fa-square';
-        var everyoneA = 'fa-square';
-        var self = 'fa-square';
-      }
-      var t = new Intl.DateTimeFormat('en', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      }).format(new Date(time * 1000));
-      showContainer.innerHTML = `
-              <div class="imgOptions">
-              <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
-              <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'videos', '${vidID}')"></i>
-              <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
-              <i class="fa fa-info optIcons" onclick="showInfo('${ID}')"></i>
-              <div class="optionDropdown" style="display:none;">
-              <span class="title">Who can view?</span>
 
-                <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self', '${vidID}', '${visibility}')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
+function showVideo(path, visibility, ID, ext, vidID, time, size){
+  var showImageDiv = document.getElementById('imageShowDiv');
+  if (showImageDiv.style.display == 'none') {
+    showImageDiv.style.display = 'flex';
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
+    if (visibility == 'self') {
+      var self = 'fa-square-check';
+      var everyoneU = 'fa-square';
+      var everyoneA = 'fa-square';
+      var following = 'fa-square';
+    }else if(visibility == 'followers'){
+      var following = 'fa-square-check';
+      var everyoneU = 'fa-square';
+      var everyoneA = 'fa-square';
+      var self = 'fa-square';
+    }else if(visibility == 'anon'){
+      var everyoneA = 'fa-square-check';
+      var following = 'fa-square';
+      var everyoneU = 'fa-square';
+      var self = 'fa-square';
+    }else if(visibility == 'users'){
+      var everyoneU = 'fa-square-check';
+      var following = 'fa-square';
+      var everyoneA = 'fa-square';
+      var self = 'fa-square';
+    }
+    var t = new Intl.DateTimeFormat('en', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    }).format(new Date(time * 1000));
+    showContainer.innerHTML = `
+            <div class="imgOptions">
+            <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
+            <i class="fa fa-trash optIcons" id="deleteImageIcon" onclick="deleteImage('${ID}', '${ext}', 'videos', '${vidID}')"></i>
+            <i class="fa fa-earth optIcons" onclick="showPicOptions('')"></i>
+            <i class="fa fa-info optIcons" onclick="showInfo('${ID}')"></i>
+            <div class="optionDropdown" style="display:none;">
+            <span class="title">Who can view?</span>
 
-                <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${vidID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
+              <div class="options" id="selfOption" onclick="changeImageVisibility('${ID}', 'self', '${vidID}', '${visibility}')"> <span>Only Me</span>   <i class="checkbox fa fa-regular ${self}"></i> </div>
 
-                <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${vidID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
+              <div class="options" id="followersOption" onclick="changeImageVisibility('${ID}', 'followers', '${vidID}', '${visibility}')"><span>Following</span> <i class=" checkbox fa-regular ${following}"></i></div>
 
-                <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
+              <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${vidID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
 
-              </div>
+              <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
+
             </div>
-            <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></vide>`;
-      disbaleScroll();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      if (visibility == 'none') {
-        document.getElementById('earthIcon').remove();
-        document.getElementById('deleteImageIcon').remove();
-        document.getElementById('optionDropdown').remove();
-      }
+          </div>
+          <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></vide>`;
+    disbaleScroll();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    if (visibility == 'none') {
+      document.getElementById('earthIcon').remove();
+      document.getElementById('deleteImageIcon').remove();
+      document.getElementById('optionDropdown').remove();
     }
   }
+}
 
-  function removeImage(){
-    var showImageDiv = document.getElementById('imageShowDiv');
-    if (showImageDiv.style.display != 'none') {
-      var showContainer = document.querySelector('#imageShowDiv .imageContainer');
-      showContainer.innerHTML = ``;
-      showImageDiv.style.display = 'none';
-      enableScroll();
-    }
+function removeImage(){
+  var showImageDiv = document.getElementById('imageShowDiv');
+  if (showImageDiv.style.display != 'none') {
+    var showContainer = document.querySelector('#imageShowDiv .imageContainer');
+    showContainer.innerHTML = ``;
+    showImageDiv.style.display = 'none';
+    enableScroll();
   }
+}
 
+function follow(){
+  var followButton = document.getElementById('followButton');
+  followButton.innerHTML = '...';
 
-  function follow(){
-    var followButton = document.getElementById('followButton');
-    followButton.innerHTML = '...';
-  
-    const followUser = async () =>{
-        const url = '/.ht/API/follow.php/?follow';
-        var encyDat = {
-          'username': `${currentUsername}`
-        };
-        const response = await fetch(url, {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(encyDat)
-          });
-        var data = await response.json();
-  
-        if (data) {
-          if (data.Result) {
-            followButton.innerHTML = 'Followed';
-            followButton.setAttribute( "onClick", "javascript: unfollow();");
-          }else{
+  const followUser = async () =>{
+      const url = '/.ht/API/follow.php/?follow';
+      var encyDat = {
+        'username': `${currentUsername}`
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+        });
+      var data = await response.json();
+
+      if (data) {
+        if (data.Result) {
+          followButton.innerHTML = 'Followed';
+          followButton.setAttribute( "onClick", "javascript: unfollow();");
+        }else{
+        followButton.innerHTML = `${data.message}`;
+        }
+      }else{
           followButton.innerHTML = `${data.message}`;
-          }
-        }else{
-            followButton.innerHTML = `${data.message}`;
-        }
       }
-      followUser();
-  }
-  
-  
-  function unfollow(){
-    var followButton = document.getElementById('followButton');
-    followButton.innerHTML = '...';
-  
-    const unfollowUser = async () =>{
-        const url = '/.ht/API/follow.php/?unfollow';
-        var encyDat = {
-          'username': `${currentUsername}`
-        };
-        const response = await fetch(url, {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(encyDat)
-          });
-        var data = await response.json();
-  
-        if (data) {
-          if (data.Result) {
-            followButton.innerHTML = 'Follow';
-            followButton.setAttribute( "onClick", "javascript: follow();");
-          }else{
-            followButton.innerHTML = "Can't  unfollow";
-          }
+    }
+    followUser();
+}
+
+function unfollow(){
+  var followButton = document.getElementById('followButton');
+  followButton.innerHTML = '...';
+
+  const unfollowUser = async () =>{
+      const url = '/.ht/API/follow.php/?unfollow';
+      var encyDat = {
+        'username': `${currentUsername}`
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+        });
+      var data = await response.json();
+
+      if (data) {
+        if (data.Result) {
+          followButton.innerHTML = 'Follow';
+          followButton.setAttribute( "onClick", "javascript: follow();");
         }else{
-            followButton.innerHTML = "Can't  unfollow";
+          followButton.innerHTML = "Can't  unfollow";
         }
+      }else{
+          followButton.innerHTML = "Can't  unfollow";
       }
-      unfollowUser();
-  }
+    }
+    unfollowUser();
+}
