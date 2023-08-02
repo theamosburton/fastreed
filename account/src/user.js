@@ -124,7 +124,6 @@ class showMenus{
       }
 
       if (fileInput.files && fileInput.files[0]) {
-console.log(fileInput.files[0].type);
         if (fileInput.files[0].type.startsWith('image/')) {
           this.uploadImages(fileInput);
         }else if(fileInput.files[0].type.startsWith('video/')){
@@ -134,7 +133,7 @@ console.log(fileInput.files[0].type);
           uploadBox.style.display = 'flex';
           uploadBox.style.display = 'flex';
           uploadProgressDiv.innerHTML = 'Video or Image';
-          uploadProgressDiv.style.color = 'red';
+          uploadProgressDiv.style.backgroundColor = 'red';
           uploadProgressDiv.style.width = '100%';
         }
 
