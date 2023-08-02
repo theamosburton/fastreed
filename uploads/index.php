@@ -32,18 +32,20 @@ class getFastreedContent {
         // Vars
 
         if (!isset($_GET['type']) || empty($_GET['type'])) {
-            $this->renderError();
+            $this->renderUError();
         }elseif (!isset($_GET['ID']) || empty($_GET['ID'])) {
-            $this->renderError();
+            $this->renderUError();
         }elseif (!isset($_GET['UN']) || empty($_GET['UN'])) {
-            $this->renderError();
+            $this->renderUError();
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
-            $this->renderError();
+            $this->renderUError();
         }else {
-            if (!$this->checkPermission()) {
-                $this->renderPError();
-            }elseif(!$this->checkUpload()){
+            if (!$this->checkUpload()) {
                 $this->renderUError();
+            }elseif($this->checkIfViolated()){
+                $this->renderVError();
+            }elseif($this->checkPermission()){
+                $this->renderPError();
             }else{
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
@@ -75,19 +77,8 @@ class getFastreedContent {
         }
     }
 
-    private function renderError(){
-        $filepath =$this->_DOCROOT.'/assets/img/warning.png';
-        header('Content-Type: image/png');
-        header('Content-Length: ' . filesize($filepath));
-        header('Content-Disposition: inline'); // Set to inline instead of attachment
-        // ob_clean();
-        // flush();
-        readfile($filepath);
-    }
-
-
     private function renderPError(){
-        $filepath =$this->_DOCROOT.'/assets/img/permissionError.png';
+        $filepath =$this->_DOCROOT.'/assets/img/private.png';
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
@@ -96,9 +87,18 @@ class getFastreedContent {
         readfile($filepath);
     }
 
+    private function renderVError(){
+      $filepath =$this->_DOCROOT.'/assets/img/violated.png';
+      header('Content-Type: image/png');
+      header('Content-Length: ' . filesize($filepath));
+      header('Content-Disposition: inline'); // Set to inline instead of attachment
+      // ob_clean();
+      // flush();
+      readfile($filepath);
+    }
 
     private function renderUError(){
-        $filepath =$this->_DOCROOT.'/assets/img/notFound.png';
+        $filepath =$this->_DOCROOT.'/assets/img/nomedia.png';
         header('Content-Type: image/png');
         header('Content-Length: ' . filesize($filepath));
         header('Content-Disposition: inline'); // Set to inline instead of attachment
@@ -126,7 +126,7 @@ class getFastreedContent {
         $IMGID = $_GET['ID'];
         $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
         $result = mysqli_query($this->DB, $sql);
-        
+
         if ($result) {
             if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
@@ -138,7 +138,7 @@ class getFastreedContent {
 
                 $forDomain = ($baseUrl == 'https://'.DOMAIN.'/web-stories' || $baseUrl == 'https://'.DOMAIN.'/posts');
                 $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/web-stories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
-                    
+
                 if ($forDomain ||  $forDomainAlias) {
                     $return = true;
                 }elseif ($access == 'anon') {
@@ -161,6 +161,26 @@ class getFastreedContent {
             }
         }
         return $return;
+    }
+
+    private function checkIfViolated(){
+      $return = false;
+      $ownerUID = $this->userData->getUID('username', $_GET['UN']);
+      $IMGID = $_GET['ID'];
+      $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+          if (mysqli_num_rows($result)) {
+              $row = mysqli_fetch_assoc($result);
+              $status = $row['status'];
+              if ($status == 'UNV' || $status == 'VFD') {
+                $return = false;
+              }elseif ($status == 'VLD') {
+                $return = true;
+              }
+          }
+      }
+      return $return;
     }
 }
 

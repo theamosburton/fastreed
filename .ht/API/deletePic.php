@@ -57,14 +57,14 @@ class deletePic{
     private function changeByUser(){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid); 
+        $personID = $this->AUTH->decrypt($eid);
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $value = $data['value'];
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 7');
         }else{
-            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'"; 
+            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'";
             $result = mysqli_query($this->DB, $sql);
             if($result){
                 showMessage(true, 'changed');
@@ -77,14 +77,14 @@ class deletePic{
     private function changeByAdmin(){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid); 
+        $personID = $this->AUTH->decrypt($eid);
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $value = $data['value'];
         if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
             showMessage(false, 'Error 7');
         }else{
-            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'"; 
+            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'";
             $result = mysqli_query($this->DB, $sql);
             if($result){
                 showMessage(true, 'changed');
@@ -97,53 +97,71 @@ class deletePic{
     private function deleteByUser($what){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid); 
+        $personID = $this->AUTH->decrypt($eid);
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
         $path = $this->_DOCROOT.'/.ht/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 7');
-        }elseif (file_exists($path)) {
+        }elseif ($this->deleteEntry($personID, $imgID)) {
+          if (file_exists($path)) {
             if (unlink($path)) {
-                $sql = "DELETE FROM uploads WHERE personID = '$personID' and uploadID = '$imgID'";
-                $result = mysqli_query($this->DB, $sql);
-                if ($result) {
-                    showMessage(true, 'Deleted');
-                }else{
-                    showMessage(false, 'Not deleted');
-                }
+                showMessage(true, 'Deleted');
             }else{
-                showMessage(false, 'Not deleted');
+                showMessage(true, 'Deleted');
             }
+          }else{
+                showMessage(true, 'Deleted');
+          }
+        }elseif(file_exists($path)){
+          if (unlink($path)) {
+              showMessage(true, 'Deleted');
+          }else{
+              showMessage(true, 'Deleted');
+          }
         }else{
             showMessage(false, 'Not exists');
         }
+    }
+
+    private function deleteEntry($personID, $imgID){
+      $return = false;
+      $sql = "DELETE FROM uploads WHERE personID = '$personID' and uploadID = '$imgID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $return = true;
+      }
+      return $return;
     }
 
 
     private function deleteByAdmin($what){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid); 
+        $personID = $this->AUTH->decrypt($eid);
         $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $ext = $data['extension'];
         $path = $this->_DOCROOT.'/.ht/fastreedusercontent'.'/'.$what.'/'.$username.'/'.$imgID.$ext;
         if($this->userData->getSelfDetails()['userType'] != 'Admin'){
             showMessage(false, 'Not an admin');
-        }elseif (file_exists($path)) {
+        }elseif ($this->deleteEntry($personID, $imgID)) {
+          if (file_exists($path)) {
             if (unlink($path)) {
-                $sql = "DELETE FROM uploads WHERE personID = '$personID' and uploadID = '$imgID'";
-                $result = mysqli_query($this->DB, $sql);
-                if ($result) {
-                    showMessage(true, 'Deleted');
-                }else{
-                    showMessage(false, 'Not deleted');
-                }
+                showMessage(true, 'Deleted');
             }else{
-                showMessage(false, 'Not deleted');
+                showMessage(true, 'Deleted');
             }
+          }else{
+                showMessage(true, 'Deleted');
+          }
+        }elseif(file_exists($path)){
+          if (unlink($path)) {
+              showMessage(true, 'Deleted');
+          }else{
+              showMessage(true, 'Deleted');
+          }
         }else{
             showMessage(false, 'Not exists');
         }
@@ -153,7 +171,7 @@ class deletePic{
         $return = false;
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $dID = $this->AUTH->decrypt($eid); 
+        $dID = $this->AUTH->decrypt($eid);
         $sql = "SELECT * FROM accounts WHERE personID = '$dID'";
         $result = mysqli_query($this->DB, $sql);
         if (mysqli_num_rows($result)) {
