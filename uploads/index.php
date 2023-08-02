@@ -44,7 +44,7 @@ class getFastreedContent {
                 $this->renderUError();
             }elseif($this->checkIfViolated()){
                 $this->renderVError();
-            }elseif($this->checkPermission()){
+            }elseif(!$this->checkPermission()){
                 $this->renderPError();
             }else{
                 $EXT = $_GET['EXT'];
