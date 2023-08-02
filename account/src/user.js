@@ -1,5 +1,9 @@
 class showMenus{
     constructor(){
+      this.startX = 0;
+      this.minDistance = 50;
+      this.rightSide = 'media';
+      this.leftSide = '';
       this.hashValue = window.location.hash.substr(1);
       // var params = new URLSearchParams(window.location.search);
       this.optValue = this.hashValue;
@@ -27,6 +31,8 @@ class showMenus{
       for (var i = 0; i < this.othersDivs.length; i++) {
           this.othersDivs[i].style.display = 'none';
       }
+
+
       // check the hash and display what to show
       if (x == 'opt' || x == '' || x === null || x === 'undefined') {
         this.dashboardMenu.classList.add('active');
@@ -38,7 +44,48 @@ class showMenus{
         showMenu.classList.add('active');
         showDiv.style.display = 'block';
         showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (x == 'media') {
+          this.rightSide = 'account';
+          this.leftSide = 'opt';
+        }else if (x == 'account') {
+          this.rightSide = 'account';
+          this.leftSide = 'media';
+        }else if (x == 'opt') {
+          this.rightSide = 'media';
+          this.leftSide = 'opt';
+        }
       }
+    }
+
+
+
+
+    handleTouchStart(event) {
+        this.startX = event.touches[0].clientX;
+    }
+
+    handleTouchEnd(event) {
+        var endX = event.changedTouches[0].clientX;
+
+        var deltaX = endX - this.startX;
+
+        if (Math.abs(deltaX) > this.minDistance) {
+            if (deltaX > 0) {
+                // Swipe right
+                // Change the hash without refreshing
+                window.location.hash = this.leftSide;
+
+                this.updateMenus(this.leftSide);
+                console.log('Swiped left');
+                // Perform your swipe right action here
+            } else {
+                // Swipe left
+                window.location.hash = this.rightSide;
+                this.updateMenus(this.rightSide);
+                console.log('Swiped right');
+                // Perform your swipe left action here
+            }
+        }
     }
 
     reload(){
@@ -328,10 +375,7 @@ class showMenus{
     }
 
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    var showMenu = new showMenus();
-});
+var showMenu = new showMenus();
 
 
 
