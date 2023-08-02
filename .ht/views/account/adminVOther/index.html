@@ -18,7 +18,7 @@
                             <?php
                             $selfId = $this->userData->getSelfDetails()['UID'];
                             $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
- 
+
                             if($selfId == $otherID ){
                                 echo <<<HTML
                                 <a href="/account/" class="profileActions">Profile</a>
@@ -39,16 +39,16 @@
                 </div>
             </div>
         </div>
-        <!-- Profile on left side --> 
+        <!-- Profile on left side -->
 
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
             <div class="userContent">
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
-                    <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
-                    <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
-                    <a id="accountMenu" class="menus" onclick="new showMenus()" href="?opt=account">Account Setting</a>
-                    
+                    <a id="dashboardMenu" class="menus" onclick="showMenu.showMenus('')" href="#">Dashboard</a>
+                    <a id="mediaMenu" class="menus" onclick="showMenu.showMenus('media')" href="#media"> Media Library</a>
+                    <a id="accountMenu" class="menus" onclick="showMenu.showMenus('account')" href="#account">Account Setting</a>
+
                 </div>
                 <!-- Menus section -->
 
@@ -68,7 +68,7 @@
                 </div>
                 <!-- Media Library Section -->
 
-                
+
                 <!-- Accounts Related-->
                 <div id="accountDiv" class="accountDiv contentView" style="display:none">
                     <?php
@@ -80,4 +80,3 @@
         </div>
     </div>
 </div>
-    

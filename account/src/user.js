@@ -118,21 +118,24 @@ class showMenus{
     //*******Photo/Video Upload************/
     uploadMedia() {
       var fileInput = document.getElementById("uploadInputImage");
-      var uploadMessage = document.getElementById('uploadMessage');
+      var uploadProgressDiv = document.getElementById('uploadProgressDiv');
       if (document.getElementById('noUploads')) {
         document.getElementById('noUploads').remove();
       }
 
       if (fileInput.files && fileInput.files[0]) {
-
+console.log(fileInput.files[0].type);
         if (fileInput.files[0].type.startsWith('image/')) {
           this.uploadImages(fileInput);
         }else if(fileInput.files[0].type.startsWith('video/')){
           this.uploadVideo(fileInput);
         }else{
+          var uploadBox = document.getElementById('tempUploadBox');
           uploadBox.style.display = 'flex';
-          uploadMessage.innerHTML = 'Video or Image';
-          uploadMessage.style.color = 'red';
+          uploadBox.style.display = 'flex';
+          uploadProgressDiv.innerHTML = 'Video or Image';
+          uploadProgressDiv.style.color = 'red';
+          uploadProgressDiv.style.width = '100%';
         }
 
       }

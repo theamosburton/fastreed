@@ -9,7 +9,7 @@
                         <div class="user-profile">
                             <div class="user-avatar">
                                 <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
-                                <div onclick="new showMenus().uploadDp()" class="editPhotos" id="editPhotos">
+                                <div onclick="showMenu.uploadDp()" class="editPhotos" id="editPhotos">
                                     <i class="fa-solid fa-upload fa-xs"></i>
                                 </div>
                             </div>
@@ -29,10 +29,10 @@
             <div class="userContent">
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
-                    <a id="dashboardMenu" class="menus" onclick="new showMenus().updateMenus('')" href="#opt">Dashboard</a>
-                    <a id="mediaMenu" class="menus" onclick="new showMenus().updateMenus('media')" href="#media"> Media Library</a>
+                    <a id="dashboardMenu" class="menus" onclick="showMenu.updateMenus('')" href="#">Dashboard</a>
+                    <a id="mediaMenu" class="menus" onclick="showMenu.updateMenus('media')" href="#media"> Media Library</a>
                     <!-- <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a> -->
-                    <a id="accountMenu" class="menus" onclick="new showMenus().updateMenus('account')" href="#account">Account Setting</a>
+                    <a id="accountMenu" class="menus" onclick="showMenu.updateMenus('account')" href="#account">Account Setting</a>
 
                 </div>
                 <!-- Menus section -->

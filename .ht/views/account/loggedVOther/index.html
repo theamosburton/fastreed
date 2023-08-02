@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row gutters profile">
-        
+
         <!-- Profile on left side -->
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
             <div class="card h-100">
@@ -14,7 +14,7 @@
                             <div class="user-details">
                                 <h3 class="user-name"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name']?></h3>
                                 <?php
- 
+
                                 if($selfId == $otherID ){
                                     echo <<<HTML
                                     <a href="/account/" class="profileActions">Profile</a>
@@ -35,15 +35,15 @@
                 </div>
             </div>
         </div>
-        <!-- Profile on left side --> 
+        <!-- Profile on left side -->
 
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
             <div class="userContent">
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
-                    <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Dashboard</a>
-                    <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt=details">About</a>
-                    <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
+                    <a id="dashboardMenu" class="menus" onclick="showMenu.showMenus('')" href="#">Dashboard</a>
+                    <a id="detailsMenu" class="menus" onclick="showMenu.showMenus('details')" href="#details">About</a>
+                    <a id="mediaMenu" class="menus" onclick="showMenu.showMenus('media')" href="#media"> Media Library</a>
                 </div>
                 <!-- Menus section -->
 
@@ -70,9 +70,8 @@
                 </div>
                 <!-- Media Library Section -->
 
-                
+
             </div>
         </div>
     </div>
 </div>
-    

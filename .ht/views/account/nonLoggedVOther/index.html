@@ -32,7 +32,7 @@
 										data-size="large"
 										data-logo_alignment="left"
 										data-width="290">
-										
+
 									</div>
 
                             <!-- <span onclick="follow()" class="profileActions" id="editButton">Follow</span> -->
@@ -41,16 +41,16 @@
                 </div>
             </div>
         </div>
-        <!-- Profile on left side --> 
+        <!-- Profile on left side -->
 
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 guttersInside">
             <div class="userContent">
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
-                    <a id="dashboardMenu" class="menus" onclick="new showMenus()" href="?opt">Content</a>
-                    <a id="detailsMenu" class="menus" onclick="new showMenus()" href="?opt=details">About</a>
-                    <a id="mediaMenu" class="menus" onclick="new showMenus()" href="?opt=media"> Media Library</a>
-                    
+                    <a id="dashboardMenu" class="menus" onclick="showMenu.showMenus('')" href="#">Content</a>
+                    <a id="detailsMenu" class="menus" onclick="showMenu.showMenus('details')" href="#details">About</a>
+                    <a id="mediaMenu" class="menus" onclick="showMenu.showMenus('media')" href="#media"> Media Library</a>
+
                 </div>
                 <!-- Menus section -->
 
@@ -75,9 +75,8 @@
                 </div>
                 <!-- Media Library Section -->
 
-                
+
             </div>
         </div>
     </div>
 </div>
-    
