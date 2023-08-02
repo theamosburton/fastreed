@@ -1,7 +1,7 @@
 class showMenus{
     constructor(){
       this.startX = 0;
-      this.minDistance = 50;
+      this.minDistance = 200;
       this.rightSide = 'media';
       this.leftSide = '';
       this.hashValue = window.location.hash.substr(1);
