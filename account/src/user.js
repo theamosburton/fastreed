@@ -1,9 +1,5 @@
 class showMenus{
     constructor(){
-      this.startX = 0;
-      this.minDistance = 130;
-      this.rightSide = 'media';
-      this.leftSide = '';
       this.hashValue = window.location.hash.substr(1);
       // var params = new URLSearchParams(window.location.search);
       this.optValue = this.hashValue;
@@ -55,37 +51,6 @@ class showMenus{
           this.leftSide = 'opt';
         }
       }
-    }
-
-
-
-
-    handleTouchStart(event) {
-        this.startX = event.touches[0].clientX;
-    }
-
-    handleTouchEnd(event) {
-        var endX = event.changedTouches[0].clientX;
-
-        var deltaX = endX - this.startX;
-
-        if (Math.abs(deltaX) > this.minDistance) {
-            if (deltaX > 0) {
-                // Swipe right
-                // Change the hash without refreshing
-                window.location.hash = this.leftSide;
-
-                this.updateMenus(this.leftSide);
-                console.log('Swiped left');
-                // Perform your swipe right action here
-            } else {
-                // Swipe left
-                window.location.hash = this.rightSide;
-                this.updateMenus(this.rightSide);
-                console.log('Swiped right');
-                // Perform your swipe left action here
-            }
-        }
     }
 
     reload(){
