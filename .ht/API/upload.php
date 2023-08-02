@@ -18,7 +18,7 @@ class uploadMedia{
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
-        $this->BASIC_FUNC = new BasicFunctions(); 
+        $this->BASIC_FUNC = new BasicFunctions();
         $this->AUTH = new Auth();
         $this->userData = new getLoggedData();
         // Who is editing
@@ -217,7 +217,7 @@ class uploadMedia{
         $return = array('Result'=> false);
         $date = date('Y-m-d');
         $time =  time();
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB')";
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB', 'UFD')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;
@@ -245,7 +245,7 @@ class uploadMedia{
 
     private function resetDP($id, $fileAddress){
         $return = false;
-        $sql = "UPDATE account_details SET 
+        $sql = "UPDATE account_details SET
         profilePic = '$fileAddress'
         WHERE personID = '$id'
         ";

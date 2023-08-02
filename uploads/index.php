@@ -173,9 +173,7 @@ class getFastreedContent {
           if (mysqli_num_rows($result)) {
               $row = mysqli_fetch_assoc($result);
               $status = $row['status'];
-              if ($status == 'UNV' || $status == 'VFD') {
-                $return = false;
-              }elseif ($status == 'VLD') {
+              if ($status =='VLD') {
                 $return = true;
               }
           }
