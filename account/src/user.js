@@ -17,42 +17,7 @@ class showMenus{
       }
   }
 
-    updateMenus(x){
-      for (var i = 0; i < this.othersMenus.length; i++) {
-          // othersDivs[i].style.display = 'none';
-          if (this.othersMenus[i].classList.contains('active')) {
-            this.othersMenus[i].classList.remove('active');
-          }
-      }
-      for (var i = 0; i < this.othersDivs.length; i++) {
-          this.othersDivs[i].style.display = 'none';
-      }
-
-
-      // check the hash and display what to show
-      if (x == 'opt' || x == '' || x === null || x === 'undefined') {
-        this.dashboardMenu.classList.add('active');
-        this.dashboardDiv.style.display = 'block';
-        this.dashboardMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }else{
-        var showDiv = document.getElementById(`${x}Div`);
-        var showMenu = document.getElementById(`${x}Menu`);
-        showMenu.classList.add('active');
-        showDiv.style.display = 'block';
-        showMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        if (x == 'media') {
-          this.rightSide = 'account';
-          this.leftSide = 'opt';
-        }else if (x == 'account') {
-          this.rightSide = 'account';
-          this.leftSide = 'media';
-        }else if (x == 'opt') {
-          this.rightSide = 'media';
-          this.leftSide = 'opt';
-        }
-      }
-    }
-
+    
     reload(){
         window.location.href =  window.location.href;
     }
