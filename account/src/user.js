@@ -17,7 +17,7 @@ class showMenus{
       }
   }
 
-    
+
     reload(){
         window.location.href =  window.location.href;
     }
@@ -310,7 +310,43 @@ class showMenus{
 var showMenu = new showMenus();
 
 
+function restrictMedia(ID, status){
+  if (adminLogged) {
+    whoIs = 'Admin';
+  }else{
+    whoIs = 'User';
+    currentUsername = '';
+  }
+    const changeStatus = async () =>{
+      const url = '/.ht/API/deletePic.php';
+      var encyDat = {
+        'purpose': 'report',
+        'imgID': `${ID}`,
+        'whois':`${whoIs}`,
+        'value':`${status}`,
+        'personID' : ' '
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+        });
+      var data = await response.json();
 
+      if (data) {
+        if (data.Result) {
+          alert(`${data.message}`);
+        }else{
+          alert(`${data.message}`);
+        }
+      }else{
+        alert( "Can't Update");
+      }
+  }
+  changeStatus();
+}
 
 function showPicOptions(what){
   var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);

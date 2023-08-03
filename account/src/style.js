@@ -74,7 +74,7 @@ function exapndAndShrink(id){
     }
 }
 
-function showImage(path, visibility, ID, ext, imgID, time, size){
+function showImage(path, visibility, ID, ext, imgID, time, size, status){
   if (size >= 1024) {
     size = size/1024;
     size = size.toFixed(2);
@@ -115,7 +115,44 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
         minute: '2-digit',
         hour12: true,
       }).format(new Date(time * 1000));
+      var restrictMedia = '';
+      var statusOpt = '';
+      var statusInfo = '';
 
+      if (status ==  'VFD') {
+        statusInfo = `<div class="details uploadStatus">
+          <span class="property">Status:</span>
+          <span class="value" style="color: green;"> Verified By Admin</span>
+        </div>`;
+      }else if (status ==  'UFD') {
+        statusInfo = `<div class="details uploadStatus">
+          <span class="property">Status:</span>
+          <span class="value" style="color: orange;"> Not Verified</span>
+        </div>`;
+      }else if (status ==  'VLD') {
+        statusInfo = `<div class="details uploadStatus">
+          <span class="property">Status:</span>
+          <span class="value" style="color: red;"> Image is against community guidelines</span>
+        </div>`;
+      }else{
+        statusInfo = `<div class="details uploadStatus">
+          <span class="property">Status:</span>
+          <span class="value" style="color: orange;"> Not Verified</span>
+        </div>`;
+      }
+
+      if (adminLogged) {
+          restrictMedia = `<div class="options" id="everyoneOptionA" onclick="restrictMedia('${ID}', 'VLD')"><span>Violated</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
+        if (status == 'UFD') {
+          statusOpt = `<div class="options" id="unverifyImage" onclick="restrictMedia('${ID}', 'VFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
+        }else if (status == 'VFD') {
+          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+        }else if (status == 'VLD') {
+          restrictMedia = `<div class="options" id="everyoneOptionA" onclick="restrictMedia('${ID}', 'VLD')"><span>Violated</span> <i class="checkbox fa-regular fa-square-check"></i></div>`;
+          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+        }
+
+      }
 
       showContainer.innerHTML = `
           <div class="imgOptions">
@@ -133,6 +170,8 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
               <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${imgID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
 
               <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${imgID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
+              ${statusOpt}
+              ${restrictMedia}
             </div>
 
 
@@ -150,7 +189,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
                 <span class="property">Upload Time:</span>
                 <span class="value">${t} (IST)</span>
               </div>
-
+              ${statusInfo}
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
@@ -169,7 +208,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size){
     }
   }
 
-function showVideo(path, visibility, ID, ext, vidID, time, size){
+function showVideo(path, visibility, ID, ext, vidID, time, size, status){
   var showImageDiv = document.getElementById('imageShowDiv');
   if (showImageDiv.style.display == 'none') {
     showImageDiv.style.display = 'flex';
@@ -222,7 +261,7 @@ function showVideo(path, visibility, ID, ext, vidID, time, size){
 
             </div>
           </div>
-          <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></vide>`;
+          <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></video>`;
     disbaleScroll();
     window.scrollTo({
       top: 0,
@@ -235,6 +274,7 @@ function showVideo(path, visibility, ID, ext, vidID, time, size){
     }
   }
 }
+
 
 function removeImage(){
   var showImageDiv = document.getElementById('imageShowDiv');

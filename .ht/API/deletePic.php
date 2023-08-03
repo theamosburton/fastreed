@@ -24,6 +24,14 @@ class deletePic{
             showMessage(false, 'Error 4');
         }elseif (!isset($data['purpose']) || empty($data['purpose'])) {
             showMessage(false, 'Error 5');
+        }elseif ($data['purpose'] == 'report') {
+            if (!isset($data['value']) || empty($data['value'])) {
+                showMessage(false, 'Status not found');
+            }elseif ($data['whois'] == 'Admin') {
+                $this->reportMedia();
+            }else{
+                showMessage(false, 'Not an admin');
+            }
         }elseif (!$this->checkUserE()) {
             showMessage(false, 'Error 6');
         }elseif ($data['purpose'] == 'visibility') {
@@ -53,6 +61,37 @@ class deletePic{
         $this->closeConnection();
     }
 
+    private function reportMedia(){
+      $data = json_decode(file_get_contents('php://input'), true);
+      $value = $data['value'];
+      $ImgID = $data['imgID'];
+
+      $sql1 = "SELECT * FROM uploads WHERE uploadID = '$ImgID'";
+      $result1 = mysqli_query($this->DB, $sql1);
+      if ($result1) {
+        if (mysqli_num_rows($result1)) {
+
+          $row = mysqli_fetch_assoc($result1);
+          $status = $row['status'];
+          if ($status == 'VLD' && $value == 'VLD') {
+            $value = 'VFD';
+          }
+        }
+      }
+
+      if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+          showMessage(false, 'Not an admin');
+      }else{
+        $sql = "UPDATE uploads set status = '$value' WHERE uploadID = '$ImgID'";
+        $result = mysqli_query($this->DB, $sql);
+        if($result){
+            showMessage(true, 'changed');
+        }else{
+            showMessage(false, "Can't changed");
+        }
+      }
+
+    }
 
     private function changeByUser(){
         $data = json_decode(file_get_contents('php://input'), true);
