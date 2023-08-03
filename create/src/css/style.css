@@ -2,9 +2,7 @@
     padding: 0;
     margin: 0;
 }
-html{
-    overflow: hidden;
-}
+
 
 .editContainer{
     position: relative;
@@ -158,12 +156,12 @@ html{
     font-size: small;
 }
 .editorSection .editorBox .layers .layersTop .title{
-    align-items: flex-end;  
+    align-items: flex-end;
     font-weight: 1000;
     font-size: larger;
 }
 #title0{
-    align-items: flex-end;  
+    align-items: flex-end;
     font-weight: 1000;
     font-size: larger;
     margin-bottom: 10px;
@@ -401,7 +399,7 @@ html{
     width: 100%;
     object-fit: cover;
     cursor:grab;
-    
+
 }
 .editContainer .leftSection .uploadsDiv .uploadContent img:hover, .editContainer .leftSection .uploadsDiv .uploadContent video:hover{
     cursor: grab;
@@ -609,7 +607,7 @@ html{
       transform: rotate(360deg);
     }
   }
-  
+
   .infinite-rotation {
     animation: rotate infinite .8s linear;
   }
@@ -645,7 +643,7 @@ html{
 
 
 @media (max-width: 600px){
-   
+
     .editContainer .rightSection{
         animation: grow .5s ease forwards;
     }
@@ -676,7 +674,7 @@ html{
     }
 }
 @media (max-width: 400px){
-   
+
     .editContainer .editorSection .editorBox{
         width: calc(9*2rem);
         height: calc(16*1.95rem);
@@ -694,7 +692,7 @@ html{
         width: calc(9*1.6rem);
         height: calc(16*1.6rem);
     }
-   
+
 }
 
 
