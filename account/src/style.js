@@ -122,7 +122,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size, status){
       if (status ==  'VFD') {
         statusInfo = `<div class="details uploadStatus">
           <span class="property">Status:</span>
-          <span class="value" style="color: green;"> Verified By Admin</span>
+          <span class="value" style="color: green;"> Verified By Admin <i class="checkbox fa-regular fa-circle-check"></i></span>
         </div>`;
       }else if (status ==  'UFD') {
         statusInfo = `<div class="details uploadStatus">
@@ -142,14 +142,14 @@ function showImage(path, visibility, ID, ext, imgID, time, size, status){
       }
 
       if (adminLogged) {
-          restrictMedia = `<div class="options" id="everyoneOptionA" onclick="restrictMedia('${ID}', 'VLD')"><span>Violated</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
+          restrictMedia = `<div class="options" id="restrictMedia" onclick="restrictMedia('${ID}', 'VLD', '${status}', 'restrictMedia')"><span>Violated</span> <i class="checkbox fa-regular fa-square"></i></div>`;
         if (status == 'UFD') {
-          statusOpt = `<div class="options" id="unverifyImage" onclick="restrictMedia('${ID}', 'VFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
+          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'VFD', '${status}', 'verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
         }else if (status == 'VFD') {
-          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD', '${status}','verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
         }else if (status == 'VLD') {
-          restrictMedia = `<div class="options" id="everyoneOptionA" onclick="restrictMedia('${ID}', 'VLD')"><span>Violated</span> <i class="checkbox fa-regular fa-square-check"></i></div>`;
-          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+          restrictMedia = `<div class="options" id="restrictMedia" onclick="restrictMedia('${ID}', 'VLD', '${status}','restrictMedia')"><span>Violated</span> <i class="checkbox fa-regular fa-square-check"></i></div>`;
+          statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD', '${status}','verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
         }
 
       }

@@ -310,7 +310,15 @@ class showMenus{
 var showMenu = new showMenus();
 
 
-function restrictMedia(ID, status){
+function restrictMedia(ID, status, ostatus, element){
+  var spinner =  document.createElement('div');
+  spinner.classList.add('spinner');
+  spinner.style.marginRight = '0px';
+  var e = document.querySelector(`#${element} .checkbox`);
+  var s = document.getElementById(`${element}`);
+  e.style.display = 'none';
+  s.appendChild(spinner);
+  var spinner
   if (adminLogged) {
     whoIs = 'Admin';
   }else{
@@ -337,7 +345,15 @@ function restrictMedia(ID, status){
 
       if (data) {
         if (data.Result) {
-          alert(`${data.message}`);
+          spinner.remove();
+            e.style.display = 'flex';
+          if(e.classList.contains('fa-square')){
+            e.classList.remove('fa-square')
+            e.classList.add('fa-square-check')
+          }else if (e.classList.contains('fa-square-check')) {
+            e.classList.add('fa-square')
+            e.classList.remove('fa-square-check')
+          }
         }else{
           alert(`${data.message}`);
         }
@@ -346,6 +362,7 @@ function restrictMedia(ID, status){
       }
   }
   changeStatus();
+
 }
 
 function showPicOptions(what){
