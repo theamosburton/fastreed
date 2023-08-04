@@ -261,7 +261,7 @@ function showVideo(path, visibility, ID, ext, vidID, time, size, status){
     }else if (status ==  'VLD') {
       statusInfo = `<div class="details uploadStatus">
         <span class="property">Status:</span>
-        <span class="value" style="color: red;"> Image is against community guidelines</span>
+        <span class="value" style="color: red;"> Video is against community guidelines</span>
       </div>`;
     }else{
       statusInfo = `<div class="details uploadStatus">

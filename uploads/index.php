@@ -167,17 +167,22 @@ class getFastreedContent {
       $return = false;
       $ownerUID = $this->userData->getUID('username', $_GET['UN']);
       $IMGID = $_GET['ID'];
-      $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
-      $result = mysqli_query($this->DB, $sql);
-      if ($result) {
-          if (mysqli_num_rows($result)) {
-              $row = mysqli_fetch_assoc($result);
-              $status = $row['status'];
-              if ($status =='VLD') {
-                $return = true;
-              }
-          }
+      if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+        $return = false;
+      }else{
+        $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $row = mysqli_fetch_assoc($result);
+                $status = $row['status'];
+                if ($status =='VLD') {
+                  $return = true;
+                }
+            }
+        }
       }
+
       return $return;
     }
 }
