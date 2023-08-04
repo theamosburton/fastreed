@@ -242,6 +242,46 @@ function showVideo(path, visibility, ID, ext, vidID, time, size, status){
       minute: '2-digit',
       hour12: true,
     }).format(new Date(time * 1000));
+
+
+    var restrictMedia = '';
+    var statusOpt = '';
+    var statusInfo = '';
+
+    if (status ==  'VFD') {
+      statusInfo = `<div class="details uploadStatus">
+        <span class="property">Status:</span>
+        <span class="value" style="color: green;"> Verified By Admin <i class="checkbox fa-regular fa-circle-check"></i></span>
+      </div>`;
+    }else if (status ==  'UFD') {
+      statusInfo = `<div class="details uploadStatus">
+        <span class="property">Status:</span>
+        <span class="value" style="color: orange;"> Not Verified</span>
+      </div>`;
+    }else if (status ==  'VLD') {
+      statusInfo = `<div class="details uploadStatus">
+        <span class="property">Status:</span>
+        <span class="value" style="color: red;"> Image is against community guidelines</span>
+      </div>`;
+    }else{
+      statusInfo = `<div class="details uploadStatus">
+        <span class="property">Status:</span>
+        <span class="value" style="color: orange;"> Not Verified</span>
+      </div>`;
+    }
+
+    if (adminLogged) {
+        restrictMedia = `<div class="options" id="restrictMedia" onclick="restrictMedia('${ID}', 'VLD', '${status}', 'restrictMedia')"><span>Violated</span> <i class="checkbox fa-regular fa-square"></i></div>`;
+      if (status == 'UFD') {
+        statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'VFD', '${status}', 'verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square"></i></div>`;
+      }else if (status == 'VFD') {
+        statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD', '${status}','verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+      }else if (status == 'VLD') {
+        restrictMedia = `<div class="options" id="restrictMedia" onclick="restrictMedia('${ID}', 'VLD', '${status}','restrictMedia')"><span>Violated</span> <i class="checkbox fa-regular fa-square-check"></i></div>`;
+        statusOpt = `<div class="options" id="verifyImage" onclick="restrictMedia('${ID}', 'UFD', '${status}','verifyImage')"><span>Verify Image</span> <i class=" checkbox fa-regular fa-square-check"></i></div>`;
+      }
+
+    }
     showContainer.innerHTML = `
             <div class="imgOptions">
             <i class="fa fa-times fa-xl optIcons" onclick="removeImage()"></i>
@@ -258,7 +298,24 @@ function showVideo(path, visibility, ID, ext, vidID, time, size, status){
               <div class="options" id="everyoneOptionU" onclick="changeImageVisibility('${ID}', 'users', '${vidID}', '${visibility}')"><span>All Users</span> <i class=" checkbox fa-regular ${everyoneU}"></i></div>
 
               <div class="options" id="everyoneOptionA" onclick="changeImageVisibility('${ID}', 'anon', '${vidID}', '${visibility}')"><span>Anonymous</span> <i class=" checkbox fa-regular ${everyoneA}"></i></div>
-
+              ${statusOpt}
+              ${restrictMedia}
+            </div>
+            <div class="optionDropdown" id="optionDropdownDetails" style="display:none;">
+              <div class="details size">
+                <span class="property">File Size: </span>
+                <span class="value">${size}</span>
+              </div>
+              <div class="details">
+                <span class="property">Link:</span>
+                <textarea id="linkToCopy" style="position: absolute; top: -9999px;"></textarea>
+                <span class="value copylink" onclick="copyLink('${path}')">Copy <i class="fa fa-solid fa-copy"></i></span>
+              </div>
+              <div class="details uploadDT">
+                <span class="property">Upload Time:</span>
+                <span class="value">${t} (IST)</span>
+              </div>
+              ${statusInfo}
             </div>
           </div>
           <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></video>`;
