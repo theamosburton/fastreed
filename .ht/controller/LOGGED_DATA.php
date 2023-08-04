@@ -20,7 +20,7 @@ class getLoggedData{
                 $this->whoVisited($PID);
             }
         }
-       
+
     }
 
     public function closeConnection()
@@ -59,7 +59,7 @@ class getLoggedData{
                 $ePID = false;
             }
             $this->PID = $ePID;
-            $this->userLogged = true;  
+            $this->userLogged = true;
             $isPresent = mysqli_num_rows($result);
             if ($isPresent) {
                 $row = mysqli_fetch_assoc($result);
@@ -75,7 +75,12 @@ class getLoggedData{
 
      public function getSelfDetails(){
         $return = array();
-        $pID = $_SESSION['LOGGED_USER'];
+        if (isset($_SESSION['LOGGED_USER'])) {
+            $pID = $_SESSION['LOGGED_USER'];
+        }else {
+          $pID = '';
+        }
+
         if (isset($_COOKIE['UID'])) {
             $ePID = $_COOKIE['UID'];
         }elseif (isset($_COOKIE['AID'])) {
@@ -105,7 +110,7 @@ class getLoggedData{
                 }else{
                     $age = null;
                 }
-                
+
                 $email = $row['emailID'];
                 $userType = 'User';
                 $websiteUrl = $row['websiteUrl'];
@@ -178,14 +183,14 @@ class getLoggedData{
                 $UID = $row['personID'];
                 $userSince = $row['tdate'];
                 $password = $row['Password'];
-                $accountWith = $row['accountWith'];   
+                $accountWith = $row['accountWith'];
                 $sql2 = "SELECT * FROM account_access WHERE personID = '$pID'";
 
                 $return = array(
                     'UID' => $UID,
                     'userSince' => $userSince,
                     'password' => $password,
-                    'accountWith' => $accountWith  
+                    'accountWith' => $accountWith
                 );
             }
         }
@@ -194,7 +199,7 @@ class getLoggedData{
 
     // By admin
     public function accountsByAdmin($ftype, $ffield){
-        //  If argument are username then get UID from 
+        //  If argument are username then get UID from
         //  getUID function using former username
         if ($ftype == 'username') {
             $type = 'personID';
@@ -213,13 +218,13 @@ class getLoggedData{
                 $UID = $row['personID'];
                 $userSince = $row['tdate'];
                 $password = $row['Password'];
-                $accountWith = $row['accountWith'];   
+                $accountWith = $row['accountWith'];
 
                 $return = array(
                     'UID' => $UID,
                     'userSince' => $userSince,
                     'password' => $password,
-                    'accountWith' => $accountWith  
+                    'accountWith' => $accountWith
                 );
             }
         }
@@ -282,9 +287,9 @@ class getLoggedData{
             }
         }
         return $data;
-     } 
+     }
 
-    //  get uid from username 
+    //  get uid from username
     public function getUID($type, $field){
         $data = false;
         $sql = "SELECT * FROM account_details WHERE $type = '$field'";
@@ -309,7 +314,7 @@ class getLoggedData{
         $sql = "SELECT * FROM followOthers WHERE follower = '$followeeUID' and followee = '$selfUID' and followBack = 1";
         $result = mysqli_query($this->DB, $sql);
 
-        
+
 
         // If this person is followed second person firstly
         // then he follows back
@@ -322,7 +327,7 @@ class getLoggedData{
         if (mysqli_num_rows($result) || mysqli_num_rows($result1) || mysqli_num_rows($result2)) {
             $return = true;
         }
-       
+
         return $return;
     }
 
@@ -386,6 +391,6 @@ class getLoggedData{
         }
         return $return;
     }
-}   
+}
 
 ?>
