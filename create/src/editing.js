@@ -114,6 +114,7 @@ class Edits{
           }
         }
       }
+      this.saveToBrowser();
     }
   deleteMedia(type){
       if(type == 'image'){
@@ -147,6 +148,7 @@ class Edits{
       this.editor.presentLayerDiv.appendChild(layersTop);
       media.remove();
       this.editor.layers['L' + this.editor.presentLayerIndex].media = {};
+      this.saveToBrowser();
   }
   modifyMedia(type, blobUrl, url){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -161,6 +163,7 @@ class Edits{
       this.editor.layers['L' + this.editor.presentLayerIndex].media.type = type;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = blobUrl;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.url = url;
+      this.saveToBrowser();
   }
   updateMedia(type){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -200,6 +203,7 @@ class Edits{
     }else if(overlayArea >= '20'){
       document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
     }
+    this.saveToBrowser();
 
   }
   mediaFit(){
@@ -211,6 +215,7 @@ class Edits{
       this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.mediaFit = mediaFit.value;
       mediaContent.style.objectFit = `${mediaFit.value}`;
     }
+    this.saveToBrowser();
   }
     // Media Editing
 
@@ -231,6 +236,7 @@ class Edits{
         this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
       }
     }
+    this.saveToBrowser();
   }
   changeFontFamily(x){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -246,11 +252,13 @@ class Edits{
         applyto.style.fontFamily = `${fontFamily.value}`;
         this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
     }
+    this.saveToBrowser();
   }
   }
   editTitle(x){
     var text = document.getElementById(`${x}`);
     this.editor.layers['L' + this.editor.presentLayerIndex].title.text = `${text.innerHTML}`;
+    this.saveToBrowser();
   }
   changeFontWeight(){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -261,7 +269,7 @@ class Edits{
       applyto.style.fontWeight = `${fontWeight.value}`;
       this.editor.layers['L' + this.editor.presentLayerIndex].title.fontWeight = `${fontWeight.value}`;
     }
-
+   this.saveToBrowser();
   }
   // Title editing
 
@@ -283,10 +291,12 @@ class Edits{
         this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
       }
     }
+    this.saveToBrowser();
   }
   editText(x){
     var text = document.getElementById(`${x}`);
     this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = `${text.innerHTML}`;
+    this.saveToBrowser();
   }
   changeOtherFontWeight(){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -297,6 +307,7 @@ class Edits{
       applyto.style.fontWeight = `${fontWeight.value}`;
       this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontWeight = `${fontWeight.value}`;
     }
+    this.saveToBrowser();
   }
   changeOtherFontFamily(x){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -313,6 +324,7 @@ class Edits{
         this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
       }
     }
+    this.saveToBrowser();
   }
   // Text Editing
 
@@ -343,6 +355,7 @@ class Edits{
         document.getElementById('titleText0').innerHTML = title.value;
       }
     }
+    this.saveToBrowser();
   }
 
   editStoryDescription(x){
@@ -350,6 +363,7 @@ class Edits{
   var description = document.getElementById(`${x}`);
   this.editor.metaData.description = description.innerHTML;
   descriptionIn.value = description.innerHTML;
+  this.saveToBrowser();
   }
 
   editStoryTitle(x){
@@ -357,9 +371,18 @@ class Edits{
   var title = document.getElementById(`${x}`);
   this.editor.metaData.title = title.innerHTML;
   titleIn.value = title.innerHTML;
+  this.saveToBrowser();
   }
    // Meta Data //
 
+  saveToBrowser(){
+    var dat = {
+      version : editor.version,
+      layers : editor.layers,
+      metaData : editor.metaData
+    };
+    window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+  }
 
 hexToRgb(hexColor) {
     // Remove the # symbol if present
