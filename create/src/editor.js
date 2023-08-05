@@ -26,6 +26,7 @@ class Editor{
             var data = await response.json();
             if (data) {
                 if (data.Result) {
+                    this.version = 100;
                     this.layers = {};
                     this.metaData = {};
                     this.metaData.title = "";
@@ -117,11 +118,51 @@ class Editor{
     createExistedLayers(){
         var jsonString = this.webstoryData;
         var jsObject = JSON.parse(jsonString);
-        this.layers = jsObject.layers;
-        this.metaData = jsObject.metaData;
-        this.updateStory();
+        var browserData = window.localStorage.getItem(`${editor.storyID}`);
+        browserData = JSON.parse(browserData);
+        if (browserData.version === jsObject.version) {
+          this.metaData = jsObject.metaData;
+          this.layers = jsObject.layers;
+          this.version = jsObject.version;
+          this.updateStory();
+        }else{
+          var alertCont = document.querySelector('.altertContainer');
+          alertCont.style.display = 'flex';
+          var bv = this.numberToVersion(browserData.version);
+          var fv = this.numberToVersion(jsObject.version);
+          document.querySelector('.altertDiv').innerHTML =
+          `<div class="title">
+            Continue With
+          </div>
+          <div class="describe">
+            We have two different versions of your webstory kindly select anyone to continue with.
+          </div>
+          <div class="options">
+            <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
+            <div class="option" id="fastreed" onclick="editor.continueWith('fastreed')">Fastreed(v${fv})</div>
+          </div>`;
+        }
     }
-
+    continueWith(x){
+      var jsonString = this.webstoryData;
+      var jsObject = JSON.parse(jsonString);
+      var browserData = window.localStorage.getItem(`${editor.storyID}`);
+      var alertCont = document.querySelector('.altertContainer');
+      browserData = JSON.parse(browserData);
+      if (x == 'browser') {
+        this.metaData = browserData.metaData;
+        this.layers = browserData.layers;
+        this.version = browserData.version;
+        alertCont.style.display = 'none';
+        this.updateStory();
+      }else{
+        this.metaData = jsObject.metaData;
+        this.layers = jsObject.layers;
+        this.version = jsObject.version;
+        alertCont.style.display = 'none';
+        this.updateStory();
+      }
+    }
     createNewLayer(){
         this.inBetweenLayersAdd();
         this.totalLayers += 1;
@@ -480,9 +521,11 @@ class Editor{
     }
 
     saveStory(){
+        editor.version += 1;
         var jsObject = {
-            "layers":editor.layers,
-            "metaData":editor.metaData
+            layers:editor.layers,
+            metaData:editor.metaData,
+            version: editor.version
         };
         var metadata = editor.metaData;
         var jsonData = JSON.stringify(jsObject);
@@ -511,6 +554,12 @@ class Editor{
                 if (data.Result) {
                     setTimeout(function(){
                         saving.innerHTML = 'Saved';
+                        var dat = {
+                          layers : editor.layers,
+                          metaData : editor.metaData,
+                          version : editor.version
+                        };
+                          window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                     }, 500);
                 }else{
                     setTimeout(function(){
@@ -525,8 +574,6 @@ class Editor{
         }
         saveData();
     }
-
-
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
         for (let  i= 0; i < this.totalLayers; i++) {
@@ -636,8 +683,6 @@ class Editor{
                 `;
                 layer.appendChild(contorlsElements);
                 layer.appendChild(videoElement);
-                // editor.playPauseMedia();
-                // editor.muteUnmute();
             }
 
             newLayer.appendChild(layersTop);
@@ -922,6 +967,19 @@ class Editor{
 
             }
 
+    }
+
+
+    numberToVersion(number) {
+      if (typeof number !== 'number' || isNaN(number) || number < 0) {
+        throw new Error('Input must be a non-negative number');
+      }
+
+      const major = Math.floor(number / 100);
+      const minor = Math.floor((number % 100) / 10);
+      const patch = number % 10;
+
+      return `${major}.${minor}.${patch}`;
     }
 
 }
