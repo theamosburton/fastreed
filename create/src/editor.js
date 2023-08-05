@@ -905,18 +905,18 @@ class Editor{
                 var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);
                 var overlayArea = this.layers['L'+ j].media.styles.overlayArea;
                 if (overlayArea == '100') {
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
 
                 }else if(overlayArea >= '80'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
 
                 }else if(overlayArea >= '60'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }else if(overlayArea >= '40'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }
                 else if(overlayArea >= '20'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
+                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }
             }
 

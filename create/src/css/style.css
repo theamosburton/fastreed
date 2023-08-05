@@ -2,8 +2,30 @@
     padding: 0;
     margin: 0;
 }
+html{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(180, 174, 174);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(89, 84, 84);
+}
 .editContainer{
     position: relative;
     margin: 0;
@@ -23,6 +45,7 @@
 .editContainer .rightSection{
     width: 30%;
     background-color: #1c1c22;
+    overflow: hidden;
 }
 .editContainer .editorSection{
     width: 45%;
@@ -204,6 +227,7 @@
 }
 .rightDiv{
     margin: 0;
+    padding: 0 10px ;
 }
 .editContainer .leftSection .uploadsDiv .buttons{
     margin-top: 10px;
@@ -486,7 +510,7 @@
 
 .rightDiv .selectedObject{
     display: flex;
-    margin: 10px 10px 0px 10px;
+    margin:10px;
     width: 100%;
     flex-direction: column;
 }
@@ -523,7 +547,7 @@
     width: 100%;
     color: rgb(194, 197, 201);
     flex-direction: column;
-    margin-top: 10px;
+    margin: 10px 0;
     border-radius: 10px;
 }
 .rightDiv .selectedObject .objectOptions .objectOptionsbody{
