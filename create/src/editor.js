@@ -143,7 +143,7 @@ class Editor{
         var fv = this.numberToVersion(jsObject.version);
         document.querySelector('.altertDiv').innerHTML =
         `<div class="title">
-          Continue With
+          Choose Story Version ! 
         </div>
         <div class="describe">
           We have two different versions of your webstory kindly select the <b> latest one</b> to continue.
