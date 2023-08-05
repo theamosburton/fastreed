@@ -743,13 +743,13 @@ html{
         z-index: 999;
     }
     .altertDiv .option{
-      font-size: 10px;
+      font-size: 12px;
     }
     .altertDiv .title{
-      font-size: 15px;
+      font-size: 17px;
     }
     .altertDiv .describe{
-      font-size: 9px;
+      font-size: 10px;
     }
 }
 @media (max-width: 400px){
