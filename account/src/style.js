@@ -122,7 +122,7 @@ function showImage(path, visibility, ID, ext, imgID, time, size, status){
       if (status ==  'VFD') {
         statusInfo = `<div class="details uploadStatus">
           <span class="property">Status:</span>
-          <span class="value" style="color: green;"> Verified By Admin <i class="checkbox fa-regular fa-circle-check"></i></span>
+          <span class="value" style="color: green;"> Verified  <i class="checkbox fa-regular fa-circle-check"></i></span>
         </div>`;
       }else if (status ==  'UFD') {
         statusInfo = `<div class="details uploadStatus">
@@ -251,7 +251,7 @@ function showVideo(path, visibility, ID, ext, vidID, time, size, status){
     if (status ==  'VFD') {
       statusInfo = `<div class="details uploadStatus">
         <span class="property">Status:</span>
-        <span class="value" style="color: green;"> Verified By Admin <i class="checkbox fa-regular fa-circle-check"></i></span>
+        <span class="value" style="color: green;"> Verified  <i class="checkbox fa-regular fa-circle-check"></i></span>
       </div>`;
     }else if (status ==  'UFD') {
       statusInfo = `<div class="details uploadStatus">
