@@ -471,6 +471,7 @@
     font-weight: bold;
     margin-left: 10px;
     color: rgb(194, 197, 201);
+    margin-top: 10px;
 }
 .rightHead .top {
     display: flex;
