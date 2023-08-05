@@ -377,7 +377,7 @@ class Edits{
 
   saveToBrowser(){
     var dat = {
-      version : editor.version,
+      version : editor.version+1,
       layers : editor.layers,
       metaData : editor.metaData
     };

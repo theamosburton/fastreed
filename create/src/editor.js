@@ -102,6 +102,12 @@ class Editor{
                         this.presentLayerDiv.style.display = 'flex';
                         document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
                         this.createStylesheet();
+                        var dat = {
+                          version : this.version+1,
+                          layers : this.layers,
+                          metaData : this.metaData
+                        };
+                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                     }else{
                         this.createExistedLayers();
                     }
@@ -120,49 +126,57 @@ class Editor{
     var jsObject = JSON.parse(jsonString);
     var browserData = window.localStorage.getItem(`${editor.storyID}`);
     browserData = JSON.parse(browserData);
-    if (browserData.version == jsObject.version) {
+    if (browserData) {
+      if (browserData.version == jsObject.version) {
+        this.metaData = jsObject.metaData;
+        this.layers = jsObject.layers;
+        this.version = jsObject.version;
+        this.updateStory();
+      }else{
+        var alertCont = document.querySelector('.altertContainer');
+        alertCont.style.display = 'flex';
+        var bv = this.numberToVersion(browserData.version);
+        var fv = this.numberToVersion(jsObject.version);
+        document.querySelector('.altertDiv').innerHTML =
+        `<div class="title">
+          Continue With
+        </div>
+        <div class="describe">
+          We have two different versions of your webstory kindly select anyone to continue with.
+        </div>
+        <div class="options">
+          <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
+          <div class="option" id="fastreed" onclick="editor.continueWith('fastreed')">Fastreed(v${fv})</div>
+        </div>`;
+      }
+    }else{
       this.metaData = jsObject.metaData;
       this.layers = jsObject.layers;
       this.version = jsObject.version;
       this.updateStory();
-    }else{
+    }
+
+  }
+    continueWith(x){
+      var jsonString = this.webstoryData;
+      var jsObject = JSON.parse(jsonString);
+      var browserData = window.localStorage.getItem(`${editor.storyID}`);
       var alertCont = document.querySelector('.altertContainer');
-      alertCont.style.display = 'flex';
-      var bv = this.numberToVersion(browserData.version);
-      var fv = this.numberToVersion(jsObject.version);
-      document.querySelector('.altertDiv').innerHTML =
-      `<div class="title">
-        Continue With
-      </div>
-      <div class="describe">
-        We have two different versions of your webstory kindly select anyone to continue with.
-      </div>
-      <div class="options">
-        <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
-        <div class="option" id="fastreed" onclick="editor.continueWith('fastreed')">Fastreed(v${fv})</div>
-      </div>`;
+      browserData = JSON.parse(browserData);
+      if (x == 'browser') {
+        this.metaData = browserData.metaData;
+        this.layers = browserData.layers;
+        this.version = browserData.version;
+        alertCont.style.display = 'none';
+        this.updateStory();
+      }else{
+        this.metaData = jsObject.metaData;
+        this.layers = jsObject.layers;
+        this.version = jsObject.version;
+        alertCont.style.display = 'none';
+        this.updateStory();
+      }
     }
-  }
-  continueWith(x){
-    var jsonString = this.webstoryData;
-    var jsObject = JSON.parse(jsonString);
-    var browserData = window.localStorage.getItem(`${editor.storyID}`);
-    var alertCont = document.querySelector('.altertContainer');
-    browserData = JSON.parse(browserData);
-    if (x == 'browser') {
-      this.metaData = browserData.metaData;
-      this.layers = browserData.layers;
-      this.version = browserData.version;
-      alertCont.style.display = 'none';
-      this.updateStory();
-    }else{
-      this.metaData = jsObject.metaData;
-      this.layers = jsObject.layers;
-      this.version = jsObject.version;
-      alertCont.style.display = 'none';
-      this.updateStory();
-    }
-  }
     createNewLayer(){
         this.inBetweenLayersAdd();
         this.totalLayers += 1;
