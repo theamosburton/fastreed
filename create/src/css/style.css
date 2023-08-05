@@ -630,7 +630,6 @@ html{
   background-color: rgba(0, 0, 0, 0.352);
   display: none;
   justify-content: center;
-  align-items: center;
 }
 .altertContainer .altertDiv{
   background-color: white;
@@ -638,6 +637,9 @@ html{
   padding: 20px;
   display: flex;
   flex-direction: column;
+  margin: 20px;
+  height: min-content;
+  overflow: auto;
 }
 .altertDiv .options{
   display: flex;
@@ -739,6 +741,15 @@ html{
         width: 100%;
         max-width: 350px;
         z-index: 999;
+    }
+    .altertDiv .option{
+      font-size: 10px;
+    }
+    .altertDiv .title{
+      font-size: 15px;
+    }
+    .altertDiv .describe{
+      font-size: 9px;
     }
 }
 @media (max-width: 400px){

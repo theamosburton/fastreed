@@ -146,7 +146,7 @@ class Editor{
           Continue With
         </div>
         <div class="describe">
-          We have two different versions of your webstory kindly select anyone to continue with.
+          We have two different versions of your webstory kindly select the <b> latest one</b> to continue.
         </div>
         <div class="options">
           <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
