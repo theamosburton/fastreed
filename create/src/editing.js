@@ -1,6 +1,7 @@
 class Edits{
   constructor(){
       this.editor = editor;
+      this.version;
   }
 
   initializeVars(){
@@ -114,6 +115,9 @@ class Edits{
           }
         }
       }
+      if (this.version+1 == editor.version) {
+        this.version += 1;
+      }
       this.saveToBrowser();
     }
   deleteMedia(type){
@@ -148,6 +152,9 @@ class Edits{
       this.editor.presentLayerDiv.appendChild(layersTop);
       media.remove();
       this.editor.layers['L' + this.editor.presentLayerIndex].media = {};
+      if (this.version+1 == editor.version) {
+        this.version += 1;
+      }
       this.saveToBrowser();
   }
   modifyMedia(type, blobUrl, url){
@@ -163,6 +170,9 @@ class Edits{
       this.editor.layers['L' + this.editor.presentLayerIndex].media.type = type;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = blobUrl;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.url = url;
+      if (this.version+1 == editor.version) {
+        this.version += 1;
+      }
       this.saveToBrowser();
   }
   updateMedia(type){
@@ -203,6 +213,9 @@ class Edits{
     }else if(overlayArea >= '20'){
       document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
     }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
     this.saveToBrowser();
 
   }
@@ -214,6 +227,9 @@ class Edits{
       var mediaContent = document.getElementById(`mediaContent${this.editor.presentLayerIndex}`);
       this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.mediaFit = mediaFit.value;
       mediaContent.style.objectFit = `${mediaFit.value}`;
+    }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
     }
     this.saveToBrowser();
   }
@@ -236,7 +252,9 @@ class Edits{
         this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
       }
     }
-    this.saveToBrowser();
+    if (this.version+1 == editor.version) {
+  this.version += 1;
+}
   }
   changeFontFamily(x){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -251,13 +269,19 @@ class Edits{
         var fontFamily = document.getElementById(`fontFamily${this.editor.presentLayerIndex}`);
         applyto.style.fontFamily = `${fontFamily.value}`;
         this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
+      }
+    }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
     }
     this.saveToBrowser();
-  }
   }
   editTitle(x){
     var text = document.getElementById(`${x}`);
     this.editor.layers['L' + this.editor.presentLayerIndex].title.text = `${text.innerHTML}`;
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
     this.saveToBrowser();
   }
   changeFontWeight(){
@@ -269,7 +293,10 @@ class Edits{
       applyto.style.fontWeight = `${fontWeight.value}`;
       this.editor.layers['L' + this.editor.presentLayerIndex].title.fontWeight = `${fontWeight.value}`;
     }
-   this.saveToBrowser();
+   if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
+    this.saveToBrowser();
   }
   // Title editing
 
@@ -291,11 +318,17 @@ class Edits{
         this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
       }
     }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
     this.saveToBrowser();
   }
   editText(x){
     var text = document.getElementById(`${x}`);
     this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = `${text.innerHTML}`;
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
     this.saveToBrowser();
   }
   changeOtherFontWeight(){
@@ -306,6 +339,9 @@ class Edits{
       var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
       applyto.style.fontWeight = `${fontWeight.value}`;
       this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontWeight = `${fontWeight.value}`;
+    }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
     }
     this.saveToBrowser();
   }
@@ -323,6 +359,9 @@ class Edits{
         applyto.style.fontFamily = `${fontFamily.value}`;
         this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
       }
+    }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
     }
     this.saveToBrowser();
   }
@@ -355,29 +394,38 @@ class Edits{
         document.getElementById('titleText0').innerHTML = title.value;
       }
     }
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
     this.saveToBrowser();
   }
 
   editStoryDescription(x){
-  var descriptionIn = document.getElementById("storyDescription");
-  var description = document.getElementById(`${x}`);
-  this.editor.metaData.description = description.innerHTML;
-  descriptionIn.value = description.innerHTML;
-  this.saveToBrowser();
+    var descriptionIn = document.getElementById("storyDescription");
+    var description = document.getElementById(`${x}`);
+    this.editor.metaData.description = description.innerHTML;
+    descriptionIn.value = description.innerHTML;
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
+    this.saveToBrowser();
   }
 
   editStoryTitle(x){
-  var titleIn = document.getElementById("storyTitle");
-  var title = document.getElementById(`${x}`);
-  this.editor.metaData.title = title.innerHTML;
-  titleIn.value = title.innerHTML;
-  this.saveToBrowser();
+    var titleIn = document.getElementById("storyTitle");
+    var title = document.getElementById(`${x}`);
+    this.editor.metaData.title = title.innerHTML;
+    titleIn.value = title.innerHTML;
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
+    this.saveToBrowser();
   }
    // Meta Data //
 
   saveToBrowser(){
     var dat = {
-      version : editor.version+1,
+      version : editor.version,
       layers : editor.layers,
       metaData : editor.metaData
     };

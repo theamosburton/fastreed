@@ -35,6 +35,9 @@ class Editor{
                     this.metaData.url = "";
                     this.webstoryData = data.message;
                     if (this.webstoryData == '{}') {
+                      if (window.localStorage.getItem(`${editor.storyID}`)) {
+                        this.continueWith('browser');
+                      }else{
                         this.presentLayerIndex = 0;
                         this.presentLayer  = this.presentLayerIndex + 1 ;
                         this.totalLayers = 1;
@@ -108,6 +111,7 @@ class Editor{
                           metaData : this.metaData
                         };
                         window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                      }
                     }else{
                         this.createExistedLayers();
                     }
@@ -948,6 +952,7 @@ class Editor{
 
     applyStyleSheet(){
         for (let j = 0; j < this.layers.length; j++) {
+
             document.getElementById(`titleText${j}`).style.fontSize = this.layers['L'+ j].title.fontSize;
             document.getElementById(`titleText${j}`).style.fontFamily = this.layers['L'+ j].title.fontFamily;
             document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
@@ -978,9 +983,7 @@ class Editor{
                     document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
                 }
             }
-
-            }
-
+        }
     }
 
 
