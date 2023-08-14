@@ -446,4 +446,14 @@ hexToRgb(hexColor) {
   }
 }
 
+
+
 let edits = new Edits();
+
+window.addEventListener('beforeunload', function (e) {
+    // Your action here
+    // For example, you could show a confirmation dialog
+    alert('Are you sure you want to leave?');
+    // (e || window.event).returnValue = confirmationMessage;
+    // return confirmationMessage;
+});
