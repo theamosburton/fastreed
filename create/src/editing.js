@@ -450,10 +450,45 @@ hexToRgb(hexColor) {
 
 let edits = new Edits();
 
-window.addEventListener('beforeunload', function (e) {
-    // Your action here
-    // For example, you could show a confirmation dialog
-    alert('Are you sure you want to leave?');
-    // (e || window.event).returnValue = confirmationMessage;
-    // return confirmationMessage;
+// custom.js
+// Use your preferred method to detect when the user is leaving the page
+window.addEventListener('beforeunload', function (event) {
+    event.preventDefault();
+
+    // Create a Bootstrap modal dialog
+    var modalHtml = `
+        <div class="modal fade" id="customModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Leaving</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Your changes may not be saved. Do you want to save your work?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+                        <a href="https://example.com" class="btn btn-primary">Don't Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Inject the modal HTML into the DOM
+    var modalContainer = document.createElement('div');
+    modalContainer.innerHTML = modalHtml;
+    document.body.appendChild(modalContainer);
+
+    // Show the modal
+    var modal = new bootstrap.Modal(document.getElementById('customModal'));
+    modal.show();
+
+    // Handle the modal close event
+    modal._dialog.addEventListener('hidden.bs.modal', function () {
+        // Unbind the event and proceed with navigation
+        window.removeEventListener('beforeunload', beforeUnloadHandler);
+        window.location.href = "https://example.com"; // Replace with your desired URL
+    });
 });
