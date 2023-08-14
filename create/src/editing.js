@@ -430,6 +430,10 @@ class Edits{
       metaData : editor.metaData
     };
     window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+    setTimeout(function(){
+      editor.saveStory();
+      console.log('Story Updated');
+    }, 15000);
   }
 
 hexToRgb(hexColor) {

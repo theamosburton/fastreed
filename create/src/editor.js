@@ -143,7 +143,7 @@ class Editor{
         var fv = this.numberToVersion(jsObject.version);
         document.querySelector('.altertDiv').innerHTML =
         `<div class="title">
-          Choose Story Version ! 
+          Choose Story Version !
         </div>
         <div class="describe">
           We have two different versions of your webstory kindly select the <b> latest one</b> to continue.
@@ -951,7 +951,7 @@ class Editor{
     }
 
     applyStyleSheet(){
-        for (let j = 0; j < this.layers.length; j++) {
+        for (let j = 0; j < Object.keys(this.layers).length; j++) {
 
             document.getElementById(`titleText${j}`).style.fontSize = this.layers['L'+ j].title.fontSize;
             document.getElementById(`titleText${j}`).style.fontFamily = this.layers['L'+ j].title.fontFamily;
@@ -960,7 +960,6 @@ class Editor{
             document.getElementById(`otherText${j}`).style.fontSize = this.layers['L'+ j].otherText.fontSize;
             document.getElementById(`otherText${j}`).style.fontFamily = this.layers['L'+ j].otherText.fontFamily;
             document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
-
 
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
