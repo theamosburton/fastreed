@@ -137,7 +137,7 @@ class Webstories{
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'Admin') {
             if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
-                if (!isset($data['username']) || empty($data['username'])) {
+                if (isset($data['username']) && !empty($data['username'])) {
                     if ($UID = $this->userData->getOtherData('username', $data['username'])) {
                         if (!isset($data['data']) || empty($data['data'])) {
                             $storyData = $data['data'];
