@@ -138,7 +138,7 @@ class Webstories{
         if ($data['whois'] == 'Admin') {
             if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
                 if (isset($data['username']) && !empty($data['username'])) {
-                    if ($UID = $this->userData->getOtherData('username', $data['username'])) {
+                    if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
                         if (isset($data['data']) && !empty($data['data'])) {
                             $storyData = $data['data'];
                             $storyID = $data['storyID'];
