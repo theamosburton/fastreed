@@ -559,7 +559,8 @@ class Editor{
             'whois': `${self.whoIs}`,
             'storyID': `${self.storyID}`,
             'data': `${jsonData}`,
-            'metaData': `${metadata}`
+            'metaData': `${metadata}`,
+            'username': `${currentUsername}`
             };
             const response = await fetch(url, {
                 method: 'post',
