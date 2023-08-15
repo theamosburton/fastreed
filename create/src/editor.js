@@ -1,21 +1,23 @@
 class Editor{
     constructor(){
         var params = new URLSearchParams(window.location.search);
-        this.username = '';
+            this.username = '';
         if (params.get('username')) {
-            this.whoIs = 'Admin';
             this.username = params.get('username');
+            this.whoIs = 'Admin';
         }else{
             this.whoIs = 'User';
         }
         this.storyID = params.get('ID');
         this.editorId = document.getElementById('editTab');
+
         const fetchWebstoryData = async () =>{
             const url = '/.ht/API/webstories.php';
             var encyDat = {
             'purpose' : 'fetch',
             'whois': `${this.whoIs}`,
-            'storyID': `${this.storyID}`
+            'storyID': `${this.storyID}`,
+            'username': `${currentUsername}`
             };
             const response = await fetch(url, {
                 method: 'post',
