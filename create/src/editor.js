@@ -1,7 +1,7 @@
 class Editor{
     constructor(){
         var params = new URLSearchParams(window.location.search);
-        var this.username = '';
+        this.username = '';
         if (params.get('username')) {
             this.whoIs = 'Admin';
             this.username = params.get('username');
