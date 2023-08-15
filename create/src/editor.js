@@ -1,10 +1,10 @@
 class Editor{
     constructor(){
         var params = new URLSearchParams(window.location.search);
-        var username = '';
+        var this.username = '';
         if (params.get('username')) {
             this.whoIs = 'Admin';
-            username = params.get('username');
+            this.username = params.get('username');
         }else{
             this.whoIs = 'User';
         }
@@ -15,8 +15,7 @@ class Editor{
             var encyDat = {
             'purpose' : 'fetch',
             'whois': `${this.whoIs}`,
-            'storyID': `${this.storyID}`,
-            'username': `${username}`
+            'storyID': `${this.storyID}`
             };
             const response = await fetch(url, {
                 method: 'post',
@@ -561,7 +560,7 @@ class Editor{
             'storyID': `${self.storyID}`,
             'data': `${jsonData}`,
             'metaData': `${metadata}`,
-            'username': `${currentUsername}`
+            'username': `${this.username}`
             };
             const response = await fetch(url, {
                 method: 'post',
