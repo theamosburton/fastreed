@@ -1,0 +1,121 @@
+
+<?php
+$showCreation = false;
+if($canCreate == 'NOR'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Request to become creator</span>
+    </div>
+    HTML;
+}elseif($canCreate == 'REQ'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
+        <span id="requested" class="ml-3" >You have requested for creator access</span>
+    </div>
+    HTML;
+}elseif($canCreate == 'REJ'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
+        <div class="ml-3 col-12 d-inline">
+            <span id="rejected" class="font-weight-bold" >Creator access rejected by admin</span>
+        </div>
+        <div class="ml-3 col-12 d-inline mt-1 ">
+            <span id="reqCreation" class="reqCreationButton ml-6" onclick="requestCreation()">Request Again</span>
+        </div>
+    </div>
+    HTML;
+}elseif($canCreate == 'ACC'){
+    $showCreation = true;
+}
+?>
+
+<div class="contentTopics resCreation row webstoriesDiv">
+    <div class="mtitle mb-3">
+
+        <?php
+        if($showCreation){
+            echo <<<HTML
+            <div>
+                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory()">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                </span>
+            </div>
+            HTML;
+        }else{
+            echo <<<HTML
+            <div>
+                <span>Web Stories</span>
+            </div>
+            HTML;
+        }
+        ?>
+    </div>
+
+
+
+
+
+        <?php
+    // Title = stories[i][8];
+    // data = stories[i][7]
+    // access = stories[i][6]
+    // status = stories[i][5]
+    // storyID = stories[i][1]
+    // personID = stories[i][0]
+
+    $webstories = array();
+
+    $stories = $this->getStoriesData->getAllData($this->userData->getSelfDetails()['UID']);
+    $length = count($stories);
+    for($i=0; $i<$length; $i++){
+        $webstoryData = json_decode($stories[$i][7], true);
+
+        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url'])){
+            $setUrl = '/assets/img/nomedia.png';
+        }else{
+            $setUrl = $webstoryData['layers']['L0']['media']['url'];
+        }
+        if(!empty($webstoryData['metaData']['title'])){
+            $title = $webstoryData['metaData']['title'];
+        }else{
+            $title = $stories[$i][8];
+        }
+        $webstories[$i] = '
+        <div class="webstory" id="webstory'.$i.'">
+            <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="title">' . $title . '</div>
+                <div class="options">
+                    <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\')"> <i class="fa fa-pen"></i></div>
+                    <div class="publish"> <i class="fa fa-paper-plane"></i></div>
+                    <div class="delete" onclick="deleteStory(\'' . $stories[$i][1] . '\', \'' . $i . '\')"><i class="fa fa-trash"></i> </div>
+                    <div class="storyOptions"> <i class="fa fa-ellipsis-v"></i></div>
+
+                </div>
+            </div>
+        </div>';
+    }
+
+    $webstories = array_reverse($webstories);
+    if(count($webstories) <= 0){
+        echo <<<HTML
+        <div class="noUpload">
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>Nothing to display</p></div> </div>
+        HTML;
+    }else{
+        echo <<<HTML
+        <div class="webstories">
+        HTML;
+        for($j=0; $j<count($webstories); $j++){
+            echo $webstories[$j];
+        }
+        echo <<<HTML
+        </div>
+        HTML;
+    }
+
+    ?>
+
+</div>

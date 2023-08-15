@@ -11,5 +11,105 @@ if($canCreate == 'REQ'){
         </div>
     </div>
 HTML;
+}elseif($canCreate == 'REJ' || $canCreate == 'NOR'){
+  echo <<<HTML
+  <div class="contentTopics resCreation row">
+      <div class="title col-12 mb-3">Allow to write</div>
+      <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
+          <span id="requested" class="reqCreationButton ACCbutton" onclick="responseCreation('ACC')">True</span>
+      </div>
+      <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
+          <span id="rejected" class="reqCreationButton REJbutton" onclick="responseCreation('REJ')">False</span>
+      </div>
+  </div>
+HTML;
 }
 ?>
+
+<div class="contentTopics resCreation row webstoriesDiv">
+    <div class="mtitle mb-3">
+
+        <?php
+        if($canCreate == 'ACC'){
+            echo <<<HTML
+            <div>
+                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory('admin')">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                </span>
+            </div>
+            HTML;
+        }else{
+            echo <<<HTML
+            <div>
+                <span>Web Stories</span>
+            </div>
+            HTML;
+        }
+        ?>
+    </div>
+
+
+
+
+
+        <?php
+    // Title = stories[i][8];
+    // data = stories[i][7]
+    // access = stories[i][6]
+    // status = stories[i][5]
+    // storyID = stories[i][1]
+    // personID = stories[i][0]
+
+    $webstories = array();
+
+    $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
+    $length = count($stories);
+    for($i=0; $i<$length; $i++){
+        $webstoryData = json_decode($stories[$i][7], true);
+
+        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url'])){
+            $setUrl = '/assets/img/nomedia.png';
+        }else{
+            $setUrl = $webstoryData['layers']['L0']['media']['url'];
+        }
+        if(!empty($webstoryData['metaData']['title'])){
+            $title = $webstoryData['metaData']['title'];
+        }else{
+            $title = $stories[$i][8];
+        }
+        $webstories[$i] = '
+        <div class="webstory" id="webstory'.$i.'">
+            <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="title">' . $title . '</div>
+                <div class="options">
+                    <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\', \'' . $this->otherUsername . '\')"> <i class="fa fa-pen"></i></div>
+                    <div class="publish"> <i class="fa fa-paper-plane"></i></div>
+                    <div class="delete" onclick="deleteStory(\'' . $stories[$i][1] . '\', \'' . $i . '\')"><i class="fa fa-trash"></i> </div>
+                    <div class="storyOptions"> <i class="fa fa-ellipsis-v"></i></div>
+
+                </div>
+            </div>
+        </div>';
+    }
+
+    $webstories = array_reverse($webstories);
+    if(count($webstories) <= 0){
+        echo <<<HTML
+        <div class="noUpload">
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>Nothing to display</p></div> </div>
+        HTML;
+    }else{
+        echo <<<HTML
+        <div class="webstories">
+        HTML;
+        for($j=0; $j<count($webstories); $j++){
+            echo $webstories[$j];
+        }
+        echo <<<HTML
+        </div>
+        HTML;
+    }
+
+    ?>
+
+</div>

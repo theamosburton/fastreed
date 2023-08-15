@@ -23,7 +23,7 @@ class uploadMedia{
     }
   }
 
-  //*******Image Upload************/ 
+  //*******Image Upload************/
   uploadImages(fileInput){
     var self = this;
     if (self.uploadingBar.classList.contains('warning')) {
@@ -49,7 +49,7 @@ class uploadMedia{
       var mimeString = binaryFile.type;
       var fileExtension = mimeString.substring(mimeString.lastIndexOf('/') + 1);
       formData.append('media', binaryFile, 'uploadFile.'+fileExtension);
-  
+
       // Append other data to the FormData object
       formData.append('ePID', ePID);
       formData.append('ext', fileExtension);
@@ -90,13 +90,13 @@ class uploadMedia{
             console.log('Upload failed. Error: ' + xhr.status);
         }
       });
-  
+
       xhr.send(formData);
   }
-  //*******Image Upload************/ 
+  //*******Image Upload************/
 
 
-  //*******Video Upload************/ 
+  //*******Video Upload************/
   uploadVideo(fileInput) {
     var self = this;
     if (self.uploadingBar.classList.contains('warning')) {
@@ -158,24 +158,24 @@ class uploadMedia{
 
   }
 
-  
-  //*******Video Upload************/ 
+
+  //*******Video Upload************/
 
   //*******Photo/Video Upload************/
   dataURItoBlob(dataURI) {
     // Convert base64 to raw binary data held in a string
     var byteString = atob(dataURI.split(',')[1]);
-  
+
     // Separate the MIME type from the base64 data
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  
+
     // Write the bytes of the string to an ArrayBuffer
     var ab = new ArrayBuffer(byteString.length);
     var ia = new Uint8Array(ab);
     for (var i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-  
+
     // Create a Blob object from the ArrayBuffer
     return new Blob([ab], { type: mimeString });
   }
@@ -198,8 +198,21 @@ class fetchMedia{
     refresh.classList.add('infinite-rotation');
     var self = this;
     async function getUploadsData(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      if (username !== null && username.trim() !== '') {
+        if (whoIs == 'Admin') {
+          var encyDat = {
+            "whois": `${whoIs}`,
+            "username" : `${currentUsername}`
+          };
+        }else{
+          var encyDat = {};
+        }
+      }else {
+        var encyDat = {};
+      }
       const logUrl = '/.ht/API/getUploads.php';
-      var encyDat = {};
       const response = await fetch(logUrl, {
           method: 'post',
           headers: {
@@ -222,7 +235,7 @@ class fetchMedia{
           var refreshElement = document.getElementById('rotateRefresh');
           refreshElement.classList.remove('infinite-rotation');
         }
-        
+
       }else{
 
       }
@@ -266,7 +279,7 @@ createVideoElement(videoURL, ulink, u) {
 async fetchAndDisplayMedia(u) {
   var ulink = this.uploads['up' + u].link;
   var type = this.uploads['up' + u].type;
-  
+
   if (type == 'image') {
     const response = await fetch(ulink);
     const blob = await response.blob();

@@ -38,7 +38,7 @@ class createContent{
          $this->uploadData = new getUploadData();
         if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
             new userEditor();
-        }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='admin') {
+        }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='Admin') {
             new userEditor();
         }else if(!isset($_GET['username']) || empty($_GET['username'])){
             new userEditor();
@@ -162,7 +162,7 @@ class userEditor extends createContent{
             $ordinal = $this->BASIC_FUNC->convertToOrdinal($number);
 
             $title = 'My '.$ordinal. ' webstory';
-            
+
             $personID = $_SESSION['LOGGED_USER'];
             $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
             $firstEdit = time();
@@ -177,7 +177,7 @@ class userEditor extends createContent{
             }else{
                 header('Location:/account/');
             }
-        } 
+        }
     }
 
 
@@ -188,10 +188,10 @@ class userEditor extends createContent{
         <html lang="en">
         <head>
         HTML;
-        echo  
-        '<script> 
+        echo
+        '<script>
             var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
-            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
+            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'";
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
             var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
          </script>';
@@ -209,10 +209,6 @@ class userEditor extends createContent{
     }
 }
 
-
-
-
-
 class adminEditor extends createContent{
     function __construct(){
 
@@ -229,15 +225,17 @@ class adminEditor extends createContent{
          $this->uploadData = new getUploadData();
         // $this->const4Inherited();
         if (isset($_GET['type']) && !empty($_GET['type'])) {
-            if ($_GET['type'] != 'webstory') {
-                $this->createWebstory();
-            }else if (!isset($_GET['ID']) || empty($_GET['ID'])) {
-                $this->createWebstory();
-            }else if($this->checkID($_GET['ID'], 'user', 'stories')){
+          if (isset($_GET['ID']) && !empty($_GET['ID'])) {
+            if($this->checkID($_GET['ID'], 'admin', 'stories')){
                 $this->editWebstory();
             }else{
                 $this->createWebstory();
+                // echo "string";
             }
+          }else{
+            $this->createWebstory();
+            // echo "string2";
+          }
         }
         $this->closeConnection();
         $this->userData->closeConnection();
@@ -245,26 +243,39 @@ class adminEditor extends createContent{
         $this->BASIC_FUNC->closeConnection();
         $this->captureVisit->closeConnection();
     }
+    protected function checkID($ID, $who, $type){
+        $return = false;
+        $dID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
+        $sql = "SELECT * FROM stories WHERE personID = '$dID' and storyID =  '$ID'";
+        $result = mysqli_query($this->DB_CONN, $sql);
+        if ($result) {
+            if (mysqli_num_rows($result)) {
+                $return = true;
+            }
+        }
+
+        return $return;
+    }
     public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
+        if ($this->DB_CONN) {
+            mysqli_close($this->DB_CONN);
+            $this->DB_CONN = null; // Set the connection property to null after closing
         }
     }
     private function createWebstory(){
-        if (!$this->checkCanCreate('user')) {
+        if (!$this->checkCanCreate('admin')) {
             header('Location:/account/?message=cannot create stories');
         }else{
-            if ($this->checkStories('user')) {
-                $number = $this->checkStories('user')+1;
+            if ($this->checkStories('admin')) {
+                $number = $this->checkStories('admin')+1;
             }else{
                 $number = 1;
             }
             $ordinal = $this->BASIC_FUNC->convertToOrdinal($number);
 
             $title = 'My '.$ordinal. ' webstory';
-            
-            $personID = $_SESSION['LOGGED_USER'];
+
+            $personID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
             $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
             $firstEdit = time();
             $tdate = date('Y-m-d');
@@ -274,26 +285,24 @@ class adminEditor extends createContent{
             $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
             $result = mysqli_query($this->DB_CONN, $sql);
             if ($result) {
-                header("Location:/create/?type=webstory&ID=".$storyID);
+                header("Location: /create/?editor=Admin&type=webstory&username=" . $_GET['username'] . "&ID=" . $storyID);
             }else{
                 header('Location:/account/');
             }
-        } 
+        }
     }
-
-
-
     private function editWebstory(){
+      $ePID =  $this->AUTH->encrypt($this->userData->getOtherData('username', $_GET['username'])['UID']);
         echo <<<HTML
         <!DOCTYPE html>
         <html lang="en">
         <head>
         HTML;
-        echo  
-        '<script> 
-            var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
-            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
-            var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
+        echo
+        '<script>
+            var ePID = "'.$ePID.'";
+            var currentEmail = "'.$this->userData->getOtherData('username', $_GET['username'])['email'].'";
+            var currentUsername = "'.$this->userData->getOtherData('username', $_GET['username'])['username'].'";
             var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
          </script>';
 

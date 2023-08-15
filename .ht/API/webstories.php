@@ -48,19 +48,19 @@ class Webstories{
                 if (!isset($data['username']) || empty($data['username'])) {
                     showMessage(false, 'Username needed');
                 }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-                    $storyID = $data['storyID'];
-                    $sql = "SELECT FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
-                    $result = mysqli_query($this->DB, $sql);
-                    if ($result) {
-                        if ( $row = mysqli_fetch_assoc($result)) {
-                            $storyData = $row['storyData'];
-                            showMessage(true, $storyData);
-                        }else{
-                            showMessage(false, 'No story with this id');
-                        }
-                    }else{
-                        showMessage(false, 'Can not find story');
-                    }
+                  $storyID = $data['storyID'];
+                  $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+                  $result = mysqli_query($this->DB, $sql);
+                  if ($result) {
+                      if ( $row = mysqli_fetch_assoc($result)) {
+                          $storyData = $row['storyData'];
+                          showMessage(true, $storyData);
+                      }else{
+                          showMessage(false, 'No story with this id');
+                      }
+                  }else{
+                      showMessage(false, 'Can not find story');
+                  }
                 }else{
                     showMessage(false, 'Incorrect Username');
                 }
@@ -152,7 +152,7 @@ class Webstories{
                         }else{
                             showMessage(false, 'No updated data');
                         }
-                        
+
                     }else{
                         showMessage(false, 'Incorrect Username');
                     }
@@ -194,11 +194,11 @@ class Webstories{
                                 showMessage(false, 'Can not Edit');
                             }
                         }
-                        
+
                     }else{
                         showMessage(false, 'No updated metadata');
                     }
-                    
+
                 }else{
                     showMessage(false, 'No updated data');
                 }
@@ -217,6 +217,6 @@ class Webstories{
             $return = true;
         }
         return $return;
-    } 
+    }
 }
 ?>

@@ -2,7 +2,7 @@ class Editor{
     constructor(){
         var params = new URLSearchParams(window.location.search);
         if (params.get('username')) {
-            this.whoIs = whoIs;
+            this.whoIs = 'Admin';
         }else{
             this.whoIs = 'User';
         }
@@ -14,7 +14,8 @@ class Editor{
             var encyDat = {
             'purpose' : 'fetch',
             'whois': `${this.whoIs}`,
-            'storyID': `${this.storyID}`
+            'storyID': `${this.storyID}`,
+            'username': `${currentUsername}`
             };
             const response = await fetch(url, {
                 method: 'post',

@@ -16,8 +16,19 @@ class respondUploads{
 
 
     private function responseUploads(){
+      $data = json_decode(file_get_contents('php://input'), true);
+      if ($data['whois'] == 'Admin') {
+        if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+          $id = $this->userData->getOtherData('username', $data['username'])['UID'];
+          $username = $data['username'];
+        }else{
+          $id = $this->userData->getSelfDetails()['UID'];
+          $username = $this->userData->getSelfDetails()['username'];
+        }
+      }else{
         $id = $this->userData->getSelfDetails()['UID'];
         $username = $this->userData->getSelfDetails()['username'];
+      }
         $data = $this->uploadData->getAllData($id);
         $data = array_reverse($data);
         $length = count($data);
@@ -42,12 +53,16 @@ class respondUploads{
             ];
         }
 
-        if (isset($_SESSION['LOGGED_USER'])) { 
+        if (isset($_SESSION['LOGGED_USER'])) {
             if ($_SESSION['LOGGED_USER'] == $id) {
                 $dataDecode = json_encode($uploads);
                 echo "$dataDecode";
+            }elseif ($_SESSION['LOGGED_USER'] == $this->userData->getAdminID()) {
+              $dataDecode = json_encode($uploads);
+              echo "$dataDecode";
+            }else{
+              echo '';
             }
-           
         }
     }
 }

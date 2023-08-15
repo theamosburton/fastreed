@@ -719,7 +719,7 @@ function responseCreation(val){
 }
 
 
-function InitializeWebstory(){
+function InitializeWebstory(x){
   var reqCreation = document.querySelector('#reqCreation');
   reqCreation.querySelector('i').style.display = 'none';
   reqCreation.innerHTML = 'Initializing...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
@@ -742,7 +742,11 @@ function InitializeWebstory(){
     if (data) {
       if (data.Result) {
         reqCreation.innerHTML='Creating...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
-        window.location.href = "/create/?type=webstory";
+        if (x == 'admin') {
+          window.location.href = `/create/?type=webstory&editor=Admin&username=${currentUsername}`;
+        }else{
+          window.location.href = "/create/?type=webstory";
+        }
       }else{
         reqCreation.innerHTML= `${data.message}`;
       }
@@ -753,8 +757,13 @@ function InitializeWebstory(){
   canCreateStories();
 }
 
-function editStory(x){
-  window.location.href = `/create/?type=webstory&ID=${x}`;
+function editStory(x, u){
+  if (u == '') {
+    window.location.href = `/create/?type=webstory&ID=${x}`;
+  }else{
+    window.location.href = `/create/?type=webstory&editor=Admin&ID=${x}&username=${u}`;
+  }
+
 }
 
 
