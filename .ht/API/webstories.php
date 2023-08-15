@@ -139,7 +139,7 @@ class Webstories{
             if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
                 if (isset($data['username']) && !empty($data['username'])) {
                     if ($UID = $this->userData->getOtherData('username', $data['username'])) {
-                        if (!isset($data['data']) || empty($data['data'])) {
+                        if (isset($data['data']) && !empty($data['data'])) {
                             $storyData = $data['data'];
                             $storyID = $data['storyID'];
                             $sql = "UPDATE stories set storyData = '$storyData' WHERE personID = '$UID' and storyID = '$storyID'";
