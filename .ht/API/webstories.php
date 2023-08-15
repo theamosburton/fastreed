@@ -135,7 +135,7 @@ class Webstories{
 
     private function updateStory(){
         $data = json_decode(file_get_contents('php://input'), true);
-        if ($data['whois'] == 'admin') {
+        if ($data['whois'] == 'Admin') {
             if ($this->userData->getSelfDetails()['accType'] == 'Admin') {
                 if (!isset($data['username']) || empty($data['username'])) {
                     if ($UID = $this->userData->getOtherData('username', $data['username'])) {
