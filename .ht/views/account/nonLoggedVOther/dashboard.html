@@ -13,7 +13,7 @@
     // personID = stories[i][0]
 
     $webstories = array();
-
+    echo $this->userData->getOtherData('username', $this->otherUsername)['UID'];
     $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
     $length = count($stories);
     for($i=0; $i<$length; $i++){
