@@ -14,7 +14,7 @@
 
     $webstories = array();
 
-    $stories = $this->getStoriesData->getAllData($this->userData->getSelfDetails()['UID']);
+    $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username',  $this->otherUsername)['UID']);
     $length = count($stories);
     for($i=0; $i<$length; $i++){
       if((stories[i][5] == 'published') && (stories[i][6] == 'Anonymous')){
