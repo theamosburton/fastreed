@@ -427,3 +427,28 @@ function showInfo(what){
       options.style.display = 'none';
   }
 }
+
+function showPicOptions(what){
+  var options = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
+  var details = document.getElementById('optionDropdownDetails');
+  var isDisp = options.style.display;
+  if (what == 'none') {
+    options.style.display = 'none';
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
+  }else if(what == 'block'){
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
+    options.style.display = 'block';
+  }else if(isDisp == 'none'){
+    if (details.style.display == 'block') {
+      details.style.display = 'none'
+    }
+      options.style.display = 'block';
+  }else{
+      options.style.display = 'none';
+  }
+
+}
