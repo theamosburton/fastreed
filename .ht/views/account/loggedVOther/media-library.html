@@ -50,7 +50,7 @@
                     $what = 'photos';
                     $icon = '';
                 }elseif($data[$i][6] == 'videos'){
-                  if({$data[$i][11]} == 'VLD'){
+                  if($data[$i][11] == 'VLD'){
                     $whatToShow = <<<HTML
                         <div class="imgDiv" onclick="showImage('{$pathImg}', 'none', '','','', '{$data[$i][9]}', '{$data[$i][10]}', '{$data[$i][11]}')">
                             <img src="$pathImg" alt="">

@@ -1,7 +1,6 @@
 class showMenus{
     constructor(){
       this.hashValue = window.location.hash.substr(1);
-      // var params = new URLSearchParams(window.location.search);
       this.optValue = this.hashValue;
       this.dashboardMenu = document.querySelector('#dashboardMenu');
       this.dashboardDiv = document.querySelector('#dashboardDiv');
