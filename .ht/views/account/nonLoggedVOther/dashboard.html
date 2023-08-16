@@ -17,7 +17,7 @@
     $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
     $length = count($stories);
     for($i=0; $i<$length; $i++){
-      if(stories[i][5] == 'published' && stories[i][6] == 'Anonymous'){
+      if(stories[$i][5] == 'published' && stories[$i][6] == 'Anonymous'){
         $webstoryData = json_decode($stories[$i][7], true);
 
         if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url'])){
