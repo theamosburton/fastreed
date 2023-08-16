@@ -201,16 +201,20 @@ class fetchMedia{
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
       if (username !== null && username.trim() !== '') {
-        if (whoIs == 'Admin') {
+        if (self.whoIs == 'Admin') {
           var encyDat = {
-            "whois": `${whoIs}`,
+            "whois": `${self.whoIs}`,
             "username" : `${currentUsername}`
           };
         }else{
-          var encyDat = {};
+          var encyDat = {
+            "whois": `${self.whoIs}`,
+            "username" : `${currentUsername}`};
         }
       }else {
-        var encyDat = {};
+        var encyDat = {
+          "whois": `${self.whoIs}`,
+          "username" : `${currentUsername}`};
       }
       const logUrl = '/.ht/API/getUploads.php';
       const response = await fetch(logUrl, {
