@@ -40,19 +40,14 @@
     }
 
     $webstories = array_reverse($webstories);
-    if($canViewContent != 'Users'){
-      echo <<<HTML
-      <div class="noUpload">
-          <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-          <div> <p>Private Stories</p></div> </div>
-      HTML;
-    }else if(count($webstories) <= 0){
+    if(count($webstories) <= 0){
         echo <<<HTML
         <div class="noUpload">
             <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
             <div> <p>No story to display</p></div> </div>
         HTML;
-    }else{
+    }else if($canViewContent == 'users'){
+      if($canViewContent == 'followers' && $isFollowingMe){
         echo <<<HTML
         <div class="webstories">
         HTML;
@@ -62,6 +57,20 @@
         echo <<<HTML
         </div>
         HTML;
+      }else{
+        echo <<<HTML
+        <div class="noUpload">
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>Stories Available to followings only</p></div> </div>
+        HTML;
+      }
+
+    }else{
+      echo <<<HTML
+      <div class="noUpload">
+          <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+          <div> <p>Stories are private</p></div> </div>
+      HTML;
     }
 
     ?>
