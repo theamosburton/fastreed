@@ -390,26 +390,7 @@ function showPicOptions(what){
 
 }
 
-function showInfo(what){
-  var options = document.getElementById('optionDropdownDetails');
-  var options1 = document.querySelector(`.imageShowDiv .imageContainer .imgOptions .optionDropdown`);
-  var isDisp = options.style.display;
-  if (what == 'none') {
-    options.style.display = 'none';
-  }else if(what == 'block'){
-    if (options1.style.display == 'block') {
-      options1.style.display = 'none'
-    }
-    options.style.display = 'block';
-  }else if(isDisp == 'none'){
-    if (options1.style.display == 'block') {
-      options1.style.display = 'none'
-    }
-      options.style.display = 'block';
-  }else{
-      options.style.display = 'none';
-  }
-}
+
 
 
 function copyLink(path){
