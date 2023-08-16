@@ -61,7 +61,8 @@
         echo <<<HTML
         <div class="noUpload">
             <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-            <div> <p>Stories Available to followings only</p></div> </div>
+            <div> <p>You can view stories only if {$this->userData->getOtherData('username', $this->otherUsername)['name']} follows you </p></div>
+        </div>
         HTML;
       }
 

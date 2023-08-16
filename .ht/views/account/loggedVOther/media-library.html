@@ -16,7 +16,7 @@
             echo <<<HTML
             <div class="noUpload">
                 <div><i class="fa fa-lock"></i></div>
-                <div> <p>Only following can view uploads</p></div>
+                <div> <p>You can view uploads only if {$this->userData->getOtherData('username', $this->otherUsername)['name']} follows you </p></div>
             </div>
             HTML;
         }else{
