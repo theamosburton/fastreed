@@ -366,10 +366,6 @@ function restrictMedia(ID, status, ostatus, element){
 }
 
 
-
-
-
-
 function copyLink(path){
    // The link to be copied
    const linkToCopy = 'https://'+domainName+path;

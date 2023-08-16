@@ -1,0 +1,63 @@
+<div class="contentTopics resCreation row webstoriesDiv">
+    <div class="mtitle mb-3">
+      <div>
+          <span>Web Stories</span>
+      </div>
+    </div>
+        <?php
+    // Title = stories[i][8];
+    // data = stories[i][7]
+    // access = stories[i][6]
+    // status = stories[i][5]
+    // storyID = stories[i][1]
+    // personID = stories[i][0]
+
+    $webstories = array();
+
+    $stories = $this->getStoriesData->getAllData($this->userData->getSelfDetails()['UID']);
+    $length = count($stories);
+    for($i=0; $i<$length; $i++){
+      if((stories[i][5] == 'published') && (stories[i][6] == 'Anonymous')){
+        $webstoryData = json_decode($stories[$i][7], true);
+
+        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url'])){
+            $setUrl = '/assets/img/nomedia.png';
+        }else{
+            $setUrl = $webstoryData['layers']['L0']['media']['url'];
+        }
+        if(!empty($webstoryData['metaData']['title'])){
+            $title = $webstoryData['metaData']['title'];
+        }else{
+            $title = $stories[$i][8];
+        }
+        $webstories[$i] = '
+        <div class="webstory" id="webstory'.$i.'">
+            <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="title">' . $title . '</div>
+            </div>
+        </div>';
+      }
+    }
+
+    $webstories = array_reverse($webstories);
+    if(count($webstories) <= 0){
+        echo <<<HTML
+        <div class="noUpload">
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>No story to display</p></div> </div>
+        HTML;
+    }else{
+        echo <<<HTML
+        <div class="webstories">
+        HTML;
+        for($j=0; $j<count($webstories); $j++){
+            echo $webstories[$j];
+        }
+        echo <<<HTML
+        </div>
+        HTML;
+    }
+
+    ?>
+
+</div>
