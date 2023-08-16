@@ -40,7 +40,13 @@
     }
 
     $webstories = array_reverse($webstories);
-    if(count($webstories) <= 0){
+    if($canViewContent != 'Anonymous'){
+      echo <<<HTML
+      <div class="noUpload">
+          <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+          <div> <p>Login to view</p></div> </div>
+      HTML;
+    }else if(count($webstories) <= 0){
         echo <<<HTML
         <div class="noUpload">
             <div><i class="fa fa-circle-exclamation fa-xl"></i></div>

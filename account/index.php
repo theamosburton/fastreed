@@ -25,7 +25,7 @@ class showProfile {
     private $SERVROOT;
     protected $getStoriesData;
     function __construct() {
-        
+
         $this->const4Inherited();
         if ($this->adminLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
@@ -49,7 +49,7 @@ class showProfile {
         }
 
         $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-        
+
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
         $this->FUNC = new BasicFunctions();
@@ -71,17 +71,17 @@ class showProfile {
         }else{
             $this->extraStyle = $this->blackMode;
         }
-        
+
         $this->userData = new getLoggedData();
         $this->uploadData = new getUploadData();
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
         $this->getStoriesData = new getStoriesData();
-    } 
+    }
     protected function addHead(){
         // *************/ Head Section /**************** //
             include "../.ht/views/homepage/head.html";
-           
+
             echo "\n".<<<HTML
             <body class="scrollbar-style">
             HTML."\n".<<<HTML
@@ -133,7 +133,7 @@ class showProfile {
             </header>
             HTML."\n";
         // ********************************************** //
-    } 
+    }
 
     protected function addFooter(){
         //***************/ Footer Section /*****************//
@@ -159,7 +159,7 @@ class showProfile {
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             <script type="text/javascript" src="/assets/js/admin.js?v=$this->version"></script>
             HTML."\n";
-            
+
         }elseif ($this->userLogged) {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
@@ -170,7 +170,7 @@ class showProfile {
         </html>
         HTML."\n";
         // ********************************************** //
-    }   
+    }
 
     protected function checkUserExits($x){
         $return = false;
@@ -205,16 +205,16 @@ class loggedAdminVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
-        
+
         $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
         $this->extraScript = '
-        <script> 
+        <script>
             // other
             var ePID = "'.$ePID.'";
-            var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
+            var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
-       
+
          $selfId = $this->userData->getSelfDetails()['UID'];
          $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
          $userSettings = $this->userData->getSettings($otherID);
@@ -239,7 +239,7 @@ class loggedAdminVother extends showProfile{
                     </div>
                 </div>
             </div>
-        HTML;    
+        HTML;
     // ********************************************** //
         $this->addFooter();
         $this->closeConnection();
@@ -258,13 +258,13 @@ class loggedVself extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
-        
+
         $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
 
-        $this->extraScript = 
-        '<script> 
+        $this->extraScript =
+        '<script>
             var ePID = "'.$this->userData->getSelfDetails()['ePID'].'";
-            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'"; 
+            var currentEmail = "'.$this->userData->getSelfDetails()['email'].'";
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
          </script>';
 
@@ -289,24 +289,24 @@ class loggedVself extends showProfile{
 
         //***************/ Profile Section /**********//
         echo "\n";
-        
+
         include $this->DOCROOT."/.ht/views/account/loggedVSelf/index.html";
 
         // ***************************************** //
-        
+
 
         echo <<<HTML
                     </div>
                 </div>
             </div>
-        HTML;    
+        HTML;
     // ********************************************** //
         $this->addFooter();
         $this->closeConnection();
    }
 }
 
-class loggedVother extends showProfile{ 
+class loggedVother extends showProfile{
     protected $webTitle;
     protected $webDescription;
     protected $webKeywords;
@@ -319,7 +319,7 @@ class loggedVother extends showProfile{
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js'];
 
-        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'"; 
+        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
         $selfId = $this->userData->getSelfDetails()['UID'];
@@ -345,12 +345,12 @@ class loggedVother extends showProfile{
                     </div>
                 </div>
             </div>
-        HTML;    
+        HTML;
     // ********************************************** //
         $this->addFooter();
         $this->closeConnection();
    }
-   
+
 }
 
 class nonLoggedVother extends showProfile{
@@ -389,12 +389,12 @@ class nonLoggedVother extends showProfile{
                     </div>
                 </div>
             </div>
-        HTML;    
+        HTML;
     // ********************************************** //
         $this->addFooter();
         $this->closeConnection();
    }
-   
+
 }
 
 ?>
