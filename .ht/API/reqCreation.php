@@ -88,7 +88,7 @@ class authorReqRes{
                 }elseif ($updatedValue == 'REJ') {
                     $message = 'Sorry! '.$name.' your request is rejected. Try again after some time';
                 }
-                $profilePic = $this->userData->getSelfDetails()['profilePic'];
+                $profilePic = $this->userData->getOtherData('personID', $dID)['profilePic'];
                 $time = time();
                 $url = '/accounts/';
                 $title = $message;
