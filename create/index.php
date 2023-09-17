@@ -194,6 +194,7 @@ class userEditor extends createContent{
             var currentEmail = "'.$this->userData->getSelfDetails()['email'].'";
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
             var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
+            var userName = "'.$this->userData->getSelfDetails()['name'].'";
          </script>';
 
         include '../.ht/views/create/head.html';
@@ -304,6 +305,7 @@ class adminEditor extends createContent{
             var currentEmail = "'.$this->userData->getOtherData('username', $_GET['username'])['email'].'";
             var currentUsername = "'.$this->userData->getOtherData('username', $_GET['username'])['username'].'";
             var whoIs = "'.$this->userData->getSelfDetails()['userType'].'";
+            var userName = "'.$this->userData->getOtherData('username', $_GET['username'])['name'].'";
          </script>';
 
         include '../.ht/views/create/head.html';

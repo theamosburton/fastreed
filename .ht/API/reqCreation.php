@@ -54,7 +54,7 @@ class authorReqRes{
         $result2 = mysqli_query($this->DB, $sql);
         if ($result2) {
              // add to db
-            
+
             $sql = "UPDATE settings SET canCreate = 'REQ' WHERE personID = '$dID'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
@@ -90,7 +90,7 @@ class authorReqRes{
                 }
                 $profilePic = $this->userData->getSelfDetails()['profilePic'];
                 $time = time();
-                $url = '/profile/';
+                $url = '/accounts/';
                 $title = $message;
                 $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$dID', 'self', '$time', 0, '$url', 0)";
                 $result2 = mysqli_query($this->DB, $sql);
@@ -101,12 +101,12 @@ class authorReqRes{
         }
     }
 
-    
+
     private function checkUserE(){
         $return = false;
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $dID = $this->AUTH->decrypt($eid); 
+        $dID = $this->AUTH->decrypt($eid);
         $sql = "SELECT * FROM accounts WHERE personID = '$dID'";
         $result = mysqli_query($this->DB, $sql);
         if (mysqli_num_rows($result)) {

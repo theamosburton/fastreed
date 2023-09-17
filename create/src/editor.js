@@ -1,5 +1,6 @@
 class Editor{
     constructor(){
+        this.topBars = document.getElementById("navBars");
         var params = new URLSearchParams(window.location.search);
             this.username = '';
         if (params.get('username')) {
@@ -28,6 +29,11 @@ class Editor{
             });
             var data = await response.json();
             if (data) {
+              const date = new Date();
+              const month = date.toLocaleString('default', { month: 'long' });
+              const day = date.getDate();
+              const year = date.getFullYear();
+              const fDate = `${month} ${day}, ${year}`;
                 if (data.Result) {
                     this.version = 100;
                     this.layers = {};
@@ -36,6 +42,7 @@ class Editor{
                     this.metaData.description = "";
                     this.metaData.keywords = "";
                     this.metaData.url = "";
+                    this.metaData.date = `${fDate}`;
                     this.webstoryData = data.message;
                     if (this.webstoryData == '{}') {
                       if (window.localStorage.getItem(`${editor.storyID}`)) {
@@ -53,7 +60,8 @@ class Editor{
                                     "overlayArea": "40"
                                 },
                                 "type":'',
-                                "url":''
+                                "url":'default',
+                                "credit" : 'none'
                             },
                             'title':{
                                 "text":'',
@@ -61,12 +69,7 @@ class Editor{
                                 "fontWeight":"1000",
                                 "fontSize":"larger"
                             },
-                            'otherText': {
-                                "text":'',
-                                "fontFamily":"inherit",
-                                "fontWeight":"400",
-                                "fontSize":"medium"
-                            }
+                            'theme':'default'
                         };
 
                         if (this.editorId.children.length <= 0) {
@@ -74,21 +77,30 @@ class Editor{
                             layersTop.classList.add('layersTop');
                             layersTop.innerHTML = `
                             <div class="title" id="title${this.presentLayerIndex}">
-                            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Enter Post Title</span>
+                              <div>
+                                <span class="date">${this.metaData.date}</span>
+                                <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
+                                <span class="author">By ${userName}</span>
+                                <span class="imageCredit">Image Credit: </span>
+                              </div>
                             </div>
-                            <div class="text" id="text${this.presentLayerIndex}">
-                            <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryDesciption('otherText${this.presentLayerIndex}')">Enter story description...</span>
-                            </div>`;
+                            `;
                             var newLayer = document.createElement('div');
                             newLayer.id = `layer${this.presentLayerIndex}`;
                             newLayer.className = 'layers';
-                            newLayer.innerHTML = `<div class="placeholder" id="placeholder${this.presentLayerIndex}">
-                                <p> Add thumbnail photo</p>
-                                <small> Recomended ratios are </small>
-                                <small> 9:16, 3:4 and 2:3 </small>
-                            </div>`;
+                            var defaultImage = document.createElement('img');
+                            defaultImage.src = "/assets/img/default.jpeg";
+                            defaultImage.id = 'mediaContent0';
                             this.editorId.appendChild(newLayer);
                             newLayer.appendChild(layersTop);
+                            newLayer.appendChild(defaultImage);
+                            var headElement = document.createElement('div');
+                            headElement.id = 'headSection';
+                            headElement.innerHTML = `
+                                                     <div id="brandDiv">
+                                                        <img src="/assets/img/favicon2.jpg">
+                                                     </div>`;
+                            newLayer.appendChild(headElement);
                         }
 
                         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
@@ -96,15 +108,6 @@ class Editor{
                         for (var i = 0; i < otherLayers.length; i++) {
                             otherLayers[i].style.display = "none";
                         }
-
-                        this.layersAhead = this.totalLayers - this.presentLayer;
-                        if (this.layersAhead) {
-                            this.layersBack = this.totalLayers-this.layersAhead-1;
-                        }else{
-                            this.layersBack = 0;
-                        }
-                        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-                        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
                         this.presentLayerDiv.style.display = 'flex';
                         document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
                         this.createStylesheet();
@@ -113,7 +116,7 @@ class Editor{
                           layers : this.layers,
                           metaData : this.metaData
                         };
-                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                        // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                       }
                     }else{
                         this.createExistedLayers();
@@ -198,7 +201,8 @@ class Editor{
                     "overlayArea": "40"
                 },
                 "type":'',
-                "url":''
+                "url":'',
+                "credit" : 'none'
             },
             'title':{
                 "text":'',
@@ -206,13 +210,17 @@ class Editor{
                 "fontWeight":"1000",
                 "fontSize":"larger"
             },
-            'otherText': {
+            'theme':'default'
+        };
+
+        if (this.presentLayerIndex != 0) {
+            this.layers['L'+ this.presentLayerIndex].otherText = {
                 "text":'',
                 "fontFamily":"inherit",
                 "fontWeight":"400",
                 "fontSize":"medium"
-            }
-        };
+            };
+        }
         var newLayer = document.createElement('div');
         newLayer.id = `layer${this.presentLayerIndex}`;
         newLayer.className = 'layers';
@@ -228,27 +236,35 @@ class Editor{
         layersTop.classList.add('layersTop');
         layersTop.innerHTML = `
         <div class="title" id="title${this.presentLayerIndex}">
-        <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editTitle('titleText${this.presentLayerIndex}')">Enter Title/heading</span>
-        </div>
-        <div class="text" id="text${this.presentLayerIndex}">
-        <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Enter more text..</span>
-        </div>`;
-
-        newLayer.innerHTML = `<div class="placeholder" id="placeholder${this.presentLayerIndex}">
-            <p> Add</p>
-            <p> Photo/Video</p>
-            <small> Recomended ratios are </small>
-            <small> 9:16, 3:4 and 2:3 </small>
+            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title text</span>
+            <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}', '')">Edit description text</span>
+            <span class="imageCredit">Image Credit: </span>
         </div>
         `;
+        this.topBars.querySelector('.nav').backgroundcolor = '#d6c8c8';
+        for (var i = 1; i < this.totalLayers; i++) {
+          this.topBars.querySelector(`#nav${i}`).classList.remove('active');
+        }
+
+        var newBar = document.createElement('span');
+        newBar.id = `nav${this.presentLayer}`;
+        newBar.classList.add('nav');
+        newBar.classList.add('active');
+        this.topBars.appendChild(newBar);
+        var headElement = document.createElement('div');
+        headElement.id = 'headSection';
+        headElement.innerHTML = `<div id="brandDiv">
+                                    <img src="/assets/img/favicon2.jpg">
+                                 </div>`;
+
+        var defaultImage = document.createElement('img');
+        defaultImage.src = "/assets/img/default.jpeg";
+        defaultImage.id = `mediaContent${this.presentLayerIndex}`;
+        newLayer.appendChild(headElement);
+        newLayer.appendChild(defaultImage);
         newLayer.appendChild(layersTop);
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
-        this.layersAhead = this.totalLayers - this.presentLayer;
-        this.layersBack = this.totalLayers-this.layersAhead-1;
-        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
-        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
         this.createStylesheet();
     }
 
@@ -257,11 +273,81 @@ class Editor{
         var styleBoxn = document.createElement('div');
         styleBoxn.id = `styleBox${this.presentLayerIndex}`;
         styleBoxn.classList.add('objectOptionsbody');
+        if (this.presentLayerIndex != 0) {
+          var otherText = `
+          <!-- Other Text Styles -->
+          <div class="optionsDIv" id="aboutStyles${this.presentLayerIndex}">
+              <span class="objectName" onclick="edits.expandOptions('aboutStyles${this.presentLayerIndex}')">
+                  <span>Text</span>
+                  <i class="fa fa-caret-right"></i>
+              </span>
+              <div class="options" style="display:none;">
+
+
+                  <div class="div">
+                      <span>Font weight</span>
+                      <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${this.presentLayerIndex}" class="value inputText">
+                          <option value="lighter" selected>Light</option>
+                          <option value="600">Bold</option>
+                          <option value="1000">Bolder</option>
+                      </select>
+                  </div>
+                  <div class="div">
+                      <span>Font size</span>
+                      <select id="otherFontSize${this.presentLayerIndex}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
+                          <option value="medium">Medium</option>
+                          <option value="large">Large</option>
+                          <option value="small">Small</option>
+                          <option value="x-small">X-Smaller</option>
+                      </select>
+                      <br/>
+                      <span>Custom font size</span>
+                      <input class="value inputText text" type="text" id="customOtherFontSize${this.presentLayerIndex}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')">
+                  </div>
+
+                  <div class="div">
+                      <span>Font family</span>
+                      <select id="otherFontFamily${this.presentLayerIndex}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
+                          <option value="inherit">Auto</option>
+                          <option value="cursive">Cursive</option>
+                          <option value="monospace">Monospace</option>
+                          <option value="sans-serif">Sans-serif</option>
+                      </select>
+                      <br/>
+                      <span>Custom font family</span>
+                      <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${this.presentLayerIndex}" placeholder="e.g. verdana, Sans-serif etc.">
+                  </div>
+              </div>
+          </div>
+          <!-- Other Text Styles -->`;
+        }else{
+          var otherText = '';
+        }
         styleBoxn.innerHTML = `
+                    <!-- Theme Options -->
+                     <div class="optionsDIv" id="themeStyles${this.presentLayerIndex}">
+                         <span class="objectName" onclick="edits.expandOptions('themeStyles${this.presentLayerIndex}','')">
+                             <span>Choose Theme</span>
+                             <i class="fa fa-caret-down"></i>
+                         </span>
+                         <div class="options" style="display: block;">
+                             <div class="div">
+                                 <span>Select Theme</span>
+                                 <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
+                                     <option value="Default">Default</option>
+                                     <option value="1">Theme 1</option>
+                                     <option value="2">Theme 2</option>
+                                     <option value="3">Theme 3</option>
+                                 </select>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- Theme Options -->
+
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${this.presentLayerIndex}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${this.presentLayerIndex}','')">
-                            <span>Layer Media</span>
+                            <span>Media</span>
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display: none;">
@@ -282,9 +368,10 @@ class Editor{
                             </div>
 
                             <div class="div">
-                                <span>Shade Area</span>
-                                <input onchange="edits.overlayEdit('overlayArea')" class="value inputText" type="range" id="overlayArea${this.presentLayerIndex}" value="40">
+                                <span>Media Credit</span>
+                                <input class="value inputText text" type="text" id="mediaCredit${this.presentLayerIndex}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
+
                         </div>
                     </div>
                     <!-- Media Options -->
@@ -334,54 +421,7 @@ class Editor{
                         </div>
                     </div>
                     <!-- Text Styles -->
-
-
-
-                    <!-- Other Text Styles -->
-                    <div class="optionsDIv" id="aboutStyles${this.presentLayerIndex}">
-                        <span class="objectName" onclick="edits.expandOptions('aboutStyles${this.presentLayerIndex}')">
-                            <span>Text</span>
-                            <i class="fa fa-caret-right"></i>
-                        </span>
-                        <div class="options" style="display:none;">
-
-
-                            <div class="div">
-                                <span>Font weight</span>
-                                <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${this.presentLayerIndex}" class="value inputText">
-                                    <option value="lighter" selected>Light</option>
-                                    <option value="600">Bold</option>
-                                    <option value="1000">Bolder</option>
-                                </select>
-                            </div>
-                            <div class="div">
-                                <span>Font size</span>
-                                <select id="otherFontSize${this.presentLayerIndex}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
-                                    <option value="small">Small</option>
-                                    <option value="x-small">X-Smaller</option>
-                                </select>
-                                <br/>
-                                <span>Custom font size</span>
-                                <input class="value inputText text" type="text" id="customOtherFontSize${this.presentLayerIndex}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')">
-                            </div>
-
-                            <div class="div">
-                                <span>Font family</span>
-                                <select id="otherFontFamily${this.presentLayerIndex}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
-                                    <option value="inherit">Auto</option>
-                                    <option value="cursive">Cursive</option>
-                                    <option value="monospace">Monospace</option>
-                                    <option value="sans-serif">Sans-serif</option>
-                                </select>
-                                <br/>
-                                <span>Custom font family</span>
-                                <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${this.presentLayerIndex}" placeholder="e.g. verdana, Sans-serif etc.">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Other Text Styles -->
+                    ${otherText}
             </div>
         `;
         styleBox.appendChild(styleBoxn);
@@ -444,13 +484,14 @@ class Editor{
             this.presentLayerDiv.style.display = 'flex';
             document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
             this.playPauseLastMedia('forward');
+
         }
         this.presentLayer  = this.presentLayerIndex + 1 ;
-        this.layersAhead = this.totalLayers - this.presentLayer;
-        this.layersBack = this.totalLayers-this.layersAhead-1;
-        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
-        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+        for (var i = 1; i < this.totalLayers+1; i++) {
+          this.topBars.querySelector(`#nav${i}`).classList.remove('active');
+        }
+        this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
+
     }
 
     moveBackward(){
@@ -465,12 +506,12 @@ class Editor{
             this.presentLayerDiv.style.display = 'flex';
             document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
             this.playPauseLastMedia('backward');
+
         }
-        this.layersAhead = this.totalLayers - this.presentLayer;
-        this.layersBack = this.totalLayers-this.layersAhead-1;
-        document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-        document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
-        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+        for (var i = 1; i < this.totalLayers+1; i++) {
+          this.topBars.querySelector(`#nav${i}`).classList.remove('active');
+        }
+        this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
     }
     playPauseMedia(){
         var playPauseMedia = document.querySelector(`#layer${this.presentLayerIndex} #playPauseMedia`);
@@ -602,15 +643,9 @@ class Editor{
 
            if (i == 0) {
              if (this.metaData.title == '') {
-               var text = "Enter Story Title";
+               var text = "Edit title for this webstory";
              }else{
                var text = this.metaData.title;
-             }
-
-             if (this.metaData.description == '') {
-               var othertext = 'Enter story description...';
-             }else{
-               var othertext = this.metaData.description;
              }
            }else{
              if (this.layers['L'+ i].title.text == '') {
@@ -640,11 +675,13 @@ class Editor{
             layersTop.classList.add('layersTop');
             if ( i == 0) {
                 layersTop.innerHTML = `
-                <div class="title" id="title0" >
-                <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0')">${text}</span>
-                </div>
-                <div class="text" id="text0">
-                <span class="titleText" contenteditable="true" id="otherText0" contenteditable="true" onkeyup="edits.editStoryDescription('otherText0')">${othertext}</span>
+                <div class="title" id="title${this.presentLayerIndex}">
+                  <div>
+                    <span class="date">${this.metaData.date}</span>
+                    <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
+                    <span class="author">By ${userName}</span>
+                    <span class="imageCredit">Image Credit:</span>
+                  </div>
                 </div>`;
             }else{
                 layersTop.innerHTML = `
@@ -782,17 +819,20 @@ class Editor{
             // Title //
 
             // Text //
-            if (this.layers['L'+ j].otherText.fontSize == 'medium') {
-                ofsm = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontSize == 'large') {
-                ofsl = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontSize == 'small') {
-                ofss = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontSize == 'x-small') {
-                ofsxs = 'selected';
-            } else {
-                ofsc = this.layers['L'+ j].otherText.fontSize;
-            }
+            if (j != 0) {
+              if (this.layers['L'+ j].otherText.fontSize == 'medium') {
+                  ofsm = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontSize == 'large') {
+                  ofsl = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontSize == 'small') {
+                  ofss = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontSize == 'x-small') {
+                  ofsxs = 'selected';
+              } else {
+                  ofsc = this.layers['L'+ j].otherText.fontSize;
+              }
+
+
 
             if (this.layers['L'+ j].otherText.fontFamily == 'cursive') {
                 offc = 'selected';
@@ -814,11 +854,82 @@ class Editor{
                 ofwbr = 'selected';
             }
             // Text //
+            }
 
             var styleBoxn = document.createElement('div');
             styleBoxn.id = `styleBox${j}`;
             styleBoxn.classList.add('objectOptionsbody');
+            if (j != 0) {
+              var otherTextStyle = `
+              <!-- Other Text Styles -->
+                <div class="optionsDIv" id="aboutStyles${j}">
+                    <span class="objectName" onclick="edits.expandOptions('aboutStyles${j}')">
+                        <span>Text</span>
+                        <i class="fa fa-caret-right"></i>
+                    </span>
+                    <div class="options" style="display:none;">
+
+
+                        <div class="div">
+                            <span>Font weight</span>
+                            <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${j}" class="value inputText">
+                                <option ${ofwl} value="lighter" selected>Light</option>
+                                <option ${ofwb} value="600">Bold</option>
+                                <option ${ofwbr} value="1000">Bolder</option>
+                            </select>
+                        </div>
+                        <div class="div">
+                            <span>Font size</span>
+                            <select id="otherFontSize${j}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
+                                <option  ${ofsm} value="medium">Medium</option>
+                                <option  ${ofsl} value="large">Large</option>
+                                <option ${ofss} value="small">Small</option>
+                                <option ${ofsxs} value="x-small">X-Smaller</option>
+                            </select>
+                            <br/>
+                            <span>Custom font size</span>
+                            <input class="value inputText text" type="text" id="customOtherFontSize${j}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')" value="${ofsc}">
+                        </div>
+
+                        <div class="div">
+                            <span>Font family</span>
+                            <select id="otherFontFamily${j}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
+                                <option ${offa} value="inherit">Auto</option>
+                                <option  ${offc} value="cursive">Cursive</option>
+                                <option  ${offm} value="monospace">Monospace</option>
+                                <option  ${offs} value="sans-serif">Sans-serif</option>
+                            </select>
+                            <br/>
+                            <span>Custom font family</span>
+                            <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${j}" placeholder="e.g. verdana, Sans-serif etc." value=" ${offcs}">
+                        </div>
+                    </div>
+                </div>
+                <!-- Other Text Styles -->
+                `;
+            }else{
+              var otherTextStyle = ``;
+            }
             styleBoxn.innerHTML = `
+                  <!-- Theme Options -->
+                    <div class="optionsDIv" id="themeStyles${this.presentLayerIndex}">
+                        <span class="objectName" onclick="edits.expandOptions('themeStyles${this.presentLayerIndex}','')">
+                            <span>Choose Theme</span>
+                            <i class="fa fa-caret-right"></i>
+                        </span>
+                        <div class="options" style="display: none;">
+                            <div class="div">
+                                <span>Select Theme</span>
+                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
+                                    <option value="Default">Default</option>
+                                    <option value="1">Theme 1</option>
+                                    <option value="2">Theme 2</option>
+                                    <option value="3">Theme 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Theme Options -->
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${j}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${j}','')">
@@ -839,10 +950,9 @@ class Editor{
                                 <span>Shade Opacity</span>
                                 <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
                             </div>
-
                             <div class="div">
-                                <span>Shade Area</span>
-                                <input onchange="edits.overlayEdit('overlayArea')" class="value inputText" type="range" id="overlayArea${j}" value="${moa}">
+                                <span>Media Credit</span>
+                                <input class="value inputText text" type="text" id="mediaCredit${this.presentLayerIndex}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
                         </div>
                     </div>
@@ -893,54 +1003,7 @@ class Editor{
                         </div>
                     </div>
                     <!-- Text Styles -->
-
-
-
-                    <!-- Other Text Styles -->
-                    <div class="optionsDIv" id="aboutStyles${j}">
-                        <span class="objectName" onclick="edits.expandOptions('aboutStyles${j}')">
-                            <span>Text</span>
-                            <i class="fa fa-caret-right"></i>
-                        </span>
-                        <div class="options" style="display:none;">
-
-
-                            <div class="div">
-                                <span>Font weight</span>
-                                <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${j}" class="value inputText">
-                                    <option ${ofwl} value="lighter" selected>Light</option>
-                                    <option ${ofwb} value="600">Bold</option>
-                                    <option ${ofwbr} value="1000">Bolder</option>
-                                </select>
-                            </div>
-                            <div class="div">
-                                <span>Font size</span>
-                                <select id="otherFontSize${j}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
-                                    <option  ${ofsm} value="medium">Medium</option>
-                                    <option  ${ofsl} value="large">Large</option>
-                                    <option ${ofss} value="small">Small</option>
-                                    <option ${ofsxs} value="x-small">X-Smaller</option>
-                                </select>
-                                <br/>
-                                <span>Custom font size</span>
-                                <input class="value inputText text" type="text" id="customOtherFontSize${j}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')" value="${ofsc}">
-                            </div>
-
-                            <div class="div">
-                                <span>Font family</span>
-                                <select id="otherFontFamily${j}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
-                                    <option ${offa} value="inherit">Auto</option>
-                                    <option  ${offc} value="cursive">Cursive</option>
-                                    <option  ${offm} value="monospace">Monospace</option>
-                                    <option  ${offs} value="sans-serif">Sans-serif</option>
-                                </select>
-                                <br/>
-                                <span>Custom font family</span>
-                                <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${j}" placeholder="e.g. verdana, Sans-serif etc." value=" ${offcs}">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Other Text Styles -->
+                    ${otherTextStyle}
             </div>
         `;
         styleBox.appendChild(styleBoxn);
@@ -961,30 +1024,19 @@ class Editor{
             document.getElementById(`titleText${j}`).style.fontFamily = this.layers['L'+ j].title.fontFamily;
             document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
 
-            document.getElementById(`otherText${j}`).style.fontSize = this.layers['L'+ j].otherText.fontSize;
-            document.getElementById(`otherText${j}`).style.fontFamily = this.layers['L'+ j].otherText.fontFamily;
-            document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
+            if (j != 0) {
+              document.getElementById(`otherText${j}`).style.fontSize = this.layers['L'+ j].otherText.fontSize;
+              document.getElementById(`otherText${j}`).style.fontFamily = this.layers['L'+ j].otherText.fontFamily;
+              document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
+            }
+
 
             if (document.getElementById(`mediaContent${j}`)) {
                 document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
             }
             if (Object.keys(this.layers['L'+ j].media).length  != 0) {
                 var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);
-                var overlayArea = this.layers['L'+ j].media.styles.overlayArea;
-                if (overlayArea == '100') {
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, ${overlayOpacity-10}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-
-                }else if(overlayArea >= '80'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-
-                }else if(overlayArea >= '60'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                }else if(overlayArea >= '40'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
-                }
-                else if(overlayArea >= '20'){
-                    document.querySelector(`#layer${j} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity-50}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-                }
+                document.querySelector(`#layer${j} .layersTop`).style.backgroundColor =  `rgba(0,0,0,${overlayOpacity}%)`;
             }
         }
     }

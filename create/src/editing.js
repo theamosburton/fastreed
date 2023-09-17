@@ -96,6 +96,7 @@ class Edits{
           contorlsElements.innerHTML = `
           <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
           <i class="fa fa-play" id="playPauseMedia" data-status="paused" onclick="editor.playPauseMedia()"></i>
+          <i class="fa fa-paper-plane"></i>
           `;
 
           layer.appendChild(contorlsElements);
@@ -118,7 +119,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      this.saveToBrowser();
+      // this.saveToBrowser();
     }
   deleteMedia(type){
       if(type == 'image'){
@@ -155,7 +156,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      this.saveToBrowser();
+      // this.saveToBrowser();
   }
   modifyMedia(type, blobUrl, url){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -173,7 +174,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      this.saveToBrowser();
+      // this.saveToBrowser();
   }
   updateMedia(type){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -186,36 +187,11 @@ class Edits{
       }
   }
   overlayEdit(x){
-    this.initializeVars();
-    if (x == 'overlayArea') {
-      this.overlayArea = document.getElementById(`overlayArea${this.editor.presentLayerIndex}`).value;
-    }else if(x == 'overlayOpacity'){
-      this.overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`).value;
-    }
-
-
-    var overlayArea = this.overlayArea;
+    this.overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`).value;
     var overlayOpacity = this.overlayOpacity;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
-    this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.overlayArea = overlayArea;
-    if (this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl == undefined || this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl == '') {
-      alert('Add photo or video');
-    }else if (overlayArea == '100') {
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(182deg, rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
 
-    }else if(overlayArea >= '80'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-
-    }else if(overlayArea >= '60'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-    }else if(overlayArea >= '40'){
-        document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%), rgba(0, 0, 0, ${overlayOpacity}%))`;
-    }else if(overlayArea >= '20'){
-      document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(0, 0, 0, ${overlayOpacity}%),rgba(0, 0, 0, ${overlayOpacity}%))`;
-    }
-    if (this.version+1 == editor.version) {
-      this.version += 1;
-    }
+    document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundColor = `rgba(0,0,0,${overlayOpacity}%)`;
     this.saveToBrowser();
 
   }
@@ -329,7 +305,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   changeOtherFontWeight(){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -343,7 +319,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   changeOtherFontFamily(x){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -422,6 +398,15 @@ class Edits{
     this.saveToBrowser();
   }
    // Meta Data //
+
+
+   // Theme //
+   editTheme(){
+       var theme = document.getElementById(`editTheme${this.editor.presentLayerIndex}`).value;
+       this.editor.layers['L' + this.editor.presentLayerIndex].theme = `${theme}`;
+   }
+   //  Theme //
+
 
   saveToBrowser(){
     var dat = {
