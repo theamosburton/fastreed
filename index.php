@@ -76,22 +76,22 @@ class showIndex{
     //***************/ Posts Section /**********//
         echo "\n";
         echo <<<HTML
-                        <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">		    
+                        <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="pin_container">
         HTML."\n";
         include ".ht/views/homepage/content.html";
         echo <<<HTML
-                            </div>		    
+                            </div>
                         </div>
         HTML."\n";
-        
+
     // ***************************************** //
 
         echo <<<HTML
                     </div>
                 </div>
             </div>
-        HTML;    
+        HTML;
 // ********************************************** //
 
 
@@ -109,7 +109,7 @@ class showIndex{
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             <script type="text/javascript" src="/assets/js/admin.js?v=$this->version"></script>
             HTML."\n";
-            
+
         }elseif ($this->userLogged) {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>

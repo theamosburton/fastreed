@@ -64,7 +64,7 @@ class gSignUpLogin{
     $email = mysqli_real_escape_string($this->DB,$email);
     $sql = "SELECT * FROM account_details WHERE emailID = '$email'";
     $result = mysqli_query($this->DB, $sql);
-  
+
     if (mysqli_num_rows($result)) {
       $data = $result->fetch_assoc();
       $return['id'] = $data['personID'];
@@ -82,7 +82,7 @@ class gSignUpLogin{
     setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/');
     $_SESSION['LOGGED_USER'] = $userID;
     showMessage(true, 'Logged in');
-  }  
+  }
 
   // Deleting Other IDS and Making Reference //
   public function makeReference(){
@@ -111,7 +111,7 @@ class gSignUpLogin{
 
   private function resetDP($id, $fileAddress){
         $return = false;
-        $sql = "UPDATE account_details SET 
+        $sql = "UPDATE account_details SET
         profilePic = '$fileAddress'
         WHERE personID = '$id'
         ";

@@ -36,7 +36,7 @@
 
 
 /*****************/
-  
+
 .pin_container {
   margin: 0;
   padding: 0;
@@ -72,7 +72,7 @@
   padding: 1px;
   margin: 11px 8px;
   border-radius: var(--f-card_border_radius);
-  
+
 }
 .f-card::after{
   content: " ";
@@ -138,7 +138,7 @@
   margin: 20px 0px;
 }
 .rotate{
-  animation: rotate 1s linear infinite; 
+  animation: rotate 1s linear infinite;
 }
 @keyframes rotate{
   to{ transform: rotate(360deg); }
@@ -194,7 +194,7 @@
 
 /* Notifications */
 #noti-nav{
-  background-color: #353740; 
+  background-color: #353740;
   margin-bottom: 20px;
 }
 #noti-nav .noti-head{
@@ -323,7 +323,7 @@
   background-color: #1e1f209f;
   align-items: center;
   justify-content: center;
-  
+
 }
 .profileUpdateShade .wrapper{
   box-shadow: 0 0 2px 0 grey;
@@ -371,7 +371,7 @@
   display: flex;
   flex-direction: column;
   margin: 20px;
-  
+
 }
 .u-inputs input:hover, .u-inputs select:hover, .u-inputs input:focus,  .u-inputs select:focus{
   cursor: pointer;
@@ -486,7 +486,7 @@
   padding: 10px;
   border-radius: 15px;
   margin: 10px;
-  
+
 }
 /* headers */
 header{
@@ -562,7 +562,7 @@ header #nav #profileImage{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  animation: rotate 1s linear infinite; 
+  animation: rotate 1s linear infinite;
   margin-right: 20px;
 }
 
@@ -660,13 +660,13 @@ header #nav #profileImage{
 }
 
 
-  
+
   /*Large and Medium Cards   */
 .f-card_large .image, .f-card_medium .image{
   border:0.5px solid slategrey;
   width: 100%;
   height: 90%;
-  border-radius: 20px; 
+  border-radius: 20px;
   background-position-x: center;
   background-position-y: top;
   background-size: cover;
@@ -774,7 +774,7 @@ header #nav #profileImage{
     top: -12px;
     right: 8px;
     font-size: 13px;
-    
+
   }
   .settings, .accounts, .options{
     top: 66px;
@@ -820,7 +820,7 @@ header #nav #profileImage{
   .f-card_large .title p, .f-card_medium .title p{
     font-size: 25px;
     font-weight: 600;
-  } 
+  }
 
   .f-card_small .title a{
     font-size: 19px;
@@ -831,7 +831,7 @@ header #nav #profileImage{
     font-size: 14px;
   }
 }
-  
+
    @media (max-width: 350px) {
     .profile-info .info-div #myEmail{
       min-width: 0px!important;

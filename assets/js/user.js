@@ -10,13 +10,13 @@ if (cookieExist != null) {
 
 function uploadImage(event) {
     event.preventDefault(); // Prevent form submission
-  
+
     var fileInput = document.getElementById('imageInput');
     var file = fileInput.files[0];
-  
+
     var formData = new FormData();
     formData.append('image', file);
-  
+
     // Send the file to the PHP server using AJAX
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'upload.php', true);
@@ -30,8 +30,8 @@ function uploadImage(event) {
     xhr.send(formData);
   }
 
-  
-  
+
+
 function cancelUpdatePopup() {
     $('.profileUpdateShade').css('display', 'none');
      enableScroll();
@@ -118,7 +118,7 @@ async function isUserlogged(){
               });
             var notificationData = await response.json();
 
-            
+
             var notifiCount = notificationData.length;
 
             const alread = notificationData.filter(notification => notification.isRead === "1");
@@ -139,12 +139,12 @@ async function isUserlogged(){
             let notification = [];
             notification[0] = `
             <div class="notification no-noti" id="notification">
-            
+
                     <div class="body">
                         <p class="noti-parts title"> No new notification</p>
                     </div>
             </div>`;
-            // 
+            //
             for (let g = 0; g < notificationData.length; g++) {
 
                 // Get title of notification title and name, username etc
@@ -195,7 +195,7 @@ async function isUserlogged(){
                         </div>
                         ${showDot}
                     </a>
-                    
+
                 </div>`;
             }
             let oldFirst = [...notification].reverse();
@@ -204,7 +204,7 @@ async function isUserlogged(){
             oldFirst = oldFirst.join("\n");
             document.getElementById('notifications').innerHTML = newFirst;
             styleUpdate();
-           
+
         }
 
     }
@@ -225,10 +225,10 @@ function markRead(SNO, red){
             }else{
                 console.log("Not Marked Read");
             }
-        
+
         }
     }
-    
+
 }
 function timeAgo(timestamp) {
     const seconds = Math.floor((new Date() - timestamp * 1000) / 1000);
@@ -270,10 +270,3 @@ function timeAgo(timestamp) {
     }
     return `${Math.floor(seconds)} seconds ago`;
   }
-
-
-  
-  
-  
-
-

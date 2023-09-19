@@ -5,18 +5,18 @@
 					</div>
 					<div class="notifications scrollbar-style" id="notifications">
 					    <div  class="spinner" id="notiSpinner">
-						</div>	
+						</div>
 					</div>
 				</div>
 				<!-- ******************************************** Notifications ********************************************** -->
 
 				<!-- Accounts -->
 				<div class="dropdowns" id="accounts" style="display:none">
-						<?php 
+						<?php
 						// Logged Users
 					if ($this->userLogged) {
 					echo '  <div class="profile-top">
-                                <div class="profile-info"> 
+                                <div class="profile-info">
                                     <div class="image-div">
                                         <img id="profile-image" src="'.$this->userData->getSelfDetails()['profilePic'].'">
                                     </div>
@@ -25,20 +25,20 @@
                                         <div id="myEmail">'.$this->userData->getSelfDetails()['username'].'</div>
                                     </div>
                                 </div>
-                                
+
                                 <a href="/account/" class="menus">
 									<i class=" left fa fa-table-columns"></i>
-                                    <span>Dashboard</span> 
+                                    <span>Dashboard</span>
 								</a>
 
 								<a href="/account/?opt=media" class="menus">
-                                    <i class="left fa fa-light fa-photo-film"></i> 
+                                    <i class="left fa fa-light fa-photo-film"></i>
 									<span>Media Library</span>
                                 </a>
 
                                 <a href="/account/?opt=account" class="menus">
-                                    <i class="left fa fa-gear"></i> 
-                                    <span>Account settings</span> 
+                                    <i class="left fa fa-gear"></i>
+                                    <span>Account settings</span>
 								</a>
                             </div>
 
@@ -48,7 +48,7 @@
 								</div>
 						    </div>'."\n";
 						}else {
-							echo 
+							echo
 							'<div class="non-logged-account">
 								<div class="menu-head">
 									<span class="name">Login or Create Account</span>
@@ -70,12 +70,12 @@
 										data-size="large"
 										data-logo_alignment="left"
 										data-width="290">
-										
+
 									</div>
 
-								<a id="contEmail" class="continueEmail" href="" style="pointer-events: none"> <i class="left fa fa-envelope"></i> Continue with email</a>
+								<a id="contEmail" class="continueEmail" href="account/sign/index.php"> <i class="left fa fa-envelope"></i> Continue with email</a>
 								</div>
-								
+
 							</div>'."\n";
 						}
 						?>
@@ -87,19 +87,19 @@
 				<?php
 				if($this->adminLogged){
 					$refresh =  <<<HTML
-										<div id="refStyle" class="menus" onclick="refreshCss()"> 
+										<div id="refStyle" class="menus" onclick="refreshCss()">
 											<div  class="spinner" id="RSpinner"></div>
 											<i id="RefreshIcon" class="left fa fa-rotate"></i>
 											<span>Refresh Style </span>
 										</div>
-										<div id="refHard" class="menus" onclick="hardRefresh()"> 
+										<div id="refHard" class="menus" onclick="hardRefresh()">
 											<div  class="spinner" id="HRSpinner"></div>
 											<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
 											<span> Hard Pull</span>
 										</div>
 								HTML."\n";
 				}
-				
+
 				if($this->adminLogged){
 					echo <<<HTML
 							<div class="dropdowns" id="advOptions" style="display:none">
@@ -128,22 +128,22 @@
 				}
 				?>
 				<!-- ********************* Admin Options ************************ -->
-					
+
 
 				<!-- Settings-->
 				<div class="dropdowns" id="settings" style="display:none">
 					<div class="menu-head">
 						<span class="name">Settings</span>
 					</div>
-					<div class="menus settings" onclick="toggleMode()"> 
-						<i class="left fa fa-circle-half-stroke"></i> 
+					<div class="menus settings" onclick="toggleMode()">
+						<i class="left fa fa-circle-half-stroke"></i>
 						<span> Dark Mode </span>
 						<i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i>
 					</div>
 
 					<a href="" class="menus settings">
 						<i class="left fa fa-icons"></i>
-						<span>Manage Interests</span> 
+						<span>Manage Interests</span>
 					</a>
 					<a href="" class="menus settings">
 						<i class="left fa fa-message"></i>
