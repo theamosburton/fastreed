@@ -38,7 +38,7 @@ class updateDetails{
     var nameRegex =/^[a-zA-Z]+(?: [a-zA-Z]+)*(?:\. [a-zA-Z]+)?$/;
     this.fullName = document.querySelector('#fullName').value;
     var uError = document.querySelector('#nameErrorMessage');
-    
+
     if(nameRegex.test(this.fullName)){
       uError.innerHTML = '&#x2713;';
       uError.style.color = 'lime';
@@ -63,7 +63,7 @@ class updateDetails{
       this.isGender = true;
       errorMessage.innerHTML = '&#x2713;';
       errorMessage.style.color = 'lime';
-      
+
     }else{
       errorMessage.innerHTML = `Please select gender`;
     }
@@ -83,7 +83,7 @@ class updateDetails{
     }else if (this.username.length <= 6) {
       uError.innerHTML = ' Short Username ';
     }else{
-      
+
       const checkFromRemote = async () =>{
           const logUrl = `/.ht/API/updateDetails.php/?fieldsCheck`;
           var encyDat = {
@@ -109,7 +109,7 @@ class updateDetails{
               uError.innerHTML = '&#x2713;';
               uError.style.color = 'Lime';
             }
-            
+
           }else{
               uError.innerHTML = 'Try Again...';
               uError.style.color = 'Orange';
@@ -148,7 +148,7 @@ class updateDetails{
             if (!data.Result) {
               this.isEmail = true;
               uError.innerHTML = '&#x2713;';
-              uError.style.color = 'Lime';   
+              uError.style.color = 'Lime';
             }else{
               uError.innerHTML = ' Already Taken ';
               uError.style.color = 'Orange';
@@ -161,7 +161,7 @@ class updateDetails{
       checkFromRemote();
     }
   }
-  
+
   checkDOB(){
     this.isDOB = false;
     this.DOB = document.querySelector('#DOB').value;
@@ -179,15 +179,15 @@ class updateDetails{
         errorMessage.style.color = 'Orange';
         errorMessage.innerHTML = 'Please Enter DOB';
     }
-  
-  
+
+
     function isFiveYearsOld(dateString) {
       var inputDate = new Date(dateString);
       var today = new Date();
       var tenYearsAgo = new Date().setFullYear(today.getFullYear() - 7);
       return inputDate <= tenYearsAgo;
       }
-  
+
   }
 
   checkWebsite(){
@@ -199,7 +199,7 @@ class updateDetails{
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
     '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-  
+
     if(pattern.test(this.website)){
       if(this.website == 'https://www.fastreed.com'){
         this.website = '';
@@ -263,7 +263,7 @@ class updateDetails{
                     body: JSON.stringify(encyDat)
                   });
                 var data = await response.json();
-    
+
                 if (data) {
                   if (data.Result) {
                     messageDiv.classList.add('alert-success');
@@ -321,7 +321,7 @@ class updateDetails{
         }
         if (this.isEmail) {
           if (this.isDOB) {
-           
+
             messageDiv.classList.add('alert-success');
             messageDiv.classList.remove('alert-danger');
             dispMessage.innerHTML = 'Updating...';
@@ -349,7 +349,7 @@ class updateDetails{
                   body: JSON.stringify(encyDat)
                 });
               var data = await response.json();
-  
+
               if (data) {
                 console.log();
                 if (data.Result) {
@@ -415,7 +415,7 @@ class updateDetails{
       newPass.type = 'password';
     }
   }
-  
+
   checkNewPassword(){
     var error = document.getElementById('newPasswordError');
     var input = document.getElementById('newPassword');
@@ -443,7 +443,7 @@ class updateDetails{
     }
   }
 
-  checkVerifyPassword(){  
+  checkVerifyPassword(){
     var error = document.getElementById('verifyError');
     var input = document.getElementById('newPasswordVerify');
     error.style.display = 'block';
@@ -723,9 +723,9 @@ function updateAccess(id){
         if (id == 'canCreate') {
           field.style.display = 'block';
           var requested ='';
-          var rejected = ''; 
-          var notReq = ''; 
-          var accepted = ''; 
+          var rejected = '';
+          var notReq = '';
+          var accepted = '';
           var followersSel ='';
           if (fieldValue == 'ACC') {
             accepted = 'selected';
@@ -734,7 +734,7 @@ function updateAccess(id){
           }else if (fieldValue == 'REJ') {
             rejected = 'selected';
           }else{
-            notReq = 'selected'; 
+            notReq = 'selected';
           }
 
           fieldDiv.innerHTML = `<select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('${id}')" id="${id}Access">
@@ -745,7 +745,7 @@ function updateAccess(id){
           </select>`;
         }else{
           field.style.display = 'block';
-          var selfSel = ''; 
+          var selfSel = '';
           var followersSel ='';
           var anonSel = '';
           var usersSel = '';
@@ -780,7 +780,3 @@ function updateAccess(id){
   }
   updateAccess();
 }
-
-
-  
-   

@@ -18,7 +18,7 @@ class updateDetails{
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
 
-    
+
         if (!isset($_GET)) {
             showMessage(false, "Access Denied No argument");
         }elseif (isset($_GET['gender']) && isset($_GET['DOB'])) {
@@ -34,6 +34,18 @@ class updateDetails{
             $value = $data['value'];
             $currentValue = $data['currentValue'];
             if($this->checkExcept($f, $u, $value, $currentValue)){
+                showMessage(false, "Available");
+            }else{
+                showMessage(true, "Exists");
+            }
+        }elseif (isset($_GET['emailCheck'])){
+            $data = json_decode(file_get_contents('php://input'), true);
+            $email = $data['email'];
+            $sql = "SELECT COUNT(emailID) as count FROM account_details WHERE emailID = '$email'";
+            $result = mysqli_query($this->DB, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $return = ($row['count'] == 0);
+            if($return){
                 showMessage(false, "Available");
             }else{
                 showMessage(true, "Exists");
@@ -77,7 +89,7 @@ class updateDetails{
         }else{
             showMessage(false, "Access Denied DA");
         }
-       
+
     }
 
     // Updating profile details
@@ -144,13 +156,13 @@ class updateDetails{
         $email = $data['email'] ?? null;
         $cEmail = $data['cEmail'] ?? null;
         $cUsername = $data['cUsername'] ?? null;
-        
+
         $adminValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($cEmail) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cEmail) && !empty($cUsername);
 
         $userValueSet = isset($fullName) && isset($gender) && isset($DOB) && isset($Username) && isset($cUsername) && isset($email) && !empty($fullName) && !empty($gender) && !empty($DOB) && !empty($Username) && !empty($cUsername);
 
         $ePID = $data['personID'];
-        
+
         if ($x == 'admin') {
             if ($adminValueSet) {
                 # admin edit
@@ -160,7 +172,7 @@ class updateDetails{
                     showMessage(false, "Email Already Exists");
                 } else {
                     $dPID = $this->AUTH->decrypt($ePID);
-                    $sql = "UPDATE account_details SET 
+                    $sql = "UPDATE account_details SET
                     gender = '$gender',
                     DOB = '$DOB',
                     fullName = '$fullName',
@@ -169,7 +181,7 @@ class updateDetails{
                     websiteUrl = '$website',
                     emailID = '$email'
                     WHERE personID = '$dPID'";
-    
+
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
                         $this->renameUploadFolder($cUsername, $Username);
@@ -187,7 +199,7 @@ class updateDetails{
                     showMessage(false, "Username Already Exists");
                 } else {
                     $dPID = $this->AUTH->decrypt($ePID);
-                    $sql = "UPDATE account_details SET 
+                    $sql = "UPDATE account_details SET
                     gender = '$gender',
                     DOB = '$DOB',
                     fullName = '$fullName',
@@ -195,7 +207,7 @@ class updateDetails{
                     username = '$Username',
                     websiteUrl = '$website'
                     WHERE personID = '$dPID'";
-    
+
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
                         $this->renameUploadFolder($cUsername, $Username);
@@ -210,7 +222,7 @@ class updateDetails{
     }
 
 
-    // Renaming upload folder 
+    // Renaming upload folder
     private function renameUploadFolder($cUsername, $Username){
         $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
         $pDirectory = $_DOCROOT.'/.ht/fastreedusercontent/photos/'.$cUsername;
@@ -260,11 +272,11 @@ class updateDetails{
             showMessage(false, "Upload problem");
         }
     }
-    // Updating profile details / 
+    // Updating profile details /
     private function updateGenderDob($gender, $dob){
         $uid = $_SESSION['LOGGED_USER'];
         $sql = "UPDATE account_details SET gender = '$gender', DOB = '$dob' WHERE personID = '$uid'";
-    
+
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             showMessage(true, "Profile Updated");
@@ -272,6 +284,6 @@ class updateDetails{
             showMessage(false, "Not Updated");
         }
     }
-    
+
 }
 ?>

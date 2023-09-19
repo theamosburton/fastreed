@@ -56,17 +56,20 @@ if ($adminLogged || $userLogged) {
              <!-- Sign Up -->
              <div  class="form signup">
                <div class="field">
-                 <input type="text" placeholder="Full Name*" required>
+                 <input id="fullName" onkeyup="checkName()" type="text" placeholder="Full Name*" required>
                </div>
                <div class="field">
-                 <input type="text" placeholder="Email Address*" required>
+                 <input id="emailAddress" onkeyup="checkEmail()" type="text" placeholder="Email Address*" required>
                </div>
                <div class="field">
-                 <input type="password" placeholder="Password*" required>
+                 <input onkeyup="checkNewPassword()" id="password" type="password" placeholder="Password*" required>
                </div>
                <div class="field">
-                 <input type="password" placeholder="Confirm password*" required>
+                 <input onkeyup="checkVerifyPassword()" id="passwordVerify" type="password" placeholder="Confirm password*" required>
                </div>
+
+                <div class="signup-link">By clicking on signup you agree to fastreed <a href="">terms and conditions</a></div>
+
                <div class="field btn">
                  <div class="btn-layer"></div>
                  <button id="signupButton" class="submit"  onclick="signup()">Signup</button>

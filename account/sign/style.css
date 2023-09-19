@@ -134,7 +134,7 @@ input[type="radio"]{
   color: #1a75ff;
 }
 .form-inner .form .pass-link{
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .form-inner .form .signup-link{
   text-align: center;
@@ -206,6 +206,9 @@ input[type="radio"]{
   to{ transform: rotate(360deg); }
 }
 @media (max-width: 400px) {
+  html,body{
+    place-items: normal;
+  }
   body{
     background: white;
   }
