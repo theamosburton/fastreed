@@ -115,7 +115,7 @@ function checkEmail(){
             emailVerified = true;
             emailID.style.color = 'green';
           }else{
-            emailMessage = 'Invalid email address';
+            emailMessage = 'Already have an account with this email address';
             emailID.style.borderColor =  'Orange';
             emailID.style.color = 'red';
             emailVerified = false;
