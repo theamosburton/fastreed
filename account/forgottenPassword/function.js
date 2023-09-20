@@ -111,6 +111,24 @@ function checkNewPassword(){
   }
 }
 
+function checkPasswordStrength(password) {
+  var strength = '';
+
+  var hasLetters = /[a-zA-Z]/.test(password);
+  var hasNumbers = /\d/.test(password);
+  var hasSpecialChars = /[^a-zA-Z0-9]/.test(password);
+
+  if ((hasLetters && hasNumbers) || (hasLetters && hasSpecialChars) || (hasSpecialChars && hasNumbers)) {
+    strength = 'Medium';
+  } else if (hasLetters && hasNumbers && hasSpecialChars) {
+    strength = 'Strong';
+  } else {
+    strength = 'Weak';
+  }
+
+  return strength;
+}
+
 function checkVerifyPassword(){
   var input = document.getElementById('passwordVerify');
   var input2 = document.getElementById('password');
