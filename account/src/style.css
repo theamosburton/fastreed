@@ -292,7 +292,7 @@ background-color: transparent!important;
     background-color: rgb(181 45 1 / 93%);
 }
 .forgotPassword{
-  margin-left: 10px;
+  margin-left: 10px !important;
 }
 .setPassword .password .pErrorDiv{
     padding: 0px!important;
