@@ -218,9 +218,7 @@
     flex-direction: row;
 }
 
-.forgotPassword{
-  margin-left: 10px;
-}
+
 .privacySecurity .password .inp .eye-logo{
     margin-left: 15px;
 }
@@ -292,6 +290,9 @@ background-color: transparent!important;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: rgb(181 45 1 / 93%);
+}
+.forgotPassword{
+  margin-left: 10px;
 }
 .setPassword .password .pErrorDiv{
     padding: 0px!important;
