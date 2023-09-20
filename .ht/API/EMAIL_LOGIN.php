@@ -140,8 +140,7 @@ class eSignUpLogin{
       }else{
         $email = $data['emailAddress'];
         $sEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-        $name = $data['fullName'];
-        $sName = filter_var($name, FILTER_SANITIZE_STRING);
+        $sName = $data['fullName'];
         $password = $data['password'];
         $randOTP ="";
         for ($x = 1; $x <= 6; $x++) {
