@@ -73,9 +73,6 @@ class eSignUpLogin{
         $password = $_SESSION['password'];
         $sName = $_SESSION['name'];
         if($this->sendOTP($sEmail, $randOTP, $sName)){
-          if (DOMAIN == 'localhost') {
-            setcookie('otp', $randOTP, time()+(60 * 60 * 24 * 90), '/');
-          }
           $_SESSION['otp'] = $randOTP;
           $_SESSION['otpTime'] = time();
           showMessage(true, 'OTP sent');
@@ -358,7 +355,7 @@ class eSignUpLogin{
         }
         #cont{
           background-color: white;
-          padding: .3em;
+          padding: .5em;
           max-width: 500px;
           border: .5px solid #eee;
           border-radius: 5px;
