@@ -200,6 +200,7 @@ function checkPasswordStrength(password) {
 
 
 function sendOTP(){
+  let signupError = document.getElementById('signupError');
   let password = document.getElementById('password');
   let email = document.getElementById('emailAddress');
   let name = document.getElementById('fullName');
@@ -223,20 +224,29 @@ function sendOTP(){
       if (data.Result) {
         window.location = 'auth.php';
       }else{
+        signupError.style.display = 'block';
+        signupError.innerHTML = data.message;
+        signupError.style.color = 'red';
       }
     }else{
+      signupError.style.display = 'block';
+      signupError.innerHTML = 'Server error';
+      signupError.style.color = 'red';
     }
   }
-  let signupError = document.getElementById('signupError');
+
   if (!nameVerified) {
     signupError.style.display = 'block';
     signupError.innerHTML = nameMessage;
+    signupError.style.color = 'red';
   }else if (!emailVerified) {
     signupError.style.display = 'block';
     signupError.innerHTML = emailMessage;
+    signupError.style.color = 'red';
   }else if (!passwordVerified) {
     signupError.style.display = 'block';
     signupError.innerHTML = passMessage;
+    signupError.style.color = 'red';
   }else{
     signupError.style.display = 'none';
     sendotp();
@@ -266,10 +276,12 @@ function resendOTP(){
       }else{
         error.style.display = 'block';
         error.innerHTML = data.message;
+        error.style.color = 'red';
       }
     }else{
       error.style.display = 'block';
       error.innerHTML = 'Server Error';
+      error.style.color = 'red';
     }
   }
   resendotp();
@@ -304,10 +316,12 @@ function verifyEmail(){
       }else{
         error.style.display = 'block';
         error.innerHTML = data.message;
+        error.style.color = 'red';
       }
     }else{
       error.style.display = 'block';
       error.innerHTML = 'Problem at our end';
+      error.style.color = 'red';
     }
   }
 
@@ -316,5 +330,6 @@ function verifyEmail(){
   }else{
     error.style.display = 'block';
     error.innerHTML = 'Short OTP entered';
+    error.style.color = 'red';
   }
 }
