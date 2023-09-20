@@ -102,6 +102,8 @@ class forgotPassword{
 
   private function resetPassword($id, $pass){
     $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+    echo $id;
+    echo $hashedPassword;
     $sql = "UPDATE accounts SET Password = '$hashedPassword' WHERE personID = '$id'";
     $result = mysqli_query($this->DB, $sql);
     if (mysqli_num_rows($result)) {
