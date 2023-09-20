@@ -18,6 +18,9 @@ function hideEmail($email) {
     return $hiddenEmail;
 }
 $hiddenEmail = hideEmail($_SESSION['email']);
+if (!isset($_SESSION['rID'])) {
+  header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
