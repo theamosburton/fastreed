@@ -55,6 +55,7 @@ if ($adminLogged || $userLogged) {
 
              <!-- Sign Up -->
              <div  class="form signup">
+                <div id="signupError" class="errorMessage"></div>
                <div class="field">
                  <input id="fullName" onkeyup="checkName()" type="text" placeholder="Full Name*" required>
                </div>
@@ -72,7 +73,7 @@ if ($adminLogged || $userLogged) {
 
                <div class="field btn">
                  <div class="btn-layer"></div>
-                 <button id="signupButton" class="submit"  onclick="signup()">Signup</button>
+                 <button id="signupButton" class="submit"  onclick="sendOTP()">Signup</button>
                </div>
              </div>
            </div>

@@ -23,17 +23,18 @@ function login(){
         loginError.style.color = 'lime';
         loginError.innerHTML = 'Login Successful';
         let element = document.getElementById('loginButton');
-        element.innerHTML = 'Login';
+        element.innerHTML = 'Redirecting.....';
         window.location = '/';
       }else{
         loginError.style.display = 'block';
         loginError.innerHTML = data.message;
         let element = document.getElementById('loginButton');
-        element.innerHTML = 'Redirecting.....';
+        element.innerHTML = 'Login';
       }
     }else{
       loginError.style.display = 'block';
       loginError.innerHTML = 'Problem at our end';
+      element.innerHTML = 'Login';
     }
   }
   if (emailUsername.trim() === "") {
@@ -58,51 +59,27 @@ function enableLoading(id){
 var emailVerified = false;
 var nameVerified = false;
 var passwordVerified = false;
-
-function signup(){
-  let name = document.getElementById('fullname');
-  let email = document.getElementById('emailAddress0');
-  let password = document.getElementById('password');
-  let vPassword = document.getElementById('passwordVerify');
-  const userSignUp = async () =>{
-    const url = '/.ht/API/EMAIL_LOGIN.php';
-    var encyDat = {
-      "purpose": "signUp",
-      "Email": `${email}`,
-      "password":`${password}`,
-      "name": `${name}`
-    };
-    const response = await fetch(url, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(encyDat)
-      });
-      var data = await response.json();
-    if (data) {
-      if (data.Result) {
-      }else{
-      }
-    }else{
-    }
-  }
-  userSignUp();
-}
+var nameMessage = 'Empty name given';
+var passMessage = 'Empty password given';
+var emailMessage = 'Empty email given';
 
 function checkName() {
   var nameRegex =/^[a-zA-Z]+(?: [a-zA-Z]+)*(?:\. [a-zA-Z]+)?$/;
   let name = document.getElementById('fullName');
   if (name.value.length < 6) {
+    nameMessage = 'Very short name';
     name.style.borderColor = 'orange'
-    name.style.color = 'red'
+    name.style.color = 'red';
+    nameVerified = false;
   }else if(nameRegex.test(name.value)){
     name.style.borderColor = 'lime'
     name.style.color = 'Green'
     nameVerified = true;
   }else{
+    nameMessage = 'Invalid name entered';
     name.style.borderColor = 'orange'
     name.style.color = 'red'
+    nameVerified = false;
   }
 }
 
@@ -111,9 +88,13 @@ function checkEmail(){
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if ( emailID.value.length <= 5) {
     emailID.style.borderColor = 'Orange';
+    emailMessage = 'Very short email address';
+    emailVerified = false;
   }else if(!emailRegex.test(emailID.value)){
     emailID.style.borderColor = 'Orange';
     emailID.style.color = 'red';
+    emailMessage = 'Invalid email address';
+    emailVerified = false;
   }else{
     const checkFromRemote = async () =>{
         const logUrl = `/.ht/API/updateDetails.php/?emailCheck`;
@@ -134,14 +115,16 @@ function checkEmail(){
             emailVerified = true;
             emailID.style.color = 'green';
           }else{
-            alert('Email already exists');
+            emailMessage = 'Invalid email address';
             emailID.style.borderColor =  'Orange';
             emailID.style.color = 'red';
+            emailVerified = false;
           }
         }else{
-            alert('Server Problem');
+            emailMessage = 'Problem at our end';
             emailID.style.borderColor = 'Orange';
             emailID.style.color = 'red';
+            emailVerified = false;
         }
     }
     checkFromRemote();
@@ -161,7 +144,6 @@ function checkNewPassword(){
   }else if(checkPasswordStrength(input) == 'Medium'){
     input.style.color = 'green';
     input.style.borderColor = 'lime';
-    passwordVerified = true;
   }else if(checkPasswordStrength(input) == 'Strong'){
     input.style.color = 'green';
     input.style.borderColor = 'lime';
@@ -179,7 +161,9 @@ function checkVerifyPassword(){
     input2.style.color = '#ff3e00';
     input.style.borderColor = '#ff3e00';
     input2.style.borderColor = '#ff3e00';
-  }else if(input2.value == input.value){
+    passMessage = 'Short password entered';
+    passwordVerified = false;
+  }else if(input2.value === input.value){
     input.style.color = 'green';
     input2.style.color = 'green';
     input.style.borderColor = 'lime';
@@ -190,6 +174,8 @@ function checkVerifyPassword(){
     input.style.color = '#ff3e00';
     input.style.borderColor = '#ff3e00';
     input2.style.borderColor = '#ff3e00';
+    passMessage = 'Password not matched';
+    passwordVerified = false;
   }
 }
 
@@ -209,4 +195,83 @@ function checkPasswordStrength(password) {
   }
 
   return strength;
+}
+
+
+
+function sendOTP(){
+  let password = document.getElementById('password');
+  let email = document.getElementById('emailAddress');
+  let name = document.getElementById('fullName');
+  const sendotp = async () =>{
+    const url = '/.ht/API/EMAIL_LOGIN.php';
+    var encyDat = {
+      "purpose": "verifyEmail",
+      "emailAddress": `${email.value}`,
+      "password":`${password.value}`,
+      "fullName": `${name.value}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+      var data = await response.json();
+    if (data) {
+      if (data.Result) {
+        window.location = 'auth.php';
+      }else{
+      }
+    }else{
+    }
+  }
+  let signupError = document.getElementById('signupError');
+  if (!nameVerified) {
+    signupError.style.display = 'block';
+    signupError.innerHTML = nameMessage;
+  }else if (!emailVerified) {
+    signupError.style.display = 'block';
+    signupError.innerHTML = emailMessage;
+  }else if (!passwordVerified) {
+    signupError.style.display = 'block';
+    signupError.innerHTML = passMessage;
+  }else{
+    signupError.style.display = 'none';
+    sendotp();
+  }
+}
+
+function verifyEmail(){
+  let otp =  document.getElementById('otpInput');
+
+  const verifyOTP = async () =>{
+    const url = '/.ht/API/EMAIL_LOGIN.php';
+    var encyDat = {
+      "purpose": "verifyOTP",
+      "OTP" : `${otp.value}`
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+      var data = await response.json();
+    if (data) {
+      if (data.Result) {
+        // window.location = 'auth.php';
+      }else{
+      }
+    }else{
+    }
+  }
+
+  if (otp.value.length === 6) {
+    verifyOTP();
+  }else{
+
+  }
 }

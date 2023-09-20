@@ -12,7 +12,7 @@ class passwordRelated{
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
-        
+
         if (!isset($_GET)) {
             showMessage(false, "Access Denied No argument");
         }elseif (isset($_GET['passwordRelated'])) {
@@ -96,9 +96,9 @@ class passwordRelated{
         $newPassword = htmlentities($newPassword, ENT_QUOTES, 'UTF-8');
 
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $sql = "UPDATE accounts SET 
+        $sql = "UPDATE accounts SET
         Password = '$hashedPassword'
-        WHERE personID = '$dPID' 
+        WHERE personID = '$dPID'
         ";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
@@ -133,7 +133,7 @@ class passwordRelated{
             }else{
                 $this->createPassword();
             }
-           
+
         } elseif($this->userData->getSelfDetails()['userType'] == 'Admin'){
             $this->createPassword();
         }else {
@@ -141,7 +141,7 @@ class passwordRelated{
         }
 
     }
-    
+
 
 }
 ?>

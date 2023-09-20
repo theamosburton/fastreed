@@ -30,7 +30,7 @@ class BasicFunctions
     filter_var($IP_ADDRESS, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
     return $IP_ADDRESS;
   }
-  
+
   public function gitIsUpdated(){
       shell_exec('git fetch fastreed');
       // Get the SHA hash of the latest commit on the local and remote branches
@@ -38,12 +38,12 @@ class BasicFunctions
       $remoteSha = shell_exec('git rev-parse fastreed/main');
       // Compare the local and remote branches
       // $diff = shell_exec("git diff $localSha $remoteSha");
-      if ($localSha != $remoteSha) {  
+      if ($localSha != $remoteSha) {
       $return = false;
       // If there are differences, return false
       } else {
       // If there are no differences, return true
-      $return = true; 
+      $return = true;
       }
       return $return;
   }
