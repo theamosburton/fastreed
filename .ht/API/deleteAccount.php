@@ -28,7 +28,7 @@ class deleteAccount {
             showMessage(false, "Set relevent parameter");
         }
         $this->userData->closeConnection();
-        $this.closeConnection();
+        $this->closeConnection();
     }
 
     public function closeConnection()
@@ -61,13 +61,13 @@ class deleteAccount {
                 case 'uploads':
                     $this->deletingUploads($dPID, $username);
                     break;
-                
+
                 default:
                     showMessage(false, "Not mentioned what to delete");
                     break;
             }
         }
-       
+
     }
 
     private function deleteUsingUsername(){
@@ -94,7 +94,7 @@ class deleteAccount {
                 case 'uploads':
                     $this->deletingUploads($dPID, $data['username']);
                     break;
-                
+
                 default:
                     showMessage(false, "Not mentioned what to delete");
                     break;
@@ -115,7 +115,7 @@ class deleteAccount {
                         $return = true;
                     }
                 }
-                
+
             }
         }
         return $return;
@@ -166,7 +166,7 @@ class deleteAccount {
             case 'uploads':
                 $this->deletingUploads($dPID, $username);
                 break;
-            
+
             default:
                 showMessage(false, "Not mentioned what to delete");
                 break;
@@ -199,7 +199,7 @@ class deleteAccount {
             }
         }
         /************************************/
-    
+
 
         /************************************/
         // Check if rows exist before deleting in accounts table
@@ -237,16 +237,16 @@ class deleteAccount {
         } else {
             showMessage(false, "Userdata not deleted");
         }
- 
+
     }
-    
-    
+
+
 
     private function deletingContents($id) {
         $deleteUploads = "DELETE FROM uploads WHERE personID = '$id'";
-    
+
         $deleteResult = mysqli_query($this->DB, $deleteUploads);
-    
+
         if ($deleteResult !== false) {
             if (mysqli_affected_rows($this->DB) > 0) {
                 showMessage(true, "All rows deleted");
@@ -257,14 +257,14 @@ class deleteAccount {
             showMessage(false, "Failed to delete rows");
         }
     }
-    
-    
+
+
 
     private function deletingUploads($username) {
         $photos = $this->_DOCROOT . '/.ht/fastreedusercontent/photos/' . $username;
         $videos = $this->_DOCROOT . '/.ht/fastreedusercontent/videos/' . $username;
         $audios = $this->_DOCROOT . '/.ht/fastreedusercontent/audios/' . $username;
-    
+
         // Delete 'photos' directory and its contents
         if (is_dir($photos)) {
             $files = glob($photos . '/*'); // Get all files within the directory
@@ -281,7 +281,7 @@ class deleteAccount {
         }else{
             $photosDeleted = true;
         }
-    
+
         // Delete 'videos' directory and its contents
         if (is_dir($videos)) {
             $files = glob($videos . '/*'); // Get all files within the directory
@@ -298,7 +298,7 @@ class deleteAccount {
         }else{
             $videosDeleted = true;
         }
-    
+
         // Delete 'audios' directory and its contents
         if (is_dir($audios)) {
             $files = glob($audios . '/*'); // Get all files within the directory
@@ -315,7 +315,7 @@ class deleteAccount {
         }else{
             $audioDeleted = true;
         }
-    
+
         // Show appropriate message based on deletion status
         if ($photosDeleted && $videosDeleted && $audioDeleted) {
             showMessage(true, 'Uploads deleted');
@@ -323,9 +323,9 @@ class deleteAccount {
             showMessage(false, 'Uploads not deleted');
         }
     }
-    
-    
-    
+
+
+
 }
 
 ?>
