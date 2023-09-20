@@ -308,11 +308,9 @@ function verifyEmail(){
     if (data) {
       if (data.Result) {
         error.style.display = 'block';
-        error.innerHTML = 'Email verified successfully....';
+        error.innerHTML = 'Redirecting....';
         error.style.color = 'green';
-        setTimeout(function (){
-          window.location.href = '/';
-        }, 3000);
+        window.location.href = '/';
       }else{
         error.style.display = 'block';
         error.innerHTML = data.message;
