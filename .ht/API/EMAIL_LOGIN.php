@@ -328,7 +328,7 @@ class eSignUpLogin{
           </div><hr>
           <div>You can create your channel and publish your content. To know more about us please have a visit at our website:
           </div><br>
-          <div id='link'><a href='https://www.".DOMAIN."/'> Website Link</a>
+          <div id='link'><a href='https://".DOMAIN."/'> Website Link</a>
           </div><br>
           <footer id='footer'>
           This mail is sent to <b>".$userEmail." </b>and is intended for account verification of <b>".$userFullName."</b>. <br><br>Kindly ignore if you haven't generated the OTP</b>
