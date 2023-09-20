@@ -1,25 +1,26 @@
 <?php
-if(!isset($_SESSION)){session_start();}
-$_SERVROOT = '../../../';
-$_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include "../../.ht/controller/VISIT.php";
-$VisitorActivity = new VisitorActivity();
-$version = $VisitorActivity->VERSION;
-$version = implode('.', str_split($version, 1));
-$userData = new getLoggedData();
-$adminLogged = $userData->adminLogged;
-$userLogged = $userData->userLogged;
-function hideEmail($email) {
-    list($username, $domain) = explode('@', $email);
-    $usernameLength = strlen($username);
-    $charactersToHide = max(0, $usernameLength - 3);
-    $hiddenPart = str_repeat('*', $charactersToHide);
-    $hiddenEmail = substr($username, 0, 3) . $hiddenPart . '@' . $domain;
-    return $hiddenEmail;
-}
-$hiddenEmail = hideEmail($_SESSION['email']);
 if (!isset($_SESSION['rID'])) {
   header("Location: index.php");
+}else{
+  if(!isset($_SESSION)){session_start();}
+  $_SERVROOT = '../../../';
+  $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
+  include "../../.ht/controller/VISIT.php";
+  $VisitorActivity = new VisitorActivity();
+  $version = $VisitorActivity->VERSION;
+  $version = implode('.', str_split($version, 1));
+  $userData = new getLoggedData();
+  $adminLogged = $userData->adminLogged;
+  $userLogged = $userData->userLogged;
+  function hideEmail($email) {
+      list($username, $domain) = explode('@', $email);
+      $usernameLength = strlen($username);
+      $charactersToHide = max(0, $usernameLength - 3);
+      $hiddenPart = str_repeat('*', $charactersToHide);
+      $hiddenEmail = substr($username, 0, 3) . $hiddenPart . '@' . $domain;
+      return $hiddenEmail;
+  }
+  $hiddenEmail = hideEmail($_SESSION['email']);
 }
 ?>
 <!DOCTYPE html>
