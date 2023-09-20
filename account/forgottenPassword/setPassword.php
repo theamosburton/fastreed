@@ -9,6 +9,15 @@ $version = implode('.', str_split($version, 1));
 $userData = new getLoggedData();
 $adminLogged = $userData->adminLogged;
 $userLogged = $userData->userLogged;
+function hideEmail($email) {
+    list($username, $domain) = explode('@', $email);
+    $usernameLength = strlen($username);
+    $charactersToHide = max(0, $usernameLength - 3);
+    $hiddenPart = str_repeat('*', $charactersToHide);
+    $hiddenEmail = substr($username, 0, 3) . $hiddenPart . '@' . $domain;
+    return $hiddenEmail;
+}
+$hiddenEmail = hideEmail($_SESSION['email']);
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -28,14 +37,24 @@ $userLogged = $userData->userLogged;
 
              <!-- Log in -->
              <div class="form login">
-               <div  class="otpMessage">Enter email address or Username to recover password</div>
+               <div  class="otpMessage">Enter 6 digit OTP sent to: <i> <?php echo $hiddenEmail; ?> </i></div>
                <div id="otpError" class="errorMessage"></div>
                <div class="field">
-                 <input id="emailUsername" type="text" placeholder="Email or Username" required>
+                 <input id="otpInput" type="text" onkeyup="checkOTP()" placeholder="Enter 6 digit OTP" required>
                </div>
+
+               <div class="field">
+                 <input id="password" onkeyup="checkNewPassword()" type="text" placeholder="Enter New Password" required>
+               </div>
+
+               <div class="field">
+                 <input id="passwordVerify" onkeyup="checkVerifyPassword()" type="text" placeholder="Confirm Password" required>
+               </div>
+
+                <div class="pass-link"><a onclick="resendOTP()">Resend OTP</a></div>
                <div class="field btn">
                  <div class="btn-layer"></div>
-                 <button id="confirmButton" class="submit" onclick="sendOTP()">Recover Password</button>
+                 <button id="confirmButton" class="submit" onclick="resetPassword()">Reset Password</button>
                </div>
              </div>
 

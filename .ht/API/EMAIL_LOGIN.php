@@ -44,7 +44,8 @@ class eSignUpLogin{
       if (!isset($data['OTP']) || empty($data['OTP'])) {
         showMessage(false, 'Empty OTP given');
       }else{
-        if ($data['OTP'] == $_SESSION['otp']) {
+
+        if (password_verify($data['otp'], $_SESSION['OTP'])) {
           $elapsedTime = time() - $_SESSION['otpTime'];
           if ($elapsedTime <= 600) {
             $sEmail = $_SESSION['email'];
@@ -73,7 +74,8 @@ class eSignUpLogin{
         $password = $_SESSION['password'];
         $sName = $_SESSION['name'];
         if($this->sendOTP($sEmail, $randOTP, $sName)){
-          $_SESSION['otp'] = $randOTP;
+          $hashedOTP = password_hash($randOTP, PASSWORD_DEFAULT);
+          $_SESSION['otp'] = $hashedOTP;
           $_SESSION['otpTime'] = time();
           showMessage(true, 'OTP sent');
         }else{
@@ -193,7 +195,8 @@ class eSignUpLogin{
           if (DOMAIN == 'localhost') {
             setcookie('otp', $randOTP, time()+(60 * 60 * 24 * 90), '/');
           }
-          $_SESSION['otp'] = $randOTP;
+          $hashedOTP = password_hash($randOTP, PASSWORD_DEFAULT);
+          $_SESSION['otp'] = $hashedOTP;
           $_SESSION['otpTime'] = time();
           $_SESSION['email'] = $sEmail;
           $_SESSION['password'] = $password;
