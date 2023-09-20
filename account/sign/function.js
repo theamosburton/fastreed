@@ -243,9 +243,42 @@ function sendOTP(){
   }
 }
 
+function resendOTP(){
+  let error =  document.getElementById('otpError');
+  const resendotp = async () =>{
+    const url = '/.ht/API/EMAIL_LOGIN.php';
+    var encyDat = {
+      "purpose": "resendOTP"
+    };
+    const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(encyDat)
+      });
+      var data = await response.json();
+    if (data) {
+      if (data.Result) {
+        error.style.display = 'block';
+        error.innerHTML = 'OTP sent successfully';
+        error.style.color = 'lime';
+      }else{
+        error.style.display = 'block';
+        error.innerHTML = data.message;
+      }
+    }else{
+      error.style.display = 'block';
+      error.innerHTML = 'Server Error';
+    }
+  }
+  resendotp();
+}
+
+
 function verifyEmail(){
   let otp =  document.getElementById('otpInput');
-
+  let error =  document.getElementById('otpError');
   const verifyOTP = async () =>{
     const url = '/.ht/API/EMAIL_LOGIN.php';
     var encyDat = {
@@ -262,16 +295,26 @@ function verifyEmail(){
       var data = await response.json();
     if (data) {
       if (data.Result) {
-        // window.location = 'auth.php';
+        error.style.display = 'block';
+        error.innerHTML = 'Email verified successfully....';
+        error.style.color = 'green';
+        setTimeout(function (){
+          window.location.href = '/';
+        }, 3000);
       }else{
+        error.style.display = 'block';
+        error.innerHTML = data.message;
       }
     }else{
+      error.style.display = 'block';
+      error.innerHTML = 'Problem at our end';
     }
   }
 
   if (otp.value.length === 6) {
     verifyOTP();
   }else{
-
+    error.style.display = 'block';
+    error.innerHTML = 'Short OTP entered';
   }
 }

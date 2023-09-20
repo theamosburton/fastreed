@@ -45,17 +45,45 @@ class eSignUpLogin{
         showMessage(false, 'Empty OTP given');
       }else{
         if ($data['OTP'] == $_SESSION['otp']) {
-          $sEmail = $_SESSION['email'];
-          $password = $_SESSION['password'];
-          $sName = $_SESSION['name'];
-          $firtchar = substr($sName, 0, 1);
-          $firstchar = strtoupper($firtchar);
-          $profilePic = '/assets/Dp/'.$firstchar.'.png';
-          $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-          $this->createNewAccount($sEmail, $sName, $profilePic, $hashedPassword);
+          $elapsedTime = time() - $_SESSION['otpTime'];
+          if ($elapsedTime <= 600) {
+            $sEmail = $_SESSION['email'];
+            $password = $_SESSION['password'];
+            $sName = $_SESSION['name'];
+            $firtchar = substr($sName, 0, 1);
+            $firstchar = strtoupper($firtchar);
+            $profilePic = '/assets/Dp/'.$firstchar.'.png';
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $this->createNewAccount($sEmail, $sName, $profilePic, $hashedPassword);
+          }else {
+              showMessage(false, 'OTP expired');
+          }
         }else{
           showMessage(false, 'Wrong OTP given');
         }
+      }
+    }elseif ($data['purpose'] == 'resendOTP') {
+      if (isset($_SESSION['name']) && isset($_SESSION['password']) && isset($_SESSION['email'])) {
+        $randOTP = "";
+        for ($x = 1; $x <= 6; $x++) {
+            // Set each digit
+            $randOTP .= random_int(0, 9);
+        }
+        $sEmail = $_SESSION['email'];
+        $password = $_SESSION['password'];
+        $sName = $_SESSION['name'];
+        if($this->sendOTP($sEmail, $randOTP, $sName)){
+          if (DOMAIN == 'localhost') {
+            setcookie('otp', $randOTP, time()+(60 * 60 * 24 * 90), '/');
+          }
+          $_SESSION['otp'] = $randOTP;
+          $_SESSION['otpTime'] = time();
+          showMessage(true, 'OTP sent');
+        }else{
+          showMessage(false, 'OTP not sent 1');
+        }
+      }else {
+        showMessage(false, 'OTP not sent 2');
       }
     }
   }
@@ -94,7 +122,24 @@ class eSignUpLogin{
           $this->loginAccount($userID);
           $ePID = $this->AUTH->encrypt($userID);
           $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
-          showMessage(true, "Account created successfully");
+          $_SESSION['email'];
+          $_SESSION['password'];
+          $_SESSION['name'];
+          if (isset($_SESSION['email'])) {
+              unset($_SESSION['email']);
+          }
+          if (isset($_SESSION['password'])) {
+              unset($_SESSION['password']);
+          }
+          if (isset($_SESSION['name'])) {
+              unset($_SESSION['name']);
+          }
+          if (isset($_SESSION['otp'])) {
+              unset($_SESSION['otp']);
+          }
+          if (isset($_SESSION['otpTime'])) {
+              unset($_SESSION['otpTime']);
+          }
         }else {
           showMessage(false, "Can't create settings");
         }
@@ -147,12 +192,15 @@ class eSignUpLogin{
             // Set each digit
             $randOTP .= random_int(0, 9);
         }
-        $_SESSION['otp'] = $randOTP;
-        setcookie('otp', $randOTP, time()+(60 * 60 * 24 * 90), '/');
-        $_SESSION['email'] = $sEmail;
-        $_SESSION['password'] = $password;
-        $_SESSION['name'] = $sName;
         if($this->sendOTP($sEmail, $randOTP, $sName)){
+          if (DOMAIN == 'localhost') {
+            setcookie('otp', $randOTP, time()+(60 * 60 * 24 * 90), '/');
+          }
+          $_SESSION['otp'] = $randOTP;
+          $_SESSION['otpTime'] = time();
+          $_SESSION['email'] = $sEmail;
+          $_SESSION['password'] = $password;
+          $_SESSION['name'] = $sName;
           showMessage(true, 'OTP sent');
         }else{
           showMessage(false, 'OTP not sent');
@@ -339,10 +387,9 @@ class eSignUpLogin{
 
     $subject = $randOTP." is your OTP";
     $headers = "From: Fastreed OTP Authentication <no-reply@".DOMAIN.">" . "\r\n" ."CC: support@".DOMAIN."\r\n"."Content-type: text/html";
-    $mailDeliverd =  mail($userEmail,$subject,$message,$headers);
     if(DOMAIN == 'localhost'){
       $mailStatus = true;
-    }else if ($mailDeliverd) {
+    }else if (mail($userEmail,$subject,$message,$headers)) {
       $mailStatus = true;
     }else {
       $mailStatus = false;

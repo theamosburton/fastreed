@@ -9,8 +9,10 @@ $version = implode('.', str_split($version, 1));
 $userData = new getLoggedData();
 $adminLogged = $userData->adminLogged;
 $userLogged = $userData->userLogged;
-if ($adminLogged || $userLogged) {
-  header("Location: /");
+if (!isset($_SESSION['otp']) || empty($_SESSION['otp']) || !isset($_SESSION['email']) || empty($_SESSION['email'])) {
+    header("Location: /account/sign/");
+}elseif ($adminLogged || $userLogged) {
+    header("Location: /");
 }
 ?>
 <!DOCTYPE html>
@@ -31,12 +33,12 @@ if ($adminLogged || $userLogged) {
 
              <!-- Log in -->
              <div class="form login">
-               <div  class="otpMessage" >We have sent a 6 digit OTP to your email address please enter to contnue</div>
+               <div  class="otpMessage">We have sent a 6 digit OTP to your email address please enter to contnue</div>
                <div id="otpError" class="errorMessage"></div>
                <div class="field">
-                 <input id="otpInput" type="number" placeholder="Enter six digit OTP" required>
+                 <input id="otpInput" type="text" placeholder="Enter six digit OTP" required>
                </div>
-               <div class="pass-link"><a href="#">Resend OTP</a></div>
+               <div class="pass-link"><a onclick="resendOTP()">Resend OTP</a></div>
                <div class="field btn">
                  <div class="btn-layer"></div>
                  <button id="confirmButton" class="submit" onclick="verifyEmail()">Verify</button>

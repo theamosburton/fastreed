@@ -35,11 +35,11 @@ class showProfile {
         }elseif (isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new nonLoggedVother();
         }elseif ($this->userLogged && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
-            header("Location:/");
+            header("Location:/account/sign/");
         }elseif($this->userLogged) {
             new loggedVself();
         }else{
-            header("Location:/");
+            header("Location:/account/sign");
         }
     }
     // This function construct properties and methods for inherited classes
