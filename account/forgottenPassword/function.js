@@ -168,7 +168,7 @@ function resetPassword(){
     error.style.color = 'red';
   }else{
     var input = document.getElementById('otpInput');
-    var input2 = document.getElementById('password');
+    var input2 = document.getElementById('passwordVerify');
     var inputOTP = input.value;
     const resetPassword = async () =>{
       const url = '/.ht/API/FORGOT_PASSWORD.php';
