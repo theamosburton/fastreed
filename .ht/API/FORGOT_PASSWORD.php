@@ -106,7 +106,7 @@ class forgotPassword{
     echo $hashedPassword;
     $sql = "UPDATE accounts SET Password = '$hashedPassword' WHERE personID = '$id'";
     $result = mysqli_query($this->DB, $sql);
-    if (mysqli_num_rows($result)) {
+    if ($result) {
        showMessage(true, 'Password updated');
     }else {
        showMessage(true, 'Can not update password');
