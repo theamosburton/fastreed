@@ -22,10 +22,6 @@ if ($adminLogged || $userLogged) {
   </head>
   <body>
     <div class="wrapper">
-         <div class="title-text">
-           <div class="title login">Login Form</div>
-           <div class="title signup">Signup Form</div>
-         </div>
          <div class="form-container">
            <div class="slide-controls">
              <input type="radio" name="slide" id="login" checked>

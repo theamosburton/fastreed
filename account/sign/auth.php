@@ -22,7 +22,7 @@ if ($adminLogged || $userLogged) {
     <title></title>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="auth wrapper">
          <div class="title-text">
            <div class="title signup">Verify Email</div>
          </div>
