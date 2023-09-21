@@ -132,7 +132,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      // this.saveToBrowser();
+      this.saveToBrowser();
   }
   modifyMedia(type, blobUrl, url){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -233,7 +233,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   editTitle(x){
     var text = document.getElementById(`${x}`);
@@ -241,7 +241,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   changeFontWeight(){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -255,7 +255,7 @@ class Edits{
    if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   // Title editing
 
@@ -280,7 +280,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   editText(x){
     var text = document.getElementById(`${x}`);
@@ -288,7 +288,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   changeOtherFontWeight(){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -302,7 +302,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   changeOtherFontFamily(x){
     if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
@@ -322,7 +322,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
   // Text Editing
 
@@ -356,7 +356,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
 
   editStoryDescription(x){
@@ -367,7 +367,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
 
   editStoryTitle(x){
@@ -378,7 +378,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
    // Meta Data //
 

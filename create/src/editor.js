@@ -123,7 +123,7 @@ class Editor{
                           layers : this.layers,
                           metaData : this.metaData
                         };
-                        // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                       }
                     }else{
                         this.createExistedLayers();
@@ -641,7 +641,7 @@ class Editor{
                           metaData : editor.metaData,
                           version : editor.version
                         };
-                          // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                          window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                     }, 500);
                 }else{
                     setTimeout(function(){
