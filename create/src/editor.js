@@ -92,7 +92,7 @@ class Editor{
                             <div>
                               <span class="date">${this.metaData.date}</span>
                               <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
-                              <span class="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
+                              <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
                             </div>
                           </div>`;
                           var defaultImage = document.createElement('img');
@@ -243,7 +243,7 @@ class Editor{
 
             <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Edit description text</span>
 
-            <span class="imageCredit" onkeyup="mediaCredit()">Image Credit: </span>
+            <span class="imageCredit" id="imageCredit${this.presentLayerIndex}"  onkeyup="mediaCredit()">Image Credit: </span>
         </div>
         `;
         var previousElement = document.getElementById(`nav${this.presentLayer-1}`);
@@ -720,7 +720,7 @@ class Editor{
                   <div>
                     <span class="date">${this.metaData.date}</span>
                     <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
-                    <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
+                    <span class="imageCredit" id="imageCredit${i}"  onkeyup="mediaCredit()">${pl}</span>
                   </div>
                 </div>`;
             }else{
@@ -728,7 +728,7 @@ class Editor{
                 <div class="title" id="title${this.presentLayerIndex}" >
                 <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
                 <span class="otherText" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-                <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
+                <span class="imageCredit"  id="imageCredit${i}" onkeyup="mediaCredit()">${pl}</span>
                 </div>
 
                 `;
@@ -983,7 +983,7 @@ class Editor{
                             </div>
                             <div class="div">
                                 <span>Media Credit</span>
-                                <input class="value inputText text" type="text" id="mediaCredit${this.presentLayerIndex}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
+                                <input class="value inputText text" type="text" id="mediaCredit${j}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
                         </div>
                     </div>

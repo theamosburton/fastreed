@@ -188,7 +188,7 @@ class Edits{
 
   mediaCredit(){
     var applyFrom = document.getElementById(`mediaCredit${this.editor.presentLayerIndex}`);
-    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .imageCredit`);
+    var applyto =  document.getElementById(`imageCredit${this.editor.presentLayerIndex}`);
     applyto.innerHTML = applyFrom.value;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
   }
