@@ -122,36 +122,12 @@ class Edits{
       // this.saveToBrowser();
     }
   deleteMedia(type){
-      if(type == 'image'){
-          var media = document.querySelector(`#${this.editor.presentLayerDiv.id} img`);
-      }else if(type == 'video'){
-          var media = document.querySelector(`#${this.editor.presentLayerDiv.id} video`);
-      }
-
-      var overlay = document.createElement('div');
-      overlay.classList.add('overlay');
-      overlay.id = `overlay${this.presentLayerIndex}`;
-
-      var layersTop = document.createElement('div');
-      layersTop.classList.add('layersTop');
-      layersTop.innerHTML = `
-      <div class="title" id="title${this.presentLayerIndex}">
-      <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editTitle('titleText${this.presentLayerIndex}')">Enter Title/heading</span>
-      </div>
-      <div class="text" id="text${this.presentLayerIndex}">
-      <span class="titleText" contenteditable="true" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeypress="edits.editText('otherText${this.presentLayerIndex}')">Enter more text..</span>
-      </div>`;
-
-      this.editor.presentLayerDiv.innerHTML = `<div class="placeholder" id="placeholder${this.editor.presentLayerIndex}">
-          <p> Add</p>
-          <p> Photo/Video</p>
-          <small> Recomended ratios are </small>
-          <small> 9:16, 3:4 and 2:3 </small>
-      </div>`;
-
-      this.editor.presentLayerDiv.appendChild(overlay);
-      this.editor.presentLayerDiv.appendChild(layersTop);
+      var media = document.querySelector(`#mediaContent${this.editor.presentLayerIndex}`);
       media.remove();
+      var tmpImage = document.createElement('img');
+      tmpImage.src = "/assets/img/default.jpeg";
+      tmpImage.id =` mediaContent${this.editor.presentLayerIndex}`;
+      document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
       this.editor.layers['L' + this.editor.presentLayerIndex].media = {};
       if (this.version+1 == editor.version) {
         this.version += 1;

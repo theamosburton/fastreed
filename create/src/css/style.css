@@ -673,7 +673,7 @@ html{
         position: absolute;
         width: 100%;
         max-width: 350px;
-        z-index: 999;
+        z-index: 99999;
     }
 
     .hideShowLeft{
@@ -722,7 +722,7 @@ html{
         right: 0;
         width: 100%;
         max-width: 350px;
-        z-index: 999;
+        z-index: 99999;
     }
     .altertDiv .option{
       font-size: 12px;
