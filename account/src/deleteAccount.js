@@ -97,12 +97,12 @@ class DeleteAccount{
             async function Implementing() {
               thisIs.deletingCriteria.style.display = 'none';
               thisIs.deletingDiv.style.display = 'block';
-            
+
               try {
                 await deleteUploads();
                 await deleteContents();
                 await deleteUserData();
-            
+
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                 } else {
@@ -115,9 +115,9 @@ class DeleteAccount{
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
-            
+
           Implementing();
-            
+
         }else{
             this.errorDiv.style.display = 'block';
             this.dErrorDivInside.style.display = 'block';
@@ -215,12 +215,12 @@ class DeleteAccount{
             async function Implementing() {
               thisIs.deletingCriteria.style.display = 'none';
               thisIs.deletingDiv.style.display = 'block';
-            
+
               try {
                 await deleteUploads();
                 await deleteContents();
                 await deleteUserData();
-            
+
                 if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                   thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
                 } else {
@@ -234,7 +234,7 @@ class DeleteAccount{
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
               }
             }
-            
+
           Implementing();
         }
     }
@@ -336,12 +336,12 @@ class DeleteAccount{
           async function Implementing() {
             thisIs.deletingCriteria.style.display = 'none';
             thisIs.deletingDiv.style.display = 'block';
-          
+
             try {
               await deleteUploads();
               await deleteContents();
               await deleteUserData();
-          
+
               if (thisIs.uploadDeleted && thisIs.contentDeleted && thisIs.userDataDeleted) {
                 thisIs.deletingDiv.innerHTML += `<span class="deleting">Finish Deleting...............<i class="fa-solid fa-check"></i></span>`;
               } else {
@@ -350,14 +350,14 @@ class DeleteAccount{
               setTimeout(function (){
                 location.reload();
               }, 3000);
-              
+
             } catch (error) {
               thisIs.deletingDiv.innerHTML += `<span class="deleting">Something wrong happened...............<i class="fa-solid fa-xmark"></i></span>`;
             }
           }
-          
+
         Implementing();
-      } 
+      }
   }
 }
 var deleteAccount = new DeleteAccount();

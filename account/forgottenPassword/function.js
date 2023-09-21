@@ -191,6 +191,9 @@ function resetPassword(){
           error.style.display = 'block';
           error.innerHTML = 'Password Reset Successfully';
           error.style.color = 'lime';
+          setTimeout(function (){
+            location.reload();
+          }, 3000);
         }else{
           error.style.display = 'block';
           error.innerHTML = data.message;
