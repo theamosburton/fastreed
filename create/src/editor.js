@@ -92,7 +92,7 @@ class Editor{
                             <div>
                               <span class="date">${this.metaData.date}</span>
                               <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
-                              <span class="imageCredit" onkeyup="mediaCredit()">Media Credit: </span>
+                              <span class="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
                             </div>
                           </div>`;
                           var defaultImage = document.createElement('img');
@@ -720,7 +720,7 @@ class Editor{
                   <div>
                     <span class="date">${this.metaData.date}</span>
                     <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
-                    <span class="imageCredit">${pl}</span>
+                    <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
                   </div>
                 </div>`;
             }else{
