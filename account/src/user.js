@@ -74,7 +74,7 @@ class showMenus{
       uploadDbButton.addEventListener('click', () => {
         this.croppie.result({ format: 'base64', size: 'original' }).then((base64Image) => {
           var binaryImage = this.dataURItoBlob(base64Image);
-          this.uploadImageToServer(binaryImage, 'dpUpload'); // Pass the base64Image to uploadToServer()
+          this.uploadImageToServer(binaryImage, 'dpUpload', 'justArgument'); // Pass the base64Image to uploadToServer()
         });
       });
     }
@@ -126,6 +126,7 @@ class showMenus{
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
+
     uploadImageToServer(binaryFile, utype, tempBox) {
         var formData = new FormData();
         // Determine the file extension based on the MIME type
