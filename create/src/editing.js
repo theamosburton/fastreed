@@ -192,7 +192,7 @@ class Edits{
     this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
 
     document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundColor = `rgba(0,0,0,${overlayOpacity}%)`;
-    this.saveToBrowser();
+    // this.saveToBrowser();
 
   }
   mediaFit(){
@@ -207,7 +207,14 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
+  }
+
+  mediaCredit(){
+    var applyFrom = document.getElementById(`mediaCredit${this.editor.presentLayerIndex}`);
+    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .imageCredit`);
+    applyto.innerHTML = applyFrom.value;
+    this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
   }
     // Media Editing
 
@@ -250,7 +257,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   editTitle(x){
     var text = document.getElementById(`${x}`);
@@ -258,7 +265,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   changeFontWeight(){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
@@ -272,7 +279,7 @@ class Edits{
    if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   // Title editing
 
@@ -297,7 +304,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   editText(x){
     var text = document.getElementById(`${x}`);
@@ -339,7 +346,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
   // Text Editing
 
@@ -373,7 +380,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
 
   editStoryDescription(x){
@@ -384,7 +391,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
 
   editStoryTitle(x){
@@ -395,7 +402,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    this.saveToBrowser();
+    // this.saveToBrowser();
   }
    // Meta Data //
 

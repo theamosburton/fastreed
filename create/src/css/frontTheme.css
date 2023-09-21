@@ -1,0 +1,54 @@
+/* Default theme for front page */
+.defaultFront .title div{
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.defaultFront .title{
+  padding: 10px;
+  align-items: flex-end;
+  font-weight: 1000;
+  font-size: larger;
+}
+
+.defaultFront .title span{
+  height: 45%;
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 10px;
+  height: auto;
+  overflow-wrap: anywhere;
+}
+.defaultFront .imageCredit{
+    font-size: 13px;
+    font-weight: lighter;
+    padding-bottom: 0px;
+    justify-content:flex-end;
+}
+.defaultFront .title .titleText{
+    align-items: center;
+}
+.defaultFront .title .date{
+    font-size: 12px;
+    padding-bottom: 0px;
+}
+.defaultFront{
+  align-items: center;
+  background-image: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 999;
+}
+/* Default theme for front page */

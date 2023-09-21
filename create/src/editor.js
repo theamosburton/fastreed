@@ -55,7 +55,7 @@ class Editor{
                             'media': {
                                 "blobUrl":'',
                                 "styles":{
-                                    "overlayOpacity": "50",
+                                    "overlayOpacity": "10",
                                     "mediaFit":"cover",
                                     "overlayArea": "40"
                                 },
@@ -73,34 +73,34 @@ class Editor{
                         };
 
                         if (this.editorId.children.length <= 0) {
-                            var layersTop = document.createElement('div');
-                            layersTop.classList.add('layersTop');
-                            layersTop.innerHTML = `
-                            <div class="title" id="title${this.presentLayerIndex}">
-                              <div>
-                                <span class="date">${this.metaData.date}</span>
-                                <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
-                                <span class="author">By ${userName}</span>
-                                <span class="imageCredit">Image Credit: </span>
-                              </div>
+                          var newLayer = document.createElement('div');
+                          newLayer.id = `layer${this.presentLayerIndex}`;
+                          newLayer.className = 'layers';
+                          var layersTop = document.createElement('div');
+                          layersTop.classList.add('layersTop');
+                          layersTop.classList.add('defaultFront');
+                          layersTop.id = `layersTop${this.presentLayerIndex}`;
+                          layersTop.innerHTML = `
+                          <div class="title" id="title${this.presentLayerIndex}">
+                            <div>
+                              <span class="date">${this.metaData.date}</span>
+                              <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
+                              <span class="imageCredit">Media Credit: </span>
                             </div>
-                            `;
-                            var newLayer = document.createElement('div');
-                            newLayer.id = `layer${this.presentLayerIndex}`;
-                            newLayer.className = 'layers';
-                            var defaultImage = document.createElement('img');
-                            defaultImage.src = "/assets/img/default.jpeg";
-                            defaultImage.id = 'mediaContent0';
-                            this.editorId.appendChild(newLayer);
-                            newLayer.appendChild(layersTop);
-                            newLayer.appendChild(defaultImage);
-                            var headElement = document.createElement('div');
-                            headElement.id = 'headSection';
-                            headElement.innerHTML = `
-                                                     <div id="brandDiv">
-                                                        <img src="/assets/img/favicon2.jpg">
-                                                     </div>`;
-                            newLayer.appendChild(headElement);
+                          </div>`;
+                          var defaultImage = document.createElement('img');
+                          defaultImage.src = "/assets/img/default.jpeg";
+                          defaultImage.id = 'mediaContent0';
+                          var headElement = document.createElement('div');
+                          headElement.id = 'headSection';
+                          headElement.innerHTML = `
+                                                   <div id="brandDiv">
+                                                      <img src="/assets/img/favicon2.jpg">
+                                                   </div>`;
+                          this.editorId.appendChild(newLayer);
+                          newLayer.appendChild(layersTop);
+                          newLayer.appendChild(defaultImage);
+                          newLayer.appendChild(headElement);
                         }
 
                         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
@@ -196,7 +196,7 @@ class Editor{
             'media': {
                 "blobUrl":'',
                 "styles":{
-                    "overlayOpacity": "50",
+                    "overlayOpacity": "10",
                     "mediaFit":"cover",
                     "overlayArea": "40"
                 },
@@ -210,21 +210,17 @@ class Editor{
                 "fontWeight":"1000",
                 "fontSize":"larger"
             },
-            'theme':'default'
+            'theme':'default',
+            'otherText': {
+              "text":'',
+              "fontFamily":"inherit",
+              "fontWeight":"400",
+              "fontSize":"medium"
+            }
         };
-
-        if (this.presentLayerIndex != 0) {
-            this.layers['L'+ this.presentLayerIndex].otherText = {
-                "text":'',
-                "fontFamily":"inherit",
-                "fontWeight":"400",
-                "fontSize":"medium"
-            };
-        }
         var newLayer = document.createElement('div');
         newLayer.id = `layer${this.presentLayerIndex}`;
         newLayer.className = 'layers';
-
         this.editorId.appendChild(newLayer);
         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
         for (var i = 0; i < this.totalLayers; i++) {
@@ -234,10 +230,14 @@ class Editor{
 
         var layersTop = document.createElement('div');
         layersTop.classList.add('layersTop');
+        layersTop.classList.add('defaultOther');
+        layersTop.id = `layersTop${this.presentLayerIndex}`;
         layersTop.innerHTML = `
         <div class="title" id="title${this.presentLayerIndex}">
             <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title text</span>
+
             <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}', '')">Edit description text</span>
+
             <span class="imageCredit">Image Credit: </span>
         </div>
         `;
@@ -260,9 +260,9 @@ class Editor{
         var defaultImage = document.createElement('img');
         defaultImage.src = "/assets/img/default.jpeg";
         defaultImage.id = `mediaContent${this.presentLayerIndex}`;
-        newLayer.appendChild(headElement);
-        newLayer.appendChild(defaultImage);
         newLayer.appendChild(layersTop);
+        newLayer.appendChild(defaultImage);
+        newLayer.appendChild(headElement);
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
         this.createStylesheet();
@@ -364,7 +364,7 @@ class Editor{
 
                             <div class="div">
                                 <span>Shade Opacity</span>
-                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="50">
+                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="10">
                             </div>
 
                             <div class="div">
@@ -622,7 +622,7 @@ class Editor{
                           metaData : editor.metaData,
                           version : editor.version
                         };
-                          window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                          // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                     }, 500);
                 }else{
                     setTimeout(function(){
@@ -639,6 +639,7 @@ class Editor{
     }
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
+        console.log(this.layers)
         for (let  i= 0; i < this.totalLayers; i++) {
 
            if (i == 0) {
@@ -661,26 +662,38 @@ class Editor{
              }
            }
 
+
+
             this.presentLayerIndex = 0;
             this.presentLayer  = this.presentLayerIndex + 1 ;
             var newLayer = document.createElement('div');
             newLayer.id = `layer${i}`;
             newLayer.className = 'layers';
-
             this.editorId.appendChild(newLayer);
             this.presentLayerDiv = document.getElementById('layer0');
             document.getElementById(`layer${i}`).style.display = 'none';
 
             var layersTop = document.createElement('div');
             layersTop.classList.add('layersTop');
+
+            if (i == 0) {
+              layersTop.classList.add(`${this.layers['L'+ i].theme}Front`);
+            }else{
+              layersTop.classList.add(`${this.layers['L'+ i].theme}Other`);
+            }
+
+            if (this.layers['L'+ i].media.credit == 'none') {
+              var pl = 'Media Credit';
+            }else{
+              var pl = this.layers['L'+ i].media.credit;
+            }
             if ( i == 0) {
                 layersTop.innerHTML = `
                 <div class="title" id="title${this.presentLayerIndex}">
                   <div>
                     <span class="date">${this.metaData.date}</span>
                     <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
-                    <span class="author">By ${userName}</span>
-                    <span class="imageCredit">Image Credit:</span>
+                    <span class="imageCredit">${pl}</span>
                   </div>
                 </div>`;
             }else{
@@ -690,28 +703,20 @@ class Editor{
                 </div>
                 <div class="text" id="text${i}">
                 <span class="titleText" contenteditable="true" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-                </div>`;
+                </div>
+                <span class="imageCredit">${pl}</span>`;
             }
+            var headElement = document.createElement('div');
+            headElement.id = 'headSection';
+            headElement.innerHTML = `
+                                     <div id="brandDiv">
+                                        <img src="/assets/img/favicon2.jpg">
+                                     </div>`;
+            newLayer.appendChild(headElement);
+            if (this.layers['L'+ i].media.url  == "default") {
+              newLayer.innerHTML += `
+               <img id="mediaContent${i}" src="/assets/img/default.jpeg">`;
 
-            if (Object.keys(this.layers['L'+ i].media).length  === 0) {
-                if (i == 0) {
-                    newLayer.innerHTML = `
-                    <div class="placeholder" id="placeholder${i}">
-                        <p> Add thumbnail Photo</p>
-                        <small> Recomended ratios are </small>
-                        <small> 9:16, 3:4 and 2:3 </small>
-                    </div>
-                    `;
-                }else{
-                     newLayer.innerHTML = `
-                    <div class="placeholder" id="placeholder${i}">
-                        <p> Add</p>
-                        <p> Photo/Video</p>
-                        <small> Recomended ratios are </small>
-                        <small> 9:16, 3:4 and 2:3 </small>
-                    </div>
-                    `;
-                }
             }else if (this.layers['L'+ i].media.type == 'image') {
                 if (document.getElementById(`videoControls${i+1}`)) {
                     document.getElementById(`videoControls${i+1}`).remove();
