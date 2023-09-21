@@ -1,8 +1,8 @@
 <?php
+  if(!isset($_SESSION)){session_start();}
 if (!isset($_SESSION['rID'])) {
   header("Location: index.php");
 }else{
-  if(!isset($_SESSION)){session_start();}
   $_SERVROOT = '../../../';
   $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
   include "../../.ht/controller/VISIT.php";

@@ -41,7 +41,8 @@ if ($adminLogged || $userLogged) {
                <div class="field">
                  <input id="loginPassword" type="password" placeholder="Password" required>
                </div>
-               <div class="pass-link"><a href="#">Forgot password?</a></div>
+               <div class="pass-link"><a href="../forgottenPassword/
+                 ">Forgot password?</a></div>
                <div class="field btn">
                  <div class="btn-layer"></div>
                  <button id="loginButton" class="submit"  onclick="login()">Login</button>
