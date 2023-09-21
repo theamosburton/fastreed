@@ -609,7 +609,7 @@ html{
   z-index: 99999;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.352);
+  background-color: rgba(0, 0, 0, 0.6);
   display: none;
   justify-content: center;
 }
