@@ -15,7 +15,15 @@ html,body{
   background: #1a75ff;
   color: #fff;
 }
-
+.signInWith{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signInWith span{
+  margin: 20px 0px;
+}
 .wrapper{
   overflow: hidden;
   max-width: 390px;

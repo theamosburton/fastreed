@@ -1,3 +1,23 @@
+function onGoogleSignIn(response) {
+  const responsePayload = decodeJWT(response.credential);
+      const loginURL =`/.ht/API/G_USER_LOGIN.php?email=${responsePayload.email}&name=${responsePayload.name}&profilePic=${responsePayload.picture}`;
+      serverLogin(loginURL);
+      async function serverLogin(url){
+        const response = await fetch(url);
+        var data = await response.json();
+        islogged = data.Result;
+        message = data.message;
+        if (islogged) {
+          location.reload();
+        }else {
+          alert("Unable To Login");
+        }
+      }
+ }
+ function decodeJWT(jwtToken) {
+    const payload = JSON.parse(window.atob(jwtToken.split('.')[1]));
+    return payload;
+  }
 function login(){
   let passwordInput = document.getElementById('loginPassword').value;
   let emailUsername = document.getElementById('userEmailName').value;

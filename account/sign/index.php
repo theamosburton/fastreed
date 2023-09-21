@@ -18,6 +18,9 @@ if ($adminLogged || $userLogged) {
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <title></title>
   </head>
   <body>
@@ -48,6 +51,29 @@ if ($adminLogged || $userLogged) {
                  <button id="loginButton" class="submit"  onclick="login()">Login</button>
                </div>
                <div class="signup-link">Not a member? <a href="">Signup now</a></div>
+
+
+               <!-- Google Sigin in -->
+
+ 								<div class="signInWith">
+                  <span>OR</span>
+                  <div id="g_id_onload"
+                       data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+                       data-context="use"
+                       data-ux_mode="popup"
+                       data-callback="onGoogleSignIn"
+                       data-auto_prompt="false">
+                  </div>
+
+                  <div class="g_id_signin"
+                       data-type="standard"
+                       data-shape="pill"
+                       data-theme="outline"
+                       data-text="continue_with"
+                       data-size="large"
+                       data-logo_alignment="left">
+                  </div>
+                </div>
              </div>
 
              <!-- Sign Up -->
@@ -71,6 +97,26 @@ if ($adminLogged || $userLogged) {
                <div class="field btn">
                  <div class="btn-layer"></div>
                  <button id="signupButton" class="submit"  onclick="sendOTP()">Signup</button>
+               </div>
+
+               <div class="signInWith">
+                 <span>OR</span>
+                 <div id="g_id_onload"
+                       data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+                       data-context="use"
+                       data-ux_mode="popup"
+                       data-callback="onGoogleSignIn"
+                       data-auto_prompt="false">
+                  </div>
+
+                  <div class="g_id_signin"
+                       data-type="standard"
+                       data-shape="pill"
+                       data-theme="outline"
+                       data-text="continue_with"
+                       data-size="large"
+                       data-logo_alignment="left">
+                  </div>
                </div>
              </div>
            </div>
