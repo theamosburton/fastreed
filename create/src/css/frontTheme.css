@@ -15,7 +15,8 @@
   padding: 10px;
   align-items: flex-end;
   font-weight: 1000;
-  font-size: larger;
+  font-size: 20px;
+  min-width: 240px;
 }
 
 .defaultFront .title span{

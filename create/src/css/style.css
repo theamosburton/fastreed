@@ -156,10 +156,11 @@ html{
   width: -webkit-fill-available;
   margin-left: 2px;
   border-radius: 4px;
-  background-color: #d6c8c8;
+  background-color: grey;
 }
 .navSection .active{
-  background-color: grey;
+  background-color: #d6c8c8;
+
 }
 #brandDiv img{
   width: 30px;

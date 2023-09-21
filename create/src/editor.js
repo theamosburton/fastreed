@@ -1,6 +1,13 @@
 class Editor{
     constructor(){
+        var newBar = document.createElement('span');
+        newBar.id = `nav1`;
+        newBar.classList.add('nav');
+        newBar.classList.add('active');
         this.topBars = document.getElementById("navBars");
+        this.topBars.appendChild(newBar);
+
+
         var params = new URLSearchParams(window.location.search);
             this.username = '';
         if (params.get('username')) {
@@ -55,7 +62,7 @@ class Editor{
                             'media': {
                                 "blobUrl":'',
                                 "styles":{
-                                    "overlayOpacity": "10",
+                                    "overlayOpacity": "0",
                                     "mediaFit":"cover",
                                     "overlayArea": "40"
                                 },
@@ -67,7 +74,7 @@ class Editor{
                                 "text":'',
                                 "fontFamily":"inherit",
                                 "fontWeight":"1000",
-                                "fontSize":"larger"
+                                "fontSize":"20px"
                             },
                             'theme':'default'
                         };
@@ -196,7 +203,7 @@ class Editor{
             'media': {
                 "blobUrl":'',
                 "styles":{
-                    "overlayOpacity": "10",
+                    "overlayOpacity": "0",
                     "mediaFit":"cover",
                     "overlayArea": "40"
                 },
@@ -208,14 +215,14 @@ class Editor{
                 "text":'',
                 "fontFamily":"inherit",
                 "fontWeight":"1000",
-                "fontSize":"larger"
+                "fontSize":"20px"
             },
             'theme':'default',
             'otherText': {
               "text":'',
               "fontFamily":"inherit",
-              "fontWeight":"400",
-              "fontSize":"medium"
+              "fontWeight":"1000",
+              "fontSize":"20px"
             }
         };
         var newLayer = document.createElement('div');
@@ -234,14 +241,13 @@ class Editor{
         layersTop.id = `layersTop${this.presentLayerIndex}`;
         layersTop.innerHTML = `
         <div class="title" id="title${this.presentLayerIndex}">
-            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title text</span>
+            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editTitle('titleText${this.presentLayerIndex}')">Edit title text</span>
 
-            <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}', '')">Edit description text</span>
+            <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Edit description text</span>
 
             <span class="imageCredit">Image Credit: </span>
         </div>
         `;
-        this.topBars.querySelector('.nav').backgroundcolor = '#d6c8c8';
         for (var i = 1; i < this.totalLayers; i++) {
           this.topBars.querySelector(`#nav${i}`).classList.remove('active');
         }
@@ -650,20 +656,17 @@ class Editor{
              }
            }else{
              if (this.layers['L'+ i].title.text == '') {
-                var text = "Enter Title/Heading...";
+                var text = "Edit title text";
              }else{
                  var text = this.layers['L'+ i].title.text;
              }
 
              if (this.layers['L'+ i].otherText.text == '') {
-               var othertext ="Enter more text..";
+               var othertext ="Edit description text";
              }else{
                var othertext =this.layers['L'+ i].otherText.text;
              }
            }
-
-
-
             this.presentLayerIndex = 0;
             this.presentLayer  = this.presentLayerIndex + 1 ;
             var newLayer = document.createElement('div');
@@ -675,6 +678,18 @@ class Editor{
 
             var layersTop = document.createElement('div');
             layersTop.classList.add('layersTop');
+            if (i != 0) {
+              var newBar = document.createElement('span');
+              newBar.id = `nav${i+1}`;
+              newBar.classList.add('nav');
+              newBar.classList.add('active');
+              this.topBars.appendChild(newBar);
+            }
+
+            if (this.topBars.querySelector(`#nav${i+1}`).classList.contains('active')) {
+              this.topBars.querySelector(`#nav${i+1}`).classList.remove('active');
+            }
+              this.topBars.querySelector(`#nav1`).classList.add('active');
 
             if (i == 0) {
               layersTop.classList.add(`${this.layers['L'+ i].theme}Front`);
@@ -700,11 +715,11 @@ class Editor{
                 layersTop.innerHTML = `
                 <div class="title" id="title${this.presentLayerIndex}" >
                 <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
+                <span class="otherText" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
+                <span class="imageCredit">${pl}</span>
                 </div>
-                <div class="text" id="text${i}">
-                <span class="titleText" contenteditable="true" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-                </div>
-                <span class="imageCredit">${pl}</span>`;
+
+                `;
             }
             var headElement = document.createElement('div');
             headElement.id = 'headSection';
@@ -713,16 +728,18 @@ class Editor{
                                         <img src="/assets/img/favicon2.jpg">
                                      </div>`;
             newLayer.appendChild(headElement);
-            if (this.layers['L'+ i].media.url  == "default") {
-              newLayer.innerHTML += `
-               <img id="mediaContent${i}" src="/assets/img/default.jpeg">`;
+            if (this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
+
+              var imageElement = document.createElement('img');
+              imageElement.id = `mediaContent${i}`;
+              imageElement.src = "/assets/img/default.jpeg";
+              newLayer.appendChild(imageElement);
 
             }else if (this.layers['L'+ i].media.type == 'image') {
                 if (document.getElementById(`videoControls${i+1}`)) {
                     document.getElementById(`videoControls${i+1}`).remove();
                 }
                 edits.updateMedia('image');
-
                 var layer = document.getElementById(`layer${i}`);
                 var imageElement = document.createElement('img');
                 imageElement.id = `mediaContent${i}`;
@@ -733,7 +750,6 @@ class Editor{
                 edits.updateMedia('video');
                 var layerId =  editor.presentLayerIndex;
                 var layer = document.getElementById(`layer${i}`);
-
                 var videoElement = document.createElement('video');
                 videoElement.src = this.layers['L'+ i].media.url;
                 videoElement.type = 'video/mp4';
