@@ -170,15 +170,11 @@ class showMenus{
             var response = JSON.parse(xhr.responseText);
             if (response.Result) {
               if (utype == 'dpUpload') {
-                document.querySelector('#uploadDbButton').innerHTML = `Processing...`;
-                setTimeout(function(){
+                document.querySelector('#uploadDbButton').innerHTML = `Uploading...`;
                   location.reload();
-                }, 3000);
               }else if (utype == 'image') {
                 document.querySelector('#uploadProgressDiv').innerHTML = `Processing...`;
-                setTimeout(function(){
                   location.reload();
-                }, 3000);
               }
             }else{
               document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
@@ -249,9 +245,7 @@ class showMenus{
           var response = JSON.parse(xhr.responseText);
           if (response.Result) {
             document.querySelector('#uploadProgressDivVideo').innerHTML = `Processing...`;
-            setTimeout(function(){
               location.reload();
-          }, 3000);
           }else{
             document.querySelector('#uploadProgressDivVideo').innerHTML = 'Someting Went Wrong' ;
             document.querySelector('#uploadProgressDivVideo').style.backgroundColor = 'red';

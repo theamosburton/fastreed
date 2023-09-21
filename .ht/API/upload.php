@@ -142,28 +142,30 @@ class uploadMedia{
                 $sizeB = $file['size'];
                 // Convert the file size to a human-readable format (e.g., KB, MB, GB)
                 $sizeKB = round($sizeB / 1024, 2);
-
-                $this->deleteOldDP($id);
-                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB)['Result']){
-                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
-                    $add = '/uploads/photos/'.$username.'/';
-                    // Create the directory if it doesn't exist
-                    if (!is_dir($directory)) {
-                        mkdir($directory, 0777, true);
-                    }
-                    $fileAddress = $directory.$fileName.'.'.$file_ext;
-                    $address = $add.$fileName.'.'.$file_ext;
-                    if (move_uploaded_file($file_tmp, $fileAddress)) {
-                        // File moved successfully
-                        showMessage(true, 'File Uploaded');
-                        $this->resetDP($id, $address);
-                    } else {
-                        // Failed to move the file
-                        showMessage(false, 'Error moving the file');
-                    }
-                }else {
-                    showMessage(false, 'File cannot entered in DB');
+                if ($this->deleteOldDP($id)) {
+                  $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+                  if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB)['Result']){
+                      $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
+                      $add = '/uploads/photos/'.$username.'/';
+                      // Create the directory if it doesn't exist
+                      if (!is_dir($directory)) {
+                          mkdir($directory, 0777, true);
+                      }
+                      $fileAddress = $directory.$fileName.'.'.$file_ext;
+                      $address = $add.$fileName.'.'.$file_ext;
+                      if (move_uploaded_file($file_tmp, $fileAddress)) {
+                          // File moved successfully
+                          showMessage(true, 'File Uploaded');
+                          $this->resetDP($id, $address);
+                      } else {
+                          // Failed to move the file
+                          showMessage(false, 'Error moving the file');
+                      }
+                  }else {
+                      showMessage(false, 'File cannot entered in DB');
+                  }
+                }else{
+                  showMessage(false, 'Old Dp not deleted');
                 }
             }else {
                 showMessage(false, 'Problem with image');
@@ -227,20 +229,28 @@ class uploadMedia{
     }
 
     private function deleteOldDP($id){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
+        $return = false;
         $getDPSQL = "SELECT * FROM uploads WHERE personID = '$id' and purpose = 'DP'";
         $resultGet = mysqli_query($this->DB, $getDPSQL);
         if (mysqli_num_rows($resultGet)) {
             $row = mysqli_fetch_assoc($resultGet);
             $uploadID = $row['uploadID'];
             $extension = $row['extension'];
-            $path = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$id.'/'.$uploadID.$extension;
+            $path = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/'.$uploadID.$extension;
             if (file_exists($path)) {
                 if (unlink($path)) {
                     $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";
                     $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                      $return = true;
+                    }
                 }
             }
+        }else{
+          $return = true;
         }
+        return $return;
     }
 
     private function resetDP($id, $fileAddress){
