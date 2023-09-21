@@ -32,7 +32,7 @@ class showMenus{
     }
 
     // For dp upload only
-    uploadImage() {
+    uploadProfile() {
       document.querySelector('#uploadDbButton').innerHTML = `Upload`;
       var removeImageButton = document.querySelector('#removeImage');
       var uploadDbButton = document.querySelector('#uploadDbButton');
@@ -145,7 +145,7 @@ class showMenus{
 
 
         // Track the progress of the upload
-        if (utype == 'dpUploads') {
+        if (utype == 'dpUpload') {
           xhr.upload.addEventListener('progress', (event) => {
             if (event.lengthComputable) {
               var percentComplete = (event.loaded / event.total) * 100;
@@ -169,7 +169,7 @@ class showMenus{
             // Upload successful, handle the response
             var response = JSON.parse(xhr.responseText);
             if (response.Result) {
-              if (utype == 'dpUploads') {
+              if (utype == 'dpUpload') {
                 document.querySelector('#uploadDbButton').innerHTML = `Processing...`;
                 setTimeout(function(){
                   location.reload();

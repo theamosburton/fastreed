@@ -103,7 +103,7 @@ class showProfile {
                             <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-file-upload"></i> Browse file to upload <small>Photo will be cropped to 1:1</small></label>
                             <div id="croppieContainer"></div>
                             <img id="croppedImage" stye="width:50px; height:50px; display:none;">
-                            <input onchange="new showMenus().uploadImage()" type="file" id="uploadInputFile" hidden>
+                            <input onchange="new showMenus().uploadProfile()" type="file" id="uploadInputFile" hidden>
                             <span id="removeImage" onclick="new showMenus().removeImage()">
                                 <i class="fa fa-rotate-right"></i>
                             </span>
