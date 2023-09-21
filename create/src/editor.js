@@ -92,7 +92,7 @@ class Editor{
                             <div>
                               <span class="date">${this.metaData.date}</span>
                               <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
-                              <span class="imageCredit">Media Credit: </span>
+                              <span class="imageCredit" onkeyup="mediaCredit()">Media Credit: </span>
                             </div>
                           </div>`;
                           var defaultImage = document.createElement('img');
@@ -233,8 +233,6 @@ class Editor{
         for (var i = 0; i < this.totalLayers; i++) {
             document.getElementById(`layer${i}`).style.display = 'none';
         }
-
-
         var layersTop = document.createElement('div');
         layersTop.classList.add('layersTop');
         layersTop.classList.add('defaultOther');
@@ -245,18 +243,20 @@ class Editor{
 
             <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Edit description text</span>
 
-            <span class="imageCredit">Image Credit: </span>
+            <span class="imageCredit" onkeyup="mediaCredit()">Image Credit: </span>
         </div>
         `;
-        for (var i = 1; i < this.totalLayers; i++) {
-          this.topBars.querySelector(`#nav${i}`).classList.remove('active');
-        }
-
+        var previousElement = document.getElementById(`nav${this.presentLayer-1}`);
         var newBar = document.createElement('span');
         newBar.id = `nav${this.presentLayer}`;
         newBar.classList.add('nav');
         newBar.classList.add('active');
-        this.topBars.appendChild(newBar);
+
+        this.topBars.insertBefore(newBar, previousElement.nextSibling);
+        for (var i = 1; i < this.totalLayers; i++) {
+          this.topBars.querySelector(`#nav${i}`).classList.remove('active');
+        }
+        this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
         var headElement = document.createElement('div');
         headElement.id = 'headSection';
         headElement.innerHTML = `<div id="brandDiv">
@@ -272,6 +272,7 @@ class Editor{
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
         this.createStylesheet();
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
 
     createStylesheet(){
@@ -447,19 +448,23 @@ class Editor{
                 document.getElementById(`styleBox${layersIndex}`).id = `styleBox${layersIndex + 1}`;
             }
 
+            for (var j = layersAhead; j >= 1; j--) {
+              var layersIndex = presentLayer + j;
+                document.getElementById(`nav${layersIndex}`).id = `nav${layersIndex + 1}`;
+            }
         }
     }
 
     deleteLayer(){
         if (this.totalLayers > 1 && this.presentLayerIndex != 0) {
             this.inBetweenLayersDel();
-            this.layers.splice(this.presentLayerIndex, 1);
+            delete this.layers['L'+ this.presentLayerIndex];
             this.totalLayers -= 1;
             this.presentLayerDiv = document.getElementById(`styleBox${this.presentLayerIndex}`);
             this.presentLayerDiv.remove();
             document.getElementById(`layer${this.presentLayerIndex}`).remove();
+            document.getElementById(`nav${this.presentLayerIndex+1}`).remove();
             this.moveBackward();
-
         }else{
             alert('Can\'t delete first layer')
         }
@@ -473,6 +478,11 @@ class Editor{
                 var layersIndex = presentLayer + i - 1;
                 document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex - 1}`;
                 document.getElementById(`styleBox${layersIndex}`).id = `styleBox${layersIndex - 1}`;
+            }
+
+            for (var j = layersAhead; j >= 1; j--) {
+              var layersIndex = presentLayer + j;
+                document.getElementById(`nav${layersIndex}`).id = `nav${layersIndex - 1}`;
             }
         }
     }
@@ -498,6 +508,8 @@ class Editor{
         }
         this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
 
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+
     }
 
     moveBackward(){
@@ -518,6 +530,7 @@ class Editor{
           this.topBars.querySelector(`#nav${i}`).classList.remove('active');
         }
         this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
+        document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
     playPauseMedia(){
         var playPauseMedia = document.querySelector(`#layer${this.presentLayerIndex} #playPauseMedia`);
@@ -645,7 +658,6 @@ class Editor{
     }
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
-        console.log(this.layers)
         for (let  i= 0; i < this.totalLayers; i++) {
 
            if (i == 0) {
@@ -716,7 +728,7 @@ class Editor{
                 <div class="title" id="title${this.presentLayerIndex}" >
                 <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
                 <span class="otherText" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-                <span class="imageCredit">${pl}</span>
+                <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
                 </div>
 
                 `;
@@ -770,8 +782,6 @@ class Editor{
             // this.playPauseLastMedia('add');
             this.layersAhead = this.totalLayers - this.presentLayer;
             this.layersBack = this.totalLayers - this.layersAhead-1;
-            document.getElementById('forwardIcon').innerHTML = `${this.layersAhead}&nbsp;`;
-            document.getElementById('backwardIcon').innerHTML = `&nbsp;${this.layersBack}`;
             document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
         }
         this.updateStylesheet();
