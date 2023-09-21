@@ -192,7 +192,7 @@ function resetPassword(){
           error.innerHTML = 'Password Reset Successfully';
           error.style.color = 'lime';
           setTimeout(function (){
-            location.reload();
+            window.location = '../account/';
           }, 3000);
         }else{
           error.style.display = 'block';
