@@ -675,7 +675,6 @@ class Editor{
     }
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
-        console.log(this.layers);
         for (let  i= 0; i < this.totalLayers; i++) {
            if (i == 0) {
              if (this.metaData.title == '') {
