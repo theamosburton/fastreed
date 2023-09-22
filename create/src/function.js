@@ -46,5 +46,5 @@ function openOptions(x){
 function showPreview(){
   var urlObj = new URL(window.location.href);
   var id = urlObj.searchParams.get("ID");
-  var newTab = window.open(`/create/preview.php?webstory=${id}`, '_blank');
+  var newTab = window.open(`/create/preview?webstory=${id}`, '_blank');
 }

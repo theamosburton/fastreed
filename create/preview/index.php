@@ -1,7 +1,7 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include "../.ht/controller/VISIT.php";
+include "../../.ht/controller/VISIT.php";
 
 new storyPreview();
 
@@ -42,20 +42,30 @@ class storyPreview{
          if ($this->adminLogged || $this->userLogged) {
            if (!isset($_GET['webstory']) || empty($_GET['webstory'])) {
              $message = 'No webstory ID found in URL';
-             include '../.ht/views/preview/previewError.html';
+             include '../../.ht/views/preview/previewError.html';
            }elseif  (!$this->webstoryExists()) {
              $message = 'Webstory not exists with this ID';
-             include '../.ht/views/preview/previewError.html';
+             include '../../.ht/views/preview/previewError.html';
            }else{
-             echo "<script>
-             var storyData = ".$this->webstoryExists()['storyData'].";
-             console.log(storyData);
-             </script>";
-              include '../.ht/views/preview/preview.html';
+             $data = $this->webstoryExists()['storyData'];
+             $phpData = json_decode($data, true);
+             // var_dump($phpData);
+             if ($phpData['metaData']['title'] == '') {
+               $message = 'Title not given';
+
+               include '../../.ht/views/preview/previewError.html';
+             }else{
+               $title = $phpData['metaData']['title'];
+               echo "<script>
+               var storyData = ".$this->webstoryExists()['storyData'].";
+               </script>";
+                include '../../.ht/views/preview/preview.html';
+             }
+
            }
          }else{
            $message = 'You can not view this preview';
-           include '../.ht/views/preview/previewError.html';
+           include '../../.ht/views/preview/previewError.html';
          }
 
          $this->closeConnection();
