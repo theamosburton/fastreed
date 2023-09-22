@@ -98,16 +98,16 @@ class Editor{
                           var defaultImage = document.createElement('img');
                           defaultImage.src = "/assets/img/default.jpeg";
                           defaultImage.id = 'mediaContent0';
-                          var headElement = document.createElement('div');
-                          headElement.id = 'headSection';
-                          headElement.innerHTML = `
-                                                   <div id="brandDiv">
-                                                      <img src="/assets/img/favicon2.jpg">
-                                                   </div>`;
+                          // var headElement = document.createElement('div');
+                          // headElement.id = 'headSection';
+                          // headElement.innerHTML = `
+                          //                          <div id="brandDiv">
+                          //                             <img src="/assets/img/favicon2.jpg">
+                          //                          </div>`;
                           this.editorId.appendChild(newLayer);
                           newLayer.appendChild(layersTop);
                           newLayer.appendChild(defaultImage);
-                          newLayer.appendChild(headElement);
+                          // newLayer.appendChild(headElement);
                         }
 
                         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
@@ -257,18 +257,18 @@ class Editor{
           this.topBars.querySelector(`#nav${i}`).classList.remove('active');
         }
         this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
-        var headElement = document.createElement('div');
-        headElement.id = 'headSection';
-        headElement.innerHTML = `<div id="brandDiv">
-                                    <img src="/assets/img/favicon2.jpg">
-                                 </div>`;
+        // var headElement = document.createElement('div');
+        // headElement.id = 'headSection';
+        // headElement.innerHTML = `<div id="brandDiv">
+        //                             <img src="/assets/img/favicon2.jpg">
+        //                          </div>`;
 
         var defaultImage = document.createElement('img');
         defaultImage.src = "/assets/img/default.jpeg";
         defaultImage.id = `mediaContent${this.presentLayerIndex}`;
         newLayer.appendChild(layersTop);
         newLayer.appendChild(defaultImage);
-        newLayer.appendChild(headElement);
+        // newLayer.appendChild(headElement);
         this.presentLayerDiv.style.display = 'flex';
         this.playPauseLastMedia('add');
         this.createStylesheet();
@@ -446,8 +446,11 @@ class Editor{
                 var layersIndex = presentLayer + i - 1;
                 document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex + 1}`;
                 document.getElementById(`styleBox${layersIndex}`).id = `styleBox${layersIndex + 1}`;
+                let newLayer =  layersIndex +1
+                this.layers['L' + newLayer] = this.layers['L' + layersIndex];
+                delete this.layers['L' + layersIndex];
             }
-
+            // For Bars
             for (var j = layersAhead; j >= 1; j--) {
               var layersIndex = presentLayer + j;
                 document.getElementById(`nav${layersIndex}`).id = `nav${layersIndex + 1}`;
@@ -459,6 +462,16 @@ class Editor{
         if (this.totalLayers > 1 && this.presentLayerIndex != 0) {
             this.inBetweenLayersDel();
             delete this.layers['L'+ this.presentLayerIndex];
+
+            var presentLayer  = this.presentLayerIndex + 1 ;
+            var layersAhead = this.totalLayers - presentLayer;
+            for (let l = 1; l <= layersAhead; l++) {
+                var layersIndex = presentLayer + l - 1;
+                  let newLayer =  layersIndex -1
+                this.layers['L' + newLayer] = this.layers['LL' + layersIndex];
+                delete this.layers['LL' + layersIndex];
+            }
+
             this.totalLayers -= 1;
             this.presentLayerDiv = document.getElementById(`styleBox${this.presentLayerIndex}`);
             this.presentLayerDiv.remove();
@@ -478,6 +491,12 @@ class Editor{
                 var layersIndex = presentLayer + i - 1;
                 document.getElementById(`layer${layersIndex}`).id = `layer${layersIndex - 1}`;
                 document.getElementById(`styleBox${layersIndex}`).id = `styleBox${layersIndex - 1}`;
+            }
+
+            for (let k = 1; k <= layersAhead; k++) {
+                var layersIndex = presentLayer + k - 1;
+                this.layers['LL' + layersIndex] = this.layers['L' + layersIndex];
+                delete this.layers['L' + layersIndex];
             }
 
             for (var j = layersAhead; j >= 1; j--) {
@@ -658,8 +677,8 @@ class Editor{
     }
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
+        console.log(this.layers);
         for (let  i= 0; i < this.totalLayers; i++) {
-
            if (i == 0) {
              if (this.metaData.title == '') {
                var text = "Edit title for this webstory";
@@ -733,13 +752,13 @@ class Editor{
 
                 `;
             }
-            var headElement = document.createElement('div');
-            headElement.id = 'headSection';
-            headElement.innerHTML = `
-                                     <div id="brandDiv">
-                                        <img src="/assets/img/favicon2.jpg">
-                                     </div>`;
-            newLayer.appendChild(headElement);
+            // var headElement = document.createElement('div');
+            // headElement.id = 'headSection';
+            // headElement.innerHTML = `
+            //                          <div id="brandDiv">
+            //                             <img src="/assets/img/favicon2.jpg">
+            //                          </div>`;
+            // newLayer.appendChild(headElement);
             if (this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
 
               var imageElement = document.createElement('img');

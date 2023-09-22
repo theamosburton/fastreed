@@ -29,7 +29,7 @@
   overflow-wrap: anywhere;
 }
 .defaultFront .imageCredit{
-    font-size: 13px;
+    font-size: 10px;
     font-weight: lighter;
     padding-bottom: 0px;
     justify-content:flex-end;
@@ -42,7 +42,6 @@
     padding-bottom: 0px;
 }
 .defaultFront{
-  align-items: center;
   background-image: none;
   position: absolute;
   width: 100%;

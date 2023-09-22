@@ -40,11 +40,10 @@
   background: rgba(0,0,0,0.4)
 }
 .defaultOther .imageCredit{
-    font-size: 13px;
+    font-size: 10px;
     font-weight: lighter;
     padding-bottom: 0px;
     justify-content: flex-end;
-    color: grey!important;
 }
 .defaultOther .title .author{
     font-size: 13px;
@@ -52,7 +51,6 @@
     padding-bottom: 0px;
 }
 .defaultOther{
-  align-items: center;
   background-image: none;
   position: absolute;
   width: 100%;
