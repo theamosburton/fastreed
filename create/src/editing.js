@@ -128,7 +128,8 @@ class Edits{
       tmpImage.src = "/assets/img/default.jpeg";
       tmpImage.id =` mediaContent${this.editor.presentLayerIndex}`;
       document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
-      this.editor.layers['L' + this.editor.presentLayerIndex].media = {};
+      this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
+      this.editor.layers['L' + this.editor.presentLayerIndex].blobUrl.url = 'default';
       if (this.version+1 == editor.version) {
         this.version += 1;
       }

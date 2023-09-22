@@ -754,7 +754,7 @@ class Editor{
 
                 `;
             }
-            if (this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
+            if (this.layers['L'+ i].media.url == undefined || this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
 
               var imageElement = document.createElement('img');
               imageElement.id = `mediaContent${i}`;
@@ -1075,10 +1075,13 @@ class Editor{
               document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
             }
 
+            if (this.layers['L'+ j].media.url !== undefined && this.layers['L'+ j].media.url  !== "default"  && this.layers['L'+ j].media.url  !== "") {
+              if (document.getElementById(`mediaContent${j}`)) {
+                  document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
+              }
 
-            if (document.getElementById(`mediaContent${j}`)) {
-                document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
             }
+
             if (Object.keys(this.layers['L'+ j].media).length  != 0) {
                 var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);
                 document.querySelector(`#layer${j} .layersTop`).style.backgroundColor =  `rgba(0,0,0,${overlayOpacity}%)`;

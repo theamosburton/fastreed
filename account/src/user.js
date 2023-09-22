@@ -747,13 +747,14 @@ function deleteStory(storyID, divID){
       alert(`${data.message}`);
     }else{
       storyDIV.querySelector('.background .title').innerHTML = 'Deleting...';
-
+      if (localStorage.getItem(`${storyID}`)) {
+        localStorage.removeItem(`${storyID}`);
+      }
       setTimeout(function(){
         setTimeout(function(){
           storyDIV.style.display = 'none';
         }, 300);
         storyDIV.style.marginLeft = '-210px';
-
       }, 1000);
 
     }
