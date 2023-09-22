@@ -1,5 +1,5 @@
 /* Default theme for front page */
-.defaultFront .title div{
+.defaultFront .title .box{
   flex-direction: column;
   width: 100%;
   display: flex;
@@ -28,11 +28,17 @@
   height: auto;
   overflow-wrap: anywhere;
 }
-.defaultFront .imageCredit{
-    font-size: 10px;
-    font-weight: lighter;
-    padding-bottom: 0px;
-    justify-content:flex-end;
+.defaultFront .creditBox{
+  display: flex;
+  justify-content:flex-end;
+  width: 100%;
+}
+.defaultFront .creditBox .imageCredit{
+  display: inline;
+  font-size: 10px;
+  font-weight: lighter;
+  padding-bottom: 0px!important;
+      /* background: rgba(0,0,0,0.4) */
 }
 .defaultFront .title .titleText{
     align-items: center;

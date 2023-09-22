@@ -25,26 +25,32 @@ class createContent{
     private $SERVROOT;
 
     function __construct() {
-         // Create an instance to create/save activity
-         $this->captureVisit = new VisitorActivity();
-         $this->BASIC_FUNC = new BasicFunctions();
-         $DB = new DataBase();
-         $this->DB_CONN = $DB->DBConnection();
-         $this->AUTH = new Auth();
-         // Get css,js version from captureVisit
-         $this->version = $this->captureVisit->VERSION;
-         $this->version = implode('.', str_split($this->version, 1));
-         $this->userData = new getLoggedData();
-         $this->uploadData = new getUploadData();
-        if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
-            new userEditor();
-        }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='Admin') {
-            new userEditor();
-        }else if(!isset($_GET['username']) || empty($_GET['username'])){
-            new userEditor();
-        }else{
-            new adminEditor();
-        }
+       // Create an instance to create/save activity
+       $this->captureVisit = new VisitorActivity();
+       $this->BASIC_FUNC = new BasicFunctions();
+       $DB = new DataBase();
+       $this->DB_CONN = $DB->DBConnection();
+       $this->AUTH = new Auth();
+       // Get css,js version from captureVisit
+       $this->version = $this->captureVisit->VERSION;
+       $this->version = implode('.', str_split($this->version, 1));
+       $this->userData = new getLoggedData();
+       $this->uploadData = new getUploadData();
+       $adminLogged = $this->userData->adminLogged;
+       $userLogged = $this->userData->userLogged;
+       if ($adminLogged || $userLogged) {
+         if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+             new userEditor();
+         }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='Admin') {
+             new userEditor();
+         }else if(!isset($_GET['username']) || empty($_GET['username'])){
+             new userEditor();
+         }else{
+             new adminEditor();
+         }
+       }else{
+          header("Location: /account/sign/");
+       }
         $this->closeConnection();
         $this->userData->closeConnection();
         $this->uploadData->closeConnection();

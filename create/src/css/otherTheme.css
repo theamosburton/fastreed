@@ -1,5 +1,5 @@
 /* Default theme for front page */
-.defaultOther .title div{
+/* .defaultOther .title div{
   flex-direction: column;
   width: 100%;
   display: flex;
@@ -9,7 +9,7 @@
   padding: 10px;
   margin-top: 10px;
   background-color: rgba(0,0,0,0.4);
-}
+} */
 
 .defaultOther .title{
   padding: 10px;
@@ -39,11 +39,19 @@
 .defaultOther .title .otherText{
   background: rgba(0,0,0,0.4)
 }
-.defaultOther .imageCredit{
-    font-size: 10px;
-    font-weight: lighter;
-    padding-bottom: 0px;
-    justify-content: flex-end;
+.defaultOther .creditBox{
+  display: flex;
+  justify-content:flex-end;
+  width: 100%;
+}
+.defaultOther  .creditBox .imageCredit{
+  display: inline!important;
+  font-size: 10px;
+  font-weight: lighter;
+  width: auto;
+  padding: 2px 5px!important;
+  justify-content:flex-end;
+  background: rgba(0,0,0,0.4);
 }
 .defaultOther .title .author{
     font-size: 13px;

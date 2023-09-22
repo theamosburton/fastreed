@@ -89,25 +89,21 @@ class Editor{
                           layersTop.id = `layersTop${this.presentLayerIndex}`;
                           layersTop.innerHTML = `
                           <div class="title" id="title${this.presentLayerIndex}">
-                            <div>
+                            <div class="box">
                               <span class="date">${this.metaData.date}</span>
                               <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
-                              <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
+                              <div class="creditBox">
+                                <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
+                              </div>
+
                             </div>
                           </div>`;
                           var defaultImage = document.createElement('img');
                           defaultImage.src = "/assets/img/default.jpeg";
                           defaultImage.id = 'mediaContent0';
-                          // var headElement = document.createElement('div');
-                          // headElement.id = 'headSection';
-                          // headElement.innerHTML = `
-                          //                          <div id="brandDiv">
-                          //                             <img src="/assets/img/favicon2.jpg">
-                          //                          </div>`;
                           this.editorId.appendChild(newLayer);
                           newLayer.appendChild(layersTop);
                           newLayer.appendChild(defaultImage);
-                          // newLayer.appendChild(headElement);
                         }
 
                         this.presentLayerDiv = document.getElementById(`layer${this.presentLayerIndex}`);
@@ -243,7 +239,9 @@ class Editor{
 
             <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Edit description text</span>
 
-            <span class="imageCredit" id="imageCredit${this.presentLayerIndex}"  onkeyup="mediaCredit()">Image Credit: </span>
+            <div class="creditBox">
+              <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
+            </div>
         </div>
         `;
         var previousElement = document.getElementById(`nav${this.presentLayer-1}`);
@@ -736,10 +734,12 @@ class Editor{
             if ( i == 0) {
                 layersTop.innerHTML = `
                 <div class="title" id="title${this.presentLayerIndex}">
-                  <div>
+                  <div class="box">
                     <span class="date">${this.metaData.date}</span>
                     <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
-                    <span class="imageCredit" id="imageCredit${i}"  onkeyup="mediaCredit()">${pl}</span>
+                    <div class="creditBox">
+                      <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">${pl}</span>
+                    </div>
                   </div>
                 </div>`;
             }else{
@@ -747,18 +747,13 @@ class Editor{
                 <div class="title" id="title${this.presentLayerIndex}" >
                 <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
                 <span class="otherText" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
-                <span class="imageCredit"  id="imageCredit${i}" onkeyup="mediaCredit()">${pl}</span>
+                <div class="creditBox">
+                  <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">${pl}</span>
+                </div>
                 </div>
 
                 `;
             }
-            // var headElement = document.createElement('div');
-            // headElement.id = 'headSection';
-            // headElement.innerHTML = `
-            //                          <div id="brandDiv">
-            //                             <img src="/assets/img/favicon2.jpg">
-            //                          </div>`;
-            // newLayer.appendChild(headElement);
             if (this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
 
               var imageElement = document.createElement('img');
