@@ -47,8 +47,6 @@ class getFastreedContent {
             }elseif(!$this->checkPermission()){
                 $this->renderPError();
             }else{
-              // echo "Hello";
-                // echo $this->checkUpload();
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
@@ -116,10 +114,18 @@ class getFastreedContent {
         $IMGID = $_GET['ID'];
         $EXT = $_GET['EXT'];
         $filepath =$this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
-        if (file_exists($filepath)) {
-            $return = $filepath;
+              // Decode the URL to remove URL-encoded characters
+              // Replace unwanted characters with an empty string
+        if (strpos($filepath, "\xE2\x80\x8B") !== false) {
+          $decodedURL = str_replace("\xE2\x80\x8B", '', $filepath);
+          $url = str_replace("%E2%80%8B%E2%80%8B%E2%80%8B", '', $decodedURL);
+        }else{
+          $url = $filepath;
         }
-        echo $filepath;
+        if (file_exists($url)) {
+            $return = $url;
+        }
+        // echo $url;
         return $return;
 
     }

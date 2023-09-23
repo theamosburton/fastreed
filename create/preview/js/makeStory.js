@@ -177,7 +177,8 @@ for (let  i= 0; i < totalLayers; i++) {
     </amp-story-page>`;
   }else if(storyData.layers['L'+ i].media.type == "video"){
     if (storyData.layers['L'+i].media.url == "" ||  storyData.layers['L'+i].media.url == "default") {
-      var backgroundVideo = "/create/preview/favicons/slide24.mp4";
+      var backgroundVideo  ="";
+      var poster= "/assets/img/default.jpeg";
     }else{
       var backgroundVideo = storyData.layers['L'+i].media.url;
     }
@@ -192,7 +193,7 @@ for (let  i= 0; i < totalLayers; i++) {
                   autoplay
                   width="auto"
                   height="auto"
-                  poster=""
+                  poster="${poster}"
                   controls
                   class=" zoom-in "
                   >

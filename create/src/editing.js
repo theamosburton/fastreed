@@ -46,9 +46,8 @@ class Edits{
 
 
       if (type == 'image') {
-        if (document.getElementById(`placeholder${editor.presentLayerIndex}`)) {
-          document.getElementById(`placeholder${editor.presentLayerIndex}`).remove();
-        }else if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
+        console.log(editor.presentLayerIndex);
+        if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
           document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
         }
         var layerId =  editor.presentLayerIndex;
@@ -77,9 +76,7 @@ class Edits{
         if (editor.presentLayerIndex == 0) {
           alert('Please use photo for thumbnail');
         }else{
-          if (document.getElementById(`placeholder${editor.presentLayerIndex}`)) {
-            document.getElementById(`placeholder${editor.presentLayerIndex}`).remove();
-          }else if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
+          if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
             document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
           }
           edits.modifyMedia('video', link, olink);
@@ -125,8 +122,8 @@ class Edits{
       var media = document.querySelector(`#mediaContent${this.editor.presentLayerIndex}`);
       media.remove();
       var tmpImage = document.createElement('img');
+      tmpImage.id =`mediaContent${this.editor.presentLayerIndex}`;
       tmpImage.src = "/assets/img/default.jpeg";
-      tmpImage.id =` mediaContent${this.editor.presentLayerIndex}`;
       document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
       this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
       this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = 'default';
