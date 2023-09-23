@@ -779,7 +779,7 @@ class Editor{
                 videoElement.type = 'video/mp4';
                 videoElement.id = `mediaContent${i}`;
                 var contorlsElements = document.createElement('div');
-                contorlsElements.id = `videoControls${i+1}`;
+                contorlsElements.id = `videoControls${i}`;
                 contorlsElements.className = 'videoControls';
                 contorlsElements.innerHTML = `
                 <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
@@ -952,7 +952,7 @@ class Editor{
                 `;
                 var textVisi = `<div class="div"  onclick="edits.containsText()">
                   <span>Text Visibility</span>
-                  <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${j-1}"></i>
+                  <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${j}"></i>
                 </div>`;
             }else{
               var otherTextStyle = ``;
@@ -1083,7 +1083,7 @@ class Editor{
 
             if (j != 0) {
               // Text Visibility
-              var tButton = document.getElementById(`textToggle${j-1}`);
+              var tButton = document.getElementById(`textToggle${j}`);
               if (this.layers['L' +j].textVisibility == 'false') {
                 this.layers['L' + j].textVisibility = 'false';
                 if(tButton.classList.contains('fa-toggle-on')){

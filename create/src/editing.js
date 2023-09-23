@@ -152,6 +152,7 @@ class Edits{
     // adding text if not exists
     var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
     if (this.editor.presentLayerIndex != 0) {
+      this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = '';
       var title = document.getElementById(`otherText${this.editor.presentLayerIndex}`);
       var text = document.getElementById(`titleText${this.editor.presentLayerIndex}`);
       if (title.style.display == 'none') {
@@ -179,6 +180,7 @@ class Edits{
     document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
     this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
     this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = 'default';
+    this.editor.layers['L' + this.editor.presentLayerIndex].media.type = '';
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
@@ -246,7 +248,7 @@ class Edits{
 // Text Visibility
    containsText(){
      // Text Visibility
-     var button = document.getElementById(`textToggle${this.editor.presentLayerIndex-1}`);
+     var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
      if(button.classList.contains('fa-toggle-on')){
        if (this.editor.layers['L' + this.editor.presentLayerIndex].media.type == 'video') {
          button.classList.remove('fa-toggle-on')
