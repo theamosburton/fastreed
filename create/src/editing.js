@@ -73,6 +73,36 @@ class Edits{
           }
         }
       }else if(type == 'video'){
+        // Text Visibility
+        if (editor.presentLayerIndex != 0) {
+          var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
+          if (this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility == '' || this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility == 'false') {
+            this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'false';
+            if(button.classList.contains('fa-toggle-on')){
+              button.classList.remove('fa-toggle-on')
+            }
+            if(button.classList.contains('enabledText')){
+              button.classList.remove('enabledText')
+            }
+            if(!button.classList.contains('fa-toggle-off')){
+              button.classList.add('fa-toggle-off')
+            }
+            document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'none';
+            document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'none';
+          }else{
+            this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'true';
+            if(button.classList.contains('fa-toggle-off')){
+              button.classList.remove('fa-toggle-off')
+            }
+            if(!button.classList.contains('enabledText')){
+              button.classList.add('enabledText')
+            }
+            if(!button.classList.contains('fa-toggle-on')){
+              button.classList.add('fa-toggle-on')
+            }
+          }
+        }
+
         if (editor.presentLayerIndex == 0) {
           alert('Please use photo for thumbnail');
         }else{
@@ -88,7 +118,7 @@ class Edits{
           videoElement.type = 'video/mp4';
           videoElement.id = `mediaContent${editor.presentLayerIndex}`;
           var contorlsElements = document.createElement('div');
-          contorlsElements.id = `videoControls${editor.presentLayer}`;
+          contorlsElements.id = `videoControls${editor.presentLayerIndex}`;
           contorlsElements.className = 'videoControls';
           contorlsElements.innerHTML = `
           <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
@@ -119,18 +149,40 @@ class Edits{
       // this.saveToBrowser();
     }
   deleteMedia(type){
-      var media = document.querySelector(`#mediaContent${this.editor.presentLayerIndex}`);
-      media.remove();
-      var tmpImage = document.createElement('img');
-      tmpImage.id =`mediaContent${this.editor.presentLayerIndex}`;
-      tmpImage.src = "/assets/img/default.jpeg";
-      document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
-      this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
-      this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = 'default';
-      if (this.version+1 == editor.version) {
-        this.version += 1;
+    // adding text if not exists
+    var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
+    if (this.editor.presentLayerIndex != 0) {
+      var title = document.getElementById(`otherText${this.editor.presentLayerIndex}`);
+      var text = document.getElementById(`titleText${this.editor.presentLayerIndex}`);
+      if (title.style.display == 'none') {
+        title.style.display = 'flex';
       }
-      this.saveToBrowser();
+      if (text.style.display == 'none') {
+        text.style.display = 'flex';
+      }
+      if(button.classList.contains('fa-toggle-off')){
+        button.classList.remove('fa-toggle-off')
+      }
+      if(!button.classList.contains('enabledText')){
+        button.classList.add('enabledText')
+      }
+      if(!button.classList.contains('fa-toggle-on')){
+        button.classList.add('fa-toggle-on')
+      }
+    }
+    var media = document.querySelector(`#mediaContent${this.editor.presentLayerIndex}`);
+    media.remove();
+    document.getElementById(`videoControls${editor.presentLayerIndex}`).remove();
+    var tmpImage = document.createElement('img');
+    tmpImage.id =`mediaContent${this.editor.presentLayerIndex}`;
+    tmpImage.src = "/assets/img/default.jpeg";
+    document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
+    this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
+    this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = 'default';
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
+    this.saveToBrowser();
   }
   modifyMedia(type, blobUrl, url){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -191,7 +243,38 @@ class Edits{
     this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
   }
     // Media Editing
-
+// Text Visibility
+   containsText(){
+     // Text Visibility
+     var button = document.getElementById(`textToggle${this.editor.presentLayerIndex-1}`);
+     if(button.classList.contains('fa-toggle-on')){
+       if (this.editor.layers['L' + this.editor.presentLayerIndex].media.type == 'video') {
+         button.classList.remove('fa-toggle-on')
+         if(button.classList.contains('enabledText')){
+           button.classList.remove('enabledText')
+         }
+         if(!button.classList.contains('fa-toggle-off')){
+           button.classList.add('fa-toggle-off')
+         }
+         this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'false';
+         document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'none';
+         document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'none';
+       }else{
+         alert('You can hide text only in videos');
+       }
+     }else{
+       button.classList.remove('fa-toggle-off')
+       if(!button.classList.contains('enabledText')){
+         button.classList.add('enabledText')
+       }
+       if(!button.classList.contains('fa-toggle-on')){
+         button.classList.add('fa-toggle-on')
+       }
+       this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'true';
+       document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'flex';
+       document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'flex';
+     }
+   }
   // Title Editing
   changeFontSize(x){
     if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){

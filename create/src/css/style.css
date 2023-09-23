@@ -214,7 +214,7 @@ html{
   z-index: 9999;
   display: flex;
   flex-direction: row;
-  margin: 0px 0px -12px 0px;
+  margin: 0px 0px -13px 0px;
   width: calc(9*1.75rem);
   padding: 0 4px;
 }
@@ -718,6 +718,14 @@ html{
   max-width: 300px;
 }
 
+.toggleText {
+  margin-left: 20px;
+}
+
+.enabledText {
+  color: rgb(143, 143, 237);
+}
+
 @keyframes rotate {
     from {
       transform: rotate(0deg);
@@ -783,6 +791,10 @@ html{
         margin-top: 10%;
     }
 
+    .navSection{
+      margin: 0px 0px -15px 0px;
+    }
+
     .editContainer .rightSection{
         display: none;
         position: absolute;
@@ -807,13 +819,14 @@ html{
         width: calc(9*2rem);
         height: calc(16*1.95rem);
         min-height: calc(16*1.95rem);
+        margin-top: 14px;
     }
     .editContainer .editorSection {
         justify-content: flex-start;
         /* padding-top: 10%; */
     }
     .navSection{
-      width: calc(9*1.6rem);
+      width: calc(9*1.9rem);
       margin-bottom: -27px;
     }
 }
@@ -823,6 +836,11 @@ html{
         margin: 20px 40px 10px 40px;
         width: calc(9*1.6rem);
         height: calc(16*1.6rem);
+    }
+
+    .navSection{
+      width: calc(9*1.6rem);
+      margin-bottom: -28px;
     }
 
 }

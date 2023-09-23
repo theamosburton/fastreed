@@ -119,7 +119,7 @@ class Editor{
                           layers : this.layers,
                           metaData : this.metaData
                         };
-                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                        // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                       }
                     }else{
                         this.createExistedLayers();
@@ -214,6 +214,7 @@ class Editor{
                 "fontSize":"20px"
             },
             'theme':'default',
+            'textVisibility': '',
             'otherText': {
               "text":'',
               "fontFamily":"Poppins-regular",
@@ -279,6 +280,7 @@ class Editor{
         styleBoxn.id = `styleBox${this.presentLayerIndex}`;
         styleBoxn.classList.add('objectOptionsbody');
         if (this.presentLayerIndex != 0) {
+          // For non front pages
           var otherText = `
           <!-- Other Text Styles -->
           <div class="optionsDIv" id="aboutStyles${this.presentLayerIndex}">
@@ -325,37 +327,32 @@ class Editor{
               </div>
           </div>
           <!-- Other Text Styles -->`;
+          var textVisi = `<div class="div"  onclick="edits.containsText()">
+            <span>Text Visibility</span>
+            <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${this.presentLayerIndex}"></i>
+          </div>`;
         }else{
+          // For front pages
           var otherText = '';
+          var textVisi = '';
         }
         styleBoxn.innerHTML = `
-                    <!-- Theme Options -->
-                     <div class="optionsDIv" id="themeStyles${this.presentLayerIndex}">
-                         <span class="objectName" onclick="edits.expandOptions('themeStyles${this.presentLayerIndex}','')">
-                             <span>Choose Theme</span>
-                             <i class="fa fa-caret-down"></i>
-                         </span>
-                         <div class="options" style="display: block;">
-                             <div class="div">
-                                 <span>Select Theme</span>
-                                 <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
-                                     <option value="Default">Default</option>
-                                     <option value="1">Theme 1</option>
-                                     <option value="2">Theme 2</option>
-                                     <option value="3">Theme 3</option>
-                                 </select>
-                             </div>
-                         </div>
-                     </div>
-                     <!-- Theme Options -->
 
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${this.presentLayerIndex}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${this.presentLayerIndex}','')">
                             <span>Media</span>
-                            <i class="fa fa-caret-right"></i>
+                            <i class="fa fa-caret-down"></i>
                         </span>
-                        <div class="options" style="display: none;">
+
+                        <div class="options" style="display: block;">
+                            <div class="div">
+                                <span>Select Theme</span>
+                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
+                                    <option value="Default">Default</option>
+                                </select>
+                            </div>
+
                             <div class="div">
                                 <span>Media Fit</span>
                                 <select onchange="edits.mediaFit()" id="mediaFit${this.presentLayerIndex}" class="value inputText">
@@ -376,6 +373,8 @@ class Editor{
                                 <span>Media Credit</span>
                                 <input class="value inputText text" type="text" id="mediaCredit${this.presentLayerIndex}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
+
+                            ${textVisi}
 
                         </div>
                     </div>
@@ -951,29 +950,15 @@ class Editor{
                 </div>
                 <!-- Other Text Styles -->
                 `;
+                var textVisi = `<div class="div"  onclick="edits.containsText()">
+                  <span>Text Visibility</span>
+                  <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${j-1}"></i>
+                </div>`;
             }else{
               var otherTextStyle = ``;
+              var textVisi = '';
             }
             styleBoxn.innerHTML = `
-                  <!-- Theme Options -->
-                    <div class="optionsDIv" id="themeStyles${this.presentLayerIndex}">
-                        <span class="objectName" onclick="edits.expandOptions('themeStyles${this.presentLayerIndex}','')">
-                            <span>Choose Theme</span>
-                            <i class="fa fa-caret-right"></i>
-                        </span>
-                        <div class="options" style="display: none;">
-                            <div class="div">
-                                <span>Select Theme</span>
-                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
-                                    <option value="Default">Default</option>
-                                    <option value="1">Theme 1</option>
-                                    <option value="2">Theme 2</option>
-                                    <option value="3">Theme 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Theme Options -->
                     <!-- Media Options -->
                     <div class="optionsDIv" id="mediaStyles${j}">
                         <span class="objectName" onclick="edits.expandOptions('mediaStyles${j}','')">
@@ -981,6 +966,14 @@ class Editor{
                             <i class="fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display: none;">
+                            <div class="div">
+                                <span>Select Theme</span>
+                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
+                                    <option value="Default">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options" style="display: block;">
                             <div class="div">
                                 <span>Media Fit</span>
                                 <select onchange="edits.mediaFit()" id="mediaFit${j}" class="value inputText">
@@ -999,6 +992,7 @@ class Editor{
                                 <input class="value inputText text" type="text" id="mediaCredit${j}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
                         </div>
+                        ${textVisi}
                     </div>
                     <!-- Media Options -->
 
@@ -1087,12 +1081,45 @@ class Editor{
               document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
             }
 
+            if (j != 0) {
+              // Text Visibility
+              var tButton = document.getElementById(`textToggle${j-1}`);
+              if (this.layers['L' +j].textVisibility == 'false') {
+                this.layers['L' + j].textVisibility = 'false';
+                if(tButton.classList.contains('fa-toggle-on')){
+                  tButton.classList.remove('fa-toggle-on')
+                }
+                if(tButton.classList.contains('enabledText')){
+                  tButton.classList.remove('enabledText')
+                }
+                if(!tButton.classList.contains('fa-toggle-off')){
+                  tButton.classList.add('fa-toggle-off')
+                }
+                document.getElementById(`otherText${j}`).style.display = 'none';
+                document.getElementById(`titleText${j}`).style.display = 'none';
+              }else{
+                this.layers['L' + j].textVisibility = 'true';
+                if(tButton.classList.contains('fa-toggle-off')){
+                  tButton.classList.remove('fa-toggle-off')
+                }
+                if(!tButton.classList.contains('enabledText')){
+                  tButton.classList.add('enabledText')
+                }
+                if(!tButton.classList.contains('fa-toggle-on')){
+                  tButton.classList.add('fa-toggle-on')
+                }
+              }
+              // Text Visibility
+            }
+
             if (this.layers['L'+ j].media.url !== undefined && this.layers['L'+ j].media.url  !== "default"  && this.layers['L'+ j].media.url  !== "") {
               if (document.getElementById(`mediaContent${j}`)) {
                   document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
               }
 
             }
+
+
 
             if (Object.keys(this.layers['L'+ j].media).length  != 0) {
                 var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);

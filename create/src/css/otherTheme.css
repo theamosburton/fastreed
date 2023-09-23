@@ -53,8 +53,8 @@
   width: auto;
   padding: 2px 5px!important;
   justify-content:center;
-  background: rgba(0,0,0,0.4);
   margin-top: 30px;
+  margin-bottom: 10px;
 }
 .defaultOther .title .author{
     font-size: 13px;
@@ -70,5 +70,6 @@
   flex-direction: column;
   justify-content: flex-end;
   z-index: 999;
+  background-image: linear-gradient(rgba(85, 83, 83, 0%), rgba(85, 83, 83, 0%), rgba(85, 83, 83, 0%), black);
 }
 /* Default theme for front page */
