@@ -163,7 +163,7 @@ for (let  i= 0; i < totalLayers; i++) {
           <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
           <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:40px 20px">
             <div animate-in="fly-in-top" animate-in-delay="1s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-top:120px">
-              <p class="fade-in" style="font:18px/1.1 BebasNeue;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">${date}</p>
+              <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">${date}</p>
             </div>
             <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
               <h1 class="fade-in" style="font:34px/1.2 BebasNeue;font-weight:900;letter-spacing:0.72px;padding-bottom:15px;text-align:center">${storyData.metaData.title}</h1>
@@ -198,10 +198,10 @@ for (let  i= 0; i < totalLayers; i++) {
 						</div>
 						<div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:55px 24px 20px;justify-content:flex-end">
 							<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
-								<div style="text-align:left;color:#fff;background-color:rgba(65,120,252, 0.7);font:18px BebasNeue;font-weight:900;padding:14px 30px;letter-spacing:1px">${storyData.layers['L' + i].title.text}</div>
+								<div style="text-align:left;color:#fff;background-color:rgba(65,120,252, 0.7);font:18px Poppins-medium;font-weight:900;padding:14px 30px;letter-spacing:1px">${storyData.layers['L' + i].title.text}</div>
 							</div>
 							<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
-								<div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4 helvetica;padding:15px 30px 24px" class="description ">
+								<div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4  Poppins-regular;padding:15px 30px 24px" class="description ">
 									<p>${storyData.layers['L' + i].otherText.text}</p>
 								</div>
 							</div>
