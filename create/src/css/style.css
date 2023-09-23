@@ -813,7 +813,8 @@ html{
         /* padding-top: 10%; */
     }
     .navSection{
-      width: calc(9*2rem);
+      width: calc(9*1.6rem);
+      margin-bottom: -27px;
     }
 }
 
