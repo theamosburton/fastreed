@@ -175,7 +175,53 @@ for (let  i= 0; i < totalLayers; i++) {
         </div>
       </amp-story-grid-layer>
     </amp-story-page>`;
-  }else if(storyData.layers.L0.media.type == "" || storyData.layers.L0.media.type == "image"){
+  }else if(storyData.layers['L'+ i].media.type == "video"){
+    if (storyData.layers['L'+i].media.url == "" ||  storyData.layers['L'+i].media.url == "default") {
+      var backgroundVideo = "/create/preview/favicons/slide24.mp4";
+    }else{
+      var backgroundVideo = storyData.layers['L'+i].media.url;
+    }
+    ampStory.innerHTML += `<amp-story-page class="NWSStory-scene" data-layout="7" data-type="standard" id="Story_page_6_Template_id_5">
+      <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+        <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+        <div class="NWSStory-layers NWSStory-layers--unfixed">
+          <div class="NWSStory-layers-group NWSStory-layers-group--media">
+            <div class="NWSStory-layer NWSStory-layer--img">
+              <div class="NWSStory-layer-content">
+                <amp-video
+                  autoplay
+                  loop
+                  width="auto"
+                  height="auto"
+                  poster=""
+                  controls
+                  class=" zoom-in "
+                  >
+                  <source src="${backgroundVideo}" type="video/mp4">
+                </amp-video>
+              </div>
+            </div>
+          </div>
+          <div class="NWSStory-layer NWSStory-layer--overlay">
+            <div class="NWSStory-layer-content" style="opacity:1;background:linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%)"></div>
+          </div>
+          <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:55px 24px 20px;justify-content:flex-end">
+            <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+              <div style="text-align:left;color:#fff;background-color:rgba(65,120,252, 0.7);font:18px BebasNeue;font-weight:900;padding:14px 30px;letter-spacing:1px">${storyData.layers['L' + i].title.text}</div>
+            </div>
+            <div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
+              <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4 helvetica;padding:15px 30px 24px" class="description ">
+                <p>${storyData.layers['L' + i].otherText.text}</p>
+              </div>
+            </div>
+            <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
+              <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Video Credit: ${storyData.layers['L' + i].media.credit}</p>
+            </div>
+          </div>
+        </div>
+      </amp-story-grid-layer>
+    </amp-story-page>`;
+  }else{
     if (storyData.layers['L'+i].media.url == "" ||  storyData.layers['L'+i].media.url == "default") {
       var backgroundImage = "/assets/img/default.jpeg";
     }else{
@@ -212,51 +258,5 @@ for (let  i= 0; i < totalLayers; i++) {
 					</div>
 				</amp-story-grid-layer>
 			</amp-story-page>`;
-  }else{
-    if (storyData.layers['L'+i].media.url == "" ||  storyData.layers['L'+i].media.url == "default") {
-      var backgroundVideo = "favicons/slide24.mp4";
-    }else{
-      var backgroundImage = storyData.layers['L'+i].media.url;
-    }
-    ampStory.innerHTML += `<amp-story-page class="NWSStory-scene" data-layout="7" data-type="standard" id="Story_page_6_Template_id_5">
-      <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
-        <div class="NWSStory-layers NWSStory-layers--fixed"></div>
-        <div class="NWSStory-layers NWSStory-layers--unfixed">
-          <div class="NWSStory-layers-group NWSStory-layers-group--media">
-            <div class="NWSStory-layer NWSStory-layer--img">
-              <div class="NWSStory-layer-content">
-                <amp-video
-                  autoplay
-                  loop
-                  width="auto"
-                  height="auto"
-                  poster=""
-                  controls
-                  class=" zoom-in "
-                  >
-                  <source src="http://localhost${storyData.layers['L'+i].media.url}" type="video/mp4">
-                </amp-video>
-              </div>
-            </div>
-          </div>
-          <div class="NWSStory-layer NWSStory-layer--overlay">
-            <div class="NWSStory-layer-content" style="opacity:1;background:linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%)"></div>
-          </div>
-          <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:55px 24px 20px;justify-content:flex-end">
-            <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
-              <div style="text-align:left;color:#fff;background-color:rgba(65,120,252, 0.7);font:18px BebasNeue;font-weight:900;padding:14px 30px;letter-spacing:1px">${storyData.layers['L' + i].title.text}</div>
-            </div>
-            <div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
-              <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4 helvetica;padding:15px 30px 24px" class="description ">
-                <p>${storyData.layers['L' + i].otherText.text}</p>
-              </div>
-            </div>
-            <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
-              <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: ${storyData.layers['L' + i].media.credit}</p>
-            </div>
-          </div>
-        </div>
-      </amp-story-grid-layer>
-    </amp-story-page>`;
   }
 }

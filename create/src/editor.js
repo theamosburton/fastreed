@@ -72,7 +72,7 @@ class Editor{
                             },
                             'title':{
                                 "text":'',
-                                "fontFamily":"inherit",
+                                "fontFamily":"BebasNeue",
                                 "fontWeight":"1000",
                                 "fontSize":"20px"
                             },
@@ -209,16 +209,16 @@ class Editor{
             },
             'title':{
                 "text":'',
-                "fontFamily":"inherit",
+                "fontFamily":"Poppins-medium",
                 "fontWeight":"1000",
                 "fontSize":"20px"
             },
             'theme':'default',
             'otherText': {
               "text":'',
-              "fontFamily":"inherit",
-              "fontWeight":"1000",
-              "fontSize":"20px"
+              "fontFamily":"Poppins-regular",
+              "fontWeight":"400",
+              "fontSize":"18px"
             }
         };
         var newLayer = document.createElement('div');
@@ -1063,15 +1063,28 @@ class Editor{
 
     applyStyleSheet(){
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
-
+          // For front page and other
             document.getElementById(`titleText${j}`).style.fontSize = this.layers['L'+ j].title.fontSize;
-            document.getElementById(`titleText${j}`).style.fontFamily = this.layers['L'+ j].title.fontFamily;
+            document.getElementById(`titleText${j}`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
             document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
 
             if (j != 0) {
-              document.getElementById(`otherText${j}`).style.fontSize = this.layers['L'+ j].otherText.fontSize;
-              document.getElementById(`otherText${j}`).style.fontFamily = this.layers['L'+ j].otherText.fontFamily;
+              // Frr other pages only
+              var nm1 = parseFloat(this.layers['L'+ j].otherText.fontSize);
+              var nmm1 = nm1 - 6;
+              var otherText = nmm1 + "px";
+
+              var nm2 = parseFloat(this.layers['L'+ j].title.fontSize);
+              var nmm2 = nm2 - 6;
+              var title = nmm2 + "px";
+
+              document.getElementById(`otherText${j}`).style.fontSize = otherText;
+              document.getElementById(`otherText${j}`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
               document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
+
+              document.getElementById(`titleText${j}`).style.fontSize = title;
+              document.getElementById(`titleText${j}`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
+              document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
             }
 
             if (this.layers['L'+ j].media.url !== undefined && this.layers['L'+ j].media.url  !== "default"  && this.layers['L'+ j].media.url  !== "") {

@@ -41,12 +41,14 @@ class getFastreedContent {
             $this->renderUError();
         }else {
             if (!$this->checkUpload()) {
-                $this->renderUError();
+                // $this->renderUError();
             }elseif($this->checkIfViolated()){
                 $this->renderVError();
             }elseif(!$this->checkPermission()){
                 $this->renderPError();
             }else{
+              // echo "Hello";
+                // echo $this->checkUpload();
                 $EXT = $_GET['EXT'];
                 $filepath = $this->checkUpload();
                 $type = $_GET['type'];
@@ -117,7 +119,9 @@ class getFastreedContent {
         if (file_exists($filepath)) {
             $return = $filepath;
         }
+        echo $filepath;
         return $return;
+
     }
 
     private function checkPermission(){
