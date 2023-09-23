@@ -190,7 +190,6 @@ for (let  i= 0; i < totalLayers; i++) {
               <div class="NWSStory-layer-content">
                 <amp-video
                   autoplay
-                  loop
                   width="auto"
                   height="auto"
                   poster=""
