@@ -88,20 +88,20 @@ class Editor{
                           layersTop.classList.add('defaultFront');
                           layersTop.id = `layersTop${this.presentLayerIndex}`;
                           layersTop.innerHTML = `
-                          <div class="title" id="title${this.presentLayerIndex}">
+                          <div class="title">
                             <div class="box">
                               <span class="date">${this.metaData.date}</span>
-                              <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editStoryTitle('titleText${this.presentLayerIndex}', '')">Edit title for this webstory</span>
+                              <span class="titleText"  contenteditable="true" onkeyup="edits.editStoryTitle('')">Edit title for this webstory</span>
                               <div class="creditBox">
-                                <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
+                                <span class="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
                               </div>
-
                             </div>
                           </div>`;
                           var defaultImage = document.createElement('img');
                           defaultImage.src = "/assets/img/default.jpeg";
-                          defaultImage.id = 'mediaContent0';
+                          defaultImage.className = 'mediaContent';
                           this.editorId.appendChild(newLayer);
+
                           newLayer.appendChild(layersTop);
                           newLayer.appendChild(defaultImage);
                         }
@@ -233,15 +233,14 @@ class Editor{
         var layersTop = document.createElement('div');
         layersTop.classList.add('layersTop');
         layersTop.classList.add('defaultOther');
-        layersTop.id = `layersTop${this.presentLayerIndex}`;
         layersTop.innerHTML = `
-        <div class="title" id="title${this.presentLayerIndex}">
-            <span class="titleText" id="titleText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editTitle('titleText${this.presentLayerIndex}')">Edit title text</span>
+        <div class="title" id="title">
+            <span class="titleText" contenteditable="true" onkeyup="edits.editTitle()">Edit title text</span>
 
-            <span class="otherText" id="otherText${this.presentLayerIndex}" contenteditable="true" onkeyup="edits.editText('otherText${this.presentLayerIndex}')">Edit description text</span>
+            <span class="otherText" contenteditable="true" onkeyup="edits.editText()">Edit description text</span>
 
             <div class="creditBox">
-              <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">Media Credit</span>
+              <span class="imageCredit"  id="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
             </div>
         </div>
         `;
@@ -264,7 +263,7 @@ class Editor{
 
         var defaultImage = document.createElement('img');
         defaultImage.src = "/assets/img/default.jpeg";
-        defaultImage.id = `mediaContent${this.presentLayerIndex}`;
+        defaultImage.classList.add('mediaContent');
         newLayer.appendChild(layersTop);
         newLayer.appendChild(defaultImage);
         // newLayer.appendChild(headElement);
@@ -283,17 +282,17 @@ class Editor{
           // For non front pages
           var otherText = `
           <!-- Other Text Styles -->
-          <div class="optionsDIv" id="aboutStyles${this.presentLayerIndex}">
-              <span class="objectName" onclick="edits.expandOptions('aboutStyles${this.presentLayerIndex}')">
+          <div class="optionsDIv aboutStyles">
+              <span class="objectName" onclick="edits.expandOptions('aboutStyles')">
                   <span>Text</span>
-                  <i class="fa fa-caret-right"></i>
+                  <i class="upDownIcon fa fa-caret-right"></i>
               </span>
               <div class="options" style="display:none;">
 
 
                   <div class="div">
                       <span>Font weight</span>
-                      <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${this.presentLayerIndex}" class="value inputText">
+                      <select onchange="edits.changeOtherFontWeight()" class="otherFontWeight value inputText">
                           <option value="lighter" selected>Light</option>
                           <option value="600">Bold</option>
                           <option value="1000">Bolder</option>
@@ -301,7 +300,7 @@ class Editor{
                   </div>
                   <div class="div">
                       <span>Font size</span>
-                      <select id="otherFontSize${this.presentLayerIndex}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
+                      <select onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
                           <option value="medium">Medium</option>
                           <option value="large">Large</option>
                           <option value="small">Small</option>
@@ -309,12 +308,12 @@ class Editor{
                       </select>
                       <br/>
                       <span>Custom font size</span>
-                      <input class="value inputText text" type="text" id="customOtherFontSize${this.presentLayerIndex}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')">
+                      <input class="customOtherFontSize value inputText text" type="text" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')">
                   </div>
 
                   <div class="div">
                       <span>Font family</span>
-                      <select id="otherFontFamily${this.presentLayerIndex}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
+                      <select onchange="edits.changeOtherFontFamily('select')"  class="otherFontFamily value inputText">
                           <option value="inherit">Auto</option>
                           <option value="cursive">Cursive</option>
                           <option value="monospace">Monospace</option>
@@ -322,14 +321,14 @@ class Editor{
                       </select>
                       <br/>
                       <span>Custom font family</span>
-                      <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${this.presentLayerIndex}" placeholder="e.g. verdana, Sans-serif etc.">
+                      <input type="text" class="otherCustomFontFamily value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" placeholder="e.g. verdana, Sans-serif etc.">
                   </div>
               </div>
           </div>
           <!-- Other Text Styles -->`;
           var textVisi = `<div class="div"  onclick="edits.containsText()">
             <span>Text Visibility</span>
-            <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${this.presentLayerIndex}"></i>
+            <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on"></i>
           </div>`;
         }else{
           // For front pages
@@ -339,23 +338,16 @@ class Editor{
         styleBoxn.innerHTML = `
 
                     <!-- Media Options -->
-                    <div class="optionsDIv" id="mediaStyles${this.presentLayerIndex}">
-                        <span class="objectName" onclick="edits.expandOptions('mediaStyles${this.presentLayerIndex}','')">
+                    <div class="optionsDIv mediaStyles" >
+                        <span class="objectName" onclick="edits.expandOptions('mediaStyles')">
                             <span>Media</span>
-                            <i class="fa fa-caret-down"></i>
+                            <i class="upDownIcon fa fa-caret-down"></i>
                         </span>
 
                         <div class="options" style="display: block;">
                             <div class="div">
-                                <span>Select Theme</span>
-                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
-                                    <option value="Default">Default</option>
-                                </select>
-                            </div>
-
-                            <div class="div">
                                 <span>Media Fit</span>
-                                <select onchange="edits.mediaFit()" id="mediaFit${this.presentLayerIndex}" class="value inputText">
+                                <select onchange="edits.mediaFit()" class="mediaFit value inputText">
                                     <option value="fill">Fill</option>
                                     <option value="none">None</option>
                                     <option value="cover" selected>Cover</option>
@@ -366,30 +358,28 @@ class Editor{
 
                             <div class="div">
                                 <span>Shade Opacity</span>
-                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${this.presentLayerIndex}" value="10">
+                                <input onchange="edits.overlayEdit()" class="mediaOverlayOpacity value inputText" type="range" value="10">
                             </div>
 
                             <div class="div">
                                 <span>Media Credit</span>
-                                <input class="value inputText text" type="text" id="mediaCredit${this.presentLayerIndex}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
+                                <input class="mediaCredit value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
                             </div>
-
                             ${textVisi}
-
                         </div>
                     </div>
                     <!-- Media Options -->
 
                     <!-- Text Styles -->
-                    <div class="optionsDIv" id="titleStyles${this.presentLayerIndex}">
-                        <span class="objectName" onclick="edits.expandOptions('titleStyles${this.presentLayerIndex}')">
+                    <div class="optionsDIv titleStyles">
+                        <span class="objectName" onclick="edits.expandOptions('titleStyles')">
                             <span>Title</span>
-                            <i class="fa fa-caret-right"></i>
+                            <i class="upDownIcon fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
                             <div class="div">
                                 <span>Font weight</span>
-                                <select id="titleFontWeight${this.presentLayerIndex}" onchange="edits.changeFontWeight()" class="value inputText">
+                                <select onchange="edits.changeFontWeight()" class="titleFontWeight value inputText">
                                     <option value="400">Light</option>
                                     <option value="700" >Bold</option>
                                     <option value="1000" selected>Bolder</option>
@@ -399,20 +389,20 @@ class Editor{
 
                             <div class="div">
                                 <span>Font size</span>
-                                <select name="" id="titleFontSize${this.presentLayerIndex}" onchange="edits.changeFontSize('select')" class="value inputText">
+                                <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
                                     <option value="medium">Medium</option>
                                     <option value="large">Large</option>
                                     <option value="larger" selected>X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
-                                <input class="value inputText text" type="text" id="customFontSize${this.presentLayerIndex}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeFontSize('custom')">
+                                <input class="customFontSize value inputText text" type="text"  placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeFontSize('custom')">
                             </div>
 
 
                             <div class="div">
                                 <span>Font family</span>
-                                <select id="fontFamily${this.presentLayerIndex}" onchange="edits.changeFontFamily('select')"  class="value inputText">
+                                <select  onchange="edits.changeFontFamily('select')"  class="fontFamily value inputText">
                                     <option value="inherit">Auto</option>
                                     <option value="cursive">Cursive</option>
                                     <option value="monospace">Monospace</option>
@@ -420,7 +410,7 @@ class Editor{
                                 </select>
                                 <br/>
                                 <span>Custom font family</span>
-                                <input type="text" class="value inputText text" onkeyup="edits.changeFontFamily('custom')" id="customFontFamily${this.presentLayerIndex}" placeholder="e.g. verdana, Sans-serif etc.">
+                                <input type="text" class="customFontFamily value inputText text" onkeyup="edits.changeFontFamily('custom')" placeholder="e.g. verdana, Sans-serif etc.">
                             </div>
                         </div>
                     </div>
@@ -724,29 +714,29 @@ class Editor{
               layersTop.classList.add(`${this.layers['L'+ i].theme}Other`);
             }
 
-            if (this.layers['L'+ i].media.credit == 'none') {
+            if (this.layers['L'+ i].media.credit == "none" || this.layers['L'+ i].media.credit == '') {
               var pl = 'Media Credit';
             }else{
               var pl = this.layers['L'+ i].media.credit;
             }
             if ( i == 0) {
                 layersTop.innerHTML = `
-                <div class="title" id="title${this.presentLayerIndex}">
+                <div class="title">
                   <div class="box">
                     <span class="date">${this.metaData.date}</span>
-                    <span class="titleText" id="titleText0" contenteditable="true" onkeyup="edits.editStoryTitle('titleText0', '')">${text}</span>
+                    <span class="titleText" contenteditable="true" onkeyup="edits.editStoryTitle()">${text}</span>
                     <div class="creditBox">
-                      <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">${pl}</span>
+                      <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
                     </div>
                   </div>
                 </div>`;
             }else{
                 layersTop.innerHTML = `
-                <div class="title" id="title${this.presentLayerIndex}" >
-                <span class="titleText" id="titleText${i}" contenteditable="true" onkeyup="edits.editTitle('titleText${i}')">${text}</span>
-                <span class="otherText" id="otherText${i}" contenteditable="true" onkeyup="edits.editText('otherText${i}')">${othertext}</span>
+                <div class="title">
+                <span class="titleText" contenteditable="true" onkeyup="edits.editTitle()">${text}</span>
+                <span class="otherText" contenteditable="true" onkeyup="edits.editText()">${othertext}</span>
                 <div class="creditBox">
-                  <span class="imageCredit"  id="imageCredit${this.presentLayerIndex}" onkeyup="mediaCredit()">${pl}</span>
+                  <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
                 </div>
                 </div>
 
@@ -755,7 +745,7 @@ class Editor{
             if (this.layers['L'+ i].media.url == undefined || this.layers['L'+ i].media.url  == "default" || this.layers['L'+ i].media.url  == "") {
 
               var imageElement = document.createElement('img');
-              imageElement.id = `mediaContent${i}`;
+              imageElement.classList.add('mediaContent');
               imageElement.src = "/assets/img/default.jpeg";
               newLayer.appendChild(imageElement);
 
@@ -766,7 +756,7 @@ class Editor{
                 edits.updateMedia('image');
                 var layer = document.getElementById(`layer${i}`);
                 var imageElement = document.createElement('img');
-                imageElement.id = `mediaContent${i}`;
+                imageElement.classList.add('mediaContent');
                 imageElement.src = this.layers['L'+ i].media.url;
                 layer.appendChild(imageElement);
 
@@ -777,9 +767,8 @@ class Editor{
                 var videoElement = document.createElement('video');
                 videoElement.src = this.layers['L'+ i].media.url;
                 videoElement.type = 'video/mp4';
-                videoElement.id = `mediaContent${i}`;
+                videoElement.classList.add('mediaContent');
                 var contorlsElements = document.createElement('div');
-                contorlsElements.id = `videoControls${i}`;
                 contorlsElements.className = 'videoControls';
                 contorlsElements.innerHTML = `
                 <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
@@ -905,17 +894,17 @@ class Editor{
             if (j != 0) {
               var otherTextStyle = `
               <!-- Other Text Styles -->
-                <div class="optionsDIv" id="aboutStyles${j}">
-                    <span class="objectName" onclick="edits.expandOptions('aboutStyles${j}')">
+                <div class="optionsDIv aboutStyles">
+                    <span class="objectName" onclick="edits.expandOptions('aboutStyles')">
                         <span>Text</span>
-                        <i class="fa fa-caret-right"></i>
+                        <i class="upDownIcon fa fa-caret-right"></i>
                     </span>
                     <div class="options" style="display:none;">
 
 
                         <div class="div">
                             <span>Font weight</span>
-                            <select onchange="edits.changeOtherFontWeight()" id="otherFontWeight${j}" class="value inputText">
+                            <select onchange="edits.changeOtherFontWeight()" class="otherFontWeight value inputText">
                                 <option ${ofwl} value="lighter" selected>Light</option>
                                 <option ${ofwb} value="600">Bold</option>
                                 <option ${ofwbr} value="1000">Bolder</option>
@@ -923,7 +912,7 @@ class Editor{
                         </div>
                         <div class="div">
                             <span>Font size</span>
-                            <select id="otherFontSize${j}" onchange="edits.changeOtherFontSize('select')"  class="value inputText">
+                            <select  onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
                                 <option  ${ofsm} value="medium">Medium</option>
                                 <option  ${ofsl} value="large">Large</option>
                                 <option ${ofss} value="small">Small</option>
@@ -931,12 +920,12 @@ class Editor{
                             </select>
                             <br/>
                             <span>Custom font size</span>
-                            <input class="value inputText text" type="text" id="customOtherFontSize${j}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')" value="${ofsc}">
+                            <input class="customOtherFontSize value inputText text" type="text"  placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeOtherFontSize('custom')" value="${ofsc}">
                         </div>
 
                         <div class="div">
                             <span>Font family</span>
-                            <select id="otherFontFamily${j}" onchange="edits.changeOtherFontFamily('select')"  class="value inputText">
+                            <select onchange="edits.changeOtherFontFamily('select')"  class="otherFontFamily value inputText">
                                 <option ${offa} value="inherit">Auto</option>
                                 <option  ${offc} value="cursive">Cursive</option>
                                 <option  ${offm} value="monospace">Monospace</option>
@@ -944,15 +933,16 @@ class Editor{
                             </select>
                             <br/>
                             <span>Custom font family</span>
-                            <input type="text" class="value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" id="otherCustomFontFamily${j}" placeholder="e.g. verdana, Sans-serif etc." value=" ${offcs}">
+                            <input type="text" class="otherCustomFontFamily value inputText text" onkeyup="edits.changeOtherFontFamily('custom')" placeholder="e.g. verdana, Sans-serif etc." value=" ${offcs}">
                         </div>
                     </div>
                 </div>
                 <!-- Other Text Styles -->
                 `;
-                var textVisi = `<div class="div"  onclick="edits.containsText()">
+                var textVisi = `
+                <div class="div"  onclick="edits.containsText()">
                   <span>Text Visibility</span>
-                  <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on" id="textToggle${j}"></i>
+                  <i class="toggleText enabledText fa fa-solid fa-lg fa-toggle-on"></i>
                 </div>`;
             }else{
               var otherTextStyle = ``;
@@ -960,23 +950,22 @@ class Editor{
             }
             styleBoxn.innerHTML = `
                     <!-- Media Options -->
-                    <div class="optionsDIv" id="mediaStyles${j}">
-                        <span class="objectName" onclick="edits.expandOptions('mediaStyles${j}','')">
+                    <div class="mediaStyles optionsDIv">
+                        <span class="objectName" onclick="edits.expandOptions('mediaStyles')">
                             <span>Layer Media</span>
-                            <i class="fa fa-caret-right"></i>
+                            <i class="upDownIcon fa fa-caret-down"></i>
                         </span>
-                        <div class="options" style="display: none;">
-                            <div class="div">
+                        <div class="options" style="display: block;">
+                            <!-- <div class="div">
                                 <span>Select Theme</span>
-                                <select onchange="edits.editTheme()" id="editTheme${this.presentLayerIndex}" class="value inputText">
+                                <select onchange="edits.editTheme()"  class="editTheme value inputText">
                                     <option value="Default">Default</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="options" style="display: block;">
+                            </div> -->
+
                             <div class="div">
                                 <span>Media Fit</span>
-                                <select onchange="edits.mediaFit()" id="mediaFit${j}" class="value inputText">
+                                <select onchange="edits.mediaFit()" class="mediaFit value inputText">
                                     <option ${mff} value="fill">Fill</option>
                                     <option ${mfn} value="none">None</option>
                                     <option ${mfc} value="cover">Cover</option>
@@ -985,27 +974,28 @@ class Editor{
                             </div>
                             <div class="div">
                                 <span>Shade Opacity</span>
-                                <input onchange="edits.overlayEdit('overlayOpacity')" class="value inputText" type="range" id="mediaOverlayOpacity${j}" value="${moo}">
+                                <input onchange="edits.overlayEdit()" class="mediaOverlayOpacity value inputText" type="range" value="${moo}">
                             </div>
                             <div class="div">
                                 <span>Media Credit</span>
-                                <input class="value inputText text" type="text" id="mediaCredit${j}" placeholder="Blank for none" onkeyup="edits.mediaCredit()">
+                                <input class="mediaCredit value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaCredit()" value="${this.layers['L'+ j].media.credit}">
                             </div>
-                        </div>
-                        ${textVisi}
+                              ${textVisi}
+                         </div>
                     </div>
+
                     <!-- Media Options -->
 
                     <!-- Text Styles -->
-                    <div class="optionsDIv" id="titleStyles${j}">
-                        <span class="objectName" onclick="edits.expandOptions('titleStyles${j}')">
+                    <div class="titleStyles optionsDIv">
+                        <span class="objectName" onclick="edits.expandOptions('titleStyles')">
                             <span>Title</span>
-                            <i class="fa fa-caret-right"></i>
+                            <i class="upDownIcon fa fa-caret-right"></i>
                         </span>
                         <div class="options" style="display:none;">
                             <div class="div">
                                 <span>Font weight</span>
-                                <select id="titleFontWeight${j}" onchange="edits.changeFontWeight()" class="value inputText">
+                                <select onchange="edits.changeFontWeight()" class="titleFontWeight value inputText">
                                     <option  ${tfwl} value="400">Light</option>
                                     <option  ${tfwb} value="600" >Bold</option>
                                     <option  ${tfwbr} value="1000">Bolder</option>
@@ -1015,20 +1005,20 @@ class Editor{
 
                             <div class="div">
                                 <span>Font size</span>
-                                <select name="" id="titleFontSize${j}" onchange="edits.changeFontSize('select')" class="value inputText">
+                                <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
                                     <option  ${tfsm} value="medium">Medium</option>
                                     <option ${tfsl} value="large">Large</option>
                                     <option ${tfsxl} value="larger">X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
-                                <input class="value inputText text" type="text" id="customFontSize${j}" placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeFontSize('custom')" value="${tfsc}">
+                                <input class="customFontSize value inputText text" type="text"  placeholder="e.g. 1rem, 30px, x-large, .8em etc." onkeyup="edits.changeFontSize('custom')" value="${tfsc}">
                             </div>
 
 
                             <div class="div">
                                 <span>Font family</span>
-                                <select id="fontFamily${j}" onchange="edits.changeFontFamily('select')"  class="value inputText">
+                                <select  onchange="edits.changeFontFamily('select')"  class="fontFamily value inputText">
                                     <option ${tffa} value="inherit">Auto</option>
                                     <option ${tffc} value="cursive">Cursive</option>
                                     <option ${tffm} value="monospace">Monospace</option>
@@ -1036,7 +1026,7 @@ class Editor{
                                 </select>
                                 <br/>
                                 <span>Custom font family</span>
-                                <input type="text" class="value inputText text" onkeyup="edits.changeFontFamily('custom')" id="customFontFamily${j}" placeholder="e.g. verdana, Sans-serif etc." value="${tffcs}">
+                                <input type="text" class="customFontFamily value inputText text" onkeyup="edits.changeFontFamily('custom')" placeholder="e.g. verdana, Sans-serif etc." value="${tffcs}">
                             </div>
                         </div>
                     </div>
@@ -1058,9 +1048,9 @@ class Editor{
     applyStyleSheet(){
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
           // For front page and other
-            document.getElementById(`titleText${j}`).style.fontSize = this.layers['L'+ j].title.fontSize;
-            document.getElementById(`titleText${j}`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
-            document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
+            document.querySelector(`#layer${j} .titleText`).style.fontSize = this.layers['L'+ j].title.fontSize;
+            document.querySelector(`#layer${j} .titleText`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
+            document.querySelector(`#layer${j} .titleText`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
 
             if (j != 0) {
               // Frr other pages only
@@ -1071,19 +1061,18 @@ class Editor{
               var nm2 = parseFloat(this.layers['L'+ j].title.fontSize);
               var nmm2 = nm2 - 6;
               var title = nmm2 + "px";
+              document.querySelector(`#layer${j} .otherText`).style.fontSize = otherText;
+              document.querySelector(`#layer${j} .otherText`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
+              document.querySelector(`#layer${j} .otherText`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
 
-              document.getElementById(`otherText${j}`).style.fontSize = otherText;
-              document.getElementById(`otherText${j}`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
-              document.getElementById(`otherText${j}`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
-
-              document.getElementById(`titleText${j}`).style.fontSize = title;
-              document.getElementById(`titleText${j}`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
-              document.getElementById(`titleText${j}`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
+              document.querySelector(`#layer${j} .titleText`).style.fontSize = title;
+              document.querySelector(`#layer${j} .titleText`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
+              document.querySelector(`#layer${j} .titleText`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
             }
 
             if (j != 0) {
               // Text Visibility
-              var tButton = document.getElementById(`textToggle${j}`);
+              var tButton = document.querySelector(`#styleBox${j} .toggleText`);
               if (this.layers['L' +j].textVisibility == 'false') {
                 this.layers['L' + j].textVisibility = 'false';
                 if(tButton.classList.contains('fa-toggle-on')){
@@ -1095,8 +1084,8 @@ class Editor{
                 if(!tButton.classList.contains('fa-toggle-off')){
                   tButton.classList.add('fa-toggle-off')
                 }
-                document.getElementById(`otherText${j}`).style.display = 'none';
-                document.getElementById(`titleText${j}`).style.display = 'none';
+                document.querySelector(`#layer${j} .otherText`).style.display = 'none';
+                document.querySelector(`#layer${j} .titleText`).style.display = 'none';
               }else{
                 this.layers['L' + j].textVisibility = 'true';
                 if(tButton.classList.contains('fa-toggle-off')){
@@ -1113,8 +1102,8 @@ class Editor{
             }
 
             if (this.layers['L'+ j].media.url !== undefined && this.layers['L'+ j].media.url  !== "default"  && this.layers['L'+ j].media.url  !== "") {
-              if (document.getElementById(`mediaContent${j}`)) {
-                  document.getElementById(`mediaContent${j}`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
+              if (document.getElementById(`#layer${j} .mediaContent`)) {
+                  document.getElementById(`#layer${j} .mediaContent`).style.objectFit = `${this.layers['L'+ j].media.styles.mediaFit}`;
               }
 
             }

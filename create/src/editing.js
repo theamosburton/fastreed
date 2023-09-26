@@ -11,29 +11,19 @@ class Edits{
 
 
   //Expanding Options
-  expandOptions(id, func){
-      var option = document.querySelector(`#${id} .options`);
-      var icon = document.querySelector(`#${id} .objectName i`);
-      if (func == 'block' || func == 'none') {
-          if (func == 'none') {
-              option.style.display = 'none';
-              icon.classList.add('fa-caret-right');
-              icon.classList.remove('fa-caret-down');
-          }else{
-              icon.classList.add('fa-caret-down');
-              icon.classList.remove('fa-caret-right');
-              option.style.display = 'block';
-          }
+  expandOptions(className){
+      var option = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .${className} .options`);
+
+      var icon =   document.querySelector(`#styleBox${this.editor.presentLayerIndex} .${className} .upDownIcon`);
+      console.log(option);
+      if (option.style.display == 'block') {
+          option.style.display = 'none';
+          icon.classList.add('fa-caret-right');
+          icon.classList.remove('fa-caret-down');
       }else{
-          if (option.style.display == 'block') {
-              option.style.display = 'none';
-              icon.classList.add('fa-caret-right');
-              icon.classList.remove('fa-caret-down');
-          }else{
-              icon.classList.add('fa-caret-down');
-              icon.classList.remove('fa-caret-right');
-              option.style.display = 'block';
-          }
+          icon.classList.add('fa-caret-down');
+          icon.classList.remove('fa-caret-right');
+          option.style.display = 'block';
       }
 
   }
@@ -43,25 +33,21 @@ class Edits{
       var hsLeft = document.getElementById('hsLeft');
       var hsRight = document.getElementById('hsRight');
       var leftSection = document.getElementById('leftSection');
-
-
       if (type == 'image') {
-        console.log(editor.presentLayerIndex);
-        if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
-          document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
+        if(document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`)){
+          document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`).remove();
         }
         var layerId =  editor.presentLayerIndex;
-        if (document.getElementById(`videoControls${layerId+1}`)) {
-          document.getElementById(`videoControls${layerId+1}`).remove();
+        if (document.querySelector(`#layer${this.editor.presentLayerIndex} .videoControls`)) {
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .videoControls`).remove();
         }
         edits.modifyMedia('image', link, olink);
 
         var layer = document.getElementById(`layer${layerId}`);
         var imageElement = document.createElement('img');
-        imageElement.id = `mediaContent${editor.presentLayerIndex}`;
+        imageElement.className = `mediaContent`;
         imageElement.src = link;
         layer.appendChild(imageElement);
-        editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
         var screenWidth = window.innerWidth;
         if (screenWidth < 800) {
           if (leftSection.style.display = 'flex') {
@@ -73,9 +59,10 @@ class Edits{
           }
         }
       }else if(type == 'video'){
+
         // Text Visibility
         if (editor.presentLayerIndex != 0) {
-          var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
+          var button = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .toggleText`);
           if (this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility == '' || this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility == 'false') {
             this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'false';
             if(button.classList.contains('fa-toggle-on')){
@@ -87,8 +74,8 @@ class Edits{
             if(!button.classList.contains('fa-toggle-off')){
               button.classList.add('fa-toggle-off')
             }
-            document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'none';
-            document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'none';
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'none';
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'none';
           }else{
             this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'true';
             if(button.classList.contains('fa-toggle-off')){
@@ -106,8 +93,8 @@ class Edits{
         if (editor.presentLayerIndex == 0) {
           alert('Please use photo for thumbnail');
         }else{
-          if(document.getElementById(`mediaContent${editor.presentLayerIndex}`)){
-            document.getElementById(`mediaContent${editor.presentLayerIndex}`).remove();
+          if(document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`)){
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`).remove();
           }
           edits.modifyMedia('video', link, olink);
           var layerId =  editor.presentLayerIndex;
@@ -116,9 +103,8 @@ class Edits{
           var videoElement = document.createElement('video');
           videoElement.src = link;
           videoElement.type = 'video/mp4';
-          videoElement.id = `mediaContent${editor.presentLayerIndex}`;
+          videoElement.classList.add('mediaContent');
           var contorlsElements = document.createElement('div');
-          contorlsElements.id = `videoControls${editor.presentLayerIndex}`;
           contorlsElements.className = 'videoControls';
           contorlsElements.innerHTML = `
           <i class="fa-regular fa-volume-high" id="muteUnmute" data-status="unmuted" onclick="editor.muteUnmute()"></i>
@@ -128,7 +114,6 @@ class Edits{
 
           layer.appendChild(contorlsElements);
           layer.appendChild(videoElement);
-          editor.mediaOverlayDiv = document.getElementById(`overlay${editor.presentLayerIndex}`);
           editor.playPauseMedia();
           editor. muteUnmute();
           var screenWidth = window.innerWidth;
@@ -149,12 +134,13 @@ class Edits{
       // this.saveToBrowser();
     }
   deleteMedia(type){
+    document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`).remove();
     // adding text if not exists
-    var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
+    var button = document.querySelector(`#layer${this.editor.presentLayerIndex} .toggleText`);
     if (this.editor.presentLayerIndex != 0) {
       this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = '';
-      var title = document.getElementById(`otherText${this.editor.presentLayerIndex}`);
-      var text = document.getElementById(`titleText${this.editor.presentLayerIndex}`);
+      var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+      var title = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
       if (title.style.display == 'none') {
         title.style.display = 'flex';
       }
@@ -171,11 +157,13 @@ class Edits{
         button.classList.add('fa-toggle-on')
       }
     }
-    var media = document.querySelector(`#mediaContent${this.editor.presentLayerIndex}`);
-    media.remove();
-    document.getElementById(`videoControls${editor.presentLayerIndex}`).remove();
+
+    if (type == 'video') {
+      document.querySelector(`#layer${this.editor.presentLayerIndex} .videoControls`).remove();
+    }
+
     var tmpImage = document.createElement('img');
-    tmpImage.id =`mediaContent${this.editor.presentLayerIndex}`;
+    tmpImage.className =`mediaContent`;
     tmpImage.src = "/assets/img/default.jpeg";
     document.getElementById(`layer${this.editor.presentLayerIndex}`).appendChild(tmpImage);
     this.editor.layers['L' + this.editor.presentLayerIndex].media.url = 'default';
@@ -190,12 +178,24 @@ class Edits{
       var deleteMediaButton = document.getElementById('deleteMedia');
       if (type == 'image') {
           deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
+          var button = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .toggleText`);
+           if(button.classList.contains('fa-toggle-off')){
+              button.classList.remove('fa-toggle-off')
+            }
+            if(!button.classList.contains('enabledText')){
+              button.classList.add('enabledText')
+            }
+            if(!button.classList.contains('fa-toggle-on')){
+              button.classList.add('fa-toggle-on')
+            }
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'flex';
+            document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'flex';
       }else if(type == 'video'){
           deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('video')");
       }else{
           deleteMediaButton.removeAttribute("onclick");
       }
-      document.getElementById(`mediaStyles${this.editor.presentLayerIndex}`).style.display = 'flex';
+      document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaStyles`).style.display = 'flex';
       this.editor.layers['L' + this.editor.presentLayerIndex].media.type = type;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl = blobUrl;
       this.editor.layers['L' + this.editor.presentLayerIndex].media.url = url;
@@ -204,18 +204,9 @@ class Edits{
       }
       // this.saveToBrowser();
   }
-  updateMedia(type){
-      var deleteMediaButton = document.getElementById('deleteMedia');
-      if (type == 'image') {
-          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
-      }else if(type == 'video'){
-          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('video')");
-      }else{
-          deleteMediaButton.removeAttribute("onclick");
-      }
-  }
-  overlayEdit(x){
-    this.overlayOpacity = document.getElementById(`mediaOverlayOpacity${this.editor.presentLayerIndex}`).value;
+
+  overlayEdit(){
+    this.overlayOpacity = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaOverlayOpacity`).value;
     var overlayOpacity = this.overlayOpacity;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
 
@@ -227,8 +218,8 @@ class Edits{
     if (this.editor.layers['L' + this.editor.presentLayerIndex].media.blobUrl == undefined) {
       alert('Add photo or video');
     }else{
-      var mediaFit = document.getElementById(`mediaFit${this.editor.presentLayerIndex}`);
-      var mediaContent = document.getElementById(`mediaContent${this.editor.presentLayerIndex}`);
+      var mediaFit = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaFit`);
+      var mediaContent = document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`);
       this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.mediaFit = mediaFit.value;
       mediaContent.style.objectFit = `${mediaFit.value}`;
     }
@@ -239,8 +230,9 @@ class Edits{
   }
 
   mediaCredit(){
-    var applyFrom = document.getElementById(`mediaCredit${this.editor.presentLayerIndex}`);
-    var applyto =  document.getElementById(`imageCredit${this.editor.presentLayerIndex}`);
+    var applyFrom = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaCredit`);
+
+    var applyto =  document.querySelector(`#layer${this.editor.presentLayerIndex} .imageCredit`);
     applyto.innerHTML = applyFrom.value;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
   }
@@ -248,7 +240,7 @@ class Edits{
 // Text Visibility
    containsText(){
      // Text Visibility
-     var button = document.getElementById(`textToggle${this.editor.presentLayerIndex}`);
+     var button = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .toggleText`);
      if(button.classList.contains('fa-toggle-on')){
        if (this.editor.layers['L' + this.editor.presentLayerIndex].media.type == 'video') {
          button.classList.remove('fa-toggle-on')
@@ -259,8 +251,8 @@ class Edits{
            button.classList.add('fa-toggle-off')
          }
          this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'false';
-         document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'none';
-         document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'none';
+         document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'none';
+         document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'none';
        }else{
          alert('You can hide text only in videos');
        }
@@ -273,71 +265,59 @@ class Edits{
          button.classList.add('fa-toggle-on')
        }
        this.editor.layers['L' + this.editor.presentLayerIndex].textVisibility = 'true';
-       document.getElementById(`otherText${this.editor.presentLayerIndex}`).style.display = 'flex';
-       document.getElementById(`titleText${this.editor.presentLayerIndex}`).style.display = 'flex';
+       document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'flex';
+       document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'flex';
      }
    }
   // Title Editing
   changeFontSize(x){
-    if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
-      alert('Add Title!');
+    if (x == 'select') {
+      var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .titleFontSize`);
+      var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
+      applyto.style.fontSize = `${fontSize.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
     }else{
-      if (x == 'select') {
-        var fontSize = document.getElementById(`titleFontSize${this.editor.presentLayerIndex}`);
-        var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-        applyto.style.fontSize = `${fontSize.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
-      }else{
-        var fontSize = document.getElementById(`customFontSize${this.editor.presentLayerIndex}`);
-        var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-        applyto.style.fontSize = `${fontSize.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
-      }
+      var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customFontSize`);
+      var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
+      applyto.style.fontSize = `${fontSize.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
     }
     if (this.version+1 == editor.version) {
-  this.version += 1;
-}
+    this.version += 1;
+    }
   }
   changeFontFamily(x){
-    if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
-      alert('Add Title!');
+    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
+    if (x == 'custom') {
+      var fontFamily = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customFontFamily`);
+      applyto.style.fontFamily = `${fontFamily.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
     }else{
-      var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-      if (x == 'custom') {
-        var fontFamily = document.getElementById(`customFontFamily${this.editor.presentLayerIndex}`);
-        applyto.style.fontFamily = `${fontFamily.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
-      }else{
-        var fontFamily = document.getElementById(`fontFamily${this.editor.presentLayerIndex}`);
-        applyto.style.fontFamily = `${fontFamily.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
-      }
+      var fontFamily = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .fontFamily`);
+      applyto.style.fontFamily = `${fontFamily.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontFamily = `${fontFamily.value}`;
     }
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
     this.saveToBrowser();
   }
-  editTitle(x){
-    var text = document.getElementById(`${x}`);
-    this.editor.layers['L' + this.editor.presentLayerIndex].title.text = `${text.innerHTML}`;
+  editTitle(){
+    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
+    this.editor.layers['L' + this.editor.presentLayerIndex].title.text = text.innerHTML;
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
     this.saveToBrowser();
   }
   changeFontWeight(){
-    if(document.getElementById(`titleText${this.editor.presentLayerIndex}`).value == ''){
-      alert('Add Title!');
-    }else{
-      var fontWeight = document.getElementById(`titleFontWeight${this.editor.presentLayerIndex}`);
-      var applyto = document.querySelector(`#title${this.editor.presentLayerIndex} .titleText`);
-      applyto.style.fontWeight = `${fontWeight.value}`;
-      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontWeight = `${fontWeight.value}`;
-    }
-   if (this.version+1 == editor.version) {
+    var fontWeight = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .titleFontWeight`);
+    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
+    applyto.style.fontWeight = `${fontWeight.value}`;
+    this.editor.layers['L' + this.editor.presentLayerIndex].title.fontWeight = `${fontWeight.value}`;
+    if (this.version+1 == editor.version) {
       this.version += 1;
-    }
+     }
     this.saveToBrowser();
   }
   // Title editing
@@ -345,62 +325,50 @@ class Edits{
 
   // Text Editing
   changeOtherFontSize(x){
-    if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
-      alert('Add text!');
+    if (x == 'select') {
+      var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .otherFontSize`);
+      var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+      applyto.style.fontSize = `${fontSize.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
     }else{
-      if (x == 'select') {
-        var fontSize = document.getElementById(`otherFontSize${this.editor.presentLayerIndex}`);
-        var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-        applyto.style.fontSize = `${fontSize.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
-      }else{
-        var fontSize = document.getElementById(`customOtherFontSize${this.editor.presentLayerIndex}`);
-        var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-        applyto.style.fontSize = `${fontSize.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
-      }
+      var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customOtherFontSize`);
+      var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+      applyto.style.fontSize = `${fontSize.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
     }
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
     this.saveToBrowser();
   }
-  editText(x){
-    var text = document.getElementById(`${x}`);
-    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = `${text.innerHTML}`;
+  editText(){
+    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = text.innerHTML;
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
     this.saveToBrowser();
   }
   changeOtherFontWeight(){
-    if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
-      alert('Add text!');
-    }else{
-      var fontWeight = document.getElementById(`otherFontWeight${this.editor.presentLayerIndex}`);
-      var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-      applyto.style.fontWeight = `${fontWeight.value}`;
-      this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontWeight = `${fontWeight.value}`;
-    }
+    var fontWeight = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .otherFontWeight`);
+    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+    applyto.style.fontWeight = `${fontWeight.value}`;
+    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontWeight = `${fontWeight.value}`;
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
     this.saveToBrowser();
   }
   changeOtherFontFamily(x){
-    if (document.getElementById(`otherText${this.editor.presentLayerIndex}`).value == '') {
-      alert('Add text!');
+    var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
+    if (x == 'custom') {
+      var fontFamily = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .otherCustomFontFamily`);
+      applyto.style.fontFamily = `${fontFamily.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
     }else{
-      var applyto = document.querySelector(`#text${this.editor.presentLayerIndex} .titleText`);
-      if (x == 'custom') {
-        var fontFamily = document.getElementById(`otherCustomFontFamily${this.editor.presentLayerIndex}`);
-        applyto.style.fontFamily = `${fontFamily.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
-      }else{
-        var fontFamily = document.getElementById(`otherFontFamily${this.editor.presentLayerIndex}`);
-        applyto.style.fontFamily = `${fontFamily.value}`;
-        this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
-      }
+      var fontFamily = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .otherFontFamily`);
+      applyto.style.fontFamily = `${fontFamily.value}`;
+      this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontFamily = `${fontFamily.value}`;
     }
     if (this.version+1 == editor.version) {
       this.version += 1;
@@ -426,14 +394,14 @@ class Edits{
       this.editor.metaData.description = description.value;
       this.editor.metaData.keywords =keywords.value;
       if (description.value == '') {
-        document.getElementById('otherText0').innerHTML = 'Enter story description..';
-        document.getElementById('titleText0').innerHTML = title.value;
+        // document.querySelector('#layer0 .otherText').innerHTML = 'Enter story description..';
+        document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }else if(title.value == ''){
-        document.getElementById('otherText0').innerHTML = description.value;
-        document.getElementById('titleText0').innerHTML = 'Enter Story Title';
+        // document.querySelector('#layer0 .otherText').innerHTML = description.value;
+        document.querySelector('#layer0 .titleText').innerHTML = 'Edit title for this webstory';
       }else{
-        document.getElementById('otherText0').innerHTML = description.value;
-        document.getElementById('titleText0').innerHTML = title.value;
+        // document.querySelector('#layer0 .otherText').innerHTML = description.value;
+        document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }
     }
     if (this.version+1 == editor.version) {
@@ -442,9 +410,8 @@ class Edits{
     this.saveToBrowser();
   }
 
-  editStoryDescription(x){
+  editStoryDescription(){
     var descriptionIn = document.getElementById("storyDescription");
-    var description = document.getElementById(`${x}`);
     this.editor.metaData.description = description.innerHTML;
     descriptionIn.value = description.innerHTML;
     if (this.version+1 == editor.version) {
@@ -453,9 +420,9 @@ class Edits{
     this.saveToBrowser();
   }
 
-  editStoryTitle(x){
+  editStoryTitle(){
     var titleIn = document.getElementById("storyTitle");
-    var title = document.getElementById(`${x}`);
+    var title = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
     this.editor.metaData.title = title.innerHTML;
     titleIn.value = title.innerHTML;
     if (this.version+1 == editor.version) {
