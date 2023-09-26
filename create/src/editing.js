@@ -204,7 +204,16 @@ class Edits{
       }
       // this.saveToBrowser();
   }
-
+  updateMedia(type){
+      var deleteMediaButton = document.getElementById('deleteMedia');
+      if (type == 'image') {
+          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
+      }else if(type == 'video'){
+          deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('video')");
+      }else{
+          deleteMediaButton.removeAttribute("onclick");
+      }
+  }
   overlayEdit(){
     this.overlayOpacity = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaOverlayOpacity`).value;
     var overlayOpacity = this.overlayOpacity;
