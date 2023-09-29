@@ -688,7 +688,6 @@ html{
   flex-direction: column;
   margin: 20px;
   height: min-content;
-  overflow: auto;
 }
 .altertDiv .options{
   display: flex;
@@ -724,6 +723,28 @@ html{
 
 .enabledText {
   color: rgb(143, 143, 237);
+}
+.cancelButton{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.cancelButton span{
+  display: inline;
+  padding: 3px 10px;
+  background: orange;
+  border-radius: 10px;
+  font-weight: bolder;
+  color: white;
+}
+#metaErrorBox{
+  background: #c52938;
+margin: 10px 10px 10px 10px;
+padding: 5px 10px;
+border-radius: 10px;
+border: 2px solid red;
+color: white;
+font-weight: bold;
 }
 
 @keyframes rotate {

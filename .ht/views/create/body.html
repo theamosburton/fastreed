@@ -78,7 +78,7 @@
                         <div class="buttonsDiv">
                             <div class="buttons" onclick="showPreview()"> Preview</div>
                             <div class="buttons" id="saveStory" onclick="editor.saveStory()">Save</div>
-                            <div class="buttons">Publish</div>
+                            <div class="buttons" id="publishStory" onclick="editor.publishStory()">Publish</div>
                         </div>
                     </div>
                 </div>
@@ -92,10 +92,13 @@
                     <div class="objectOptions" id="metaData" style="display: none;">
                         <div class="objectOptionsbody">
                             <div class="optionsDIv" id="">
+                              <div id="metaErrorBox" style="display:none;">
+                                <span id="metaError"></span>
+                              </div>
                                 <div class="options">
                                     <div>
                                         <span>URL</span>
-                                        <input onkeypress="edits.updateMetaData('')" class="value inputText text" type="text" id="storyUrl" placeholder="type-your-webstory-link" value="">
+                                        <input onkeyup="edits.updateMetaData('')" class="value inputText text" type="text" id="storyUrl" placeholder="type-your-webstory-link" value="">
                                     </div>
                                 </div>
 
@@ -118,6 +121,16 @@
                                         <span>Keywords</span>
                                         <textarea onkeyup="edits.updateMetaData('')" class="value inputText text" name="" id="storyKeywords" cols="22" placeholder="Keywords" value=""></textarea>
                                     </div>
+                                </div>
+
+                                <div class="options">
+                                  <div class="div">
+                                      <span>Visibility</span>
+                                      <select onchange="edits.storyVisibility()" class="value inputText" id="storyVisibility">
+                                          <option value="public">Public</option>
+                                          <option value="followings">Followings</option>
+                                      </select>
+                                  </div>
                                 </div>
                             </div>
                         </div>

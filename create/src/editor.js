@@ -49,12 +49,16 @@ class Editor{
                     this.metaData.description = "";
                     this.metaData.keywords = "";
                     this.metaData.url = "";
+                    this.metaData.timeStamp = date.getTime();
                     this.metaData.date = `${fDate}`;
+                    this.metaData.storyVisibility = 'Public';
                     this.webstoryData = data.message;
-                    if (this.webstoryData == '{}') {
+                    var jObject = JSON.parse(this.webstoryData);
+                    if (!jObject.version) {
                       if (window.localStorage.getItem(`${editor.storyID}`)) {
                         this.continueWith('browser');
                       }else{
+                        this.storyStatus = 'drafted';
                         this.presentLayerIndex = 0;
                         this.presentLayer  = this.presentLayerIndex + 1 ;
                         this.totalLayers = 1;
@@ -117,7 +121,8 @@ class Editor{
                         var dat = {
                           version : this.version+1,
                           layers : this.layers,
-                          metaData : this.metaData
+                          metaData : this.metaData,
+                          storyStatus : 'drafted'
                         };
                         // window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
                       }
@@ -137,6 +142,12 @@ class Editor{
     createExistedLayers(){
     var jsonString = this.webstoryData;
     var jsObject = JSON.parse(jsonString);
+    if (jsObject.storyStatus == 'drafted') {
+      document.getElementById('publishStory').innerHTML = 'Publish';
+    }else if (jsObject.storyStatus == 'published'){
+      document.getElementById('publishStory').innerHTML = 'Update';
+    }
+    // console.log(jsObject);
     var browserData = window.localStorage.getItem(`${editor.storyID}`);
     browserData = JSON.parse(browserData);
     if (browserData) {
@@ -144,6 +155,7 @@ class Editor{
         this.metaData = jsObject.metaData;
         this.layers = jsObject.layers;
         this.version = jsObject.version;
+        this.storyStatus = jsObject.storyStatus;
         this.updateStory();
       }else{
         var alertCont = document.querySelector('.altertContainer');
@@ -166,6 +178,7 @@ class Editor{
       this.metaData = jsObject.metaData;
       this.layers = jsObject.layers;
       this.version = jsObject.version;
+      this.storyStatus = jsObject.storyStatus;
       this.updateStory();
     }
 
@@ -180,12 +193,14 @@ class Editor{
         this.metaData = browserData.metaData;
         this.layers = browserData.layers;
         this.version = browserData.version;
+        this.storyStatus = browserData.storyStatus;
         alertCont.style.display = 'none';
         this.updateStory();
       }else{
         this.metaData = jsObject.metaData;
         this.layers = jsObject.layers;
         this.version = jsObject.version;
+        this.storyStatus = jsObject.storyStatus;
         alertCont.style.display = 'none';
         this.updateStory();
       }
@@ -607,61 +622,96 @@ class Editor{
         }
     }
 
-    saveStory(){
-        editor.version += 1;
-        var jsObject = {
-            layers:editor.layers,
-            metaData:editor.metaData,
-            version: editor.version
-        };
-        var metadata = editor.metaData;
-        var jsonData = JSON.stringify(jsObject);
-        metadata = JSON.stringify(metadata);
-        var self = this;
-        var saving = document.getElementById('saveStory');
-        saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
-        const saveData = async () =>{
-            const url = '/.ht/API/webstories.php';
-            var encyDat = {
-            'purpose' : 'update',
-            'whois': `${self.whoIs}`,
-            'storyID': `${self.storyID}`,
-            'data': `${jsonData}`,
-            'metaData': `${metadata}`,
-            'username': `${self.username}`
-            };
-            const response = await fetch(url, {
-                method: 'post',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(encyDat)
-            });
-            var data = await response.json();
-            if (data) {
-                if (data.Result) {
-                    setTimeout(function(){
-                        saving.innerHTML = 'Saved';
-                        var dat = {
-                          layers : editor.layers,
-                          metaData : editor.metaData,
-                          version : editor.version
-                        };
-                          window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
-                    }, 500);
-                }else{
-                    setTimeout(function(){
-                        saving.innerHTML = 'Not saved';
-                    }, 500);
-                }
-            }else{
-                setTimeout(function(){
-                    saving.innerHTML = 'Not saved';
-                }, 500);
-            }
+    async saveStory(){
+      if (editor.metaData.title != '' || editor.metaData.url != '') {
+        if (editor.metaData.url != '' && editor.metaData.url.length >= 15) {
+          await this.createUrl();
+        }else if (editor.metaData.title.length  >= 15){
+          await this.createUrl();
         }
-        saveData();
+      }
+      editor.version += 1;
+      var jsObject = {
+          layers:editor.layers,
+          metaData:editor.metaData,
+          version: editor.version
+      };
+      var metadata = editor.metaData;
+      var jsonData = JSON.stringify(jsObject);
+      metadata = JSON.stringify(metadata);
+      var self = this;
+      var saving = document.getElementById('saveStory');
+      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      const saveData = async () =>{
+          const url = '/.ht/API/webstories.php';
+          var encyDat = {
+          'purpose' : 'update',
+          'whois': `${self.whoIs}`,
+          'storyID': `${self.storyID}`,
+          'data': `${jsonData}`,
+          'metaData': `${metadata}`,
+          'username': `${self.username}`
+          };
+          const response = await fetch(url, {
+              method: 'post',
+              headers: {
+              'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(encyDat)
+          });
+          var data = await response.json();
+          if (data) {
+              if (data.Result) {
+                  setTimeout(function(){
+                      saving.innerHTML = 'Saved';
+                      var dat = {
+                        layers : editor.layers,
+                        metaData : editor.metaData,
+                        version : editor.version
+                      };
+                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                  }, 500);
+              }else{
+                  setTimeout(function(){
+                      saving.innerHTML = 'Not saved';
+                  }, 500);
+              }
+          }else{
+              setTimeout(function(){
+                  saving.innerHTML = 'Not saved';
+              }, 500);
+          }
+      }
+      saveData();
     }
+
+     async createUrl(){
+        const url = '/.ht/API/webstories.php';
+        var encyDat = {
+        'purpose' : 'generateUrl',
+        'title' : `${editor.metaData.title}`,
+        'url' :`${editor.metaData.url}`
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+        });
+        var data = await response.json();
+        if (data) {
+            if (data.Result) {
+                var urlInput = document.getElementById("storyUrl");
+                urlInput.value = data.message;
+                editor.metaData.url = data.message;
+            }else{
+            }
+        }else{
+        }
+    }
+
+
     updateStory(){
         this.totalLayers = Object.keys(this.layers).length;
         for (let  i= 0; i < this.totalLayers; i++) {
@@ -1130,5 +1180,145 @@ class Editor{
       return `${major}.${minor}.${patch}`;
     }
 
+
+    // Publishing
+  async publishStory(){
+      var saving = document.getElementById('publishStory');
+      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      const x = await this.checkLayers()
+      if (!x.length) {
+        const metaData = this.checkMetaData();
+        if (metaData == '') {
+
+        }else{
+
+          var metaErrorBox = document.getElementById('metaErrorBox');
+          metaErrorBox.style.display = 'block';
+          metaErrorBox.querySelector('#metaError').innerHTML = metaData;
+        }
+      }else{
+        var alertCont = document.querySelector('.altertContainer');
+        alertCont.style.display = 'flex';
+        alertCont.id = 'errorConatiner';
+        document.querySelector('.altertDiv').innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> ${x[0]}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`;
+          document.querySelector('.altertDiv').style.background = 'transparent';
+      }
+    }
+
+  async checkLayers() {
+    const errorArray = [];
+    if (this.totalLayers < 4) {
+      errorArray.push("At least four layers needed");
+    } else {
+      for (let i = 0; i < this.totalLayers; i++) {
+        const layer = this.layers['L' + i];
+        if (layer.media.url === 'default' || layer.media.url === '') {
+          if (i == 0) {
+            errorArray.push(`Add meta image of story`);
+              this.moveToLayer(0)
+            break;
+          }else{
+            errorArray.push(`Add media in Layer ${i + 1}`);
+              this.moveToLayer(i)
+            break;
+          }
+
+        } else {
+          const urlExists = await this.checkUrlExists(layer.media.url);
+          if (!urlExists) {
+            errorArray.push(`Media Link <i>"${layer.media.url}"</i> does not exist in Layer ${i + 1}`);
+            this.moveToLayer(i)
+            break;
+          } else {
+            if (this.metaData.title == '') {
+              errorArray.push(`Add title of the story`);
+              this.moveToLayer(0)
+              break;
+            }else if (i != 0 && (layer.title.text == '')) {
+              errorArray.push(`Add title in Layer ${i + 1}`);
+              this.moveToLayer(i)
+              break;
+            }else if (i != 0 && (layer.otherText.text == '')) {
+              errorArray.push(`Add description text in Layer ${i + 1}`);
+              this.moveToLayer(i)
+              break;
+            }
+          }
+        }
+      }
+    }
+    return errorArray;
+  }
+
+  async checkUrlExists(url) {
+    try {
+      const response = await fetch(url, { method: 'HEAD' });
+
+      if (response.ok) {
+        return true; // URL exists (HTTP status 200 OK)
+      } else {
+        return false; // URL does not exist (HTTP status indicates an error)
+      }
+    } catch (error) {
+      return false; // URL does not exist or there was an error
+    }
+  }
+
+  checkMetaData(){
+    let metaError = '';
+    let description = this.metaData.description;
+    let title = this.metaData.title;
+    let keywords = this.metaData.keywords;
+    let url = this.metaData.url;
+    if (this.getWordCount(title) <= 7) {
+      metaError = 'Atleast 7 words required in title';
+      document.getElementById('storyTitle').style.borderColor = 'red';
+        openOptions('metadata');
+    }else if (url.length <= 20) {
+        metaError = 'URL must be atleast 20 character long';
+        document.getElementById('storyUrl').style.borderColor = 'red';
+          openOptions('metadata');
+    }else if (this.getWordCount(description) <= 10) {
+        metaError = 'Atleast 10 words required in description';
+        document.getElementById('storydescription').style.borderColor = 'red';
+          openOptions('metadata');
+    }else if (this.getWordCount(keywords) <= 5) {
+        metaError = 'Atleast 5 words required in keywords';
+        document.getElementById('storyKeywords').style.borderColor = 'red';
+          openOptions('metadata');
+    }
+    return metaError;
+  }
+    // Publishing
+
+  getWordCount(inputString) {
+      // Use a regular expression to split the string into words
+      const words = inputString.split(/\s+/);
+      return words.length;
+  }
+  moveToLayer(index){
+    this.presentLayerIndex  = index;
+    this.presentLayerDiv = document.getElementById(`layer${index}`);
+    for (var i = 0; i < this.totalLayers; i++) {
+        document.getElementById(`layer${i}`).style.display = 'none';
+        document.getElementById(`styleBox${i}`).style.display = 'none';
+    }
+    this.presentLayerDiv.style.display = 'flex';
+    document.getElementById(`styleBox${this.presentLayerIndex}`).style.display = 'flex';
+    this.playPauseLastMedia('forward');
+    this.presentLayer  = index + 1 ;
+    for (var i = 1; i < this.totalLayers+1; i++) {
+      this.topBars.querySelector(`#nav${i}`).classList.remove('active');
+    }
+    this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
+
+    document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+    }
 }
 let editor = new Editor();

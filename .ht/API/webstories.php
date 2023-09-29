@@ -19,7 +19,9 @@ class Webstories{
         $this->userData = new getLoggedData();
 
         $data = json_decode(file_get_contents('php://input'), true);
-        if (!isset($data['whois']) || empty($data['whois'])) {
+        if ($data['purpose'] == 'generateUrl') {
+            $this->generateUrl();
+        }elseif (!isset($data['whois']) || empty($data['whois'])) {
             showMessage(false, 'Specify Who are you?');
         }elseif (!isset($data['storyID']) || empty($data['storyID'])) {
             showMessage(false, 'Story ID not found');
@@ -32,6 +34,7 @@ class Webstories{
         }elseif ($data['purpose'] == 'fetch') {
             $this->fetchStory();
         }
+
         $this->closeConnection();
         $this->userData->closeConnection();
     }
@@ -54,7 +57,12 @@ class Webstories{
                   if ($result) {
                       if ( $row = mysqli_fetch_assoc($result)) {
                           $storyData = $row['storyData'];
-                          showMessage(true, $storyData);
+                          $storyStatus = $row['storyStatus'];
+                          $data = json_decode($storyData, true);
+                          $data['storyStatus'] = "$storyStatus";
+                          $newJsonString = json_encode($data);
+
+                          showMessage(true, $newJsonString);
                       }else{
                           showMessage(false, 'No story with this id');
                       }
@@ -76,7 +84,11 @@ class Webstories{
                     if ($result) {
                         if ( $row = mysqli_fetch_assoc($result)) {
                             $storyData = $row['storyData'];
-                            showMessage(true, $storyData);
+                            $storyStatus = $row['storyStatus'];
+                            $data = json_decode($storyData, true);
+                            $data['storyStatus'] = $storyStatus;
+                            $newJsonString = json_encode($data);
+                            showMessage(true, $newJsonString);
                         }else{
                             showMessage(false, 'No story with this id');
                         }
@@ -131,8 +143,6 @@ class Webstories{
             showMessage(false, 'Specify who are you?');
         }
     }
-
-
     private function updateStory(){
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'Admin') {
@@ -217,6 +227,36 @@ class Webstories{
             $return = true;
         }
         return $return;
+    }
+    private function generateUrl(){
+      $data = json_decode(file_get_contents('php://input'), true);
+      $title =  $data['title'];
+      $url =  $data['url'];
+      if (empty($url) || strlen($url) <= 15) {
+          $title = strtolower($title);
+          $url = str_replace(' ', '-', $title);
+      }else{
+          $url = strtolower($url);
+          $url = str_replace(' ', '-', $url);
+      }
+
+      $url = urlencode($url);
+      $inc = 1;
+      while ($this->checkUrl($url)) {
+        $url = $url."-".$inc;
+        $inc += 1;
+      }
+      showMessage(true, $url);
+    }
+    private function checkUrl($url){
+      $sql = "SELECT * FROM stories WHERE JSON_EXTRACT(storyData, '$.metadata.url') = '$url'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+          $return = true;
+      }else{
+          $return = false;
+      return $return;
+      }
     }
 }
 ?>

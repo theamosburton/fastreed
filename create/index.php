@@ -173,7 +173,7 @@ class userEditor extends createContent{
             $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
             $firstEdit = time();
             $tdate = date('Y-m-d');
-            $status = 'drafted ';
+            $status = 'drafted';
             $access = 'self';
             $storyData = '{}';
             $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";

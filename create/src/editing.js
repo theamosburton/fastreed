@@ -178,18 +178,21 @@ class Edits{
       var deleteMediaButton = document.getElementById('deleteMedia');
       if (type == 'image') {
           deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('image')");
-          var button = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .toggleText`);
-           if(button.classList.contains('fa-toggle-off')){
-              button.classList.remove('fa-toggle-off')
-            }
-            if(!button.classList.contains('enabledText')){
-              button.classList.add('enabledText')
-            }
-            if(!button.classList.contains('fa-toggle-on')){
-              button.classList.add('fa-toggle-on')
-            }
-            document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'flex';
-            document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'flex';
+          if (this.editor.presentLayerIndex != 0) {
+            var button = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .toggleText`);
+             if(button.classList.contains('fa-toggle-off')){
+                button.classList.remove('fa-toggle-off')
+              }
+              if(!button.classList.contains('enabledText')){
+                button.classList.add('enabledText')
+              }
+              if(!button.classList.contains('fa-toggle-on')){
+                button.classList.add('fa-toggle-on')
+              }
+              document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'flex';
+              document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'flex';
+          }
+
       }else if(type == 'video'){
           deleteMediaButton.setAttribute("onclick", "edits.deleteMedia('video')");
       }else{
@@ -401,7 +404,7 @@ class Edits{
       this.editor.metaData.url = url.value;
       this.editor.metaData.title = title.value;
       this.editor.metaData.description = description.value;
-      this.editor.metaData.keywords =keywords.value;
+      this.editor.metaData.keywords = keywords.value;
       if (description.value == '') {
         // document.querySelector('#layer0 .otherText').innerHTML = 'Enter story description..';
         document.querySelector('#layer0 .titleText').innerHTML = title.value;
@@ -441,15 +444,21 @@ class Edits{
   }
    // Meta Data //
 
-
    // Theme //
-   editTheme(){
+  editTheme(){
        var theme = document.getElementById(`editTheme${this.editor.presentLayerIndex}`).value;
        this.editor.layers['L' + this.editor.presentLayerIndex].theme = `${theme}`;
    }
    //  Theme //
 
-
+  storyVisibility(){
+    var storyVisibility = document.querySelector(`#storyVisibility`).value;
+    this.editor.metaData.storyVisibility = `${storyVisibility}`;
+    if (this.version+1 == editor.version) {
+      this.version += 1;
+    }
+    this.saveToBrowser();
+  }
   saveToBrowser(){
     var dat = {
       version : editor.version,
