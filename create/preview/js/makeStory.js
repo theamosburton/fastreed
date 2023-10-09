@@ -128,7 +128,6 @@ var bookend = `<amp-story-bookend layout="nodisplay">
     }
   </script>
 </amp-story-bookend>`;
-console.log(storyData);
 var story = document.getElementById('app');
 var ampStory = document.createElement('amp-story');
 ampStory.setAttribute("class", "NWSStory");
@@ -236,6 +235,15 @@ for (let  i= 0; i < totalLayers; i++) {
     }else{
       var backgroundImage = storyData.layers['L'+i].media.url;
     }
+    console.log(storyData.layers['L' +i].otherText.text);
+    let text = `<div style="padding:15px 30px 24px"></div>`;
+    if (storyData.layers['L' +i].otherText.text != '') {
+      text = `<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
+        <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4  Poppins-regular;padding:15px 30px 24px" class="description ">
+          <p>${storyData.layers['L' + i].otherText.text}</p>
+        </div>
+      </div>`;
+    }
     ampStory.innerHTML +=
     `<amp-story-page class="NWSStory-scene" data-layout="7" data-type="standard" id="Story_page_7_Template_id_5">
 				<amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
@@ -255,11 +263,7 @@ for (let  i= 0; i < totalLayers; i++) {
 							<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
 								<div style="text-align:left;color:#fff;background-color:rgba(65,120,252, 0.7);font:18px Poppins-medium;font-weight:900;padding:14px 30px;letter-spacing:1px">${storyData.layers['L' + i].title.text}</div>
 							</div>
-							<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
-								<div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:14px/1.4  Poppins-regular;padding:15px 30px 24px" class="description ">
-									<p>${storyData.layers['L' + i].otherText.text}</p>
-								</div>
-							</div>
+              ${text}
 							<div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
 								<p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: ${storyData.layers['L' + i].media.credit}</p>
 							</div>

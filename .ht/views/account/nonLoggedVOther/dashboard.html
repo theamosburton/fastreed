@@ -18,7 +18,7 @@
     for($i=0; $i<$length; $i++){
       if($stories[$i][5] == 'published' && $stories[$i][6] == 'Anonymous'){
         $webstoryData = json_decode($stories[$i][7], true);
-        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url'])){
+        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url']) || $webstoryData['layers']['L0']['media']['url'] == 'default'){
             $setUrl = '/assets/img/nomedia.png';
         }else{
             $setUrl = $webstoryData['layers']['L0']['media']['url'];

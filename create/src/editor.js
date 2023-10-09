@@ -49,6 +49,7 @@ class Editor{
                     this.metaData.description = "";
                     this.metaData.keywords = "";
                     this.metaData.url = "";
+                    // JavaScript
                     this.metaData.timeStamp = date.getTime();
                     this.metaData.date = `${fDate}`;
                     this.metaData.storyVisibility = 'Public';
@@ -206,6 +207,7 @@ class Editor{
       }
     }
     createNewLayer(){
+      if (this.totalLayers <= 11) {
         this.inBetweenLayersAdd();
         this.totalLayers += 1;
         this.presentLayerIndex += 1;
@@ -234,7 +236,7 @@ class Editor{
               "text":'',
               "fontFamily":"Poppins-regular",
               "fontWeight":"400",
-              "fontSize":"18px"
+              "fontSize":"16px"
             }
         };
         var newLayer = document.createElement('div');
@@ -270,11 +272,6 @@ class Editor{
           this.topBars.querySelector(`#nav${i}`).classList.remove('active');
         }
         this.topBars.querySelector(`#nav${this.presentLayer}`).classList.add('active');
-        // var headElement = document.createElement('div');
-        // headElement.id = 'headSection';
-        // headElement.innerHTML = `<div id="brandDiv">
-        //                             <img src="/assets/img/favicon2.jpg">
-        //                          </div>`;
 
         var defaultImage = document.createElement('img');
         defaultImage.src = "/assets/img/default.jpeg";
@@ -286,6 +283,19 @@ class Editor{
         this.playPauseLastMedia('add');
         this.createStylesheet();
         document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
+      }else{
+        var alertCont = document.querySelector('.altertContainer');
+        alertCont.style.display = 'flex';
+        alertCont.id = 'errorConatiner';
+        document.querySelector('.altertDiv').innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Sorry!</strong>12 layers Max.
+            <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`;
+          document.querySelector('.altertDiv').style.background = 'transparent';
+      }
     }
 
     createStylesheet(){
@@ -624,12 +634,12 @@ class Editor{
 
     async saveStory(){
       if (editor.metaData.title != '' || editor.metaData.url != '') {
-        if (editor.metaData.url != '' && editor.metaData.url.length >= 15) {
-          await this.createUrl();
-        }else if (editor.metaData.title.length  >= 15){
+        if (editor.metaData.url != '') {
           await this.createUrl();
         }
       }
+      const date = new Date();
+      editor.metaData.timeStamp = date.getTime();
       editor.version += 1;
       var jsObject = {
           layers:editor.layers,
@@ -685,12 +695,13 @@ class Editor{
       saveData();
     }
 
-     async createUrl(){
+    async createUrl(){
         const url = '/.ht/API/webstories.php';
         var encyDat = {
         'purpose' : 'generateUrl',
         'title' : `${editor.metaData.title}`,
-        'url' :`${editor.metaData.url}`
+        'url' :`${editor.metaData.url}`,
+        'storyID' : `${editor.storyID}`
         };
         const response = await fetch(url, {
             method: 'post',
@@ -1106,11 +1117,11 @@ class Editor{
               // Frr other pages only
               var nm1 = parseFloat(this.layers['L'+ j].otherText.fontSize);
               var nmm1 = nm1 - 6;
-              var otherText = nmm1 + "px";
+              var otherText = nm1;
 
               var nm2 = parseFloat(this.layers['L'+ j].title.fontSize);
               var nmm2 = nm2 - 6;
-              var title = nmm2 + "px";
+              var title = nm2;
               document.querySelector(`#layer${j} .otherText`).style.fontSize = otherText;
               document.querySelector(`#layer${j} .otherText`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
               document.querySelector(`#layer${j} .otherText`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
@@ -1183,34 +1194,107 @@ class Editor{
 
     // Publishing
   async publishStory(){
-      var saving = document.getElementById('publishStory');
-      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
-      const x = await this.checkLayers()
-      if (!x.length) {
-        const metaData = this.checkMetaData();
-        if (metaData == '') {
-
-        }else{
-
-          var metaErrorBox = document.getElementById('metaErrorBox');
-          metaErrorBox.style.display = 'block';
-          metaErrorBox.querySelector('#metaError').innerHTML = metaData;
-        }
-      }else{
-        var alertCont = document.querySelector('.altertContainer');
-        alertCont.style.display = 'flex';
-        alertCont.id = 'errorConatiner';
-        document.querySelector('.altertDiv').innerHTML =
-        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> ${x[0]}
-            <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>`;
-          document.querySelector('.altertDiv').style.background = 'transparent';
-      }
+    await this.publish();
+      // var saving = document.getElementById('publishStory');
+      // saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      // const x = await this.checkLayers()
+      // if (!x.length) {
+      //   const metaData = this.checkMetaData();
+      //   if (metaData == '') {
+      //     var alertCont = document.querySelector('.altertContainer');
+      //     alertCont.style.display = 'none';
+      //     var metaErrorBox = document.getElementById('metaErrorBox');
+      //     metaErrorBox.style.display = 'none';
+      //     var inputs = document.querySelectorAll(".inputText");
+      //     inputs.forEach(function(element) {
+      //       element.style.borderColor = 'grey';
+      //     });
+      //     await this.publish();
+      //   }else{
+      //     var metaErrorBox = document.getElementById('metaErrorBox');
+      //     metaErrorBox.style.display = 'block';
+      //     metaErrorBox.querySelector('#metaError').innerHTML = metaData;
+      //   }
+      // }else{
+      //   var alertCont = document.querySelector('.altertContainer');
+      //   alertCont.style.display = 'flex';
+      //   alertCont.id = 'errorConatiner';
+      //   document.querySelector('.altertDiv').innerHTML =
+      //   `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      //       <strong>Error!</strong> ${x[0]}
+      //       <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
+      //         <span aria-hidden="true">&times;</span>
+      //       </button>
+      //     </div>`;
+      //     document.querySelector('.altertDiv').style.background = 'transparent';
+      //     var screenWidth = window.innerWidth;
+      //     if (screenWidth < 800) {
+      //       hideSection('rightSection');
+      //     }
+      // }
     }
 
+  async publish(){
+    var jsObject = {
+        layers:editor.layers,
+        metaData:editor.metaData,
+        version: editor.version
+    };
+    var metadata = editor.metaData;
+    var jsonData = JSON.stringify(jsObject);
+    metadata = JSON.stringify(metadata);
+   const url = '/.ht/API/webstories.php';
+   var encyDat = {
+   'purpose' : 'publish',
+   'whois': `${this.whoIs}`,
+   'storyID': `${this.storyID}`,
+   'data': `${jsonData}`,
+   'metaData': `${metadata}`,
+   'username': `${this.username}`
+   };
+   const response = await fetch(url, {
+       method: 'post',
+       headers: {
+       'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(encyDat)
+   });
+   var data = await response.json();
+   if (data) {
+       if (data.Result) {
+         var saving = document.getElementById('publishStory');
+         saving.innerHTML = "Published";
+       }else{
+         var alertCont = document.querySelector('.altertContainer');
+         alertCont.style.display = 'flex';
+         alertCont.id = 'errorConatiner';
+         document.querySelector('.altertDiv').innerHTML =
+         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong>Error!</strong> ${data.message}
+             <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>`;
+           document.querySelector('.altertDiv').style.background = 'transparent';
+           var saving = document.getElementById('publishStory');
+           saving.innerHTML = "Publish";
+       }
+   }else{
+     var alertCont = document.querySelector('.altertContainer');
+     alertCont.style.display = 'flex';
+     alertCont.id = 'errorConatiner';
+     document.querySelector('.altertDiv').innerHTML =
+     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+         <strong>Error!</strong> There is a problem at our end
+         <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>`;
+       document.querySelector('.altertDiv').style.background = 'transparent';
+       var saving = document.getElementById('publishStory');
+       saving.innerHTML = "Publish";
+   }
+ }
   async checkLayers() {
     const errorArray = [];
     if (this.totalLayers < 4) {
@@ -1240,22 +1324,30 @@ class Editor{
               errorArray.push(`Add title of the story`);
               this.moveToLayer(0)
               break;
-            }else if (i != 0 && (layer.title.text == '')) {
-              errorArray.push(`Add title in Layer ${i + 1}`);
-              this.moveToLayer(i)
-              break;
-            }else if (i != 0 && (layer.otherText.text == '')) {
-              errorArray.push(`Add description text in Layer ${i + 1}`);
-              this.moveToLayer(i)
-              break;
+            }else if (i != 0 && (layer.title.text == '' || this.hasOnlySpaces(layer.title.text))) {
+              if (layer.textVisibility == 'true') {
+                errorArray.push(`Add title in Layer ${i + 1}`);
+                this.moveToLayer(i)
+                break;
+              }
+
             }
+            // else if (i != 0 && (layer.otherText.text == '' || this.hasOnlySpaces(layer.otherText.text))) {
+            //   if (layer.textVisibility == 'true') {
+            //     errorArray.push(`Add description text in Layer ${i + 1}`);
+            //     this.moveToLayer(i)
+            //     break;
+            //   }
+            // }
           }
         }
       }
     }
     return errorArray;
   }
-
+  hasOnlySpaces(inputString) {
+    return /^\s*$/.test(inputString);
+  }
   async checkUrlExists(url) {
     try {
       const response = await fetch(url, { method: 'HEAD' });
@@ -1276,22 +1368,33 @@ class Editor{
     let title = this.metaData.title;
     let keywords = this.metaData.keywords;
     let url = this.metaData.url;
-    if (this.getWordCount(title) <= 7) {
+    var inputs = document.querySelectorAll(".inputText");
+    inputs.forEach(function(element) {
+      element.style.borderColor = 'grey';
+    });
+    if (this.getWordCount(title) <= 6) {
       metaError = 'Atleast 7 words required in title';
+      let err = document.getElementById('titleError');
+      err.style.display = 'inline';
       document.getElementById('storyTitle').style.borderColor = 'red';
-        openOptions('metadata');
+      openOptions('metadata');
     }else if (url.length <= 20) {
         metaError = 'URL must be atleast 20 character long';
+        let err = document.getElementById('urlError');
+        err.style.display = 'inline';
+        openOptions('metadata');
         document.getElementById('storyUrl').style.borderColor = 'red';
-          openOptions('metadata');
-    }else if (this.getWordCount(description) <= 10) {
-        metaError = 'Atleast 10 words required in description';
-        document.getElementById('storydescription').style.borderColor = 'red';
-          openOptions('metadata');
-    }else if (this.getWordCount(keywords) <= 5) {
+    }else if (this.getWordCount(description) <= 4) {
+        metaError = 'Atleast 5 words required in description';
+        let err = document.getElementById('descriptionError');
+        err.style.display = 'inline';
+        document.getElementById('storyDescription').style.borderColor = 'red';
+        openOptions('metadata');
+    }else if (this.getWordCount(keywords) <= 4) {
         metaError = 'Atleast 5 words required in keywords';
+        let err = document.getElementById('keywordsError');
+        err.style.display = 'inline';
         document.getElementById('storyKeywords').style.borderColor = 'red';
-          openOptions('metadata');
     }
     return metaError;
   }

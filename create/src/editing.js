@@ -355,7 +355,26 @@ class Edits{
   }
   editText(){
     var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
-    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = text.innerHTML;
+    const selection = window.getSelection();
+    let range = selection.getRangeAt(0);
+    let startOffset = range.startOffset;
+    let endOffset = range.endOffset;
+
+    const capitalizedText = this.capitalizeSentences(text.innerHTML);
+    text.innerHTML = capitalizedText;
+    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = capitalizedText;
+    const newRange = document.createRange();
+    const startNode = text.firstChild;
+    if (startNode === null) {
+      let startOffset = 1;
+      let endOffset = 1;
+    }else{
+      newRange.setStart(startNode, startOffset);
+      newRange.setEnd(startNode, endOffset);
+      selection.removeAllRanges();
+      selection.addRange(newRange);
+    }
+
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
@@ -401,19 +420,24 @@ class Edits{
       description.value =  this.editor.metaData.description;
       keywords.value = this.editor.metaData.keywords;
     }else{
+      const start = title.selectionStart;
+      const end = title.selectionEnd;
+      title.value = this.capitalizeEveryWord(title.value);
+      description.value = this.capitalizeSentences(description.value);
       this.editor.metaData.url = url.value;
       this.editor.metaData.title = title.value;
       this.editor.metaData.description = description.value;
       this.editor.metaData.keywords = keywords.value;
+      title.setSelectionRange(start, end);
       if (description.value == '') {
         // document.querySelector('#layer0 .otherText').innerHTML = 'Enter story description..';
-        document.querySelector('#layer0 .titleText').innerHTML = title.value;
+        document.querySelector('#layer0 .titleText').innerHTML = this.capitalizeEveryWord(title.value);
       }else if(title.value == ''){
         // document.querySelector('#layer0 .otherText').innerHTML = description.value;
         document.querySelector('#layer0 .titleText').innerHTML = 'Edit title for this webstory';
       }else{
         // document.querySelector('#layer0 .otherText').innerHTML = description.value;
-        document.querySelector('#layer0 .titleText').innerHTML = title.value;
+        document.querySelector('#layer0 .titleText').innerHTML = this.capitalizeEveryWord(title.value);
       }
     }
     if (this.version+1 == editor.version) {
@@ -424,6 +448,7 @@ class Edits{
 
   editStoryDescription(){
     var descriptionIn = document.getElementById("storyDescription");
+    description.innerHTML = this.capitalizeSentences(description.innerHTML);
     this.editor.metaData.description = description.innerHTML;
     descriptionIn.value = description.innerHTML;
     if (this.version+1 == editor.version) {
@@ -435,8 +460,21 @@ class Edits{
   editStoryTitle(){
     var titleIn = document.getElementById("storyTitle");
     var title = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
-    this.editor.metaData.title = title.innerHTML;
-    titleIn.value = title.innerHTML;
+    const start = window.getSelection().getRangeAt(0).startOffset;
+    const end = window.getSelection().getRangeAt(0).endOffset;
+    const text = title.textContent;
+    const capitalizedText = this.capitalizeEveryWord(text);
+    title.textContent = capitalizedText;
+    this.editor.metaData.title = capitalizedText;
+    // Restore cursor position
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(title.firstChild, start);
+    range.setEnd(title.firstChild, end);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
@@ -468,7 +506,7 @@ class Edits{
     window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
   }
 
-hexToRgb(hexColor) {
+  hexToRgb(hexColor) {
     // Remove the # symbol if present
     hexColor = hexColor.replace("#", "");
 
@@ -480,6 +518,29 @@ hexToRgb(hexColor) {
     // Return the RGB format with commas
     return `${r}, ${g}, ${b}`;
   }
+  capitalizeEveryWord(inputString) {
+    return inputString.replace(/\b\w/g, function (match) {
+        return match.toUpperCase();
+    });
+  }
+
+ capitalizeSentences(inputString) {
+      return inputString.replace(/\.(\s|$)|^.|\.\w/g, function (match) {
+          return match.toUpperCase();
+      });
+  }
+
+
+ capitalizeSentences(paragraph) {
+  let sentences = paragraph.split('. ');
+  for (let i = 0; i < sentences.length; i++) {
+    sentences[i] = sentences[i].charAt(0).toUpperCase() + sentences[i].slice(1);
+  }
+  return sentences.join('. ');
+}
+
+
+
 }
 
 

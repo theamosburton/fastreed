@@ -171,7 +171,10 @@ class userEditor extends createContent{
 
             $personID = $_SESSION['LOGGED_USER'];
             $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
-            $firstEdit = time();
+            $phpTimestamp = time(); // Get current Unix timestamp in seconds
+            $jsTimestamp = $phpTimestamp * 1000; // Convert to milliseconds
+
+            $firstEdit = $jsTimestamp;
             $tdate = date('Y-m-d');
             $status = 'drafted';
             $access = 'self';

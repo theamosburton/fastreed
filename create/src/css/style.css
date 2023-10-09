@@ -747,6 +747,15 @@ color: white;
 font-weight: bold;
 }
 
+.options .additional{
+  color: black;
+  font-size: x-small;
+  font-weight: bold;
+  background: #fff353;
+  padding: 1px 5px;
+  border-radius: 4px;
+  display: none;
+}
 @keyframes rotate {
     from {
       transform: rotate(0deg);
