@@ -298,7 +298,6 @@ class Webstories{
              $url  = $baseURL . '-' . $suffix;
           }
           $dataArray['metaData']['url'] = $url;
-          $shareUrl = DOMAIN.'/webstories/'.$url;
           if($this->updateMeta($dataArray['metaData'], $storyID)){
           // Updatiing story data
           $dataArray['storyStatus'] = 'published';
@@ -306,7 +305,7 @@ class Webstories{
           $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = 'published', access = 'public'  WHERE storyID = '$storyID'";
           $result3 = mysqli_query($this->DB, $sql3);
             if ($result3) {
-              showMessage(true, "$shareUrl");
+              showMessage(true, "$url");
             }else{
               showMessage(false, "Problem at our end");
             }

@@ -1355,7 +1355,7 @@ class Editor{
               </div>
               <div class="link">
                 <div class="viewLink" onclick="editor.viewStory('${data.message}')">
-                    <i class="fa-solid fa-link"></i>
+                  <i class="fa-solid fa-paper-plane"></i>
                 </div>
                 <div class="copyLink"  onclick="editor.copyLink('${data.message}')">
                     <i class="fa-solid fa-copy"></i>
@@ -1554,7 +1554,7 @@ class Editor{
         navigator.share({
             title: `${title}`,
             text:  `${text}`,
-            url: `${url}`
+            url: `/webstories/${url}`
         })
         .then(() => console.log('Shared successfully'))
         .catch((error) => console.error('Sharing failed:', error));
@@ -1573,7 +1573,7 @@ class Editor{
      alert('Link copied')
    }
    viewStory(link){
-      window.open(`${link}`, '_blank');
+      window.open(`/webstories/${link}`, '_blank');
    }
 }
 let editor = new Editor();

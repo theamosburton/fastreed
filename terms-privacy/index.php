@@ -4,8 +4,8 @@ include $_DOCROOT."/.ht/controller/VISIT.php";
 new VisitorActivity();
 ?>
 
-<!DOCTYPE html> 
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<!DOCTYPE html>
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +13,12 @@ new VisitorActivity();
 	<meta name="description" content="unititled">
 	<meta name="keywords" content="Fastreed - Terms and Privacy">
 	<meta name="author" content="Audain Designs">
-	<link rel="shortcut icon" href="favicon.ico">  
+	<link rel="shortcut icon" href="favicon.ico">
 	<title>Fastreed - Terms and Privacy</title>
 
 	<!-- Gobal CSS -->
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-	
+
 	<!-- Template CSS -->
 	<link href="../assets/css/style.css?V=1.1.1" rel="stylesheet">
 	<link href="../assets/css/page.css?V=1.1.4" rel="stylesheet">
@@ -45,7 +45,7 @@ new VisitorActivity();
 							</ul>
 					    </div>
 					</div>
-					
+
 				</div>
 				<!-- Right Main Bar -->
 				<div class="content col-md-9 col-sm-12 col-xs-12">
@@ -67,9 +67,9 @@ new VisitorActivity();
                                 <ul>
                                     <li>Posts/blogs/articles from other websites, </li>
                                     <li>Photos, Video and multimedia from other authors.</li>
-                                </ul> 
-                                 
-                                 
+                                </ul>
+
+
                             </p>
                             <h4 id="3">Your Rights</h4>
 							<p>Under certain regulations set by your local and national law on this website you:
@@ -85,7 +85,7 @@ new VisitorActivity();
 							<p>We don't want to harm any community, caste, religion, organization, culture or tridition. We believe that all people are equal in dignity and rights. We don't endorse and recommend blog or posts written on the basis of discriminition. Any blog or articles found discriminent kindly raise complaint or write to us.</p>
                             <a href="mail:contact@fastreed.com">contact@fastreed.com</a>
                             <br><br>
-                            <p>The content of discrimination or violation would be removed by owner or website member as soon as it is seen or reported.</p> 
+                            <p>The content of discrimination or violation would be removed by owner or website member as soon as it is seen or reported.</p>
                             <h4 id="5">Age Requirement</h4>
 							<p>There is <b>no age requirement</b>  to read, share and review blogs/articles written on general topics. Adult and pronographic content is completey restricted on this website. We don't publish adult content in any form i.e. written, photos, or video. </p> <p> However, some articles may be inappropriate for minors to read and share. These articles are meant for adults only. A warning will be given to confirm age according to the subject of article. To read and share articles related to romance and sex life, it is necessary for you to be an adult (at least 18 years old).</p>
 
@@ -144,7 +144,7 @@ new VisitorActivity();
 	<!-- Global jQuery -->
 	<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-	
+
 	<!-- Template JS -->
 	<script type="text/javascript" src="../assets/js/main.js"></script>
 	<script type="text/javascript" src="../assets/js/page.js"></script>
