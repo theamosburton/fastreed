@@ -1194,47 +1194,80 @@ class Editor{
 
     // Publishing
   async publishStory(){
-    await this.publish();
-      // var saving = document.getElementById('publishStory');
-      // saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
-      // const x = await this.checkLayers()
-      // if (!x.length) {
-      //   const metaData = this.checkMetaData();
-      //   if (metaData == '') {
-      //     var alertCont = document.querySelector('.altertContainer');
-      //     alertCont.style.display = 'none';
-      //     var metaErrorBox = document.getElementById('metaErrorBox');
-      //     metaErrorBox.style.display = 'none';
-      //     var inputs = document.querySelectorAll(".inputText");
-      //     inputs.forEach(function(element) {
-      //       element.style.borderColor = 'grey';
-      //     });
-      //     await this.publish();
-      //   }else{
-      //     var metaErrorBox = document.getElementById('metaErrorBox');
-      //     metaErrorBox.style.display = 'block';
-      //     metaErrorBox.querySelector('#metaError').innerHTML = metaData;
-      //   }
-      // }else{
-      //   var alertCont = document.querySelector('.altertContainer');
-      //   alertCont.style.display = 'flex';
-      //   alertCont.id = 'errorConatiner';
-      //   document.querySelector('.altertDiv').innerHTML =
-      //   `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      //       <strong>Error!</strong> ${x[0]}
-      //       <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
-      //         <span aria-hidden="true">&times;</span>
-      //       </button>
-      //     </div>`;
-      //     document.querySelector('.altertDiv').style.background = 'transparent';
-      //     var screenWidth = window.innerWidth;
-      //     if (screenWidth < 800) {
-      //       hideSection('rightSection');
-      //     }
-      // }
+      var saving = document.getElementById('publishStory');
+      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      const x = await this.checkLayers()
+      if (!x.length) {
+        const metaData = this.checkMetaData();
+        if (metaData == '') {
+          var alertCont = document.querySelector('.altertContainer');
+          alertCont.style.display = 'none';
+          var metaErrorBox = document.getElementById('metaErrorBox');
+          metaErrorBox.style.display = 'none';
+          var inputs = document.querySelectorAll(".inputText");
+          inputs.forEach(function(element) {
+            element.style.borderColor = 'grey';
+          });
+          await this.publish();
+        }else{
+          var metaErrorBox = document.getElementById('metaErrorBox');
+          metaErrorBox.style.display = 'block';
+          metaErrorBox.querySelector('#metaError').innerHTML = metaData;
+        }
+      }else{
+        var alertCont = document.querySelector('.altertContainer');
+        alertCont.style.display = 'flex';
+        alertCont.id = 'errorConatiner';
+        document.querySelector('.altertDiv').innerHTML =
+        document.querySelector('.altertDiv').innerHTML =
+        `<div class="progress">
+          <div class="cancelBar">
+           <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+          </div>
+          <div class="progressBar">
+              <div class="progressIcon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+          </div>
+          <div class="progressWritten">Error Found</div>
+          <div class="progressExtra">
+          <div class="alert alert-warning" role="alert">
+             ${x[0]}
+          </div>
+          </div>
+        </div>`;
+          document.querySelector('.altertDiv').style.background = 'transparent';
+          saving.innerHTML = "Publish";
+          var screenWidth = window.innerWidth;
+          if (screenWidth < 800) {
+            hideSection('rightSection');
+          }
+      }
     }
 
   async publish(){
+    var alertCont = document.querySelector('.altertContainer');
+    alertCont.style.display = 'flex';
+    alertCont.id = 'errorConatiner';
+    document.querySelector('.altertDiv').innerHTML =
+    `<div class="progress">
+      <div class="cancelBar">
+      </div>
+      <div class="progressBar">
+          <div class="progressIcon">
+          <div class="spinner" style="width: 75px;height: 75px;border-width:8px;margin:0;">
+          </div>
+      </div>
+      <div class="progressWritten">Verifying....</div>
+      <div class="progressExtra">
+
+      </div>
+    </div>`;
+     document.querySelector('.altertDiv').style.background = 'transparent';
+     var screenWidth = window.innerWidth;
+     if (screenWidth < 800) {
+       hideSection('rightSection');
+     }
     var jsObject = {
         layers:editor.layers,
         metaData:editor.metaData,
@@ -1262,19 +1295,52 @@ class Editor{
    var data = await response.json();
    if (data) {
        if (data.Result) {
-         var saving = document.getElementById('publishStory');
-         saving.innerHTML = "Published";
+         setTimeout(function(){
+           var alertCont = document.querySelector('.altertContainer');
+           alertCont.style.display = 'flex';
+           alertCont.id = 'errorConatiner';
+           document.querySelector('.altertDiv').innerHTML =
+           `<div class="progress">
+             <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+             </div>
+             <div class="progressBar">
+                 <div class="progressIcon">
+                 <i class="fas fa-check-circle"></i>
+                 </div>
+             </div>
+             <div class="progressWritten">Successful</div>
+             <div class="progressExtra">
+
+             </div>
+           </div>`;
+             document.querySelector('.altertDiv').style.background = 'transparent';
+             var saving = document.getElementById('publishStory');
+             saving.innerHTML = "Published";
+         }, 1000);
+
        }else{
          var alertCont = document.querySelector('.altertContainer');
          alertCont.style.display = 'flex';
          alertCont.id = 'errorConatiner';
+
          document.querySelector('.altertDiv').innerHTML =
-         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-             <strong>Error!</strong> ${data.message}
-             <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>`;
+         `<div class="progress">
+           <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+           </div>
+           <div class="progressBar">
+               <div class="progressIcon">
+               <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+               </div>
+           </div>
+           <div class="progressWritten">Can't Publish</div>
+           <div class="progressExtra">
+           <div class="alert alert-warning" role="alert">
+              ${data.message}
+           </div>
+           </div>
+         </div>`;
            document.querySelector('.altertDiv').style.background = 'transparent';
            var saving = document.getElementById('publishStory');
            saving.innerHTML = "Publish";
@@ -1284,12 +1350,22 @@ class Editor{
      alertCont.style.display = 'flex';
      alertCont.id = 'errorConatiner';
      document.querySelector('.altertDiv').innerHTML =
-     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-         <strong>Error!</strong> There is a problem at our end
-         <button type="button" class="close" data-dismiss="alert" onclick="cancelError()" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>`;
+     `<div class="progress">
+       <div class="cancelBar">
+       <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+       </div>
+       <div class="progressBar">
+           <div class="progressIcon">
+           <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+           </div>
+       </div>
+       <div class="progressWritten">Can't Publish</div>
+       <div class="progressExtra">
+       <div class="alert alert-warning" role="alert">
+          ${data.message}
+       </div>
+       </div>
+     </div>`;
        document.querySelector('.altertDiv').style.background = 'transparent';
        var saving = document.getElementById('publishStory');
        saving.innerHTML = "Publish";
