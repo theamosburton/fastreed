@@ -1338,6 +1338,11 @@ class Editor{
          setTimeout(function(){
            var alertCont = document.querySelector('.altertContainer');
            alertCont.style.display = 'flex';
+           if (self.storyStatus == 'published') {
+             var smessage = 'Story Updated';
+           }else{
+             var smessage = 'Story Published';
+           }
            alertCont.id = 'errorConatiner';
            document.querySelector('.altertDiv').innerHTML =
            `<div class="progress">
@@ -1351,16 +1356,19 @@ class Editor{
              </div>
              <div class="progressExtra">
              <div class="alert alert-success" role="alert">
-                Story Published Successfully
-              </div>
+                ${smessage}
+             </div>
+             <div class="alert alert-warning" role="alert">
+                <strong>Note</strong>: Photos and videos uploaded to this story will be visible publically.
+             </div>
               <div class="link">
-                <div class="viewLink" onclick="editor.viewStory('${data.message}')">
+                <div class="viewLink" onclick="editor.viewStory('${data.message}/')">
                   <i class="fa-solid fa-paper-plane"></i>
                 </div>
-                <div class="copyLink"  onclick="editor.copyLink('${data.message}')">
+                <div class="copyLink"  onclick="editor.copyLink('${window.location.origin}/webstories/${data.message}/')">
                     <i class="fa-solid fa-copy"></i>
                 </div>
-                <div class="shareLink" onclick="editor.shareLink('${self.metaData.title}', '${self.metaData.description}','${data.message}')">
+                <div class="shareLink" onclick="editor.shareLink('${self.metaData.title}', '${self.metaData.description}','${data.message}/')">
                   <i class="fa-solid fa-share-from-square"></i>
                 </div>
               </div>
