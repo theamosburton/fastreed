@@ -146,7 +146,6 @@ if (storyData.layers.L0.media.url == '' || storyData.layers.L0.media.url == 'def
 story.appendChild(ampStory);
 
 var totalLayers = Object.keys(storyData.layers).length;
-console.log(totalLayers);
 for (let  i= 0; i < totalLayers; i++) {
   if (i == 0) {
     ampStory.innerHTML += `<amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_1_Template_id_4">
@@ -236,7 +235,6 @@ for (let  i= 0; i < totalLayers; i++) {
     }else{
       var backgroundImage = storyData.layers['L'+i].media.url;
     }
-    console.log(storyData.layers['L' +i].otherText.text);
     let text = `<div style="padding:15px 30px 24px"></div>`;
     if (storyData.layers['L' +i].otherText.text != '') {
       text = `<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
