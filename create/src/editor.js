@@ -1196,6 +1196,28 @@ class Editor{
   async publishStory(){
       var saving = document.getElementById('publishStory');
       saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      var alertCont = document.querySelector('.altertContainer');
+      alertCont.style.display = 'flex';
+      alertCont.id = 'errorConatiner';
+      document.querySelector('.altertDiv').innerHTML =
+      `<div class="progress">
+        <div class="cancelBar">
+        </div>
+        <div class="progressBar">
+            <div class="progressIcon">
+            <div class="spinner" style="width: 75px;height: 75px;border-width:8px;margin:0;">
+            </div>
+        </div>
+        <div class="progressWritten">Verifying....</div>
+        <div class="progressExtra">
+
+        </div>
+      </div>`;
+       document.querySelector('.altertDiv').style.background = 'transparent';
+       var screenWidth = window.innerWidth;
+       if (screenWidth < 800) {
+         hideSection('rightSection');
+       }
       const x = await this.checkLayers()
       if (!x.length) {
         const metaData = this.checkMetaData();
@@ -1210,9 +1232,31 @@ class Editor{
           });
           await this.publish();
         }else{
-          var metaErrorBox = document.getElementById('metaErrorBox');
+          var alertCont = document.querySelector('.altertContainer');
+          alertCont.style.display = 'flex';
+          alertCont.id = 'errorConatiner';
+          document.querySelector('.altertDiv').innerHTML =
+          document.querySelector('.altertDiv').innerHTML =
+          `<div class="progress">
+            <div class="cancelBar">
+             <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+            </div>
+            <div class="progressBar">
+                <div class="progressIcon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+            </div>
+            <div class="progressExtra">
+            <div class="alert alert-warning" role="alert">
+               ${metaData}
+            </div>
+            </div>
+          </div>`;
+            document.querySelector('.altertDiv').style.background = 'transparent';
+            saving.innerHTML = "Publish";
+          // var metaErrorBox = document.getElementById('metaErrorBox');
           metaErrorBox.style.display = 'block';
-          metaErrorBox.querySelector('#metaError').innerHTML = metaData;
+          // metaErrorBox.querySelector('#metaError').innerHTML = metaData;
         }
       }else{
         var alertCont = document.querySelector('.altertContainer');
@@ -1229,7 +1273,6 @@ class Editor{
               <i class="fa-solid fa-triangle-exclamation"></i>
               </div>
           </div>
-          <div class="progressWritten">Error Found</div>
           <div class="progressExtra">
           <div class="alert alert-warning" role="alert">
              ${x[0]}
@@ -1238,14 +1281,11 @@ class Editor{
         </div>`;
           document.querySelector('.altertDiv').style.background = 'transparent';
           saving.innerHTML = "Publish";
-          var screenWidth = window.innerWidth;
-          if (screenWidth < 800) {
-            hideSection('rightSection');
-          }
       }
     }
 
   async publish(){
+    let self = this;
     var alertCont = document.querySelector('.altertContainer');
     alertCont.style.display = 'flex';
     alertCont.id = 'errorConatiner';
@@ -1309,9 +1349,21 @@ class Editor{
                  <i class="fas fa-check-circle"></i>
                  </div>
              </div>
-             <div class="progressWritten">Successful</div>
              <div class="progressExtra">
-
+             <div class="alert alert-success" role="alert">
+                Story Published Successfully
+              </div>
+              <div class="link">
+                <div class="viewLink" onclick="editor.viewStory('${data.message}')">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <div class="copyLink"  onclick="editor.copyLink('${data.message}')">
+                    <i class="fa-solid fa-copy"></i>
+                </div>
+                <div class="shareLink" onclick="editor.shareLink('${self.metaData.title}', '${self.metaData.description}','${data.message}')">
+                  <i class="fa-solid fa-share-from-square"></i>
+                </div>
+              </div>
              </div>
            </div>`;
              document.querySelector('.altertDiv').style.background = 'transparent';
@@ -1334,7 +1386,6 @@ class Editor{
                <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
                </div>
            </div>
-           <div class="progressWritten">Can't Publish</div>
            <div class="progressExtra">
            <div class="alert alert-warning" role="alert">
               ${data.message}
@@ -1359,7 +1410,6 @@ class Editor{
            <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
            </div>
        </div>
-       <div class="progressWritten">Can't Publish</div>
        <div class="progressExtra">
        <div class="alert alert-warning" role="alert">
           ${data.message}
@@ -1499,5 +1549,31 @@ class Editor{
 
     document.getElementById('layerNumber').innerHTML = `Layer ${this.presentLayer}`;
     }
+  shareLink(title, text, url){
+    if (navigator.share) {
+        navigator.share({
+            title: `${title}`,
+            text:  `${text}`,
+            url: `${url}`
+        })
+        .then(() => console.log('Shared successfully'))
+        .catch((error) => console.error('Sharing failed:', error));
+    } else {
+        // Fallback for browsers that don't support the Web Share API
+        alert('Web Share API is not supported in this browser.');
+    }
+   }
+  copyLink(link){
+    const input = document.createElement('input');
+     input.value = link;
+     document.body.appendChild(input);
+     input.select();
+     document.execCommand('copy');
+     document.body.removeChild(input);
+     alert('Link copied')
+   }
+   viewStory(link){
+      window.open(`${link}`, '_blank');
+   }
 }
 let editor = new Editor();

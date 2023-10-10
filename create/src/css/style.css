@@ -742,6 +742,28 @@ html{
   overflow-wrap: break-word;
   font-size: 20px;
   padding: 20px;
+  max-width: 350px;
+}
+.progressExtra .link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.link .copyLink, .link .viewLink, .link .shareLink{
+  width: 37px;
+  border: 1px solid grey;
+  border-radius: 25px;
+  margin-right: 10px;
+  height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+}
+.link .copyLink:hover, .link .viewLink:hover, .link .shareLink:hover{
+  cursor: pointer;
+  border-color: black;
+  color: black;
 }
 .altertContainer .altertDiv{
   background-color: white;
