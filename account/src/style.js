@@ -452,3 +452,7 @@ function showPicOptions(what){
   }
 
 }
+
+function viewStory(link){
+   window.open(`${link}`, '_blank');
+}

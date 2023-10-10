@@ -11,8 +11,7 @@ class getStoriesData{
         $sql = "SELECT * FROM stories WHERE personID = '$id'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-            $rowCount = mysqli_num_rows($result);
-            if ($rowCount) {
+            if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_all($result);
                 $return = $row;
             }
