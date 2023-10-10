@@ -286,6 +286,15 @@ class Webstories{
       $data = json_decode(file_get_contents('php://input'), true);
       $dataArray = json_decode($data['data'], true);
       $layers = $this->checkLayers($dataArray);
+      $layer = $dataArray['layers'];
+      $images = [];
+      for ($i = 0; $i < count($layer); $i++) {
+        $images[$i] = $layer['L' . $i]['media']['url'];
+        $urlParts = parse_url($images[$i]);
+        $pathSegments = explode('/', trim($urlParts['path'], '/'));
+        $images[$i] = $pathSegments[3];
+        $images[$i] = strtok($images[$i], '.');
+      }
       $metaData = $this->checkMetaData($dataArray);
       $storyID = $data['storyID'];
       $lastEdit = $dataArray['metaData']['timeStamp'];
@@ -305,7 +314,11 @@ class Webstories{
           $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = 'published', access = 'public'  WHERE storyID = '$storyID'";
           $result3 = mysqli_query($this->DB, $sql3);
             if ($result3) {
-              showMessage(true, "$url");
+              if ($this->makePublic($images)) {
+                showMessage(true, "$url");
+              }else{
+                showMessage(false, "Problem at our end");
+              }
             }else{
               showMessage(false, "Problem at our end");
             }
@@ -318,6 +331,27 @@ class Webstories{
       }else{
         showMessage(false, "$layers[0]");
       }
+    }
+    private function makePublic($images){
+      $images = array_unique($images);
+      $return = [];
+      for ($i=0; $i < count($images) ; $i++) {
+        $sql = "UPDATE uploads set access = 'anon' WHERE uploadID = '$images[$i]'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $return[$i] = true;
+        }else{
+            $return[$i] = false;
+        }
+      }
+      $re = true;
+      for ($j=0; $j < count($return) ; $j++) {
+        if ($return[$j] === false) {
+          $re = false;
+          break;
+        }
+      }
+      return $re;
     }
     private function checkLayers($dataArray){
       $layers = $dataArray['layers'];

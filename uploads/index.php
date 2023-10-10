@@ -41,7 +41,7 @@ class getFastreedContent {
             $this->renderUError();
         }else {
             if (!$this->checkUpload()) {
-                // $this->renderUError();
+                $this->renderUError();
             }elseif($this->checkIfViolated()){
                 $this->renderVError();
             }elseif(!$this->checkPermission()){
@@ -141,17 +141,7 @@ class getFastreedContent {
             if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
                 $access = $row['access'];
-                $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-                $host = $_SERVER['HTTP_HOST'];
-                $basePath = dirname($_SERVER['PHP_SELF']);
-                $baseUrl = $protocol . '://' . $host . $basePath . '/';
-
-                $forDomain = ($baseUrl == 'https://'.DOMAIN.'/webstories' || $baseUrl == 'https://'.DOMAIN.'/posts');
-                $forDomainAlias = ($baseUrl == 'https://'.DOMAIN_ALIAS.'/webstories' || $baseUrl == 'https://'.DOMAIN_ALIAS.'/posts');
-
-                if ($forDomain ||  $forDomainAlias) {
-                    $return = true;
-                }elseif ($access == 'anon') {
+                if ($access == 'anon') {
                     $return = true;
                 }elseif (isset($_SESSION['LOGGED_USER'])) {
                     if ($this->userData->getSelfDetails()['userType'] == 'Admin') {

@@ -219,7 +219,7 @@ class uploadMedia{
         $return = array('Result'=> false);
         $date = date('Y-m-d');
         $time =  time();
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB', 'UFD')";
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status, usedInStory) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB', 'UFD', 0)";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;
