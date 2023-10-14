@@ -216,7 +216,7 @@ class forgotPassword{
           <div id='link'><a href='https://".DOMAIN_NAME."/'> Website Link</a>
           </div><br>
           <footer id='footer'>
-          This mail is sent to <b>".$userEmail." </b>and is intended for password recovery of <b>".$userFullName."</b>. <br><br>Kindly ignore if you haven't generated the OTP</b>
+          This mail is sent to <b>".$userEmail." </b>and is intended for password recovery. <br><br>Kindly ignore if you haven't generated the OTP</b>
           </footer><br>
         </div>
       </body>
