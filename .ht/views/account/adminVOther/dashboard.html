@@ -3,23 +3,26 @@ if($canCreate == 'REQ'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
-            <span id="requested" class="reqCreationButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
+        <div class="ml-3 col-12 d-inline">
+          <div class="infor">A request been made for contribution to Fastreed by this user. Select any of one from the following</div>
         </div>
-        <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
-            <span id="rejected" class="reqCreationButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
+        <div class="ml-3 col-12 d-inline">
+         <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
+         <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
         </div>
+
     </div>
 HTML;
 }elseif($canCreate == 'REJ' || $canCreate == 'NOR'){
   echo <<<HTML
   <div class="contentTopics resCreation row">
       <div class="title col-12 mb-3">Allow to write</div>
-      <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
-          <span id="requested" class="reqCreationButton ACCbutton" onclick="responseCreation('ACC')">True</span>
+      <div class="ml-3 col-12 d-inline">
+        <div class="infor">Would you like this user to contribute to the website or not</div>
       </div>
-      <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center">
-          <span id="rejected" class="reqCreationButton REJbutton" onclick="responseCreation('REJ')">False</span>
+      <div class="ml-3 col-12 d-inline">
+       <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
+       <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
       </div>
   </div>
 HTML;

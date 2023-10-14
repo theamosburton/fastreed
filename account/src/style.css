@@ -747,7 +747,9 @@ margin-top: 10px;
     display: flex;
     align-items: center;
 }
-
+.infor{
+  margin: 10px 0px 15px 0px;
+}
 .reqCreation span, .resCreation span{
     padding: 8px 20px!important;
     display: inline-block;
@@ -763,27 +765,35 @@ margin-top: 10px;
     margin-top: 5px;
 }
 
-.reqCreation #requested, .resCreation #requested{
-    background-color: blueviolet;
-    color: white;
-}
-.reqCreation #requested:hover, .resCreation #requested:hover{
-    background-color: rgb(111, 28, 189);
-}
-
-.reqCreation #rejected, .resCreation #rejected{
-    background-color: tomato;
-    color:white;
-}
 
 
-.reqCreation #rejected:hover, .resCreation #rejected:hover{
-    background-color: rgb(232, 79, 52);
-}
+
+
+
+
 
 .reqCreation .reqCreationButton:hover, .resCreation .reqCreationButton:hover{
     cursor: pointer;
     background-color: rgb(182, 182, 182);
+}
+
+.responseButton{
+  font-weight: bold;
+  border: 1px solid #c9bfbf;
+  margin-left: 10px;
+  background: #f0ecec;
+  border-radius: 5px !important;
+}
+.responseButton:hover{
+  cursor: pointer;
+  background: #c9c9c9;
+}
+.responseButton:first-child{
+  margin-left: 0px;
+}
+#requestedUser{
+  background: #c9c9c9;
+  border-radius: 40px;
 }
 
 .webstoriesDiv{

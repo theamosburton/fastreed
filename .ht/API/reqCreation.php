@@ -90,7 +90,7 @@ class authorReqRes{
                 }
                 $profilePic = $this->userData->getOtherData('personID', $dID)['profilePic'];
                 $time = time();
-                $url = '/accounts/';
+                $url = '/account/';
                 $title = $message;
                 $sql = "INSERT INTO notifications (title, image, reciever, purpose, timestamp, markRead, url, status) VALUES ('$title', '$profilePic', '$dID', 'self', '$time', 0, '$url', 0)";
                 $result2 = mysqli_query($this->DB, $sql);

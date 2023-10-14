@@ -636,7 +636,7 @@ function requestCreation(){
 
 
 function responseCreation(val){
-  var button = document.querySelector(`.reqCreationButton.${val}button`);
+  var button = document.querySelector(`.resCreation .${val}button`);
   const responseCreate = async () =>{
     const url = '/.ht/API/reqCreation.php';
     var encyDat = {

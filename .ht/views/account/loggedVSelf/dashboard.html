@@ -5,14 +5,20 @@ if($canCreate == 'NOR'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Request to become creator</span>
+        <div class="ml-3 col-12 d-inline">
+          <div class="infor"> To contribute content to Fastreed, please click the designated submit button. Our administrators will assess and determine whether to approve or decline your submission </div>
+        </div>
+        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Submit</span>
     </div>
     HTML;
 }elseif($canCreate == 'REQ'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <span id="requested" class="ml-3" >You have requested for creator access</span>
+          <div class="ml-3 col-12 d-inline">
+            <div class="infor">A request been made for contribution to Fastreed. Kindly anticipate a 24-48 hour waiting period for our final result</div>
+          </div>
+        <span id="requestedUser" class="ml-3" >Submitted</span>
     </div>
     HTML;
 }elseif($canCreate == 'REJ'){
@@ -20,11 +26,9 @@ if($canCreate == 'NOR'){
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
         <div class="ml-3 col-12 d-inline">
-            <span id="rejected" class="font-weight-bold" >Creator access rejected by admin</span>
+            <div class="infor"> Your Request has been <strong> rejected</strong> by our administrators. You still have a chance, if you want to try again. Our administrators will again assess and determine whether to approve or decline your submission </div>
         </div>
-        <div class="ml-3 col-12 d-inline mt-1 ">
-            <span id="reqCreation" class="reqCreationButton ml-6" onclick="requestCreation()">Request Again</span>
-        </div>
+          <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Submit Again</span>
     </div>
     HTML;
 }elseif($canCreate == 'ACC'){
