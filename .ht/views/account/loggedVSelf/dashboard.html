@@ -98,14 +98,15 @@ if($canCreate == 'NOR'){
         $webstories[$i] = '
         <div class="webstory" id="webstory'.$i.'">
             <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="storyOverlay"></div>
                 <div class="title">' . $title . '</div>
-                <div class="options">
-                    <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\', \'\')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
-                    <div class="view" onclick="' . $func . '"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
-                    <div class="delete" onclick="deleteStory(\'' . $stories[$i][1] . '\', \'' . $i . '\')"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
-                    <div class="storyOptions"> '.$statIcon.'</div>
 
-                </div>
+            </div>
+            <div class="options">
+                <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\', \'\')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
+                <div class="view" onclick="' . $func . '"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
+                <div class="delete" onclick="deleteStory(\'' . $stories[$i][1] . '\', \'' . $i . '\')"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
+                <div class="storyOptions"> '.$statIcon.'</div>
             </div>
         </div>';
     }
