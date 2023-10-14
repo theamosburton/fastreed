@@ -893,7 +893,8 @@ margin-top: 10px;
     height: 10%;
     width: 100%;
    color: #050505;
-   background-color: #ffff;
+   background-color: #dddd;
+   border: .5px solid grey;
    margin-top: 10px;
    border-radius: 10px;
 }
