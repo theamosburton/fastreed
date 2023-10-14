@@ -168,20 +168,25 @@ class showMenus{
           if (xhr.status === 200) {
             // Upload successful, handle the response
             var response = JSON.parse(xhr.responseText);
-            if (response.Result) {
-              if (utype == 'dpUpload') {
+            if (utype == 'dpUpload') {
+              if (response.Result) {
                 document.querySelector('#uploadDbButton').innerHTML = `Uploading...`;
-                  location.reload();
-              }else if (utype == 'image') {
+                location.reload();
+              }else{
+                document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
+                document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
+              }
+            }else if (utype == 'image') {
+              if (response.Result) {
                 document.querySelector('#uploadProgressDiv').innerHTML = `Processing...`;
                   location.reload();
+              }else{
+                document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
+                document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
+                setTimeout(function(){
+                  tempBox.style.display = "none";
+                }, 3000);
               }
-            }else{
-              document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
-              document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
-              setTimeout(function(){
-                tempBox.style.display = "none";
-              }, 3000);
             }
           } else {
             document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
