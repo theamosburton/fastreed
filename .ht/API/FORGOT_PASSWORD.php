@@ -44,7 +44,7 @@ class forgotPassword{
             $_SESSION['rID'] = $this->checkUserExists($data['emailUsername'])['id'];
             showMessage(true, 'OTP sent');
           }else{
-            showMessage(false, 'OTP not sent 1');
+            showMessage(false, 'OTP not sent');
           }
         }else{
           showMessage(false, 'No user exists with this credential');
