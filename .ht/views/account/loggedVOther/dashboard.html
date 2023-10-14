@@ -16,8 +16,11 @@
     $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
     $length = count($stories);
     for($i=0; $i<$length; $i++){
-      if($stories[$i][5] == 'published' && $stories[$i][6] == 'Users'){
+      if($stories[$i][5] == 'published' && $stories[$i][6] == "public"){
+
         $webstoryData = json_decode($stories[$i][7], true);
+        $URL = $webstoryData['metaData']['url'];
+        $URL = "/webstories/".$URL;
         if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url']) || $webstoryData['layers']['L0']['media']['url'] == 'default'){
             $setUrl = '/assets/img/nomedia.png';
         }else{
@@ -28,10 +31,13 @@
         }else{
             $title = $stories[$i][8];
         }
+        $webstories[$i] =
         $webstories[$i] = '
-        <div class="webstory" id="webstory'.$i.'">
+        <div class="webstory" id="webstory'.$i.'" onclick="viewStory('.'\''.$URL.'\''.')">
             <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="storyOverlay"></div>
                 <div class="title">' . $title . '</div>
+
             </div>
         </div>';
       }else{
@@ -46,26 +52,26 @@
             <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
             <div> <p>No story to display</p></div> </div>
         HTML;
-    }else if($canViewContent == 'users'){
-      if($canViewContent == 'followers' && $isFollowingMe){
-        echo <<<HTML
-        <div class="webstories">
-        HTML;
-        for($j=0; $j<count($webstories); $j++){
-            echo $webstories[$j];
-        }
-        echo <<<HTML
-        </div>
-        HTML;
-      }else{
-        echo <<<HTML
-        <div class="noUpload">
-            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-            <div> <p>You can view stories only if {$this->userData->getOtherData('username', $this->otherUsername)['name']} follows you </p></div>
-        </div>
-        HTML;
+    }else if($canViewContent == "anon" || $canViewContent == "users"){
+      echo <<<HTML
+      <div class="webstories">
+      HTML;
+      for($j=0; $j<count($webstories); $j++){
+          echo $webstories[$j];
       }
-
+      echo <<<HTML
+      </div>
+      HTML;
+    }else if($canViewContent == "followers" && $isFollowingMe){
+      echo <<<HTML
+      <div class="webstories">
+      HTML;
+      for($j=0; $j<count($webstories); $j++){
+          echo $webstories[$j];
+      }
+      echo <<<HTML
+      </div>
+      HTML;
     }else{
       echo <<<HTML
       <div class="noUpload">
@@ -73,7 +79,6 @@
           <div> <p>Stories are private</p></div> </div>
       HTML;
     }
-
     ?>
 
 </div>

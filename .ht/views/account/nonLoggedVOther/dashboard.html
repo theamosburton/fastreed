@@ -16,8 +16,10 @@
     $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
     $length = count($stories);
     for($i=0; $i<$length; $i++){
-      if($stories[$i][5] == 'published' && $stories[$i][6] == 'Anonymous'){
+      if($stories[$i][5] == 'published' && $stories[$i][6] == 'public'){
         $webstoryData = json_decode($stories[$i][7], true);
+        $URL = $webstoryData['metaData']['url'];
+        $URL = "/webstories/".$URL;
         if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url']) || $webstoryData['layers']['L0']['media']['url'] == 'default'){
             $setUrl = '/assets/img/nomedia.png';
         }else{
@@ -29,9 +31,11 @@
             $title = $stories[$i][8];
         }
         $webstories[$i] = '
-        <div class="webstory" id="webstory'.$i.'">
+        <div class="webstory" id="webstory'.$i.'" onclick="viewStory('.'\''.$URL.'\''.')">
             <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="storyOverlay"></div>
                 <div class="title">' . $title . '</div>
+
             </div>
         </div>';
       }else{
@@ -40,7 +44,7 @@
     }
 
     $webstories = array_reverse($webstories);
-    if($canViewContent != 'anon'){
+    if($canViewContent != "anon"){
       echo <<<HTML
       <div class="noUpload">
           <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
