@@ -50,11 +50,12 @@ class Editor{
                     this.metaData.keywords = "";
                     this.metaData.url = "";
                     // JavaScript
-                    this.metaData.timeStamp = date.getTime();
+                    editor.metaData.timeStamp = Date.now();
                     this.metaData.date = `${fDate}`;
                     this.metaData.storyVisibility = 'Public';
                     this.webstoryData = data.message;
                     var jObject = JSON.parse(this.webstoryData);
+                    // checking if story is empty or not
                     if (!jObject.version) {
                       if (window.localStorage.getItem(`${editor.storyID}`)) {
                         this.continueWith('browser');
@@ -638,8 +639,7 @@ class Editor{
           await this.createUrl();
         }
       }
-      const date = new Date();
-      editor.metaData.timeStamp = date.getTime();
+      editor.metaData.timeStamp = Date.now();
       editor.version += 1;
       var jsObject = {
           layers:editor.layers,
@@ -1208,7 +1208,7 @@ class Editor{
             <div class="spinner" style="width: 75px;height: 75px;border-width:8px;margin:0;">
             </div>
         </div>
-        <div class="progressWritten">Verifying....</div>
+        <div class="progressWritten">Checking....</div>
         <div class="progressExtra">
 
         </div>

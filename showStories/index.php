@@ -40,7 +40,14 @@ class storyPreview{
            $description = $data['description'];
            $url = $data['url'];
            $keywords = $data['keywords'];
-           
+           $unixLastGMT = $this->istToGMT($data['lastEdit']);
+           $unixFirstGMT = $this->istToGMT($data['firstEdit']);
+
+           // $unixLastGMT = $data['lastEdit'];
+           // $unixFirstGMT = $data['firstEdit'];
+
+           $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
+           $firstmod = gmdate("D, d M Y H:i:s", $unixFirstGMT) . " GMT";
            echo "<script>
            var storyData = ".$JSONlayers.";
            </script>";
@@ -88,6 +95,23 @@ class storyPreview{
                mysqli_close($this->DB);
                $this->DB = null; // Set the connection property to null after closing
            }
+       }
+
+       private function istToGMT($istUnixTimestamp){
+                     // Create a DateTime object with the JavaScript timestamp in milliseconds
+            $istDateTime = new DateTime("@" . ($istUnixTimestamp / 1000));
+
+            // Set the input time zone to IST (Indian Standard Time)
+            $istTimeZone = new DateTimeZone('Asia/Kolkata');
+            $istDateTime->setTimezone($istTimeZone);
+
+            // Set the output time zone to GMT (Greenwich Mean Time)
+            $gmtTimeZone = new DateTimeZone('GMT');
+            $istDateTime->setTimezone($gmtTimeZone);
+
+            // Get the GMT Unix timestamp in seconds (not milliseconds)
+            $gmtUnixTimestamp = $istDateTime->getTimestamp();
+         return $gmtUnixTimestamp;
        }
 
 

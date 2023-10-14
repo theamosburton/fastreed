@@ -194,7 +194,8 @@ class Webstories{
                         $keywords = $metaData['keywords'];
                         $storyID = $data['storyID'];
                         $storyData = $data['data'];
-                        $lastEdit = $metaData['timeStamp'];
+                        $phpTimestamp = time(); // Get current Unix timestamp in seconds
+                        $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
                         if (!empty($url)) {
                           $baseURL = $url;
                           $suffix = 'fastreed';
@@ -297,30 +298,56 @@ class Webstories{
       }
       $metaData = $this->checkMetaData($dataArray);
       $storyID = $data['storyID'];
-      $lastEdit = $dataArray['metaData']['timeStamp'];
+      $phpTimestamp = time(); // Get current Unix timestamp in seconds
+      $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
       if (!count($layers)) {
         if (!count($metaData)) {
-          $url = $dataArray['metaData']['url'];
-          $baseURL =$url ;
-          $suffix = 'fastreed';
-          if($this->checkUrl($url , $storyID)) {
-             $url  = $baseURL . '-' . $suffix;
-          }
-          $dataArray['metaData']['url'] = $url;
           if($this->updateMeta($dataArray['metaData'], $storyID)){
-          // Updatiing story data
-          $dataArray['storyStatus'] = 'published';
-          $storyData = json_encode($dataArray,true);
-          $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = 'published', access = 'public'  WHERE storyID = '$storyID'";
-          $result3 = mysqli_query($this->DB, $sql3);
-            if ($result3) {
-              if ($this->makePublic($images)) {
-                showMessage(true, "$url");
+            if ($this->checkStoryPublished($storyID)) {
+              $url = $dataArray['metaData']['url'];
+              $baseURL =$url ;
+              $suffix = 'fastreed';
+              if($this->checkUrl($url , $storyID)) {
+                 $url  = $baseURL . '-' . $suffix;
+              }
+              $dataArray['metaData']['url'] = $url;
+              // Updatiing story data
+              $dataArray['storyStatus'] = 'published';
+              $storyData = json_encode($dataArray,true);
+              $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = 'published', access = 'public'  WHERE storyID = '$storyID'";
+              $result3 = mysqli_query($this->DB, $sql3);
+              if ($result3) {
+                if ($this->makePublic($images)) {
+                  showMessage(true, "$url");
+                }else{
+                  showMessage(false, "Problem at our end");
+                }
               }else{
                 showMessage(false, "Problem at our end");
               }
             }else{
-              showMessage(false, "Problem at our end");
+              $url = $dataArray['metaData']['url'];
+              $baseURL =$url ;
+              $suffix = 'fastreed';
+              if($this->checkUrl($url , $storyID)) {
+                 $url  = $baseURL . '-' . $suffix;
+              }
+              $dataArray['metaData']['url'] = $url;
+
+              // Updatiing story data
+              $dataArray['storyStatus'] = 'published';
+              $storyData = json_encode($dataArray,true);
+              $sql3 = "UPDATE stories set storyData = '$storyData',  firstEdit = '$lastEdit', lastEdit = '$lastEdit', storyStatus = 'published', access = 'public'  WHERE storyID = '$storyID'";
+              $result3 = mysqli_query($this->DB, $sql3);
+              if ($result3) {
+                if ($this->makePublic($images)) {
+                  showMessage(true, "$url");
+                }else{
+                  showMessage(false, "Problem at our end");
+                }
+              }else{
+                showMessage(false, "Problem at our end");
+              }
             }
           }else{
             showMessage(false, "Problem at our end");
@@ -331,6 +358,19 @@ class Webstories{
       }else{
         showMessage(false, "$layers[0]");
       }
+    }
+    public function checkStoryPublished($id){
+      $published = false;
+      $sql = "SELECT * FROM stories WHERE storyID = '$id'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $storyStatus = $row['storyStatus'];
+        if ($storyStatus == 'published') {
+          $published = true;
+        }
+      }
+      return $published;
     }
     private function makePublic($images){
       $images = array_unique($images);
