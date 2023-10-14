@@ -170,7 +170,7 @@ class showMenus{
             var response = JSON.parse(xhr.responseText);
             if (utype == 'dpUpload') {
               if (response.Result) {
-                document.querySelector('#uploadDbButton').innerHTML = `Uploading...`;
+                document.querySelector('#uploadProgressDiv').innerHTML = `Uploading...`;
                 location.reload();
               }else{
                 document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
