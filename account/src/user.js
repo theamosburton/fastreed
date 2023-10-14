@@ -170,11 +170,11 @@ class showMenus{
             var response = JSON.parse(xhr.responseText);
             if (utype == 'dpUpload') {
               if (response.Result) {
-                document.querySelector('#uploadProgressDiv').innerHTML = `Uploading...`;
+                document.querySelector('#uploadDbButton').innerHTML = `Uploading...`;
                 location.reload();
               }else{
-                document.querySelector('#uploadProgressDiv').innerHTML = 'Someting Went Wrong' ;
-                document.querySelector('#uploadProgressDiv').style.backgroundColor = 'red';
+                document.querySelector('#uploadDbButton').innerHTML = 'Someting Went Wrong' ;
+                document.querySelector('#uploadDbButton').style.backgroundColor = 'red';
               }
             }else if (utype == 'image') {
               if (response.Result) {
