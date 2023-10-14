@@ -18,8 +18,9 @@ include($GLOBALS['DEV_OPTIONS']);
 
 if (isset($_SERVER['HTTP_REFERER'])) {
     $referrer = $_SERVER['HTTP_REFERER'];
+    $referrer = $_SERVER['HTTP_REFERER'];
     $urlParts = parse_url($referrer);
-    $refdomain = $urlParts['host'];
+    $refdomain = $urlParts['scheme'].'://'.$urlParts['host'];
     if ($refdomain == DOMAIN || $refdomain == DOMAIN_ALIAS) {
         $loggedData = new getLoggedData();
         $isLogged = $loggedData->userLogged;
@@ -31,7 +32,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         }
     }else {
         showMessage(false, "Access Denied DD");
-    }   
+    }
 }else {
     showMessage(false, "Access Denied DA");
 }
