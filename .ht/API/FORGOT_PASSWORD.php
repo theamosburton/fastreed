@@ -205,7 +205,7 @@ class forgotPassword{
       <body>
         <div id='cont'>
           <div id='message'>
-              <b>Hello! ".$userFullName." </b><br><br>
+              <b>Hello! User </b><br><br>
               One Time Password(OTP) for password recovery is: <b>(valid for 10 minutes only)</b>
               <div id='OTP'>
                 <span id='cpOTP'>".$randOTP." </span>
