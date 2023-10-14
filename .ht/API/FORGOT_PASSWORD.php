@@ -224,7 +224,7 @@ class forgotPassword{
 
     $subject = $randOTP." is your OTP";
     $headers = "From: Fastreed Reset Password <no-reply@".DOMAIN.">" . "\r\n" ."CC: support@".DOMAIN."\r\n"."Content-type: text/html";
-    if(DOMAIN == 'localhost'){
+    if(DOMAIN == 'http://localhost'){
       $mailStatus = true;
     }else if (mail($userEmail,$subject,$message,$headers)) {
       $mailStatus = true;
