@@ -213,7 +213,7 @@ class forgotPassword{
           </div><hr>
           <div>You can create your channel and publish your content. To know more about us please have a visit at our website:
           </div><br>
-          <div id='link'><a href='https://".DOMAIN."/'> Website Link</a>
+          <div id='link'><a href='https://".DOMAIN_NAME."/'> Website Link</a>
           </div><br>
           <footer id='footer'>
           This mail is sent to <b>".$userEmail." </b>and is intended for password recovery of <b>".$userFullName."</b>. <br><br>Kindly ignore if you haven't generated the OTP</b>
@@ -223,11 +223,11 @@ class forgotPassword{
     </html>";
 
     $subject = $randOTP." is your OTP";
-    $headers = "From: Fastreed Reset Password <no-reply@".DOMAIN.">" . "\r\n" ."CC: support@".DOMAIN."\r\n"."Content-type: text/html";
+    $headers = "From: Fastreed Reset Password <no-reply@".DOMAIN_NAME.">" . "\r\n" ."CC: support@".DOMAIN_NAME."\r\n"."Content-type: text/html";
+    echo $headers;
     if(DOMAIN == 'http://localhost'){
       $mailStatus = true;
     }else if (mail($userEmail,$subject,$message,$headers)) {
-      echo $userEmail;
       $mailStatus = true;
     }else {
       $mailStatus = false;
