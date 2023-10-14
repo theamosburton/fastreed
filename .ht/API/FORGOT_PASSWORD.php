@@ -227,6 +227,7 @@ class forgotPassword{
     if(DOMAIN == 'http://localhost'){
       $mailStatus = true;
     }else if (mail($userEmail,$subject,$message,$headers)) {
+      echo $userEmail;
       $mailStatus = true;
     }else {
       $mailStatus = false;
