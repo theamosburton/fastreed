@@ -81,7 +81,7 @@ class uploadMedia{
                 // Convert the file size to a human-readable format (e.g., KB, MB, GB)
                 $sizeKB = round($sizeB / 1024, 2);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext, $sizeKB)['Result']){
+                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext, $sizeKB, 'users')['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
                     $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
                     // Create the directory if it doesn't exist
@@ -144,7 +144,7 @@ class uploadMedia{
                 $sizeKB = round($sizeB / 1024, 2);
                 if ($this->deleteOldDP($id)) {
                   $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                  if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB)['Result']){
+                  if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB, 'anon')['Result']){
                       $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
                       $add = '/uploads/photos/'.$username.'/';
                       // Create the directory if it doesn't exist
@@ -188,7 +188,7 @@ class uploadMedia{
                 $sizeKB = round($sizeB / 1024, 2);
                 $this->deleteOldDP($id);
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext, $sizeKB)['Result']){
+                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext, $sizeKB, 'users')['Result']){
                     $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
                     $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
                     // Create the directory if it doesn't exist
@@ -215,11 +215,11 @@ class uploadMedia{
         }
     }
 
-    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext, $sizeKB){
+    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext, $sizeKB, $access){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
         $time =  time();
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status, usedInStory) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', 'users', '$time', '$sizeKB', 'UFD', 0)";
+        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', '$access', '$time', '$sizeKB', 'UFD')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;
