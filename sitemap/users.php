@@ -4,9 +4,9 @@ $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.ht/controller/VISIT.php";
 header('Content-type: application/xml');
 
-new createAuthorsSitemap();
+new createUsersSitemap();
 
-class createAuthorsSitemap{
+class createUsersSitemap{
     public $version;
     public $captureVisit;
     protected $userLogged = false;
@@ -29,8 +29,8 @@ class createAuthorsSitemap{
          $this->version = implode('.', str_split($this->version, 1));
          $this->userData = new getLoggedData();
          $this->uploadData = new getUploadData();
-         $storiesList = $this->verifiedStories();
-         $this->createXML($storiesList);
+         $usernameList = $this->usersList();
+         $this->createXML($usernameList);
          $this->closeConnection();
          $this->userData->closeConnection();
          $this->uploadData->closeConnection();
@@ -43,57 +43,39 @@ class createAuthorsSitemap{
                $this->DB = null; // Set the connection property to null after closing
            }
        }
-       private function verifiedStories(){
-         $sql = "SELECT * FROM metaData WHERE moniStatus = '1'";
+       private function usersList(){
+         $sql = "SELECT personID FROM settings";
          $result = mysqli_query($this->DB, $sql);
          $usernames = [];
          if ($result) {
            $personIDs = mysqli_fetch_all($result);
-
+           for ($i=0; $i < mysqli_num_rows($result); $i++) {
+             $personID = $personIDs[$i][0];
+             $sql1 = "SELECT username FROM account_details WHERE personID = '$personID'";
+             $result1 = mysqli_query($this->DB, $sql1);
+             $row = mysqli_fetch_assoc($result1);
+             $usernames[$i] = $row;
+           }
          }
-         return $personIDs;
+         return $usernames;
       }
 
       private function createXML($list){
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+        // Create the root element
+        // $urlset = $xml->createElement('urlset');
+        // $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        // $xml->appendChild($urlset);
         for ($i=0; $i < count($list); $i++) {
-           $lastMod = $this->lastMod($list[$i][0]);
-           $lastMod = gmdate("Y-m-d\TH:i:sP", $lastMod);
-           $url = DOMAIN.'/webstories/'.$list[$i][4];
+           $url = DOMAIN.'/u/'.$list[$i]['username'];
            $xml .= '<url>';
            $xml .= '<loc>' . $url . '</loc>';
-            $xml .= '<lastmod>' . $lastMod . '</lastmod>';
            $xml .= '</url>';
         }
         $xml .= '</urlset>';
         echo $xml;
-      }
-      private function lastMod($id){
-        $sql = "SELECT * FROM stories WHERE storyID = '$id'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-          $row = mysqli_fetch_assoc($result);
-          $lastmod = $row['lastEdit'];
-          $lastModGMT = $this->istToGMT($lastmod);
-        }
-        return $lastModGMT;
-      }
-      private function istToGMT($istUnixTimestamp){
-                    // Create a DateTime object with the JavaScript timestamp in milliseconds
-           $istDateTime = new DateTime("@" . ($istUnixTimestamp / 1000));
-
-           // Set the input time zone to IST (Indian Standard Time)
-           $istTimeZone = new DateTimeZone('Asia/Kolkata');
-           $istDateTime->setTimezone($istTimeZone);
-
-           // Set the output time zone to GMT (Greenwich Mean Time)
-           $gmtTimeZone = new DateTimeZone('GMT');
-           $istDateTime->setTimezone($gmtTimeZone);
-
-           // Get the GMT Unix timestamp in seconds (not milliseconds)
-           $gmtUnixTimestamp = $istDateTime->getTimestamp();
-        return $gmtUnixTimestamp;
       }
 }
  ?>
