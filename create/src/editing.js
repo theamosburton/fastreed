@@ -322,6 +322,7 @@ class Edits{
     }
     this.saveToBrowser();
   }
+
   changeFontWeight(){
     var fontWeight = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .titleFontWeight`);
     var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
@@ -464,6 +465,7 @@ class Edits{
     const end = window.getSelection().getRangeAt(0).endOffset;
     const text = title.textContent;
     const capitalizedText = this.capitalizeEveryWord(text);
+    titleIn.value = capitalizedText;
     title.textContent = capitalizedText;
     this.editor.metaData.title = capitalizedText;
     // Restore cursor position
