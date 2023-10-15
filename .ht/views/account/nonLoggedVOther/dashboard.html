@@ -1,73 +1,9 @@
-<div class="contentTopics resCreation row webstoriesDiv">
+<div class="contentTopics resCreation row webstoriesDiv" id="webstoriesDivs">
     <div class="mtitle mb-3">
       <div>
           <span>Web Stories</span>
       </div>
     </div>
-        <?php
-    // Title = stories[i][8];
-    // data = stories[i][7]
-    // access = stories[i][6]
-    // status = stories[i][5]
-    // storyID = stories[i][1]
-    // personID = stories[i][0]
-
-    $webstories = array();
-    $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
-    $length = count($stories);
-    for($i=0; $i<$length; $i++){
-      if($stories[$i][5] == 'published' && $stories[$i][6] == 'public'){
-        $webstoryData = json_decode($stories[$i][7], true);
-        $URL = $webstoryData['metaData']['url'];
-        $URL = "/webstories/".$URL;
-        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url']) || $webstoryData['layers']['L0']['media']['url'] == 'default'){
-            $setUrl = '/assets/img/nomedia.png';
-        }else{
-            $setUrl = $webstoryData['layers']['L0']['media']['url'];
-        }
-        if(!empty($webstoryData['metaData']['title'])){
-            $title = $webstoryData['metaData']['title'];
-        }else{
-            $title = $stories[$i][8];
-        }
-        $webstories[$i] = '
-        <div class="webstory" id="webstory'.$i.'" onclick="viewStory('.'\''.$URL.'\''.')">
-            <div class="background" style="background-image: url(' . $setUrl . ');">
-                <div class="storyOverlay"></div>
-                <div class="title">' . $title . '</div>
-
-            </div>
-        </div>';
-      }else{
-        $webstories = [];
-      }
-    }
-
-    $webstories = array_reverse($webstories);
-    if($canViewContent != "anon"){
-      echo <<<HTML
-      <div class="noUpload">
-          <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-          <div> <p>Login to view</p></div> </div>
-      HTML;
-    }else if(count($webstories) <= 0){
-        echo <<<HTML
-        <div class="noUpload">
-            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-            <div> <p>No story to display</p></div> </div>
-        HTML;
-    }else{
-        echo <<<HTML
-        <div class="webstories">
-        HTML;
-        for($j=0; $j<count($webstories); $j++){
-            echo $webstories[$j];
-        }
-        echo <<<HTML
-        </div>
-        HTML;
-    }
-
-    ?>
-
+    <div class="webstories" id="webstories">
+    </div>
 </div>

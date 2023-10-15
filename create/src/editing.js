@@ -361,7 +361,7 @@ class Edits{
     let startOffset = range.startOffset;
     let endOffset = range.endOffset;
 
-    const capitalizedText = this.capitalizeSentences(text.innerHTML);
+    const capitalizedText = text.innerHTML;
     text.innerHTML = capitalizedText;
     this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = capitalizedText;
     const newRange = document.createRange();
@@ -423,8 +423,6 @@ class Edits{
     }else{
       const start = title.selectionStart;
       const end = title.selectionEnd;
-      title.value = this.capitalizeEveryWord(title.value);
-      description.value = this.capitalizeSentences(description.value);
       this.editor.metaData.url = url.value;
       this.editor.metaData.title = title.value;
       this.editor.metaData.description = description.value;
@@ -432,13 +430,13 @@ class Edits{
       title.setSelectionRange(start, end);
       if (description.value == '') {
         // document.querySelector('#layer0 .otherText').innerHTML = 'Enter story description..';
-        document.querySelector('#layer0 .titleText').innerHTML = this.capitalizeEveryWord(title.value);
+        document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }else if(title.value == ''){
         // document.querySelector('#layer0 .otherText').innerHTML = description.value;
         document.querySelector('#layer0 .titleText').innerHTML = 'Edit title for this webstory';
       }else{
         // document.querySelector('#layer0 .otherText').innerHTML = description.value;
-        document.querySelector('#layer0 .titleText').innerHTML = this.capitalizeEveryWord(title.value);
+        document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }
     }
     if (this.version+1 == editor.version) {
@@ -449,7 +447,6 @@ class Edits{
 
   editStoryDescription(){
     var descriptionIn = document.getElementById("storyDescription");
-    description.innerHTML = this.capitalizeSentences(description.innerHTML);
     this.editor.metaData.description = description.innerHTML;
     descriptionIn.value = description.innerHTML;
     if (this.version+1 == editor.version) {
@@ -464,10 +461,9 @@ class Edits{
     const start = window.getSelection().getRangeAt(0).startOffset;
     const end = window.getSelection().getRangeAt(0).endOffset;
     const text = title.textContent;
-    const capitalizedText = this.capitalizeEveryWord(text);
-    titleIn.value = capitalizedText;
-    title.textContent = capitalizedText;
-    this.editor.metaData.title = capitalizedText;
+    titleIn.value = text;
+    title.textContent = text;
+    this.editor.metaData.title = text;
     // Restore cursor position
     const range = document.createRange();
     const sel = window.getSelection();
@@ -520,26 +516,7 @@ class Edits{
     // Return the RGB format with commas
     return `${r}, ${g}, ${b}`;
   }
-  capitalizeEveryWord(inputString) {
-    return inputString.replace(/\b\w/g, function (match) {
-        return match.toUpperCase();
-    });
-  }
 
- capitalizeSentences(inputString) {
-      return inputString.replace(/\.(\s|$)|^.|\.\w/g, function (match) {
-          return match.toUpperCase();
-      });
-  }
-
-
- capitalizeSentences(paragraph) {
-  let sentences = paragraph.split('. ');
-  for (let i = 0; i < sentences.length; i++) {
-    sentences[i] = sentences[i].charAt(0).toUpperCase() + sentences[i].slice(1);
-  }
-  return sentences.join('. ');
-}
 
 
 

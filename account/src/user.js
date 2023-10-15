@@ -723,9 +723,9 @@ function editStory(x, u){
 function deleteStory(storyID, divID){
   var storyDIV = document.querySelector(`#webstory${divID}`);
   if (adminLogged) {
-    whoIs = 'admin';
+    whoIs = 'Admin';
   }else{
-    whoIs = 'user';
+    whoIs = 'User';
     currentUsername = '';
   }
 

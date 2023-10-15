@@ -206,7 +206,7 @@ class loggedAdminVother extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
 
-        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
         $this->extraScript = '
         <script>
             // other
@@ -259,7 +259,7 @@ class loggedVself extends showProfile{
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
 
-        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
 
         $this->extraScript =
         '<script>
@@ -317,7 +317,7 @@ class loggedVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
-        $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js'];
+        $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js', '/account/src/viewStories.js'];
 
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
@@ -364,7 +364,7 @@ class nonLoggedVother extends showProfile{
         $this->webDescription = "Add and Edit Your Profile Info";
         $this->webKeywords = "Add and Edit Your Profile Info";
         $this->pageCss = ['/account/src/style.css'];
-        $this->pageJs = ['/account/src/style.js'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
 
 
         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];

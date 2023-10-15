@@ -52,4 +52,5 @@ function showPreview(){
 function cancelError(){
   document.getElementById('errorConatiner').style.display = 'none';
    showSection('rightSection', 'righthideMe');
+    window.location.href =  window.location.href;
 }

@@ -97,7 +97,7 @@ class Editor{
                           <div class="title">
                             <div class="box">
                               <span class="date">${this.metaData.date}</span>
-                              <span class="titleText"  contenteditable="true" onkeypress="edits.editStoryTitle('')">Edit title for this webstory</span>
+                              <span class="titleText"  contenteditable="true" onkeyup="edits.editStoryTitle('')">Edit title for this webstory</span>
                               <div class="creditBox">
                                 <span class="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
                               </div>
@@ -142,47 +142,53 @@ class Editor{
     }
 
     createExistedLayers(){
-    var jsonString = this.webstoryData;
-    var jsObject = JSON.parse(jsonString);
-    if (jsObject.storyStatus == 'drafted') {
-      document.getElementById('publishStory').innerHTML = 'Publish';
-    }else if (jsObject.storyStatus == 'published'){
-      document.getElementById('publishStory').innerHTML = 'Update';
-    }
-    // console.log(jsObject);
-    var browserData = window.localStorage.getItem(`${editor.storyID}`);
-    browserData = JSON.parse(browserData);
-    if (browserData) {
-      if (browserData.version == jsObject.version) {
+      var jsonString = this.webstoryData;
+      var jsObject = JSON.parse(jsonString);
+      var storyStatus = JSON.parse(jsObject.storyStatus);
+      if (storyStatus.status == 'drafted') {
+        document.getElementById('publishStory').innerHTML = 'Publish';
+      }else if (storyStatus.status == 'published'){
+        var publish =  document.getElementById('publishStory');
+        var save =  document.getElementById('saveStory')
+        publish.innerHTML = 'Draft';
+        save.innerHTML = 'Update';
+        publish.setAttribute('onclick', 'editor.draftStory()');
+        save.setAttribute('onclick', 'editor.publishStory()');
+      }
+      // console.log(jsObject);
+      var browserData = window.localStorage.getItem(`${editor.storyID}`);
+      browserData = JSON.parse(browserData);
+      if (browserData) {
+        if (browserData.version == jsObject.version) {
+          this.metaData = jsObject.metaData;
+          this.layers = jsObject.layers;
+          this.version = jsObject.version;
+          this.storyStatus = storyStatus.status;
+          this.createExistedStory();
+        }else{
+          var alertCont = document.querySelector('.altertContainer');
+          alertCont.style.display = 'flex';
+          var bv = this.numberToVersion(browserData.version);
+          var fv = this.numberToVersion(jsObject.version);
+          document.querySelector('.altertDiv').innerHTML =
+          `<div class="title">
+            Choose Story Version !
+          </div>
+          <div class="describe">
+            We have two different versions of your webstory kindly select the <b> latest one</b> to continue.
+          </div>
+          <div class="options">
+            <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
+            <div class="option" id="fastreed" onclick="editor.continueWith('fastreed')">Fastreed(v${fv})</div>
+          </div>`;
+        }
+      }else{
         this.metaData = jsObject.metaData;
         this.layers = jsObject.layers;
         this.version = jsObject.version;
-        this.storyStatus = jsObject.storyStatus;
-        this.updateStory();
-      }else{
-        var alertCont = document.querySelector('.altertContainer');
-        alertCont.style.display = 'flex';
-        var bv = this.numberToVersion(browserData.version);
-        var fv = this.numberToVersion(jsObject.version);
-        document.querySelector('.altertDiv').innerHTML =
-        `<div class="title">
-          Choose Story Version !
-        </div>
-        <div class="describe">
-          We have two different versions of your webstory kindly select the <b> latest one</b> to continue.
-        </div>
-        <div class="options">
-          <div class="option" id="browser" onclick="editor.continueWith('browser')">Browser(v${bv})</div>
-          <div class="option" id="fastreed" onclick="editor.continueWith('fastreed')">Fastreed(v${fv})</div>
-        </div>`;
+        this.storyStatus = storyStatus.status;
+        this.createExistedStory();
       }
-    }else{
-      this.metaData = jsObject.metaData;
-      this.layers = jsObject.layers;
-      this.version = jsObject.version;
-      this.storyStatus = jsObject.storyStatus;
-      this.updateStory();
-    }
 
   }
     continueWith(x){
@@ -197,14 +203,14 @@ class Editor{
         this.version = browserData.version;
         this.storyStatus = browserData.storyStatus;
         alertCont.style.display = 'none';
-        this.updateStory();
+        this.createExistedStory();
       }else{
         this.metaData = jsObject.metaData;
         this.layers = jsObject.layers;
         this.version = jsObject.version;
         this.storyStatus = jsObject.storyStatus;
         alertCont.style.display = 'none';
-        this.updateStory();
+        this.createExistedStory();
       }
     }
     createNewLayer(){
@@ -633,97 +639,8 @@ class Editor{
         }
     }
 
-    async saveStory(){
-      if (editor.metaData.title != '' || editor.metaData.url != '') {
-        if (editor.metaData.url != '') {
-          await this.createUrl();
-        }
-      }
-      editor.metaData.timeStamp = Date.now();
-      editor.version += 1;
-      var jsObject = {
-          layers:editor.layers,
-          metaData:editor.metaData,
-          version: editor.version
-      };
-      var metadata = editor.metaData;
-      var jsonData = JSON.stringify(jsObject);
-      metadata = JSON.stringify(metadata);
-      var self = this;
-      var saving = document.getElementById('saveStory');
-      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
-      const saveData = async () =>{
-          const url = '/.ht/API/webstories.php';
-          var encyDat = {
-          'purpose' : 'update',
-          'whois': `${self.whoIs}`,
-          'storyID': `${self.storyID}`,
-          'data': `${jsonData}`,
-          'metaData': `${metadata}`,
-          'username': `${self.username}`
-          };
-          const response = await fetch(url, {
-              method: 'post',
-              headers: {
-              'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(encyDat)
-          });
-          var data = await response.json();
-          if (data) {
-              if (data.Result) {
-                  setTimeout(function(){
-                      saving.innerHTML = 'Saved';
-                      var dat = {
-                        layers : editor.layers,
-                        metaData : editor.metaData,
-                        version : editor.version
-                      };
-                        window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
-                  }, 500);
-              }else{
-                  setTimeout(function(){
-                      saving.innerHTML = 'Not saved';
-                  }, 500);
-              }
-          }else{
-              setTimeout(function(){
-                  saving.innerHTML = 'Not saved';
-              }, 500);
-          }
-      }
-      saveData();
-    }
 
-    async createUrl(){
-        const url = '/.ht/API/webstories.php';
-        var encyDat = {
-        'purpose' : 'generateUrl',
-        'title' : `${editor.metaData.title}`,
-        'url' :`${editor.metaData.url}`,
-        'storyID' : `${editor.storyID}`
-        };
-        const response = await fetch(url, {
-            method: 'post',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(encyDat)
-        });
-        var data = await response.json();
-        if (data) {
-            if (data.Result) {
-                var urlInput = document.getElementById("storyUrl");
-                urlInput.value = data.message;
-                editor.metaData.url = data.message;
-            }else{
-            }
-        }else{
-        }
-    }
-
-
-    updateStory(){
+    createExistedStory(){
         this.totalLayers = Object.keys(this.layers).length;
         for (let  i= 0; i < this.totalLayers; i++) {
            if (i == 0) {
@@ -1194,6 +1111,7 @@ class Editor{
 
     // Publishing
   async publishStory(){
+    await this.saveStory();
       var saving = document.getElementById('publishStory');
       saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
       var alertCont = document.querySelector('.altertContainer');
@@ -1230,7 +1148,13 @@ class Editor{
           inputs.forEach(function(element) {
             element.style.borderColor = 'grey';
           });
-          await this.publish();
+
+          if (this.storyStatus == 'published') {
+              await this.updateStory();
+          }else{
+              await this.publish();
+          }
+
         }else{
           var alertCont = document.querySelector('.altertContainer');
           alertCont.style.display = 'flex';
@@ -1254,9 +1178,6 @@ class Editor{
           </div>`;
             document.querySelector('.altertDiv').style.background = 'transparent';
             saving.innerHTML = "Publish";
-          // var metaErrorBox = document.getElementById('metaErrorBox');
-          metaErrorBox.style.display = 'block';
-          // metaErrorBox.querySelector('#metaError').innerHTML = metaData;
         }
       }else{
         var alertCont = document.querySelector('.altertContainer');
@@ -1313,6 +1234,7 @@ class Editor{
         metaData:editor.metaData,
         version: editor.version
     };
+    edits.saveToBrowser();
     var metadata = editor.metaData;
     var jsonData = JSON.stringify(jsObject);
     metadata = JSON.stringify(metadata);
@@ -1374,11 +1296,7 @@ class Editor{
               </div>
              </div>
            </div>`;
-             document.querySelector('.altertDiv').style.background = 'transparent';
-             var saving = document.getElementById('publishStory');
-             saving.innerHTML = "Published";
          }, 1000);
-
        }else{
          var alertCont = document.querySelector('.altertContainer');
          alertCont.style.display = 'flex';
@@ -1400,9 +1318,6 @@ class Editor{
            </div>
            </div>
          </div>`;
-           document.querySelector('.altertDiv').style.background = 'transparent';
-           var saving = document.getElementById('publishStory');
-           saving.innerHTML = "Publish";
        }
    }else{
      var alertCont = document.querySelector('.altertContainer');
@@ -1424,9 +1339,6 @@ class Editor{
        </div>
        </div>
      </div>`;
-       document.querySelector('.altertDiv').style.background = 'transparent';
-       var saving = document.getElementById('publishStory');
-       saving.innerHTML = "Publish";
    }
  }
   async checkLayers() {
@@ -1479,9 +1391,7 @@ class Editor{
     }
     return errorArray;
   }
-  hasOnlySpaces(inputString) {
-    return /^\s*$/.test(inputString);
-  }
+
   async checkUrlExists(url) {
     try {
       const response = await fetch(url, { method: 'HEAD' });
@@ -1495,7 +1405,6 @@ class Editor{
       return false; // URL does not exist or there was an error
     }
   }
-
   checkMetaData(){
     let metaError = '';
     let description = this.metaData.description;
@@ -1532,8 +1441,344 @@ class Editor{
     }
     return metaError;
   }
-    // Publishing
+  // Publishing
+  // saving
+  async saveStory(){
+    if (editor.metaData.title != '' && editor.metaData.url == '') {
+      await this.createUrl();
+    }
+    editor.metaData.timeStamp = Date.now();
+    editor.version += 1;
+    editor.metaData.title = this.capitalizeEveryWord(editor.metaData.title);
+    editor.metaData.description = this.capitalizeSentences(editor.metaData.description);
+    document.getElementById('storyTitle').value = editor.metaData.title;
+    document.getElementById('storyDescription').value = editor.metaData.description;
+    var jsObject = {
+        layers:editor.layers,
+        metaData:editor.metaData,
+        version: editor.version
+    };
+    var metadata = editor.metaData;
+    var jsonData = JSON.stringify(jsObject);
+    metadata = JSON.stringify(metadata);
+    var self = this;
+    var saving = document.getElementById('saveStory');
+    saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+    const saveData = async () =>{
+        const url = '/.ht/API/webstories.php';
+        var encyDat = {
+        'purpose' : 'save',
+        'whois': `${self.whoIs}`,
+        'storyID': `${self.storyID}`,
+        'data': `${jsonData}`,
+        'metaData': `${metadata}`,
+        'username': `${self.username}`,
+        'version': `${self.version}`
+        };
+        const response = await fetch(url, {
+            method: 'post',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(encyDat)
+        });
+        var data = await response.json();
+        if (data) {
+            if (data.Result) {
+                setTimeout(function(){
+                    saving.innerHTML = 'Saved';
+                    var dat = {
+                      layers : editor.layers,
+                      metaData : editor.metaData,
+                      version : editor.version
+                    };
+                      window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
+                }, 500);
+            }else{
+                setTimeout(function(){
+                    saving.innerHTML = 'Not saved';
+                }, 500);
+            }
+        }else{
+            setTimeout(function(){
+                saving.innerHTML = 'Not saved';
+            }, 500);
+        }
+    }
+    saveData();
+  }
+  async createUrl(){
+      const url = '/.ht/API/webstories.php';
+      var encyDat = {
+      'purpose' : 'generateUrl',
+      'title' : `${editor.metaData.title}`,
+      'url' :`${editor.metaData.url}`,
+      'storyID' : `${editor.storyID}`
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+      });
+      var data = await response.json();
+      if (data) {
+          if (data.Result) {
+              var urlInput = document.getElementById("storyUrl");
+              urlInput.value = data.message;
+              editor.metaData.url = data.message;
+          }else{
+          }
+      }else{
+      }
+  }
+  // saving
 
+  // Update
+  async updateStory(){
+    let self = this;
+    var alertCont = document.querySelector('.altertContainer');
+    alertCont.style.display = 'flex';
+    alertCont.id = 'errorConatiner';
+    document.querySelector('.altertDiv').innerHTML =
+    `<div class="progress">
+      <div class="cancelBar">
+      </div>
+      <div class="progressBar">
+          <div class="progressIcon">
+          <div class="spinner" style="width: 75px;height: 75px;border-width:8px;margin:0;">
+          </div>
+      </div>
+      <div class="progressWritten">Updating....</div>
+      <div class="progressExtra">
+
+      </div>
+    </div>`;
+     document.querySelector('.altertDiv').style.background = 'transparent';
+     var screenWidth = window.innerWidth;
+     if (screenWidth < 800) {
+       hideSection('rightSection');
+     }
+    var jsObject = {
+        layers:editor.layers,
+        metaData:editor.metaData,
+        version: editor.version
+    };
+    var metadata = editor.metaData;
+    var jsonData = JSON.stringify(jsObject);
+    metadata = JSON.stringify(metadata);
+   const url = '/.ht/API/webstories.php';
+   var encyDat = {
+   'purpose' : 'update',
+   'whois': `${this.whoIs}`,
+   'storyID': `${this.storyID}`,
+   'data': `${jsonData}`,
+   'metaData': `${metadata}`,
+   'username': `${this.username}`,
+   'version': `${editor.version}`,
+   };
+   const response = await fetch(url, {
+       method: 'post',
+       headers: {
+       'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(encyDat)
+   });
+   var data = await response.json();
+   if (data) {
+       if (data.Result) {
+         setTimeout(function(){
+           var alertCont = document.querySelector('.altertContainer');
+           alertCont.style.display = 'flex';
+           alertCont.id = 'errorConatiner';
+           document.querySelector('.altertDiv').innerHTML =
+           `<div class="progress">
+             <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+             </div>
+             <div class="progressBar">
+                 <div class="progressIcon">
+                 <i class="fas fa-check-circle"></i>
+                 </div>
+             </div>
+             <div class="progressExtra">
+             <div class="alert alert-success" role="alert">
+              Story Updated
+             </div>
+             <div class="alert alert-warning" role="alert">
+                <strong>Note</strong>: Photos and videos uploaded to this story will be visible publically.
+             </div>
+              <div class="link">
+                <div class="viewLink" onclick="editor.viewStory('${data.message}/')">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <div class="copyLink"  onclick="editor.copyLink('${window.location.origin}/webstories/${data.message}/')">
+                    <i class="fa-solid fa-copy"></i>
+                </div>
+                <div class="shareLink" onclick="editor.shareLink('${self.metaData.title}', '${self.metaData.description}','${data.message}/')">
+                  <i class="fa-solid fa-share-from-square"></i>
+                </div>
+              </div>
+             </div>
+           </div>`;
+         }, 1000);
+       }else{
+         var alertCont = document.querySelector('.altertContainer');
+         alertCont.style.display = 'flex';
+         alertCont.id = 'errorConatiner';
+
+         document.querySelector('.altertDiv').innerHTML =
+         `<div class="progress">
+           <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+           </div>
+           <div class="progressBar">
+               <div class="progressIcon">
+               <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+               </div>
+           </div>
+           <div class="progressExtra">
+           <div class="alert alert-warning" role="alert">
+              ${data.message}
+           </div>
+           </div>
+         </div>`;
+       }
+   }else{
+     var alertCont = document.querySelector('.altertContainer');
+     alertCont.style.display = 'flex';
+     alertCont.id = 'errorConatiner';
+     document.querySelector('.altertDiv').innerHTML =
+     `<div class="progress">
+       <div class="cancelBar">
+       <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+       </div>
+       <div class="progressBar">
+           <div class="progressIcon">
+           <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+           </div>
+       </div>
+       <div class="progressExtra">
+       <div class="alert alert-warning" role="alert">
+          ${data.message}
+       </div>
+       </div>
+     </div>`;
+   }
+ }
+ // update
+
+ async draftStory(){
+   var alertCont = document.querySelector('.altertContainer');
+   alertCont.style.display = 'flex';
+   alertCont.id = 'errorConatiner';
+   document.querySelector('.altertDiv').innerHTML =
+   `<div class="progress">
+     <div class="cancelBar">
+     </div>
+     <div class="progressBar">
+         <div class="progressIcon">
+         <div class="spinner" style="width: 75px;height: 75px;border-width:8px;margin:0;">
+         </div>
+     </div>
+     <div class="progressWritten">Updating....</div>
+     <div class="progressExtra">
+
+     </div>
+   </div>`;
+    document.querySelector('.altertDiv').style.background = 'transparent';
+    var screenWidth = window.innerWidth;
+    if (screenWidth < 800) {
+      hideSection('rightSection');
+    }
+
+  let self = this;
+   const url = '/.ht/API/webstories.php';
+   var encyDat = {
+   'purpose' : 'draft',
+   'whois': `${self.whoIs}`,
+   'storyID': `${self.storyID}`,
+   'username': `${self.username}`,
+   'version': `${self.version}`
+   };
+   const response = await fetch(url, {
+       method: 'post',
+       headers: {
+       'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(encyDat)
+   });
+   var data = await response.json();
+   if (data) {
+       if (data.Result) {
+         setTimeout(function(){
+           var alertCont = document.querySelector('.altertContainer');
+           alertCont.id = 'errorConatiner';
+           document.querySelector('.altertDiv').innerHTML =
+           `<div class="progress">
+             <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+             </div>
+             <div class="progressBar">
+                 <div class="progressIcon">
+                 <i class="fas fa-check-circle" style="color: orange;"></i>
+                 </div>
+             </div>
+             <div class="progressExtra">
+             <div class="alert alert-success" role="alert">
+                Story Drafted
+             </div>
+             <div class="alert alert-warning" role="alert">
+                <strong>Note</strong>: Photos and videos uploaded to this story will be visible publically even after being drafted
+             </div>
+             </div>
+           </div>`;
+         }, 1000);
+
+       }else{
+         var alertCont = document.querySelector('.altertContainer');
+         alertCont.style.display = 'flex';
+         alertCont.id = 'errorConatiner';
+         document.querySelector('.altertDiv').innerHTML =
+         `<div class="progress">
+           <div class="cancelBar">
+          <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+           </div>
+           <div class="progressBar">
+               <div class="progressIcon">
+               <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+               </div>
+           </div>
+           <div class="progressExtra">
+           <div class="alert alert-warning" role="alert">
+              ${data.message}
+           </div>
+           </div>
+         </div>`;
+       }
+   }else{
+     var alertCont = document.querySelector('.altertContainer');
+     alertCont.style.display = 'flex';
+     alertCont.id = 'errorConatiner';
+     document.querySelector('.altertDiv').innerHTML =
+     `<div class="progress">
+       <div class="cancelBar">
+       <div class="closeButton" onclick="cancelError()"> <i class="fa-solid fa-x"></i> </div>
+       </div>
+       <div class="progressBar">
+           <div class="progressIcon">
+           <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+           </div>
+       </div>
+       <div class="progressExtra">
+       <div class="alert alert-warning" role="alert">
+          ${data.message}
+       </div>
+       </div>
+     </div>`;
+   }
+ }
   getWordCount(inputString) {
       // Use a regular expression to split the string into words
       const words = inputString.split(/\s+/);
@@ -1580,8 +1825,29 @@ class Editor{
      document.body.removeChild(input);
      alert('Link copied')
    }
-   viewStory(link){
+  viewStory(link){
       window.open(`/webstories/${link}`, '_blank');
-   }
+  }
+  capitalizeEveryWord(inputString) {
+      return inputString.replace(/\b\w/g, function (match) {
+          return match.toUpperCase();
+      });
+    }
+  capitalizeSentences(inputString) {
+        return inputString.replace(/\.(\s|$)|^.|\.\w/g, function (match) {
+            return match.toUpperCase();
+        });
+    }
+  capitalizeSentences(paragraph) {
+    let sentences = paragraph.split('. ');
+    for (let i = 0; i < sentences.length; i++) {
+      sentences[i] = sentences[i].charAt(0).toUpperCase() + sentences[i].slice(1);
+    }
+    return sentences.join('. ');
+  }
+  hasOnlySpaces(inputString) {
+    return /^\s*$/.test(inputString);
+  }
+
 }
 let editor = new Editor();
