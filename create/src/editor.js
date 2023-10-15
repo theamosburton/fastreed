@@ -97,7 +97,7 @@ class Editor{
                           <div class="title">
                             <div class="box">
                               <span class="date">${this.metaData.date}</span>
-                              <span class="titleText"  contenteditable="true" onkeyup="edits.editStoryTitle('')">Edit title for this webstory</span>
+                              <span class="titleText"  contenteditable="true" onkeypress="edits.editStoryTitle('')">Edit title for this webstory</span>
                               <div class="creditBox">
                                 <span class="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
                               </div>
