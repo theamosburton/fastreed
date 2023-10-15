@@ -177,12 +177,20 @@ class userEditor extends createContent{
             $firstEdit = $jsTimestamp;
             $tdate = date('Y-m-d');
             $status = '{"status": "drafted", "version": 100}';
+            $moniStatus = '{"status": "false", "version": 100}';
             $access = 'self';
             $storyData = '{}';
             $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
             $result = mysqli_query($this->DB_CONN, $sql);
             if ($result) {
-                header("Location:/create/?type=webstory&ID=".$storyID);
+              $sql3 = "INSERT INTO metaData (postID, title, description, keywords, url, moniStatus) VALUES ('$storyID','', '', '', '', '$moniStatus')";
+              $result3 = mysqli_query($this->DB_CONN, $sql3);
+              if ($result3) {
+                    header("Location:/create/?type=webstory&ID=".$storyID);
+              }else{
+                // echo $result3;
+                  header('Location:/account/');
+              }
             }else{
                 header('Location:/account/');
             }
@@ -290,12 +298,20 @@ class adminEditor extends createContent{
             $firstEdit = time();
             $tdate = date('Y-m-d');
             $status = '{"status": "drafted", "version": 100}';
+            $moniStatus = '{"status": "false", "version": 100}';
             $access = 'self';
             $storyData = '{}';
             $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
             $result = mysqli_query($this->DB_CONN, $sql);
             if ($result) {
-                header("Location: /create/?editor=Admin&type=webstory&username=" . $_GET['username'] . "&ID=" . $storyID);
+              $sql3 = "INSERT INTO metaData (postID, title, description, keywords, url, moniStatus) VALUES ('$storyID',' ', ' ', ' ', ' ', '$moniStatus')";
+              $result3 = mysqli_query($this->DB_CONN, $sql3);
+              if ($result3) {
+                    header("Location: /create/?editor=Admin&type=webstory&username=" . $_GET['username'] . "&ID=" . $storyID);
+              }else{
+                // echo $result3;
+                  header('Location:/account/');
+              }
             }else{
                 header('Location:/account/');
             }
