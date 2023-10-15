@@ -44,12 +44,11 @@ class createAuthorsSitemap{
            }
        }
        private function verifiedStories(){
-         $sql = "SELECT * FROM metaData WHERE moniStatus = '1'";
+         $sql = "SELECT * FROM metaData WHERE JSON_EXTRACT(moniStatus, '$.status') = 'true';
          $result = mysqli_query($this->DB, $sql);
          $usernames = [];
          if ($result) {
            $personIDs = mysqli_fetch_all($result);
-
          }
          return $personIDs;
       }
