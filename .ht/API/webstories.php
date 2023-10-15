@@ -232,7 +232,13 @@ class Webstories{
                     $sql = "DELETE FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
+                      $sql1 = "DELETE FROM metaData WHERE postID = '$storyID'";
+                      $result1 = mysqli_query($this->DB, $sql1);
+                      if ($result1) {
                         showMessage(true, 'Deleted');
+                      }else{
+                          showMessage(false, 'Can not Delete');
+                      }
                     }else{
                         showMessage(false, 'Can not Delete');
                     }
@@ -248,7 +254,13 @@ class Webstories{
                 $sql = "DELETE FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                 $result = mysqli_query($this->DB, $sql);
                 if ($result) {
+                  $sql1 = "DELETE FROM metaData WHERE postID = '$storyID'";
+                  $result1 = mysqli_query($this->DB, $sql1);
+                  if ($result1) {
                     showMessage(true, 'Deleted');
+                  }else{
+                      showMessage(false, 'Can not Delete');
+                  }
                 }else{
                     showMessage(false, 'Can not Delete');
                 }

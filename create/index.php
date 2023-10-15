@@ -289,7 +289,7 @@ class adminEditor extends createContent{
             $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
             $firstEdit = time();
             $tdate = date('Y-m-d');
-            $status = 'drafted ';
+            $status = '{"status": "drafted", "version": 100}';
             $access = 'self';
             $storyData = '{}';
             $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
