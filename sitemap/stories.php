@@ -2,7 +2,7 @@
 $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.ht/controller/VISIT.php";
-header('Content-type: application/xml');
+// header('Content-type: application/xml');
 
 new createAuthorsSitemap();
 
@@ -30,7 +30,8 @@ class createAuthorsSitemap{
          $this->userData = new getLoggedData();
          $this->uploadData = new getUploadData();
          $storiesList = $this->verifiedStories();
-         $this->createXML($storiesList);
+         var_dump($storiesList);
+         // $this->createXML($storiesList);
          $this->closeConnection();
          $this->userData->closeConnection();
          $this->uploadData->closeConnection();
@@ -68,6 +69,7 @@ class createAuthorsSitemap{
         $xml .= '</urlset>';
         echo $xml;
       }
+
       private function lastMod($id){
         $sql = "SELECT * FROM stories WHERE storyID = '$id'";
         $result = mysqli_query($this->DB, $sql);
