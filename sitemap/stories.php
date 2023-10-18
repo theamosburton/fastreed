@@ -2,7 +2,7 @@
 $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.ht/controller/VISIT.php";
-// header('Content-type: application/xml');
+header('Content-type: application/xml');
 
 new createAuthorsSitemap();
 
