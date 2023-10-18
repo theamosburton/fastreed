@@ -125,7 +125,7 @@ fetchStories();
 function populateStoryLoading() {
     var webstories = document.getElementById('webstories');
     webstories.innerHTML = `
-    <div class="webstory">
+    <div class="webstory loading">
          <div class="fading-div" >
          </div>
          <div class="options" style="border:0px" >
@@ -134,7 +134,7 @@ function populateStoryLoading() {
           </div>
      </div>
 
-     <div class="webstory">
+     <div class="webstory loading">
           <div class="fading-div" >
           </div>
           <div class="options" style="border:0px" >
@@ -143,7 +143,7 @@ function populateStoryLoading() {
            </div>
       </div>
 
-      <div class="webstory">
+      <div class="webstory loading">
            <div class="fading-div" >
            </div>
            <div class="options" style="border:0px" >
@@ -152,7 +152,7 @@ function populateStoryLoading() {
             </div>
        </div>
 
-       <div class="webstory">
+       <div class="webstory loading">
             <div class="fading-div" >
             </div>
             <div class="options" style="border:0px" >

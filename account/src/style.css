@@ -22,7 +22,9 @@
   /* background-size: 800px 104px; */
   /* height: 96px; */
   position: relative;
-  min-height: 320px;
+}
+.webstories .loading{
+  min-height: 300px;
 }
 
 
