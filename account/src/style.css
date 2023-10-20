@@ -17,9 +17,7 @@
   animation-name: placeHolderShimmer;
   -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-  background: transparent;
   background: linear-gradient(to left, #e7e7e7 8%, #d1d1d1 18%, #e7e7e7 33%);
-
   position: relative;
 }
 .webstories .loading{

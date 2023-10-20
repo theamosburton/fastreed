@@ -24,6 +24,10 @@ class Webstories{
             $this->generateUrl();
         }elseif ($data['purpose'] == 'fetchAll') {
              $this->fetchAll();
+        }elseif ($data['purpose'] == 'adminFetching') {
+             $this->adminFetching();
+        }elseif ($data['purpose'] == 'adminStoryAction') {
+             $this->adminStoryAction();
         }elseif (!isset($data['whois']) || empty($data['whois'])) {
             showMessage(false, 'Specify Who are you?');
         }elseif (!isset($data['storyID']) || empty($data['storyID'])) {
@@ -54,6 +58,91 @@ class Webstories{
         }
     }
 
+
+    private function adminStoryAction(){
+      if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!isset($data['action']) || empty($data['action'])) {
+          showMessage(false, 'No acion given');
+        }else{
+          $action = $data['action'];
+          $storyID = $data['storyID'];
+          if ($action == 'reject') {
+            $sql = "UPDATE metaData SET moniStatus = JSON_SET(moniStatus, '$.status', 'false') WHERE postID = '$storyID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+              showMessage(true, 'Story Rejected');
+            }else{
+              showMessage(false, 'Can not reject story');
+            }
+          }elseif ($action == 'accept') {
+            $sql = "UPDATE metaData SET moniStatus = JSON_SET(moniStatus, '$.status', 'true') WHERE postID = '$storyID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+              showMessage(true, 'Story Accepted');
+            }else{
+              showMessage(false, 'Can not accepted story');
+            }
+          }elseif ($action == 'delete') {
+            $sql = "DELETE FROM stories WHERE storyID = '$storyID'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+              $sql1 = "DELETE FROM metaData WHERE postID = '$storyID'";
+              $result1 = mysqli_query($this->DB, $sql1);
+              if ($result1) {
+                showMessage(true, 'Deleted');
+              }else{
+                  showMessage(false, 'Can not Delete');
+              }
+            }else{
+                showMessage(false, 'Can not Delete');
+            }
+          }
+        }
+      }else{
+        showMessage(false, 'Not an Admin');
+      }
+    }
+    private function adminFetching(){
+      if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
+        $sql = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+           $row = mysqli_fetch_all($result);
+           for ($i=0; $i <  mysqli_num_rows($result); $i++) {
+             $storyID = $row[$i][1];
+             $userID = $row[$i][0];
+             $row[$i][0] = $this->getUserName($userID);
+             $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
+             $result1 = mysqli_query($this->DB, $sql1);
+             if ($result1) {
+               $row1 = mysqli_fetch_assoc($result1);
+               $moniStatus = $row1['moniStatus'];
+               $url = $row1['url'];
+               $row[$i][10] = $moniStatus;
+               $row[$i][11] = $url;
+             }
+           }
+           $row = json_encode($row);
+           showMessage(true, "$row");
+        }else{
+          showMessage(false, 'Server Error');
+        }
+      }
+      else{
+        showMessage(false, 'Not an Admin');
+      }
+
+    }
+    private function getUserName($uid){
+      $sql = "SELECT username FROM account_details WHERE personID = '$uid'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $username = mysqli_fetch_assoc($result)['username'];
+      }
+
+      return $username;
+    }
     private function fetchAll(){
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'Admin') {
@@ -147,7 +236,6 @@ class Webstories{
           showMessage(false, 'Specify Who are you');
         }
     }
-
     private function fetchStory(){
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data['whois'] == 'Admin') {
@@ -300,7 +388,7 @@ class Webstories{
                             $decodeData['metaData'] = $metaData;
                             $version = $data['version'];
                             $storyStatus = ['status'=>'published', 'version'=>$version];
-                            $verifyStatus = ['status'=>'false', 'version'=>$version];
+                            $verifyStatus = ['status'=>'none', 'version'=>$version];
                             $storyStatus = json_encode($storyStatus);
                             $verifyStatus = json_encode($verifyStatus);
                             $storyData = json_encode($decodeData,true);
@@ -364,7 +452,7 @@ class Webstories{
                           $decodeData['metaData'] = $metaData;
                           $version = $data['version'];
                           $storyStatus = ['status'=>'published', 'version'=>$version];
-                          $verifyStatus = ['status'=>'false', 'version'=>$version];
+                          $verifyStatus = ['status'=>'none', 'version'=>$version];
                           $storyStatus = json_encode($storyStatus);
                           $verifyStatus = json_encode($verifyStatus);
                           $storyData = json_encode($decodeData,true);
@@ -417,7 +505,7 @@ class Webstories{
                     $storyID = $data['storyID'];
                     $version = $data['version'];
                     $storyStatus = ['status'=>'drafted', 'version'=>$version];
-                    $verifyStatus = ['status'=>'false', 'version'=>$version];
+                    $verifyStatus = ['status'=>'none', 'version'=>$version];
                     $storyStatus = json_encode($storyStatus);
                     $verifyStatus = json_encode($verifyStatus);
                     $sql = "UPDATE stories set storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
@@ -444,7 +532,7 @@ class Webstories{
                 $storyID = $data['storyID'];
                 $version = $data['version'];
                 $storyStatus = ['status'=>'drafted', 'version'=>$version];
-                $verifyStatus = ['status'=>'false', 'version'=>$version];
+                $verifyStatus = ['status'=>'none', 'version'=>$version];
                 $storyStatus = json_encode($storyStatus);
                 $verifyStatus = json_encode($verifyStatus);
                 $sql = "UPDATE stories set storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
@@ -495,7 +583,7 @@ class Webstories{
                           $decodeData['metaData'] = $metaData;
                           $version = $data['version'];
                           $storyStatus = ['status'=>'drafted', 'version'=>$version];
-                          $verifyStatus = ['status'=>'false', 'version'=>$version];
+                          $verifyStatus = ['status'=>'none', 'version'=>$version];
                           $storyStatus = json_encode($storyStatus);
                           $verifyStatus = json_encode($verifyStatus);
                           $storyData = json_encode($decodeData,true);
@@ -559,7 +647,7 @@ class Webstories{
                         $decodeData['metaData'] = $metaData;
                         $version = $data['version'];
                         $storyStatus = ['status'=>'drafted', 'version'=>$version];
-                        $verifyStatus = ['status'=>'false', 'version'=>$version];
+                        $verifyStatus = ['status'=>'none', 'version'=>$version];
                         $storyStatus = json_encode($storyStatus);
                         $verifyStatus = json_encode($verifyStatus);
                         $storyData = json_encode($decodeData,true);

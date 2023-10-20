@@ -1,3 +1,4 @@
+var visitedusername = '';
 function fetchStories(){
   populateStoryLoading();
   var currentURL = window.location.href;
@@ -6,7 +7,7 @@ function fetchStories(){
   var username = '';
 // Check if 'u' is in the URL and if there's a segment following it
 if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
-  username = urlSegments[indexOfU + 1];
+  visitedusername = urlSegments[indexOfU + 1];
   if (adminLogged) {
     var whoIs = 'Admin';
   }else if(userLogged){
@@ -23,7 +24,7 @@ if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
       var encyDat = {
       'purpose' : 'fetchAll',
       'whois': `${whoIs}`,
-      'username': `${username}`
+      'username': `${visitedusername}`
       };
       const response = await fetch(url, {
           method: 'post',
@@ -81,6 +82,11 @@ if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
                 var func = "";
                 var icon = '<i class="fa-solid fa-floppy-disk"></i>';
               }
+              if (visitedusername == '') {
+                var p = '';
+              }else if (visitedusername != '') {
+                var p = visitedusername;
+              }
               webstoryDiv.innerHTML += `
               <div class="webstory" id="webstory${i}">
                   <div class="background" style="background-image: url('${setUrl}');">
@@ -89,7 +95,7 @@ if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
 
                   </div>
                   <div class="options">
-                      <div class="edit" onclick="editStory('${webstories[i][1]}','')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
+                      <div class="edit" onclick="editStory('${webstories[i][1]}','${p}')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
                       <div class="view" onclick="${func}"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
                       <div class="delete" onclick="deleteStory('${webstories[i][1]}', ${i})"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
                       <div class="storyOptions">${icon}</div>
