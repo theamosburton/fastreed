@@ -30,6 +30,7 @@ class showIndex{
         $this->webTitle = $this->captureVisit->webTitle;
         $this->webDescription = $this->captureVisit->webDescription;;
         $this->webKeywords = $this->captureVisit->webKeywords;
+        $this->canonUrl = "https://www.fastreed.com";
 
 
 // *************/ Head Section /**************** //

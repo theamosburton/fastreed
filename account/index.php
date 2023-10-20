@@ -202,9 +202,11 @@ class loggedAdminVother extends showProfile{
         $this->const4Inherited();
         $ePID = $this->AUTH->encrypt($this->userData->getOtherData('username', $this->otherUsername)['dPID']);
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
-        $this->webDescription = "Add and Edit Your Profile Info";
-        $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername;
+        $this->webDescription = "Fastreed Account: Manage, edit and view profile";
+        $this->webKeywords = "Fastreed Account: Manage, edit and view profile";
         $this->pageCss = ['/account/src/style.css'];
+
 
         $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
         $this->extraScript = '
@@ -254,9 +256,10 @@ class loggedVself extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = "Add and Edit Your Profile Info";
-        $this->webDescription = "Add and Edit Your Profile Info";
-        $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->webTitle = "Fastreed Account: Manage, edit and view profile";
+        $this->webDescription = "Manage, edit and view your profile and request for creator access from here";
+        $this->webKeywords = "Manage, edit and view profile, fastreed account setting, updating account details, request for creater access";
+        $this->canonUrl = 'https://fastreed.com/account/';
         $this->pageCss = ['/account/src/style.css'];
 
         $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
@@ -314,8 +317,9 @@ class loggedVother extends showProfile{
    function __construct() {
         $this->const4Inherited();
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
-        $this->webDescription = "Add and Edit Your Profile Info";
-        $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername;
+        $this->webDescription = "Fastreed Account: View profile";
+        $this->webKeywords = "Fastreed Account: View profile";
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js', '/account/src/viewStories.js'];
 
@@ -361,8 +365,9 @@ class nonLoggedVother extends showProfile{
    function __construct() {
         $this->const4Inherited();
         $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'. Fastreed User';
-        $this->webDescription = "Add and Edit Your Profile Info";
-        $this->webKeywords = "Add and Edit Your Profile Info";
+        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername;
+        $this->webDescription = "Fastreed Account: View profile";
+        $this->webKeywords = "Fastreed Account: View profile";
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
 
