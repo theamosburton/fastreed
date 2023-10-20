@@ -50,7 +50,7 @@ function styleUpdate() {
     }else if(colorMode == 'light'){
         enableLightMode();
     }
-    $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green'); 
+    $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
     $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
 }
 
@@ -66,7 +66,7 @@ function toggleMode(){
         toggleMode.classList.add('fa-toggle-on');
         location.reload();
     } else {
-        // Enable light mode 
+        // Enable light mode
         toggleMode.classList.remove('fa-toggle-on');
         toggleMode.classList.add('fa-toggle-off');
         enableLightMode();
@@ -75,7 +75,7 @@ function toggleMode(){
 }
 
 function enableDarkMode() {
-    document.cookie = "colorMode=dark; max-age=31104000; path=/"; 
+    document.cookie = "colorMode=dark; max-age=31104000; path=/";
     $('body').css('background-color', 'rgb(32,33,35)');
     $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
     $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
@@ -84,12 +84,13 @@ function enableDarkMode() {
         'background-color': '#353740',
         'box-shadow': '0px 0px 40px 3px black'
     });
-   
+
     $('.notification').css('background-color', '#16161d');
     $('.profile-info').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-top .menus').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-info').css('color', 'aliceblue');
 
+    $('.fading-div').css('background', 'linear-gradient(to left, rgb(51 51 51) 8%, rgb(39 32 36) 18%, rgb(51,51,51) 33%)');
     $('.dropdowns .menu-head').css('background-color', '#16161d');
     $('.dropdowns .settings, #advOptions .menus').css('background-color', '#16161d');
     $('header').css('border-bottom', '1px solid rgb(218,218,218)');
@@ -99,9 +100,9 @@ function enableDarkMode() {
     $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
-    toggleMode.classList.add('fa-toggle-on'); 
+    toggleMode.classList.add('fa-toggle-on');
     $('#toggleMode').css('color','#8f8fed');
-      
+
 }
 
 
@@ -112,8 +113,8 @@ $('#noti-nav').mouseout(function(){
     document.querySelector('#notifications').classList.remove('sc-color');
 });
 
-  
-  
+
+
 
 function enableLightMode(){
     document.cookie = "colorMode=light; max-age=31104000; path=/";
@@ -128,6 +129,7 @@ function enableLightMode(){
     'background-color': 'rgb(255, 255, 255)',
     'box-shadow': '0px 0px 40px 7px grey'
     });
+    $('.fading-div').css('background', 'linear-gradient(to left, #e7e7e7 8%, #d1d1d1 18%, #e7e7e7 33%)');
     $('.notification').css('background-color', 'rgb(213,211,211)');
     $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-info').css('background-color', 'rgb(213, 211 ,211)');
@@ -144,7 +146,7 @@ function enableLightMode(){
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');
     $('#toggleMode').css('color','rgb(32,33,35)');
-   
+
 }
 
 
@@ -155,7 +157,7 @@ function disbaleScroll() {
     document.body.style.overflow = 'hidden';
     document.body.dataset.scrollY = scrollY;
   }
-  
+
   // Enable scrolling on the webpage
   function enableScroll() {
     // Get the previous Y scroll position
@@ -183,7 +185,7 @@ function removeOptions(){
         notification.style.display = 'none';
     }else if(accountsState.style.display == 'block'){
         accountsState.style.display = 'none';
-        mSpinner.style.display = 'none';  
+        mSpinner.style.display = 'none';
         accountIcon.style.display = "block";
     }else if(advOptions.style.display == 'block'){
         advOptions.style.display = 'none';
@@ -198,7 +200,7 @@ function toggleSetting(){
         overlay.style.display = 'block';
     }else{
         settingState.style.display = 'none';
-        
+
     }
  }
 
@@ -226,13 +228,13 @@ function toggleAdmin() {
     if(advOptions.style.display == 'none'){
         advOptions.style.display = 'block';
         overlay.style.display = 'block';
-        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green'); 
+        $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
     }else{
         advOptions.style.display = 'none';
     }
 }
 
-    
+
 
 function toggleProfile() {
     if(accountsState.style.display == 'none'){
@@ -241,5 +243,5 @@ function toggleProfile() {
     }else{
         accountsState.style.display = 'none';
     }
-    
+
 }

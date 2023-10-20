@@ -50,7 +50,7 @@ class getLoggedData{
         $PID = $_SESSION['LOGGED_USER'];
         $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
         $result = mysqli_query($this->DB, $sql);
-        if ($result) {
+        if ($result && mysqli_num_rows($result)) {
             if (isset($_COOKIE['UID'])) {
                 $ePID = $_COOKIE['UID'];
             }elseif (isset($_COOKIE['AID'])) {
@@ -60,19 +60,32 @@ class getLoggedData{
             }
             $this->PID = $ePID;
             $this->userLogged = true;
-            $isPresent = mysqli_num_rows($result);
-            if ($isPresent) {
-                $row = mysqli_fetch_assoc($result);
-                if (isset($this->getAccess()['userType'])) {
-                    $userType = $this->getAccess()['userType'];
-                    if ($userType == 'Admin') {
-                        $this->adminLogged = true;
-                    }
-                }
+            $row = mysqli_fetch_assoc($result);
+            $userType = $this->getAccess()['userType'];
+            if ($userType == 'Admin') {
+                $this->adminLogged = true;
             }
+
         }
      }
 
+     public function whoAmI(){
+       $return = 'Anonymous';
+       if (isset($_SESSION['LOGGED_USER'])) {
+         $PID = $_SESSION['LOGGED_USER'];
+         $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
+         $result = mysqli_query($this->DB, $sql);
+         if ($result && mysqli_num_rows($result)) {
+           $userType = $this->getAccess()['userType'];
+           if ($userType == 'Admin') {
+               $return = 'Admin';
+           }else{
+              $return = 'User';
+           }
+         }
+       }
+       return $return;
+     }
      public function getSelfDetails(){
         $return = array();
         if (isset($_SESSION['LOGGED_USER'])) {
@@ -146,20 +159,22 @@ class getLoggedData{
      // This will work if user is super user or admin
      public function getAccess(){
         $data = array();
-        $PID = $_SESSION['LOGGED_USER'];
-        $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-            $isPresent = mysqli_num_rows($result);
-            if ($isPresent) {
-                $row = mysqli_fetch_assoc($result);
-                $userType = $row['accType'];
-                $canGiveAccess = $row['canGiveAccess'];
-                $canEditOthers = $row['canEditUser'];
-                $canCreateUsers = $row['canCreateUsers'];
-                $canDeleteUsers = $row['canDeleteUsers'];
-                $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers, "canGiveAccess" => $canGiveAccess);
-            }
+        if (isset($_SESSION['LOGGED_USER'])) {
+          $PID = $_SESSION['LOGGED_USER'];
+          $sql = "SELECT * FROM account_access WHERE personID = '$PID'";
+          $result = mysqli_query($this->DB, $sql);
+          if ($result) {
+              $isPresent = mysqli_num_rows($result);
+              if ($isPresent) {
+                  $row = mysqli_fetch_assoc($result);
+                  $userType = $row['accType'];
+                  $canGiveAccess = $row['canGiveAccess'];
+                  $canEditOthers = $row['canEditUser'];
+                  $canCreateUsers = $row['canCreateUsers'];
+                  $canDeleteUsers = $row['canDeleteUsers'];
+                  $data = array("userType"=>$userType, "canEditUsers"=>$canEditOthers, "canCreateUsers"=>$canCreateUsers,"canDeleteUser" => $canDeleteUsers, "canGiveAccess" => $canGiveAccess);
+              }
+          }
         }
        return $data;
      }

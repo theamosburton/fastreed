@@ -4,7 +4,7 @@
         <!-- Profile on left side -->
         <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12 guttersInside leftSide">
             <div class="card h-100">
-                <div class="card-body">
+                <div class="card-body leftSideProfile" >
                     <div class="account-settings">
                         <div class="user-profile">
                             <div class="user-avatar">
@@ -33,13 +33,14 @@
                     <?php
                         if($this->userData->userLogged && $this->userData->adminLogged){
                             echo <<<HTML
-                            <a id="storyReviewMenu" class="menus" onclick="stylePage.updateMenus('storyReview')" href="#storyReview">Review</a>
+                            <a id="adminPanelMenu" class="menus" onclick="stylePage.updateMenus('adminPanel')" href="#adminPanel">Admin Panel</a>
                             HTML;
                         }
                     ?>
                     <a id="mediaMenu" class="menus" onclick="stylePage.updateMenus('media')" href="#media"> Media Library</a>
                     <!-- <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a> -->
                     <a id="accountMenu" class="menus" onclick="stylePage.updateMenus('account')" href="#account">Account Setting</a>
+
 
                 </div>
                 <!-- Menus section -->
@@ -54,10 +55,12 @@
                 <?php
                   if ($this->userData->userLogged && $this->userData->adminLogged) {
                     echo <<<HTML
-                    <div id="storyReviewDiv" class="storyReviewDiv contentView" style="display:none">
-                  HTML;
+                    <div id="adminPanelDiv" class="adminPanelDiv contentView" style="display:none">
+                      <div id="" class="adminPanelDivInside">
+                    HTML;
                     include 'webstoryReview.html';
                     echo <<<HTML
+                      </div>
                     </div>
                   HTML;
                   }
@@ -65,7 +68,6 @@
                 <!-- Media Library Section -->
                 <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
                     <?php
-
                         include 'media-library.html';
                     ?>
                 </div>

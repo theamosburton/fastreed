@@ -16,15 +16,33 @@
   -webkit-animation-name: placeHolderShimmer;
   animation-name: placeHolderShimmer;
   -webkit-animation-timing-function: linear;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: linear;
   background: #F6F6F6;
-  background: linear-gradient(to left, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background: linear-gradient(to left, #e7e7e7 8%, #d1d1d1 18%, #e7e7e7 33%);
   /* background-size: 800px 104px; */
   /* height: 96px; */
   position: relative;
 }
 .webstories .loading{
   min-height: 340px;
+}
+
+.adminPanelDivInside .title{
+  padding:5px 10px 15px 5px;
+  font-size: 20px;
+}
+.adminPanelDivInside .title select{
+  padding: 2px 10px 2px 0px;
+  border: 0;
+  border-bottom: 3px solid;
+  outline: 0;
+  background: transparent;
+  color: grey;
+}
+.adminPanelDivInside .title select option:checked + select, {
+  border: none;
+  outline: 0;
+  background: yellow;
 }
 .storyBox{
   display: flex;
@@ -54,6 +72,24 @@
   border-radius: 5px;
 }
 .storyBox .visibleArea .imageDiv img{
+}
+.storyBox .visibleArea .imageDiv .storyStatus{
+  position: absolute;
+  left:0;
+  top: 0;
+  background: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 20px;
+  margin-top: -5px;
+  margin-left: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+}
+.storyBox .visibleArea .imageDiv .storyStatus i{
+  color: black;
 }
 .storyBox .visibleArea .otherInfoDiv{
   height: fill-available;
@@ -1048,6 +1084,12 @@ margin-top: 10px;
 .webstoriesDiv .webstories .webstory .options div:hover{
    color:#28a745;
    cursor: pointer;
+}
+.guttersInside{
+    background-color: transparent!important;
+}
+.leftSideProfile .account-settings, .leftSideProfile .account-settings .user-profile{
+  background-color: transparent!important;
 }
 @media (max-width: 990px) {
     .leftSide{

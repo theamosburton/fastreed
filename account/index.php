@@ -74,8 +74,17 @@ class showProfile {
 
         $this->userData = new getLoggedData();
         $this->uploadData = new getUploadData();
-        $this->adminLogged = $this->userData->adminLogged;
-        $this->userLogged = $this->userData->userLogged;
+        $this->whoAmI = $this->userData->whoAmI();
+        if ($this->whoAmI == 'Admin') {
+          $this->adminLogged = true;
+          $this->userLogged = true;
+        }elseif ($this->whoAmI == 'User') {
+          $this->adminLogged = false;
+          $this->userLogged = true;
+        }else{
+          $this->adminLogged = false;
+          $this->userLogged = false;
+        }
         $this->getStoriesData = new getStoriesData();
     }
     protected function addHead(){
@@ -208,7 +217,7 @@ class loggedAdminVother extends showProfile{
         $this->pageCss = ['/account/src/style.css'];
 
 
-        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
+        $this->pageJs = ['/account/src/review.js', '/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
         $this->extraScript = '
         <script>
             // other
@@ -262,7 +271,7 @@ class loggedVself extends showProfile{
         $this->canonUrl = 'https://fastreed.com/account/';
         $this->pageCss = ['/account/src/style.css'];
 
-        $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
+        $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
 
         $this->extraScript =
         '<script>
