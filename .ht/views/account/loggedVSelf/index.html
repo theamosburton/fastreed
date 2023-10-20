@@ -50,19 +50,18 @@
                         include 'dashboard.html';
                     ?>
                 </div>
-                <!-- Dashboard Section -->
+                <!-- Story Review Section -->
                 <?php
-                    if($this->userData->userLogged && $this->userData->adminLogged){
-                      echo <<<HTML
-                      <div id="storyReviewDiv" class="storyReviewDiv contentView" style="display:none">
-                        <?php
-                              include 'dashboard.html';
-                          ?>    
-                      </div>
-                      HTML;
-                      include 'webstoryReview.html';
-                    }
-                ?>
+                  if ($this->userData->userLogged && $this->userData->adminLogged) {
+                    echo <<<HTML
+                    <div id="storyReviewDiv" class="storyReviewDiv contentView" style="display:none">
+                  HTML;
+                    include 'webstoryReview.html';
+                    echo <<<HTML
+                    </div>
+                  HTML;
+                  }
+                  ?>
                 <!-- Media Library Section -->
                 <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
                     <?php
