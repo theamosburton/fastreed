@@ -34,15 +34,16 @@
   max-width: 550px;
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
+
 }
 .storyBox .visibleArea{
   display: flex;
   flex-direction: row;
+
   /* max-height: 100px; */
 }
 .storyBox .visibleArea{
   display: flex;
-  justify-content: center;
 }
 .storyBox .visibleArea .imageDiv{
   width: 100px;
@@ -62,6 +63,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+    overflow: scroll;
 }
 .storyBox .visibleArea .otherInfoDiv .title, .storyBox .visibleArea .otherInfoDiv .about{
   width: 100%;
@@ -74,6 +76,7 @@
   overflow: hidden;
   font-weight: bold;
   margin-left: 10px;
+  overflow: auto;
 }
 .storyBox .visibleArea .otherInfoDiv .title span{
   display: inline;
@@ -95,6 +98,9 @@
   margin-left: 10px;
   border-radius: 5px;
   height: auto;
+}
+.storyBox .visibleArea .otherInfoDiv .about .buttons i{
+  margin-left: 10px;
 }
 .storyBox .visibleArea .otherInfoDiv .about .buttons:hover{
   cursor: pointer;
