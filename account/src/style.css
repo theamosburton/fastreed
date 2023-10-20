@@ -91,18 +91,18 @@
   height: 35%;
 }
 .storyBox .visibleArea .otherInfoDiv .about .buttons{
-  padding: 0px 15px;
+  /* padding: 0px 15px; */
   border: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   height: auto;
+  height: 30px;
+  width: 30px;
 }
-.storyBox .visibleArea .otherInfoDiv .about .buttons i{
-  margin-left: 10px;
-}
+
 .storyBox .visibleArea .otherInfoDiv .about .buttons:hover{
   cursor: pointer;
 }
