@@ -60,11 +60,9 @@
 .storyBox .visibleArea .otherInfoDiv{
   height: fill-available;
   padding-left: 7px;
-  padding-bottom: 5px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 }
 .storyBox .visibleArea .otherInfoDiv .title, .storyBox .visibleArea .otherInfoDiv .about{
   width: 100%;
@@ -77,7 +75,6 @@
   overflow: hidden;
   font-weight: bold;
   margin-left: 10px;
-  overflow: auto;
 }
 .storyBox .visibleArea .otherInfoDiv .title span{
   display: inline;
