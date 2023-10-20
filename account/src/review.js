@@ -11,7 +11,8 @@ function storyAction(x, y){
 }
 
 function fetchStoriesReview(){
-populateStoryLoadingAdmin();
+  populateStoryLoadingAdmin();
+  
 }
 
 fetchStoriesReview();
