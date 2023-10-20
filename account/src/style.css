@@ -26,8 +26,79 @@
 .webstories .loading{
   min-height: 340px;
 }
+.storyBox{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 550px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+.storyBox .visibleArea{
+  display: flex;
+  flex-direction: row;
+  /* max-height: 100px; */
+}
+.storyBox .visibleArea{
+  display: flex;
+  justify-content: center;
+}
+.storyBox .visibleArea .imageDiv{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.storyBox .visibleArea .imageDiv img{
+}
+.storyBox .visibleArea .otherInfoDiv{
+  height: fill-available;
+  padding-left: 7px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.storyBox .visibleArea .otherInfoDiv .title, .storyBox .visibleArea .otherInfoDiv .about{
+  width: 100%;
+  height: 65%;
+}
+.storyBox .visibleArea .otherInfoDiv .title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show before ellipsis */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.storyBox .visibleArea .otherInfoDiv .title span{
+  display: inline;
+  white-space: normal;
+  font-size: 20px;
+}
 
-
+.storyBox .visibleArea .otherInfoDiv .about{
+  display: flex;
+  flex-direction: row;
+  height: 35%;
+}
+.storyBox .visibleArea .otherInfoDiv .about .buttons{
+  padding: 0px 15px;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  border-radius: 5px;
+  height: auto;
+}
+.storyBox .visibleArea .otherInfoDiv .about .buttons:hover{
+  cursor: pointer;
+}
 @keyframes placeHolderShimmer {
   0% {
     background-position: -200px 0;

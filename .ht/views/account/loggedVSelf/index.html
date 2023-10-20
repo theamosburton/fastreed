@@ -30,6 +30,13 @@
                 <!-- Menus section -->
                 <div class="userContentMenus scrollbar-style">
                     <a id="dashboardMenu" class="menus" onclick="stylePage.updateMenus('')" href="#">Dashboard</a>
+                    <?php
+                        if($this->userData->userLogged && $this->userData->adminLogged){
+                            echo <<<HTML
+                            <a id="storyReviewMenu" class="menus" onclick="stylePage.updateMenus('storyReview')" href="#storyReview">Review</a>
+                            HTML;
+                        }
+                    ?>
                     <a id="mediaMenu" class="menus" onclick="stylePage.updateMenus('media')" href="#media"> Media Library</a>
                     <!-- <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a> -->
                     <a id="accountMenu" class="menus" onclick="stylePage.updateMenus('account')" href="#account">Account Setting</a>
@@ -44,7 +51,18 @@
                     ?>
                 </div>
                 <!-- Dashboard Section -->
-
+                <?php
+                    if($this->userData->userLogged && $this->userData->adminLogged){
+                      echo <<<HTML
+                      <div id="storyReviewDiv" class="storyReviewDiv contentView" style="display:none">
+                        <?php
+                              include 'dashboard.html';
+                          ?>    
+                      </div>
+                      HTML;
+                      include 'webstoryReview.html';
+                    }
+                ?>
                 <!-- Media Library Section -->
                 <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
                     <?php
