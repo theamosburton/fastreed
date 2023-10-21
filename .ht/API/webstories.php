@@ -703,13 +703,23 @@ class Webstories{
       $storyID =  $data['storyID'];
       $url =  $data['url'];
 
-      if (empty($url) && !empty($title)) {
-          $title = strtolower($title);
-          $url = str_replace(' ', '-', $title);
-      }else{
-          $url = strtolower($url);
-          $url = str_replace(' ', '-', $url);
-      }
+      $title = preg_replace('/[^a-zA-Z\s]/', '', $title);
+
+      // Replace multiple spaces with a single space
+      $title = preg_replace('/\s+/', ' ', $title);
+
+      // Replace spaces with hyphens
+      $title = str_replace(' ', '-', $title);
+
+      // Convert to lowercase
+      $title = strtolower($title);
+
+      // Remove duplicate hyphens
+      $title = preg_replace('/-+/', '-', $title);
+
+      // Trim hyphens from the beginning and end
+      $url = trim($title, '-');
+
       $baseURL = $url;
       $suffix = 'fastreed';
       if($this->checkUrl($url, $storyID)) {
