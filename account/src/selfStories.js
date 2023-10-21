@@ -69,14 +69,14 @@ if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
                 var setUrl = webstoryData.layers.L0.media.url;
               }
               if (verifyStatus != null && verifyStatus.status == 'true') {
-                var URL = webstoryData.metaData.url;
-                URL = '/webstories/'.URL;
-                var func = `viewStory('${URL}')`;
+                var storyURL = webstoryData.metaData.url;
+                storyURL = '/webstories/'+storyURL;
+                var func = `viewStory('${storyURL}')`;
                 var icon = '<i class="fa-solid fa-earth-asia" style="color:#13c013;"></i>';
               }else if(storyStatus.status == 'published'){
-                  var URL = webstoryData.metaData.url;
-                  URL = '/webstories/'.URL;
-                  var func = `viewStory('${URL}')`;
+                  var storyURL = webstoryData.metaData.url;
+                  storyURL = '/webstories/'+storyURL;
+                  var func = `viewStory('${storyURL}')`;
                   var icon = '<i class="fa-solid fa-earth-asia" style="color:darkorange;"></i>';
               }else{
                 var func = "";
