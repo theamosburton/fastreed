@@ -85,6 +85,8 @@ class getLoggedData{
              }else{
                 $return = 'User';
              }
+           }else{
+              $return = 'User';
            }
          }
        }
