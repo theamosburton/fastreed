@@ -63,11 +63,6 @@ class createUsersSitemap{
       private function createXML($list){
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-
-        // Create the root element
-        // $urlset = $xml->createElement('urlset');
-        // $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-        // $xml->appendChild($urlset);
         for ($i=0; $i < count($list); $i++) {
            $url = DOMAIN.'/u/'.$list[$i]['username'];
            $xml .= '<url>';
