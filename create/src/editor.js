@@ -153,7 +153,7 @@ class Editor{
         publish.innerHTML = 'Draft';
         save.innerHTML = 'Update';
         publish.setAttribute('onclick', 'editor.draftStory()');
-        save.setAttribute('onclick', 'editor.publishStory()');
+        save.setAttribute('onclick', 'editor.updateStory()');
       }
       // console.log(jsObject);
       var browserData = window.localStorage.getItem(`${editor.storyID}`);
