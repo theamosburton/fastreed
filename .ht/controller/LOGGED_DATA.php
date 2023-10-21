@@ -65,7 +65,6 @@ class getLoggedData{
             if ($userType == 'Admin') {
                 $this->adminLogged = true;
             }
-
         }
      }
 

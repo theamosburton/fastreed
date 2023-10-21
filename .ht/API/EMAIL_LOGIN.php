@@ -118,26 +118,32 @@ class eSignUpLogin{
         $sql2 = "INSERT INTO settings (personID , canViewContent, canViewMail, canViewAge, canViewUploads, canCreate) VALUES ('$userID','everyone', 'self', 'followers', 'self', 'NOR')";
         $result2 = mysqli_query($this->DB, $sql2);
         if ($result2) {
-          $this->loginAccount($userID);
-          $ePID = $this->AUTH->encrypt($userID);
-          $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
-          $_SESSION['email'];
-          $_SESSION['password'];
-          $_SESSION['name'];
-          if (isset($_SESSION['email'])) {
-              unset($_SESSION['email']);
-          }
-          if (isset($_SESSION['password'])) {
-              unset($_SESSION['password']);
-          }
-          if (isset($_SESSION['name'])) {
-              unset($_SESSION['name']);
-          }
-          if (isset($_SESSION['otp'])) {
-              unset($_SESSION['otp']);
-          }
-          if (isset($_SESSION['otpTime'])) {
-              unset($_SESSION['otpTime']);
+          $sql3 = "INSERT INTO account_access (personID , accType, canGiveAccess, canEditUser, canDeleteUsers, canCreateUsers) VALUES ('$userID','User', '0', '0', '0', '0')";
+          $result3 = mysqli_query($this->DB, $sql3);
+          if ($result3) {
+            $this->loginAccount($userID);
+            $ePID = $this->AUTH->encrypt($userID);
+            $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
+            $_SESSION['email'];
+            $_SESSION['password'];
+            $_SESSION['name'];
+            if (isset($_SESSION['email'])) {
+                unset($_SESSION['email']);
+            }
+            if (isset($_SESSION['password'])) {
+                unset($_SESSION['password']);
+            }
+            if (isset($_SESSION['name'])) {
+                unset($_SESSION['name']);
+            }
+            if (isset($_SESSION['otp'])) {
+                unset($_SESSION['otp']);
+            }
+            if (isset($_SESSION['otpTime'])) {
+                unset($_SESSION['otpTime']);
+            }
+          }else {
+            showMessage(false, "Can't provide access");
           }
         }else {
           showMessage(false, "Can't create settings");
