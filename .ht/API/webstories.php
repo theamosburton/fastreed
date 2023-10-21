@@ -408,7 +408,7 @@ class Webstories{
                                 $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , `storyStatus` = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
                                 $result3 = mysqli_query($this->DB, $sql3);
                                 if ($result2 && $result3) {
-                                    showMessage(true, 'Updated 2');
+                                    showMessage(true, "$url");
                                 }else{
                                     showMessage(false, 'Can not Update');
                                 }
@@ -462,7 +462,7 @@ class Webstories{
                               $sql1 = "UPDATE metaData set `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
                               $result1 = mysqli_query($this->DB, $sql1);
                               if ($result && $result1) {
-                                  showMessage(true, 'Updated 1');
+                                  showMessage(true,  "$url");
                               }else{
                                   showMessage(false, 'Can not Update 1');
                               }
