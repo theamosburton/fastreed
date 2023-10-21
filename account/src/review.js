@@ -43,10 +43,10 @@ function fetchStoriesReview(sev){
             showStories(rejected, what);
           }
         }else{
-          console.log(data.message);
+          alert(data.message);
         }
       }else{
-          console.log('Problem 2');
+          alert('Problem 2');
       }
   }
   fetchWebstoryData();
