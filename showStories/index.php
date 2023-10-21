@@ -42,6 +42,7 @@ class storyPreview{
            $keywords = $data['keywords'];
            $unixLastGMT = $this->istToGMT($data['lastEdit']);
            $unixFirstGMT = $this->istToGMT($data['firstEdit']);
+           $noIndex = $data['noIndex'];
 
            // $unixLastGMT = $data['lastEdit'];
            // $unixFirstGMT = $data['firstEdit'];
@@ -73,6 +74,9 @@ class storyPreview{
              $description = $row['description'];
              $url = $row['url'];
              $keywords = $row['keywords'];
+             $moniStat = $row['moniStatus'];
+             $moniStat = json_decode($moniStat);
+             $moniStat = $moniStat->status;
              $row = mysqli_fetch_assoc($result);
              $sql1 = "SELECT * FROM stories WHERE storyID = '$postID'";
              $result1 = mysqli_query($this->DB, $sql1);
@@ -83,6 +87,11 @@ class storyPreview{
                   $webstoryData['description'] = $description;
                   $webstoryData['url'] = $url;
                   $webstoryData['keywords'] = $keywords;
+                  if ($moniStat == "false" || $moniStat == "none") {
+                    $webstoryData['noIndex'] = '<meta name="robots" content="noindex">';
+                  }else{
+                    $webstoryData['noIndex'] = '';
+                  }
                   $return = $webstoryData;
                }
              }
