@@ -24,7 +24,6 @@ function fetchStoriesReview(sev){
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-          console.log(parsedJSON);
           for (var i = 0; i < parsedJSON.length; i++) {
             var status = JSON.parse(parsedJSON[i][10]);
 

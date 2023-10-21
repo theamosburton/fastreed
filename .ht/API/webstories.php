@@ -405,7 +405,7 @@ class Webstories{
                             }else{
                                 $sql2 = "INSERT INTO metaData(`postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
                                 $result2 = mysqli_query($this->DB, $sql2);
-                                $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , `storyStatus` = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                                $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
                                 $result3 = mysqli_query($this->DB, $sql3);
                                 if ($result2 && $result3) {
                                     showMessage(true, "$url");
