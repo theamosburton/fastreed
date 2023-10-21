@@ -76,11 +76,13 @@ class authorReqRes{
             $updatedValue = $data['value'];
             $eid = $data['personID'];
             $dID = $this->AUTH->decrypt($eid);
-            $sql = "UPDATE settings SET canCreate = '$updatedValue' WHERE personID = '$dID'";
+            $rejectionReason = $data['rejectionReason'];
+            if (empty($reason)) {
+              $reason = 'Not Given';
+            }
+            $sql = "UPDATE settings SET canCreate = '$updatedValue', rejectionReason = '$rejectionReason' WHERE personID = '$dID'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
-
-
                 // notify user
                 $name = $this->userData->getOtherData('personID', $dID)['name'];
                 if ($updatedValue == 'ACC') {

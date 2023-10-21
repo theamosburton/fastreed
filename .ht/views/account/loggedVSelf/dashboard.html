@@ -5,20 +5,31 @@ if($canCreate == 'NOR'){
     echo <<<HTML
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
-        <div class="ml-3 col-12 d-inline">
-          <div class="infor"> To contribute content to Fastreed, please click the designated submit button. Our administrators will assess and determine whether to approve or decline your submission </div>
+        <div class=" col-12 d-inline">
+          <div class="alert alert-info" style="max-width:600px" role="alert">
+          To contribute content to Fastreed, please click the designated submit button. Our administrators will assess and determine whether to approve or decline your submission.
+          <hr>
+          Please upload an ID document with your name, photo, and country clearly visible. You can combine to make a pdf(if required) and upload. Maximum file size is <strong>5 MB.</strong>
+          </div>
+          <div class="alert alert-danger"  id="errorDoc" role="alert" style="display:none;max-width:600px">
+          </div>
         </div>
-        <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Submit</span>
+        <div class="requestButtons">
+          <label class="reqCreationButton" id="verificationDocumentLabel" for="verificationDocument">Upload</label>
+          <input  id="verificationDocument" onchange="handleFileSelect(this)" type="file" style="display:none;">
+          <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Submit</span>
+        </div>
     </div>
     HTML;
 }elseif($canCreate == 'REQ'){
     echo <<<HTML
-    <div class="contentTopics resCreation row">
+    <div class="contentTopics resCreation row" style="max-width: 600px;">
         <div class="title col-12 mb-3">Creator Request</div>
-          <div class="ml-3 col-12 d-inline">
-            <div class="infor">A request been made for contribution to Fastreed. Kindly anticipate a 24-48 hour waiting period for our final result</div>
+          <div class="col-12 d-inline" >
+            <div class="alert alert-info" role="alert" >
+              A request been made for contribution to Fastreed. We usually process your request within <strong>24-48 hours.</strong> But sometimes it may take upto 7 days. Kindly anticipate this waiting period for our final result.
+            </div>
           </div>
-        <span id="requestedUser" class="ml-3" >Submitted</span>
     </div>
     HTML;
 }elseif($canCreate == 'REJ'){
@@ -26,9 +37,21 @@ if($canCreate == 'NOR'){
     <div class="contentTopics resCreation row">
         <div class="title col-12 mb-3">Creator Request</div>
         <div class="ml-3 col-12 d-inline">
-            <div class="infor"> Your Request has been <strong> rejected</strong> by our administrators. You still have a chance, if you want to try again. Our administrators will again assess and determine whether to approve or decline your submission </div>
+            <div class="alert alert-info" role="alert">
+              Your Request has been <strong> rejected</strong> by our administrators. You still have a chance, if you want to try again. Our administrators will again assess and determine whether to approve or decline your submission.
+              <hr>
+              Please upload an ID document with your name, photo, and country clearly visible. You can combine to make a pdf(if required) and upload. Maximum file size is <strong>5 MB.</strong>
+              <hr>
+              Rejection reason : <strong>{$rejectionReason}</strong>
+            </div>
+            <div class="alert alert-danger"  id="errorDoc" role="alert" style="display:none;max-width:600px">
+            </div>
         </div>
-          <span id="reqCreation" class="reqCreationButton ml-3" onclick="requestCreation()">Submit Again</span>
+        <div class="requestButtons">
+          <label class="reqCreationButton" id="verificationDocumentLabel" for="verificationDocument">Upload</label>
+          <input  id="verificationDocument" onchange="handleFileSelect(this)" type="file" style="display:none;">
+          <span id="reqCreation" class="reqCreationButton" onclick="requestCreation()">Submit Again</span>
+        </div>
     </div>
     HTML;
 }elseif($canCreate == 'ACC'){
@@ -42,19 +65,13 @@ if($canCreate == 'NOR'){
         if($showCreation){
             echo <<<HTML
             <div>
-                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory('')">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                <span id="reqCreation" onclick="InitializeWebstory('')">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
                 </span>
             </div>
-            HTML;
-        }else{
-            echo <<<HTML
-            <div>
-                <span>Web Stories</span>
+            <div class="webstories" id="webstories">
             </div>
             HTML;
         }
         ?>
     </div>
-  <div class="webstories" id="webstories">
-  </div>
 </div>

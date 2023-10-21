@@ -54,6 +54,13 @@ class getFastreedContent {
                     $contentType = 'image/'.$EXT;
                 }elseif ($type == 'videos') {
                     $contentType = 'video/'.$EXT;
+                }else{
+                  if ($EXT == 'pdf') {
+                    $contentType = 'application/pdf';
+                  }else{
+                    $contentType = 'file';
+                  }
+
                 }
                 // echo $filepath;
                 header('Cache-Control: max-age=2592000'); // Cache for 1 hour

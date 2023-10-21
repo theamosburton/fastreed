@@ -121,7 +121,6 @@ class showMenus{
         imagePreview.appendChild(imgElement);
         binaryImage = e.target.result;
         var blobImage = self.dataURItoBlob(binaryImage)
-        console.log(blobImage);
         self.uploadImageToServer(blobImage, 'image', tempBox);
       };
       reader.readAsDataURL(fileInput.files[0]);
@@ -603,46 +602,166 @@ function deleteImage(imgID, ext, what, ID){
 }
 
 
+
 function requestCreation(){
   var field =  document.getElementById('reqCreation');
-  const requestCreate = async () =>{
-    const url = '/.ht/API/reqCreation.php';
-    var encyDat = {
-      'purpose' : 'request',
-      'personID' : `${ePID}`,
-    };
-    const response = await fetch(url, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(encyDat)
-      });
-    var data = await response.json();
-    if (data) {
-      if (data.Result) {
-        field.innerHTML = 'Requested';
-        location.reload();
-      }else{
-        field.innerHTML = `${data.message}`;
-      }
-    }else{
-      field.innerHTML = 'Something went wrong';
-    }
-  }
+  field.innerHTML = 'Submitting... <div class="spinner" style="margin-left: 10px; margin-right:0px; border: 4px solid white;border-left: 4px solid black;"></div>';
+  field.style.padding = '8px 10px 8px 20px';
+  field.removeAttribute('onclick');
 
-  requestCreate();
+  const input = document.getElementById('verificationDocument');
+  const errorDoc = document.getElementById('errorDoc');
+  const selectedFile = input.files[0]; // Get the selected file.
+  if (selectedFile) {
+     const fileSizeInMB = selectedFile.size / (1024 * 1024);
+     if (fileSizeInMB > 5) {
+       errorDoc.style.display = 'block';
+       errorDoc.innerHTML = 'File Size Excceded';
+       field.innerHTML = 'Submit';
+       field.style.padding = '6px 20px';
+       field.setAttribute('onclick', 'requestCreation()');
+     }else{
+       const fileType = selectedFile.type;
+       console.log(selectedFile);
+      if (fileType.startsWith('image/') || fileType === 'application/pdf') {
+        var filename = selectedFile.name;
+        var extension = filename.split('.').pop();
+        uploadFileToServer(extension, selectedFile, fileType)
+      }else{
+        errorDoc.style.display = 'block';
+        errorDoc.innerHTML = 'File should be image or pdf only';
+        field.innerHTML = 'Submit';
+        field.style.padding = '6px 20px';
+        field.setAttribute('onclick', 'requestCreation()');
+      }
+     }
+  }else{
+      errorDoc.style.display = 'block';
+      errorDoc.innerHTML = 'Click on upload to select file';
+      field.innerHTML = 'Submit';
+      field.style.padding = '6px 20px';
+      field.setAttribute('onclick', 'requestCreation()');
+  }
 }
 
 
+function uploadFileToServer(extension, file, type) {
+  var formData = new FormData();
+  formData.append('mime', type);
+  formData.append('type', 'file');
+  formData.append('ePID', ePID);
+  formData.append('ext', extension);
+  formData.append('editor', showMenu.whoIs);
+  formData.append('media', file);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '../.ht/API/upload.php', true);
+
+  xhr.addEventListener('load', () => {
+    const errorDoc = document.getElementById('errorDoc');
+    const field =  document.getElementById('reqCreation');
+    if (xhr.status === 200) {
+      // Upload successful, handle the response
+      var response = JSON.parse(xhr.responseText);
+      if (response.Result) {
+        const requestCreate = async () =>{
+          const url = '/.ht/API/reqCreation.php';
+          var encyDat = {
+            'purpose' : 'request',
+            'personID' : `${ePID}`,
+          };
+          const response = await fetch(url, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(encyDat)
+            });
+          var data = await response.json();
+          if (data) {
+            if (data.Result) {
+              errorDoc.style.display = 'none';
+              errorDoc.innerHTML = "";
+              document.getElementById('verificationDocumentLabel').style.display = 'none';
+              document.getElementById('reqCreation').innerHTML = 'Submitted';
+            }else{
+              errorDoc.style.display = 'block';
+              errorDoc.innerHTML = `${response.message}`;
+              field.innerHTML = 'Submit';
+              field.style.padding = '6px 20px';
+              field.setAttribute('onclick', 'requestCreation()');
+            }
+          }else{
+            errorDoc.style.display = 'block';
+            errorDoc.innerHTML = "Can't upload file";
+            field.innerHTML = 'Submit';
+            field.style.padding = '6px 20px';
+            field.setAttribute('onclick', 'requestCreation()');
+          }
+        }
+
+        requestCreate();
+      }else{
+        errorDoc.style.display = 'block';
+        errorDoc.innerHTML = `${response.message}`;
+        field.innerHTML = 'Submit';
+        field.style.padding = '6px 20px';
+        field.setAttribute('onclick', 'requestCreation()');
+      }
+    } else {
+      errorDoc.style.display = 'block';
+      errorDoc.innerHTML = "Can't upload file";
+      field.innerHTML = 'Submit';
+      field.style.padding = '6px 20px';
+      field.setAttribute('onclick', 'requestCreation()');
+    }
+  });
+  xhr.send(formData);
+}
+
+
+
+function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mimeString });
+}
+
+function handleFileSelect(input) {
+  // This function is called when the user selects a file.
+  const selectedFile = input.files[0]; // Get the selected file.
+
+  if (selectedFile) {
+    var field =  document.getElementById('verificationDocumentLabel');
+    field.innerHTML = selectedFile.name;
+    field.style.padding = '6px 10px';
+    console.log("Selected file:", selectedFile.name);
+  }
+}
 function responseCreation(val){
+  const errorDoc = document.getElementById('errorDoc');
   var button = document.querySelector(`.resCreation .${val}button`);
+  var reasonInput = document.getElementById('rejectionReason');
+  var rejected = document.getElementById('rejected');
+  var accepted = document.getElementById('requested');
+  if (val == 'REJ') {
+    rejected.innerHTML = '<div class="spinner" style="margin:0;"></div>';
+    accepted.removeAttribute('onclick');
+  }else if (val == 'ACC') {
+    accepted.innerHTML = '<div class="spinner" style="margin:0;"></div>';
+    rejected.removeAttribute('onclick');
+  }
   const responseCreate = async () =>{
     const url = '/.ht/API/reqCreation.php';
     var encyDat = {
       'purpose' : 'response',
       'personID' : `${ePID}`,
-      'value' : `${val}`
+      'value' : `${val}`,
+      'rejectionReason' : `${reasonInput.value}`
     };
     const response = await fetch(url, {
         method: 'post',
@@ -655,16 +774,30 @@ function responseCreation(val){
     if (data) {
       if (data.Result) {
         if (val == 'ACC') {
-          button.innerHTML = 'Accepted';
+          accepted.innerHTML = 'Accepted';
         }else{
-          button.innerHTML = 'Rejected';
+          rejected.innerHTML = 'Rejected';
         }
         location.reload();
       }else{
-        button.innerHTML = `${data.message}`;
+        errorDoc.style.display = 'block';
+        errorDoc.innerHTML =  `${data.message}`;
+        field.innerHTML = 'Submit';
+        if (val == 'ACC') {
+          accepted.innerHTML = 'Accept';
+        }else{
+          rejected.innerHTML = 'Reject';
+        }
       }
     }else{
-      button.innerHTML = 'Something went wrong';
+      errorDoc.style.display = 'block';
+      errorDoc.innerHTML =  'Something went wrong';
+      field.innerHTML = 'Submit';
+      if (val == 'ACC') {
+        accepted.innerHTML = 'Accept';
+      }else{
+        rejected.innerHTML = 'Reject';
+      }
     }
   }
 

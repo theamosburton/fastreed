@@ -1,18 +1,9 @@
-function storyAction(x, y){
-  let rejectButton =document.getElementById(`rejectStory${y}`);
-  let acceptButton =document.getElementById(`acceptStory${y}`);
-  if (x == 'accept') {
-    acceptButton.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
-    rejectButton.removeAttribute('onclick');
-  }else if (x == 'reject'){
-    rejectButton.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
-    acceptButton.removeAttribute('onclick');
-  }
-}
-let nonVerified = [];
-let verified = [];
-let rejected = [];
+
+
 function fetchStoriesReview(sev){
+  let nonVerified = [];
+  let verified = [];
+  let rejected = [];
   populateStoryLoadingAdmin();
   const fetchWebstoryData = async () =>{
     let what = sev;
@@ -33,18 +24,17 @@ function fetchStoriesReview(sev){
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-
           for (var i = 0; i < parsedJSON.length; i++) {
             var status = JSON.parse(parsedJSON[i][10]);
+
             if (status.status == 'none') {
-              nonVerified[i] = parsedJSON[i];
-            }else if (status.status == 'true') {
-              verified[i] = parsedJSON[i];
-            }else if (status.status == 'false') {
-              rejected[i] = parsedJSON[i];
+              nonVerified.push(parsedJSON[i]);
+            } else if (status.status == 'true') {
+              verified.push(parsedJSON[i]);
+            } else if (status.status == 'false') {
+              rejected.push(parsedJSON[i]);
             }
           }
-          console.log(nonVerified);
           if (what == 'none') {
             showStories(nonVerified, what);
           }else if (what == 'true') {
@@ -52,7 +42,6 @@ function fetchStoriesReview(sev){
           }else if (what == 'false') {
             showStories(rejected, what);
           }
-          console.log(what);
         }else{
           console.log(data.message);
         }
@@ -64,11 +53,6 @@ function fetchStoriesReview(sev){
 }
 
 function showStories(x, what){
-  // var x = [];
-  // for (let i = 0; i < originalArray.length; i++) {
-  //   x[i] = originalArray[i];
-  // }
-  console.log(x);
   document.getElementById('reviewStoriesDiv').innerHTML = '';
   if (x.length) {
     for (var i = 0; i < x.length; i++) {
@@ -78,6 +62,25 @@ function showStories(x, what){
     var url = layers.metaData.url;
     var storyID = x[i][1];
     var username = x[i][0];
+    var color;
+    var actions;
+    if (what == 'none') {
+      color = 'orange';
+      actions = `
+      <div class="buttons" id="rejectStoryN${i}" onclick="storyAction('reject', 'rejectStoryN${i}', '${i}', '${storyID}')"> <i class="fa-solid fa-xmark"></i></div>
+      <div class="buttons" id="acceptStoryN${i}" onclick="storyAction('accept', 'acceptStoryN${i}','${i}', '${storyID}')"> <i class="fa-solid fa-check"></i></div>
+      `;
+    }else if (what == 'true') {
+      color = 'limegreen';
+      actions = `
+      <div class="buttons" id="rejectStoryT${i}" onclick="storyAction('reject', 'rejectStoryT${i}','${i}', '${storyID}')"> <i class="fa-solid fa-xmark"></i></div>
+      `;
+    }else if (what == 'false') {
+      actions = `
+      <div class="buttons" id="acceptStoryF${i}" onclick="storyAction('accept', 'acceptStoryF${i}','${i}', '${storyID}')"> <i class="fa-solid fa-check"></i></div>
+      `;
+      color = 'red';
+    }
     document.getElementById('reviewStoriesDiv').innerHTML += `
       <div class="contentTopics">
         <div class="storyBox" id="storybox${i}">
@@ -85,7 +88,7 @@ function showStories(x, what){
             <div class="imageDiv">
               <img src="${image}" alt="">
               <div class="storyStatus" id="storyStatus${i}">
-                <i class="fa-solid fa-earth" style="color:orange;"></i>
+                <i class="fa-solid fa-earth" style="color:${color};"></i>
               </div>
 
             </div>
@@ -96,8 +99,7 @@ function showStories(x, what){
               <div class="about">
                 <div class="buttons" onclick="viewStoryAdmin('${url}')"> <i class="fa fa-eye"></i></div>
                 <div class="buttons" onclick="editStoryRe('${storyID}','${username}')"><i class="fa fa-pen-to-square"></i></div>
-                <div class="buttons" id="rejectStory${i}" onclick="storyAction('reject', '${i}', '${storyID}')"> <i class="fa-solid fa-xmark"></i></div>
-                <div class="buttons" id="acceptStory${i}" onclick="storyAction('accept', '${i}', '${storyID}')"> <i class="fa-solid fa-check"></i></div>
+                ${actions}
             </div>
             </div>
           </div>
@@ -138,7 +140,9 @@ function viewStoryAdmin(link){
     window.open(`/webstories/${link}`, '_blank');
 }
 
-function storyAction(action, id, storyID){
+function storyAction(action, elementID, id, storyID){
+  var element = document.getElementById(`${elementID}`);
+  element.innerHTML = '<div class="spinner" style="margin-right:0px"></div>';
   const storyActionInside = async () =>{
       const url = '/.ht/API/webstories.php';
       var encyDat = {
@@ -158,19 +162,16 @@ function storyAction(action, id, storyID){
       if (data) {
         if (data.Result) {
           if (action == 'reject') {
-            document.getElementById(`rejectStory${id}`).innerHTML = '<i class="fa-solid fa-xmark"></i>';
-            rejected.unshift(nonVerified[id]);
-            nonVerified.splice(id, 1);
+            element.innerHTML = '<i class="fa-solid fa-xmark"></i>';
           }else if (action == 'accept') {
-            document.getElementById(`acceptStory${id}`).innerHTML = '<i class="fa-solid fa-check"></i>';
-            accepted.unshift(nonVerified[id]);
-            nonVerified.splice(id, 1);
+            element.innerHTML.innerHTML = '<i class="fa-solid fa-check"></i>';
           }
+          location.reload();
         }else{
-          console.log(data);
+          alert(data.message);
         }
       }else{
-
+        alert('Server Problem');
       }
     }
     storyActionInside();

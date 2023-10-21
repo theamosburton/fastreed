@@ -37,6 +37,8 @@ class uploadMedia{
                 $this->uploadAudio($dPID);
             }elseif ($_POST['type'] == 'dpUpload') {
                 $this->uploadDP($dPID);
+            }elseif ($_POST['type'] == 'file') {
+                $this->uploadVD($dPID);
             }else {
                 showMessage(false, 'Sepcify what to upload 2');
             }
@@ -50,6 +52,8 @@ class uploadMedia{
                 $this->uploadAudio($dPID);
             }elseif ($_POST['type'] == 'dpUpload') {
                 $this->uploadDP($dPID);
+            }elseif ($_POST['type'] == 'file') {
+                $this->uploadVD($dPID);
             }else {
                 showMessage(false, 'Can not upload');
             }
@@ -130,6 +134,10 @@ class uploadMedia{
             }
         }
     }
+
+
+
+
 
     private function uploadDP($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
@@ -215,6 +223,54 @@ class uploadMedia{
         }
     }
 
+
+
+
+    private function uploadVD($id){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
+        if(isset($_FILES['media'])){
+            $file = $_FILES['media'];
+            $file_tmp = $file['tmp_name'];
+            $file_error = $file['error'];
+            $file_ext = $_POST['ext'];
+            if ($file_error === UPLOAD_ERR_OK) {
+                $sizeB = $file['size'];
+                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+                $sizeKB = round($sizeB / 1024, 2);
+                $sizeMB = round($sizeKB / 1024, 2);
+                $this->deleteOldDV($id);
+                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "DV");
+                if ($sizeKB <= 5120) {
+                  if($this->makeFileEntry($fileName, $username, $id, 'DV', 'files', $file_ext, $sizeKB, 'self')['Result']){
+                      $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/files/'.$username.'/';
+                      $add = '/.ht/fastreedusercontent/files/'.$username.'/';
+                      // Create the directory if it doesn't exist
+                      if (!is_dir($directory)) {
+                          mkdir($directory, 0777, true);
+                      }
+                      $fileAddress = $directory.$fileName.'.'.$file_ext;
+                      $address = $add.$fileName.'.'.$file_ext;
+                      if (move_uploaded_file($file_tmp, $fileAddress)) {
+                          // File moved successfully
+                          showMessage(true, 'File Uploaded');
+                      } else {
+                          // Failed to move the file
+                          showMessage(false, 'Error moving the file');
+                      }
+                  }else {
+                      showMessage(false, 'File cannot entered in DB');
+                  }
+                }else{
+                    showMessage(false, 'File Size Exceeded');
+                }
+              }else {
+                showMessage(false, 'Problem with file');
+              }
+        }else {
+            showMessage(false, 'No file Found');
+        }
+    }
+
     private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext, $sizeKB, $access){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
@@ -241,6 +297,31 @@ class uploadMedia{
             if (file_exists($path)) {
                 if (unlink($path)) {
                     $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";
+                    $result = mysqli_query($this->DB, $sql);
+                    if ($result) {
+                      $return = true;
+                    }
+                }
+            }
+        }else{
+          $return = true;
+        }
+        return $return;
+    }
+
+    private function deleteOldDV($id){
+        $username = $this->userData->getOtherData('personID', $id)['username'];
+        $return = false;
+        $getDPSQL = "SELECT * FROM uploads WHERE personID = '$id' and purpose = 'DV'";
+        $resultGet = mysqli_query($this->DB, $getDPSQL);
+        if (mysqli_num_rows($resultGet)) {
+            $row = mysqli_fetch_assoc($resultGet);
+            $uploadID = $row['uploadID'];
+            $extension = $row['extension'];
+            $path = $this->_DOCROOT.'/.ht/fastreedusercontent/files/'.$username.'/'.$uploadID.$extension;
+            if (file_exists($path)) {
+                if (unlink($path)) {
+                    $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DV'";
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
                       $return = true;

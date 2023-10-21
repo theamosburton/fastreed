@@ -17,10 +17,26 @@ class getUploadData{
                 $return = $row;
             }
         }
-        
+
         return $return;
         $this->closeConnection();
-        
+
+    }
+    public function documentVerificationFile($id){
+        $return = array();
+        $sql = "SELECT * FROM uploads WHERE personID = '$id' and purpose ='DV'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            $rowCount = mysqli_num_rows($result);
+            if ($rowCount) {
+                $row = mysqli_fetch_assoc($result);
+                $return = $row;
+            }
+        }
+
+        return $return;
+        $this->closeConnection();
+
     }
     public function closeConnection(){
         if ($this->DB) {

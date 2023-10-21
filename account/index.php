@@ -288,6 +288,10 @@ class loggedVself extends showProfile{
          $canViewContent = $userSettings['canViewContent'];
          $canViewUploads = $userSettings['canViewUploads'];
          $canCreate = $userSettings['canCreate'];
+         $rejectionReason = $userSettings['rejectionReason'];
+         if ($rejectionReason == NULL) {
+           $rejectionReason = 'Not Given';
+         }
         $this->addHead();
         $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
     //***************/ Main Container Starts /**********//

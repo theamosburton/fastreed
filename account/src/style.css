@@ -909,32 +909,48 @@ margin-top: 10px;
 
 
 /* Dashboard */
-#reqCreation{
-    padding: 8px 20px 10px 20px!important;
-    border: none!important;
-    display: flex;
-    align-items: center;
+.resCreation{
+  padding: 20px 10px!important;
 }
 .infor{
   margin: 10px 0px 15px 0px;
 }
 .reqCreation span, .resCreation span{
-    padding: 8px 20px!important;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 5px;
+    padding: 6px 25px!important;
 }
 .reqCreation .reqCreationButton, .resCreation .reqCreationButton{
     background-color: gainsboro;
-    padding: 8px 20px!important;
-    border-radius: 20px;
+    padding: 6px 25px;
     color: #18191c;
     font-weight: bold;
-    margin-right: 20px;
-    margin-top: 5px;
+    margin:0;
+    margin-left: 30px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#verificationDocumentLabel{
+  max-width: 200px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#reqCreation{
+    display: flex;
+    align-items: center;
+    padding: 6px 20px!important;
+    border: 1px solid grey;
 }
 
-
-
+.requestButtons{
+  display: flex;
+  align-items: center;
+  width: auto;
+  flex-wrap: wrap;
+}
 
 
 
@@ -946,11 +962,13 @@ margin-top: 10px;
 }
 
 .responseButton{
+    padding: 8px 20px!important;
   font-weight: bold;
   border: 1px solid #c9bfbf;
   margin-left: 10px;
   background: #f0ecec;
   border-radius: 5px !important;
+  color: black;
 }
 .responseButton:hover{
   cursor: pointer;
@@ -961,7 +979,12 @@ margin-top: 10px;
 }
 #requestedUser{
   background: #c9c9c9;
-  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  padding: 8px 20px!important;
+  border: 1px solid grey;
+  font-weight: bold;
+  margin-left: 20px;
 }
 
 .webstoriesDiv{
