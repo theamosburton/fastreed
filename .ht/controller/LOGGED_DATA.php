@@ -78,11 +78,13 @@ class getLoggedData{
          $sql = "SELECT * FROM account_details WHERE personID = '$PID'";
          $result = mysqli_query($this->DB, $sql);
          if ($result && mysqli_num_rows($result)) {
-           $userType = $this->getAccess()['userType'];
-           if ($userType == 'Admin') {
-               $return = 'Admin';
-           }else{
-              $return = 'User';
+           if(count($this->getAccess())){
+             $userType = $this->getAccess()['userType'];
+             if ($userType == 'Admin') {
+                 $return = 'Admin';
+             }else{
+                $return = 'User';
+             }
            }
          }
        }
