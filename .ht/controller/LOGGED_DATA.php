@@ -61,10 +61,13 @@ class getLoggedData{
             $this->PID = $ePID;
             $this->userLogged = true;
             $row = mysqli_fetch_assoc($result);
-            $userType = $this->getAccess()['userType'];
-            if ($userType == 'Admin') {
-                $this->adminLogged = true;
+            if(count($this->getAccess())){
+              $userType = $this->getAccess()['userType'];
+              if ($userType == 'Admin') {
+                  $this->adminLogged = true;
+              }
             }
+
         }
      }
 

@@ -155,15 +155,9 @@ class gSignUpLogin{
         $sql2 = "INSERT INTO settings (personID , canViewContent, canViewMail, canViewAge, canViewUploads, canCreate) VALUES ('$userID','everyone', 'self', 'followers', 'self', 'NOR')";
         $result2 = mysqli_query($this->DB, $sql2);
         if ($result2) {
-          $sql3 = "INSERT INTO account_access (personID , accType, canGiveAccess, canEditUser, canDeleteUsers, canCreateUsers) VALUES ('$userID','User', '0', '0', '0', '0')";
-          $result3 = mysqli_query($this->DB, $sql3);
-          if ($result3) {
-            $this->loginAccount($userID);
-            $ePID = $this->AUTH->encrypt($userID);
-            $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
-          }else {
-            showMessage(false, "Can't provide access");
-          }
+          $this->loginAccount($userID);
+          $ePID = $this->AUTH->encrypt($userID);
+          $this->notifyAdmin($name, $profilePicLink, $userSince, $username);
         }else {
           showMessage(false, "Can't create settings");
         }
