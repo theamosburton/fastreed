@@ -98,5 +98,5 @@
 
     </div>
   </body>
-  <script src="//assets/js/policy.js" charset="utf-8"></script>
+  <script src="/assets/js/policy.js" charset="utf-8"></script>
 </html>

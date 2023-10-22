@@ -82,9 +82,12 @@ body{
   height: 100vh;
   overflow: scroll;
   border-right: 1px solid grey;
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 .sideBar .links{
   padding: 20px;
+  margin-bottom: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
