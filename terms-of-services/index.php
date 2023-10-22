@@ -23,6 +23,9 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
+    <script type="text/javascript">
+      var menu = 'termsService';
+    </script>
   </head>
   <body>
     <div class="selfContainer">
@@ -92,13 +95,5 @@
 
     </div>
   </body>
-  <script type="text/javascript">
-  const container = document.querySelector('.headMenus');
-  const content = document.getElementById('termsService');
-  const containerWidth = container.clientWidth;
-  const contentWidth = content.scrollWidth;
-  const scrollLeftValue = (containerWidth - contentWidth) / 2;
-  container.scrollLeft = -scrollLeftValue;
-  </script>
   <script src="/assets/js/policy.js" charset="utf-8"></script>
 </html>

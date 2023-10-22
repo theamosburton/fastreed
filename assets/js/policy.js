@@ -33,6 +33,9 @@ if (currentURL.split('#')) {
   });
 }
 
+var activeMenu = document.getElementById(`${menu}`);
+activeMenu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
 function navigateTo(what, id) {
     window.location.hash = id;
     var targetElement = document.getElementById(`p${id}`);
