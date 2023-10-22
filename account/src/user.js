@@ -808,7 +808,7 @@ function responseCreation(val){
 function InitializeWebstory(x){
   var reqCreation = document.querySelector('#reqCreation');
   reqCreation.querySelector('i').style.display = 'none';
-  reqCreation.innerHTML = 'Initializing...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
+  reqCreation.innerHTML = '<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0;"></div>';
 
   // Checking if he can create stories or not
   const canCreateStories = async() => {
@@ -827,11 +827,11 @@ function InitializeWebstory(x){
     var data = await response.json();
     if (data) {
       if (data.Result) {
-        reqCreation.innerHTML='Creating...<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0; margin-left: 15px; "></div>';
+        reqCreation.innerHTML='<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0;"></div>';
         if (x == 'admin') {
-          window.location.href = `/create/?type=webstory&editor=Admin&username=${currentUsername}`;
+          // window.location.href = `/create/?type=webstory&editor=Admin&username=${currentUsername}`;
         }else{
-          window.location.href = "/create/?type=webstory";
+          // window.location.href = "/create/?type=webstory";
         }
       }else{
         reqCreation.innerHTML= `${data.message}`;

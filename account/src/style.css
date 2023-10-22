@@ -941,8 +941,12 @@ margin-top: 10px;
 #reqCreation{
     display: flex;
     align-items: center;
-    padding: 6px 20px!important;
+    justify-content: center;
+    margin-left: 5px;
+    padding: 6px 9px!important;
     border: 1px solid grey;
+    text-align: center;
+    cursor: pointer;
 }
 
 .requestButtons{
