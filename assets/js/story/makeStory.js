@@ -111,6 +111,44 @@ var frontPage = `<amp-story-page class="NWSStory-scene" data-layout="2" data-typ
 
 var storyOuter = `<amp-story class="NWSStory" publisher="Indiatimes" standalone="" title="" poster-portrait-src=""></amp-story>`;
 
+var promotedPage = `
+     <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+				<amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+					<div class="NWSStory-layers NWSStory-layers--fixed"></div>
+					<div class="NWSStory-layers NWSStory-layers--unfixed">
+						<div class="NWSStory-layers-group NWSStory-layers-group--media">
+							<div class="NWSStory-layer NWSStory-layer--img">
+								<div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
+									<div class="NWSStory-layer NWSStory-layer--img">
+										<div class="NWSStory-layer-content">
+											<amp-img src="https://im.indiatimes.in/content/2023/May/Tu-Jhoothi-Main-Makkar-Netflix-Streaming-Soon-1_64524047017c2.jpg" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+						<div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+							<div style="width:100%;margin:0 auto 3.125rem auto">
+								<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+									<div style="background:linear-gradient(to right, #97c445, #319b3f);;width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+									<h1 class="ipl-story-sub-headline m-b-15" style="font-size:1.4rem">Here's A List Of Movies And Web Series Coming Out On OTT In May 2023</h1>
+								</div>
+								<div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+									<div style="color:#fff;font-weight:400" class="ipl-story-desc m-b-10">The month of May 2023 has started, and this month films and web series like Tu Jhoothi Main Makkar to Saas-Bahu and Flamingo will be released on OTT. So let's take a look at Ott Movies And Web Series coming out in May.</div>
+								</div>
+								<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+									<p class="ipl-story-credit"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</amp-story-grid-layer>
+				<amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+					<a href="may-2023-ott-release-movies-and-web-series-601477.html" class="cls_shop_buy_button_8"><span>Read Full Story</span></a>
+				</amp-story-page-outlink>
+			</amp-story-page>`;
+
 var bookend = `<amp-story-bookend layout="nodisplay">
   <script type="application/json">
     {
@@ -128,6 +166,8 @@ var bookend = `<amp-story-bookend layout="nodisplay">
     }
   </script>
 </amp-story-bookend>`;
+
+
 var story = document.getElementById('app');
 var ampStory = document.createElement('amp-story');
 ampStory.setAttribute("class", "NWSStory");
@@ -272,3 +312,4 @@ for (let  i= 0; i < totalLayers; i++) {
 			</amp-story-page>`;
   }
 }
+ampStory.innerHTML += promotedPage;

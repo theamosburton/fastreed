@@ -82,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div id="selectedObject" class="selectedObject" >
                     <div class="objectHead" id="objectHead">
                         <span class="active" id="layerNumber" onclick="openOptions('layers')" >Layer 1</span>
@@ -91,6 +90,22 @@
 
                     <div class="objectOptions" id="metaData" style="display: none;">
                         <div class="objectOptionsbody">
+                          <div class="optionsDIv" id="">
+                              <div class="options">
+                                  <div>
+                                      <span>Related Story </span>
+                                      <br>
+                                      <input onkeyup="edits.updateMetaData('')" class="value inputText text" type="text" id="relatedStoryLink" placeholder="type-your-webstory-link" value="">
+                                      <div class="storiesSectionError" id="storiesSectionError" style="display:none;">
+                                        No Related Story Found!
+                                      </div>
+                                      <div id="relatedStoriesSelection" style="display:none;">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+
                             <div class="optionsDIv" id="">
                                 <div class="options">
                                     <div>
@@ -145,16 +160,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="height:100px;padding:10px;">
+                            </div>
                         </div>
                     </div>
 
                     <div class="objectOptions" id="objectOptions">
                     </div>
-
+                </div>
             </div>
-
-
+          <!-- Right Section -->
         </div>
-        <!-- Right Section -->
-    </div>
 </body>

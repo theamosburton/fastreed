@@ -50,14 +50,18 @@ class Editor{
                     this.metaData.keywords = "";
                     this.metaData.url = "";
                     this.metaData.category = "";
+                    this.metaData.relatedStory = "";
                     // JavaScript
                     editor.metaData.timeStamp = Date.now();
                     this.metaData.date = `${fDate}`;
                     this.metaData.storyVisibility = 'Public';
                     this.webstoryData = data.message;
                     var jObject = JSON.parse(this.webstoryData);
+                    var otherStories = JSON.parse(jObject.otherStories);
+                    this.otherStories = otherStories;
                     // checking if story is empty or not
                     if (!jObject.version) {
+                      this.updateOtherStories();
                       if (window.localStorage.getItem(`${editor.storyID}`)) {
                         this.continueWith('browser');
                       }else{
@@ -146,6 +150,7 @@ class Editor{
       var jsonString = this.webstoryData;
       var jsObject = JSON.parse(jsonString);
       var storyStatus = JSON.parse(jsObject.storyStatus);
+      var otherStories = JSON.parse(jsObject.otherStories);
       if (storyStatus.status == 'drafted') {
         document.getElementById('publishStory').innerHTML = 'Publish';
       }else if (storyStatus.status == 'published'){
@@ -165,6 +170,7 @@ class Editor{
           this.layers = jsObject.layers;
           this.version = jsObject.version;
           this.storyStatus = storyStatus.status;
+          this.otherStories = otherStories;
           this.createExistedStory();
         }else{
           var alertCont = document.querySelector('.altertContainer');
@@ -188,9 +194,10 @@ class Editor{
         this.layers = jsObject.layers;
         this.version = jsObject.version;
         this.storyStatus = storyStatus.status;
+        this.otherStories = otherStories;
         this.createExistedStory();
       }
-
+      this.updateOtherStories();
   }
     continueWith(x){
       var jsonString = this.webstoryData;
@@ -1096,6 +1103,30 @@ class Editor{
         }
     }
 
+    updateOtherStories(){
+      var otherStories = this.otherStories;
+      if (otherStories.length < 0) {
+        document.getElementById('storiesSectionError').style.display = 'block';
+      }else{
+        var storiesSection = document.getElementById('relatedStoriesSelection');
+        storiesSection.style.display = 'flex';
+        for (var i = 0; i < otherStories.length; i++) {
+          var storyData = JSON.parse(otherStories[i][7]);
+          var url = storyData.metaData.url;
+          var title = storyData.metaData.title;
+          var image = storyData.layers.L0.media.url;
+          storiesSection.innerHTML += `
+          <div class="relatedStories"  style="background-image:url('${image}')">
+            <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
+              <div class="storyTitle">
+                  <span>${title}</span>
+              </div>
+            </div>
+          </div>
+          `;
+        }
+      }
+    }
 
     numberToVersion(number) {
       if (typeof number !== 'number' || isNaN(number) || number < 0) {
@@ -1108,7 +1139,21 @@ class Editor{
 
       return `${major}.${minor}.${patch}`;
     }
+    selectRelatedStory(url, id){
+      var allStories = document.querySelectorAll('.relatedStoryTitle');
+      allStories.forEach((element) => {
+        if (element.querySelector('.storyOverlay')) {
+          element.querySelector('.storyOverlay').remove();
+        }
+      });
 
+      var selectedStory = document.getElementById(`${id}`);
+      selectedStory.innerHTML +=  `<div class="storyOverlay">
+        <i class="fa-solid fa-check fa-4x"></i>
+      </div>`;
+      this.metaData.relatedStory = url;
+
+    }
 
     // Publishing
   async publishStory(){

@@ -829,9 +829,9 @@ function InitializeWebstory(x){
       if (data.Result) {
         reqCreation.innerHTML='<div  class="spinner" style="border: 4px solid white; border-left: 4px solid rgb(32,33,35); display:inline-block; margin:0;"></div>';
         if (x == 'admin') {
-          // window.location.href = `/create/?type=webstory&editor=Admin&username=${currentUsername}`;
+          window.location.href = `/create/?type=webstory&editor=Admin&username=${currentUsername}`;
         }else{
-          // window.location.href = "/create/?type=webstory";
+          window.location.href = "/create/?type=webstory";
         }
       }else{
         reqCreation.innerHTML= `${data.message}`;

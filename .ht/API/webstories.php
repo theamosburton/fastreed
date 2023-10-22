@@ -244,6 +244,8 @@ class Webstories{
                     showMessage(false, 'Username needed');
                 }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
                   $storyID = $data['storyID'];
+                  $otherStories = $this->getStoriesByID($storyID);
+                  $otherStories = json_encode($otherStories);
                   $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                   $result = mysqli_query($this->DB, $sql);
                   if ($result) {
@@ -258,6 +260,7 @@ class Webstories{
                           $data = json_decode($storyData, true);
                           $data['storyStatus'] = "$storyStatus";
                           $data['isVerified'] = "$isVerified";
+                          $data['otherStories'] = "$otherStories";
                           $newJsonString = json_encode($data);
 
                           showMessage(true, $newJsonString);
@@ -277,6 +280,8 @@ class Webstories{
             if ($UID = $this->userData->getSelfDetails()['UID']) {
                 if (!isset($data['data']) || empty($data['data'])) {
                     $storyID = $data['storyID'];
+                    $otherStories = $this->getStoriesByID($storyID);
+                    $otherStories = json_encode($otherStories);
                     $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
@@ -291,6 +296,7 @@ class Webstories{
                           $data = json_decode($storyData, true);
                           $data['storyStatus'] = "$storyStatus";
                           $data['isVerified'] = "$isVerified";
+                          $data['otherStories'] = "$otherStories";
                           $newJsonString = json_encode($data);
                             showMessage(true, $newJsonString);
                         }else{
@@ -955,6 +961,31 @@ class Webstories{
       $result1 = mysqli_query($this->DB, $sql1);
       if ($result1) {
           $return = true;
+      }
+      return $return;
+    }
+    private function getStoriesByID($storyID){
+      $return = array();
+      $sql = "SELECT personID FROM stories WHERE storyID = '$storyID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $personID = $row['personID'];
+          $sql1 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND personID = '$personID' AND storyID != '$storyID'";
+          $result1 = mysqli_query($this->DB, $sql1);
+          if ($result1) {
+            if (mysqli_num_rows($result1)) {
+              $return = mysqli_fetch_all($result1);
+            }else{
+              $sql2 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND storyID != '$storyID'";
+              $result2 = mysqli_query($this->DB, $sql2);
+              if ($result1) {
+                if (mysqli_num_rows($result1)) {
+                  $return = mysqli_fetch_all($result2);
+                }
+              }
+            }
+          }
       }
       return $return;
     }

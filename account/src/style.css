@@ -1114,6 +1114,8 @@ margin-top: 10px;
 .leftSideProfile .account-settings, .leftSideProfile .account-settings .user-profile{
   background-color: transparent!important;
 }
+
+
 @media (max-width: 990px) {
     .leftSide{
         border: none!important;
