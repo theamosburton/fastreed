@@ -95,7 +95,6 @@ body{
   justify-content: center;
   cursor: pointer;
   list-style:none;
-  overflow: scroll;
   scroll-behavior: smooth;
 }
 .sideBar .links .link{
