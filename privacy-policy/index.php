@@ -24,7 +24,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
     <script type="text/javascript">
-      var menu = 'privayPolicy';
+      let menu = 'privayPolicy';
     </script>
   </head>
   <body>
