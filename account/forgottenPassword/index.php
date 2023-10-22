@@ -14,9 +14,23 @@ $userLogged = $userData->userLogged;
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="public, max-age=3600">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta data-rh="true" name="keywords" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
+    <meta data-rh="true" name="description" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
+    <meta data-rh="true" property="og:title" content="Recover Forgotten Password">
+    <meta data-rh="true" property="twitter:title" content="Recover Forgotten Password">
+    <meta data-rh="true" property="og:description" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
+    <meta data-rh="true" property="twitter:description" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
+    <meta data-rh="true" property="og:image" content="https://www.fastreed.com/favicon.ico">
+    <meta data-rh="true" property="twitter:image" content="https://www.fastreed.com/favicon.ico">
+    <meta data-rh="true" property="og:url" content="https://www.fastreed.com/account/forgottenPassword/index.php">
+    <meta data-rh="true" property="og:type" content="website">
+    <!-- <meta name="author" content=""> -->
+    <link data-rh="true" rel="canonical" href="https://www.fastreed.com/account/forgottenPassword/index.php">
+    <title>Recover Forgotten Password</title>
     <link rel="stylesheet" href="../sign/style.css">
-    <title></title>
   </head>
   <body>
     <div class="auth wrapper">
