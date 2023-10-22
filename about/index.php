@@ -34,8 +34,8 @@
           <a class="menus" href="/">Home</a>
           <a class="menus" href="/terms-of-services/" >Terms of Services</a>
           <a class="menus" href="/privacy-policy/">Privacy Policy</a>
-          <a class="menus active" href="/about/">About Us</a>
-          <a class="menus" href="#">FAQ</a>
+          <a class="menus active" id="aboutMenu" href="/about/">About Us</a>
+          <a class="menus" href="/guide/">Guide</a>
         </div>
       </div>
       <div class="body">
@@ -68,5 +68,14 @@
 
     </div>
   </body>
+  <script type="text/javascript">
+    const container = document.querySelector('.headMenus');
+
+    const content = document.getElementById('aboutMenu');
+    const containerWidth = container.clientWidth;
+    const contentWidth = content.scrollWidth;
+    const scrollLeftValue = (containerWidth - contentWidth) / 2;
+    container.scrollLeft = scrollLeftValue;
+  </script>
   <script src="/assets/js/policy.js" charset="utf-8"></script>
 </html>
