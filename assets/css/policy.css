@@ -147,5 +147,6 @@ body{
   }
   .mainContent{
     width: auto;
+    padding: 25px;
   }
 }
