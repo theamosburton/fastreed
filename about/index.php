@@ -28,7 +28,7 @@
     <div class="selfContainer">
       <div class="head">
         <div class="headTop">
-          <h1>Fastreed <span>About us</span></h1>
+          <h1>Fastreed <span>About</span></h1>
         </div>
         <div class="headMenus">
           <a class="menus" href="/">Home</a>
