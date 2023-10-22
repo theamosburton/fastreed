@@ -34,11 +34,10 @@
           <h1>Fastreed <span>Guide</span></h1>
         </div>
         <div class="headMenus">
-          <a class="menus" href="/">Home</a>
-          <a class="menus" href="/terms-of-services/" >Terms of Services</a>
-          <a class="menus" href="/privacy-policy/">Privacy Policy</a>
-          <a class="menus"  href="/about/">About Us</a>
-          <a class="menus active" id="guideMenu" href="#">Guide</a>
+          <a class="menus active" id="guideMenu" href="#">Dashboard</a>
+          <a class="menus" href="/guide/verification/">Verification</a>
+          <a class="menus" href="/guide/editor-guide/">Editor Guide</a>
+          <a class="menus"  href="/guide/content-ploicy/">Content Policy</a>
         </div>
       </div>
       <div class="body">
@@ -53,26 +52,26 @@
           </ul>
         </div>
         <div class="mainContent">
-
-          <div class="paragraph">
-            <h2 id="p1">What is Fastreed?</h2>
-            <p>Fastreed is a Webstories creating and publishing website. It is multi-story writing, multi-blogging or Multi-Niche Blogging website. On fastreed website you will find webstories on multiple topics such as: Sports, Business, Social Media, Technology, Education, Politics, Entertainment etc. written and compiled by many authors (Fastreed authors).</p>
-            <p>There is no premium or paid membership on our platform. Fastreed is completey free for everyone.</p>
-            <p>Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world.</p>
-            <div class="alert alert-secondary" role="alert">
-              As for now only<b> fastreed verified authors</b> can write webstories but soon it will be allowed for public.
+          <div class="innerDiv">
+            <div class="paragraph">
+              <h2 id="p1">What is Fastreed?</h2>
+              <p>Fastreed is a Webstories creating and publishing website. It is multi-story writing, multi-blogging or Multi-Niche Blogging website. On fastreed website you will find webstories on multiple topics such as: Sports, Business, Social Media, Technology, Education, Politics, Entertainment etc. written and compiled by many authors (Fastreed authors).</p>
+              <p>There is no premium or paid membership on our platform. Fastreed is completey free for everyone.</p>
+              <p>Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world.</p>
+              <div class="alert alert-secondary" role="alert">
+                As for now only<b> fastreed verified authors</b> can write webstories but soon it will be allowed for public.
+                </div>
+            </div>
+            <div class="paragraph">
+              <h2 id="p2">Why Fastreed?</h2>
+              <p>You want to write and share your ideas or information you are on the right platform. But why you choose reading and writing articles;</p>
+              <p>Online, there are many ways to transfer ideas and information among others like Forums, Discussion groups, Videos, Social Media posts etc. but reading and writing webstories is a most prefered way to consume the information in a fast way. There are lots of benefits associated with reading and writing. It expand your knowledge and understanding, improve communication skills, enhnace your creativity, boost your critical thinking, sync you with updates and technologies.</p>
+              <div class="alert alert-success" role="alert">
+                You will be able to <b>earn money</b> by writing articles when it is enabled on our platform. We will let you know when it is enabled.
               </div>
           </div>
-          <div class="paragraph">
-            <h2 id="p2">Why Fastreed?</h2>
-            <p>You want to write and share your ideas or information you are on the right platform. But why you choose reading and writing articles;</p>
-            <p>Online, there are many ways to transfer ideas and information among others like Forums, Discussion groups, Videos, Social Media posts etc. but reading and writing webstories is a most prefered way to consume the information in a fast way. There are lots of benefits associated with reading and writing. It expand your knowledge and understanding, improve communication skills, enhnace your creativity, boost your critical thinking, sync you with updates and technologies.</p>
-            <div class="alert alert-success" role="alert">
-              You will be able to <b>earn money</b> by writing articles when it is enabled on our platform. We will let you know when it is enabled.
-            </div>
-        </div>
+          </div>
       </div>
-
     </div>
   </body>
 
