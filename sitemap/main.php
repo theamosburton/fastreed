@@ -11,6 +11,11 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>
       <priority>1</priority>
     </url>
     <url>
+      <loc>'.DOMAIN.'/account/</loc>
+      <lastmod>2023-10-14T17:54:06+00:00</lastmod>
+      <priority>0.9</priority>
+    </url>
+    <url>
       <loc>'.DOMAIN.'/account/sign</loc>
       <lastmod>2023-10-14T17:54:06+00:00</lastmod>
       <priority>0.9</priority>
