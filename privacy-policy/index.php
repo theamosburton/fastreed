@@ -2,6 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="public, max-age=3600">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta data-rh="true" name="keywords" content="">
     <meta data-rh="true" name="description" content="Fastreed: Privacy Policy">
     <meta data-rh="true" property="og:title" content="Fastreed: Privacy Policy">
