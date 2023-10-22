@@ -66,7 +66,7 @@ class createAuthorsSitemap{
         for ($i=0; $i < count($list); $i++) {
            $url = DOMAIN.'/u/'.$list[$i]['username'];
            $xml .= '<url>';
-           $xml .= '<loc>' . $url . '</loc>';
+           $xml .= '<loc>' . $url . '/'.'</loc>';
            $xml .= '</url>';
         }
         $xml .= '</urlset>';
