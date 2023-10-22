@@ -415,11 +415,13 @@ class Edits{
     var title = document.getElementById("storyTitle");
     var description = document.getElementById("storyDescription");
     var keywords = document.getElementById("storyKeywords");
+    var category = document.getElementById("storyCategory");
     if (x == 'update') {
       url.value = this.editor.metaData.url;
       title.value =  this.editor.metaData.title
       description.value =  this.editor.metaData.description;
       keywords.value = this.editor.metaData.keywords;
+      category.value =  this.editor.metaData.category;
     }else{
       const start = title.selectionStart;
       const end = title.selectionEnd;
@@ -427,15 +429,13 @@ class Edits{
       this.editor.metaData.title = title.value;
       this.editor.metaData.description = description.value;
       this.editor.metaData.keywords = keywords.value;
+      this.editor.metaData.category = category.value;
       title.setSelectionRange(start, end);
       if (description.value == '') {
-        // document.querySelector('#layer0 .otherText').innerHTML = 'Enter story description..';
         document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }else if(title.value == ''){
-        // document.querySelector('#layer0 .otherText').innerHTML = description.value;
         document.querySelector('#layer0 .titleText').innerHTML = 'Edit title for this webstory';
       }else{
-        // document.querySelector('#layer0 .otherText').innerHTML = description.value;
         document.querySelector('#layer0 .titleText').innerHTML = title.value;
       }
     }

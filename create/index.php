@@ -141,8 +141,10 @@ class userEditor extends createContent{
             }else if($this->checkID($_GET['ID'], 'user', 'stories')){
                 $this->editWebstory();
             }else{
-                $this->createWebstory();
+                header('Location:/account/');
             }
+        }else{
+            header('Location:/account/');
         }
         $this->closeConnection();
         $this->userData->closeConnection();
@@ -188,7 +190,6 @@ class userEditor extends createContent{
               if ($result3) {
                     header("Location:/create/?type=webstory&ID=".$storyID);
               }else{
-                // echo $result3;
                   header('Location:/account/');
               }
             }else{
@@ -196,9 +197,6 @@ class userEditor extends createContent{
             }
         }
     }
-
-
-
     private function editWebstory(){
         echo <<<HTML
         <!DOCTYPE html>
@@ -248,12 +246,12 @@ class adminEditor extends createContent{
                 $this->editWebstory();
             }else{
                 $this->createWebstory();
-                // echo "string";
             }
           }else{
-            $this->createWebstory();
-            // echo "string2";
+            header('Location:/account/');
           }
+        }else{
+            header('Location:/account/');
         }
         $this->closeConnection();
         $this->userData->closeConnection();

@@ -49,6 +49,7 @@ class Editor{
                     this.metaData.description = "";
                     this.metaData.keywords = "";
                     this.metaData.url = "";
+                    this.metaData.category = "";
                     // JavaScript
                     editor.metaData.timeStamp = Date.now();
                     this.metaData.date = `${fDate}`;
@@ -1142,8 +1143,6 @@ class Editor{
         if (metaData == '') {
           var alertCont = document.querySelector('.altertContainer');
           alertCont.style.display = 'none';
-          var metaErrorBox = document.getElementById('metaErrorBox');
-          metaErrorBox.style.display = 'none';
           var inputs = document.querySelectorAll(".inputText");
           inputs.forEach(function(element) {
             element.style.borderColor = 'grey';
@@ -1183,7 +1182,6 @@ class Editor{
         var alertCont = document.querySelector('.altertContainer');
         alertCont.style.display = 'flex';
         alertCont.id = 'errorConatiner';
-        document.querySelector('.altertDiv').innerHTML =
         document.querySelector('.altertDiv').innerHTML =
         `<div class="progress">
           <div class="cancelBar">
@@ -1410,6 +1408,7 @@ class Editor{
     let description = this.metaData.description;
     let title = this.metaData.title;
     let keywords = this.metaData.keywords;
+    let category = this.metaData.category;
     let url = this.metaData.url;
     var inputs = document.querySelectorAll(".inputText");
     inputs.forEach(function(element) {
@@ -1436,6 +1435,11 @@ class Editor{
     }else if (this.getWordCount(keywords) <= 4) {
         metaError = 'Atleast 5 words required in keywords';
         let err = document.getElementById('keywordsError');
+        err.style.display = 'inline';
+        document.getElementById('storyKeywords').style.borderColor = 'red';
+    }else if (category == "") {
+        metaError = 'Please select a category';
+        let err = document.getElementById('categoriesError');
         err.style.display = 'inline';
         document.getElementById('storyKeywords').style.borderColor = 'red';
     }

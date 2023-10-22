@@ -56,29 +56,35 @@ class createAuthorsSitemap{
 
       private function createXML($list){
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
         for ($i=0; $i < count($list); $i++) {
-           $lastMod = $this->lastMod($list[$i][0]);
-           $lastMod = gmdate("Y-m-d\TH:i:sP", $lastMod);
+           $lastmod = $this->storyData($list[$i][0])['lastEdit'];
+           $lastmod = $this->istToGMT($lastmod);
+           $lastmod = gmdate("Y-m-d\TH:i:sP", $lastmod);
            $url = DOMAIN.'/webstories/'.$list[$i][4];
            $xml .= '<url>';
            $xml .= '<loc>' . $url . '</loc>';
-            $xml .= '<lastmod>' . $lastMod . '</lastmod>';
+           $xml .= '<news:news>';
+           $xml .= '<news:publication>';
+           $xml .= '<news:name>Fastreed</news:name>';
+           $xml .= '<news:language>en</news:language>';
+           $xml .= '</news:publication>';
+           $xml .= '<news:publication_date>' . $lastmod . '</news:publication_date>';
+           $xml .= '<news:title>' . $list[$i][1] . '</news:title>';
+           $xml .= '</news:news>';
            $xml .= '</url>';
         }
         $xml .= '</urlset>';
         echo $xml;
       }
 
-      private function lastMod($id){
+      private function storyData($id){
         $sql = "SELECT * FROM stories WHERE storyID = '$id'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
           $row = mysqli_fetch_assoc($result);
-          $lastmod = $row['lastEdit'];
-          $lastModGMT = $this->istToGMT($lastmod);
         }
-        return $lastModGMT;
+        return $row;
       }
       private function istToGMT($istUnixTimestamp){
                     // Create a DateTime object with the JavaScript timestamp in milliseconds

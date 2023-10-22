@@ -21,7 +21,12 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>
       <priority>0.9</priority>
     </url>
     <url>
-      <loc>'.DOMAIN.'/terms-privacy/</loc>
+      <loc>'.DOMAIN.'/privacy-policy/</loc>
+      <lastmod>2023-10-14T17:54:06+00:00</lastmod>
+      <priority>0.9</priority>
+    </url>
+    <url>
+      <loc>'.DOMAIN.'/terms-of-services/</loc>
       <lastmod>2023-10-14T17:54:06+00:00</lastmod>
       <priority>0.9</priority>
     </url>

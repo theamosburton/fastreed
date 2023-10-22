@@ -1,0 +1,137 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.selfContainer{
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  /* max-width: 1300px; */
+}
+.head{
+  height: 100px;
+  width: 100vw;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  position: fixed;
+  background: white;
+}
+.headTop{
+  width: -webkit-fill-available;
+  height: 50%;
+  padding: 10px 20px 7px 20px;
+}
+.headTop h1{
+  color: #3367d6;
+  font-size: 2em;
+  margin-bottom: 0px;
+}
+.headTop h1 span{
+  color: grey;
+  font-weight: 400;
+  font-size: .8em;
+}
+.headMenus{
+  width: -webkit-fill-available;
+  height: 50%;
+  padding: 10px 10px 1px 10px;
+  display: flex;
+  /* align-items: center; */
+}
+.headMenus .menus{
+  text-decoration: none;
+  color: #666;
+  padding: 3px 10px;
+  margin: 0px 8px;
+  font-weight: 500;
+}
+.body{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  padding-top: 100px;
+  overflow: hidden;
+}
+.headMenus .menus:hover{
+  border-bottom: 3px solid #3367d6;
+  border-radius: 7px 7px 0px 0px;
+  color: #3367d6;
+}
+.active{
+  border-bottom: 3px solid#3367d6;
+  border-radius: 7px 7px 0px 0px;
+  color: #3367d6!important;
+}
+.sideBar{
+  width: 300px;
+  height: 100vh;
+  overflow: scroll;
+  border-right: 1px solid grey;
+}
+.sideBar .links{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  list-style:numeric;
+}
+.sideBar .links .link{
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  margin: 10px 10px 10px 25px;
+  padding: 5px 0px;
+  /* border-bottom: .5px solid grey; */
+}
+.sideBar .links .link:hover{
+  color: #3367d6;
+}
+ .activeLink{
+   color: #3367d6!important;
+ }
+.mainContent{
+  width: calc(100vw - 300px);
+  padding:  50px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+.h-50{
+  height: 50px;
+}
+.mainContent .paragraph{
+  color: #555;
+  max-width: 700px;
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+.mainContent .last{
+  display: flex;
+  justify-content: right;
+  text-align:center;
+  font-weight: bolder;
+}
+.mainContent .paragraph h2{
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.mainContent .paragraph ul{
+  margin-left: 20px;
+}

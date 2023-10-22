@@ -1,5 +1,23 @@
 
-
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('nav')) {
+    const param1Value = urlParams.get('nav')
+    var select = document.getElementById('shuffleStoryType');
+    if (param1Value == 'verify') {
+      select.options[1].selected = true;
+      fetchStoriesReview('true');
+    }else if (param1Value == 'rejected') {
+      select.options[2].selected = true;
+      // document.getElementById('rejectOption');
+      fetchStoriesReview('false');
+    }else{
+      select.options[0].selected = true;
+      // document.getElementById('newOption');
+      fetchStoriesReview('none');
+    }
+}else{
+  fetchStoriesReview('none');
+}
 function fetchStoriesReview(sev){
   let nonVerified = [];
   let verified = [];
@@ -176,10 +194,24 @@ function storyAction(action, elementID, id, storyID){
     }
     storyActionInside();
 }
-fetchStoriesReview('none');
+
+
 function shuffleStoryType(){
   var type = document.getElementById('shuffleStoryType');
   fetchStoriesReview(`${type.value}`);
+  if (type.value == 'true') {
+    const currentURL = new URL(window.location);
+    currentURL.searchParams.set('nav', 'verify');
+    window.history.replaceState({}, '', currentURL);
+  }else if (type.value == 'false') {
+    const currentURL = new URL(window.location);
+    currentURL.searchParams.set('nav', 'rejected');
+    window.history.replaceState({}, '', currentURL);
+  }else{
+    const currentURL = new URL(window.location);
+    currentURL.searchParams.set('nav', 'none');
+    window.history.replaceState({}, '', currentURL);
+  }
 }
 function populateStoryLoadingAdmin() {
     var webstories = document.getElementById('reviewStoriesDiv');
