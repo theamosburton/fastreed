@@ -850,7 +850,7 @@ margin-top: 10px;
     box-shadow: 0 0 17px 5px;
     background-color: transparent;
     padding: 10px;
-    background-color: #a3a5ac;
+    background-color: #bec0c7;
     border-radius: 15px;
 }
 #optionDropdownDetails{
@@ -880,11 +880,9 @@ margin-top: 10px;
     font-size: 20px;
     padding: 3px 15px;
     cursor: pointer;
-    font-weight: bolder;
-    margin-top: 3px;
+    margin-top: 5px;
     background-color: rgb(232, 233, 238);
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 .optionDropdown .options span{
@@ -1041,6 +1039,9 @@ margin-top: 10px;
 .storiesTypeRightDiv .storiesTypes{
   padding: 0px 10px;
   height: 100%;
+  background: #5CC9D8;
+  font-weight: bold;
+  border-radius: 5px;
 }
 .webstoriesDiv .webstories{
     display: flex;
