@@ -1120,7 +1120,6 @@ class Editor{
               const temp = otherStories[startIndex];
               otherStories[startIndex] = otherStories[g];
               otherStories[g] = temp;
-              // Move indices towards each other
               startIndex++;
               g--;
             }
@@ -1130,6 +1129,7 @@ class Editor{
         for (var i = 0; i < otherStories.length; i++) {
           var storyData = JSON.parse(otherStories[i].storyData);
           var url = storyData.metaData.url;
+          url = 'https://www.fastreed.com/webstories/'+ url + '/';
           var title = storyData.metaData.title;
           var image = storyData.layers.L0.media.url;
           if (this.metaData.relatedStory == url) {
@@ -1184,7 +1184,6 @@ class Editor{
         this.metaData.relatedStory = "";
         var selected = document.getElementById(`'S${id}'`);
         selected.remove();
-
       }
       selectedStory.innerHTML +=  `<div class="storyOverlay" id="S${id}">
         <i class="fa-solid fa-check fa-4x"></i>
