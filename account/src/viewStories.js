@@ -82,7 +82,6 @@ class FetchStories {
   }
 
   filterWebstory(input){
-
     var value = input.value;
     this.filter = value;
     var webstories = this.webstoriesData;
@@ -134,7 +133,7 @@ class FetchStories {
       var noUpload = document.createElement('div');
       noUpload.classList.add('noUpload');
       noUpload.innerHTML = `<div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-             <div> <p>Nothing to display</p></div>`;
+             <div> <p>No ${this.filter} Visual Story to display</p></div>`;
       webstoriesDiv.appendChild(noUpload);
     }else{
       var webstoriesDiv = document.getElementById('webstoriesDiv');
@@ -166,37 +165,27 @@ class FetchStories {
         }else{
           var setUrl = webstoryData.layers.L0.media.url;
         }
+
         if (verifyStatus != null && verifyStatus.status == 'true') {
           var storyURL = webstoryData.metaData.url;
           storyURL = '/webstories/'+storyURL;
-          var func = `viewStory('${storyURL}')`;
           var icon = '<i class="fa-solid fa-earth-asia" style="color:#13c013;"></i>';
         }else if(storyStatus.status == 'published'){
             var storyURL = webstoryData.metaData.url;
             storyURL = '/webstories/'+storyURL;
-            var func = `viewStory('${storyURL}')`;
             var icon = '<i class="fa-solid fa-earth-asia" style="color:darkorange;"></i>';
         }else{
           var func = "";
           var icon = '<i class="fa-solid fa-floppy-disk"></i>';
         }
-        if (this.visitedusername == '') {
-          var p = '';
-        }else if (this.visitedusername != '') {
-          var p = this.visitedusername;
-        }
         webstoryDiv.innerHTML += `
         <div class="webstory" id="webstory${i}">
-            <div class="background" style="background-image: url('${setUrl}');">
+            <div class="background" style="background-image: url('${setUrl}');" onclick="viewStory('${storyURL}')">
                 <div class="storyOverlay"></div>
+                 <div class="storyViewIcon">
+                 ${icon}
+                  </div>
                 <div class="title">${title}</div>
-
-            </div>
-            <div class="options">
-                <div class="edit" onclick="editStory('${webstories[i][1]}','${p}')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
-                <div class="view" onclick="${func}"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
-                <div class="delete" onclick="deleteStory('${webstories[i][1]}', ${i})"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
-                <div class="storyOptions">${icon}</div>
             </div>
         </div>
         `;

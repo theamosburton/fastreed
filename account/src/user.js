@@ -893,6 +893,10 @@ function deleteStory(storyID, divID){
           storyDIV.style.display = 'none';
         }, 300);
         storyDIV.style.marginLeft = '-210px';
+        var storyTypes = document.getElementById('storyTypes');
+        fetchStoriesData.webstoriesData.splice(divID, 1);
+        fetchStoriesData.filterWebstory(storyTypes);
+
       }, 1000);
 
     }

@@ -6,6 +6,11 @@
     /* animation: fading 2s infinite; */
 }
 
+.storyViewIcon{
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
 .fading-div {
   -webkit-animation-duration: 1.25s;
   animation-duration: 1.25s;

@@ -210,7 +210,7 @@ class loggedAdminVother extends showProfile{
    function __construct() {
         $this->const4Inherited();
         $ePID = $this->AUTH->encrypt($this->userData->getOtherData('username', $this->otherUsername)['dPID']);
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].': Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
         $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
         $this->webDescription = "Fastreed Account: Manage, edit and view profile";
         $this->webKeywords = "Fastreed Account: Manage, edit and view profile";
@@ -329,7 +329,7 @@ class loggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].': Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
         $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
         $this->webDescription = "Fastreed Account: View profile";
         $this->webKeywords = "Fastreed Account: View profile";
@@ -377,7 +377,7 @@ class nonLoggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].': Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
         $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
         $this->webDescription = "Fastreed Account: View profile";
         $this->webKeywords = "Fastreed Account: View profile";

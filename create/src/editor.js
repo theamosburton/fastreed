@@ -25,7 +25,7 @@ class Editor{
             'purpose' : 'fetch',
             'whois': `${this.whoIs}`,
             'storyID': `${this.storyID}`,
-            'username': `${currentUsername}`
+            'username': `${currentUsername}`,
             };
             const response = await fetch(url, {
                 method: 'post',
@@ -1105,7 +1105,7 @@ class Editor{
 
     updateOtherStories(){
       var otherStories = this.otherStories;
-      if (otherStories.length < 0) {
+      if (otherStories.length <= 0) {
         document.getElementById('storiesSectionError').style.display = 'block';
       }else{
         var storiesSection = document.getElementById('relatedStoriesSelection');

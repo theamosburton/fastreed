@@ -21,11 +21,8 @@ class FetchStories {
     }else{
       this.filter = 'All';
     }
-    var currentURL = window.location.href;
-    var urlSegments = currentURL.split('/');
-    var indexOfU = urlSegments.indexOf('u');
-    if (indexOfU !== -1 && indexOfU < urlSegments.length - 1) {
-        this.visitedusername = urlSegments[indexOfU + 1];
+    if (currentUsername) {
+        this.visitedusername = currentUsername;
       if (adminLogged) {
         this.whoIs = 'Admin';
       }else if(userLogged){
@@ -100,11 +97,11 @@ class FetchStories {
     webstories = webstories.reverse();
     if (this.filter == 'All') {
       var webstories = this.webstoriesData;
-    }else if (this.filter == 'published') {
+    }else if (this.filter == 'Published') {
       var published = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][5]);
-        if (storyStatus.status == 'Published') {
+        if (storyStatus.status == 'published') {
           published.push(webstories[i]);
         }
       }
@@ -143,7 +140,7 @@ class FetchStories {
       var noUpload = document.createElement('div');
       noUpload.classList.add('noUpload');
       noUpload.innerHTML = `<div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-             <div> <p>Nothing to display</p></div>`;
+             <div> <p>No ${this.filter} Visual Story to display</p></div>`;
       webstoriesDiv.appendChild(noUpload);
     }else{
       var webstoriesDiv = document.getElementById('webstoriesDiv');
