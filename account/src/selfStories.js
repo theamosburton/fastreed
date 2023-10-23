@@ -79,6 +79,7 @@ class FetchStories {
   filterWebstory(input){
     var value = input.value;
     this.filter = value;
+    this.webstoriesData = this.webstories.reverse();
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('filter', `${value}`);
     const newQueryString = urlParams.toString();
