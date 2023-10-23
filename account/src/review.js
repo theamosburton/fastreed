@@ -1,23 +1,26 @@
 
 const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('nav')) {
-    const param1Value = urlParams.get('nav')
-    var select = document.getElementById('shuffleStoryType');
-    if (param1Value == 'verify') {
-      select.options[1].selected = true;
-      fetchStoriesReview('true');
-    }else if (param1Value == 'rejected') {
-      select.options[2].selected = true;
-      // document.getElementById('rejectOption');
-      fetchStoriesReview('false');
-    }else{
-      select.options[0].selected = true;
-      // document.getElementById('newOption');
-      fetchStoriesReview('none');
-    }
-}else{
-  fetchStoriesReview('none');
+if (adminLogged) {
+  if (urlParams.has('nav')) {
+      const param1Value = urlParams.get('nav')
+      var select = document.getElementById('shuffleStoryType');
+      if (param1Value == 'verify') {
+        select.options[1].selected = true;
+        fetchStoriesReview('true');
+      }else if (param1Value == 'rejected') {
+        select.options[2].selected = true;
+        // document.getElementById('rejectOption');
+        fetchStoriesReview('false');
+      }else{
+        select.options[0].selected = true;
+        // document.getElementById('newOption');
+        fetchStoriesReview('none');
+      }
+  }else{
+    fetchStoriesReview('none');
+  }
 }
+
 function fetchStoriesReview(sev){
   let nonVerified = [];
   let verified = [];

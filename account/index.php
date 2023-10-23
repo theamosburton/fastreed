@@ -217,7 +217,7 @@ class loggedAdminVother extends showProfile{
         $this->pageCss = ['/account/src/style.css'];
 
 
-        $this->pageJs = ['/account/src/review.js', '/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
+        $this->pageJs = ['/account/src/review.js', '/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js'];
         $this->extraScript = '
         <script>
             // other

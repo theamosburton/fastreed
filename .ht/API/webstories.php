@@ -208,7 +208,7 @@ class Webstories{
           if (!isset($data['username']) || empty($data['username'])) {
               showMessage(false, 'Username needed');
           }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-            $sql = "SELECT * FROM stories WHERE personID = '$UID' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+            $sql = "SELECT * FROM stories WHERE personID = '$UID'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
                $row = mysqli_fetch_all($result);
@@ -998,25 +998,89 @@ class Webstories{
       $sql = "SELECT personID FROM stories WHERE storyID = '$storyID'";
       $result = mysqli_query($this->DB, $sql);
       if ($result) {
-          $row = mysqli_fetch_assoc($result);
-          $personID = $row['personID'];
-          $sql1 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND personID = '$personID' AND storyID != '$storyID'";
-          $result1 = mysqli_query($this->DB, $sql1);
-          if ($result1) {
-            if (mysqli_num_rows($result1)) {
-              $return = mysqli_fetch_all($result1);
-            }else{
-              $sql2 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND storyID != '$storyID'";
-              $result2 = mysqli_query($this->DB, $sql2);
-              if ($result1) {
-                if (mysqli_num_rows($result1)) {
-                  $return = mysqli_fetch_all($result2);
-                }
+        $row = mysqli_fetch_assoc($result);
+        $personID = $row['personID'];
+        $category = $this->getCategory($storyID);
+
+          $withCategory = array();
+          if (!empty($category)) {
+            $sql1 = "SELECT postID FROM metaData WHERE postID != '$storyID' AND category = '$category'";
+            $result1 = mysqli_query($this->DB, $sql1);
+            if ($result1) {
+              if (mysqli_num_rows($result1)) {
+                $withCategory = mysqli_fetch_all($result1);
               }
             }
           }
+
+          $withoutThisCategory = array();
+          $sql2 = "SELECT postID FROM metaData WHERE postID != '$storyID' AND category != '$category'";
+          $result2 = mysqli_query($this->DB, $sql2);
+          if ($result2) {
+            if (mysqli_num_rows($result2)) {
+              $withoutThisCategory = mysqli_fetch_all($result2);
+            }
+          }
+
+
+
+          // Self + Category
+          $selfCat = array();
+          for ($j=0; $j < count($withCategory) ; $j++) {
+            $metaID = $withCategory[$j][0];
+            $sql3 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND `personID` = '$personID' AND `storyID` = '$metaID'";
+            $result3 = mysqli_query($this->DB, $sql3);
+            if ($result3) {
+              if (mysqli_num_rows($result3)) {
+                $dat = mysqli_fetch_assoc($result3);
+                $selfCat[$j] = $dat;
+              }
+            }
+          }
+
+          // Self + Without Category
+          $selfWCat = array();
+          for ($k=0; $k < count($withoutThisCategory) ; $k++) {
+            $metaID = $withoutThisCategory[$k][0];
+            $sql4 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND `personID` = '$personID' AND `storyID` = '$metaID'";
+            $result4 = mysqli_query($this->DB, $sql4);
+            if ($result4) {
+              if (mysqli_num_rows($result4)) {
+                $dat = mysqli_fetch_assoc($result4);
+                $selfWCat[$k] = $dat;
+              }
+            }
+          }
+
+          // Other + With Category
+          $OtherCat = array();
+          for ($l=0; $l < count($withCategory) ; $l++) {
+            $metaID = $withCategory[$l][0];
+            $sql6 = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND `storyID` = '$metaID' AND `personID` != '$personID'";
+            $result6 = mysqli_query($this->DB, $sql6);
+            if ($result6) {
+              if (mysqli_num_rows($result6)) {
+                $dat = mysqli_fetch_assoc($result6);
+                $OtherCat[$l] = $dat;
+              }
+            }
+          }
+
+          $return = $selfCat + $selfWCat + $OtherCat;
       }
       return $return;
     }
+    private function getCategory($storyID){
+      $return = '';
+      $sql = "SELECT category FROM metaData WHERE postID = '$storyID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $category = $row['category'];
+        $return = $category;
+      }
+      return $return;
+    }
+
 }
 ?>

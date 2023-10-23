@@ -1109,21 +1109,53 @@ class Editor{
         document.getElementById('storiesSectionError').style.display = 'block';
       }else{
         var storiesSection = document.getElementById('relatedStoriesSelection');
-        storiesSection.style.display = 'flex';
+        storiesSection.style.display = 'flex'
+
+        for (var g = 0; g < otherStories.length; g++) {
+          var storyData = JSON.parse(otherStories[g].storyData);
+          var url = storyData.metaData.url;
+          if (this.metaData.relatedStory == url) {
+            var startIndex = 0;
+            while (startIndex < g) {
+              const temp = otherStories[startIndex];
+              otherStories[startIndex] = otherStories[g];
+              otherStories[g] = temp;
+              // Move indices towards each other
+              startIndex++;
+              g--;
+            }
+          }
+        }
+
         for (var i = 0; i < otherStories.length; i++) {
-          var storyData = JSON.parse(otherStories[i][7]);
+          var storyData = JSON.parse(otherStories[i].storyData);
           var url = storyData.metaData.url;
           var title = storyData.metaData.title;
           var image = storyData.layers.L0.media.url;
-          storiesSection.innerHTML += `
-          <div class="relatedStories"  style="background-image:url('${image}')">
-            <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
-              <div class="storyTitle">
-                  <span>${title}</span>
+          if (this.metaData.relatedStory == url) {
+            storiesSection.innerHTML += `
+            <div class="relatedStories"  style="background-image:url('${image}')">
+              <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
+                <div class="storyTitle">
+                    <span>${title}</span>
+                </div>
+                <div class="storyOverlay" id="SrelatedStory${i+1}">
+                  <i class="fa-solid fa-check fa-4x"></i>
+                </div>
               </div>
             </div>
-          </div>
-          `;
+            `;
+          }else{
+            storiesSection.innerHTML += `
+            <div class="relatedStories"  style="background-image:url('${image}')">
+              <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
+                <div class="storyTitle">
+                    <span>${title}</span>
+                </div>
+              </div>
+            </div>
+            `;
+          }
         }
       }
     }
@@ -1148,7 +1180,13 @@ class Editor{
       });
 
       var selectedStory = document.getElementById(`${id}`);
-      selectedStory.innerHTML +=  `<div class="storyOverlay">
+      if (this.metaData.relatedStory == url) {
+        this.metaData.relatedStory = "";
+        var selected = document.getElementById(`'S${id}'`);
+        selected.remove();
+
+      }
+      selectedStory.innerHTML +=  `<div class="storyOverlay" id="S${id}">
         <i class="fa-solid fa-check fa-4x"></i>
       </div>`;
       this.metaData.relatedStory = url;
