@@ -383,8 +383,10 @@ class nonLoggedVother extends showProfile{
         $this->webKeywords = "Fastreed Account: View profile";
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
-
-
+        $this->extraScript = '
+        <script>
+            var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+         </script>';
         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
         $userSettings = $this->userData->getSettings($otherID);
         $canViewMail = $userSettings['canViewMail'];

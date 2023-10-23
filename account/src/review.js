@@ -71,7 +71,9 @@ function fetchStoriesReview(sev){
 }
 
 function showStories(x, what){
-  document.getElementById('reviewStoriesDiv').innerHTML = '';
+  if (document.getElementById('reviewStoriesDiv')) {
+      document.getElementById('reviewStoriesDiv').innerHTML = '';
+  }
   if (x.length) {
     for (var i = 0; i < x.length; i++) {
     var layers = JSON.parse(x[i][7]);
@@ -99,31 +101,33 @@ function showStories(x, what){
       `;
       color = 'red';
     }
-    document.getElementById('reviewStoriesDiv').innerHTML += `
-      <div class="contentTopics">
-        <div class="storyBox" id="storybox${i}">
-          <div class="visibleArea">
-            <div class="imageDiv">
-              <img src="${image}" alt="">
-              <div class="storyStatus" id="storyStatus${i}">
-                <i class="fa-solid fa-earth" style="color:${color};"></i>
-              </div>
+      if (document.getElementById('reviewStoriesDiv')) {
+        document.getElementById('reviewStoriesDiv').innerHTML += `
+          <div class="contentTopics">
+            <div class="storyBox" id="storybox${i}">
+              <div class="visibleArea">
+                <div class="imageDiv">
+                  <img src="${image}" alt="">
+                  <div class="storyStatus" id="storyStatus${i}">
+                    <i class="fa-solid fa-earth" style="color:${color};"></i>
+                  </div>
 
-            </div>
-            <div class="otherInfoDiv">
-              <div class="title">
-                <span>${title}</span>
+                </div>
+                <div class="otherInfoDiv">
+                  <div class="title">
+                    <span>${title}</span>
+                  </div>
+                  <div class="about">
+                    <div class="buttons" onclick="viewStoryAdmin('${url}')"> <i class="fa fa-eye"></i></div>
+                    <div class="buttons" onclick="editStoryRe('${storyID}','${username}')"><i class="fa fa-pen-to-square"></i></div>
+                    ${actions}
+                </div>
+                </div>
               </div>
-              <div class="about">
-                <div class="buttons" onclick="viewStoryAdmin('${url}')"> <i class="fa fa-eye"></i></div>
-                <div class="buttons" onclick="editStoryRe('${storyID}','${username}')"><i class="fa fa-pen-to-square"></i></div>
-                ${actions}
-            </div>
             </div>
           </div>
-        </div>
-      </div>
-      `;
+          `;
+      }
     }
   }else{
     document.getElementById('reviewStoriesDiv').innerHTML = '';
@@ -215,25 +219,8 @@ function shuffleStoryType(){
 }
 function populateStoryLoadingAdmin() {
     var webstories = document.getElementById('reviewStoriesDiv');
-    webstories.innerHTML = `
-    <div class="webstory loading" style="height:130px; margin-top: 10px;">
-         <div class="fading-div" >
-         </div>
-         <div class="options" style="border:0px" >
-           <div class="fading-div" style="margin:0;" >
-           </div>
-          </div>
-     </div>
-
-     <div class="webstory loading" style="height:130px; margin-top: 10px;">
-          <div class="fading-div" >
-          </div>
-          <div class="options" style="border:0px" >
-            <div class="fading-div" style="margin:0;" >
-            </div>
-           </div>
-      </div>
-
+    if (webstories) {
+      webstories.innerHTML = `
       <div class="webstory loading" style="height:130px; margin-top: 10px;">
            <div class="fading-div" >
            </div>
@@ -242,5 +229,24 @@ function populateStoryLoadingAdmin() {
              </div>
             </div>
        </div>
-    `;
+
+       <div class="webstory loading" style="height:130px; margin-top: 10px;">
+            <div class="fading-div" >
+            </div>
+            <div class="options" style="border:0px" >
+              <div class="fading-div" style="margin:0;" >
+              </div>
+             </div>
+        </div>
+
+        <div class="webstory loading" style="height:130px; margin-top: 10px;">
+             <div class="fading-div" >
+             </div>
+             <div class="options" style="border:0px" >
+               <div class="fading-div" style="margin:0;" >
+               </div>
+              </div>
+         </div>
+      `;
+    }
 }

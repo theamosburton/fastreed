@@ -68,6 +68,14 @@ if($canCreate == 'NOR'){
               <span>My Web Stories</span>
               <span id="reqCreation" onclick="InitializeWebstory('')"><i class="fa fa-solid fa-square-plus fa-lg"></i>
               </span>
+              <div class="storiesTypeRightDiv">
+                <select class="storiesTypes" onchange="fetchStoriesData.filterWebstory(this)">
+                  <option class="storyType" value="all">All</option>
+                  <option class="storyType" value="drafted">Drafted</option>
+                  <option class="storyType" value="published">Published</option>
+                  <option class="storyType" value="verified">Verified</option>
+                </select>
+              </div>
             </div>
             <div class="webstories" id="webstories">
             </div>

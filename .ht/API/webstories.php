@@ -204,11 +204,40 @@ class Webstories{
             }else {
                 showMessage(false, 'Problem at our end');
             }
-        }elseif ($data['whois'] == 'User' || $data['whois'] == 'Anon') {
+        }elseif ($data['whois'] == 'User') {
           if (!isset($data['username']) || empty($data['username'])) {
               showMessage(false, 'Username needed');
           }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-            $sql = "SELECT * FROM stories WHERE personID = '$UID'";
+            $sql = "SELECT * FROM stories WHERE personID = '$UID' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+               $row = mysqli_fetch_all($result);
+               for ($i=0; $i <  mysqli_num_rows($result); $i++) {
+                 $storyID = $row[$i][1];
+                 $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
+                 $result1 = mysqli_query($this->DB, $sql1);
+                 if ($result1) {
+                   $row1 = mysqli_fetch_assoc($result1);
+                   $moniStatus = $row1['moniStatus'];
+                   $url = $row1['url'];
+                   $row[$i][10] = $moniStatus;
+                   $row[$i][11] = $url;
+                 }
+               }
+               $row = json_encode($row);
+               showMessage(true, "$row");
+            }else{
+              showMessage(false, 'Server Error');
+            }
+          }else{
+            showMessage(false, 'Incorrect Username');
+          }
+        }elseif ($data['whois'] == 'Anon') {
+          if (!isset($data['username']) || empty($data['username'])) {
+              showMessage(false, 'Username needed');
+          }else if ($this->userData->getOtherData('username', $data['username'])['UID']) {
+            $UID = $this->userData->getOtherData('username', $data['username'])['UID'];
+            $sql = "SELECT * FROM stories WHERE personID = '$UID' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
                $row = mysqli_fetch_all($result);

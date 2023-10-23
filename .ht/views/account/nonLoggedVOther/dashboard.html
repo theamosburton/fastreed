@@ -1,7 +1,15 @@
-<div class="contentTopics resCreation row webstoriesDiv" id="webstoriesDivs">
+<div class="contentTopics resCreation row webstoriesDiv" id="webstoriesDiv">
     <div class="mtitle mb-3">
       <div>
-          <span>Web Stories</span>
+        <span>My Web Stories</span>
+        <span id="reqCreation" onclick="InitializeWebstory('')"><i class="fa fa-solid fa-square-plus fa-lg"></i>
+        </span>
+        <div class="storiesTypeRightDiv">
+          <select class="storiesTypes" onchange="fetchStoriesData.filterWebstory(this)">
+            <option class="storyType" value="published">Published</option>
+            <option class="storyType" value="verified">Verified</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="webstories" id="webstories">

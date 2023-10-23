@@ -1025,12 +1025,24 @@ margin-top: 10px;
     align-items: center;
     background-color: rgb(92, 201, 216)!important;
     color: inherit;
+    white-space: nowrap;
+}
+.storiesTypeRightDiv{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: -webkit-fill-available;
+}
+.storiesTypeRightDiv .storiesTypes{
+  padding: 0px 10px;
+  height: 100%;
 }
 .webstoriesDiv .webstories{
     display: flex;
     flex-direction: row;
     overflow:auto;
     height: 100%;
+    margin-top: 20px;
 }
 .webstoriesDiv .webstories .webstory{
 
