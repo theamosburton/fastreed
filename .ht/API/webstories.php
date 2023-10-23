@@ -407,149 +407,149 @@ class Webstories{
           $images[$i] = $pathSegments[3];
           $images[$i] = strtok($images[$i], '.');
         }
+        $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
+        $checkImages = $this->checkImages($images);
         $metaData = $this->checkMetaData($dataArray);
 
-        if ($this->checkStoryPublished($data['storyID'])) {
-          if (!count($layers)) {
-            if (!count($metaData)) {
-              if ($data['whois'] == 'Admin') {
-                  if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
-                      if (isset($data['username']) && !empty($data['username'])) {
-                          if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-                              if (isset($data['data']) && !empty($data['data'])) {
-                                $metaData = json_decode($data['metaData'], true);
-                                $title = $metaData['title'];
-                                $url = $metaData['url'];
-                                $category = $metaData['category'];
-                                $description = $metaData['description'];
-                                $keywords = $metaData['keywords'];
-                                $storyID = $data['storyID'];
-                                $storyData = $data['data'];
-                                $phpTimestamp = time(); // Get current Unix timestamp in seconds
-                                $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
-                                if (!empty($url)) {
-                                  $baseURL = $url;
-                                  $suffix = 'fastreed';
-                                  if($this->checkUrl($url, $storyID)) {
-                                     $url = $baseURL . '-' . $suffix;
-                                  }
-                                }
-                                $metaData['url'] = $url;
-                                $decodeData = json_decode($data['data'], true);
-                                $decodeData['metaData'] = $metaData;
-                                $version = $data['version'];
-                                $storyStatus = ['status'=>'published', 'version'=>$version];
-                                $verifyStatus = ['status'=>'none', 'version'=>$version];
-                                $storyStatus = json_encode($storyStatus);
-                                $verifyStatus = json_encode($verifyStatus);
-                                $storyData = json_encode($decodeData,true);
-                                if ($this->checkStoryMetaExists($storyID)) {
-                                    $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
-                                    $result = mysqli_query($this->DB, $sql);
-                                    $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
-                                    $result1 = mysqli_query($this->DB, $sql1);
-                                    if ($result && $result1) {
-                                        showMessage(true, 'Updated 1');
-                                    }else{
-                                        showMessage(false, 'Can not Edit and save');
-                                    }
-                                }else{
-                                    $sql2 = "INSERT INTO metaData(`postID`, `title`, `description`, `keywords`, `url`, `moniStatus`, `category`) Values('$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus', '$category')";
-                                    $result2 = mysqli_query($this->DB, $sql2);
-                                    $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
-                                    $result3 = mysqli_query($this->DB, $sql3);
-                                    if ($result2 && $result3) {
-                                        showMessage(true, "$url");
-                                    }else{
-                                        showMessage(false, 'Can not Update');
-                                    }
-                                }
-
-                              }else{
-                                  showMessage(false, 'No updated data');
-                              }
-
-                          }else{
-                              showMessage(false, 'Incorrect Username');
-                          }
-                      }else{
-                          showMessage(false, 'Username needed');
-                      }
+        if (!$this->checkStoryPublished($data['storyID'])) {
+            $this->saveStory();
+            return;
+        }
+        if (count($layers)) {
+            showMessage(false, "$layers[0]");
+            return;
+        }
+        if (count($metaData)) {
+            showMessage(false, "$metaData[0]");
+            return;
+        }
+        if (count($checkImages)) {
+            showMessage(false, "$checkImages[0]");
+            return;
+        }
+        if ($checkingRelatedStoryLink) {
+            showMessage(false, "$checkingRelatedStoryLink");
+            return;
+        }
+        if ($data['whois'] == 'Admin') {
+            if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+                showMessage(false, 'Not an admin');
+            }else if (!isset($data['username']) || empty($data['username'])) {
+              showMessage(false, 'Username needed');
+            }else if (!$this->userData->getOtherData('username', $data['username'])['UID']) {
+              showMessage(false, 'Incorrect Username');
+            }else if (!isset($data['data']) || empty($data['data'])) {
+              showMessage(false, 'No updated data');
+            }else{
+              $UID = $this->userData->getOtherData('username', $data['username'])['UID'];
+              $metaData = json_decode($data['metaData'], true);
+              $title = $metaData['title'];
+              $url = $metaData['url'];
+              $category = $metaData['category'];
+              $description = $metaData['description'];
+              $keywords = $metaData['keywords'];
+              $storyID = $data['storyID'];
+              $storyData = $data['data'];
+              $phpTimestamp = time(); // Get current Unix timestamp in seconds
+              $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
+              if (!empty($url)) {
+                $baseURL = $url;
+                $suffix = 'fastreed';
+                if($this->checkUrl($url, $storyID)) {
+                   $url = $baseURL . '-' . $suffix;
+                }
+              }
+              $metaData['url'] = $url;
+              $decodeData = json_decode($data['data'], true);
+              $decodeData['metaData'] = $metaData;
+              $version = $data['version'];
+              $storyStatus = ['status'=>'published', 'version'=>$version];
+              $verifyStatus = ['status'=>'none', 'version'=>$version];
+              $storyStatus = json_encode($storyStatus);
+              $verifyStatus = json_encode($verifyStatus);
+              $storyData = json_encode($decodeData,true);
+              if ($this->checkStoryMetaExists($storyID)) {
+                  $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                  $result = mysqli_query($this->DB, $sql);
+                  $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
+                  $result1 = mysqli_query($this->DB, $sql1);
+                  if ($result && $result1) {
+                      showMessage(true, "$url");
                   }else{
-                      showMessage(false, 'Not an admin');
-                  }
-              }else if($data['whois'] == 'User'){
-                  if ($UID = $this->userData->getSelfDetails()['UID']) {
-                      if (isset($data['data']) && !empty($data['data'])) {
-                          if (isset($data['metaData']) && !empty($data['metaData'])) {
-                              $metaData = json_decode($data['metaData'], true);
-                              $title = $metaData['title'];
-                              $url = $metaData['url'];
-                              $description = $metaData['description'];
-                              $category = $metaData['category'];
-                              $keywords = $metaData['keywords'];
-                              $storyID = $data['storyID'];
-                              $storyData = $data['data'];
-                              $phpTimestamp = time(); // Get current Unix timestamp in seconds
-                              $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
-                              if (!empty($url)) {
-                                $baseURL = $url;
-                                $suffix = 'fastreed';
-                                if($this->checkUrl($url, $storyID)) {
-                                   $url = $baseURL . '-' . $suffix;
-                                }
-                              }
-                              $metaData['url'] = $url;
-                              $decodeData = json_decode($data['data'], true);
-                              $decodeData['metaData'] = $metaData;
-                              $version = $data['version'];
-                              $storyStatus = ['status'=>'published', 'version'=>$version];
-                              $verifyStatus = ['status'=>'none', 'version'=>$version];
-                              $storyStatus = json_encode($storyStatus);
-                              $verifyStatus = json_encode($verifyStatus);
-                              $storyData = json_encode($decodeData,true);
-                              if ($this->checkStoryMetaExists($storyID)) {
-                                  $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
-                                  $result = mysqli_query($this->DB, $sql);
-                                  $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
-                                  $result1 = mysqli_query($this->DB, $sql1);
-                                  if ($result && $result1) {
-                                      showMessage(true,  "$url");
-                                  }else{
-                                      showMessage(false, 'Can not Update 1');
-                                  }
-                              }else{
-                                  $sql2 = "INSERT INTO metaData(`category`, `postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$category','$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
-                                  $result2 = mysqli_query($this->DB, $sql2);
-                                  $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
-                                  $result3 = mysqli_query($this->DB, $sql3);
-                                  if ($result2 && $result3) {
-                                      showMessage(true, 'Updated 2');
-                                  }else{
-                                      showMessage(false, 'Can not Update 2');
-                                  }
-                              }
-                          }else{
-                              showMessage(false, 'No updated metadata');
-                          }
-                      }else{
-                          showMessage(false, 'No updated data');
-                      }
-                  }else{
-                      showMessage(false, 'Incorrect Username');
+                      showMessage(false, 'Can not Edit and save');
                   }
               }else{
-                  showMessage(false, 'Specify who are you?');
+                  $sql2 = "INSERT INTO metaData(`postID`, `title`, `description`, `keywords`, `url`, `moniStatus`, `category`) Values('$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus', '$category')";
+                  $result2 = mysqli_query($this->DB, $sql2);
+                  $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                  $result3 = mysqli_query($this->DB, $sql3);
+                  if ($result2 && $result3) {
+                      showMessage(true, "$url");
+                  }else{
+                      showMessage(false, 'Can not Update');
+                  }
               }
-            }else{
-                showMessage(false, "$metaData[0]");
+            }
+          }else if($data['whois'] == 'User'){
+              if (!$this->userData->getSelfDetails()['UID']) {
+                  showMessage(false, 'Incorrect Username');
+              }else if (!isset($data['data']) || empty($data['data'])) {
+                  showMessage(false, 'No updated data');
+              }else if (!isset($data['metaData']) || empty($data['metaData'])) {
+                showMessage(false, 'No updated metadata');
+              }else{
+                $UID = $this->userData->getSelfDetails()['UID'];
+                $metaData = json_decode($data['metaData'], true);
+                $title = $metaData['title'];
+                $url = $metaData['url'];
+                $description = $metaData['description'];
+                $category = $metaData['category'];
+                $keywords = $metaData['keywords'];
+                $storyID = $data['storyID'];
+                $storyData = $data['data'];
+                $phpTimestamp = time(); // Get current Unix timestamp in seconds
+                $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
+                if (!empty($url)) {
+                  $baseURL = $url;
+                  $suffix = 'fastreed';
+                  if($this->checkUrl($url, $storyID)) {
+                     $url = $baseURL . '-' . $suffix;
+                  }
+                }
+                $metaData['url'] = $url;
+                $decodeData = json_decode($data['data'], true);
+                $decodeData['metaData'] = $metaData;
+                $version = $data['version'];
+                $storyStatus = ['status'=>'published', 'version'=>$version];
+                $verifyStatus = ['status'=>'none', 'version'=>$version];
+                $storyStatus = json_encode($storyStatus);
+                $verifyStatus = json_encode($verifyStatus);
+                $storyData = json_encode($decodeData,true);
+                if ($this->checkStoryMetaExists($storyID)) {
+                    $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result = mysqli_query($this->DB, $sql);
+                    $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
+                    $result1 = mysqli_query($this->DB, $sql1);
+                    if ($result && $result1) {
+                        showMessage(true,  "$url");
+                    }else{
+                        showMessage(false, 'Can not Update 1');
+                    }
+                }else{
+                    $sql2 = "INSERT INTO metaData(`category`, `postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$category','$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
+                    $result2 = mysqli_query($this->DB, $sql2);
+                    $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                    $result3 = mysqli_query($this->DB, $sql3);
+                    if ($result2 && $result3) {
+                        showMessage(true, 'Updated 2');
+                    }else{
+                        showMessage(false, 'Can not Update 2');
+                    }
+                }
             }
           }else{
-            showMessage(false, "$layers[0]");
+              showMessage(false, 'Specify who are you?');
           }
-        }else{
-          $this->saveStory();
-        }
     }
     private function draftStory(){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -650,7 +650,7 @@ class Webstories{
                               $sql1 = "UPDATE metaData set `category` = '$category', `moniStatus`='$verifyStatus', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url' WHERE `postID` = '$storyID'";
                               $result1 = mysqli_query($this->DB, $sql1);
                               if ($result && $result1) {
-                                  showMessage(true, 'Edited 1');
+                                  showMessage(true, 'Saved 1');
                               }else{
                                   showMessage(false, 'Can not Edit and save');
                               }
@@ -660,7 +660,7 @@ class Webstories{
                               $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
                               $result3 = mysqli_query($this->DB, $sql3);
                               if ($result2 && $result3) {
-                                  showMessage(true, 'Edited 2');
+                                  showMessage(true, 'Saved 2');
                               }else{
                                   showMessage(false, 'Can not Edit');
                               }
@@ -715,7 +715,7 @@ class Webstories{
                             $sql1 = "UPDATE metaData set `category` = '$category', `moniStatus` = '$verifyStatus',`title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url' WHERE `postID` = '$storyID'";
                             $result1 = mysqli_query($this->DB, $sql1);
                             if ($result && $result1) {
-                                showMessage(true, 'Edited 1');
+                                showMessage(true, 'Saved 3');
                             }else{
                                 showMessage(false, 'Can not Edit and save');
                             }
@@ -725,7 +725,7 @@ class Webstories{
                             $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
                             $result3 = mysqli_query($this->DB, $sql3);
                             if ($result2 && $result3) {
-                                showMessage(true, 'Edited 2');
+                                showMessage(true, 'Saved 4');
                             }else{
                                 showMessage(false, 'Can not Edit');
                             }
@@ -808,75 +808,86 @@ class Webstories{
         $images[$i] = $pathSegments[3];
         $images[$i] = strtok($images[$i], '.');
       }
+      $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
+      $checkImages = $this->checkImages($images);
       $metaData = $this->checkMetaData($dataArray);
       $storyID = $data['storyID'];
       $phpTimestamp = time(); // Get current Unix timestamp in seconds
       $lastEdit = $phpTimestamp * 1000; // Convert to milliseconds
-      if (!count($layers)) {
-        if (!count($metaData)) {
-          if($this->updateMeta($dataArray['metaData'], $storyID)){
-            if ($this->checkStoryPublished($storyID)) {
-              $url = $dataArray['metaData']['url'];
-              $baseURL =$url ;
-              $suffix = 'fastreed';
-              if($this->checkUrl($url , $storyID)) {
-                 $url  = $baseURL . '-' . $suffix;
-              }
-              $dataArray['metaData']['url'] = $url;
-              // Updatiing story data
-              $dataArray['storyStatus'] = 'published';
-              $storyStatus = ['status'=>'published', 'version'=>$version];
-              $storyStatus =json_encode($storyStatus,true);
-              $storyData = json_encode($dataArray,true);
-              $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus', access = 'public'  WHERE storyID = '$storyID'";
-              $result3 = mysqli_query($this->DB, $sql3);
-              if ($result3) {
-                if ($this->makePublic($images)) {
-                  showMessage(true, "$url");
-                }else{
-                  showMessage(false, "Problem at our end");
-                }
-              }else{
-                showMessage(false, "Problem at our end");
-              }
-            }else{
-              $url = $dataArray['metaData']['url'];
-              $baseURL =$url ;
-              $suffix = 'fastreed';
-              if($this->checkUrl($url , $storyID)) {
-                 $url  = $baseURL . '-' . $suffix;
-              }
-              $dataArray['metaData']['url'] = $url;
+      if (count($layers)) {
+          showMessage(false, "$layers[0]");
+          return;
+      }
 
-              // Updatiing story data
+      if (count($metaData)) {
+          showMessage(false, "$metaData[0]");
+          return;
+      }
+
+      if (count($checkImages)) {
+          showMessage(false, "$checkImages[0]");
+          return;
+      }
+
+      if ($checkingRelatedStoryLink) {
+          showMessage(false, "$checkingRelatedStoryLink");
+          return;
+      }
+      if ($this->updateMeta($dataArray['metaData'], $storyID)) {
+          if ($this->checkStoryPublished($storyID)) {
+              $url = $dataArray['metaData']['url'];
+              $baseURL = $url;
+              $suffix = 'fastreed';
+
+              if ($this->checkUrl($url, $storyID)) {
+                  $url = $baseURL . '-' . $suffix;
+              }
+
+              $dataArray['metaData']['url'] = $url;
               $dataArray['storyStatus'] = 'published';
-              $storyStatus = ['status'=> 'published', 'version'=> $dataArray['version']];
-              $storyStatus =json_encode($storyStatus,true);
-              $storyData = json_encode($dataArray,true);
+              $storyStatus = ['status' => 'published', 'version' => $version];
+              $storyStatus = json_encode($storyStatus, true);
+              $storyData = json_encode($dataArray, true);
+              $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus', access = 'public'  WHERE storyID = '$storyID";
+              $result3 = mysqli_query($this->DB, $sql3);
+
+              if (!$result3 || !$this->makePublic($images)) {
+                  showMessage(false, "Problem at our end");
+                  return;
+              }
+
+              showMessage(true, "$url");
+          } else {
+              $url = $dataArray['metaData']['url'];
+              $baseURL = $url;
+              $suffix = 'fastreed';
+
+              if ($this->checkUrl($url, $storyID)) {
+                  $url = $baseURL . '-' . $suffix;
+              }
+
+              $dataArray['metaData']['url'] = $url;
+              $dataArray['storyStatus'] = 'published';
+              $storyStatus = ['status' => 'published', 'version' => $dataArray['version']];
+              $storyStatus = json_encode($storyStatus, true);
+              $storyData = json_encode($dataArray, true);
               $sql3 = "UPDATE stories set storyData = '$storyData',  firstEdit = '$lastEdit', lastEdit = '$lastEdit', storyStatus = '$storyStatus', access = 'public'  WHERE storyID = '$storyID'";
               $result3 = mysqli_query($this->DB, $sql3);
-              if ($result3) {
-                if ($this->makePublic($images)) {
-                  showMessage(true, "$url");
-                }else{
+
+              if (!$result3 || !$this->makePublic($images)) {
                   showMessage(false, "Problem at our end");
-                }
-              }else{
-                showMessage(false, "Problem at our end");
+                  return;
               }
-            }
-          }else{
-            showMessage(false, "Problem at our end");
+
+              showMessage(true, "$url");
           }
-        }else{
-            showMessage(false, "$metaData[0]");
-        }
-      }else{
-        showMessage(false, "$layers[0]");
+      } else {
+          showMessage(false, "Problem at our end");
       }
+
     }
     public function checkStoryPublished($id){
-      $published = false;
+      $checkPublished = false;
       $sql = "SELECT * FROM stories WHERE storyID = '$id'";
       $result = mysqli_query($this->DB, $sql);
       if ($result) {
@@ -884,10 +895,10 @@ class Webstories{
         $storyStatus = $row['storyStatus'];
         $storyStatus = json_decode($storyStatus, true);
         if ($storyStatus['status'] == 'published') {
-          $published = true;
+          $checkPublished = true;
         }
       }
-      return $published;
+      return $checkPublished;
     }
     private function makePublic($images){
       $images = array_unique($images);
@@ -1081,6 +1092,84 @@ class Webstories{
       }
       return $return;
     }
+    private function checkImages($imageArray){
+      $errorArray = [];
+      for ($i=0; $i < count($imageArray); $i++) {
+        $image = $imageArray[$i];
+        $sql = "SELECT * FROM uploads WHERE uploadID = '$image'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $status = $row['status'];
+          if ($status == 'VLD') {
+            $layerNo = $i+1;
+            array_push($errorArray, "The media used in Layer {$layerNo} voilates our community guidelines. <br> Please respect our community guidelines. ");
+          }
+        }
+      }
+      return  $errorArray;
+    }
+    private function checkRelatedStoryLink($dataArray){
+        $metaData = $dataArray['metaData'];
+        if (!isset($metaData['relatedStory']) || empty($metaData['relatedStory'])) {
+            return false;
+        }else{
+          $relatedStory = $metaData['relatedStory'];
+          $url = preg_replace('#^https?://#', '', $relatedStory);
+          $parts = explode('/', $url);
+          $baseURL = $parts[0];
+          $baseURL = preg_replace('#^www\.#', '', $baseURL);
+          if (strpos($baseURL, 'fastreed.com') == false) {
+            $urlError = "Other web-links are not allowed in related story";
+          }else{
+            $url = preg_replace('#^https?://#', '', $relatedStory);
+            $parts = explode('/', $url);
+            if (!in_array('webstories', $parts)) {
+              $urlError = "Wrong URL used in related story link. It should have <i> /webstories/</i> path";
+            }else{
+              $url = preg_replace('#^https?://#', '', $relatedStory);
+               $parts = explode('/', $url);
+               $lastPart = end($parts);
+               if($this->getStoryWithURL($lastPart, 'onlyCheck')){
+                 $urlError = false;
+               }else{
+                 $urlError = "No visual story found with this url : <i>$relatedStory</i>";
+               }
+            }
+          }
+        }
+
+        return $urlError;
+    }
+
+    private function getStoryWithURL($URL, $other){
+      $story  = array();
+      $sql = "SELECT * FROM metaData WHERE url = '$URL'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        if (mysqli_num_rows($result)) {
+          if ($other == 'onlyCheck') {
+            return true;
+          }
+          $row = mysqli_fetch_assoc($result);
+          $storyID = $row['postID'];
+          $storyDescription = $row['description'];
+          $storyTitle = $row['title'];
+          $sql1 = "SELECT * FROM stories WHERE storyID = '$storyID'";
+          $result1 = mysqli_query($this->DB, $sql1);
+          if ($result1) {
+            if (mysqli_num_rows($result1)) {
+                $row = mysqli_fetch_assoc($result1);
+                $row['title'] = $storyTitle;
+                $row['description'] = $storyDescription;
+                $story = $row;
+            }
+          }
+        }
+      }
+      return $story;
+    }
+
 
 }
 ?>

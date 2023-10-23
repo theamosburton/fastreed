@@ -78,7 +78,7 @@
                         <div class="buttonsDiv">
                             <div class="buttons" onclick="showPreview()"> Preview</div>
                             <div class="buttons" id="saveStory" onclick="editor.saveStory()">Save</div>
-                            <div class="buttons" id="publishStory" onclick="editor.publishStory()">Publish</div>
+                            <div class="buttons" id="publishStory" onclick="editor.publishStory(true)">Publish</div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                                   <div>
                                       <span>Related Story </span>
                                       <br>
-                                      <input onkeyup="edits.updateMetaData('')" class="value inputText text" type="text" id="relatedStoryLink" placeholder="type-your-webstory-link" value="">
+                                      <input onkeyup="editor.selectRelatedStoryWithLink(this)" class="value inputText text" type="text" id="relatedStoryLink" placeholder="https://www.fastreed.com/webstories/your-webstory-link" value="">
                                       <div class="storiesSectionError" id="storiesSectionError" style="display:none;">
                                         No Related Story Found!
                                       </div>

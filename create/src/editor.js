@@ -159,7 +159,7 @@ class Editor{
         publish.innerHTML = 'Draft';
         save.innerHTML = 'Update';
         publish.setAttribute('onclick', 'editor.draftStory()');
-        save.setAttribute('onclick', 'editor.updateStory()');
+        save.setAttribute('onclick', 'editor.publishStory(false)');
       }
       // console.log(jsObject);
       var browserData = window.localStorage.getItem(`${editor.storyID}`);
@@ -1114,6 +1114,7 @@ class Editor{
         for (var g = 0; g < otherStories.length; g++) {
           var storyData = JSON.parse(otherStories[g].storyData);
           var url = storyData.metaData.url;
+          url = 'https://www.fastreed.com/webstories/'+ url + '/';
           if (this.metaData.relatedStory == url) {
             var startIndex = 0;
             while (startIndex < g) {
@@ -1146,6 +1147,10 @@ class Editor{
             </div>
             `;
           }else{
+            if (storyData.metaData.url != '') {
+              document.getElementById('relatedStoryLink').value = storyData.metaData.url;
+            }
+
             storiesSection.innerHTML += `
             <div class="relatedStories"  style="background-image:url('${image}')">
               <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
@@ -1192,9 +1197,20 @@ class Editor{
 
     }
 
+    selectRelatedStoryWithLink(input){
+      var allStories = document.querySelectorAll('.relatedStoryTitle');
+      allStories.forEach((element) => {
+        if (element.querySelector('.storyOverlay')) {
+          element.querySelector('.storyOverlay').remove();
+        }
+      });
+      this.metaData.relatedStory = input.value;
+    }
     // Publishing
-  async publishStory(){
-    await this.saveStory();
+  async publishStory(z){
+    if (z == true) {
+        await this.saveStory();
+    }
       var saving = document.getElementById('publishStory');
       saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
       var alertCont = document.querySelector('.altertContainer');
@@ -1389,7 +1405,7 @@ class Editor{
            </div>
            <div class="progressBar">
                <div class="progressIcon">
-               <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+               <i class="fa-solid fa-triangle-exclamation"></i>
                </div>
            </div>
            <div class="progressExtra">
@@ -1410,12 +1426,14 @@ class Editor{
        </div>
        <div class="progressBar">
            <div class="progressIcon">
-           <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+           <i class="fa-solid fa-triangle-exclamation"></i>
            </div>
        </div>
        <div class="progressExtra">
        <div class="alert alert-warning" role="alert">
-          ${data.message}
+          An error occured!
+          <br> Can't publish your story at the moment.
+          <br> Please try again after sometime
        </div>
        </div>
      </div>`;
@@ -1721,7 +1739,7 @@ class Editor{
            </div>
            <div class="progressBar">
                <div class="progressIcon">
-               <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+               <i class="fa-solid fa-triangle-exclamation"></i>
                </div>
            </div>
            <div class="progressExtra">
@@ -1742,12 +1760,14 @@ class Editor{
        </div>
        <div class="progressBar">
            <div class="progressIcon">
-           <div class="spinner" style="width: 75px;height: 75px;border-width:6px;margin:0;">
+           <i class="fa-solid fa-triangle-exclamation"></i>
            </div>
        </div>
        <div class="progressExtra">
        <div class="alert alert-warning" role="alert">
-          ${data.message}
+       An error occured!
+       <br> Can't update your story at the moment.
+       <br> Please try again after sometime
        </div>
        </div>
      </div>`;
