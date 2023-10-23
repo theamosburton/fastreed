@@ -6,13 +6,20 @@ class FetchStories {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('filter')) {
       const filter = urlParams.get('filter');
-      if (filter != '' || filter == 'published' || filter == 'drafted' || filter == 'verified') {
+      if (filter != '' || filter == 'Published' || filter == 'Drafted' || filter == 'Verified') {
         this.filter = filter;
+        var selectedStoryTypes = document.querySelectorAll('.storiesTypes .storyType');
+        selectedStoryTypes.forEach((element) => {
+          element.selected = false;
+        });
+        if (document.getElementById(`type${filter}`)) {
+          document.getElementById(`type${filter}`).selected = true;
+        }
       }else{
-        this.filter = 'all';
+        this.filter = 'All';
       }
     }else{
-      this.filter = 'all';
+      this.filter = 'All';
     }
     var currentURL = window.location.href;
     var urlSegments = currentURL.split('/');
@@ -91,18 +98,18 @@ class FetchStories {
   renderWebstories(){
     var webstories = this.webstoriesData;
     webstories = webstories.reverse();
-    if (this.filter == 'all') {
+    if (this.filter == 'All') {
       var webstories = this.webstoriesData;
     }else if (this.filter == 'published') {
       var published = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][5]);
-        if (storyStatus.status == 'published') {
+        if (storyStatus.status == 'Published') {
           published.push(webstories[i]);
         }
       }
       webstories = published;
-    }else if (this.filter == 'drafted') {
+    }else if (this.filter == 'Drafted') {
       var drafted = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][5]);
@@ -111,7 +118,7 @@ class FetchStories {
         }
       }
       webstories = drafted;
-    }else if (this.filter == 'verified') {
+    }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][7]);

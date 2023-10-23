@@ -5,9 +5,9 @@
         <span id="reqCreation" onclick="InitializeWebstory('')"><i class="fa fa-solid fa-square-plus fa-lg"></i>
         </span>
         <div class="storiesTypeRightDiv">
-          <select class="storiesTypes" onchange="fetchStoriesData.filterWebstory(this)">
-            <option class="storyType" value="published">Published</option>
-            <option class="storyType" value="verified">Verified</option>
+          <select class="storiesTypes" id="storyTypes" onchange="fetchStoriesData.filterWebstory(this)">
+            <option class="storyType" id="typePublished" value="Published">Published</option>
+            <option class="storyType" id="typeVerified" value="Verified">Verified</option>
           </select>
         </div>
       </div>

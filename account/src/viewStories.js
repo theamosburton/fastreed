@@ -6,13 +6,21 @@ class FetchStories {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('filter')) {
       const filter = urlParams.get('filter');
-      if (filter != '' || filter == 'published' || filter == 'verified') {
+      if (filter != '' || filter == 'Published' || filter == 'Verified') {
         this.filter = filter;
+        var selectedStoryTypes = document.querySelectorAll('.storiesTypes .storyType');
+        selectedStoryTypes.forEach((element) => {
+          element.selected = false;
+        });
+        if (document.getElementById(`type${filter}`)) {
+          document.getElementById(`type${filter}`).selected = true;
+        }
+        document.getElementById('id')
       }else{
-        this.filter = 'all';
+        this.filter = 'All';
       }
     }else{
-      this.filter = 'all';
+      this.filter = 'All';
     }
     if (currentUsername) {
         this.visitedusername = currentUsername;
@@ -90,9 +98,9 @@ class FetchStories {
   renderWebstories(){
     var webstories = this.webstoriesData;
     webstories = webstories.reverse();
-    if (this.filter == 'all') {
+    if (this.filter == 'All') {
       var webstories = this.webstoriesData;
-    }else if (this.filter == 'published') {
+    }else if (this.filter == 'Published') {
       var published = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][5]);
@@ -101,7 +109,7 @@ class FetchStories {
         }
       }
       webstories = published;
-    }else if (this.filter == 'verified') {
+    }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][7]);
