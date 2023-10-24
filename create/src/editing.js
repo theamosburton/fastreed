@@ -13,9 +13,7 @@ class Edits{
   //Expanding Options
   expandOptions(className){
       var option = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .${className} .options`);
-
       var icon =   document.querySelector(`#styleBox${this.editor.presentLayerIndex} .${className} .upDownIcon`);
-      console.log(option);
       if (option.style.display == 'block') {
           option.style.display = 'none';
           icon.classList.add('fa-caret-right');
@@ -27,6 +25,22 @@ class Edits{
       }
 
   }
+
+  expandStaticOptions(className){
+      var option = document.querySelector(`#metaData .${className} .options`);
+      var icon =   document.querySelector(`#metaData .${className} .upDownIcon`);
+      if (option.style.display == 'block') {
+          option.style.display = 'none';
+          icon.classList.add('fa-caret-right');
+          icon.classList.remove('fa-caret-down');
+      }else{
+          icon.classList.add('fa-caret-down');
+          icon.classList.remove('fa-caret-right');
+          option.style.display = 'block';
+      }
+
+  }
+
 
   // Media Editing
   selectMedia(link, type, olink){

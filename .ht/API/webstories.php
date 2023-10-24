@@ -1119,9 +1119,7 @@ class Webstories{
           $parts = explode('/', $url);
           $baseURL = $parts[0];
           $baseURL = preg_replace('#^www\.#', '', $baseURL);
-          if (strpos($baseURL, 'fastreed.com') == false) {
-            $urlError = "Other web-links are not allowed in related story";
-          }else{
+          if (strpos($baseURL, 'fastreed.com') !== false) {
             $url = preg_replace('#^https?://#', '', $relatedStory);
             $parts = explode('/', $url);
             if (!in_array('webstories', $parts)) {
@@ -1136,6 +1134,8 @@ class Webstories{
                  $urlError = "No visual story found with this url : <i>$relatedStory</i>";
                }
             }
+          }else{
+            $urlError = "Other web-links are not allowed in related story";
           }
         }
 

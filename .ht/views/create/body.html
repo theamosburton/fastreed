@@ -90,19 +90,21 @@
 
                     <div class="objectOptions" id="metaData" style="display: none;">
                         <div class="objectOptionsbody">
-                          <div class="optionsDIv" id="">
-                              <div class="options">
-                                  <div>
-                                      <span>Related Story </span>
-                                      <br>
-                                      <input onkeyup="editor.selectRelatedStoryWithLink(this)" class="value inputText text" type="text" id="relatedStoryLink" placeholder="https://www.fastreed.com/webstories/your-webstory-link" value="">
-                                      <div class="storiesSectionError" id="storiesSectionError" style="display:none;">
-                                        No Related Story Found!
-                                      </div>
-                                      <div id="relatedStoriesSelection" style="display:none;">
-                                      </div>
-                                  </div>
-                              </div>
+                          <div class="optionsDIv relatedStorySection">
+                            <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                <span>Related Story (optional)</span>
+                                <i class="upDownIcon fa fa-caret-right"></i>
+                            </span>
+                            <div class="options" style="display:none">
+                                <div>
+                                    <input onkeyup="editor.selectRelatedStoryWithLink(this)" class="value inputText text" type="text" id="relatedStoryLink" placeholder="https://www.fastreed.com/webstories/your-webstory-link" value="">
+                                    <div class="storiesSectionError" id="storiesSectionError" style="display:none;">
+                                      No Related Story Found!
+                                    </div>
+                                    <div id="relatedStoriesSelection" style="display:none;">
+                                    </div>
+                                </div>
+                            </div>
                           </div>
 
 

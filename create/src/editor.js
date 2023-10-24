@@ -1148,7 +1148,7 @@ class Editor{
             `;
           }else{
             if (storyData.metaData.url != '') {
-              document.getElementById('relatedStoryLink').value = storyData.metaData.url;
+              document.getElementById('relatedStoryLink').value = this.metaData.relatedStory;
             }
 
             storiesSection.innerHTML += `

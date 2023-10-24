@@ -1012,6 +1012,9 @@ margin-top: 10px;
     font-weight: bolder;
     padding:0;
 }
+.webstoriesDiv .mtitle div:first-child{
+    overflow: auto;
+}
 .webstoriesDiv .mtitle div #reqCreation{
     border-radius: 5px;
 }
@@ -1035,6 +1038,7 @@ margin-top: 10px;
   justify-content: flex-end;
   align-items: center;
   width: -webkit-fill-available;
+  margin-left: 10px;
 }
 .storiesTypeRightDiv .storiesTypes{
   padding: 0px 10px;
@@ -1042,6 +1046,7 @@ margin-top: 10px;
   background: #5CC9D8;
   font-weight: bold;
   border-radius: 5px;
+  display: flex;
 }
 .webstoriesDiv .webstories{
     display: flex;
@@ -1198,6 +1203,9 @@ margin-top: 10px;
 }
 
 @media (max-width: 500px){
+  .webstoriesDiv .webstories {
+    margin-top: 10px;
+  }
     .mediaDiv .uploadDiv .uploadedFile {
         margin-right: 10px;
         margin-top: 10px;
