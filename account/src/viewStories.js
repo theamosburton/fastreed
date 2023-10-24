@@ -199,37 +199,21 @@ class FetchStories {
       <div class="webstory loading">
            <div class="fading-div" >
            </div>
-           <div class="options" style="border:0px" >
-             <div class="fading-div" style="margin:0; padding: 15px;" >
-             </div>
-            </div>
        </div>
 
        <div class="webstory loading">
             <div class="fading-div" >
             </div>
-            <div class="options" style="border:0px" >
-              <div class="fading-div" style="margin:0; padding: 15px;" >
-              </div>
-             </div>
         </div>
 
         <div class="webstory loading">
              <div class="fading-div" >
              </div>
-             <div class="options" style="border:0px" >
-               <div class="fading-div" style="margin:0; padding: 15px;" >
-               </div>
-              </div>
          </div>
 
          <div class="webstory loading">
               <div class="fading-div" >
               </div>
-              <div class="options" style="border:0px" >
-                <div class="fading-div" style="margin:0; padding: 15px;" >
-                </div>
-               </div>
           </div>
       `;
   }
