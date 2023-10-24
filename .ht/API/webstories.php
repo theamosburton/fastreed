@@ -208,7 +208,7 @@ class Webstories{
           if (!isset($data['username']) || empty($data['username'])) {
               showMessage(false, 'Username needed');
           }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-            $sql = "SELECT * FROM stories WHERE personID = '$UID'";
+            $sql = "SELECT * FROM stories WHERE personID = '$UID' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
             $result = mysqli_query($this->DB, $sql);
             if ($result) {
                $row = mysqli_fetch_all($result);

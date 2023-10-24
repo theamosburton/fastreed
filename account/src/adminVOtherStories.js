@@ -1,5 +1,5 @@
 var visitedusername = '';
-class FetchStories {
+class FetchAdminStories {
   constructor() {
     this.visitedusername = '';
     this.webstoriesData = [];
@@ -248,4 +248,4 @@ class FetchStories {
   }
 }
 
-var fetchStoriesData = new FetchStories();
+var fetchStoriesDataAdmin = new FetchAdminStories();

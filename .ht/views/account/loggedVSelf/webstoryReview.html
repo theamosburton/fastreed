@@ -1,1 +1,33 @@
+<div class="title">
+  <select id="shuffleStoryType" onchange="shuffleStoryType()">
+    <option id="newOption" value="none">New</option>
+    <option id="verifyOption" value="true">Verified</option>
+    <option id="rejectOption" value="false">Rejected</option>
+  </select>
+</div>
+<div class="reviewStoriesDiv" id="reviewStoriesDiv">
+  <div class="contentTopics">
+    <div class="storyBox" id="storybox0">
+      <div class="visibleArea">
+        <div class="imageDiv">
+          <img src="/assets/img/port1.png" alt="">
+          <div class="storyStatus">
+            <i class="fa-solid fa-earth" style="color:orange;"></i>
+          </div>
 
+        </div>
+        <div class="otherInfoDiv">
+          <div class="title">
+            <span></span>
+          </div>
+          <div class="about">
+            <div class="buttons" onclick="viewStory()"> <i class="fa fa-eye"></i></div>
+            <div class="buttons" onclick="editStory()"><i class="fa fa-pen-to-square"></i></div>
+            <div class="buttons" id="rejectStory0" onclick="storyAction('reject', '0')"> <i class="fa-solid fa-xmark"></i></div>
+            <div class="buttons" id="acceptStory0" onclick="storyAction('accept', '0')"> <i class="fa-solid fa-check"></i></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
