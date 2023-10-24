@@ -1012,7 +1012,7 @@ margin-top: 10px;
     font-weight: bolder;
     padding:0;
 }
-.webstoriesDiv .mtitle div:first-child{
+.webstoriesDiv .mtitle .topBarMenus{
     overflow: auto;
 }
 .webstoriesDiv .mtitle div #reqCreation{

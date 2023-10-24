@@ -976,9 +976,9 @@ class Editor{
                     <div class="titleStyles optionsDIv">
                         <span class="objectName" onclick="edits.expandOptions('titleStyles')">
                             <span>Title</span>
-                            <i class="upDownIcon fa fa-caret-right"></i>
+                            <i class="upDownIcon fa fa-caret-down"></i>
                         </span>
-                        <div class="options" style="display:none;">
+                        <div class="options" style="display:block;">
                             <div class="div">
                                 <span>Font weight</span>
                                 <select onchange="edits.changeFontWeight()" class="titleFontWeight value inputText">
