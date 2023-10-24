@@ -161,7 +161,7 @@ body{
     margin: 0px;
 }
 .editContainer .editorSection .editorNav{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     width: calc(10*25px);
     display: flex;
     flex-direction: row;
@@ -1004,6 +1004,9 @@ font-weight: bold;
         min-height: calc(16*1.95rem);
         margin-top: 25px;
     }
+    .editContainer .editorSection .editorNav{
+        margin-bottom: 30px;
+      }
     .editContainer .editorSection {
         justify-content: flex-start;
         /* padding-top: 10%; */
