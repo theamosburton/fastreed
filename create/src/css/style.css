@@ -1002,7 +1002,7 @@ font-weight: bold;
         width: calc(9*2rem);
         height: calc(16*1.95rem);
         min-height: calc(16*1.95rem);
-        margin-top: 14px;
+        margin-top: 25px;
     }
     .editContainer .editorSection {
         justify-content: flex-start;
@@ -1010,7 +1010,7 @@ font-weight: bold;
     }
     .navSection{
       width: calc(9*1.9rem);
-      margin-bottom: -27px;
+      margin-bottom: -34px;
     }
 }
 
