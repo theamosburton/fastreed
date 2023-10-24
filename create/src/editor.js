@@ -1018,6 +1018,8 @@ class Editor{
                     </div>
                     <!-- Text Styles -->
                     ${otherTextStyle}
+                    <div style="height:100px;padding:10px;">
+                    </div>
             </div>
         `;
         styleBox.appendChild(styleBoxn);
