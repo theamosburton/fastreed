@@ -43,14 +43,41 @@ class storyPreview{
            $unixLastGMT = $this->istToGMT($data['lastEdit']);
            $unixFirstGMT = $this->istToGMT($data['firstEdit']);
            $noIndex = $data['noIndex'];
+           $metaData = $layers['metaData'];
+           if (!empty($metaData['relatedStory']) || isset($metaData['relatedStory'])) {
+             $url = $metaData['relatedStory'];
+             $urlParts = parse_url($url);
+             $path = $urlParts['path'];
+             $lastPath = basename($path);
+             if($this->getWebstoryData($lastPath)){
+               $relatedStoryData = $this->getWebstoryData($lastPath);
+             }else{
+               $relatedStoryData = '';
+             }
+           }else{
+             $relatedStoryData = '';
+           }
 
            // $unixLastGMT = $data['lastEdit'];
            // $unixFirstGMT = $data['firstEdit'];
 
            $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
            $firstmod = gmdate("D, d M Y H:i:s", $unixFirstGMT) . " GMT";
+
+           if (empty($relatedStoryData) || $relatedStoryData == '') {
+             echo "<script>
+             var storyData = ".$JSONlayers.";
+             var relatedStory = '';
+             </script>";
+           }else{
+             echo "<script>
+             var storyData = ".$JSONlayers.";
+             var relatedStory = ".json_encode($relatedStoryData).";
+             </script>";
+           }
            echo "<script>
            var storyData = ".$JSONlayers.";
+           var relatedStory = ".json_encode($relatedStoryData).";
            </script>";
 
            include '../.ht/views/webstories/index.html';
@@ -69,6 +96,7 @@ class storyPreview{
          if ($result) {
            if (mysqli_num_rows($result)) {
              $row = mysqli_fetch_assoc($result);
+
              $postID = $row['postID'];
              $title = $row['title'];
              $description = $row['description'];
@@ -77,12 +105,12 @@ class storyPreview{
              $moniStat = $row['moniStatus'];
              $moniStat = json_decode($moniStat);
              $moniStat = $moniStat->status;
-             $row = mysqli_fetch_assoc($result);
              $sql1 = "SELECT * FROM stories WHERE storyID = '$postID'";
              $result1 = mysqli_query($this->DB, $sql1);
              if ($result1) {
                if (mysqli_num_rows($result1)) {
                   $webstoryData = mysqli_fetch_assoc($result1);
+                  unset($webstoryData['personID']);
                   $webstoryData['title'] = $title;
                   $webstoryData['description'] = $description;
                   $webstoryData['url'] = $url;

@@ -49,6 +49,11 @@ class storyPreview{
            }else{
              $data = $this->webstoryExists()['storyData'];
              $phpData = json_decode($data, true);
+             if ($this->webstoryExists()['relatedStory']) {
+               $relatedStoryData = $this->webstoryExists()['relatedStory'];
+             }else{
+                $relatedStoryData = '';
+             }
              // var_dump($phpData);
              if ($phpData['metaData']['title'] == '') {
                $message = 'Title not given';
@@ -58,6 +63,7 @@ class storyPreview{
                $title = $phpData['metaData']['title'];
                echo "<script>
                var storyData = ".$this->webstoryExists()['storyData'].";
+               var relatedStory = ".json_encode($relatedStoryData).";
                </script>";
                 include '../../.ht/views/preview/preview.html';
              }
@@ -93,10 +99,60 @@ class storyPreview{
          if ($result) {
              if (mysqli_num_rows($result)) {
                  $return = mysqli_fetch_assoc($result);
-                 // $return = $row['storyData'];
+                 $storyData = $return['storyData'];
+                 $storyData = json_decode($storyData, true);
+                 $relatedStory = $storyData['metaData']['relatedStory'];
+                 $urlParts = parse_url($relatedStory);
+                 $path = $urlParts['path'];
+                 $lastPath = basename($path);
+                 if($this->getWebstoryData($lastPath)){
+                   $return['relatedStory'] = $this->getWebstoryData($lastPath);
+                 }
              }
          }
          return $return;
+       }
+
+       function getWebstoryData($link){
+         $return = false;
+         $sql = "SELECT * FROM metaData WHERE url = '$link'";
+         $result = mysqli_query($this->DB_CONN, $sql);
+         if ($result) {
+           if (mysqli_num_rows($result)) {
+             $row = mysqli_fetch_assoc($result);
+
+             $postID = $row['postID'];
+             $title = $row['title'];
+             $description = $row['description'];
+             $url = $row['url'];
+             $keywords = $row['keywords'];
+             $moniStat = $row['moniStatus'];
+             $moniStat = json_decode($moniStat);
+             $moniStat = $moniStat->status;
+             $sql1 = "SELECT * FROM stories WHERE storyID = '$postID'";
+             $result1 = mysqli_query($this->DB_CONN, $sql1);
+             if ($result1) {
+               if (mysqli_num_rows($result1)) {
+                  $webstoryData = mysqli_fetch_assoc($result1);
+                  unset($webstoryData['personID']);
+                  $webstoryData['title'] = $title;
+                  $webstoryData['description'] = $description;
+                  $webstoryData['url'] = $url;
+                  $webstoryData['keywords'] = $keywords;
+                  if ($moniStat == "false" || $moniStat == "none") {
+                    $webstoryData['noIndex'] = '<meta name="robots" content="noindex">';
+                  }else{
+                    $webstoryData['noIndex'] = '';
+                  }
+                  $return = $webstoryData;
+               }
+             }
+           }
+         }
+         return $return;
+       }
+
+       function getRelatedWebstory($link){
        }
 
 

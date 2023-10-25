@@ -188,6 +188,7 @@ story.appendChild(ampStory);
 var totalLayers = Object.keys(storyData.layers).length;
 for (let  i= 0; i < totalLayers; i++) {
   if (i == 0) {
+    var objectFit  = storyData.layers['L'+i].media.styles.mediaFit;
     ampStory.innerHTML += `<amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_1_Template_id_4">
       <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
         <div class="NWSStory-layers NWSStory-layers--fixed"></div>
@@ -195,7 +196,7 @@ for (let  i= 0; i < totalLayers; i++) {
           <div class="NWSStory-layers-group NWSStory-layers-group--media">
             <div class="NWSStory-layer NWSStory-layer--img">
               <div class="NWSStory-layer-content">
-                <amp-img src=${mainPoster} class=" zoom-in " alt="Shilpa Shetty " title="Shilpa Shetty " layout="flex-item"></amp-img>
+                <amp-img src=${mainPoster} class="" id ="storyImage${i}" object-fit = ${objectFit}" layout="flex-item"></amp-img>
               </div>
             </div>
           </div>
@@ -215,6 +216,7 @@ for (let  i= 0; i < totalLayers; i++) {
       </amp-story-grid-layer>
     </amp-story-page>`;
   }else if(storyData.layers['L'+ i].media.type == "video"){
+    var objectFit  = storyData.layers['L'+i].media.styles.mediaFit;
     if (storyData.layers['L'+i].media.url == "" ||  storyData.layers['L'+i].media.url == "default") {
       var backgroundVideo  ="";
       var poster= "/assets/img/default.jpeg";
@@ -249,8 +251,10 @@ for (let  i= 0; i < totalLayers; i++) {
                   width="auto"
                   height="auto"
                   poster="${poster}"
+                  object-fit="${objectFit}"
                   controls
-                  class=" zoom-in "
+                  class=" zoom-in"
+                  id ="storyImage${i}"
                   >
                   <source src="${backgroundVideo}" type="video/mp4">
                 </amp-video>
@@ -275,6 +279,7 @@ for (let  i= 0; i < totalLayers; i++) {
     }else{
       var backgroundImage = storyData.layers['L'+i].media.url;
     }
+
     let text = `<div style="padding:15px 30px 24px"></div>`;
     if (storyData.layers['L' +i].otherText.text != '') {
       text = `<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
@@ -291,7 +296,7 @@ for (let  i= 0; i < totalLayers; i++) {
 						<div class="NWSStory-layers-group NWSStory-layers-group--media">
 							<div class="NWSStory-layer NWSStory-layer--img">
 								<div class="NWSStory-layer-content">
-									<amp-img src="${backgroundImage}" class=" zoom-in" alt="FastX " title="FastX " layout="flex-item"></amp-img>
+									<amp-img src="${backgroundImage}" id ="storyImage${i}" class=" zoom-in" alt="FastX " title="FastX " layout="flex-item"></amp-img>
 								</div>
 							</div>
 						</div>

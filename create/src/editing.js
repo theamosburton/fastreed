@@ -300,13 +300,29 @@ class Edits{
     if (x == 'select') {
       var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .titleFontSize`);
       var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
-      applyto.style.fontSize = `${fontSize.value}`;
+      var appliedSize = parseFloat(fontSize.value);
+      if (appliedSize > 25) {
+        var percent  = (47 * appliedSize) / 100;
+        appliedSize = appliedSize - percent;
+        appliedSize = `${appliedSize}px`;
+        applyto.style.fontSize = appliedSize;
+      }else{
+        applyto.style.fontSize = fontSize.value;
+      }
       this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
     }else{
       var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customFontSize`);
       var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
-      applyto.style.fontSize = `${fontSize.value}`;
-      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize = `${fontSize.value}`;
+      var appliedSize = parseFloat(fontSize.value);
+      if (appliedSize > 30) {
+        var percent  = (47 * appliedSize) / 100;
+        appliedSize = appliedSize - percent;
+        appliedSize = `${appliedSize}px`;
+        applyto.style.fontSize = appliedSize;
+      }else{
+        applyto.style.fontSize = fontSize.value;
+      }
+      this.editor.layers['L' + this.editor.presentLayerIndex].title.fontSize =  `${fontSize.value}`;
     }
     if (this.version+1 == editor.version) {
     this.version += 1;
@@ -355,12 +371,28 @@ class Edits{
     if (x == 'select') {
       var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .otherFontSize`);
       var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
-      applyto.style.fontSize = `${fontSize.value}`;
+      var appliedSize = parseFloat(fontSize.value);
+      if (appliedSize > 250) {
+        var percent  = (47 * appliedSize) / 100;
+        appliedSize = appliedSize - percent;
+        appliedSize = `${appliedSize}px`;
+        applyto.style.fontSize = appliedSize;
+      }else{
+        applyto.style.fontSize = `${fontSize.value}`;
+      }
       this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
     }else{
       var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customOtherFontSize`);
       var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
-      applyto.style.fontSize = `${fontSize.value}`;
+      var appliedSize = parseFloat(fontSize.value);
+      if (appliedSize > 30) {
+        var percent  = (47 * appliedSize) / 100;
+        appliedSize = appliedSize - percent;
+        appliedSize = `${appliedSize}px`;
+        applyto.style.fontSize = appliedSize;
+      }else{
+        applyto.style.fontSize = `${fontSize.value}`;
+      }
       this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
     }
     if (this.version+1 == editor.version) {

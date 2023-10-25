@@ -85,7 +85,7 @@ class Editor{
                                 "text":'',
                                 "fontFamily":"BebasNeue",
                                 "fontWeight":"1000",
-                                "fontSize":"20px"
+                                "fontSize":"30px"
                             },
                             'theme':'default'
                         };
@@ -243,7 +243,7 @@ class Editor{
                 "text":'',
                 "fontFamily":"Poppins-medium",
                 "fontWeight":"1000",
-                "fontSize":"20px"
+                "fontSize":"30px"
             },
             'theme':'default',
             'textVisibility': '',
@@ -251,7 +251,7 @@ class Editor{
               "text":'',
               "fontFamily":"Poppins-regular",
               "fontWeight":"400",
-              "fontSize":"16px"
+              "fontSize":"18px"
             }
         };
         var newLayer = document.createElement('div');
@@ -328,12 +328,10 @@ class Editor{
                   <i class="upDownIcon fa fa-caret-right"></i>
               </span>
               <div class="options" style="display:none;">
-
-
                   <div class="div">
                       <span>Font weight</span>
                       <select onchange="edits.changeOtherFontWeight()" class="otherFontWeight value inputText">
-                          <option value="lighter" selected>Light</option>
+                          <option value="lighter" selected>Lighter</option>
                           <option value="600">Bold</option>
                           <option value="1000">Bolder</option>
                       </select>
@@ -341,10 +339,10 @@ class Editor{
                   <div class="div">
                       <span>Font size</span>
                       <select onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
-                          <option value="medium">Medium</option>
-                          <option value="large">Large</option>
-                          <option value="small">Small</option>
-                          <option value="x-small">X-Smaller</option>
+                          <option value="18px">Medium</option>
+                          <option value="22px">Large</option>
+                          <option value="15px">Small</option>
+                          <option value="12px">X-Smaller</option>
                       </select>
                       <br/>
                       <span>Custom font size</span>
@@ -354,7 +352,9 @@ class Editor{
                   <div class="div">
                       <span>Font family</span>
                       <select onchange="edits.changeOtherFontFamily('select')"  class="otherFontFamily value inputText">
-                          <option value="inherit">Auto</option>
+                          <option selected value="Poppins-medium">Poppins-medium</option>
+                          <option value="Poppins-regular">Poppins-regular</option>
+                          <option value="BebasNeue">BebasNeue</option>
                           <option value="cursive">Cursive</option>
                           <option value="monospace">Monospace</option>
                           <option value="sans-serif">Sans-serif</option>
@@ -430,9 +430,9 @@ class Editor{
                             <div class="div">
                                 <span>Font size</span>
                                 <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
-                                    <option value="larger" selected>X-Larger</option>
+                                    <option value="30px" selected>Medium</option>
+                                    <option value="40px">Large</option>
+                                    <option value="50px">X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
@@ -443,7 +443,9 @@ class Editor{
                             <div class="div">
                                 <span>Font family</span>
                                 <select  onchange="edits.changeFontFamily('select')"  class="fontFamily value inputText">
-                                    <option value="inherit">Auto</option>
+                                    <option value="Poppins-medium">Poppins-medium</option>
+                                    <option selected value="Poppins-regular">Poppins-regular</option>
+                                    <option value="BebasNeue">BebasNeue</option>
                                     <option value="cursive">Cursive</option>
                                     <option value="monospace">Monospace</option>
                                     <option value="sans-serif">Sans-serif</option>
@@ -780,8 +782,8 @@ class Editor{
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
             var mfc = '', mff = '', mfn = '', mfcn = '', moc = '', moo = '', moa = '';
 
-            var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '';
-            var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offcs = '';
+            var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '', tffb ='', tffp = '', tffpm='';
+            var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offb = '', offcs = '', offp='', offpm = '';
 
             // Media //
             if (Object.keys(this.layers['L'+ j].media).length  != 0) {
@@ -805,11 +807,11 @@ class Editor{
             // Media //
 
             // Title //
-            if (this.layers['L'+ j].title.fontSize == 'larger') {
+            if (this.layers['L'+ j].title.fontSize == '50px') {
                 tfsxl = 'selected';
-            } else if (this.layers['L'+ j].title.fontSize == 'large') {
+            } else if (this.layers['L'+ j].title.fontSize == '40px') {
                 tfsl = 'selected';
-            } else if (this.layers['L'+ j].title.fontSize == 'medium') {
+            } else if (this.layers['L'+ j].title.fontSize == '30px') {
                 tfsm = 'selected';
             } else {
                 tfsc = this.layers['L'+ j].title.fontSize;
@@ -817,12 +819,16 @@ class Editor{
 
             if (this.layers['L'+ j].title.fontFamily == 'cursive') {
                 tffc = 'selected';
-            } else if (this.layers['L'+ j].title.fontFamily == 'inherit') {
-                tffa = 'selected';
             } else if (this.layers['L'+ j].title.fontFamily == 'monospace') {
                 tffm = 'selected';
             } else if (this.layers['L'+ j].title.fontFamily == 'sans-serif') {
                 tffs = 'selected';
+            } else if (this.layers['L'+ j].title.fontFamily == 'BebasNeue') {
+                tffb = 'selected';
+            }else if (this.layers['L'+ j].title.fontFamily == 'Poppins-regular') {
+                tffp = 'selected';
+            }else if (this.layers['L'+ j].title.fontFamily == 'Poppins-medium') {
+                tffpm = 'selected';
             } else {
                 tffcs = this.layers['L'+ j].title.fontFamily;
             }
@@ -838,13 +844,13 @@ class Editor{
 
             // Text //
             if (j != 0) {
-              if (this.layers['L'+ j].otherText.fontSize == 'medium') {
+              if (this.layers['L'+ j].otherText.fontSize == '18px') {
                   ofsm = 'selected';
-              } else if (this.layers['L'+ j].otherText.fontSize == 'large') {
+              } else if (this.layers['L'+ j].otherText.fontSize == '22px') {
                   ofsl = 'selected';
-              } else if (this.layers['L'+ j].otherText.fontSize == 'small') {
+              } else if (this.layers['L'+ j].otherText.fontSize == '15px') {
                   ofss = 'selected';
-              } else if (this.layers['L'+ j].otherText.fontSize == 'x-small') {
+              } else if (this.layers['L'+ j].otherText.fontSize == '12px') {
                   ofsxs = 'selected';
               } else {
                   ofsc = this.layers['L'+ j].otherText.fontSize;
@@ -854,12 +860,16 @@ class Editor{
 
             if (this.layers['L'+ j].otherText.fontFamily == 'cursive') {
                 offc = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontFamily == 'inherit') {
-                offa = 'selected';
             } else if (this.layers['L'+ j].otherText.fontFamily == 'monospace') {
                 offm = 'selected';
             } else if (this.layers['L'+ j].otherText.fontFamily == 'sans-serif') {
                 offs = 'selected';
+            } else if (this.layers['L'+ j].otherText.fontFamily == 'Poppins-regular') {
+                offp = 'selected';
+            }else if (this.layers['L'+ j].title.fontFamily == 'BebasNeue') {
+                offb = 'selected';
+            }else if (this.layers['L'+ j].title.fontFamily == 'Poppins-medium') {
+                offpm = 'selected';
             } else {
                 offcs = this.layers['L'+ j].otherText.fontFamily;
             }
@@ -899,10 +909,10 @@ class Editor{
                         <div class="div">
                             <span>Font size</span>
                             <select  onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
-                                <option  ${ofsm} value="medium">Medium</option>
-                                <option  ${ofsl} value="large">Large</option>
-                                <option ${ofss} value="small">Small</option>
-                                <option ${ofsxs} value="x-small">X-Smaller</option>
+                                <option  ${ofsm} value="18px">Medium</option>
+                                <option  ${ofsl} value="22px">Large</option>
+                                <option ${ofss} value="15px">Small</option>
+                                <option ${ofsxs} value="12px">X-Smaller</option>
                             </select>
                             <br/>
                             <span>Custom font size</span>
@@ -912,7 +922,9 @@ class Editor{
                         <div class="div">
                             <span>Font family</span>
                             <select onchange="edits.changeOtherFontFamily('select')"  class="otherFontFamily value inputText">
-                                <option ${offa} value="inherit">Auto</option>
+                                <option  ${offb} value="BebasNeue">BebasNeue</option>
+                                <option ${offp} value="Poppins-regular">Poppins-regular</option>
+                                <option ${offpm} value="Poppins-medium">Poppins-medium</option>
                                 <option  ${offc} value="cursive">Cursive</option>
                                 <option  ${offm} value="monospace">Monospace</option>
                                 <option  ${offs} value="sans-serif">Sans-serif</option>
@@ -992,9 +1004,9 @@ class Editor{
                             <div class="div">
                                 <span>Font size</span>
                                 <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
-                                    <option  ${tfsm} value="medium">Medium</option>
-                                    <option ${tfsl} value="large">Large</option>
-                                    <option ${tfsxl} value="larger">X-Larger</option>
+                                    <option  ${tfsm} value="30px">Medium</option>
+                                    <option ${tfsl} value="40px">Large</option>
+                                    <option ${tfsxl} value="50px">X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
@@ -1005,10 +1017,12 @@ class Editor{
                             <div class="div">
                                 <span>Font family</span>
                                 <select  onchange="edits.changeFontFamily('select')"  class="fontFamily value inputText">
-                                    <option ${tffa} value="inherit">Auto</option>
                                     <option ${tffc} value="cursive">Cursive</option>
+                                    <option ${tffp} value="Poppins-regular">Poppins-regular</option>
+                                    <option ${tffpm} value="Poppins-medium">Poppins-medium</option>
                                     <option ${tffm} value="monospace">Monospace</option>
                                     <option ${tffs} value="sans-serif">Sans-serif</option>
+                                    <option  ${tffb} value="BebasNeue">BebasNeue</option>
                                 </select>
                                 <br/>
                                 <span>Custom font family</span>
@@ -1036,24 +1050,32 @@ class Editor{
     applyStyleSheet(){
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
           // For front page and other
-            document.querySelector(`#layer${j} .titleText`).style.fontSize = this.layers['L'+ j].title.fontSize;
+            var frontTitle = parseFloat(this.layers['L'+ j].title.fontSize);
+            var percent  = (47 * frontTitle) / 100;
+            frontTitle = frontTitle - percent;
+            frontTitle = `${frontTitle}px`;
+            document.querySelector(`#layer${j} .titleText`).style.fontSize = frontTitle;
             document.querySelector(`#layer${j} .titleText`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
-            document.querySelector(`#layer${j} .titleText`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
+            document.querySelector(`#layer${j} .titleText`).style.fontWeight = `${this.layers['L'+ j].title.fontWeight}`;
 
             if (j != 0) {
               // Frr other pages only
-              var nm1 = parseFloat(this.layers['L'+ j].otherText.fontSize);
-              var nmm1 = nm1 - 6;
-              var otherText = nm1;
+              var otherText = parseFloat(this.layers['L'+ j].otherText.fontSize);
+              if (otherText > 30) {
+                 var percent  = (47 * otherText) / 100;
+                 otherText = otherText - percent;
+              }
 
-              var nm2 = parseFloat(this.layers['L'+ j].title.fontSize);
-              var nmm2 = nm2 - 6;
-              var title = nm2;
-              document.querySelector(`#layer${j} .otherText`).style.fontSize = otherText;
+              var title = parseFloat(this.layers['L'+ j].title.fontSize);
+              if (title > 20) {
+                var percent  = (47 * title) / 100;
+                title = title - percent;
+              }
+              document.querySelector(`#layer${j} .otherText`).style.fontSize = `${otherText}px`;
               document.querySelector(`#layer${j} .otherText`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
               document.querySelector(`#layer${j} .otherText`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;
 
-              document.querySelector(`#layer${j} .titleText`).style.fontSize = title;
+              document.querySelector(`#layer${j} .titleText`).style.fontSize = `${title}px`;
               document.querySelector(`#layer${j} .titleText`).style.fontFamily = `"${this.layers['L'+ j].title.fontFamily}"`;
               document.querySelector(`#layer${j} .titleText`).style.fontWeight = this.layers['L'+ j].title.fontWeight;
             }
