@@ -210,4 +210,130 @@ if (relatedStory != '') {
   			<a href="${relatedStoryUrl}" class="cls_shop_buy_button_8"><span>Read Full Story</span></a>
   		</amp-story-page-outlink>
   	</amp-story-page>`;
+}else {
+  var relatedStoryTitle = relatedStory.title;
+  var relatedStoryDescription = relatedStory.description;
+  var relatedStoryUrl = relatedStory.url;
+  var relatedStoryData = JSON.parse(relatedStory.storyData);
+  var relatedStoryImage = relatedStoryData.layers.L0.media.url;
+  relatedStoryUrl = '/webstories/'+ relatedStoryUrl;
+  ampStory.innerHTML += `
+   <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+  		<amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+  			<div class="NWSStory-layers NWSStory-layers--fixed"></div>
+  			<div class="NWSStory-layers NWSStory-layers--unfixed">
+  				<div class="NWSStory-layers-group NWSStory-layers-group--media">
+  					<div class="NWSStory-layer NWSStory-layer--img">
+  						<div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
+  							<div class="NWSStory-layer NWSStory-layer--img">
+  								<div class="NWSStory-layer-content">
+  									<amp-img src="${relatedStoryImage}" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  				<div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+  				<div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+  					<div style="width:100%;margin:0 auto 3.125rem auto">
+  						<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+  							<div style="background:linear-gradient(to right, #97c445, #319b3f);;width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+  							<h1 class="ipl-story-sub-headline m-b-15" style="font-size:1.4rem">${relatedStoryTitle}</h1>
+  						</div>
+  						<div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+  							<div style="color:#fff;font-weight:400" class="ipl-story-desc m-b-10">${relatedStoryDescription}</div>
+  						</div>
+  						<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+  							<p class="ipl-story-credit"></p>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</amp-story-grid-layer>
+  		<amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+  			<a href="${relatedStoryUrl}" class="cls_shop_buy_button_8"><span>Read Full Story</span></a>
+  		</amp-story-page-outlink>
+  	</amp-story-page>`;
+}else {
+  var relatedStoryTitle = relatedStory.title;
+  var relatedStoryDescription = relatedStory.description;
+  var relatedStoryUrl = relatedStory.url;
+  var relatedStoryData = JSON.parse(relatedStory.storyData);
+  var relatedStoryImage = relatedStoryData.layers.L0.media.url;
+  relatedStoryUrl = '/webstories/'+ relatedStoryUrl;
+  ampStory.innerHTML += `
+   <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+  		<amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+  			<div class="NWSStory-layers NWSStory-layers--fixed"></div>
+  			<div class="NWSStory-layers NWSStory-layers--unfixed">
+  				<div class="NWSStory-layers-group NWSStory-layers-group--media">
+  					<div class="NWSStory-layer NWSStory-layer--img">
+  						<div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
+  							<div class="NWSStory-layer NWSStory-layer--img">
+  								<div class="NWSStory-layer-content">
+  									<amp-img src="${relatedStoryImage}" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  				<div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+  				<div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+  					<div style="width:100%;margin:0 auto 3.125rem auto">
+  						<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+  							<div style="background:linear-gradient(to right, #97c445, #319b3f);;width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+  							<h1 class="ipl-story-sub-headline m-b-15" style="font-size:1.4rem">${relatedStoryTitle}</h1>
+  						</div>
+  						<div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+  							<div style="color:#fff;font-weight:400" class="ipl-story-desc m-b-10">${relatedStoryDescription}</div>
+  						</div>
+  						<div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+  							<p class="ipl-story-credit"></p>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</amp-story-grid-layer>
+  		<amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+  			<a href="${relatedStoryUrl}" class="cls_shop_buy_button_8"><span>Read Full Story</span></a>
+  		</amp-story-page-outlink>
+  	</amp-story-page>`;
+}else{
+  ampStory.innerHTML += `
+   <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+      <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+        <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+        <div class="NWSStory-layers NWSStory-layers--unfixed">
+          <div class="NWSStory-layers-group NWSStory-layers-group--media">
+            <div class="NWSStory-layer NWSStory-layer--img">
+              <div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
+                <div class="NWSStory-layer NWSStory-layer--img">
+                  <div class="NWSStory-layer-content">
+                    <amp-img src="/assets/img/screen.jpeg" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+          <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+            <div style="width:100%;margin:0 auto 3.125rem auto">
+              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+                <div style="background:linear-gradient(to right, #97c445, #319b3f);;width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+                <h1 class="ipl-story-sub-headline m-b-15" style="font-size:1.4rem">Do you want to write and publish story like this?</h1>
+              </div>
+              <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                <div style="color:#fff;font-weight:400" class="ipl-story-desc m-b-10">The creater access verification is opened you can request to become a creater. Creater can create and publish visual stories like this.</div>
+              </div>
+              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                <p class="ipl-story-credit"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </amp-story-grid-layer>
+      <amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+        <a href="/account/" class="cls_shop_buy_button_8"><span>Click Here</span></a>
+      </amp-story-page-outlink>
+    </amp-story-page>`;
 }
