@@ -345,18 +345,7 @@ class Edits{
     this.saveToBrowser();
   }
   editTitle(){
-    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);  var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
-    text.addEventListener('paste', function(e) {
-      // Prevent the default paste action
-      e.preventDefault();
-
-      // Get the plain text from the clipboard
-      const textdata = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-      // Insert the plain text into the span element
-      document.execCommand('insertText', false, textdata);
-    });
-
+    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
     this.editor.layers['L' + this.editor.presentLayerIndex].title.text = text.innerHTML;
     if (this.version+1 == editor.version) {
       this.version += 1;
@@ -414,16 +403,6 @@ class Edits{
   }
   editText(){
     var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
-    text.addEventListener('paste', function(e) {
-      // Prevent the default paste action
-      e.preventDefault();
-
-      // Get the plain text from the clipboard
-      const textdata = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-      // Insert the plain text into the span element
-      document.execCommand('insertText', false, textdata);
-    });
     const selection = window.getSelection();
     let range = selection.getRangeAt(0);
     let startOffset = range.startOffset;
