@@ -243,7 +243,7 @@ class Editor{
                 "text":'',
                 "fontFamily":"Poppins-medium",
                 "fontWeight":"1000",
-                "fontSize":"30px"
+                "fontSize":"20px"
             },
             'theme':'default',
             'textVisibility': '',
@@ -251,7 +251,7 @@ class Editor{
               "text":'',
               "fontFamily":"Poppins-regular",
               "fontWeight":"400",
-              "fontSize":"18px"
+              "fontSize":"10px"
             }
         };
         var newLayer = document.createElement('div');
@@ -339,10 +339,10 @@ class Editor{
                   <div class="div">
                       <span>Font size</span>
                       <select onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
-                          <option value="18px">Medium</option>
-                          <option value="22px">Large</option>
-                          <option value="15px">Small</option>
-                          <option value="12px">X-Smaller</option>
+                          <option value="19px">Large</option>
+                          <option value="16px">Medium</option>
+                          <option value="12px">Small</option>
+                          <option value="10px">X-Smaller</option>
                       </select>
                       <br/>
                       <span>Custom font size</span>
@@ -410,7 +410,7 @@ class Editor{
                     </div>
                     <!-- Media Options -->
 
-                    <!-- Text Styles -->
+                    <!-- title Styles -->
                     <div class="optionsDIv titleStyles">
                         <span class="objectName" onclick="edits.expandOptions('titleStyles')">
                             <span>Title</span>
@@ -430,9 +430,11 @@ class Editor{
                             <div class="div">
                                 <span>Font size</span>
                                 <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
-                                    <option value="30px" selected>Medium</option>
-                                    <option value="40px">Large</option>
-                                    <option value="50px">X-Larger</option>
+                                    <option value="17px">Small</option>
+                                    <option value="20px" selected>Normal</option>
+                                    <option value="25px">Medium</option>
+                                    <option value="33px">Large</option>
+                                    <option value="40px">X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
@@ -782,7 +784,7 @@ class Editor{
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
             var mfc = '', mff = '', mfn = '', mfcn = '', moc = '', moo = '', moa = '';
 
-            var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '', tffb ='', tffp = '', tffpm='';
+            var tfwb = '', tfwbr = '', tfwl = '', tfsl = '', tfsxl = '', tfsc = '', tfsm = '', tfsn = '',tfss = '', tffa = '', tffc = '', tffm = '', tffs = '', tffcs = '', tffb ='', tffp = '', tffpm='';
             var ofwb = '', ofwbr = '', ofwl = '', ofsm = '', ofsl = '', ofsxs = '', ofss = '', ofsc = '',  offa = '', offc = '', offm = '', offs = '', offb = '', offcs = '', offp='', offpm = '';
 
             // Media //
@@ -807,12 +809,14 @@ class Editor{
             // Media //
 
             // Title //
-            if (this.layers['L'+ j].title.fontSize == '50px') {
+            if (this.layers['L'+ j].title.fontSize == '40px') {
                 tfsxl = 'selected';
-            } else if (this.layers['L'+ j].title.fontSize == '40px') {
+            } else if (this.layers['L'+ j].title.fontSize == '33px') {
                 tfsl = 'selected';
-            } else if (this.layers['L'+ j].title.fontSize == '30px') {
+            } else if (this.layers['L'+ j].title.fontSize == '25px') {
                 tfsm = 'selected';
+            } else if (this.layers['L'+ j].title.fontSize == '20px') {
+                tfsn = 'selected';
             } else {
                 tfsc = this.layers['L'+ j].title.fontSize;
             }
@@ -844,13 +848,13 @@ class Editor{
 
             // Text //
             if (j != 0) {
-              if (this.layers['L'+ j].otherText.fontSize == '18px') {
+              if (this.layers['L'+ j].otherText.fontSize == '16px') {
                   ofsm = 'selected';
-              } else if (this.layers['L'+ j].otherText.fontSize == '22px') {
+              } else if (this.layers['L'+ j].otherText.fontSize == '19px') {
                   ofsl = 'selected';
-              } else if (this.layers['L'+ j].otherText.fontSize == '15px') {
-                  ofss = 'selected';
               } else if (this.layers['L'+ j].otherText.fontSize == '12px') {
+                  ofss = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontSize == '10px') {
                   ofsxs = 'selected';
               } else {
                   ofsc = this.layers['L'+ j].otherText.fontSize;
@@ -909,10 +913,10 @@ class Editor{
                         <div class="div">
                             <span>Font size</span>
                             <select  onchange="edits.changeOtherFontSize('select')"  class="otherFontSize value inputText">
-                                <option  ${ofsm} value="18px">Medium</option>
-                                <option  ${ofsl} value="22px">Large</option>
-                                <option ${ofss} value="15px">Small</option>
-                                <option ${ofsxs} value="12px">X-Smaller</option>
+                                <option  ${ofsl} value="19px">Large</option>
+                                <option  ${ofsm} value="16px">Medium</option>
+                                <option ${ofss} value="12px">Small</option>
+                                <option ${ofsxs} value="10px">X-Smaller</option>
                             </select>
                             <br/>
                             <span>Custom font size</span>
@@ -1004,9 +1008,11 @@ class Editor{
                             <div class="div">
                                 <span>Font size</span>
                                 <select  onchange="edits.changeFontSize('select')" class="titleFontSize value inputText">
-                                    <option  ${tfsm} value="30px">Medium</option>
-                                    <option ${tfsl} value="40px">Large</option>
-                                    <option ${tfsxl} value="50px">X-Larger</option>
+                                    <option ${tfss} value="17px">Small</option>
+                                    <option ${tfsn} value="20px">Normal</option>
+                                    <option  ${tfsm} value="25px">Medium</option>
+                                    <option ${tfsl} value="33px">Large</option>
+                                    <option ${tfsxl} value="40px">X-Larger</option>
                                 </select>
                                 <br/>
                                 <span>Custom font size</span>
@@ -1051,7 +1057,7 @@ class Editor{
         for (let j = 0; j < Object.keys(this.layers).length; j++) {
           // For front page and other
             var frontTitle = parseFloat(this.layers['L'+ j].title.fontSize);
-            var percent  = (47 * frontTitle) / 100;
+            var percent  = (40 * frontTitle) / 100;
             frontTitle = frontTitle - percent;
             frontTitle = `${frontTitle}px`;
             document.querySelector(`#layer${j} .titleText`).style.fontSize = frontTitle;
@@ -1061,16 +1067,12 @@ class Editor{
             if (j != 0) {
               // Frr other pages only
               var otherText = parseFloat(this.layers['L'+ j].otherText.fontSize);
-              if (otherText > 30) {
-                 var percent  = (47 * otherText) / 100;
-                 otherText = otherText - percent;
-              }
+              var percent  = (10 * otherText) / 100;
+              otherText = otherText - percent;
 
               var title = parseFloat(this.layers['L'+ j].title.fontSize);
-              if (title > 20) {
-                var percent  = (47 * title) / 100;
-                title = title - percent;
-              }
+              var percent  = (13 * title) / 100;
+              title = title - percent;
               document.querySelector(`#layer${j} .otherText`).style.fontSize = `${otherText}px`;
               document.querySelector(`#layer${j} .otherText`).style.fontFamily = `"${this.layers['L'+ j].otherText.fontFamily}"`;
               document.querySelector(`#layer${j} .otherText`).style.fontWeight = this.layers['L'+ j].otherText.fontWeight;

@@ -73,7 +73,7 @@ for (let  i= 0; i < totalLayers; i++) {
       </div>
       <div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
         <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:${storyData.layers['L'+i].otherText.fontSize} ${storyData.layers['L'+i].otherText.fontFamily};padding:15px 30px 24px; font-weight:${storyData.layers['L'+i].otherText.fontWeight};" class="description ">
-          <p>${storyData.layers['L' + i].otherText.text}</p>
+          <p style="font:${textFontSize}  ${textFontFamily};">${storyData.layers['L' + i].otherText.text}</p>
         </div>
       </div>`;
     }
@@ -130,7 +130,7 @@ for (let  i= 0; i < totalLayers; i++) {
     if (storyData.layers['L' +i].otherText.text != '') {
       text = `<div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="font-weight:${textFontWeight}; margin-bottom:50px">
         <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:${textFontSize}  ${textFontFamily};padding:15px 30px 24px" class="description ">
-          <p>${storyData.layers['L' + i].otherText.text}</p>
+          <p style="font:${textFontSize}  ${textFontFamily};">${storyData.layers['L' + i].otherText.text}</p>
         </div>
       </div>`;
     }

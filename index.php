@@ -104,6 +104,7 @@ class showIndex{
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
+        <script type="text/javascript" src="/assets/js/homepage.js?v=$this->version"></script>
         HTML."\n";
         if ($this->adminLogged) {
             echo <<<HTML
