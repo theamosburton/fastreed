@@ -270,11 +270,8 @@ class loggedVself extends showProfile{
         $this->webKeywords = "Manage, edit and view profile, fastreed account setting, updating account details, request for creater access";
         $this->canonUrl = 'https://fastreed.com/account/';
         $this->pageCss = ['/account/src/style.css'];
-        if ($this->adminLogged) {
-            $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js'];
-        }else{
-            $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/selfStories.js'];
-        }
+        $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js', '/account/src/selfStories.js'];
+
 
 
 
