@@ -139,8 +139,14 @@ class FetchStories {
       }
       var noUpload = document.createElement('div');
       noUpload.classList.add('noUpload');
-      noUpload.innerHTML = `<div><i class="fa fa-circle-exclamation fa-xl"></i></div>
-             <div> <p>No ${this.filter} Visual Story to display</p></div>`;
+        if (this.filter == 'All') {
+          noUpload.innerHTML = `<div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+                 <div> <p>No Visual Story to display</p></div>`;
+        }else{
+          noUpload.innerHTML = `<div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+                 <div> <p>No ${this.filter} Visual Story to display</p></div>`;
+        }
+
       webstoriesDiv.appendChild(noUpload);
     }else{
       var webstoriesDiv = document.getElementById('webstoriesDiv');
