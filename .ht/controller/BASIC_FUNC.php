@@ -64,7 +64,7 @@ class BasicFunctions
       $noOfRow = $this->realNum($x);
     }
     if ($noOfRow < 10) {
-      $newID .= '000000'.$noOfRow;
+      $newID .= '00000'.$noOfRow;
     }elseif ($noOfRow < 100) {
       $newID .= '00000'.$noOfRow;
     }elseif ($noOfRow < 1000) {
