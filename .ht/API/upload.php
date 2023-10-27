@@ -93,7 +93,6 @@ class uploadMedia{
                   return;
                 }
 
-                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
                 $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
                 $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
                 // Create the directory if it doesn't exist
@@ -188,7 +187,7 @@ class uploadMedia{
         }
         $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
         $add = '/uploads/photos/'.$username.'/';
-        $dpFilePath = '/uploads/photos/DP/';
+        $dpFilePath = '/uploads/photos/';
         // Create the directory if it doesn't exist
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
@@ -259,7 +258,6 @@ class uploadMedia{
         }
 
         $this->deleteOldDP($id);
-        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
         $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
         $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
         // Create the directory if it doesn't exist

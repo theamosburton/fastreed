@@ -38,50 +38,55 @@ class getFastreedContent {
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
             $this->renderUError();
         }else {
-            if(!$imageDetails = $this->getImageDetails($_GET['ID'])){
+          $imageID = $_GET['ID'];
+            if(!$this->getImageDetails($imageID)){
                 $this->renderUError();
-            }elseif (!$this->checkUpload($imageDetails['username'])) {
-              if(isset($_GET['isDP']) && !empty($_GET['isDP'])){
-                if ($_GET['isDP'] == 'DP') {
-                  $filepath =$this->_DOCROOT.'/assets/img/userNone.jpeg';
-                  header('Content-Type: image/jpeg');
-                  header('Content-Length: ' . filesize($filepath));
-                  header('Content-Disposition: inline'); // Set to inline instead of attachment
-                  readfile($filepath);
-                }
-              }else{
-                $this->renderUError();
-              }
-            }elseif($this->checkIfViolated($imageDetails['personID'])){
-                $this->renderVError();
-            }elseif(!$this->checkPermission($imageDetails['personID'])){
-                $this->renderPError();
-            }else{
-                $EXT = $_GET['EXT'];
-                $filepath = $this->checkUpload($imageDetails['username']);
-                $type = $_GET['type'];
-                if ($type == 'photos') {
-                    $contentType = 'image/'.$EXT;
-                }elseif ($type == 'videos') {
-                    $contentType = 'video/'.$EXT;
-                }else{
-                  if ($EXT == 'pdf') {
-                    $contentType = 'application/pdf';
-                  }else{
-                    $contentType = 'file';
-                  }
-
-                }
-                // echo $filepath;
-                header('Cache-Control: max-age=2592000'); // Cache for 1 hour
-                header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2592000).' GMT'); // Cache for 1 hour
-                header('Content-Type: '.$contentType);
-                header('Content-Length: ' . filesize($filepath));
-                header('Content-Disposition: inline; filename=favicon.ico');
-                // ob_clean();
-                // flush();
-                readfile($filepath);
+                return;
             }
+            $imageDetails = $this->getImageDetails($imageID);
+            if (!$imageDetails) {
+              $this->renderUError();
+              return;
+            }
+
+            $uploadDetails = $this->checkUpload($imageDetails['username']);
+            if (!$uploadDetails) {
+              // $this->renderUError();
+              return;
+            }
+
+            if($this->checkIfViolated($this->getImageDetails($imageID)['personID'])){
+                $this->renderVError();
+                return;
+            }
+            if(!$this->checkPermission($this->getImageDetails($imageID)['personID'])){
+                $this->renderPError();
+                return;
+            }
+            $EXT = $_GET['EXT'];
+            $filepath = $this->checkUpload($imageDetails['username']);
+            $type = $_GET['type'];
+            if ($type == 'photos') {
+                $contentType = 'image/'.$EXT;
+            }elseif ($type == 'videos') {
+                $contentType = 'video/'.$EXT;
+            }else{
+              if ($EXT == 'pdf') {
+                $contentType = 'application/pdf';
+              }else{
+                $contentType = 'file';
+              }
+
+            }
+            // echo $filepath;
+            header('Cache-Control: max-age=2592000'); // Cache for 1 hour
+            header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2592000).' GMT'); // Cache for 1 hour
+            header('Content-Type: '.$contentType);
+            header('Content-Length: ' . filesize($filepath));
+            header('Content-Disposition: inline; filename=favicon.ico');
+            // ob_clean();
+            // flush();
+            readfile($filepath);
         }
         $this->closeConnection();
         $this->userData->closeConnection();
@@ -151,26 +156,30 @@ class getFastreedContent {
     }
 
     private function checkUpload($username){
-        $return = false;
         $type = $_GET['type'];
         $IMGID = $_GET['ID'];
         $EXT = $_GET['EXT'];
-        $filepath =$this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
+        $filepath = $this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
               // Decode the URL to remove URL-encoded characters
               // Replace unwanted characters with an empty string
-        if (strpos($filepath, "\xE2\x80\x8B") !== false) {
+        if (strpos($filepath, "\xE2\x80\x8B") != false) {
           $decodedURL = str_replace("\xE2\x80\x8B", '', $filepath);
           $url = str_replace("%E2%80%8B%E2%80%8B%E2%80%8B", '', $decodedURL);
         }else{
           $url = $filepath;
         }
+        // var_dump($url);
         if (file_exists($url)) {
             $return = $url;
+        }else{
+            $return = false;
         }
         // echo $url;
         return $return;
 
     }
+
+
 
     private function checkPermission($uid){
         $return = false;
