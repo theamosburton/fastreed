@@ -165,58 +165,61 @@ class updateDetails{
 
         if ($x == 'admin') {
             if ($adminValueSet) {
-                # admin edit
-                if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
-                    showMessage(false, "Username Already Exists");
-                } elseif (!$this->checkExcept('emailID', $ePID, $email, $cEmail)) {
-                    showMessage(false, "Email Already Exists");
-                } else {
-                    $dPID = $this->AUTH->decrypt($ePID);
-                    $sql = "UPDATE account_details SET
-                    gender = '$gender',
-                    DOB = '$DOB',
-                    fullName = '$fullName',
-                    bio = '$about',
-                    Username = '$Username',
-                    websiteUrl = '$website',
-                    emailID = '$email'
-                    WHERE personID = '$dPID'";
-
-                    $result = mysqli_query($this->DB, $sql);
-                    if ($result) {
-                        $this->renameUploadFolder($cUsername, $Username);
-                    } else {
-                        showMessage(false, "Not Updated 2");
-                    }
-                }
-            } else {
-                showMessage(false, "Not all value set admin");
+              showMessage(false, "Not all value set admin");
+              return;
             }
+            # admin edit
+            if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
+                showMessage(false, "Username Already Exists");
+                return;
+            }
+            if (!$this->checkExcept('emailID', $ePID, $email, $cEmail)) {
+                showMessage(false, "Email Already Exists");
+                return;
+            }
+            $dPID = $this->AUTH->decrypt($ePID);
+            $sql = "UPDATE account_details SET
+            gender = '$gender',
+            DOB = '$DOB',
+            fullName = '$fullName',
+            bio = '$about',
+            Username = '$Username',
+            websiteUrl = '$website',
+            emailID = '$email'
+            WHERE personID = '$dPID'";
+
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+                $this->renameUploadFolder($cUsername, $Username);
+            } else {
+                showMessage(false, "Not Updated 2");
+            }
+
         } else {
             # user edit
             if ($userValueSet) {
-                if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
-                    showMessage(false, "Username Already Exists");
-                } else {
-                    $dPID = $this->AUTH->decrypt($ePID);
-                    $sql = "UPDATE account_details SET
-                    gender = '$gender',
-                    DOB = '$DOB',
-                    fullName = '$fullName',
-                    bio = '$about',
-                    username = '$Username',
-                    websiteUrl = '$website'
-                    WHERE personID = '$dPID'";
+              showMessage(false, "Not all value set user");
+              return;
+            }
+            if (!$this->checkExcept('username', $ePID, $Username, $cUsername)) {
+                showMessage(false, "Username Already Exists");
+                return;
+            }
+            $dPID = $this->AUTH->decrypt($ePID);
+            $sql = "UPDATE account_details SET
+            gender = '$gender',
+            DOB = '$DOB',
+            fullName = '$fullName',
+            bio = '$about',
+            username = '$Username',
+            websiteUrl = '$website'
+            WHERE personID = '$dPID'";
 
-                    $result = mysqli_query($this->DB, $sql);
-                    if ($result) {
-                        $this->renameUploadFolder($cUsername, $Username);
-                    } else {
-                        showMessage(false, "Not Updated 1");
-                    }
-                }
+            $result = mysqli_query($this->DB, $sql);
+            if ($result) {
+                $this->renameUploadFolder($cUsername, $Username);
             } else {
-                showMessage(false, "Not all value set user");
+                showMessage(false, "Not Updated 1");
             }
         }
     }
