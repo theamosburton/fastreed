@@ -397,7 +397,12 @@ class Webstories{
     private function updateStory(){
         $data = json_decode(file_get_contents('php://input'), true);
         $dataArray = json_decode($data['data'], true);
-        $layers = $this->checkLayers($dataArray);
+        if ($data['whois'] == 'Admin') {
+          $username = $data['username'];
+        }elseif ($data['whois'] == 'User') {
+          $username = $this->userData->getSelfDetails()['username'];
+        }
+        $layers = $this->checkLayers($dataArray, $username);
         $layer = $dataArray['layers'];
         $images = [];
         for ($i = 0; $i < count($layer); $i++) {
@@ -798,14 +803,19 @@ class Webstories{
     private function publishStory(){
       $data = json_decode(file_get_contents('php://input'), true);
       $dataArray = json_decode($data['data'], true);
-      $layers = $this->checkLayers($dataArray);
+      if ($data['whois'] == 'Admin') {
+        $username = $data['username'];
+      }elseif ($data['whois'] == 'User') {
+        $username = $this->userData->getSelfDetails()['username'];
+      }
+      $layers = $this->checkLayers($dataArray, $username);
       $layer = $dataArray['layers'];
       $images = [];
       for ($i = 0; $i < count($layer); $i++) {
         $images[$i] = $layer['L' . $i]['media']['url'];
         $urlParts = parse_url($images[$i]);
         $pathSegments = explode('/', trim($urlParts['path'], '/'));
-        $images[$i] = $pathSegments[3];
+        $images[$i] = $pathSegments[2];
         $images[$i] = strtok($images[$i], '.');
       }
       $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
@@ -921,7 +931,7 @@ class Webstories{
       }
       return $re;
     }
-    private function checkLayers($dataArray){
+    private function checkLayers($dataArray, $username){
       $layers = $dataArray['layers'];
       $metaData = $dataArray['metaData'];
       $errorArray = [];
@@ -940,11 +950,12 @@ class Webstories{
                     break;
                 }
             } else {
-                $url = str_replace("/uploads", "/.ht/fastreedusercontent", $layer['media']['url']);
+                $url = str_replace("/uploads", "/.ht/fastreedusercontent/$username", $layer['media']['url']);
                 $urlExists = file_exists($this->_DOCROOT.$url);
 
                 if (!$urlExists) {
-                    $errorArray[] = 'Media inserted in Layer : ' . ($i + 1).' does not exist'.$url ;
+                    $url = str_replace("/.ht/fastreedusercontent/$username","/uploads",  $layer['media']['url']);
+                    $errorArray[] = 'Media inserted in Layer : ' . ($i + 1).' does not exist <i>'.$url.' </i>' ;
                     break;
                 } else {
                     if ($metaData['title'] == '') {
