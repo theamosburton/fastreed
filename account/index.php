@@ -106,7 +106,9 @@ class showProfile {
             echo <<<HTML
                     <div id="uploadDP" class="uploadDpDiv">
                         <div class="uploadDpContainer">
-                            <i id="cancelDpUpload" onclick="new showMenus().cancelDpUpload()" class="fa fa-xmark"></i>
+                          <div class="uploadTopBar">
+                              <i id="cancelDpUpload" onclick="new showMenus().cancelDpUpload()" class="fa fa-xmark"></i>
+                          </div>
                         <form action="" enctype="multipart/form-data">
                             <small id="message">Zoom to adjust the photo</small>
                             <label for="uploadInputFile" id="uploadFileLabel"> <i class="fa fa-file-upload"></i> Browse file to upload <small>Photo will be cropped to 1:1</small></label>
