@@ -291,6 +291,7 @@ class loggedVself extends showProfile{
          $canViewUploads = $userSettings['canViewUploads'];
          $canCreate = $userSettings['canCreate'];
          $rejectionReason = $userSettings['rejectionReason'];
+
          if ($rejectionReason == NULL) {
            $rejectionReason = 'Not Given';
          }
@@ -349,6 +350,7 @@ class loggedVother extends showProfile{
         $canViewAge = $userSettings['canViewAge'];
         $canViewContent = $userSettings['canViewContent'];
         $canViewUploads = $userSettings['canViewUploads'];
+        $canCreate = $userSettings['canCreate'];
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
@@ -395,7 +397,7 @@ class nonLoggedVother extends showProfile{
         $canViewAge = $userSettings['canViewAge'];
         $canViewContent = $userSettings['canViewContent'];
         $canViewUploads = $userSettings['canViewUploads'];
-
+        $canCreate = $userSettings['canCreate'];
         $this->addHead();
 
     //***************/ Main Container Starts /**********//

@@ -54,8 +54,6 @@ HTML;
 }elseif($canCreate == 'NOR'){
   $id = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
   $username =$this->userData->getOtherData('username', $this->otherUsername)['username'];
-  $data = $this->uploadData->documentVerificationFile($id);
-  $url = '/uploads/'.$data['type'].'/'.$data['username'].'/'.$data['uploadID'].$data['extension'];
   echo <<<HTML
   <div class="contentTopics resCreation row">
       <div class="title col-12 mb-3">Allow to write</div>

@@ -12,9 +12,15 @@
                             </div>
                             <br>
                             <div class="user-details">
-                                <h3 class="user-name"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name']?></h3>
+                                  <h3 class="user-name"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];
+                                    if($canCreate == 'ACC'){
+                                      echo '<i class="fa-solid fa-check-circle fa-sm" style="margin-left: 10px; color:#3367d6;"></i>';
+                                    }else{
+                                      echo '<i class="fa-solid fa-check-circle fa-sm" style="margin-left: 10px;"></i>';
+                                    }
+                                    ?>
+                                  </h3>
                                 <?php
-
                                 if($selfId == $otherID ){
                                     echo <<<HTML
                                     <a href="/account/" class="profileActions">Profile</a>
