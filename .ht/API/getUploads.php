@@ -34,13 +34,13 @@ class respondUploads{
         $length = count($data);
         $uploads =  array();
         for($i=0;$i < $length; $i++ ){
-            if($data[$i][6] == 'photos'){
-                $path = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            if($data[$i][5] == 'photos'){
+                $path = '/uploads/photos/'.$data[$i][2].$data[$i][6];
                 $what = 'image';
                 $icon = 'image';
                 $mediaId = $data[$i][2];
-            }elseif($data[$i][6] == 'videos'){
-                $path = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            }elseif($data[$i][5] == 'videos'){
+                $path = '/uploads/videos/'.$data[$i][2].$data[$i][6];
                 $what = 'video';
                 $icon = 'film';
                 $mediaId = $data[$i][2];
