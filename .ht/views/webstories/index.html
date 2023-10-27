@@ -29,6 +29,7 @@
          $titleFontSize = $storyData['layers']['L' . $i]['title']['fontSize'];
          $titleFontFamily = $storyData['layers']['L' . $i]['title']['fontFamily'];
          $titleFontWeight = $storyData['layers']['L' . $i]['title']['fontWeight'];
+         $storyTitle = $storyData['metaData']['title'];
 
          if ($i == 0) {
              $ampStory .= '
@@ -48,10 +49,10 @@
                          <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
                          <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:40px 20px">
                              <div animate-in="fly-in-top" animate-in-delay="1s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-top:120px">
-                                 <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">October 23, 2023</p>
+                                 <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">'.$date.'</p>
                              </div>
                              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class "NWSStory-layer">
-                                 <h1 class="fade-in" style="font:' . $titleFontSize . ' ' . $titleFontFamily . ';font-weight:' . $titleFontWeight . ';letter-spacing:0.72px;padding-bottom:15px;text-align:center;">' . $storyData['metaData']['title'] . '</h1>
+                                 <h1 class="fade-in" style="font:' . $titleFontSize . ' ' . $titleFontFamily . ';font-weight:' . $titleFontWeight . ';letter-spacing:0.72px;padding-bottom:15px;text-align:center;">' . $storyTitle . '</h1>
                              </div>
                              <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
                                  <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: none</p>
@@ -175,7 +176,7 @@
             }
       }
 
-      if (count($relatedStoryData) || $relatedStoryData == '') {
+      if ($relatedStoryData != '') {
           $relatedStoryTitle = $relatedStory['title'];
           $relatedStoryDescription = $relatedStory['description'];
           $relatedStoryUrl = $relatedStory['url'];
