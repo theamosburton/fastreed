@@ -128,7 +128,7 @@ class gSignUpLogin{
     $email = $_GET['email'];
     $username = str_replace('@gmail.com', '', $email);
     // Creating new Guest ID and encrypt
-    $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
+    $userID = $this->BASIC_FUNC->createUpdatedID('accounts', 'UID', 'personID');
     $name = $_GET['name'];
     $profilePicLink = $_GET['profilePic'];
     $date = date('Y-m-d');

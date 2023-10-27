@@ -172,7 +172,7 @@ class userEditor extends createContent{
             $title = 'My '.$ordinal. ' webstory';
 
             $personID = $_SESSION['LOGGED_USER'];
-            $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
+            $storyID = $this->BASIC_FUNC->createUpdatedID('stories', 'W', 'storyID');
             $phpTimestamp = time(); // Get current Unix timestamp in seconds
             $jsTimestamp = $phpTimestamp * 1000; // Convert to milliseconds
 
@@ -292,7 +292,7 @@ class adminEditor extends createContent{
             $title = 'My '.$ordinal. ' webstory';
 
             $personID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
-            $storyID = $this->BASIC_FUNC->createNewID('stories', 'W');
+            $storyID = $this->BASIC_FUNC->createUpdatedID('stories', 'W', 'storyID');
             $firstEdit = time();
             $tdate = date('Y-m-d');
             $status = '{"status": "drafted", "version": 100}';

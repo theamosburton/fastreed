@@ -87,7 +87,7 @@ class uploadMedia{
                     showMessage(true, 'Max. File size: 10MB');
                     return;
                 }
-                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
+                $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'VID', 'uploadID');
                 if(!$this->makeFileEntry($fileName, $id, 'UP', 'videos', $file_ext, $sizeKB, 'users')['Result']){
                   showMessage(false, 'Video cannot entered in DB');
                   return;
@@ -180,7 +180,7 @@ class uploadMedia{
         // Convert the file size to a human-readable format (e.g., KB, MB, GB)
         $sizeKB = round($sizeB / 1024, 2);
         $this->deleteOldDP($id);
-        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+        $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'IMG', 'uploadID');
         if(!$this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext, $sizeKB, 'anon')['Result']){
             showMessage(false, 'Dp cannot entered in DB');
             return;
@@ -251,7 +251,7 @@ class uploadMedia{
             showMessage(true, 'Max. File size: 2MB');
             return;
         }
-        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+        $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'IMG', 'uploadID');
         if(!$this->makeFileEntry($fileName, $id, 'UP', 'photos', $file_ext, $sizeKB, 'users')['Result']){
           showMessage(false, 'Image cannot entered in DB');
           return;
@@ -291,7 +291,7 @@ class uploadMedia{
         $sizeKB = round($sizeB / 1024, 2);
         $sizeMB = round($sizeKB / 1024, 2);
         $this->deleteOldDV($id);
-        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "DV");
+        $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'DV', 'uploadID');
         if ($sizeKB > 5120) {
           showMessage(false, 'File Size Exceeded');
           return;

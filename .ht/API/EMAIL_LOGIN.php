@@ -92,7 +92,7 @@ class eSignUpLogin{
   public function createNewAccount($email, $name, $profilePicLink, $password){
     $username = str_replace('@gmail.com', '', $email);
     // Creating new Guest ID and encrypt
-    $userID = $this->BASIC_FUNC->createNewID("accounts", "UID");
+    $userID = $this->BASIC_FUNC->createUpdatedID('accounts', 'UID', 'personID');
 
     $date = date('Y-m-d');
     // Checking If Reference Session Availabe or Not

@@ -5,6 +5,7 @@ class BasicFunctions
   private $DB_CONNECT;
   private $DB;
   private $AUTH;
+  private $INCREMENT = '';
 
   function __construct()
   {
@@ -48,6 +49,24 @@ class BasicFunctions
       return $return;
   }
 
+  public function createUpdatedID($tableName, $prefix, $columnName){
+    $newID = $this->createNewID($tableName, $prefix);
+    $this->INCREMENT = 1;
+
+      do {
+          $sql = "SELECT * FROM $tableName WHERE $columnName = '$newID'";
+          $result = mysqli_query($this->DB, $sql);
+          $rowNo = mysqli_num_rows($result);
+          if ($rowNo) {
+              $this->INCREMENT++;
+              $newID = $this->createNewID($tableName, $prefix);
+          }
+      } while ($rowNo);
+
+      return $newID;
+  }
+
+
   public function createNewID($tableName, $prefix){
     $ID_TABLE_NAME = $tableName;
     $date = date('Y-m-d');
@@ -61,11 +80,13 @@ class BasicFunctions
       $noOfRow = $this->realNum('0');
     }else {
       $x =  mysqli_num_rows($result);
+      if (!empty($this->INCREMENT) || $this->INCREMENT != 0) {
+        $x = $x + 1;
+      }
       $noOfRow = $this->realNum($x);
     }
-    if ($noOfRow < 10) {
-      $newID .= '00000'.$noOfRow;
-    }elseif ($noOfRow < 100) {
+
+    if ($noOfRow < 100) {
       $newID .= '00000'.$noOfRow;
     }elseif ($noOfRow < 1000) {
       $newID .= '0000'.$noOfRow;
