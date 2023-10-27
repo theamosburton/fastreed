@@ -82,27 +82,30 @@ class uploadMedia{
             $file_ext = $_POST['ext'];
             if ($file_error === UPLOAD_ERR_OK) {
                 $sizeB = $file['size'];
-                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
                 $sizeKB = round($sizeB / 1024, 2);
+                if ($sizeKB > 10300) {
+                    showMessage(true, 'Max. File size: 10MB');
+                    return;
+                }
                 $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'videos', $file_ext, $sizeKB, 'users')['Result']){
-                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
-                    $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
-                    // Create the directory if it doesn't exist
-                    if (!is_dir($directory)) {
-                        mkdir($directory, 0777, true);
-                    }
-                    $fileAddress = $directory.$fileName.'.'.$file_ext;
-                    $address = $add.$fileName.'.'.$file_ext;
-                    if (move_uploaded_file($file_tmp, $fileAddress)) {
-                        // File moved successfully
-                        showMessage(true, 'File Uploaded');
-                    } else {
-                        // Failed to move the file
-                        showMessage(false, 'Error moving the file');
-                    }
-                }else {
-                    showMessage(false, 'Video cannot entered in DB');
+                if(!$this->makeFileEntry($fileName, $id, 'UP', 'videos', $file_ext, $sizeKB, 'users')['Result']){
+                  showMessage(false, 'Video cannot entered in DB');
+                  return;
+                }
+
+                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "VID");
+                $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/videos/'.$username.'/';
+                $add = '/.ht/fastreedusercontent/videos/'.$username.'/';
+                // Create the directory if it doesn't exist
+                if (!is_dir($directory)) {
+                    mkdir($directory, 0777, true);
+                }
+                $fileAddress = $directory.$fileName.'.'.$file_ext;
+                $address = $add.$fileName.'.'.$file_ext;
+                if (move_uploaded_file($file_tmp, $fileAddress)) {
+                    showMessage(true, 'File Uploaded');
+                } else {
+                    showMessage(false, 'Error saving the file');
                 }
             }else{
                 switch ($file_error) {
@@ -135,147 +138,192 @@ class uploadMedia{
         }
     }
 
-
-
-
-
     private function uploadDP($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
-        if(isset($_FILES['media'])){
-            $file = $_FILES['media'];
-            $file_tmp = $file['tmp_name'];
-            $file_error = $file['error'];
-            $file_ext = $_POST['ext'];
-            if ($file_error === UPLOAD_ERR_OK) {
-                $sizeB = $file['size'];
-                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
-                $sizeKB = round($sizeB / 1024, 2);
-                if ($this->deleteOldDP($id)) {
-                  $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                  if($this->makeFileEntry($fileName, $username, $id, 'DP', 'photos', $file_ext, $sizeKB, 'anon')['Result']){
-                      $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
-                      $add = '/uploads/photos/'.$username.'/';
-                      // Create the directory if it doesn't exist
-                      if (!is_dir($directory)) {
-                          mkdir($directory, 0777, true);
-                      }
-                      $fileAddress = $directory.$fileName.'.'.$file_ext;
-                      $address = $add.$fileName.'.'.$file_ext;
-                      if (move_uploaded_file($file_tmp, $fileAddress)) {
-                          // File moved successfully
-                          showMessage(true, 'File Uploaded');
-                          $this->resetDP($id, $address);
-                      } else {
-                          // Failed to move the file
-                          showMessage(false, 'Error moving the file');
-                      }
-                  }else {
-                      showMessage(false, 'File cannot entered in DB');
-                  }
-                }else{
-                  showMessage(false, 'Old Dp not deleted');
-                }
-            }else {
-                showMessage(false, 'Problem with image');
-            }
-        }else {
+        if(!isset($_FILES['media'])){
             showMessage(false, 'No Image Found');
+            return;
+        }
+        $file = $_FILES['media'];
+        $file_tmp = $file['tmp_name'];
+        $file_error = $file['error'];
+        $file_ext = $_POST['ext'];
+        if ($file_error != UPLOAD_ERR_OK) {
+          switch ($file_error) {
+              case UPLOAD_ERR_INI_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the upload_max_filesize directive in php.ini');
+                  break;
+              case UPLOAD_ERR_FORM_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the MAX_FILE_SIZE directive specified in the HTML form');
+                  break;
+              case UPLOAD_ERR_PARTIAL:
+                  showMessage(false, 'The uploaded file was only partially uploaded');
+                  break;
+              case UPLOAD_ERR_NO_FILE:
+                  showMessage(false, 'No file was uploaded');
+                  break;
+              case UPLOAD_ERR_NO_TMP_DIR:
+                  showMessage(false, 'Missing a temporary folder');
+                  break;
+              case UPLOAD_ERR_CANT_WRITE:
+                  showMessage(false, 'Failed to write file to disk');
+                  break;
+              case UPLOAD_ERR_EXTENSION:
+                  showMessage(false, 'A PHP extension stopped the file upload');
+                  break;
+              default:
+                  showMessage(false, 'Unknown error occurred during file upload');
+                  break;
+          }
+          return;
+        }
+        $sizeB = $file['size'];
+        // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+        $sizeKB = round($sizeB / 1024, 2);
+        $this->deleteOldDP($id);
+        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+        if(!$this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext, $sizeKB, 'anon')['Result']){
+            showMessage(false, 'File cannot entered in DB');
+            return;
+        }
+        $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
+        $add = '/uploads/photos/'.$username.'/';
+        $dpFilePath = '/uploads/photos/DP/';
+        // Create the directory if it doesn't exist
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+        $fileAddress = $directory.$fileName.'.'.$file_ext;
+        $address = $dpFilePath.$fileName.'.'.$file_ext;
+        if (move_uploaded_file($file_tmp, $fileAddress)) {
+            // File moved successfully
+            showMessage(true, 'File Uploaded');
+            $this->resetDP($id, $address);
+        } else {
+            // Failed to move the file
+            showMessage(false, 'Error moving the file');
         }
     }
 
     private function uploadImage($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
-        if(isset($_FILES['media'])){
-            $file = $_FILES['media'];
-            $file_tmp = $file['tmp_name'];
-            $file_error = $file['error'];
-            $file_ext = $_POST['ext'];
-            if ($file_error === UPLOAD_ERR_OK) {
-                $sizeB = $file['size'];
-                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
-                $sizeKB = round($sizeB / 1024, 2);
-                $this->deleteOldDP($id);
-                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
-                if($this->makeFileEntry($fileName, $username, $id, 'UP', 'photos', $file_ext, $sizeKB, 'users')['Result']){
-                    $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
-                    $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
-                    // Create the directory if it doesn't exist
-                    if (!is_dir($directory)) {
-                        mkdir($directory, 0777, true);
-                    }
-                    $fileAddress = $directory.$fileName.'.'.$file_ext;
-                    $address = $add.$fileName.'.'.$file_ext;
-                    if (move_uploaded_file($file_tmp, $fileAddress)) {
-                        // File moved successfully
-                        showMessage(true, 'File Uploaded');
-                    } else {
-                        // Failed to move the file
-                        showMessage(false, 'Error moving the file');
-                    }
-                }else {
-                    showMessage(false, 'File cannot entered in DB');
-                  }
-              }else {
-                showMessage(false, 'Problem with image');
-              }
-        }else {
+        if(!isset($_FILES['media'])){
             showMessage(false, 'No Image Found');
+            return;
+        }
+        $file = $_FILES['media'];
+        $file_tmp = $file['tmp_name'];
+        $file_error = $file['error'];
+        $file_ext = $_POST['ext'];
+        if ($file_error != UPLOAD_ERR_OK) {
+          switch ($file_error) {
+              case UPLOAD_ERR_INI_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the upload_max_filesize directive in php.ini');
+                  break;
+              case UPLOAD_ERR_FORM_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the MAX_FILE_SIZE directive specified in the HTML form');
+                  break;
+              case UPLOAD_ERR_PARTIAL:
+                  showMessage(false, 'The uploaded file was only partially uploaded');
+                  break;
+              case UPLOAD_ERR_NO_FILE:
+                  showMessage(false, 'No file was uploaded');
+                  break;
+              case UPLOAD_ERR_NO_TMP_DIR:
+                  showMessage(false, 'Missing a temporary folder');
+                  break;
+              case UPLOAD_ERR_CANT_WRITE:
+                  showMessage(false, 'Failed to write file to disk');
+                  break;
+              case UPLOAD_ERR_EXTENSION:
+                  showMessage(false, 'A PHP extension stopped the file upload');
+                  break;
+              default:
+                  showMessage(false, 'Unknown error occurred during file upload');
+                  break;
+          }
+          return;
+        }
+
+        $sizeB = $file['size'];
+        $sizeKB = round($sizeB / 1024, 2);
+
+        if ($sizeKB > 2050) {
+            showMessage(true, 'Max. File size: 2MB');
+            return;
+        }
+        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+        if(!$this->makeFileEntry($fileName, $id, 'UP', 'photos', $file_ext, $sizeKB, 'users')['Result']){
+          showMessage(false, 'Image cannot entered in DB');
+          return;
+        }
+
+        $this->deleteOldDP($id);
+        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
+        $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
+        $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
+        // Create the directory if it doesn't exist
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+        $fileAddress = $directory.$fileName.'.'.$file_ext;
+        $address = $add.$fileName.'.'.$file_ext;
+        if (move_uploaded_file($file_tmp, $fileAddress)) {
+            // File moved successfully
+            showMessage(true, 'File Uploaded');
+        } else {
+            // Failed to move the file
+            showMessage(false, 'Error saving the file');
         }
     }
-
-
-
 
     private function uploadVD($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
         if(isset($_FILES['media'])){
-            $file = $_FILES['media'];
-            $file_tmp = $file['tmp_name'];
-            $file_error = $file['error'];
-            $file_ext = $_POST['ext'];
-            if ($file_error === UPLOAD_ERR_OK) {
-                $sizeB = $file['size'];
-                // Convert the file size to a human-readable format (e.g., KB, MB, GB)
-                $sizeKB = round($sizeB / 1024, 2);
-                $sizeMB = round($sizeKB / 1024, 2);
-                $this->deleteOldDV($id);
-                $fileName = $this->BASIC_FUNC->createNewID("uploads" , "DV");
-                if ($sizeKB <= 5120) {
-                  if($this->makeFileEntry($fileName, $username, $id, 'DV', 'files', $file_ext, $sizeKB, 'self')['Result']){
-                      $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/files/'.$username.'/';
-                      $add = '/.ht/fastreedusercontent/files/'.$username.'/';
-                      // Create the directory if it doesn't exist
-                      if (!is_dir($directory)) {
-                          mkdir($directory, 0777, true);
-                      }
-                      $fileAddress = $directory.$fileName.'.'.$file_ext;
-                      $address = $add.$fileName.'.'.$file_ext;
-                      if (move_uploaded_file($file_tmp, $fileAddress)) {
-                          // File moved successfully
-                          showMessage(true, 'File Uploaded');
-                      } else {
-                          // Failed to move the file
-                          showMessage(false, 'Error moving the file');
-                      }
-                  }else {
-                      showMessage(false, 'File cannot entered in DB');
-                  }
-                }else{
-                    showMessage(false, 'File Size Exceeded');
-                }
-              }else {
-                showMessage(false, 'Problem with file');
-              }
-        }else {
-            showMessage(false, 'No file Found');
+          showMessage(false, 'No file Found');
+          return;
+        }
+        $file = $_FILES['media'];
+        $file_tmp = $file['tmp_name'];
+        $file_error = $file['error'];
+        $file_ext = $_POST['ext'];
+        if ($file_error === UPLOAD_ERR_OK) {
+          return;
+        }
+        $sizeB = $file['size'];
+        // Convert the file size to a human-readable format (e.g., KB, MB, GB)
+        $sizeKB = round($sizeB / 1024, 2);
+        $sizeMB = round($sizeKB / 1024, 2);
+        $this->deleteOldDV($id);
+        $fileName = $this->BASIC_FUNC->createNewID("uploads" , "DV");
+        if ($sizeKB > 5120) {
+          showMessage(false, 'File Size Exceeded');
+          return;
+        }
+        if(!$this->makeFileEntry($fileName, $id, 'DV', 'files', $file_ext, $sizeKB, 'self')['Result']){
+          showMessage(false, 'File cannot entered in DB');
+          return;
+        }
+        $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/files/'.$username.'/';
+        $add = '/.ht/fastreedusercontent/files/'.$username.'/';
+        // Create the directory if it doesn't exist
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+        $fileAddress = $directory.$fileName.'.'.$file_ext;
+        $address = $add.$fileName.'.'.$file_ext;
+        if (move_uploaded_file($file_tmp, $fileAddress)) {
+            showMessage(true, 'File Uploaded');
+        } else {
+            showMessage(false, 'Error saving the file');
         }
     }
 
-    private function makeFileEntry($fileName, $username, $id, $purpose, $type, $ext, $sizeKB, $access){
+    private function makeFileEntry($fileName, $id, $purpose, $type, $ext, $sizeKB, $access){
         $return = array('Result'=> false);
         $date = date('Y-m-d');
         $time =  time();
-        $sql = "INSERT INTO uploads (tdate, uploadID, username, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName', '$username','$purpose', '$id', '$type', '.$ext', '$access', '$time', '$sizeKB', 'UFD')";
+        $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName','$purpose', '$id', '$type', '.$ext', '$access', '$time', '$sizeKB', 'UFD')";
         $result = mysqli_query($this->DB,$sql);
         if ($result) {
             $return['Result'] = true;
@@ -289,22 +337,22 @@ class uploadMedia{
         $return = false;
         $getDPSQL = "SELECT * FROM uploads WHERE personID = '$id' and purpose = 'DP'";
         $resultGet = mysqli_query($this->DB, $getDPSQL);
-        if (mysqli_num_rows($resultGet)) {
-            $row = mysqli_fetch_assoc($resultGet);
-            $uploadID = $row['uploadID'];
-            $extension = $row['extension'];
-            $path = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/'.$uploadID.$extension;
-            if (file_exists($path)) {
-                if (unlink($path)) {
-                    $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";
-                    $result = mysqli_query($this->DB, $sql);
-                    if ($result) {
-                      $return = true;
-                    }
-                }
-            }
-        }else{
+        if (!mysqli_num_rows($resultGet)) {
           $return = true;
+        }else{
+          $row = mysqli_fetch_assoc($resultGet);
+          $uploadID = $row['uploadID'];
+          $extension = $row['extension'];
+          $path = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/'.$uploadID.$extension;
+          if (file_exists($path)) {
+              if (unlink($path)) {
+                  $sql = "DELETE FROM uploads WHERE personID = '$id' and purpose = 'DP'";
+                  $result = mysqli_query($this->DB, $sql);
+                  if ($result) {
+                    $return = true;
+                  }
+              }
+          }
         }
         return $return;
     }

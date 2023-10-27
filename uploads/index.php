@@ -35,20 +35,30 @@ class getFastreedContent {
             $this->renderUError();
         }elseif (!isset($_GET['ID']) || empty($_GET['ID'])) {
             $this->renderUError();
-        }elseif (!isset($_GET['UN']) || empty($_GET['UN'])) {
-            $this->renderUError();
         }elseif (!isset($_GET['EXT']) || empty($_GET['EXT'])) {
             $this->renderUError();
         }else {
-            if (!$this->checkUpload()) {
+            if(!$imageDetails = $this->getImageDetails($_GET['ID'])){
                 $this->renderUError();
-            }elseif($this->checkIfViolated()){
+            }elseif (!$this->checkUpload($imageDetails['username'])) {
+              if(isset($_GET['isDP']) && !empty($_GET['isDP'])){
+                if ($_GET['isDP'] == 'DP') {
+                  $filepath =$this->_DOCROOT.'/assets/img/userNone.jpeg';
+                  header('Content-Type: image/jpeg');
+                  header('Content-Length: ' . filesize($filepath));
+                  header('Content-Disposition: inline'); // Set to inline instead of attachment
+                  readfile($filepath);
+                }
+              }else{
+                $this->renderUError();
+              }
+            }elseif($this->checkIfViolated($imageDetails['personID'])){
                 $this->renderVError();
-            }elseif(!$this->checkPermission()){
+            }elseif(!$this->checkPermission($imageDetails['personID'])){
                 $this->renderPError();
             }else{
                 $EXT = $_GET['EXT'];
-                $filepath = $this->checkUpload();
+                $filepath = $this->checkUpload($imageDetails['username']);
                 $type = $_GET['type'];
                 if ($type == 'photos') {
                     $contentType = 'image/'.$EXT;
@@ -84,6 +94,32 @@ class getFastreedContent {
         }
     }
 
+    private function getImageDetails($imgID){
+      $return = false;
+      $sql = "SELECT * FROM uploads WHERE uploadID = '$imgID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $personID = $row['personID'];
+        $getUsername = $this->getUsername($personID);
+        $row['username'] = $getUsername;
+        $return = $row;
+      }
+      return $return;
+    }
+
+    private function getUsername($personID){
+      $return = false;
+      $sql = "SELECT username FROM account_details WHERE personID = '$personID'";
+      $result = mysqli_query($this->DB, $sql);
+      if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $username = $row['username'];
+        $return = $username;
+      }
+      return $return;
+    }
+
     private function renderPError(){
         $filepath =$this->_DOCROOT.'/assets/img/private.png';
         header('Content-Type: image/png');
@@ -114,10 +150,9 @@ class getFastreedContent {
         readfile($filepath);
     }
 
-    private function checkUpload(){
+    private function checkUpload($username){
         $return = false;
         $type = $_GET['type'];
-        $username = $_GET['UN'];
         $IMGID = $_GET['ID'];
         $EXT = $_GET['EXT'];
         $filepath =$this->_DOCROOT.'/.ht/fastreedusercontent/'.$type.'/'.$username.'/'.$IMGID.'.'.$EXT;
@@ -137,9 +172,9 @@ class getFastreedContent {
 
     }
 
-    private function checkPermission(){
+    private function checkPermission($uid){
         $return = false;
-        $ownerUID = $this->userData->getUID('username', $_GET['UN']);
+        $ownerUID = $uid;
         $IMGID = $_GET['ID'];
         $sql = "SELECT * FROM uploads WHERE uploadID = '$IMGID' and personID = '$ownerUID'";
         $result = mysqli_query($this->DB, $sql);
@@ -170,9 +205,9 @@ class getFastreedContent {
         return $return;
     }
 
-    private function checkIfViolated(){
+    private function checkIfViolated($uid){
       $return = false;
-      $ownerUID = $this->userData->getUID('username', $_GET['UN']);
+      $ownerUID = $uid;
       $IMGID = $_GET['ID'];
       if (isset($this->userData->getSelfDetails()['userType']) && $this->userData->getSelfDetails()['userType'] == 'Admin') {
         $return = false;

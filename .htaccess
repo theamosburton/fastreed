@@ -5,6 +5,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/account/index\.php$
 RewriteRule ^u/([^/]+)/?$ /account/index.php?u=$1 [L,QSA]
 RewriteCond %{REQUEST_URI} !^/uploads/index\.php$
+RewriteRule ^uploads/([^/]+)/([^/]+)\.([^/]+)$ /uploads/?type=$1&ID=$2&EXT=$3 [L]
+RewriteRule ^uploads/([^/]+)/([^/]+)/([^/]+)\.([^/]+)$ /uploads/?type=$1&isDP=$2&ID=$3&EXT=$4 [L]
 RewriteRule ^uploads/([^/]+)/([^/]+)/([^/]+)\.([^/]+)$ /uploads/?type=$1&UN=$2&ID=$3&EXT=$4 [L]
 RewriteRule ^webstories/([^/]+)$ /showStories/?url=$1 [L]
 RewriteRule ^webstories/([^/]+)/$ /showStories/?url=$1 [L]

@@ -8,7 +8,7 @@ class getUploadData{
 
     public function getAllData($id){
         $return = array();
-        $sql = "SELECT * FROM uploads WHERE personID = '$id' and purpose ='UP'";
+        $sql = "SELECT * FROM uploads WHERE personID = '$id' AND (purpose ='UP' OR purpose = 'DP')";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
             $rowCount = mysqli_num_rows($result);

@@ -52,23 +52,23 @@
 
         for($i=0;$i < $length; $i++ ){
             $idn = $i+1;
-            $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][7];
-            $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][7];
+            $pathImg = '/uploads/photos/'.$username.'/'.$data[$i][2].$data[$i][6];
+            $pathVid = '/uploads/videos/'.$username.'/'.$data[$i][2].$data[$i][6];
             $whatToShow;
             $onclick;
             $what = '';
-            if($data[$i][6] == 'photos'){
+            if($data[$i][5] == 'photos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showImage('{$pathImg}', '{$data[$i][8]}', '{$data[$i][2]}', '{$data[$i][7]}', 'photo{$idn}', '{$data[$i][9]}', '{$data[$i][10]}', '{$data[$i][11]}')" >
+                    <div class="imgDiv" onclick="showImage('{$pathImg}', '{$data[$i][7]}', '{$data[$i][2]}', '{$data[$i][6]}', 'photo{$idn}', '{$data[$i][8]}', '{$data[$i][9]}', '{$data[$i][10]}')" >
                         <img class="lazyload" data-src="$pathImg" alt="">
                     </div>
                 HTML;
                 $what = 'photos';
                 $onclick = 'showImage("'.$pathImg.'")';
                 $icon = '';
-            }elseif($data[$i][6] == 'videos'){
+            }elseif($data[$i][5] == 'videos'){
                 $whatToShow = <<<HTML
-                    <div class="imgDiv" onclick="showVideo('{$pathVid}', '{$data[$i][8]}', '{$data[$i][2]}', '{$data[$i][7]}', 'photo{$idn}', '{$data[$i][9]}', '{$data[$i][10]}', '{$data[$i][11]}')">
+                    <div class="imgDiv" onclick="showVideo('{$pathVid}', '{$data[$i][7]}', '{$data[$i][2]}', '{$data[$i][6]}', 'photo{$idn}', '{$data[$i][8]}', '{$data[$i][9]}', '{$data[$i][10]}')">
                         <video class="lazyload" data-src="$pathVid">
                             <source src="{$pathVid}" type="video/mp4">
                         </video>
