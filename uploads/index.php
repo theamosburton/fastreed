@@ -51,7 +51,7 @@ class getFastreedContent {
 
             $uploadDetails = $this->checkUpload($imageDetails['username']);
             if (!$uploadDetails) {
-              // $this->renderUError();
+              $this->renderUError();
               return;
             }
 
