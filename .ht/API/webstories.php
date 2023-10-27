@@ -409,7 +409,7 @@ class Webstories{
           $images[$i] = $layer['L' . $i]['media']['url'];
           $urlParts = parse_url($images[$i]);
           $pathSegments = explode('/', trim($urlParts['path'], '/'));
-          $images[$i] = $pathSegments[3];
+          $images[$i] = $pathSegments[2];
           $images[$i] = strtok($images[$i], '.');
         }
         $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
@@ -950,11 +950,11 @@ class Webstories{
                     break;
                 }
             } else {
-                $url = str_replace("/uploads", "/.ht/fastreedusercontent/$username", $layer['media']['url']);
+                $url = str_replace("/uploads/photos", "/.ht/fastreedusercontent/photos/$username", $layer['media']['url']);
                 $urlExists = file_exists($this->_DOCROOT.$url);
 
                 if (!$urlExists) {
-                    $url = str_replace("/.ht/fastreedusercontent/$username","/uploads",  $layer['media']['url']);
+                    $url = str_replace("/.ht/fastreedusercontent/$username/photos","/uploads/photos",  $layer['media']['url']);
                     $errorArray[] = 'Media inserted in Layer : ' . ($i + 1).' does not exist <i>'.$url.' </i>' ;
                     break;
                 } else {
