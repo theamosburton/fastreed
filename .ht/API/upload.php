@@ -322,8 +322,8 @@ class uploadMedia{
         $date = date('Y-m-d');
         $time =  time();
         $sql = "INSERT INTO uploads (tdate, uploadID, purpose, personID, type, extension, access, `time`, `size`, status) Values('$date', '$fileName','$purpose', '$id', '$type', '.$ext', '$access', '$time', '$sizeKB', 'UFD')";
-        var_dump($sql);
         $result = mysqli_query($this->DB,$sql);
+        var_dump(mysqli_error($result));
         if ($result) {
             $return['Result'] = true;
             $return['fileName'] = $fileName;
