@@ -32,35 +32,35 @@
          $storyTitle = $storyData['metaData']['title'];
 
          if ($i == 0) {
-             $ampStory .= '
-             <amp-story-page id="Story_page_' . ($i + 1) . '_Template_id_7" class="NWSStory-scene" data-type="standard" data-layout="2">
-                 <amp-story-grid-layer class="NWSStory-scene-content" template="fill">
-                     <div class="NWSStory-layers NWSStory-layers--fixed"></div>
-                     <div class="NWSStory-layers NWSStory-layers--unfixed">
-                         <div class="NWSStory-layers-group NWSStory-layers-group--media">
-                             <div class="NWSStory-layer NWSStory-layer--img">
-                                 <div class="NWSStory-layer-content">
-                                     <amp-img src="' . $mainPoster . '" width="720" height="1280" layout="flex-item" class="" object-fit="' . $objectFit . '">
-                                         <div class="storyOverlay" height="100%" width="100%" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
-                                     </amp-img>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
-                         <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:40px 20px">
-                             <div animate-in="fly-in-top" animate-in-delay="1s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-top:120px">
-                                 <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">'.$date.'</p>
-                             </div>
-                             <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class "NWSStory-layer">
-                                 <h1 class="fade-in" style="font:' . $titleFontSize . ' ' . $titleFontFamily . ';font-weight:' . $titleFontWeight . ';letter-spacing:0.72px;padding-bottom:15px;text-align:center;">' . $storyTitle . '</h1>
-                             </div>
-                             <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
-                                 <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: none</p>
-                             </div>
-                         </div>
-                     </div>
-                 </amp-story-grid-layer>
-             </amp-story-page>';
+           $ampStory .= '
+            <amp-story-page id="Story_page_' . ($i + 1) . '_Template_id_7" class="NWSStory-scene" data-type="standard" data-layout="2">
+                <amp-story-grid-layer class="NWSStory-scene-content" template="fill">
+                    <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+                    <div class="NWSStory-layers NWSStory-layers--unfixed">
+                        <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                            <div class="NWSStory-layer NWSStory-layer--img">
+                                <div class="NWSStory-layer-content">
+                                    <amp-img src="' . $mainPoster . '" width="720" height="1280" layout="flex-item" class="" object-fit="' . $objectFit . '">
+                                        <div class="storyOverlay" height="100%" width="100%" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
+                                    </amp-img>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+                        <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:40px 20px">
+                            <div animate-in="fly-in-top" animate-in-delay="1s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-top:120px">
+                                <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">'.$date.'</p>
+                            </div>
+                            <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class "NWSStory-layer">
+                                <h1 class="fade-in" style="font:' . $titleFontSize . ' ' . $titleFontFamily . ';font-weight:' . $titleFontWeight . ';letter-spacing:0.72px;padding-bottom:15px;text-align:center;">' . $storyData['metaData']['title'] . '</h1>
+                            </div>
+                            <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
+                                <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: none</p>
+                            </div>
+                        </div>
+                    </div>
+                </amp-story-grid-layer>
+            </amp-story-page>';
          }elseif ($storyData['layers']['L' . $i]['media']['type'] == 'video') {
                 $textFontSize = $storyData['layers']['L' . $i]['otherText']['fontSize'];
                 $textFontFamily = $storyData['layers']['L' . $i]['otherText']['fontFamily'];
