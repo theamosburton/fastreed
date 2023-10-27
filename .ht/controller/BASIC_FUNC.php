@@ -64,17 +64,17 @@ class BasicFunctions
       $noOfRow = $this->realNum($x);
     }
     if ($noOfRow < 10) {
-      $newID .= '00000'.$noOfRow;
+      $newID .= '000000'.$noOfRow;
     }elseif ($noOfRow < 100) {
-      $newID .= '0000'.$noOfRow;
+      $newID .= '00000'.$noOfRow;
     }elseif ($noOfRow < 1000) {
-      $newID .= '000'.$noOfRow;
+      $newID .= '0000'.$noOfRow;
     }elseif ($noOfRow < 10000) {
-      $newID .= '00'.$noOfRow;
+      $newID .= '000'.$noOfRow;
     }elseif ($noOfRow < 100000) {
-      $newID .= '0'.$noOfRow;
+      $newID .= '00'.$noOfRow;
     }elseif ($noOfRow < 1000000) {
-      $newID  = $noOfRow;
+      $newID .= '0'.$noOfRow;
     }elseif ($noOfRow < 10000000) {
       $newID .= $noOfRow;
     }
