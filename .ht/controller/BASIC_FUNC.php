@@ -63,16 +63,18 @@ class BasicFunctions
       $x =  mysqli_num_rows($result);
       $noOfRow = $this->realNum($x);
     }
-    if ($noOfRow < 100) {
+    if ($noOfRow < 10) {
       $newID .= '00000'.$noOfRow;
-    }elseif ($noOfRow < 1000) {
+    }elseif ($noOfRow < 100) {
       $newID .= '0000'.$noOfRow;
-    }elseif ($noOfRow < 10000) {
+    }elseif ($noOfRow < 1000) {
       $newID .= '000'.$noOfRow;
-    }elseif ($noOfRow < 100000) {
+    }elseif ($noOfRow < 10000) {
       $newID .= '00'.$noOfRow;
-    }elseif ($noOfRow < 1000000) {
+    }elseif ($noOfRow < 100000) {
       $newID .= '0'.$noOfRow;
+    }elseif ($noOfRow < 1000000) {
+      $newID  = $noOfRow;
     }elseif ($noOfRow < 10000000) {
       $newID .= $noOfRow;
     }
