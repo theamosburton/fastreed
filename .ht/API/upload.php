@@ -256,8 +256,6 @@ class uploadMedia{
           showMessage(false, 'Image cannot entered in DB');
           return;
         }
-
-        $this->deleteOldDP($id);
         $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
         $add = '/.ht/fastreedusercontent/photos/'.$username.'/';
         // Create the directory if it doesn't exist
