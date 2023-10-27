@@ -182,7 +182,7 @@ class uploadMedia{
         $this->deleteOldDP($id);
         $fileName = $this->BASIC_FUNC->createNewID("uploads" , "IMG");
         if(!$this->makeFileEntry($fileName, $id, 'DP', 'photos', $file_ext, $sizeKB, 'anon')['Result']){
-            showMessage(false, 'File cannot entered in DB');
+            showMessage(false, 'Dp cannot entered in DB');
             return;
         }
         $directory = $this->_DOCROOT.'/.ht/fastreedusercontent/photos/'.$username.'/';
