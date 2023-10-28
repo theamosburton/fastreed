@@ -83,11 +83,15 @@
                     </div>
                 </div>
                 <div id="selectedObject" class="selectedObject" >
+                  <!-- Navs -->
                     <div class="objectHead" id="objectHead">
                         <span class="active" id="layerNumber" onclick="openOptions('layers')" >Layer 1</span>
                         <span class="" id="metaDataName" onclick="openOptions('metadata')">Metadata</span>
+                        <span class="" id="moreInformation" onclick="openOptions('moreInfo')">More</span>
                     </div>
-
+                    <!-- Navs -->
+                    
+                    <!-- Meta Data -->
                     <div class="objectOptions" id="metaData" style="display: none;">
                         <div class="objectOptionsbody">
                           <div class="optionsDIv" id="">
@@ -160,14 +164,38 @@
                                           <option value="Biography">Biography</option>
                                           <option value="Comedy">Comedy</option>
                                           <option value="Romance">Romance</option>
+                                          <option value="Health">Health</option>
+                                          <option value="Movies">Movies</option>
+                                          <option value="Web-series">Web-series</option>
+                                          <option value="Parenting">Parenting</option>
+                                          <option value="Technology">Technology</option>
+                                          <option value="Technology">Science</option>
+                                          <option value="Fashion">Fashion</option>
+                                          <option value="Photography">Photography </option>
+                                          <option value="History">History</option>
+                                          <option value="Books">Books</option>
+                                          <option value="Self Care">Self Care</option>
+                                          <option value="Space and Astronomy">Space and Astronomy</option>
+                                          <option value="Finance and Investment">Finance and Investment</option>
+                                          <option value="Social Media">Social Media</option>
+                                          <option value="Relationships and Dating">Relationships and Dating </option>
+                                          <option value="Self Improvement">Self Improvement </option>
                                           <option value="NIL">Not in the list</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                            <div style="height:100px;padding:10px;">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Meta Data -->
 
+                    <!-- More Information -->
+                    <div class="objectOptions" id="moreInfo" style="display: none;">
+                        <div class="objectOptionsbody">
                             <div class="optionsDIv relatedStorySection">
-                              <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                              <span class="objectName" onclick="edits.expandMoreOptions('relatedStorySection')">
                                   <span>Related Story (optional)</span>
                                   <i class="upDownIcon fa fa-caret-right"></i>
                               </span>
@@ -186,6 +214,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- More Information -->
 
                     <div class="objectOptions" id="objectOptions">
                     </div>

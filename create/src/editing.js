@@ -41,6 +41,21 @@ class Edits{
 
   }
 
+  expandMoreOptions(className){
+      var option = document.querySelector(`#moreInfo .${className} .options`);
+      var icon =   document.querySelector(`#moreInfo .${className} .upDownIcon`);
+      if (option.style.display == 'block') {
+          option.style.display = 'none';
+          icon.classList.add('fa-caret-right');
+          icon.classList.remove('fa-caret-down');
+      }else{
+          icon.classList.add('fa-caret-down');
+          icon.classList.remove('fa-caret-right');
+          option.style.display = 'block';
+      }
+
+  }
+
 
   // Media Editing
   selectMedia(link, type, olink){

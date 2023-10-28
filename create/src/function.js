@@ -18,9 +18,11 @@ function showSection(section, id2){
 }
 function openOptions(x){
   let layerName = document.getElementById('layerNumber');
+  let moreInformation = document.getElementById('moreInformation');
   let metaDataName = document.getElementById('metaDataName');
   let metaData = document.getElementById('metaData');
   let objectOptions = document.getElementById('objectOptions');
+  let moreInfo = document.getElementById('moreInfo');
 
   if (x == 'layers') {
     metaData.style.display = 'none';
@@ -28,6 +30,12 @@ function openOptions(x){
       metaDataName.classList.remove('active');
     }
 
+    moreInfo.style.display = 'none';
+    if (moreInformation.classList.contains("active")) {
+      moreInformation.classList.remove('active');
+    }
+
+    
     layerName.classList.add('active');
     objectOptions.style.display = 'block';
 
@@ -37,8 +45,24 @@ function openOptions(x){
       layerName.classList.remove('active');
     }
 
+    moreInfo.style.display = 'none';
+    if (moreInformation.classList.contains("active")) {
+      moreInformation.classList.remove('active');
+    }
+
     metaDataName.classList.add('active');
     metaData.style.display = 'block';
+  }else if (x == 'moreInfo') {
+    metaData.style.display = 'none';
+    if (metaDataName.classList.contains("active")) {
+      metaDataName.classList.remove('active');
+    }
+    objectOptions.style.display = 'none';
+    if (layerName.classList.contains("active")) {
+      layerName.classList.remove('active');
+    }
+    moreInformation.classList.add('active');
+    moreInfo.style.display ="block";
   }
 
 }
