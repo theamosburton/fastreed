@@ -78,7 +78,7 @@ class renderStory{
          if (empty($link)) {
            return $return;
          }
-         $sql = "SELECT * FROM metaData WHERE url = '$link' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+         $sql = "SELECT * FROM metaData WHERE url = '$link'";
          $result = mysqli_query($this->DB, $sql);
          if ($result) {
            if (mysqli_num_rows($result)) {
@@ -91,7 +91,7 @@ class renderStory{
              $moniStat = $row['moniStatus'];
              $moniStat = json_decode($moniStat);
              $moniStat = $moniStat->status;
-             $sql1 = "SELECT * FROM stories WHERE storyID = '$postID'";
+             $sql1 = "SELECT * FROM stories WHERE storyID = '$postID' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
              $result1 = mysqli_query($this->DB, $sql1);
              if ($result1) {
                if (mysqli_num_rows($result1)) {
