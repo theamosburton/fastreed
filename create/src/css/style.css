@@ -684,6 +684,17 @@ body{
   display: flex;
   align-items: flex-end;
   margin:0!important;
+  color: white;
+}
+.otherStoryOverlay{
+  left: 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #00000073;
+  top: 0px;
+  margin: 0px!important;
+  border-radius: 15px;
 }
 .storiesSectionError{
   margin: 10px 10px 15px 5px!important;

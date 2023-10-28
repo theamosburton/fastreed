@@ -1180,6 +1180,7 @@ class Editor{
             storiesSection.innerHTML += `
             <div class="relatedStories"  style="background-image:url('${image}')">
               <div class="relatedStoryTitle" id="relatedStory${i+1}" onclick="editor.selectRelatedStory('${url}', 'relatedStory${i+1}')">
+              <div class="otherStoryOverlay"></div>
                 <div class="storyTitle">
                     <span>${title}</span>
                 </div>
