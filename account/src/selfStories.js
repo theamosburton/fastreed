@@ -93,6 +93,9 @@ class FetchStories {
     this.renderWebstories()
   }
   renderWebstories(){
+    if(this.webstoriesData.length < 1){
+      return;
+    }
     var webstories = this.webstoriesData;
     webstories = webstories.reverse();
     if (this.filter == 'All') {
@@ -213,6 +216,9 @@ class FetchStories {
   }
 
   populateStoryLoading() {
+      if (document.getElementById('webstories') == null) {
+        return;
+      }
       var webstories = document.getElementById('webstories');
       webstories.innerHTML = `
       <div class="webstory loading">
