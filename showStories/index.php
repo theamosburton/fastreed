@@ -80,7 +80,6 @@ class renderStory{
          if ($result) {
            if (mysqli_num_rows($result)) {
              $row = mysqli_fetch_assoc($result);
-
              $postID = $row['postID'];
              $title = $row['title'];
              $description = $row['description'];
