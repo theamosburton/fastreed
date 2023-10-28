@@ -474,7 +474,7 @@ class Webstories{
               $verifyStatus = json_encode($verifyStatus);
               $storyData = json_encode($decodeData,true);
               if ($this->checkStoryMetaExists($storyID)) {
-                  $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                $sql = 'UPDATE stories set storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" and storyID = "$storyID"';
                   $result = mysqli_query($this->DB, $sql);
                   $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
                   $result1 = mysqli_query($this->DB, $sql1);
@@ -486,7 +486,7 @@ class Webstories{
               }else{
                   $sql2 = "INSERT INTO metaData(`postID`, `title`, `description`, `keywords`, `url`, `moniStatus`, `category`) Values('$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus', '$category')";
                   $result2 = mysqli_query($this->DB, $sql2);
-                  $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                  $sql3 = 'UPDATE stories set storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" and storyID = "$storyID"';
                   $result3 = mysqli_query($this->DB, $sql3);
                   if ($result2 && $result3) {
                       showMessage(true, "$url");
@@ -531,7 +531,7 @@ class Webstories{
                 $verifyStatus = json_encode($verifyStatus);
                 $storyData = json_encode($decodeData,true);
                 if ($this->checkStoryMetaExists($storyID)) {
-                    $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
+                  $sql = 'UPDATE stories set storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" and storyID = "$storyID"';
                     $result = mysqli_query($this->DB, $sql);
                     $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url', `moniStatus` = '$verifyStatus' WHERE `postID` = '$storyID'";
                     $result1 = mysqli_query($this->DB, $sql1);
@@ -543,7 +543,7 @@ class Webstories{
                 }else{
                     $sql2 = "INSERT INTO metaData(`category`, `postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$category','$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
                     $result2 = mysqli_query($this->DB, $sql2);
-                    $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit' , storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                    $sql3 = 'UPDATE stories set storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" and storyID = "$storyID"';
                     $result3 = mysqli_query($this->DB, $sql3);
                     if ($result2 && $result3) {
                         showMessage(true, 'Updated 2');
@@ -623,6 +623,7 @@ class Webstories{
                 if (isset($data['username']) && !empty($data['username'])) {
                     if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
                         if (isset($data['data']) && !empty($data['data'])) {
+                          var_dump($data['data']);
                           $metaData = json_decode($data['metaData'], true);
                           $title = $metaData['title'];
                           $url = $metaData['url'];
@@ -650,7 +651,8 @@ class Webstories{
                           $verifyStatus = json_encode($verifyStatus);
                           $storyData = json_encode($decodeData);
                           if ($this->checkStoryMetaExists($storyID)) {
-                              $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
+                              $sql = 'UPDATE stories SET storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" AND storyID = "$storyID"';
+                              // $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
                               $result = mysqli_query($this->DB, $sql);
                               $sql1 = "UPDATE metaData set `category` = '$category', `moniStatus`='$verifyStatus', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url' WHERE `postID` = '$storyID'";
                               $result1 = mysqli_query($this->DB, $sql1);
@@ -662,7 +664,7 @@ class Webstories{
                           }else{
                               $sql2 = "INSERT INTO metaData(`category`, `postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$category', '$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
                               $result2 = mysqli_query($this->DB, $sql2);
-                              $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
+                                $sql3 = 'UPDATE stories SET storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" AND storyID = "$storyID"';
                               $result3 = mysqli_query($this->DB, $sql3);
                               if ($result2 && $result3) {
                                   showMessage(true, 'Saved 2');
@@ -714,8 +716,9 @@ class Webstories{
                         $storyStatus = json_encode($storyStatus);
                         $verifyStatus = json_encode($verifyStatus);
                         $storyData = json_encode($decodeData);
+                        $storyData = '"'.$storyData.'"';
                         if ($this->checkStoryMetaExists($storyID)) {
-                            $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
+                            $sql = 'UPDATE stories SET storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" AND storyID = "$storyID"';
                             $result = mysqli_query($this->DB, $sql);
                             $sql1 = "UPDATE metaData set `category` = '$category', `moniStatus` = '$verifyStatus',`title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url' WHERE `postID` = '$storyID'";
                             $result1 = mysqli_query($this->DB, $sql1);
@@ -727,7 +730,7 @@ class Webstories{
                         }else{
                             $sql2 = "INSERT INTO metaData(`category`,`postID`, `title`, `description`, `keywords`, `url`, `moniStatus`) Values('$category','$storyID', '$title', '$description', '$keywords', '$url', '$verifyStatus')";
                             $result2 = mysqli_query($this->DB, $sql2);
-                            $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
+                            $sql3 = 'UPDATE stories SET storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus" WHERE personID = "$UID" AND storyID = "$storyID"';
                             $result3 = mysqli_query($this->DB, $sql3);
                             if ($result2 && $result3) {
                                 showMessage(true, 'Saved 4');
@@ -858,7 +861,7 @@ class Webstories{
               $storyStatus = ['status' => 'published', 'version' => $version];
               $storyStatus = json_encode($storyStatus, true);
               $storyData = json_encode($dataArray, true);
-              $sql3 = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus', access = 'public'  WHERE storyID = '$storyID";
+              $sql3 = 'UPDATE stories SET storyData = "$storyData", lastEdit = "$lastEdit", storyStatus = "$storyStatus", access = "public" WHERE storyID = "$storyID"';
               $result3 = mysqli_query($this->DB, $sql3);
 
               if (!$result3 || !$this->makePublic($images)) {
@@ -881,7 +884,7 @@ class Webstories{
               $storyStatus = ['status' => 'published', 'version' => $dataArray['version']];
               $storyStatus = json_encode($storyStatus, true);
               $storyData = json_encode($dataArray, true);
-              $sql3 = "UPDATE stories set storyData = '$storyData',  firstEdit = '$lastEdit', lastEdit = '$lastEdit', storyStatus = '$storyStatus', access = 'public'  WHERE storyID = '$storyID'";
+              $sql3 = 'UPDATE stories SET storyData = "$storyData", firstEdit = "$lastEdit", lastEdit = "$lastEdit", storyStatus = "$storyStatus", access = "public" WHERE storyID = "$storyID"';
               $result3 = mysqli_query($this->DB, $sql3);
 
               if (!$result3 || !$this->makePublic($images)) {
