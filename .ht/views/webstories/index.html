@@ -2,13 +2,9 @@
 <html ⚡>
 <head>
   <?php
-  include 'head.html';
-  include 'style.html';
-  ?>
-    </head>
-	<body id="app">
-    <?php
-    $storyData = json_decode($JSONlayers, true);
+
+
+  $storyData = json_decode($JSONlayers, true);
   $mainPoster = '';
   $date = $storyData['metaData']['date'];
   if ($storyData['layers']['L0']['media']['url'] == '' || $storyData['layers']['L0']['media']['url'] == 'default') {
@@ -17,9 +13,29 @@
       $mainPoster = $storyData['layers']['L0']['media']['url'];
   }
   $totalLayers = count($storyData['layers']);
+  $isVideo = false;
+  $isImage = false;
+  for ($g = 0; $g < $totalLayers; $g++) {
+    $type = $storyData['layers']['L' . $g]['media']['type'];
+    if($type == 'video'){
+        $isVideo = true;
+        break;
+    }
+  }
 
+  for ($h = 0; $h < $totalLayers; $h++) {
+    $type = $storyData['layers']['L' . $h]['media']['type'];
+    if($type == 'image'){
+        $isImage = true;
+        break;
+    }
+  }
+
+  include 'head.html';
+  include 'style.html';
     ?>
-
+  </head>
+<body id="app">
     <amp-story standalone ="" class="NWSStory" publisher="fastreed" title="<?php echo $storyData['metaData']['title'] ?>" poster-portrait-src="<?php echo $mainPoster ?>">
       <?php
       $ampStory = '';
