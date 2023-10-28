@@ -247,7 +247,7 @@ class adminEditor extends createContent{
                 $this->createWebstory();
             }
           }else{
-            header('Location:/account/');
+            $this->createWebstory();
           }
         }else{
             header('Location:/account/');
