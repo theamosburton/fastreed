@@ -75,7 +75,10 @@ class renderStory{
 
        function getWebstoryData($link){
          $return = false;
-         $sql = "SELECT * FROM metaData WHERE url = '$link'";
+         if (empty($link)) {
+           return $return;
+         }
+         $sql = "SELECT * FROM metaData WHERE url = '$link' ";
          $result = mysqli_query($this->DB, $sql);
          if ($result) {
            if (mysqli_num_rows($result)) {
