@@ -164,7 +164,7 @@ class updateDetails{
         $ePID = $data['personID'];
 
         if ($x == 'admin') {
-            if ($adminValueSet) {
+            if (!$adminValueSet) {
               showMessage(false, "Not all value set admin");
               return;
             }
@@ -197,7 +197,7 @@ class updateDetails{
 
         } else {
             # user edit
-            if ($userValueSet) {
+            if (!$userValueSet) {
               showMessage(false, "Not all value set user");
               return;
             }

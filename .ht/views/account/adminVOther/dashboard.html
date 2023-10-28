@@ -17,13 +17,12 @@ if($canCreate == 'REQ'){
         <div class="alert alert-danger"  id="errorDoc" role="alert" style="display:none;">
         </div>
         <div class="ml-3 col-12 d-inline">
-         <input type="text" id="rejectionReason" placeholder="Reason of rejection" style="margin:20px 10px 20px 0px;padding: 4px;">
-       </div>
+          <input type="text" id="rejectionReason" placeholder="Reason of rejection" style="margin:20px 10px 20px 0px;padding: 4px;">
+        </div>
         <div class="ml-3 col-12" style="display:flex;">
          <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
          <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
         </div>
-
     </div>
 HTML;
 }elseif($canCreate == 'REJ'){
@@ -35,16 +34,17 @@ HTML;
   <div class="contentTopics resCreation row">
       <div class="title col-12 mb-3">Allow to write</div>
       <div class="col-12 d-inline">
-      <div class="alert alert-info" style="max-width:600px" role="alert">
+        <div class="alert alert-info" style="max-width:600px" role="alert">
         Would you like this user to contribute to the website or not
         <hr>
         Proof Document: <a target="_blank" href="{$url}">Click Here</a>
+        </div>
       </div>
       <div class="alert alert-danger"  id="errorDoc" role="alert" style="display:none;">
       </div>
       <div class="col-12 d-inline">
        <input type="text" id="rejectionReason" placeholder="Reason of rejection" style="margin:20px 10px 20px 0px;padding: 4px;">
-     </div>
+      </div>
       <div class="col-12" style="display:flex;">
        <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
        <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
@@ -61,9 +61,10 @@ HTML;
         <div class="alert alert-info" style="max-width:600px" role="alert">
           Would you like this user to contribute to the website or not
         </div>
+      </div>
       <div class="ml-3 col-12 d-inline">
        <input type="text" id="rejectionReason" placeholder="Reason of rejection" style="margin:20px 10px 20px 0px;padding: 4px;">
-     </div>
+      </div>
       <div class="ml-3 col-12" style="display:flex;">
        <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
        <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
@@ -96,6 +97,5 @@ HTML;
             HTML;
         }
         ?>
-    </div>
-
+  </div>
 </div>
