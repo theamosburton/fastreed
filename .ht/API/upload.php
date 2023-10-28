@@ -283,7 +283,33 @@ class uploadMedia{
         $file_tmp = $file['tmp_name'];
         $file_error = $file['error'];
         $file_ext = $_POST['ext'];
-        if ($file_error === UPLOAD_ERR_OK) {
+        if ($file_error != UPLOAD_ERR_OK) {
+          switch ($file_error) {
+              case UPLOAD_ERR_INI_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the upload_max_filesize directive in php.ini');
+                  break;
+              case UPLOAD_ERR_FORM_SIZE:
+                  showMessage(false, 'The uploaded file exceeds the MAX_FILE_SIZE directive specified in the HTML form');
+                  break;
+              case UPLOAD_ERR_PARTIAL:
+                  showMessage(false, 'The uploaded file was only partially uploaded');
+                  break;
+              case UPLOAD_ERR_NO_FILE:
+                  showMessage(false, 'No file was uploaded');
+                  break;
+              case UPLOAD_ERR_NO_TMP_DIR:
+                  showMessage(false, 'Missing a temporary folder');
+                  break;
+              case UPLOAD_ERR_CANT_WRITE:
+                  showMessage(false, 'Failed to write file to disk');
+                  break;
+              case UPLOAD_ERR_EXTENSION:
+                  showMessage(false, 'A PHP extension stopped the file upload');
+                  break;
+              default:
+                  showMessage(false, 'Unknown error occurred during file upload');
+                  break;
+          }
           return;
         }
         $sizeB = $file['size'];
