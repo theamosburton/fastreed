@@ -55,10 +55,10 @@ class renderStory{
              if($this->getWebstoryData($lastPath)){
                $relatedStoryData = $this->getWebstoryData($lastPath);
              }else{
-               $relatedStoryData = '';
+               $relatedStoryData = false;
              }
            }else{
-             $relatedStoryData = '';
+             $relatedStoryData = false;
            }
 
            $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
