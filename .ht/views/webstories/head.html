@@ -21,6 +21,8 @@ echo $noIndex;
 <meta data-rh="true" name="twitter:card" content="summary_large_image">
 <!-- <meta name="author" content=""> -->
 <link data-rh="true" rel="canonical" href="<?php echo DOMAIN.'/webstories/'.$storyUrl;?>">
+<link rel="amphtml" href="<?php echo DOMAIN.'/webstories/'.$storyUrl;?>">
+
 <meta name="robots" content="max-image-preview:large">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -28,12 +30,10 @@ echo $noIndex;
 <!-- <script async src="/assets/js/story/cdn.ampproject.org-v0.js"></script> -->
 <!-- <script async custom-template="amp-mustache" src="/assets/js/story/v0-amp-mustache-0.2.js"></script>
 <script async custom-element="amp-analytics" src="/assets/js/story/v0-amp-analytics-0.1.js"></script> -->
+<script async src="https://cdn.ampproject.org/v0/amp-story-1.0.js" custom-element="amp-story"></script>
 <?php
-if($isVideo){
-  echo '<script custom-element="amp-video" src="/assets/js/story/v0-amp-video-0.1.js"></script>';
-}
+//if($isVideo){
+//  echo '<script custom-element="amp-video" src="/assets/js/story/v0-amp-video-0.1.js"></script>';
+//}
 
-if($isImage){
-  echo '<script custom-element="amp-story" src="/assets/js/story/v0-amp-story-1.0.js"></script>';
-}
 ?>
