@@ -43,6 +43,8 @@ class storyPreview{
            $unixLastGMT = $this->istToGMT($data['lastEdit']);
            $unixFirstGMT = $this->istToGMT($data['firstEdit']);
            $noIndex = $data['noIndex'];
+           $authorName = $data['authorName'];
+           $authorUsername = $data['authorUsername'];
            $storyMetaData = $layers['metaData'];
            if (!empty($storyMetaData['relatedStory']) || isset($storyMetaData['relatedStory'])) {
              $relatedStoryUrl = $storyMetaData['relatedStory'];
@@ -91,6 +93,8 @@ class storyPreview{
              if ($result1) {
                if (mysqli_num_rows($result1)) {
                   $webstoryData = mysqli_fetch_assoc($result1);
+                  $webstoryData['authorName'] = $this->getAuthorInfo($webstoryData['personID'])['fullName'];
+                  $webstoryData['authorUsername'] = $this->getAuthorInfo($webstoryData['personID'])['username'];
                   unset($webstoryData['personID']);
                   $webstoryData['title'] = $title;
                   $webstoryData['description'] = $description;
@@ -107,6 +111,15 @@ class storyPreview{
            }
          }
          return $return;
+       }
+       private function getAuthorInfo($id){
+         $rows = '';
+         $sql = "SELECT * FROM account_details WHERE personID = '$id'";
+         $result = mysqli_query($this->DB, $sql);
+         if ($result && mysqli_num_rows($result)) {
+           $rows = mysqli_fetch_assoc($result);
+         }
+         return $rows;
        }
        public function closeConnection(){
            if ($this->DB) {
