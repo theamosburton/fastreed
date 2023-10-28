@@ -35,18 +35,18 @@ class storyPreview{
            $data = $this->getWebstoryData($link);
            $JSONlayers = $data['storyData'];
            $layers = json_decode($JSONlayers, true);
-           $image = $layers['layers']['L0']['media']['url'];
-           $title = $data['title'];
-           $description = $data['description'];
-           $url = $data['url'];
-           $keywords = $data['keywords'];
+           $storyImage = $layers['layers']['L0']['media']['url'];
+           $storyTitle = $data['title'];
+           $storyDescription = $data['description'];
+           $storyUrl = $data['url'];
+           $storyKeywords = $data['keywords'];
            $unixLastGMT = $this->istToGMT($data['lastEdit']);
            $unixFirstGMT = $this->istToGMT($data['firstEdit']);
            $noIndex = $data['noIndex'];
-           $metaData = $layers['metaData'];
-           if (!empty($metaData['relatedStory']) || isset($metaData['relatedStory'])) {
-             $url = $metaData['relatedStory'];
-             $urlParts = parse_url($url);
+           $storyMetaData = $layers['metaData'];
+           if (!empty($storyMetaData['relatedStory']) || isset($storyMetaData['relatedStory'])) {
+             $relatedStoryUrl = $storyMetaData['relatedStory'];
+             $urlParts = parse_url($relatedStoryUrl);
              $path = $urlParts['path'];
              $lastPath = basename($path);
              if($this->getWebstoryData($lastPath)){
@@ -58,27 +58,8 @@ class storyPreview{
              $relatedStoryData = '';
            }
 
-           // $unixLastGMT = $data['lastEdit'];
-           // $unixFirstGMT = $data['firstEdit'];
-
            $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
            $firstmod = gmdate("D, d M Y H:i:s", $unixFirstGMT) . " GMT";
-
-           if (empty($relatedStoryData) || $relatedStoryData == '') {
-             echo "<script>
-             var storyData = ".$JSONlayers.";
-             var relatedStory = '';
-             </script>";
-           }else{
-             echo "<script>
-             var storyData = ".$JSONlayers.";
-             var relatedStory = ".json_encode($relatedStoryData).";
-             </script>";
-           }
-           echo "<script>
-           var storyData = ".$JSONlayers.";
-           var relatedStory = ".json_encode($relatedStoryData).";
-           </script>";
 
            include '../.ht/views/webstories/index.html';
          }
