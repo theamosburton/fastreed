@@ -92,10 +92,8 @@ class FetchAdminStories {
 
     this.renderWebstories()
   }
+
   renderWebstories(){
-    if(this.webstoriesData.length < 1){
-      return;
-    }
     var webstories = this.webstoriesData;
     webstories = webstories.reverse();
     if (this.filter == 'All') {
