@@ -36,9 +36,8 @@ class createContent{
        $this->version = implode('.', str_split($this->version, 1));
        $this->userData = new getLoggedData();
        $this->uploadData = new getUploadData();
-       $adminLogged = $this->userData->adminLogged;
-       $userLogged = $this->userData->userLogged;
-       if ($adminLogged || $userLogged) {
+       $whoAmI = $this->userData->whoAmI();
+       if ($whoAmI == 'Admin' || $whoAmI == 'User') {
          if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
              new userEditor();
          }elseif  (!isset($_GET['editor']) || $_GET['editor'] !='Admin') {
