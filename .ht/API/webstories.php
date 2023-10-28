@@ -648,7 +648,7 @@ class Webstories{
                           $verifyStatus = ['status'=>'none', 'version'=>$version];
                           $storyStatus = json_encode($storyStatus);
                           $verifyStatus = json_encode($verifyStatus);
-                          $storyData = json_encode($decodeData,true);
+                          $storyData = json_encode($decodeData);
                           if ($this->checkStoryMetaExists($storyID)) {
                               $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus' WHERE personID = '$UID' and storyID = '$storyID'";
                               $result = mysqli_query($this->DB, $sql);
@@ -713,7 +713,7 @@ class Webstories{
                         $verifyStatus = ['status'=>'none', 'version'=>$version];
                         $storyStatus = json_encode($storyStatus);
                         $verifyStatus = json_encode($verifyStatus);
-                        $storyData = json_encode($decodeData,true);
+                        $storyData = json_encode($decodeData);
                         if ($this->checkStoryMetaExists($storyID)) {
                             $sql = "UPDATE stories set storyData = '$storyData', lastEdit = '$lastEdit', storyStatus = '$storyStatus'  WHERE personID = '$UID' and storyID = '$storyID'";
                             $result = mysqli_query($this->DB, $sql);
