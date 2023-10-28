@@ -56,6 +56,29 @@ class Edits{
 
   }
 
+  togglePromotion(element){
+    var span = element.querySelector('span');
+    var icon = element.querySelector('i');
+    if (icon.classList.contains('enabledText')) {
+      if (icon.classList.contains('fa-toggle-on')) {
+        icon.classList.remove('fa-toggle-on');
+        icon.classList.add('fa-toggle-off');
+      }
+      icon.classList.remove('enabledText');
+      icon.classList.add('disabledText');
+      span.innerHTML = 'Disabled';
+      this.editor.metaData.selfPromotion = false;
+    }else{
+      if (icon.classList.contains('fa-toggle-off')) {
+        icon.classList.remove('fa-toggle-off');
+        icon.classList.add('fa-toggle-on');
+      }
+      icon.classList.add('enabledText');
+      icon.classList.remove('disabledText');
+      span.innerHTML = 'Enabled';
+      this.editor.metaData.selfPromotion = true;
+    }
+  }
 
   // Media Editing
   selectMedia(link, type, olink){

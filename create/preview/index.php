@@ -1,26 +1,18 @@
 <?php
 $_SERVROOT = '../../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
-include "../../.ht/controller/VISIT.php";
+include $_DOCROOT."/.ht/controller/VISIT.php";
 
 new storyPreview();
 
 class storyPreview{
     public $version;
     public $captureVisit;
-    protected $adminLogged = false;
     protected $userLogged = false;
-    protected $DB_CONN;
+    protected $DB;
     protected $AUTH;
     protected $FUNC;
     protected $userData;
-    protected $pageCss;
-    protected $extraStyle;
-    protected $blackMode;
-    protected $whiteMode;
-    protected $pageJs;
-    protected $extraScript;
-    protected $adminIsEditing;
     private $DOCROOT;
     private $SERVROOT;
 
@@ -29,94 +21,65 @@ class storyPreview{
          $this->captureVisit = new VisitorActivity();
          $this->BASIC_FUNC = new BasicFunctions();
          $DB = new DataBase();
-         $this->DB_CONN = $DB->DBConnection();
+         $this->DB = $DB->DBConnection();
          $this->AUTH = new Auth();
          // Get css,js version from captureVisit
          $this->version = $this->captureVisit->VERSION;
          $this->version = implode('.', str_split($this->version, 1));
          $this->userData = new getLoggedData();
          $this->uploadData = new getUploadData();
-         $this->adminLogged = $this->userData->adminLogged;
-         $this->userLogged = $this->userData->userLogged;
-
-         if ($this->adminLogged || $this->userLogged) {
-           if (!isset($_GET['webstory']) || empty($_GET['webstory'])) {
-             $message = 'No webstory ID found in URL';
-             include '../../.ht/views/preview/previewError.html';
-           }elseif  (!$this->webstoryExists()) {
-             $message = 'Webstory not exists with this ID';
-             include '../../.ht/views/preview/previewError.html';
+         $whoAmI = $this->userData->whoAmI();
+         if ($whoAmI != 'Admin' || $whoAmI != 'User') {
+           // code...
+         }elseif (!isset($_GET['webstory']) || empty($_GET['webstory'])) {
+           // code...
+         }elseif (!$this->getWebstoryData($_GET['webstory'])) {
+           // code...
+         }
+         $data = $this->getWebstoryData($_GET['webstory']);
+         $JSONlayers = $data['storyData'];
+         $layers = json_decode($JSONlayers, true);
+         $storyImage = $layers['layers']['L0']['media']['url'];
+         $storyTitle = $data['title'];
+         $storyDescription = $data['description'];
+         $storyUrl = $data['url'];
+         $storyKeywords = $data['keywords'];
+         $unixLastGMT = $this->istToGMT($data['lastEdit']);
+         $unixFirstGMT = $this->istToGMT($data['firstEdit']);
+         $noIndex = $data['noIndex'];
+         $authorName = $data['authorName'];
+         $authorUsername = $data['authorUsername'];
+         $authorProfilePic = $data['authorProfilePic'];
+         $storyMetaData = $layers['metaData'];
+         if (!empty($storyMetaData['relatedStory']) || isset($storyMetaData['relatedStory'])) {
+           $relatedStoryUrl = $storyMetaData['relatedStory'];
+           $urlParts = parse_url($relatedStoryUrl);
+           $path = $urlParts['path'];
+           $lastPath = basename($path);
+           if($this->getWebstoryData($lastPath)){
+             $relatedStoryData = $this->getWebstoryData($lastPath);
            }else{
-             $data = $this->webstoryExists()['storyData'];
-             $phpData = json_decode($data, true);
-             if ($this->webstoryExists()['relatedStory']) {
-               $relatedStoryData = $this->webstoryExists()['relatedStory'];
-             }else{
-                $relatedStoryData = '';
-             }
-             // var_dump($phpData);
-             if ($phpData['metaData']['title'] == '') {
-               $message = 'Title not given';
-
-               include '../../.ht/views/preview/previewError.html';
-             }else{
-               $title = $phpData['metaData']['title'];
-               echo "<script>
-               var storyData = ".$this->webstoryExists()['storyData'].";
-               var relatedStory = ".json_encode($relatedStoryData).";
-               </script>";
-                include '../../.ht/views/preview/preview.html';
-             }
-
+             $relatedStoryData = '';
            }
          }else{
-           $message = 'You can not view this preview';
-           include '../../.ht/views/preview/previewError.html';
+           $relatedStoryData = '';
          }
 
+         $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
+         $firstmod = gmdate("D, d M Y H:i:s", $unixFirstGMT) . " GMT";
+
+         include '../../.ht/views/preview/preview.html';
          $this->closeConnection();
          $this->userData->closeConnection();
          $this->uploadData->closeConnection();
          $this->BASIC_FUNC->closeConnection();
          $this->captureVisit->closeConnection();
        }
-       public function closeConnection(){
-           if ($this->DB_CONN) {
-               mysqli_close($this->DB_CONN);
-               $this->DB_CONN = null; // Set the connection property to null after closing
-           }
-       }
-       protected function webstoryExists(){
-         $return = 0;
-         if (isset($_GET['username']) && $this->adminLogged) {
-             $dID = $this->userData->getOtherData('username', $_GET['username'])['UID'];
-         }else{
-             $dID = $_SESSION['LOGGED_USER'];
-         }
-         $wb = $_GET['webstory'];
-         $sql = "SELECT * FROM stories WHERE personID = '$dID' AND storyID = '$wb'";
-         $result = mysqli_query($this->DB_CONN, $sql);
-         if ($result) {
-             if (mysqli_num_rows($result)) {
-                 $return = mysqli_fetch_assoc($result);
-                 $storyData = $return['storyData'];
-                 $storyData = json_decode($storyData, true);
-                 $relatedStory = $storyData['metaData']['relatedStory'];
-                 $urlParts = parse_url($relatedStory);
-                 $path = $urlParts['path'];
-                 $lastPath = basename($path);
-                 if($this->getWebstoryData($lastPath)){
-                   $return['relatedStory'] = $this->getWebstoryData($lastPath);
-                 }
-             }
-         }
-         return $return;
-       }
 
-       function getWebstoryData($link){
+       function getWebstoryData($ID){
          $return = false;
-         $sql = "SELECT * FROM metaData WHERE url = '$link'";
-         $result = mysqli_query($this->DB_CONN, $sql);
+         $sql = "SELECT * FROM metaData WHERE postID = '$ID'";
+         $result = mysqli_query($this->DB, $sql);
          if ($result) {
            if (mysqli_num_rows($result)) {
              $row = mysqli_fetch_assoc($result);
@@ -130,10 +93,13 @@ class storyPreview{
              $moniStat = json_decode($moniStat);
              $moniStat = $moniStat->status;
              $sql1 = "SELECT * FROM stories WHERE storyID = '$postID'";
-             $result1 = mysqli_query($this->DB_CONN, $sql1);
+             $result1 = mysqli_query($this->DB, $sql1);
              if ($result1) {
                if (mysqli_num_rows($result1)) {
                   $webstoryData = mysqli_fetch_assoc($result1);
+                  $webstoryData['authorName'] = $this->getAuthorInfo($webstoryData['personID'])['fullName'];
+                  $webstoryData['authorUsername'] = $this->getAuthorInfo($webstoryData['personID'])['username'];
+                  $webstoryData['authorProfilePic'] = $this->getAuthorInfo($webstoryData['personID'])['profilePic'];
                   unset($webstoryData['personID']);
                   $webstoryData['title'] = $title;
                   $webstoryData['description'] = $description;
@@ -151,8 +117,37 @@ class storyPreview{
          }
          return $return;
        }
+       private function getAuthorInfo($id){
+         $rows = '';
+         $sql = "SELECT * FROM account_details WHERE personID = '$id'";
+         $result = mysqli_query($this->DB, $sql);
+         if ($result && mysqli_num_rows($result)) {
+           $rows = mysqli_fetch_assoc($result);
+         }
+         return $rows;
+       }
+       public function closeConnection(){
+           if ($this->DB) {
+               mysqli_close($this->DB);
+               $this->DB = null; // Set the connection property to null after closing
+           }
+       }
 
-       function getRelatedWebstory($link){
+       private function istToGMT($istUnixTimestamp){
+                     // Create a DateTime object with the JavaScript timestamp in milliseconds
+            $istDateTime = new DateTime("@" . ($istUnixTimestamp / 1000));
+
+            // Set the input time zone to IST (Indian Standard Time)
+            $istTimeZone = new DateTimeZone('Asia/Kolkata');
+            $istDateTime->setTimezone($istTimeZone);
+
+            // Set the output time zone to GMT (Greenwich Mean Time)
+            $gmtTimeZone = new DateTimeZone('GMT');
+            $istDateTime->setTimezone($gmtTimeZone);
+
+            // Get the GMT Unix timestamp in seconds (not milliseconds)
+            $gmtUnixTimestamp = $istDateTime->getTimestamp();
+         return $gmtUnixTimestamp;
        }
 
 

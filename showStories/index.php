@@ -3,9 +3,9 @@ $_SERVROOT = '../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.ht/controller/VISIT.php";
 
-new storyPreview();
+new renderStory();
 
-class storyPreview{
+class renderStory{
     public $version;
     public $captureVisit;
     protected $userLogged = false;

@@ -51,6 +51,7 @@ class Editor{
                     this.metaData.url = "";
                     this.metaData.category = "";
                     this.metaData.relatedStory = "";
+                    this.metaData.selfPromotion = false;
                     // JavaScript
                     editor.metaData.timeStamp = Date.now();
                     this.metaData.date = `${fDate}`;
@@ -1126,6 +1127,35 @@ class Editor{
                 var overlayOpacity = parseInt(this.layers['L'+ j].media.styles.overlayOpacity, 10);
                 document.querySelector(`#layer${j} .layersTop`).style.backgroundColor =  `rgba(0,0,0,${overlayOpacity}%)`;
             }
+        }
+
+        // Updating Self Promotion Button
+        var selfProDiv = document.getElementById('togglePromotion');
+        var innerSpan = selfProDiv.querySelector('span');
+        var proIcon = selfProDiv.querySelector('i');
+        if (!this.metaData.selfPromotion || this.metaData.selfPromotion === false) {
+          innerSpan.innerHTML = 'Disabled';
+          if (proIcon.classList.contains('enabledText')) {
+            proIcon.classList.remove('enabledText');
+            proIcon.classList.add('disabledText');
+          }
+
+          if (proIcon.classList.contains('fa-toggle-on')) {
+            proIcon.classList.remove('fa-toggle-on');
+            proIcon.classList.add('fa-toggle-off');
+          }
+
+        }else {
+          innerSpan.innerHTML = 'Enabled';
+          if (proIcon.classList.contains('disabledText')) {
+            proIcon.classList.add('enabledText');
+            proIcon.classList.remove('disabledText');
+          }
+
+          if (proIcon.classList.contains('fa-toggle-off')) {
+            proIcon.classList.remove('fa-toggle-off');
+            proIcon.classList.add('fa-toggle-on');
+          }
         }
     }
 
