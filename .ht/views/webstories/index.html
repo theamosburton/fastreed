@@ -49,7 +49,6 @@
 <body id="app">
     <amp-story standalone ="" <?php echo $entity." ".$entity_logo_src." ".$entity_url;?> class="NWSStory" publisher="fastreed" title="<?php echo $storyData['metaData']['title'] ?>" poster-portrait-src="<?php echo $mainPoster ?>" publisher-logo-src="/favicon.ico"  >
       <?php
-      var_dump($totalLayers);
       $ampStory = '';
       for ($i = 0; $i < $totalLayers; $i++) {
         $objectFit = $storyData['layers']['L' . $i]['media']['styles']['mediaFit'];
