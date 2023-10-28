@@ -275,7 +275,7 @@ class uploadMedia{
 
     private function uploadVD($id){
         $username = $this->userData->getOtherData('personID', $id)['username'];
-        if(isset($_FILES['media'])){
+        if(!isset($_FILES['media'])){
           showMessage(false, 'No file Found');
           return;
         }
