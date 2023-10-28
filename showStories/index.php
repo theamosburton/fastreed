@@ -45,6 +45,7 @@ class storyPreview{
            $noIndex = $data['noIndex'];
            $authorName = $data['authorName'];
            $authorUsername = $data['authorUsername'];
+           $authorProfilePic = $data['authorProfilePic'];
            $storyMetaData = $layers['metaData'];
            if (!empty($storyMetaData['relatedStory']) || isset($storyMetaData['relatedStory'])) {
              $relatedStoryUrl = $storyMetaData['relatedStory'];
@@ -95,6 +96,7 @@ class storyPreview{
                   $webstoryData = mysqli_fetch_assoc($result1);
                   $webstoryData['authorName'] = $this->getAuthorInfo($webstoryData['personID'])['fullName'];
                   $webstoryData['authorUsername'] = $this->getAuthorInfo($webstoryData['personID'])['username'];
+                  $webstoryData['authorProfilePic'] = $this->getAuthorInfo($webstoryData['personID'])['profilePic'];
                   unset($webstoryData['personID']);
                   $webstoryData['title'] = $title;
                   $webstoryData['description'] = $description;
