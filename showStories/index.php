@@ -78,7 +78,7 @@ class renderStory{
          if (empty($link)) {
            return $return;
          }
-         $sql = "SELECT * FROM metaData WHERE url = '$link' ";
+         $sql = "SELECT * FROM metaData WHERE url = '$link' AND JSON_EXTRACT(storyStatus, '$.status') = 'published'";
          $result = mysqli_query($this->DB, $sql);
          if ($result) {
            if (mysqli_num_rows($result)) {
