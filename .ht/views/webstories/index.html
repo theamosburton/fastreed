@@ -49,6 +49,7 @@
 <body id="app">
     <amp-story standalone ="" <?php echo $entity." ".$entity_logo_src." ".$entity_url;?> class="NWSStory" publisher="fastreed" title="<?php echo $storyData['metaData']['title'] ?>" poster-portrait-src="<?php echo $mainPoster ?>" publisher-logo-src="/favicon.ico"  >
       <?php
+      var_dump($totalLayers);
       $ampStory = '';
       for ($i = 0; $i < $totalLayers; $i++) {
         $objectFit = $storyData['layers']['L' . $i]['media']['styles']['mediaFit'];
@@ -206,7 +207,6 @@
               </amp-story-page>';
             }
       }
-      var_dump($relatedStoryData);
       if ($relatedStoryData) {
 
           $relatedStoryTitle = $relatedStory['title'];
@@ -217,6 +217,7 @@
           $relatedStoryUrl = '/webstories/' . $relatedStoryUrl;
 
           $ampStory .= '
+          <!-- related story -->
           <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
               <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
                   <div class="NWSStory-layers NWSStory-layers--fixed"></div>
