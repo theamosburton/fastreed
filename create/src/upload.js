@@ -203,17 +203,17 @@ class fetchMedia{
       if (username !== null && username.trim() !== '') {
         if (self.whoIs == 'Admin') {
           var encyDat = {
-            "whois": `${self.whoIs}`,
+            "whois": 'Admin',
             "username" : `${currentUsername}`
           };
         }else{
           var encyDat = {
-            "whois": `${self.whoIs}`,
+            "whois": 'User',
             "username" : `${currentUsername}`};
         }
       }else {
         var encyDat = {
-          "whois": `${self.whoIs}`,
+          "whois": 'User',
           "username" : `${currentUsername}`};
       }
       const logUrl = '/.ht/API/getUploads.php';
