@@ -110,7 +110,9 @@ function showStories(x, what){
             <div class="storyBox" id="storybox${i}">
               <div class="visibleArea">
                 <div class="imageDiv">
-                  <img src="${image}" alt="">
+                  <div style="width:100%; height:100%">
+                    <img src="${image}" alt="" style="object-fit:cover; width:100%; height:100%">
+                  </div>
                   <div class="storyStatus" id="storyStatus${i}">
                     <i class="fa-solid fa-earth" style="color:${color};"></i>
                   </div>
