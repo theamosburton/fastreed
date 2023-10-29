@@ -83,8 +83,8 @@ class uploadMedia{
             if ($file_error === UPLOAD_ERR_OK) {
                 $sizeB = $file['size'];
                 $sizeKB = round($sizeB / 1024, 2);
-                if ($sizeKB > 10300) {
-                    showMessage(false, 'Max. File size: 10MB');
+                if ($sizeKB > 21000) {
+                    showMessage(false, 'Max. File size: 20MB');
                     return;
                 }
                 $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'VID', 'uploadID');
@@ -247,8 +247,8 @@ class uploadMedia{
         $sizeB = $file['size'];
         $sizeKB = round($sizeB / 1024, 2);
 
-        if ($sizeKB > 2050) {
-            showMessage(false, 'Max. File size: 2MB');
+        if ($sizeKB > 4200) {
+            showMessage(false, 'Max. File size: 4MB');
             return;
         }
         $fileName = $this->BASIC_FUNC->createUpdatedID('uploads', 'IMG', 'uploadID');
