@@ -110,7 +110,7 @@ function showStories(x, what){
             <div class="storyBox" id="storybox${i}">
               <div class="visibleArea">
                 <div class="imageDiv">
-                  <div style="width:100%; height:100%; overflow:hidden;">
+                  <div style="width:100%; height:100%; overflow:hidden; border-radius:5px;">
                     <img src="${image}" alt="" style="object-fit:cover; width:100%; height:100%">
                   </div>
                   <div class="storyStatus" id="storyStatus${i}">
