@@ -373,6 +373,9 @@
     padding:20px;
     margin-bottom: 20px;
 }
+.contentView .resCreation{
+  margin-top: -20px;
+}
 .contentView .expandable{
     display: none;
 }
