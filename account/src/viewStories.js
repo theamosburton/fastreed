@@ -111,7 +111,7 @@ class FetchStories {
     }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
-        var storyStatus = JSON.parse(webstories[i][7]);
+        var storyStatus = JSON.parse(webstories[i][10]);
         if (storyStatus.status == 'true') {
           verified.push(webstories[i]);
         }

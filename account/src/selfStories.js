@@ -83,24 +83,21 @@ class FetchStories {
   filterWebstory(input){
     var value = input.value;
     this.filter = value;
-    var webstories = this.webstoriesData;
-    this.webstoriesData = webstories.reverse();
+    this.webstoriesData = this.webstoriesData.reverse();
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('filter', `${value}`);
     const newQueryString = urlParams.toString();
     history.pushState(null, '', '?' + newQueryString);
-
     this.renderWebstories()
   }
+
   renderWebstories(){
     if(this.webstoriesData.length < 1){
       return;
     }
     var webstories = this.webstoriesData;
     webstories = webstories.reverse();
-    if (this.filter == 'All') {
-      var webstories = this.webstoriesData;
-    }else if (this.filter == 'Published') {
+    if (this.filter == 'Published') {
       var published = [];
       for (var i = 0; i < webstories.length; i++) {
         var storyStatus = JSON.parse(webstories[i][5]);
@@ -121,14 +118,14 @@ class FetchStories {
     }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
-        var storyStatus = JSON.parse(webstories[i][7]);
+        var storyStatus = JSON.parse(webstories[i][10]);
         if (storyStatus.status == 'true') {
           verified.push(webstories[i]);
         }
       }
       webstories = verified;
     }else{
-        var webstories = this.webstoriesData;
+        webstories = this.webstoriesData;
     }
     var webstoryDiv = document.getElementById('webstories');
     if (!webstories.length) {
