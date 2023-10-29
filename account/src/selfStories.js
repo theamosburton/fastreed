@@ -118,7 +118,7 @@ class FetchStories {
     }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
-        var storyStatus = JSON.parse(webstories[i][10]);
+        var storyStatus = JSON.parse(webstories[i][7]);
         if (storyStatus.status == 'true') {
           verified.push(webstories[i]);
         }
@@ -198,6 +198,7 @@ class FetchStories {
             <div class="background" style="background-image: url('${setUrl}');">
                 <div class="storyOverlay"></div>
                 <div class="title">${title}</div>
+
             </div>
             <div class="options">
                 <div class="edit" onclick="editStory('${webstories[i][1]}','')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
