@@ -193,7 +193,6 @@ class FetchAdminStories {
             <div class="background" style="background-image: url('${setUrl}');">
                 <div class="storyOverlay"></div>
                 <div class="title">${title}</div>
-
             </div>
             <div class="options">
                 <div class="edit" onclick="editStory('${webstories[i][1]}','${p}')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
