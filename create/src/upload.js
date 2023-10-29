@@ -201,7 +201,7 @@ class fetchMedia{
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
       if (username !== null && username.trim() !== '') {
-        if (self.whoIs == 'Admin') {
+        if (username == 'Admin') {
           var encyDat = {
             "whois": 'Admin',
             "username" : `${currentUsername}`
