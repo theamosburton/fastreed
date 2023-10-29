@@ -51,7 +51,8 @@
       <?php
       $ampStory = '';
       for ($i = 0; $i < $totalLayers; $i++) {
-        $objectFit = $storyData['layers']['L' . $i]['media']['styles']['mediaFit'];
+         $objectFit = $storyData['layers']['L' . $i]['media']['styles']['mediaFit'];
+         $mediaTitle = $storyData['layers']['L' . $i]['media']['title'];
          $overlayOpacity = $storyData['layers']['L' . $i]['media']['styles']['overlayOpacity'];
          $titleFontSize = $storyData['layers']['L' . $i]['title']['fontSize'];
          $titleFontFamily = $storyData['layers']['L' . $i]['title']['fontFamily'];
@@ -67,7 +68,7 @@
                         <div class="NWSStory-layers-group NWSStory-layers-group--media">
                             <div class="NWSStory-layer NWSStory-layer--img">
                                 <div class="NWSStory-layer-content">
-                                    <amp-img src="' . $mainPoster . '" width="720" height="1280" layout="flex-item" class="" object-fit="' . $objectFit . '">
+                                    <amp-img src="' . $mainPoster . '" width="720" height="1280" layout="flex-item" title="'.$mediaTitle .'" object-fit="' . $objectFit . '">
                                         <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
                                     </amp-img>
                                 </div>
@@ -135,6 +136,7 @@
                                             object-fit="' . $objectFit . '"
                                             controls
                                             class="zoom-in"
+                                            title="'.$mediaTitle .'"
                                             id="storyImage' . $i . '">
                                           <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
                                             <source src="' . $backgroundVideo . '" type="video/mp4">
@@ -183,7 +185,7 @@
                           <div class="NWSStory-layers-group NWSStory-layers-group--media">
                               <div class="NWSStory-layer NWSStory-layer--img">
                                   <div class="NWSStory-layer-content">
-                                      <amp-img src="' . $backgroundImage . '" id="storyImage' . $i . '" object-fit="' . $objectFit . '" class=" zoom-in" alt=" " title=" " layout="flex-item">
+                                      <amp-img src="' . $backgroundImage . '" id="storyImage' . $i . '" object-fit="' . $objectFit . '" class=" zoom-in" alt=" " title="'.$mediaTitle .'" layout="flex-item">
                                           <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
                                       </amp-img>
                                   </div>
@@ -207,13 +209,13 @@
             }
       }
       if ($relatedStoryData) {
-        var_dump($relatedStoryData);
           $relatedStoryTitle = $relatedStory['title'];
           $relatedStoryDescription = $relatedStory['description'];
           $relatedStoryUrl = $relatedStory['url'];
           $relatedStoryData = json_decode($relatedStory['storyData'], true);
           $relatedStoryImage = $relatedStoryData['layers']['L0']['media']['url'];
           $relatedStoryUrl = '/webstories/' . $relatedStoryUrl;
+          $relatedStoryMediaTitle = $relatedStoryData['layers']['L0']['media']['title'];
 
           $ampStory .= '
           <!-- related story -->
@@ -226,7 +228,7 @@
                               <div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
                                   <div class="NWSStory-layer NWSStory-layer--img">
                                       <div class="NWSStory-layer-content">
-                                          <amp-img src="' . $relatedStoryImage . '" class="" alt="" title="' . $relatedStoryTitle . '" layout="flex-item"></amp-img>
+                                          <amp-img src="' . $relatedStoryImage . '" class="" alt="" title="'.$relatedStoryMediaTitle .'" layout="flex-item"></amp-img>
                                       </div>
                                   </div>
                               </div>
@@ -276,7 +278,7 @@
                     <div class="NWSStory-layer-content">
                       <div class="NWSStory-layer NWSStory-layer--img">
                         <div class="NWSStory-layer-content">
-                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item">
+                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="'.$authorName.'" layout="flex-item">
                           <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 /20%);z-index: 9;"></div></amp-img>
                         </div>
                       </div>
@@ -321,7 +323,7 @@
                     <div class="NWSStory-layer-content">
                       <div class="NWSStory-layer NWSStory-layer--img">
                         <div class="NWSStory-layer-content">
-                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="publish story on fastreed background" layout="flex-item"></amp-img>
                         </div>
                       </div>
                     </div>
