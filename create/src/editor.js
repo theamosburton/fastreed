@@ -80,7 +80,8 @@ class Editor{
                                 },
                                 "type":'',
                                 "url":'default',
-                                "credit" : 'none'
+                                "credit" : 'none',
+                                "title" : ''
                             },
                             'title':{
                                 "text":'',
@@ -238,7 +239,8 @@ class Editor{
                 },
                 "type":'',
                 "url":'',
-                "credit" : 'none'
+                "credit" : 'none',
+                "title" : ''
             },
             'title':{
                 "text":'',
@@ -401,6 +403,12 @@ class Editor{
                                 <span>Shade Opacity</span>
                                 <input onchange="edits.overlayEdit()" class="mediaOverlayOpacity value inputText" type="range" value="10">
                             </div>
+
+                            <div class="div">
+                                <span>Media Title</span>
+                                <input class="mediaTitle value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaTitle(this)">
+                            </div>
+
 
                             <div class="div">
                                 <span>Media Credit</span>
@@ -863,29 +871,29 @@ class Editor{
 
 
 
-            if (this.layers['L'+ j].otherText.fontFamily == 'cursive') {
-                offc = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontFamily == 'monospace') {
-                offm = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontFamily == 'sans-serif') {
-                offs = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontFamily == 'Poppins-regular') {
-                offp = 'selected';
-            }else if (this.layers['L'+ j].title.fontFamily == 'BebasNeue') {
-                offb = 'selected';
-            }else if (this.layers['L'+ j].title.fontFamily == 'Poppins-medium') {
-                offpm = 'selected';
-            } else {
-                offcs = this.layers['L'+ j].otherText.fontFamily;
-            }
+              if (this.layers['L'+ j].otherText.fontFamily == 'cursive') {
+                  offc = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontFamily == 'monospace') {
+                  offm = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontFamily == 'sans-serif') {
+                  offs = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontFamily == 'Poppins-regular') {
+                  offp = 'selected';
+              }else if (this.layers['L'+ j].title.fontFamily == 'BebasNeue') {
+                  offb = 'selected';
+              }else if (this.layers['L'+ j].title.fontFamily == 'Poppins-medium') {
+                  offpm = 'selected';
+              } else {
+                  offcs = this.layers['L'+ j].otherText.fontFamily;
+              }
 
-            if (this.layers['L'+ j].otherText.fontWeight == '400') {
-                ofwl = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontWeight == '600') {
-                ofwb = 'selected';
-            } else if (this.layers['L'+ j].otherText.fontWeight == '1000') {
-                ofwbr = 'selected';
-            }
+              if (this.layers['L'+ j].otherText.fontWeight == '400') {
+                  ofwl = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontWeight == '600') {
+                  ofwb = 'selected';
+              } else if (this.layers['L'+ j].otherText.fontWeight == '1000') {
+                  ofwbr = 'selected';
+              }
             // Text //
             }
 
@@ -979,6 +987,12 @@ class Editor{
                                 <span>Shade Opacity</span>
                                 <input onchange="edits.overlayEdit()" class="mediaOverlayOpacity value inputText" type="range" value="${moo}">
                             </div>
+
+                            <div class="div">
+                                <span>Media Title</span>
+                                <input class="mediaTitle value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaTitle(this)" value="${this.layers['L'+ j].media.title}">
+                            </div>
+
                             <div class="div">
                                 <span>Media Credit</span>
                                 <input class="mediaCredit value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaCredit()" value="${this.layers['L'+ j].media.credit}">

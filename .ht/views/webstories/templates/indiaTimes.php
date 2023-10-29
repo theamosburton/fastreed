@@ -185,7 +185,7 @@ if (relatedStory != '') {
   						<div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
   							<div class="NWSStory-layer NWSStory-layer--img">
   								<div class="NWSStory-layer-content">
-  									<amp-img src="${relatedStoryImage}" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+  									<amp-img src="${relatedStoryImage}" class="" alt="" title="" layout="flex-item"></amp-img>
   								</div>
   							</div>
   						</div>
@@ -223,7 +223,7 @@ if (relatedStory != '') {
               <div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
                 <div class="NWSStory-layer NWSStory-layer--img">
                   <div class="NWSStory-layer-content">
-                    <amp-img src="/assets/img/screen.jpeg" class="" alt="" title="tu-jhoothi-main-makkar-netflix-streaming-soon-1-64524047017c2" layout="flex-item"></amp-img>
+                    <amp-img src="/assets/img/screen.jpeg" class="" alt="" title="" layout="flex-item"></amp-img>
                   </div>
                 </div>
               </div>

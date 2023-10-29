@@ -25,7 +25,6 @@ class Edits{
       }
 
   }
-
   expandStaticOptions(className){
       var option = document.querySelector(`#metaData .${className} .options`);
       var icon =   document.querySelector(`#metaData .${className} .upDownIcon`);
@@ -299,6 +298,12 @@ class Edits{
     var applyto =  document.querySelector(`#layer${this.editor.presentLayerIndex} .imageCredit`);
     applyto.innerHTML = applyFrom.value;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
+  }
+
+  mediaTitle(input){
+    var applyto =  document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaTitle`);
+    applyto.innerHTML = input.value;
+    this.editor.layers['L' + this.editor.presentLayerIndex].media.title = `${input.value}`;
   }
     // Media Editing
 // Text Visibility
