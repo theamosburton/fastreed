@@ -406,7 +406,7 @@ class Editor{
 
                             <div class="div">
                                 <span>Media Title</span>
-                                <input class="mediaTitle value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaTitle(this)">
+                                <input class="mediaTitle value inputText text" type="text" placeholder="e.g. girl reading a book" onkeyup="edits.mediaTitle(this)">
                             </div>
 
 
@@ -990,7 +990,7 @@ class Editor{
 
                             <div class="div">
                                 <span>Media Title</span>
-                                <input class="mediaTitle value inputText text" type="text" placeholder="Blank for none" onkeyup="edits.mediaTitle(this)" value="${this.layers['L'+ j].media.title}">
+                                <input class="mediaTitle value inputText text" type="text" placeholder="e.g. boy reading a book" onkeyup="edits.mediaTitle(this)" value="${this.layers['L'+ j].media.title}">
                             </div>
 
                             <div class="div">
