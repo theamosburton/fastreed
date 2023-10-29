@@ -125,6 +125,7 @@ function showStories(x, what){
                   <div class="about">
                     <div class="buttons" onclick="viewStoryAdmin('${url}')"> <i class="fa fa-eye"></i></div>
                     <div class="buttons" onclick="editStoryRe('${storyID}','${username}')"><i class="fa fa-pen-to-square"></i></div>
+                    <div class="buttons" onclick="viewStoryAuthor('${username}')"><i class="fa-solid fa-user"></i></div>
                     ${actions}
                 </div>
                 </div>
@@ -165,6 +166,10 @@ function editStoryRe(id, un){
 }
 function viewStoryAdmin(link){
     window.open(`/webstories/${link}`, '_blank');
+}
+
+function viewStoryAuthor(link){
+    window.open(`/u/${link}`, '_blank');
 }
 
 function storyAction(action, elementID, id, storyID){

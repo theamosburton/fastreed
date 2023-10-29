@@ -65,7 +65,6 @@
 }
 .storyBox .visibleArea .imageDiv{
   width: 100px;
-  height: 100px;
   position: relative;
   max-width: 100px;
   display: flex;

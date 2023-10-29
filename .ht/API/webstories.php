@@ -104,43 +104,41 @@ class Webstories{
       }
     }
     private function adminFetching(){
-      if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
-        $sql = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
-        $result = mysqli_query($this->DB, $sql);
-        if ($result) {
-           $row = mysqli_fetch_all($result);
-           for ($i=0; $i <  mysqli_num_rows($result); $i++) {
-             $storyID = $row[$i][1];
-             $userID = $row[$i][0];
-             $row[$i][0] = $this->getUserName($userID);
-             $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
-             $result1 = mysqli_query($this->DB, $sql1);
-             if ($result1) {
-               $row1 = mysqli_fetch_assoc($result1);
-               $moniStatus = $row1['moniStatus'];
-               $url = $row1['url'];
-               $row[$i][10] = $moniStatus;
-               $row[$i][11] = $url;
-             }
-           }
-           $row = json_encode($row);
-           showMessage(true, "$row");
-        }else{
-          showMessage(false, 'Server Error');
-        }
-      }
-      else{
+      if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
         showMessage(false, 'Not an Admin');
+        return;
       }
-
+      $sql = "SELECT * FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+      $result = mysqli_query($this->DB, $sql);
+      if (!$result) {
+        showMessage(false, 'Server Error');
+        return;
+      }
+      $row = mysqli_fetch_all($result);
+      for ($i=0; $i <  mysqli_num_rows($result); $i++) {
+        $storyID = $row[$i][1];
+        $userID = $row[$i][0];
+        $row[$i][0] = $this->getUserName($userID);
+        $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
+        $result1 = mysqli_query($this->DB, $sql1);
+        if ($result1) {
+          $row1 = mysqli_fetch_assoc($result1);
+          $moniStatus = $row1['moniStatus'];
+          $url = $row1['url'];
+          $row[$i][10] = $moniStatus;
+          $row[$i][11] = $url;
+        }
+     }
+     $row = json_encode($row);
+     showMessage(true, "$row");
     }
+
     private function getUserName($uid){
       $sql = "SELECT username FROM account_details WHERE personID = '$uid'";
       $result = mysqli_query($this->DB, $sql);
       if ($result) {
         $username = mysqli_fetch_assoc($result)['username'];
       }
-
       return $username;
     }
     private function fetchAll(){
