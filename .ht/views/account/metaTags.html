@@ -14,6 +14,7 @@
     <link data-rh="true" rel="canonical" href="<?php echo $this->canonUrl;?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta itemprop="occupation" content="Webstory Writer">
     <title><?php echo $this->webTitle;?></title>
     <!-- Gobal CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -57,5 +58,8 @@
     if(isset($this->extraStyle)){
         echo $this->extraStyle;
     }
+    ?>
+    <?php
+    echo $this->structure;
     ?>
 </head>

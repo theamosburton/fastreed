@@ -25,6 +25,7 @@ class showProfile {
     private $DOCROOT;
     private $SERVROOT;
     protected $profileUsername;
+    protected $userFullname;
     protected $getStoriesData;
     function __construct() {
 
@@ -220,6 +221,7 @@ class loggedAdminVother extends showProfile{
         $this->webDescription = "Fastreed Account : Manage, edit and view profile";
         $this->webKeywords = "Fastreed Account : Manage, edit and view profile";
         $this->pageCss = ['/account/src/style.css'];
+        $this->userFullname = $this->userData->getOtherData('username', $this->otherUsername)['name'];
 
 
         $this->pageJs = ['/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js'];
@@ -230,6 +232,18 @@ class loggedAdminVother extends showProfile{
             var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
+         $this->structure = '
+         <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Person",
+                "name": "'.$this->userFullname.'",
+                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
+                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+                "image": "'.$this->userImage.'"
+            }
+          </script>
+         ';
 
          $selfId = $this->userData->getSelfDetails()['UID'];
          $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
@@ -278,6 +292,7 @@ class loggedVself extends showProfile{
         $this->canonUrl = 'https://fastreed.com/account/';
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js', '/account/src/selfStories.js'];
+        $this->userFullname = $this->userData->getSelfDetails()['name'];
 
 
 
@@ -289,6 +304,18 @@ class loggedVself extends showProfile{
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
          </script>';
 
+         $this->structure = '
+         <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Person",
+                "name": "'.$this->userFullname.'",
+                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
+                "description": "'.  $this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+                "image": "'.$this->userImage.'"
+            }
+          </script>
+         ';
 
          $selfId = $_SESSION['LOGGED_USER'];
          $userSettings = $this->userData->getSettings($selfId);
@@ -360,12 +387,26 @@ class loggedVother extends showProfile{
         $this->webDescription = "Fastreed Account: View profile";
         $this->webKeywords = "Fastreed Account: View profile";
         $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
+        $this->userFullname = $this->userData->getOtherData('username', $this->otherUsername)['name'];
+
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js', '/account/src/viewStories.js'];
 
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
+         $this->structure = '
+         <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Person",
+                "name": "'.$this->userFullname.'",
+                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
+                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+                "image": "'.$this->userImage.'"
+            }
+          </script>
+         ';
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
@@ -413,13 +454,26 @@ class nonLoggedVother extends showProfile{
         $this->webDescription = "Fastreed Account: View profile";
         $this->webKeywords = "Fastreed Account: View profile";
         $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
+        $this->userFullname = $this->userData->getOtherData('username', $this->otherUsername)['name'];
+
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
-        $this->
         $this->extraScript = '
         <script>
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
+         $this->structure = '
+         <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Person",
+                "name": "'.$this->userFullname.'",
+                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
+                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+                "image": "'.$this->userImage.'"
+            }
+          </script>
+         ';
 
         $this->addHead();
 
