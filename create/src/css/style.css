@@ -107,6 +107,7 @@ body{
     flex-direction: row;
     display: flex;
     justify-content: center;
+    overflow: auto;
 }
 .editContainer .sections{
     position: relative;
