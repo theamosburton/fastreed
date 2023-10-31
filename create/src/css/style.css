@@ -76,6 +76,7 @@ html{
 body{
   margin:0;
   padding: 0;
+  overflow: auto;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -126,7 +127,7 @@ body{
     align-items: center;
     flex-direction: column;
     overflow: auto;
-    margin-top: 20px;
+    padding-top: 20px;
 }
 .editContainer .editorSection .editorBox{
     margin: 5px 40px 5px 40px;
@@ -982,7 +983,8 @@ font-weight: bold;
 
     .editContainer .editorSection{
         width: 100%;
-        margin-top: 10%;
+        margin-top: 0px;
+        padding-top: 10%;
     }
 
     .navSection{
