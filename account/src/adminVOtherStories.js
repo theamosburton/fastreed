@@ -119,7 +119,7 @@ class FetchAdminStories {
     }else if (this.filter == 'Verified') {
       var verified = [];
       for (var i = 0; i < webstories.length; i++) {
-        var storyStatus = JSON.parse(webstories[i][10]);
+        var storyStatus = JSON.parse(webstories[i][8]);
         if (storyStatus.status == 'true') {
           verified.push(webstories[i]);
         }
@@ -155,13 +155,13 @@ class FetchAdminStories {
 
       webstoryDiv.innerHTML = '';
       for (var i = 0; i < webstories.length; i++) {
-        var webstoryData = JSON.parse(webstories[i][7]);
+        var webstoryData = JSON.parse(webstories[i][6]);
         var storyStatus = JSON.parse(webstories[i][5]);
-        var verifyStatus = JSON.parse(webstories[i][10]);
+        var verifyStatus = JSON.parse(webstories[i][8]);
         if ( Object.keys(webstoryData).length == 0) {
-          var title = webstories[i][8];
+          var title = webstories[i][7];
         }else if (webstoryData.metaData.title == '' || webstoryData.metaData.title == undefined) {
-          var title = webstories[i][8];
+          var title = webstories[i][7];
         }else{
           var title = webstoryData.metaData.title
         }
