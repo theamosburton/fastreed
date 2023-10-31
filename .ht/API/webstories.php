@@ -920,7 +920,7 @@ class Webstories{
               $storyStatus = json_encode($storyStatus, true);
               $storyData = json_encode($dataArray, true);
               // Update `stories` table
-              $sql3 = 'UPDATE stories SET storyData = ?, lastEdit = ?, storyStatus = ?, access = "public" WHERE storyID = ?';
+              $sql3 = 'UPDATE stories SET storyData = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
               $stmt3 = mysqli_prepare($this->DB, $sql3);
               mysqli_stmt_bind_param($stmt3, 'ssss', $storyData, $lastEdit, $storyStatus, $storyID);
               $result3 = mysqli_stmt_execute($stmt3);
@@ -945,7 +945,7 @@ class Webstories{
               $storyStatus = json_encode($storyStatus, true);
               $storyData = json_encode($dataArray, true);
               // Update `stories` table
-              $sql3 = 'UPDATE stories SET storyData = ?, firstEdit = ?, lastEdit = ?, storyStatus = ?, access = "public" WHERE storyID = ?';
+              $sql3 = 'UPDATE stories SET storyData = ?, firstEdit = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
               $stmt3 = mysqli_prepare($this->DB, $sql3);
               mysqli_stmt_bind_param($stmt3, 'sssss', $storyData, $lastEdit, $lastEdit, $storyStatus, $storyID);
               $result3 = mysqli_stmt_execute($stmt3);
