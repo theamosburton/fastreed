@@ -179,9 +179,8 @@ class userEditor extends createContent{
             $tdate = date('Y-m-d');
             $status = '{"status": "drafted", "version": 100}';
             $moniStatus = '{"status": "false", "version": 100}';
-            $access = 'self';
             $storyData = '{}';
-            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
+            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$storyData')";
             $result = mysqli_query($this->DB_CONN, $sql);
             if ($result) {
               $sql3 = "INSERT INTO metaData (postID, title, description, keywords, url, moniStatus) VALUES ('$storyID','', '', '', '', '$moniStatus')";
@@ -296,9 +295,8 @@ class adminEditor extends createContent{
             $tdate = date('Y-m-d');
             $status = '{"status": "drafted", "version": 100}';
             $moniStatus = '{"status": "false", "version": 100}';
-            $access = 'self';
             $storyData = '{}';
-            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, access, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$access', '$storyData')";
+            $sql = "INSERT INTO stories (title, personID, storyID, tdate, firstEdit, storyStatus, storyData) VALUES ('$title','$personID','$storyID', '$tdate', '$firstEdit', '$status', '$storyData')";
             $result = mysqli_query($this->DB_CONN, $sql);
             if ($result) {
               $sql3 = "INSERT INTO metaData (postID, title, description, keywords, url, moniStatus) VALUES ('$storyID',' ', ' ', ' ', ' ', '$moniStatus')";
