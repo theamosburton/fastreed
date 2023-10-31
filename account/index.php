@@ -21,8 +21,10 @@ class showProfile {
     protected $otherUsername;
     protected $extraScript;
     protected $adminIsEditing;
+    protected $userImage;
     private $DOCROOT;
     private $SERVROOT;
+    protected $profileUsername;
     protected $getStoriesData;
     function __construct() {
 
@@ -89,7 +91,7 @@ class showProfile {
     }
     protected function addHead(){
         // *************/ Head Section /**************** //
-            include "../.ht/views/homepage/head.html";
+            include "../.ht/views/account/metaTags.html";
 
             echo "\n".<<<HTML
             <body class="scrollbar-style">
@@ -212,10 +214,11 @@ class loggedAdminVother extends showProfile{
    function __construct() {
         $this->const4Inherited();
         $ePID = $this->AUTH->encrypt($this->userData->getOtherData('username', $this->otherUsername)['dPID']);
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name']. ' - Fastreed User';
+        $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
         $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
-        $this->webDescription = "Fastreed Account: Manage, edit and view profile";
-        $this->webKeywords = "Fastreed Account: Manage, edit and view profile";
+        $this->webDescription = "Fastreed Account : Manage, edit and view profile";
+        $this->webKeywords = "Fastreed Account : Manage, edit and view profile";
         $this->pageCss = ['/account/src/style.css'];
 
 
@@ -237,7 +240,7 @@ class loggedAdminVother extends showProfile{
          $canViewContent = $userSettings['canViewContent'];
          $canViewUploads = $userSettings['canViewUploads'];
          $canCreate = $userSettings['canCreate'];
-        $this->addHead();
+         $this->addHead();
 
     //***************/ Main Container Starts /**********//
         echo <<<HTML
@@ -267,9 +270,11 @@ class loggedVself extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = "Fastreed Account: Manage, edit and view profile";
+        $this->webTitle = "Fastreed Account : Manage, edit and view profile";
         $this->webDescription = "Manage, edit and view your profile and request for creator access from here";
         $this->webKeywords = "Manage, edit and view profile, fastreed account setting, updating account details, request for creater access";
+        $this->userImage = $this->userData->getSelfDetails()['profilePic'];
+        $this->profileUsername = $this->userData->getSelfDetails()['username'];
         $this->canonUrl = 'https://fastreed.com/account/';
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/review.js','/account/src/style.js', '/account/src/editDetails.js', '/assets/js/cropper.js','/account/src/user.js', '/account/src/deleteAccount.js', '/account/src/adminVOtherStories.js', '/account/src/selfStories.js'];
@@ -297,6 +302,7 @@ class loggedVself extends showProfile{
          if ($rejectionReason == NULL) {
            $rejectionReason = 'Not Given';
          }
+        $this->userImage = $this->userData->getSelfDetails()['profilePic'];
         $this->addHead();
         $this->DOCROOT = $_SERVER['DOCUMENT_ROOT'];
     //***************/ Main Container Starts /**********//
@@ -334,16 +340,6 @@ class loggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
-        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
-        $this->webDescription = "Fastreed Account: View profile";
-        $this->webKeywords = "Fastreed Account: View profile";
-        $this->pageCss = ['/account/src/style.css'];
-        $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js', '/account/src/viewStories.js'];
-
-        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
-        var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
-         </script>';
         $selfId = $this->userData->getSelfDetails()['UID'];
         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
         $userSettings = $this->userData->getSettings($otherID);
@@ -353,6 +349,23 @@ class loggedVother extends showProfile{
         $canViewContent = $userSettings['canViewContent'];
         $canViewUploads = $userSettings['canViewUploads'];
         $canCreate = $userSettings['canCreate'];
+        if ($canCreate == 'ACC') {
+          $userStatus = 'Author';
+        }else{
+          $userStatus = 'User';
+        }
+
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].' - Fastreed '.$userStatus;
+        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
+        $this->webDescription = "Fastreed Account: View profile";
+        $this->webKeywords = "Fastreed Account: View profile";
+        $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
+        $this->pageCss = ['/account/src/style.css'];
+        $this->pageJs = ['/account/src/style.js', '/profile/src/user.js', '/account/src/user.js', '/account/src/viewStories.js'];
+
+        $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
+        var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+         </script>';
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
@@ -383,16 +396,6 @@ class nonLoggedVother extends showProfile{
 
    function __construct() {
         $this->const4Inherited();
-        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].'- Fastreed User';
-        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
-        $this->webDescription = "Fastreed Account: View profile";
-        $this->webKeywords = "Fastreed Account: View profile";
-        $this->pageCss = ['/account/src/style.css'];
-        $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
-        $this->extraScript = '
-        <script>
-            var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
-         </script>';
         $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
         $userSettings = $this->userData->getSettings($otherID);
         $canViewMail = $userSettings['canViewMail'];
@@ -400,6 +403,24 @@ class nonLoggedVother extends showProfile{
         $canViewContent = $userSettings['canViewContent'];
         $canViewUploads = $userSettings['canViewUploads'];
         $canCreate = $userSettings['canCreate'];
+        if ($canCreate == 'ACC') {
+          $userStatus = 'Auhtor';
+        }else{
+          $userStatus = 'User';
+        }
+        $this->webTitle = $this->userData->getOtherData('username', $this->otherUsername)['name'].' - Fastreed '.$userStatus;
+        $this->canonUrl = 'https://fastreed.com/u/'.$this->otherUsername.'/';
+        $this->webDescription = "Fastreed Account: View profile";
+        $this->webKeywords = "Fastreed Account: View profile";
+        $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
+        $this->pageCss = ['/account/src/style.css'];
+        $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
+        $this->
+        $this->extraScript = '
+        <script>
+            var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+         </script>';
+
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
