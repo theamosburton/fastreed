@@ -196,7 +196,7 @@ class FetchAdminStories {
             </div>
             <div class="options">
                 <div class="edit" onclick="editStory('${webstories[i][1]}','${p}')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
-                <div class="view" onclick="${func}"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
+                <div class="view" onclick="${func}"> <i class="fa fa-eye" style="color:blue;"></i></div>
                 <div class="delete" onclick="deleteStory('${webstories[i][1]}', ${i})"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
                 <div class="storyOptions">${icon}</div>
             </div>
