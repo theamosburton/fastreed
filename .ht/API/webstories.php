@@ -160,8 +160,8 @@ class Webstories{
                        $row1 = mysqli_fetch_assoc($result1);
                        $moniStatus = $row1['moniStatus'];
                        $url = $row1['url'];
-                       $row[$i][9] = $moniStatus;
-                       $row[$i][10] = $url;
+                       $row[$i][8] = $moniStatus;
+                       $row[$i][9] = $url;
                      }
                    }
                    $row = json_encode($row);
@@ -190,8 +190,8 @@ class Webstories{
                      $row1 = mysqli_fetch_assoc($result1);
                      $url = $row1['url'];
                      $moniStatus = $row1['moniStatus'];
-                     $row[$i][9] = $moniStatus;
-                     $row[$i][10] = $url;
+                     $row[$i][8] = $moniStatus;
+                     $row[$i][9] = $url;
                    }
                  }
                  $row = json_encode($row);
@@ -218,8 +218,8 @@ class Webstories{
                    $row1 = mysqli_fetch_assoc($result1);
                    $moniStatus = $row1['moniStatus'];
                    $url = $row1['url'];
-                   $row[$i][9] = $moniStatus;
-                   $row[$i][10] = $url;
+                   $row[$i][8] = $moniStatus;
+                   $row[$i][9] = $url;
                  }
                }
                $row = json_encode($row);
@@ -247,8 +247,8 @@ class Webstories{
                    $row1 = mysqli_fetch_assoc($result1);
                    $moniStatus = $row1['moniStatus'];
                    $url = $row1['url'];
-                   $row[$i][9] = $moniStatus;
-                   $row[$i][10] = $url;
+                   $row[$i][8] = $moniStatus;
+                   $row[$i][9] = $url;
                  }
                }
                $row = json_encode($row);
