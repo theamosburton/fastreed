@@ -306,6 +306,8 @@ class Edits{
     this.editor.layers['L' + this.editor.presentLayerIndex].media.title = `${input.value}`;
   }
     // Media Editing
+
+
 // Text Visibility
    containsText(){
      // Text Visibility
@@ -387,9 +389,8 @@ class Edits{
     }
     this.saveToBrowser();
   }
-  editTitle(){
-    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
-    this.editor.layers['L' + this.editor.presentLayerIndex].title.text = text.innerHTML;
+  editTitle(element){
+    this.editor.layers['L' + this.editor.presentLayerIndex].title.text = element.textContent;
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
@@ -444,27 +445,8 @@ class Edits{
     }
     this.saveToBrowser();
   }
-  editText(){
-    var text = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
-    const selection = window.getSelection();
-    let range = selection.getRangeAt(0);
-    let startOffset = range.startOffset;
-    let endOffset = range.endOffset;
-
-    const capitalizedText = text.innerHTML;
-    text.innerHTML = capitalizedText;
-    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = capitalizedText;
-    const newRange = document.createRange();
-    const startNode = text.firstChild;
-    if (startNode === null) {
-      let startOffset = 1;
-      let endOffset = 1;
-    }else{
-      newRange.setStart(startNode, startOffset);
-      newRange.setEnd(startNode, endOffset);
-      selection.removeAllRanges();
-      selection.addRange(newRange);
-    }
+  editText(element){
+    this.editor.layers['L' + this.editor.presentLayerIndex].otherText.text = element.textContent;
 
     if (this.version+1 == editor.version) {
       this.version += 1;

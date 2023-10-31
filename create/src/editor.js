@@ -270,9 +270,9 @@ class Editor{
         layersTop.classList.add('defaultOther');
         layersTop.innerHTML = `
         <div class="title" id="title">
-            <span class="titleText" contenteditable="true" onkeyup="edits.editTitle()">Edit title text</span>
+            <span class="titleText" contenteditable="true" onkeyup="edits.editTitle(this)">Edit title text</span>
 
-            <span class="otherText" contenteditable="true" onkeyup="edits.editText()">Edit description text</span>
+            <span class="otherText" contenteditable="true" onkeyup="edits.editText(this)">Edit description text</span>
 
             <div class="creditBox">
               <span class="imageCredit"  id="imageCredit" onkeyup="mediaCredit()">Media Credit</span>
@@ -732,8 +732,8 @@ class Editor{
             }else{
                 layersTop.innerHTML = `
                 <div class="title">
-                <span class="titleText" contenteditable="true" onkeyup="edits.editTitle()">${text}</span>
-                <span class="otherText" contenteditable="true" onkeyup="edits.editText()">${othertext}</span>
+                <span class="titleText" contenteditable="true" onkeyup="edits.editTitle(this)">${text}</span>
+                <span class="otherText" contenteditable="true" onkeyup="edits.editText(this)">${othertext}</span>
                 <div class="creditBox">
                   <span class="imageCredit"  onkeyup="mediaCredit()">${pl}</span>
                 </div>
