@@ -7,6 +7,19 @@ class Editor{
         this.topBars = document.getElementById("navBars");
         this.topBars.appendChild(newBar);
 
+        this.swipeArea = document.querySelector('.editorSection');
+
+       this.swipeArea.addEventListener('touchstart', (e) => {
+             this.startY = e.touches[0].clientY;
+       });
+
+       this.swipeArea.addEventListener('touchend', (e) => {
+             this.endY = e.changedTouches[0].clientY;
+             if (this.startY < this.endY) {
+               window.scrollTo(0, 0);
+             }
+
+       });
 
         var params = new URLSearchParams(window.location.search);
             this.username = '';
