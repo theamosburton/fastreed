@@ -461,6 +461,7 @@ class nonLoggedVother extends showProfile{
         $this->extraScript = '
         <script>
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
+            var userFullname = "'.$this->userData->getOtherData('username', $this->otherUsername)['name'].'";
          </script>';
          $this->structure = '
          <script type="application/ld+json">

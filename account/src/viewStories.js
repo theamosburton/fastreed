@@ -157,7 +157,6 @@ class FetchStories {
         }else{
           var title = webstoryData.metaData.title
         }
-
         if ( Object.keys(webstoryData).length == 0) {
           var setUrl =  '/assets/img/nomedia.png';
         }else if (webstoryData.layers.L0.media.url == undefined || webstoryData.layers.L0.media.url == '' ||webstoryData.layers.L0.media.url == 'default') {
@@ -179,13 +178,17 @@ class FetchStories {
           var icon = '<i class="fa-solid fa-floppy-disk"></i>';
         }
         webstoryDiv.innerHTML += `
-        <div class="webstory" id="webstory${i}">
+        <div itemscope itemtype="https://schema.org/WebStory" class="webstory" id="webstory${i}">
+            <meta itemprop="author" content="${userFullname}">
+            <meta itemprop="publisher" content="Fastreed">
+            <meta itemprop="contentUrl" content="${storyURL}">
+            <meta itemprop="articleType" content="WebStory">
             <div class="background" style="background-image: url('${setUrl}');" onclick="viewStory('${storyURL}')">
                 <div class="storyOverlay"></div>
                  <div class="storyViewIcon">
                  ${icon}
                   </div>
-                <div class="title">${title}</div>
+                <div itemprop="name" class="title">${title}</div>
             </div>
         </div>
         `;
