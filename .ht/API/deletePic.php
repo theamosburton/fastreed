@@ -96,40 +96,36 @@ class deletePic{
     private function changeByUser(){
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid);
-        $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $value = $data['value'];
         if ($personID != $_SESSION['LOGGED_USER']) {
             showMessage(false, 'Error 7');
-        }else{
-            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'";
-            $result = mysqli_query($this->DB, $sql);
-            if($result){
-                showMessage(true, 'changed');
-            }else{
-                showMessage(false, "Can't changed");
-            }
+            return;
         }
+        $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID'";
+        $result = mysqli_query($this->DB, $sql);
+        if($result){
+            showMessage(true, 'changed');
+        }else{
+            showMessage(false, "Can't changed");
+        }
+
     }
 
     private function changeByAdmin(){
         $data = json_decode(file_get_contents('php://input'), true);
-        $eid = $data['personID'];
-        $personID = $this->AUTH->decrypt($eid);
-        $username = $this->userData->getOtherData('personID', $personID)['username'];
         $imgID = $data['imgID'];
         $value = $data['value'];
         if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
             showMessage(false, 'Error 7');
+            return;
+        }
+        $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID'";
+        $result = mysqli_query($this->DB, $sql);
+        if($result){
+            showMessage(true, 'changed');
         }else{
-            $sql = "UPDATE uploads set access = '$value' WHERE uploadID = '$imgID' and username = '$username'";
-            $result = mysqli_query($this->DB, $sql);
-            if($result){
-                showMessage(true, 'changed');
-            }else{
-                showMessage(false, "Can't changed");
-            }
+            showMessage(false, "Can't changed");
         }
     }
 
