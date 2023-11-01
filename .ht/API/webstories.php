@@ -125,8 +125,8 @@ class Webstories{
           $row1 = mysqli_fetch_assoc($result1);
           $moniStatus = $row1['moniStatus'];
           $url = $row1['url'];
-          $row[$i][10] = $moniStatus;
-          $row[$i][11] = $url;
+          $row[$i][8] = $moniStatus;
+          $row[$i][9] = $url;
         }
      }
      $row = json_encode($row);

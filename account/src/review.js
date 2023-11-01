@@ -4,7 +4,7 @@ if (adminLogged) {
   if (urlParams.has('nav')) {
       const param1Value = urlParams.get('nav')
       var select = document.getElementById('shuffleStoryType');
-      if (param1Value == 'verify') {
+      if (param1Value == 'verified') {
         select.options[1].selected = true;
         fetchStoriesReview('true');
       }else if (param1Value == 'rejected') {
@@ -45,14 +45,14 @@ function fetchStoriesReview(sev){
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-          for (var i = 0; i < parsedJSON.length; i++) {
-            var status = JSON.parse(parsedJSON[i][10]);
 
-            if (status.status == 'none') {
+          for (var i = 0; i < parsedJSON.length; i++) {
+            var vStatus = JSON.parse(parsedJSON[i][8]);
+            if (vStatus.status == 'none') {
               nonVerified.push(parsedJSON[i]);
-            } else if (status.status == 'true') {
+            } else if (vStatus.status == 'true') {
               verified.push(parsedJSON[i]);
-            } else if (status.status == 'false') {
+            } else if (vStatus.status == 'false') {
               rejected.push(parsedJSON[i]);
             }
           }
@@ -79,7 +79,7 @@ function showStories(x, what){
   }
   if (x.length) {
     for (var i = 0; i < x.length; i++) {
-    var layers = JSON.parse(x[i][7]);
+    var layers = JSON.parse(x[i][6]);
     var image = layers.layers.L0.media.url;
     var title = layers.metaData.title;
     var url = layers.metaData.url;
@@ -156,7 +156,6 @@ function showStories(x, what){
 }
 
 function editStoryRe(id, un){
-  console.log(un);
   if (un == currentUsername) {
     window.open(`/create/?type=webstory&ID=${id}`, '_blank');
   }else{
