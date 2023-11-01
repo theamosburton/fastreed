@@ -452,7 +452,24 @@ class nonLoggedVother extends showProfile{
 
          // Start building the JSON-LD structured data script
        $this->structure = '
-       <script type="application/ld+json">
+       <script data-rh="true" type="application/ld+json">
+         {
+           "@context":"https://schema.org",
+           "@type":"Organization",
+           "name":"Fastreed",
+           "alternateName":"fastreed",
+           "description":"Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you are a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.",
+           "logo":"https://www.fastreed.com/assets/img/logo500x500.jpg",
+           "url":"https://www.fastreed.com",
+           "contactPoint": {
+             "@type": "ContactPoint",
+             "email": "support@fastreed.com",
+             "contactType": "customer service"
+             }
+         }
+       </script>
+       
+       <script data-rh="true" type="application/ld+json">
        {
            "@context": "http://schema.org",
            "@type": "ProfilePage",
