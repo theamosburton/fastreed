@@ -427,6 +427,11 @@ class nonLoggedVother extends showProfile{
         $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
         $webStories = $this->getWebstories($otherID);
         $allStories = [];
+        if ($canCreate == 'ACC') {
+          $authorVerification = 'verified';
+        }else{
+          $authorVerification = 'unverified';
+        }
         for ($i=0; $i < count($webStories) ; $i++) {
           $uniqueUrl = $webStories[$i][9];
           $uniqueData = json_decode($webStories[$i][6], true);
@@ -469,7 +474,7 @@ class nonLoggedVother extends showProfile{
            "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
            "author": {
                "@type": "Person",
-               "verificationStatus": true,
+               "verificationStatus":"'.$authorVerification.'",
                "image": "'.$this->userImage.'",
                "name": "'.$this->otherUsername.'"
            },
