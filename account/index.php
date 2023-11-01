@@ -437,10 +437,17 @@ class nonLoggedVother extends showProfile{
           $verificationData =  json_decode($webStories[$i][8], true);
           $publishedData = $publishedData['status'];
           $verificationData = $verificationData['status'];
-          $allStories[$i]['url'] = "https://www.fastreed.com/webstories/'.$uniqueUrl .'/";
-          $allStories[$i]['title'] = $uniqueTitle;
-          $allStories[$i]['image'] = $uniqueMedia;
-          $allStories[$i]['description'] = $uniqueDescription;
+          if ($publishedData == 'published') {
+            $allStories[$i]['url'] = "https://www.fastreed.com/webstories/'.$uniqueUrl .'/";
+            $allStories[$i]['title'] = $uniqueTitle;
+            $allStories[$i]['image'] = $uniqueMedia;
+            $allStories[$i]['description'] = $uniqueDescription;
+            if ($verificationData == 'true') {
+                $allStories[$i]['isVerified'] = true;
+            }else{
+                $allStories[$i]['isVerified'] = false;
+            }
+          }
         }
         $this->extraScript = '
         <script>
@@ -481,6 +488,7 @@ class nonLoggedVother extends showProfile{
                "url": "'.$story['url'].'",
                "description": "'.$story['url'].'",
                "image": "'.$story['image'].'",
+               "isVerified": '.($story['isVerified'] ? 'true' : 'false').'
            }';
 
            // Add a comma if there are more web stories
