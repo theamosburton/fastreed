@@ -491,7 +491,7 @@ class nonLoggedVother extends showProfile{
                "@type": "CreativeWork",
                "name": "'.$story['title'].'",
                "url": "'.$story['url'].'",
-               "description": "'.$story['url'].'",
+               "description": "'.$story['description'].'",
                "image": "'.$story['image'].'",
                "verificationStatus": "'.$story['verificationStatus'].'"
            }';
