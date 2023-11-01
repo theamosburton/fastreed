@@ -438,14 +438,14 @@ class nonLoggedVother extends showProfile{
           $publishedData = $publishedData['status'];
           $verificationData = $verificationData['status'];
           if ($publishedData == 'published') {
-            $allStories[$i]['url'] = "https://www.fastreed.com/webstories/'.$uniqueUrl .'/";
+            $allStories[$i]['url'] = 'https://www.fastreed.com/webstories/'.$uniqueUrl .'/';
             $allStories[$i]['title'] = $uniqueTitle;
             $allStories[$i]['image'] = $uniqueMedia;
             $allStories[$i]['description'] = $uniqueDescription;
             if ($verificationData == 'true') {
-                $allStories[$i]['isVerified'] = true;
+                $allStories[$i]['verificationStatus'] = 'verified';
             }else{
-                $allStories[$i]['isVerified'] = false;
+                $allStories[$i]['verificationStatus'] = 'unverified';
             }
           }
         }
@@ -469,7 +469,7 @@ class nonLoggedVother extends showProfile{
            "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
            "author": {
                "@type": "Person",
-               "isVerifiedProfileAuthor": true,
+               "verificationStatus": true,
                "image": "'.$this->userImage.'",
                "name": "'.$this->otherUsername.'"
            },
@@ -488,7 +488,7 @@ class nonLoggedVother extends showProfile{
                "url": "'.$story['url'].'",
                "description": "'.$story['url'].'",
                "image": "'.$story['image'].'",
-               "isVerified": '.($story['isVerified'] ? 'true' : 'false').'
+               "verificationStatus": "'.$story['verificationStatus'].'"
            }';
 
            // Add a comma if there are more web stories
