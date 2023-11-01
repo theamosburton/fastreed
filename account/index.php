@@ -422,26 +422,78 @@ class nonLoggedVother extends showProfile{
         $this->webKeywords = "Fastreed Account: View profile";
         $this->userImage = $this->userData->getOtherData('username', $this->otherUsername)['profilePic'];
         $this->userFullname = $this->userData->getOtherData('username', $this->otherUsername)['name'];
-
+        $webStories = $this->getWebstories($otherID);
         $this->pageCss = ['/account/src/style.css'];
         $this->pageJs = ['/account/src/style.js', '/account/src/viewStories.js'];
+        $webStories = $this->getWebstories($otherID);
+        $allStories = [];
+        for ($i=0; $i < count($webStories) ; $i++) {
+          $uniqueUrl = $webStories[$i][9];
+          $uniqueData = json_decode($webStories[$i][6], true);
+          $uniqueTitle = $uniqueData['metaData']['title'];
+          $uniqueDescription = $uniqueData['metaData']['description'];
+          $uniqueMedia = $uniqueData['layers']['L0']['media']['url'];
+          $publishedData =  json_decode($webStories[$i][5], true);
+          $verificationData =  json_decode($webStories[$i][8], true);
+          $publishedData = $publishedData['status'];
+          $verificationData = $verificationData['status'];
+          $allStories[$i]['url'] = "https://www.fastreed.com/webstories/'.$uniqueUrl .'/";
+          $allStories[$i]['title'] = $uniqueTitle;
+          $allStories[$i]['image'] = $uniqueMedia;
+          $allStories[$i]['description'] = $uniqueDescription;
+        }
         $this->extraScript = '
         <script>
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
             var userFullname = "'.$this->userData->getOtherData('username', $this->otherUsername)['name'].'";
          </script>';
-         $this->structure = '
-         <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Person",
-                "name": "'.$this->userFullname.'",
-                "url": "'.$this->canonUrl.'",
-                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
-                "image": "'.$this->userImage.'"
-            }
-          </script>
-         ';
+
+         // Start building the JSON-LD structured data script
+       $this->structure = '
+       <script type="application/ld+json">
+       {
+           "@context": "http://schema.org",
+           "@type": "ProfilePage",
+           "mainEntityOfPage": {
+               "@type": "WebSite",
+               "@id": "'.$this->canonUrl.'"
+           },
+           "name": "'.$this->userFullname.'",
+           "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+           "author": {
+               "@type": "Person",
+               "isVerifiedProfileAuthor": true,
+               "image": "'.$this->userImage.'",
+               "name": "'.$this->otherUsername.'"
+           },
+           "url": "'.$this->canonUrl.'",
+           "sameAs": [
+               "",
+               ""
+           ],
+           "hasPart": [';
+
+       // Add each web story to the "hasPart" property
+       foreach ($allStories as $story) {
+           $this->structure .= '{
+               "@type": "CreativeWork",
+               "name": "'.$story['title'].'",
+               "url": "'.$story['url'].'",
+               "description": "'.$story['url'].'",
+               "image": "'.$story['image'].'",
+           }';
+
+           // Add a comma if there are more web stories
+           if ($story !== end($allStories)) {
+               $this->structure .= ', ';
+           }
+       }
+
+       // Complete the JSON-LD script
+       $this->structure .= '
+           ]
+       }
+       </script>';
 
         $this->addHead();
 
@@ -462,6 +514,28 @@ class nonLoggedVother extends showProfile{
     // ********************************************** //
         $this->addFooter();
         $this->closeConnection();
+   }
+
+   private function getWebstories($UID){
+     $row = [];
+     $sql = "SELECT * FROM stories WHERE personID = '$UID'";
+     $result = mysqli_query($this->DB_CONN, $sql);
+     if ($result) {
+        $row = mysqli_fetch_all($result);
+        for ($i=0; $i <  mysqli_num_rows($result); $i++) {
+          $storyID = $row[$i][1];
+          $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
+          $result1 = mysqli_query($this->DB_CONN, $sql1);
+          if ($result1) {
+            $row1 = mysqli_fetch_assoc($result1);
+            $moniStatus = $row1['moniStatus'];
+            $url = $row1['url'];
+            $row[$i][8] = $moniStatus;
+            $row[$i][9] = $url;
+          }
+        }
+     }
+     return $row;
    }
 
 }
