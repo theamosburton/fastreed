@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Cache-Control" content="public, max-age=3600">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta data-rh="true" name="keywords" content="">
+    <meta data-rh="true" name="keywords" content="Webstories, Webstory platform, Fastreed, Creating webstories, Publishing webstories, Read and write webstories, Share ideas and knowledge, Web storytelling, Storytelling platform, Creative writing, Global audience, Engaging content, User-generated stories, Story sharing, Online publishing, Web content creation, Storytelling community, Creative expression, Web-based stories, Fastreed web platform.">
     <meta data-rh="true" name="description" content="Fastreed: About Us">
     <meta data-rh="true" property="og:title" content="Fastreed: About Us">
     <meta data-rh="true" property="twitter:title" content="Fastreed: About Us">
-    <meta data-rh="true" property="og:description" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
-    <meta data-rh="true" property="twitter:description" content="Fastreed is a Webstories creating and publishing website. Fastreed allow everyone to Read, Write and Share their ideas and knowledge with the world via webstories">
+    <meta data-rh="true" property="og:description" content="Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you're a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.">
     <meta data-rh="true" property="og:image" content="https://www.fastreed.com/favicon.ico">
     <meta data-rh="true" property="twitter:image" content="https://www.fastreed.com/favicon.ico">
     <meta data-rh="true" property="og:url" content="https://www.fastreed.com/about/">

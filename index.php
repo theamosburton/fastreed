@@ -27,9 +27,9 @@ class showIndex{
         $this->adminLogged = $this->userData->adminLogged;
         $this->userLogged = $this->userData->userLogged;
 
-        $this->webTitle = $this->captureVisit->webTitle;
-        $this->webDescription = $this->captureVisit->webDescription;;
-        $this->webKeywords = $this->captureVisit->webKeywords;
+        $this->webTitle = "Create and Publish Visual Stories";
+        $this->webDescription = "Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you're a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.";
+        $this->webKeywords = "Webstories, Webstory platform, Fastreed, Creating webstories, Publishing webstories, Read and write webstories, Share ideas and knowledge, Web storytelling, Storytelling platform, Creative writing, Global audience, Engaging content, User-generated stories, Story sharing, Online publishing, Web content creation, Storytelling community, Creative expression, Web-based stories, Fastreed web platform.";
         $this->canonUrl = "https://www.fastreed.com";
 
 
