@@ -468,7 +468,7 @@ class nonLoggedVother extends showProfile{
              }
          }
        </script>
-       
+
        <script data-rh="true" type="application/ld+json">
        {
            "@context": "http://schema.org",
@@ -487,21 +487,21 @@ class nonLoggedVother extends showProfile{
            "url": "'.$this->canonUrl.'",
            "hasPart": [';
 
-       // Add each web story to the "hasPart" property
-       foreach ($allStories as $story) {
-           $this->structure .= '{
-               "@type": "CreativeWork",
-               "name": "'.$story['title'].'",
-               "url": "'.$story['url'].'",
-               "description": "'.$story['description'].'",
-               "image": "'.$story['image'].'"
-           }';
+           // Add each web story to the "hasPart" property
+           foreach ($allStories as $story) {
+               $this->structure .= '{
+                   "@type": "CreativeWork",
+                   "name": "'.$story['title'].'",
+                   "url": "'.$story['url'].'",
+                   "description": "'.$story['description'].'",
+                   "image": "'.$story['image'].'"
+               }';
 
-           // Add a comma if there are more web stories
-           if ($story !== end($allStories)) {
-               $this->structure .= ', ';
+               // Add a comma if there are more web stories
+               if ($story !== end($allStories)) {
+                   $this->structure .= ', ';
+               }
            }
-       }
 
        // Complete the JSON-LD script
        $this->structure .= '
