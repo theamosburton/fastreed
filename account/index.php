@@ -486,8 +486,7 @@ class nonLoggedVother extends showProfile{
            "target": {
              "@type": "EntryPoint",
              "urlTemplate": "'.$this->canonUrl.'"
-           }
-
+           },
            "hasPart": [';
 
            // Add each web story to the "hasPart" property
