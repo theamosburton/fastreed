@@ -1202,13 +1202,11 @@ class Webstories{
             if (!in_array('webstories', $parts)) {
               $urlError = "Wrong URL used in related story link. It should have <i> /webstories/</i> path";
             }else{
-              $url = preg_replace('#^https?://#', '', $relatedStory);
-               $parts = explode('/', $url);
                $lastPart = end($parts);
                if($this->getStoryWithURL($lastPart, 'onlyCheck')){
                  $urlError = false;
                }else{
-                 $urlError = "No visual story found with this url : <i>$relatedStory</i>  $lastPart";
+                 $urlError = "No visual story found with this url : <i>$relatedStory</i>";
                }
             }
           }else{
