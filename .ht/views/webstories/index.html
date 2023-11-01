@@ -209,10 +209,9 @@
             }
       }
       if ($relatedStoryData) {
-          $relatedStoryTitle = $relatedStory['title'];
-          $relatedStoryDescription = $relatedStory['description'];
-          $relatedStoryUrl = $relatedStory['url'];
-          $relatedStoryData = json_decode($relatedStory['storyData'], true);
+          $relatedStoryTitle = $relatedStoryData['title'];
+          $relatedStoryDescription = $relatedStoryData['description'];
+          $relatedStoryUrl = $relatedStoryData['url'];
           $relatedStoryImage = $relatedStoryData['layers']['L0']['media']['url'];
           $relatedStoryUrl = '/webstories/' . $relatedStoryUrl;
           $relatedStoryMediaTitle = $relatedStoryData['layers']['L0']['media']['title'];
