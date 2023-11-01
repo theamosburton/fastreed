@@ -472,19 +472,22 @@ class nonLoggedVother extends showProfile{
        <script data-rh="true" type="application/ld+json">
        {
            "@context": "http://schema.org",
-           "@type": "ProfilePage",
-           "mainEntityOfPage": {
-               "@type": "webSite",
-               "@id": "'.$this->canonUrl.'"
-           },
-           "name": "'.$this->userFullname.'",
+           "@type": "webSite",
+           "url": "'.$this->canonUrl.'",
+           "name": "Fastreed Profile",
            "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
            "author": {
                "@type": "Person",
                "image": "'.$this->userImage.'",
-               "name": "'.$this->otherUsername.'"
+               "name": "'.$this->userFullname.'"
            },
-           "url": "'.$this->canonUrl.'",
+           "potentialAction": {
+           "@type": "ReadAction",
+           "target": {
+             "@type": "EntryPoint",
+             "urlTemplate": "'.$this->canonUrl.'"
+           }
+
            "hasPart": [';
 
            // Add each web story to the "hasPart" property
