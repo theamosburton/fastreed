@@ -482,10 +482,11 @@ class nonLoggedVother extends showProfile{
                "name": "'.$this->userFullname.'"
            },
            "potentialAction": {
-           "@type": "ReadAction",
-           "target": {
-             "@type": "EntryPoint",
-             "urlTemplate": "'.$this->canonUrl.'"
+             "@type": "ReadAction",
+             "target": {
+               "@type": "EntryPoint",
+               "urlTemplate": "'.$this->canonUrl.'"
+             }
            },
            "hasPart": [';
 
