@@ -457,7 +457,7 @@ class nonLoggedVother extends showProfile{
            "@context": "http://schema.org",
            "@type": "ProfilePage",
            "mainEntityOfPage": {
-               "@type": "WebSite",
+               "@type": "webSite",
                "@id": "'.$this->canonUrl.'"
            },
            "name": "'.$this->userFullname.'",
@@ -468,10 +468,6 @@ class nonLoggedVother extends showProfile{
                "name": "'.$this->otherUsername.'"
            },
            "url": "'.$this->canonUrl.'",
-           "sameAs": [
-               "",
-               ""
-           ],
            "hasPart": [';
 
        // Add each web story to the "hasPart" property
