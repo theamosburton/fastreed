@@ -232,18 +232,7 @@ class loggedAdminVother extends showProfile{
             var currentEmail = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
             var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
-         $this->structure = '
-         <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Person",
-                "name": "'.$this->userFullname.'",
-                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
-                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
-                "image": "'.$this->userImage.'"
-            }
-          </script>
-         ';
+        $this->structure = '';
 
          $selfId = $this->userData->getSelfDetails()['UID'];
          $otherID = $this->userData->getOtherData('username', $this->otherUsername)['UID'];
@@ -304,18 +293,7 @@ class loggedVself extends showProfile{
             var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
          </script>';
 
-         $this->structure = '
-         <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Person",
-                "name": "'.$this->userFullname.'",
-                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
-                "description": "'.  $this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
-                "image": "'.$this->userImage.'"
-            }
-          </script>
-         ';
+         $this->structure = '';
 
          $selfId = $_SESSION['LOGGED_USER'];
          $userSettings = $this->userData->getSettings($selfId);
@@ -395,18 +373,7 @@ class loggedVother extends showProfile{
         $this->extraScript = '<script> var ePID = "'.$this->userData->getOtherData('username', $this->otherUsername)['email'].'";
         var currentUsername = "'.$this->userData->getOtherData('username', $this->otherUsername)['username'].'";
          </script>';
-         $this->structure = '
-         <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Person",
-                "name": "'.$this->userFullname.'",
-                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
-                "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
-                "image": "'.$this->userImage.'"
-            }
-          </script>
-         ';
+        $this->structure = '';
         $this->addHead();
 
     //***************/ Main Container Starts /**********//
