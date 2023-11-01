@@ -499,7 +499,7 @@ class nonLoggedVother extends showProfile{
 
                // Add a comma if there are more web stories
                if ($story !== end($allStories)) {
-                   $this->structure .= ', ';
+                   $this->structure .= ', '.'\n';
                }
            }
 
