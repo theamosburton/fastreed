@@ -1192,7 +1192,7 @@ class Webstories{
             return false;
         }else{
           $relatedStory = $metaData['relatedStory'];
-          $urlParts = parse_url($relatedStoryUrl);
+          $urlParts = parse_url($relatedStory);
           $path = $urlParts['path'];
           $lastPath = basename($path);
            if($this->getStoryWithURL($lastPath, 'onlyCheck')){
