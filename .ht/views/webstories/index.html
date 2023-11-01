@@ -212,9 +212,10 @@
           $relatedStoryTitle = $relatedStoryData['title'];
           $relatedStoryDescription = $relatedStoryData['description'];
           $relatedStoryUrl = $relatedStoryData['url'];
-          $relatedStoryImage = $relatedStoryData['layers']['L0']['media']['url'];
+          $relatedStoryDataInside = json_decode($relatedStoryData['storyData'], true);
+          $relatedStoryImage = $relatedStoryDataInside['layers']['L0']['media']['url'];
           $relatedStoryUrl = '/webstories/' . $relatedStoryUrl;
-          $relatedStoryMediaTitle = $relatedStoryData['layers']['L0']['media']['title'];
+          $relatedStoryMediaTitle = $relatedStoryDataInside['layers']['L0']['media']['title'];
 
           $ampStory .= '
           <!-- related story -->
