@@ -74,7 +74,7 @@ class showIndex{
         HTML."\n";
         include ".ht/views/homepage/dropdowns.html";
 
-    //***************/ Posts Section /**********//
+    //***************/ Stories Section /**********//
         echo "\n";
         echo <<<HTML
                         <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">

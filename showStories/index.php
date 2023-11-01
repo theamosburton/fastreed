@@ -54,6 +54,9 @@ class renderStory{
              $lastPath = basename($path);
              if($this->getWebstoryData($lastPath)){
                $relatedStoryData = $this->getWebstoryData($lastPath);
+               if ($relatedStoryData) {
+                 $this->updateStoryAnalytics($relatedStoryData);
+               }
              }else{
                $relatedStoryData = false;
              }
@@ -149,6 +152,8 @@ class renderStory{
          return $gmtUnixTimestamp;
        }
 
-
+       private function updateStoryAnalytics(){
+         
+       }
 }
 ?>

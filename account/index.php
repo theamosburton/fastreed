@@ -469,7 +469,7 @@ class nonLoggedVother extends showProfile{
                 "@context": "http://schema.org",
                 "@type": "Person",
                 "name": "'.$this->userFullname.'",
-                "url": "'.$this->canonUrl.'",  // Replace with the actual URL
+                "url": "'.$this->canonUrl.'",
                 "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
                 "image": "'.$this->userImage.'"
             }
