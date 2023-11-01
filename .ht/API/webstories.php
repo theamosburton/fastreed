@@ -400,7 +400,7 @@ class Webstories{
         }elseif ($data['whois'] == 'User') {
           $username = $this->userData->getSelfDetails()['username'];
         }
-        $layers = $this->checkLayers($dataArray, $username);
+
         $layer = $dataArray['layers'];
         $images = [];
         for ($i = 0; $i < count($layer); $i++) {
@@ -410,6 +410,7 @@ class Webstories{
           $images[$i] = $pathSegments[2];
           $images[$i] = strtok($images[$i], '.');
         }
+        $layers = $this->checkLayers($dataArray, $username);
         $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
         $checkImages = $this->checkImages($images);
         $metaData = $this->checkMetaData($dataArray);
@@ -1207,7 +1208,7 @@ class Webstories{
                if($this->getStoryWithURL($lastPart, 'onlyCheck')){
                  $urlError = false;
                }else{
-                 $urlError = "No visual story found with this url : <i>$relatedStory</i>";
+                 $urlError = "No visual story found with this url : <i>$relatedStory</i>  $lastPart";
                }
             }
           }else{
