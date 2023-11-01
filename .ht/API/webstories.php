@@ -1192,26 +1192,14 @@ class Webstories{
             return false;
         }else{
           $relatedStory = $metaData['relatedStory'];
-          $url = preg_replace('#^https?://#', '', $relatedStory);
-          $parts = explode('/', $url);
-          $baseURL = $parts[0];
-          $baseURL = preg_replace('#^www\.#', '', $baseURL);
-          if (strpos($baseURL, 'fastreed.com') !== false) {
-            $url = preg_replace('#^https?://#', '', $relatedStory);
-            $parts = explode('/', $url);
-            if (!in_array('webstories', $parts)) {
-              $urlError = "Wrong URL used in related story link. It should have <i> /webstories/</i> path";
-            }else{
-               $lastPart = end($parts);
-               if($this->getStoryWithURL($lastPart, 'onlyCheck')){
-                 $urlError = false;
-               }else{
-                 $urlError = "No visual story found with this url : <i>$relatedStory</i>";
-               }
-            }
-          }else{
-            $urlError = "Other web-links are not allowed in related story";
-          }
+          $urlParts = parse_url($relatedStoryUrl);
+          $path = $urlParts['path'];
+          $lastPath = basename($path);
+           if($this->getStoryWithURL($lastPath, 'onlyCheck')){
+             $urlError = false;
+           }else{
+             $urlError = "No visual story found with this url : <i>$relatedStory</i>";
+           }
         }
 
         return $urlError;
