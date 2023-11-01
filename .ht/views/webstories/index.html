@@ -5,6 +5,7 @@
   $storyData = json_decode($JSONlayers, true);
   $mainPoster = '';
   $date = $storyData['metaData']['date'];
+  $category = $storyData['metaData']['category'];
   $isPromoted = $storyData['metaData']['selfPromotion'];
   $relatedStory = $storyData['metaData']['relatedStory'];
   $relatedStory = json_decode($relatedStory, true);
@@ -45,6 +46,42 @@
     $entity_url = "";
   }
     ?>
+    echo '
+    <script type="application/ld+json">
+      {
+    		"@context":"https://schema.org",
+    		"@type":"NewsArticle",
+    		"headline":"'.$storyTitle.'",
+    		"name":"'.$storyTitle.'",
+    		"datePublished":"'.firstmod.'",
+    		"dateModified":"'.$lastmod.'",
+    		"inLanguage":"en",
+    		"articleSection":"'.$category.'",
+    		"keywords":"'.$keywords.'",
+        "description":"'.description.'",
+    		"author":{
+    			"@type":"Person",
+    			"name":"'.$authorName.'",
+    			"url": "'.DOMAIN.'/u/'.$authorUsername.'"
+    		},
+    		"thumbnailUrl":"'.DOMAIN.'/webstories/'.$storyUrl.'",
+    		"image":{
+    			"@type":"ImageObject",
+    			"url":"'.$mainPoster.'"
+    		},
+    		"publisher":{
+    			"@type":"Organization",
+    			"name":"Fastreed",
+    			"url":"https://www.fastreed.com",
+    			"logo":{"@type":"ImageObject","url":"https://www.fastreed.com/favicon.ico","width":60,"height":60}
+    		},
+    		"mainEntityOfPage":{
+    			"@type":"WebPage",
+    			"@id":"'.DOMAIN.'/webstories/'.$storyUrl.'"
+    		}
+    	}
+    </script>';
+
   </head>
 <body id="app">
     <amp-story standalone ="" <?php echo $entity." ".$entity_logo_src." ".$entity_url;?> class="NWSStory" publisher="fastreed" title="<?php echo $storyData['metaData']['title'] ?>" poster-portrait-src="<?php echo $mainPoster ?>" publisher-logo-src="/favicon.ico"  >
