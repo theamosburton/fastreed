@@ -54,9 +54,6 @@ class renderStory{
              $lastPath = basename($path);
              if($this->getWebstoryData($lastPath)){
                $relatedStoryData = $this->getWebstoryData($lastPath);
-               if ($relatedStoryData) {
-                 $this->updateStoryAnalytics($relatedStoryData);
-               }
              }else{
                $relatedStoryData = false;
              }
@@ -107,11 +104,7 @@ class renderStory{
                   $webstoryData['description'] = $description;
                   $webstoryData['url'] = $url;
                   $webstoryData['keywords'] = $keywords;
-                  if ($moniStat == "false" || $moniStat == "none") {
-                    $webstoryData['noIndex'] = '<meta name="robots" content="noindex">';
-                  }else{
-                    $webstoryData['noIndex'] = '';
-                  }
+                  $webstoryData['noIndex'] = '';
                   $return = $webstoryData;
                }
              }
@@ -153,7 +146,7 @@ class renderStory{
        }
 
        private function updateStoryAnalytics(){
-         
+
        }
 }
 ?>
