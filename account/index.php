@@ -481,6 +481,13 @@ class nonLoggedVother extends showProfile{
                "image": "'.$this->userImage.'",
                "name": "'.$this->userFullname.'"
            },
+           "potentialAction": {
+             "@type": "ReadAction",
+             "target": {
+               "@type": "EntryPoint",
+               "urlTemplate": "'.$this->canonUrl.'"
+             }
+           },
            "hasPart": [';
 
            // Add each web story to the "hasPart" property
