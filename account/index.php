@@ -412,7 +412,7 @@ class nonLoggedVother extends showProfile{
         $canViewUploads = $userSettings['canViewUploads'];
         $canCreate = $userSettings['canCreate'];
         if ($canCreate == 'ACC') {
-          $userStatus = 'Auhtor';
+          $userStatus = 'Author';
         }else{
           $userStatus = 'User';
         }
@@ -480,6 +480,13 @@ class nonLoggedVother extends showProfile{
                "@type": "Person",
                "image": "'.$this->userImage.'",
                "name": "'.$this->userFullname.'"
+           },
+           "potentialAction": {
+             "@type": "ReadAction",
+             "target": {
+               "@type": "EntryPoint",
+               "urlTemplate": "'.$this->canonUrl.'"
+             }
            },
            "hasPart": [';
 
