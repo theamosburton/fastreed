@@ -1598,8 +1598,8 @@ class Editor{
     inputs.forEach(function(element) {
       element.style.borderColor = 'grey';
     });
-    if (this.getWordCount(title) <= 6) {
-      metaError = 'Atleast 7 words required in title';
+    if (this.getWordCount(title) <= 4) {
+      metaError = 'Atleast 5 words required in title';
       let err = document.getElementById('titleError');
       err.style.display = 'inline';
       document.getElementById('storyTitle').style.borderColor = 'red';

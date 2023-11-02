@@ -1054,13 +1054,13 @@ class Webstories{
       $keywords = $metaData['keywords'];
       $category = $metaData['category'];
       $url = $metaData['url'];
-      if (str_word_count($title) <= 4) {
+      if (str_word_count($title) < 4) {
           $metaError[] = 'At least 5 non-numeric words required in title';
       } elseif (strlen($url) <= 20) {
           $metaError[] = 'URL must be at least 20 characters long';
-      } elseif (str_word_count($description) <= 4) {
+      } elseif (str_word_count($description) < 4) {
           $metaError[] = 'At least 5 words required in description';
-      } elseif (str_word_count($keywords) <= 4) {
+      } elseif (str_word_count($keywords) < 4) {
           $metaError[] = 'At least 5 words required in keywords';
       }elseif (empty($category)) {
           $metaError[] = 'Please select a category';

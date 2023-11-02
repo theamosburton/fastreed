@@ -178,17 +178,13 @@ class FetchStories {
           var icon = '<i class="fa-solid fa-floppy-disk"></i>';
         }
         webstoryDiv.innerHTML += `
-        <div itemscope itemtype="https://schema.org/WebStory" class="webstory" id="webstory${i}">
-            <meta itemprop="author" content="${userFullname}">
-            <meta itemprop="publisher" content="Fastreed">
-            <meta itemprop="contentUrl" content="${storyURL}">
-            <meta itemprop="articleType" content="WebStory">
+        <div class="webstory" id="webstory${i}">
             <div class="background" style="background-image: url('${setUrl}');" onclick="viewStory('${storyURL}')">
                 <div class="storyOverlay"></div>
                  <div class="storyViewIcon">
                  ${icon}
                   </div>
-                <div itemprop="name" class="title">${title}</div>
+                <div class="title">${title}</div>
             </div>
         </div>
         `;
