@@ -48,11 +48,11 @@
     echo '<script>var domainName = "'.DOMAIN.'";
         </script>';
 
-    if ($this->adminLogged) {
+    if ($this->whoAmI == 'Admin') {
         echo '<script>var adminLogged = true;
         var userLogged = false;
         </script>';
-    }elseif ($this->userLogged) {
+    }elseif ($this->whoAmI == 'User') {
         echo '<script>var userLogged = true;
         var adminLogged = false;
         </script>';

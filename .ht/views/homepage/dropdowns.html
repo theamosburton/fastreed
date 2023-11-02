@@ -14,7 +14,7 @@
 				<div class="dropdowns" id="accounts" style="display:none">
 						<?php
 						// Logged Users
-					if ($this->userLogged) {
+					if ($this->whoAmI != 'Anonymous') {
 					echo '  <div class="profile-top">
                                 <div class="profile-info">
                                     <div class="image-div">
@@ -85,7 +85,7 @@
 				<!-- Admin Options -->
 
 				<?php
-				if($this->adminLogged){
+				if($this->whoAmI == 'Admin'){
 					$refresh =  <<<HTML
 										<div id="refStyle" class="menus" onclick="refreshCss()">
 											<div  class="spinner" id="RSpinner"></div>
@@ -100,7 +100,7 @@
 								HTML."\n";
 				}
 
-				if($this->adminLogged){
+				if($this->whoAmI == 'Admin'){
 					echo <<<HTML
 							<div class="dropdowns" id="advOptions" style="display:none">
 								<div class="menu-head">
@@ -113,7 +113,7 @@
 								</a>
 							</div>
 						HTML."\n";
-				}elseif($this->userLogged){
+				}elseif($this->whoAmI != 'Anonymous'){
 					echo <<<HTML
 							<div class="dropdowns" id="advOptions" style="display:none">
 								<div class="menu-head">

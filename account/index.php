@@ -7,6 +7,7 @@ new showProfile();
 class showProfile {
     public $version;
     public $captureVisit;
+    protected $whoAmI;
     protected $adminLogged = false;
     protected $userLogged = false;
     protected $DB_CONN;
@@ -30,16 +31,16 @@ class showProfile {
     function __construct() {
 
         $this->const4Inherited();
-        if ($this->adminLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
+        if ($this->whoAmI == 'Admin' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
             new loggedAdminVother();
-        }elseif ($this->userLogged && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
+        }elseif ($this->whoAmI == 'User' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new loggedVother();
         }elseif (isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new nonLoggedVother();
-        }elseif ($this->userLogged && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
+        }elseif ($this->whoAmI == 'User' && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
             header("Location:/account/sign/");
-        }elseif($this->userLogged) {
+        }elseif($this->whoAmI == 'User') {
             new loggedVself();
         }else{
             header("Location:/account/sign");
@@ -99,7 +100,7 @@ class showProfile {
             HTML."\n".<<<HTML
                 <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
             HTML."\n";
-            if ($this->userLogged) {
+            if ($this->whoAmI == 'User') {
                 if (!isset($this->userData->getSelfDetails()['DOB']) || !isset($this->userData->getSelfDetails()['Gender'])) {
                     include "../.ht/views/homepage/updateProfile.html";
                     echo "\n";
@@ -137,7 +138,7 @@ class showProfile {
             echo <<<HTML
             <header>
             HTML."\n";
-            if ($this->userLogged) {
+            if ($this->whoAmI == 'User') {
                 include "../.ht/views/homepage/userHeader.html";
             }else{
                 include "../.ht/views/homepage/anonHeader.html";
@@ -168,13 +169,13 @@ class showProfile {
                 }
             }
         }
-        if ($this->adminLogged) {
+        if ($this->whoAmI == 'Admin') {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             <script type="text/javascript" src="/assets/js/admin.js?v=$this->version"></script>
             HTML."\n";
 
-        }elseif ($this->userLogged) {
+        }elseif ($this->whoAmI == 'User') {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             HTML."\n";

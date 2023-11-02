@@ -1,4 +1,4 @@
-<?php if ($this->adminLogged) {
+<?php if ($this->whoAmI == 'Admin') {
     $adminNav = <<<HTML
     <div>
         <i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
@@ -32,8 +32,8 @@
                 <span onclick="toggleNotifications()" class="badge" id="notiCount"></span>
             </div>
             <!-- Notifications Nav-->
-            
-         
+
+
 
             <!-- Settings Nav -->
             <div class="navs">

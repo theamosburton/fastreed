@@ -9,8 +9,7 @@ class showIndex{
     public $version;
     public $captureVisit;
 
-    private $adminLogged = false;
-    private $userLogged = false;
+    protected $whoAmI;
     private $webTitle;
     private $webDescription;
     private $webKeywords;
@@ -24,8 +23,7 @@ class showIndex{
         $this->version = implode('.', str_split($this->version, 1));
 
         $this->userData = new getLoggedData();
-        $this->adminLogged = $this->userData->adminLogged;
-        $this->userLogged = $this->userData->userLogged;
+        $this->whoAmI = $this->userData->whoAmI();
 
         $this->webTitle = "Create and Publish Visual Stories";
         $this->webDescription = "Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you're a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.";
@@ -40,7 +38,7 @@ class showIndex{
         HTML."\n".<<<HTML
             <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
         HTML."\n";
-        if ($this->userLogged) {
+        if ($this->whoAmI == 'User') {
             if (!isset($this->userData->getSelfDetails()['DOB']) || !isset($this->userData->getSelfDetails['Gender'])) {
                 include ".ht/views/homepage/updateProfile.html";
                 echo "\n";
@@ -53,7 +51,7 @@ class showIndex{
            <header>
         HTML."\n";
 
-        if ($this->userLogged) {
+        if ($this->whoAmI != 'Anonymous') {
             include ".ht/views/homepage/userHeader.html";
         }else{
             include ".ht/views/homepage/anonHeader.html";
@@ -106,13 +104,13 @@ class showIndex{
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/homepage.js?v=$this->version"></script>
         HTML."\n";
-        if ($this->adminLogged) {
+        if ($this->whoAmI == 'Admin') {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             <script type="text/javascript" src="/assets/js/admin.js?v=$this->version"></script>
             HTML."\n";
 
-        }elseif ($this->userLogged) {
+        }elseif ($this->whoAmI == 'User') {
             echo <<<HTML
             <script type="text/javascript" src="/assets/js/user.js?v=$this->version"></script>
             HTML."\n";
