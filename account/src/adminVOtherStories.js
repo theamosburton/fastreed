@@ -41,9 +41,7 @@ class FetchAdminStories {
     const fetchWebstoryData = async () =>{
         const url = '/.ht/API/webstories.php';
         var encyDat = {
-        'purpose' : 'fetchAll',
-        'whois': `${this.whoIs}`,
-        'username': `${this.visitedusername}`
+        'purpose' : 'adminFetching'
         };
         const response = await fetch(url, {
             method: 'post',
@@ -56,6 +54,7 @@ class FetchAdminStories {
         if (data) {
           if (data.Result) {
             var webstories = data.message;
+              console.log(JSON.parse(webstories));
               this.webstoriesData = JSON.parse(webstories);
               this.renderWebstories();
           }else{

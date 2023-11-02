@@ -58,7 +58,6 @@ class FetchStories {
           if (data.Result) {
             var webstories = data.message;
               this.webstoriesData = JSON.parse(webstories);
-              console.log(this.webstoriesData);
               this.renderWebstories();
           }else{
             webstoryDiv.style.display = 'none';

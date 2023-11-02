@@ -880,6 +880,7 @@ class Webstories{
         $images[$i] = $pathSegments[2];
         $images[$i] = strtok($images[$i], '.');
       }
+      $images = array_unique($images);
       $checkingRelatedStoryLink = $this->checkRelatedStoryLink($dataArray);
       $checkImages = $this->checkImages($images);
       $metaData = $this->checkMetaData($dataArray);
@@ -927,7 +928,7 @@ class Webstories{
               $result3 = mysqli_stmt_execute($stmt3);
 
               if (!$result3 || !$this->makePublic($images)) {
-                  showMessage(false, 'Problem at our end');
+                  showMessage(false, 'Problem at our end with meta');
                   return;
               }
               showMessage(true, "$url");
