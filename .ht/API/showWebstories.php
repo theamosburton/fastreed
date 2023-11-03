@@ -17,17 +17,80 @@ class showWebstories{
         $this->AUTH = new Auth();
         $this->userData = new getLoggedData();
         $this->whoAmI = $this->userData->whoAmI();
-        if ($this->whoAmI == 'User') {
-          $this->showStoriesToUser();
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($this->whoAmI == 'User' || $this->whoAmI == 'Admin') {
+          if (isset($data['type']) && !empty($data['type'])) {
+            switch ($data['type']) {
+              case 'latest':
+                  $this->showLatestToUser();
+                break;
+              case 'popular':
+                  $this->showPopularToUser();
+                break;
+              case 'categorized':
+                  $this->showCategorizedToUser();
+                break;
+              default:
+                $this->showLatestToUser();
+                break;
+            }
+          }
         }elseif ($this->whoAmI == 'Anonymous') {
-          $this->showStoriesToAnonymous();
+          if (isset($data['type']) && !empty($data['type'])) {
+            switch ($data['type']) {
+              case 'latest':
+                  $this->showLatestToAnon();
+                break;
+              case 'popular':
+                  $this->showPopularToAnon();
+                break;
+              case 'categorized':
+                  $this->showCategorizedToAnon();
+                break;
+              default:
+                $this->showLatestToAnon();
+                break;
+            }
+          }
         }
+
 
         $this->closeConnection();
         $this->userData->closeConnection();
       }
-      public function showStoriesToAnonymous(){
-        
+
+
+      public function showLatestToUser(){
+        $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+        $result = mysqli_query($this->DB, $sql);
+        if (!$result) {
+          showMessage(false, 'Server Error');
+          return;
+        }
+        $row = mysqli_fetch_all($result, true);
+        for ($i=0; $i < count($row) ; $i++) {
+          $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
+          $row[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
+          $row[$i]['moniStatus'] = $storyMetaData['moniStatus'];
+          $row[$i]['title'] = $storyMetaData['title'];
+          $row[$i]['category'] = $storyMetaData['category'];
+          $storyData = json_decode($row[$i]['storyData'], true);
+          $row[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+          unset($row[$i]['storyData']);
+        }
+        $jsonDecodedData = json_encode($row);
+         showMessage(true, "$jsonDecodedData");
+      }
+
+      public function getStoryMetaData($storyID){
+        $return = [];
+        $sql = "SELECT * FROM metaData WHERE postID ='$storyID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $return = $row;
+        }
+        return $return;
       }
       public function closeConnection(){
         if ($this->DB) {

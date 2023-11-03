@@ -29,7 +29,6 @@ class showProfile {
     protected $userFullname;
     protected $getStoriesData;
     function __construct() {
-
         $this->const4Inherited();
         if ($this->whoAmI == 'Admin' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
@@ -40,14 +39,19 @@ class showProfile {
             new nonLoggedVother();
         }elseif ($this->whoAmI == 'User' && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
             header("Location:/account/sign/");
+        }elseif($this->whoAmI == 'Admin') {
+            new loggedVself();
         }elseif($this->whoAmI == 'User') {
             new loggedVself();
         }else{
-            header("Location:/account/sign");
+            header("Location:/?");
+            // var_dump($this->whoAmI);
         }
     }
     // This function construct properties and methods for inherited classes
     protected function const4Inherited(){
+      $this->userData = new getLoggedData();
+      $this->whoAmI = $this->userData->whoAmI();
         if (isset($_GET['u'])) {
             $this->otherUsername = $_GET['u'];
         }
@@ -76,9 +80,9 @@ class showProfile {
             $this->extraStyle = $this->blackMode;
         }
 
-        $this->userData = new getLoggedData();
+
         $this->uploadData = new getUploadData();
-        $this->whoAmI = $this->userData->whoAmI();
+
         if ($this->whoAmI == 'Admin') {
           $this->adminLogged = true;
           $this->userLogged = true;

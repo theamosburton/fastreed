@@ -74,7 +74,7 @@
   border-radius: var(--f-card_border_radius);
 
 }
-.f-card::after{
+.f-card-story::after{
   content: " ";
   display: block;
   height: 1px;
@@ -83,6 +83,39 @@
   left: 100%;
 }
 
+.fading-div {
+  -webkit-animation-duration: 1.25s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: fading;
+  animation-name: fading;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: #eee;
+  position: relative;
+}
+
+
+@keyframes fading {
+  0% {
+    background: #eee;
+  }
+  15% {
+    background: #eee;
+  }
+  50% {
+    background: #ccc;
+  }
+  75% {
+    background: #ccc;
+  }
+  100% {
+    background: #eee;
+  }
+}
 .option-overlay{
   display: none;
   position: absolute;

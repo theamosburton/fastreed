@@ -76,9 +76,9 @@ class showIndex{
         echo "\n";
         echo <<<HTML
                         <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="pin_container">
+                            <div class="pin_container" id="storiesDiv">
         HTML."\n";
-        include ".ht/views/homepage/content.html";
+        include ".ht/views/homepage/stories.html";
         echo <<<HTML
                             </div>
                         </div>
@@ -103,6 +103,7 @@ class showIndex{
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/homepage.js?v=$this->version"></script>
+          <script type="text/javascript" src="/assets/js/homepageLoader.js?v=$this->version"></script>
         HTML."\n";
         if ($this->whoAmI == 'Admin') {
             echo <<<HTML
