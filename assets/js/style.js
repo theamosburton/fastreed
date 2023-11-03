@@ -89,6 +89,7 @@ function enableDarkMode() {
     $('.profile-info').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-top .menus').css('background-color', 'rgb(22, 22, 29)');
     $('.profile-info').css('color', 'aliceblue');
+    $('.homePageFilter .navs').css('color', 'aliceblue');
 
     $('.fading-div').css('background', 'linear-gradient(to left, rgb(51 51 51) 8%, rgb(39 32 36) 18%, rgb(51,51,51) 33%)');
     $('.dropdowns .menu-head').css('background-color', '#16161d');
@@ -133,6 +134,7 @@ function enableLightMode(){
     $('.notification').css('background-color', 'rgb(213,211,211)');
     $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-info').css('background-color', 'rgb(213, 211 ,211)');
+    $('.homePageFilter .navs').css('color', 'grey');
     $('.profile-top .menus').css('background-color', 'rgb(213, 211 ,211)');
     $('.profile-info').css('color', 'rgb(32, 33, 35)');
     $('.dropdowns .settings, #advOptions .menus').css('background-color', 'rgb(213, 211 ,211)');

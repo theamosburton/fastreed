@@ -16,6 +16,30 @@
     background-color: rgba(32,33,35);
   }
 
+.homePageFilter{
+  margin: 10px 50px -10px 50px;
+  display: flex;
+}
+.homePageFilter .navs{
+  border: 1px solid grey;
+  padding: 5px 16px;
+  margin-left: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.homePageFilter .navs:hover{
+  cursor: pointer;
+  color: white;
+}
+
+.homePageFilter .active{
+  cursor: pointer;
+}
+.homePageFilter .active i{
+  margin-left: 10px;
+}
+
   /* Scrollbar */
   .scrollbar-style{
     overflow-y: scroll;
@@ -42,15 +66,19 @@
   padding: 0;
   width: 100%;
   max-width: 1400px;
-  position: absolute;
   left: 50%;
   z-index: 99;
-  transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--f-card_width));
   grid-auto-rows: var(--row_increment);
   justify-content: center;
   padding-top: 10px;
+}
+.homepageLoadMore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }
 .f-card a{
   text-decoration: none;
@@ -775,10 +803,13 @@ header #nav #profileImage{
   color: rgb(194, 194, 194);
 }
 
-@media (max-width: 1201px) {
+@media (max-width: 1200px) {
   .settings, .accounts, .options{
     right: 10px;
     top: 65px;
+  }
+  .homePageFilter{
+    margin: 10px 90px -10px 90px;
   }
 }
 
@@ -805,10 +836,13 @@ header #nav #profileImage{
   }
   #noti-nav{
     right: 0;
-    margin: 0px 5px 0px 10px;
+    margin: 10px 5px 0px 10px;
   }
   .notification{
     width: auto;
+  }
+  .homePageFilter{
+    margin: 5px 5px -10px 5px;
   }
 }
 @media (max-width: 576px) {

@@ -46,6 +46,9 @@ class LoadStories {
     var storiesView = ['1', '2','2', '1', '1', '1', '2', '2', '2'];
     console.log(parsedJSON);
     var renderVariable = [];
+    if (parsedJSON.length < 8) {
+      document.getElementById('homepageLoader').innerHTML = 'Nothing to load';
+    }
     for (var i = 0; i < parsedJSON.length; i++) {
       var whatToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);

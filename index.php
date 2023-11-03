@@ -76,10 +76,20 @@ class showIndex{
         echo "\n";
         echo <<<HTML
                         <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="pin_container" id="storiesDiv">
+                            <div>
+                              <div class="homePageFilter" id="homePageFilter">
+                                <div class="navs active">Latest
+                                  <i class="fa fa-solid fa-check-circle"></i>
+                                </div>
+                              </div>
+                              <div class="pin_container" id="storiesDiv">
         HTML."\n";
         include ".ht/views/homepage/stories.html";
         echo <<<HTML
+                              </div>
+                              <div class="homepageLoadMore" id="homepageLoader">
+                                Loading.....
+                              </div>
                             </div>
                         </div>
         HTML."\n";
