@@ -142,7 +142,7 @@ class showProfile {
             echo <<<HTML
             <header>
             HTML."\n";
-            if ($this->whoAmI == 'User') {
+            if ($this->whoAmI != 'Anonymous') {
                 include "../.ht/views/homepage/userHeader.html";
             }else{
                 include "../.ht/views/homepage/anonHeader.html";
@@ -330,8 +330,6 @@ class loggedVself extends showProfile{
         include $this->DOCROOT."/.ht/views/account/loggedVSelf/index.html";
 
         // ***************************************** //
-
-
         echo <<<HTML
                     </div>
                 </div>

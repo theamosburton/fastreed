@@ -1,12 +1,12 @@
-<?php if ($this->whoAmI == 'Admin') {
+<?php
+if ($this->whoAmI == 'Admin') {
     $adminNav = <<<HTML
     <div>
         <i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
     </div>
     HTML;
 }else {
-    $adminNav = <<<HTML
-    HTML;
+    $adminNav = '';
 }
 ?>
     <div class="brand"><h1><a href="/">Fastreed</a></h1></div>
