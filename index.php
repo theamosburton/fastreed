@@ -75,7 +75,7 @@ class showIndex{
     //***************/ Stories Section /**********//
         echo "\n";
         echo <<<HTML
-                        <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 0px">
                             <div>
                               <div class="homePageFilter" id="homePageFilter">
                                 <div class="navs active">Latest
