@@ -743,7 +743,7 @@ header #nav #profileImage{
 }
 .f-card_large .image .storyLink, .f-card_medium .image .storyLink{
   position: absolute;
-  z-index: 9999;
+  z-index: 99;
   height: 100%;
 }
 .f-card_large .title, .f-card_medium .title{
@@ -842,7 +842,7 @@ header #nav #profileImage{
     width: auto;
   }
   .homePageFilter{
-    margin: 5px 5px -10px 5px;
+    margin: 10px 5px -10px 5px;
   }
 }
 @media (max-width: 576px) {
