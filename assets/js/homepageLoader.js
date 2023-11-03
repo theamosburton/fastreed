@@ -54,7 +54,7 @@ class LoadStories {
         <div class="f-card f-card_large">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
-                <a href="/webstory/${parsedJSON[i].url}" class="storyLink">
+                <a href="/webstories/${parsedJSON[i].url}" class="storyLink">
                     <div class="overlay">
                         <div class="top-overlay">
                           <div class="st-logo">
@@ -86,7 +86,7 @@ class LoadStories {
         <div class="f-card f-card_medium">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
-                <a href="/webstory/${parsedJSON[i].url}" class="storyLink">
+                <a href="/webstories/${parsedJSON[i].url}" class="storyLink">
                     <div class="overlay">
                       <div class="top-overlay">
                         <div class="st-logo">
