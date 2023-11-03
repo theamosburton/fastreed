@@ -9,7 +9,7 @@ class showIndex{
     public $version;
     public $captureVisit;
 
-    private $whoAmI;
+    protected $whoAmI;
     private $webTitle;
     private $webDescription;
     private $webKeywords;
@@ -38,7 +38,7 @@ class showIndex{
         HTML."\n".<<<HTML
             <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
         HTML."\n";
-        if ($this->whoAmI != 'Anonymous') {
+        if ($this->whoAmI == 'User') {
             if (!isset($this->userData->getSelfDetails()['DOB']) || !isset($this->userData->getSelfDetails['Gender'])) {
                 include ".ht/views/homepage/updateProfile.html";
                 echo "\n";
@@ -76,9 +76,9 @@ class showIndex{
         echo "\n";
         echo <<<HTML
                         <div id="center-block" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="pin_container" id="storiesDiv">
+                            <div class="pin_container">
         HTML."\n";
-        include ".ht/views/homepage/stories.html";
+        include ".ht/views/homepage/content.html";
         echo <<<HTML
                             </div>
                         </div>
@@ -103,7 +103,6 @@ class showIndex{
         <script type="text/javascript" src="/assets/js/style.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/log.js?v=$this->version"></script>
         <script type="text/javascript" src="/assets/js/homepage.js?v=$this->version"></script>
-          <script type="text/javascript" src="/assets/js/homepageLoader.js?v=$this->version"></script>
         HTML."\n";
         if ($this->whoAmI == 'Admin') {
             echo <<<HTML
