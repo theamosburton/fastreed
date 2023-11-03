@@ -47,7 +47,7 @@ class LoadStories {
     console.log(parsedJSON);
     var renderVariable = [];
     if (parsedJSON.length < 8) {
-      document.getElementById('homepageLoader').innerHTML = 'Nothing to load';
+      document.getElementById('homepageLoader').innerHTML = '<span>Nothing to load</span';
     }
     for (var i = 0; i < parsedJSON.length; i++) {
       var whatToView = storiesView[i];

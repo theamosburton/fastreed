@@ -78,7 +78,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 10px 0px 15px 0px;
+}
+.homepageLoadMore span{
+  padding: 5px 40px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  font-weight: bolder;
 }
 .f-card a{
   text-decoration: none;

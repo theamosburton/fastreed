@@ -88,7 +88,7 @@ class showIndex{
         echo <<<HTML
                               </div>
                               <div class="homepageLoadMore" id="homepageLoader">
-                                Loading.....
+                                <span>  Loading.....</span>
                               </div>
                             </div>
                         </div>
