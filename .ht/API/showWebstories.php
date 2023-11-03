@@ -68,18 +68,35 @@ class showWebstories{
           return;
         }
         $row = mysqli_fetch_all($result, true);
-        for ($i=0; $i < count($row) ; $i++) {
+        if (count($row) > 8) {
+          $totalStories = 8;
+        }else{
+          $totalStories = count($row);
+        }
+        $storiesToRender = [];
+        for ($i=0; $i < $totalStories ; $i++) {
           $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
-          $row[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-          $row[$i]['moniStatus'] = $storyMetaData['moniStatus'];
-          $row[$i]['title'] = $storyMetaData['title'];
-          $row[$i]['category'] = $storyMetaData['category'];
+          $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
+          $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
+          $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
+          $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
+          $storiesToRender[$i]['title'] = $storyMetaData['title'];
+          $storiesToRender[$i]['category'] = $storyMetaData['category'];
+          $storiesToRender[$i]['url'] = $storyMetaData['url'];
           $storyData = json_decode($row[$i]['storyData'], true);
-          $row[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+          $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
           unset($row[$i]['storyData']);
         }
-        $jsonDecodedData = json_encode($row);
-         showMessage(true, "$jsonDecodedData");
+        usort($storiesToRender, function($a, $b) {
+            $timestampA = $a['lastPublished'] / 1000; // Convert milliseconds to seconds
+            $timestampB = $b['lastPublished'] / 1000; // Convert milliseconds to seconds
+            if ($timestampA == $timestampB) {
+                return 0;
+            }
+            return ($timestampA > $timestampB) ? -1 : 1;
+        });
+        $jsonDecodedData = json_encode($storiesToRender);
+        showMessage(true, $jsonDecodedData);
       }
 
       public function getStoryMetaData($storyID){

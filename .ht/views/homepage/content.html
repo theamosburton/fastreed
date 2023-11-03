@@ -1,26 +1,23 @@
 <?php
-$card_small = <<<HTML
-                        <div class="f-card f-card_small">
-                            <div class="image" style="background-image:url('/assets/img/thumb3.png');">
-                                <a href="">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="title"> <a href="#">This is the dummy text used for testing this website design and for other purposes also</a></div>
-                            <div class="meta">
-                                <span class="cat"> <a href="">Technology</a> </span>
-                                <span class="date">2h</span>
-                                <a href=""><i class="fa fa-ellipsis-v"></i></a>
-                            </div>
-                        </div>
-HTML;
-
 $card_large = <<<HTML
                         <div class="f-card f-card_large">
-                            <div class="image" style="background-image:url('assets/img/port2.jpg');">
-                                <a href="#">
+                            <div class="image">
+                                <img class="storyMetaImage" src="assets/img/port2.jpg" alt="">
+                                <a href="#" class="storyLink">
                                     <div class="overlay">
-                                        <div class="top-overlay"> <div class="st-logo"></div> </div>
+                                        <div class="top-overlay">
+                                          <div class="st-logo">
+                                            <svg fill="none" viewBox="0 0 22 22">
+                                              <path fill="url(#a)" fill-rule="evenodd" d="M11 22c6.075 0 11-4.925 11-11S17.075 0 11 0 0 4.925 0 11s4.925 11 11 11zm.703-12.362l3.83 1.295L8.79 19l2.04-6.638L7 11.067 13.744 3l-2.041 6.638z" clip-rule="evenodd"></path>
+                                              <defs>
+                                                <linearGradient id="a" x1="11" x2="11" y2="22" gradientUnits="userSpaceOnUse">
+                                                  <stop stop-color="#4364FF"></stop>
+                                                  <stop offset="1" stop-color="#0037FF"></stop>
+                                                </linearGradient>
+                                              </defs>
+                                            </svg>
+                                          </div>
+                                        </div>
                                         <div class="title">
                                             <p> This is the dummy text for this website for testing</p>
                                         </div>
@@ -30,16 +27,29 @@ $card_large = <<<HTML
                             <div class="meta">
                                 <span class="cat"> <a href="">Technology</a> </span>
                                 <span class="date">2h</span>
-                                <a href=""><i class="fa fa-ellipsis-v"></i></a>
+                                <i class="fa fa-ellipsis-v" onclick=""></i>
                             </div>
                         </div>
 HTML;
 $card_medium = <<<HTML
                         <div class="f-card f-card_medium">
-                            <div class="image" style="background-image:url('assets/img/port4.png');">
-                                <a href="#">
+                            <div class="image">
+                                <img class="storyMetaImage" src="assets/img/port4.png" alt="">
+                                <a href="#" class="storyLink">
                                     <div class="overlay">
-                                        <div class="top-overlay"> <div class="st-logo"></div> </div>
+                                      <div class="top-overlay">
+                                        <div class="st-logo">
+                                          <svg fill="none" viewBox="0 0 22 22">
+                                            <path fill="url(#a)" fill-rule="evenodd" d="M11 22c6.075 0 11-4.925 11-11S17.075 0 11 0 0 4.925 0 11s4.925 11 11 11zm.703-12.362l3.83 1.295L8.79 19l2.04-6.638L7 11.067 13.744 3l-2.041 6.638z" clip-rule="evenodd"></path>
+                                            <defs>
+                                              <linearGradient id="a" x1="11" x2="11" y2="22" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#4364FF"></stop>
+                                                <stop offset="1" stop-color="#0037FF"></stop>
+                                              </linearGradient>
+                                            </defs>
+                                          </svg>
+                                        </div>
+                                      </div>
                                         <div class="title">
                                             <p> This is the dummy text for this website for testing</p>
                                         </div>
@@ -49,7 +59,7 @@ $card_medium = <<<HTML
                             <div class="meta">
                                 <span class="cat"> <a href="">Technology</a> </span>
                                 <span class="date">2h</span>
-                                <a href=""><i class="fa fa-ellipsis-v"></i></a>
+                                <i class="fa fa-ellipsis-v" onclick=""></i>
                             </div>
                         </div>
 HTML;
