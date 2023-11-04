@@ -1177,11 +1177,15 @@ class Webstories{
         $sql = "SELECT * FROM uploads WHERE uploadID = '$image'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {
-          $row = mysqli_fetch_assoc($result);
-          $status = $row['status'];
-          if ($status == 'VLD') {
-            $layerNo = $i+1;
-            array_push($errorArray, "The media used in Layer {$layerNo} voilates our community guidelines. <br> Please respect our community guidelines. ");
+          if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+            $status = $row['status'];
+            if ($status == 'VLD') {
+              $layerNo = $i+1;
+              array_push($errorArray, "The media used in Layer {$layerNo} voilates our community guidelines. <br> Please respect our community guidelines. ");
+            }
+          }else{
+            array_push($errorArray, "The media used in Layer {$layerNo} do not exists.");
           }
         }
       }
