@@ -87,7 +87,7 @@ class UsersVisits
     $thisPage = $_SERVER["REQUEST_URI"];
     $sessionID = $this->BASIC_FUNC->createNewID("fast_session" , "USI");
     $_SESSION["USI"] = $sessionID;
-    
+
     $this->updateVisits($sessionID);
     $sql2 = "INSERT INTO fast_session (tdate, sessionID, personID, IPADD, refID) VALUES ('$date', '$sessionID', '$userID','$userIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
