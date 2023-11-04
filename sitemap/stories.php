@@ -10,6 +10,7 @@ class createAuthorsSitemap{
     public $version;
     public $captureVisit;
     protected $userLogged = false;
+    public $DB_CONNECT;
     protected $DB;
     protected $AUTH;
     protected $FUNC;
@@ -21,8 +22,8 @@ class createAuthorsSitemap{
          // Create an instance to create/save activity
          $this->captureVisit = new VisitorActivity();
          $this->BASIC_FUNC = new BasicFunctions();
-         $DB = new DataBase();
-         $this->DB = $DB->DBConnection();
+         $this->DB_CONNECT = new DataBase();
+         $this->DB = $this->DB_CONNECT->DBConnection();
          $this->AUTH = new Auth();
          // Get css,js version from captureVisit
          $this->version = $this->captureVisit->VERSION;
@@ -31,11 +32,10 @@ class createAuthorsSitemap{
          $this->uploadData = new getUploadData();
          $storiesList = $this->verifiedStories();
          $this->createXML($storiesList);
-         $this->closeConnection();
-         $this->userData->closeConnection();
+         $this->DB_CONNECT->closeConnection();
+         $this->userData->DB_CONNECT->closeConnection();
          $this->uploadData->closeConnection();
-         $this->BASIC_FUNC->closeConnection();
-         $this->captureVisit->closeConnection();
+         $this->BASIC_FUNC->DB_CONNECT->closeConnection();
        }
        public function closeConnection(){
            if ($this->DB) {
