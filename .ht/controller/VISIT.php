@@ -59,7 +59,7 @@ function getFullSelfURL() {
 class VisitorActivity
 {
 
-  private $DB_CONNECT;
+  public $DB_CONNECT;
   private $AUTH;
   protected $DB;
   private $GUEST_VISITED;

@@ -11,6 +11,7 @@ class createContent{
     protected $adminLogged = false;
     protected $userLogged = false;
     protected $DB_CONN;
+    protected $DB_CONNECT;
     protected $AUTH;
     protected $FUNC;
     protected $userData;
@@ -28,8 +29,8 @@ class createContent{
        // Create an instance to create/save activity
        $this->captureVisit = new VisitorActivity();
        $this->BASIC_FUNC = new BasicFunctions();
-       $DB = new DataBase();
-       $this->DB_CONN = $DB->DBConnection();
+       $this->DB_CONNECT = new DataBase();
+       $this->DB_CONN = $this->DB_CONNECT->DBConnection();
        $this->AUTH = new Auth();
        // Get css,js version from captureVisit
        $this->version = $this->captureVisit->VERSION;
@@ -50,11 +51,10 @@ class createContent{
        }else{
           header("Location: /account/sign/");
        }
-        $this->closeConnection();
-        $this->userData->closeConnection();
-        $this->uploadData->closeConnection();
-        $this->BASIC_FUNC->closeConnection();
-        $this->captureVisit->closeConnection();
+       $this->DB_CONNECT->closeConnection();
+       $this->userData->DB_CONNECT->closeConnection();
+       $this->uploadData->DB_CONNECT->closeConnection();
+       $this->BASIC_FUNC->DB_CONNECT->closeConnection();
     }
     protected function checkID($ID, $who, $type){
         $return = false;
@@ -123,8 +123,8 @@ class userEditor extends createContent{
          // Create an instance to create/save activity
          $this->captureVisit = new VisitorActivity();
          $this->BASIC_FUNC = new BasicFunctions();
-         $DB = new DataBase();
-         $this->DB_CONN = $DB->DBConnection();
+         $this->DB_CONNECT = new DataBase();
+         $this->DB_CONN = $this->DB_CONNECT->DBConnection();
          $this->AUTH = new Auth();
          // Get css,js version from captureVisit
          $this->version = $this->captureVisit->VERSION;
@@ -145,11 +145,10 @@ class userEditor extends createContent{
         }else{
             header('Location:/account/');
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
-        $this->uploadData->closeConnection();
-        $this->BASIC_FUNC->closeConnection();
-        $this->captureVisit->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
+        $this->uploadData->DB_CONNECT->closeConnection();
+        $this->BASIC_FUNC->DB_CONNECT->closeConnection();
     }
     public function closeConnection(){
         if ($this->DB_CONN) {
@@ -229,8 +228,8 @@ class adminEditor extends createContent{
          // Create an instance to create/save activity
          $this->captureVisit = new VisitorActivity();
          $this->BASIC_FUNC = new BasicFunctions();
-         $DB = new DataBase();
-         $this->DB_CONN = $DB->DBConnection();
+         $this->DB_CONNECT = new DataBase();
+         $this->DB_CONN = $this->DB_CONNECT->DBConnection();
          $this->AUTH = new Auth();
          // Get css,js version from captureVisit
          $this->version = $this->captureVisit->VERSION;
@@ -251,11 +250,10 @@ class adminEditor extends createContent{
         }else{
             header('Location:/account/');
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
-        $this->uploadData->closeConnection();
-        $this->BASIC_FUNC->closeConnection();
-        $this->captureVisit->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
+        $this->uploadData->DB_CONNECT->closeConnection();
+        $this->BASIC_FUNC->DB_CONNECT->closeConnection();
     }
     protected function checkID($ID, $who, $type){
         $return = false;
