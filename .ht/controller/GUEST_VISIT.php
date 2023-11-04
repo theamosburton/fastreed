@@ -17,7 +17,7 @@ class GuestsVisits
 
   public function guestVisited()
   {
-     
+
     // Authenticate with Cookie
       $cookie =  $this->checkCookie();
       if ($cookie['bool']) {
@@ -64,7 +64,8 @@ class GuestsVisits
     $encryptedID = $this->AUTH->encrypt($guestID);
 
     // Set cookie
-    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/");
+    $avalFor = '.'.DOMAIN;
+    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/", $avalFor);
     // Add to visiter data to DB
     $sql = "INSERT INTO guests ( tdate, guestID, guestDevice, guestBrowser, guestPlatform, browserInfo ) VALUES ('$date','$guestID','$deviceType', '$browser', '$platform','$browserInfo')";
     mysqli_query($this->DB, $sql);
@@ -130,7 +131,7 @@ class GuestsVisits
     }
     return $sessionPresent;
   }
-  
+
   public function checkSession($sess){
     $sql = "SELECT * FROM fast_session WHERE sessionID = '$sess'";
     $result = mysqli_query($this->DB, $sql);

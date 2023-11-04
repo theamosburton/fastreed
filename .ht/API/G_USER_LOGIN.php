@@ -78,8 +78,9 @@ class gSignUpLogin{
   public function loginAccount($userID){
     $this->makeReference();
     $ePID = $this->AUTH->encrypt($userID);
-    setcookie('UID', $ePID, time()+(60 * 60 * 24 * 90), '/');
-    setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/');
+    $avalFor = '.'.DOMAIN;
+    setcookie('UID', $ePID, time()+(60 * 60 * 24 * 90), '/', $avalFor);
+    setcookie('RMM', 'YUBDEF', time()+(60 * 60 * 24 * 90), '/', $avalFor);
     $_SESSION['LOGGED_USER'] = $userID;
     showMessage(true, 'Logged in');
   }

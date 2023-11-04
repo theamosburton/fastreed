@@ -43,7 +43,7 @@ if (HTTPS) {
       header('Location: ' . $redirect);
       exit();
     }
-    
+
   }
 
 function getFullSelfURL() {
@@ -88,7 +88,7 @@ class VisitorActivity
     $this->handleActivity();
   }
 
-  
+
 
   public function metaData(){
     $sql = "SELECT * FROM webmeta";
@@ -109,7 +109,7 @@ class VisitorActivity
     // Fourth should be keywords
     $this->webKeywords = $rows[3]['optionValue'];
   }
-  
+
   public function getVersions(){
     $sql = "SELECT * FROM webmeta WHERE optionName = 'cssJsVersion'";
     $result = mysqli_query($this->DB, $sql);
@@ -131,20 +131,22 @@ class VisitorActivity
             }
             $this->USER_VISITED->userVisited();
           }else {
-            setcookie("authStatus","UserID Not Found", time()+10, '/');
+            $avalFor = '.'.DOMAIN;
+            setcookie("authStatus","UserID Not Found", time()+10, '/', $avalFor);
             setcookie("UID",FALSE,time()-3600);
             $this->GUEST_VISITED->guestVisited();
           }
       }else {
         // No Cookie value Mean an anonymous user
-        setcookie("authStatus","Cookie Not Found", time()+10, '/');
+        $avalFor = '.'.DOMAIN;
+        setcookie("authStatus","Cookie Not Found", time()+10, '/', $avalFor);
         setcookie("UID",FALSE,time()-3600);
         $this->GUEST_VISITED->guestVisited();
       }
     }elseif (isset($_COOKIE['AID'])) {
       if (!empty($_COOKIE['AID'])) {
         $adminID = $_COOKIE['AID'];
-        
+
         $decAdminID = $this->AUTH->decrypt($adminID);
         // $authAdmin = $this->checkAuthVisitor($decAdminID, "accounts", "personID");
         if ($this->checkAuthVisitor($decAdminID, "accounts", "personID")) {
