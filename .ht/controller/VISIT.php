@@ -138,7 +138,7 @@ class VisitorActivity
           }
       }else {
         // No Cookie value Mean an anonymous user
-        $avalFor = '.'.DOMAIN;
+        $avalFor = '.'.DOMAIN_NAME_ALIAS;
         setcookie("authStatus","Cookie Not Found", time()+10, '/', $avalFor);
         setcookie("UID",FALSE,time()-3600);
         $this->GUEST_VISITED->guestVisited();
