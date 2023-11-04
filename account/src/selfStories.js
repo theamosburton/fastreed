@@ -42,7 +42,7 @@ class FetchStories {
         const url = '/.ht/API/webstories.php';
         var encyDat = {
         'purpose' : 'fetchAll',
-        'whois': `${this.whoIs}`,
+        'whois': 'Self',
         'username': `${this.visitedusername}`
         };
         const response = await fetch(url, {
