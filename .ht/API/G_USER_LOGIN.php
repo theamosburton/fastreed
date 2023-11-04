@@ -175,9 +175,9 @@ class gSignUpLogin{
 
   // This function is for logging out account
   public function logoutAccount(){
-    $avalFor = '.www.'.DOMAIN_NAME_ALIAS;
-    setcookie('UID', "", time()-3600, '/' , $avalFor);
-    setcookie('RMM',  "", time()-3600, '/' , $avalFor);
+    $avalFor = '.'.DOMAIN_NAME_ALIAS;
+    setcookie('UID', "", time()-3600, "/" , $avalFor);
+    setcookie('RMM',  "", time()-3600, "/" , $avalFor);
     unset($_SESSION['LOGGED_USER']);
     showMessage(true, 'Logged out');
   }
