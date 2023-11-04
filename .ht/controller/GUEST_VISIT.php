@@ -65,7 +65,7 @@ class GuestsVisits
 
     // Set cookie
     $avalFor = '.'.DOMAIN_NAME_ALIAS;
-    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/", $avalFor);
+    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/");
     // Add to visiter data to DB
     $sql = "INSERT INTO guests ( tdate, guestID, guestDevice, guestBrowser, guestPlatform, browserInfo ) VALUES ('$date','$guestID','$deviceType', '$browser', '$platform','$browserInfo')";
     mysqli_query($this->DB, $sql);

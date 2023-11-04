@@ -132,14 +132,14 @@ class VisitorActivity
             $this->USER_VISITED->userVisited();
           }else {
             $avalFor = '.'.DOMAIN_NAME_ALIAS;
-            setcookie("authStatus","UserID Not Found", time()+10, '/', $avalFor);
+            setcookie("authStatus","UserID Not Found", time()+10, '/');
             setcookie("UID",FALSE,time()-3600);
             $this->GUEST_VISITED->guestVisited();
           }
       }else {
         // No Cookie value Mean an anonymous user
         $avalFor = '.'.DOMAIN_NAME_ALIAS;
-        setcookie("authStatus","Cookie Not Found", time()+10, '/', $avalFor);
+        setcookie("authStatus","Cookie Not Found", time()+10, '/');
         setcookie("UID",FALSE,time()-3600);
         $this->GUEST_VISITED->guestVisited();
       }
