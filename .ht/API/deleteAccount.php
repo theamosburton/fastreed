@@ -7,9 +7,10 @@ class deleteAccount {
     private $DB;
     private $userData;
     private $_DOCROOT;
+    private $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];

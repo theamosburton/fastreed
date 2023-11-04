@@ -6,17 +6,20 @@ if ($proceedAhead) {
 
 class respondNotifications{
     private $userData;
+    private $DB_CONNECT;
     function __construct(){
         $this->userData = new getLoggedData();
+        $this->DB_CONNECT = new Database();
+        $DB = $this->DB_CONNECT->DBConnection();
         $this->responseNotifications();
+        $this->DB_CONNECT->closeConnection();
         $this->userData->DB_CONNECT->closeConnection();
+
     }
 
     private function responseNotifications(){
         $dPID = $this->userData->accountsByUser()['UID'];
-        $DB_CONNECT = new Database();
-        $DB = $DB_CONNECT->DBConnection();
-        $checkProfile = $this->profileCompleted($DB, $dPID);
+        $checkProfile = $this->profileCompleted($this->DB, $dPID);
         $time = $checkProfile['time'];
         // If profile is not completed
         if ($checkProfile['Result']) {
@@ -26,15 +29,15 @@ class respondNotifications{
         }
 
         // If notification is broadcasted to all
-        if($this->checkBroadcast($DB)['Result']){
-            $bNoti = $this->checkBroadcast($DB)['B-Noti'];
+        if($this->checkBroadcast($this->DB)['Result']){
+            $bNoti = $this->checkBroadcast($this->DB)['B-Noti'];
         }else {
             $bNoti = array();
         }
 
         // Other notifications
         $sql2 = "SELECT * FROM notifications WHERE reciever = '$dPID'";
-        $result2 = mysqli_query($DB, $sql2);
+        $result2 = mysqli_query($this->DB, $sql2);
         $notifications2 = array();
         if(mysqli_num_rows($result2) > 0){
             while ($row = mysqli_fetch_assoc($result2)) {

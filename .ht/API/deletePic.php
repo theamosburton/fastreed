@@ -9,8 +9,9 @@ class deletePic{
     private $userData;
     private $AUTH;
     private $_DOCROOT;
+    private $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
+        $this->DB_CONNECT = new Database();
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();

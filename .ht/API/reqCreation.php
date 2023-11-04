@@ -8,9 +8,10 @@ class authorReqRes{
     private $DB;
     private $userData;
     private $AUTH;
+    private $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
         $data = json_decode(file_get_contents('php://input'), true);

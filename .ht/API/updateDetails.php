@@ -9,9 +9,10 @@ class updateDetails{
     private $adminLogged;
     private $userLogged;
     private $userData;
+    private $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
 
@@ -56,12 +57,6 @@ class updateDetails{
         $this->DB_CONNECT->closeConnection();
         $this->userData->DB_CONNECT->closeConnection();
 
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
     public function checkExcept($f, $p, $newValue, $currentValue){
         $p = $this->AUTH->decrypt($p);

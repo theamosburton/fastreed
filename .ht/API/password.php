@@ -7,9 +7,10 @@ class passwordRelated{
     private $DB;
     private $userData;
     private $AUTH;
+    private $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
 
@@ -79,12 +80,6 @@ class passwordRelated{
         }
         $this->DB_CONNECT->closeConnection();
         $this->userData->DB_CONNECT->closeConnection();
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
     private function createPassword(){
         $data = json_decode(file_get_contents('php://input'), true);

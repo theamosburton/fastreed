@@ -35,12 +35,6 @@ class  refreshSite{
         $this->userData->DB_CONNECT->closeConnection();
 
     }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
-    }
     public function refreshCSS(){
         $oldVersion = (int) $this->getVersions($this->DB);
         $newVersion = $oldVersion + 1;

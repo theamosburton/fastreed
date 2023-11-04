@@ -39,7 +39,7 @@ class markRead{
         }else {
             showMessage(false, "Access Denied DD");
         }
-        $this->DB_CONNECT->closeConnection();
+        $DB_CONNECT->closeConnection();
     }
 }
 
