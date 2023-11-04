@@ -1,9 +1,10 @@
 <?php
 class getUploadData{
     private $DB;
+    public $DB_CONNECT;
     function __construct(){
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
     }
 
     public function getAllData($id){
@@ -35,14 +36,8 @@ class getUploadData{
         }
 
         return $return;
-        $this->closeConnection();
+        $this->DB_CONNECT->closeConnection();
 
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
 }
 ?>
