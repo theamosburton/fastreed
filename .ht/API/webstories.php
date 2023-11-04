@@ -1164,9 +1164,11 @@ class Webstories{
       $sql = "SELECT category FROM metaData WHERE postID = '$storyID'";
       $result = mysqli_query($this->DB, $sql);
       if ($result) {
-        $row = mysqli_fetch_assoc($result);
-        $category = $row['category'];
-        $return = $category;
+        if (mysqli_num_rows($result)) {
+          $row = mysqli_fetch_assoc($result);
+          $category = $row['category'];
+          $return = $category;
+        }
       }
       return $return;
     }

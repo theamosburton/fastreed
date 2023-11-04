@@ -131,7 +131,7 @@ class VisitorActivity
             }
             $this->USER_VISITED->userVisited();
           }else {
-            $avalFor = '.'.DOMAIN;
+            $avalFor = '.'.DOMAIN_NAME_ALIAS;
             setcookie("authStatus","UserID Not Found", time()+10, '/', $avalFor);
             setcookie("UID",FALSE,time()-3600);
             $this->GUEST_VISITED->guestVisited();
