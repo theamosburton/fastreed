@@ -28,10 +28,12 @@ class showProfile {
     protected $profileUsername;
     protected $userFullname;
     protected $getStoriesData;
-    private $DB;
+    protected $DB;
     function __construct() {
         $this->userData = new getLoggedData();
         $this->whoAmI = $this->userData->whoAmI();
+        $this->DB = new DataBase();
+        $this->DB_CONN = $this->DB->DBConnection();
         if ($this->whoAmI == 'Admin' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
             new loggedAdminVother();
@@ -50,6 +52,7 @@ class showProfile {
             // var_dump($this->whoAmI);
         }
         $this->userData->DB_CONNECT->closeConnection();
+        $this->DB->closeConnection();
     }
     // This function construct properties and methods for inherited classes
     protected function const4Inherited(){
@@ -275,7 +278,7 @@ class loggedVself extends showProfile{
     protected $webKeywords;
 
    function __construct() {
-        $this->const4Inherited();
+     $this->const4Inherited();
         $this->webTitle = "Fastreed Account : Manage, edit and view profile";
         $this->webDescription = "Manage, edit and view your profile and request for creator access from here";
         $this->webKeywords = "Manage, edit and view profile, fastreed account setting, updating account details, request for creater access";
