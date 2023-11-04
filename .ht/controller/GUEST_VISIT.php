@@ -64,7 +64,7 @@ class GuestsVisits
     $encryptedID = $this->AUTH->encrypt($guestID);
 
     // Set cookie
-    $avalFor = '.'.DOMAIN;
+    $avalFor = '.'.DOMAIN_NAME_ALIAS;
     $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/", $avalFor);
     // Add to visiter data to DB
     $sql = "INSERT INTO guests ( tdate, guestID, guestDevice, guestBrowser, guestPlatform, browserInfo ) VALUES ('$date','$guestID','$deviceType', '$browser', '$platform','$browserInfo')";
