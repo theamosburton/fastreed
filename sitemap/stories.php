@@ -32,9 +32,10 @@ class createAuthorsSitemap{
          $this->uploadData = new getUploadData();
          $storiesList = $this->verifiedStories();
          $this->createXML($storiesList);
+
          $this->DB_CONNECT->closeConnection();
          $this->userData->DB_CONNECT->closeConnection();
-         $this->uploadData->closeConnection();
+         $this->uploadData->DB_CONNECT->closeConnection();
          $this->BASIC_FUNC->DB_CONNECT->closeConnection();
        }
        public function closeConnection(){
