@@ -2,7 +2,7 @@
 
 class BasicFunctions
 {
-  private $DB_CONNECT;
+  public $DB_CONNECT;
   private $DB;
   private $AUTH;
   private $INCREMENT = '';
