@@ -12,7 +12,7 @@ class deletePic{
     private $DB_CONNECT;
     function __construct(){
         $this->DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
