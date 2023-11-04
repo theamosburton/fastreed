@@ -24,14 +24,7 @@ class editAccess{
         }else{
             $this->updateAccess();
         }
-        $this->closeConnection();
-    }
-    public function closeConnection()
-    {
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
+        $this->DB_CONNECT->closeConnection();
     }
     private function updateAccess(){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -69,14 +62,14 @@ class editAccess{
             }
 
         }
-        
+
     }
 
     private function checkUserE(){
         $return = false;
         $data = json_decode(file_get_contents('php://input'), true);
         $eid = $data['personID'];
-        $dID = $this->AUTH->decrypt($eid); 
+        $dID = $this->AUTH->decrypt($eid);
         $sql = "SELECT * FROM accounts WHERE personID = '$dID'";
         $result = mysqli_query($this->DB, $sql);
         if (mysqli_num_rows($result)) {

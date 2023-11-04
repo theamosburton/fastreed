@@ -35,7 +35,7 @@ class UsersVisits
         }
       }
     }
-    $this->closeConnection();
+    $this->DB_CONNECT->closeConnection();
     $this->BASIC_FUNC->closeConnection();
   }
 

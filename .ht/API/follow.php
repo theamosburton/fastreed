@@ -10,7 +10,7 @@ class follow{
         $DB_CONNECT = new Database();
         $this->DB = $DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
-       
+
 
         if (isset($_GET['follow'])) {
             $data = json_decode(file_get_contents('php://input'), true);
@@ -29,16 +29,8 @@ class follow{
         }else {
             showMessage(false, "Define what to do");
         }
-        $this->userData->closeConnection();
-        $this->closeConnection();
-    }
-
-    public function closeConnection()
-    {
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
 
     private function follow(){
@@ -131,7 +123,7 @@ class follow{
                 // then he follows back
                 $sql1 = "SELECT * FROM followOthers WHERE follower = '$selfUID' and followee = '$follweeUID' and followBack = 1";
                 $result1 = mysqli_query($this->DB, $sql1);
-                
+
                 if (mysqli_num_rows($result)) {
                     $sql2 = "UPDATE followOthers SET followBack = 0 WHERE follower = '$follweeUID' and followee = '$selfUID'";
                     $result2 = mysqli_query($this->DB, $sql2);
@@ -153,7 +145,7 @@ class follow{
                 }else {
                     showMessage(false, "Can not unfollow");
                 }
-                
+
             }else {
                 showMessage(false, "User not exists");
             }

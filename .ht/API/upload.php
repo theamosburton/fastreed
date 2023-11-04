@@ -61,8 +61,8 @@ class uploadMedia{
             showMessage(false, 'Can not upload');
         }
 
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
         $this->BASIC_FUNC->closeConnection();
     }
     public function closeConnection(){

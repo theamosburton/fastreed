@@ -1,7 +1,7 @@
 <?php
 class getLoggedData{
-    private $DB_CONNECT;
-    private $DB;
+    public $DB_CONNECT;
+    public $DB;
     public $PID;
 
     public $userLogged = false;

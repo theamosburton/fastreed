@@ -27,17 +27,10 @@ class deleteAccount {
         }else{
             showMessage(false, "Set relevent parameter");
         }
-        $this->userData->closeConnection();
-        $this->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
 
-    public function closeConnection()
-    {
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
-    }
     private function deleteUsingPassword(){
         $data = json_decode(file_get_contents('php://input'), true);
         $ePID = $data['personID'];

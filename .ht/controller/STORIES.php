@@ -16,15 +16,8 @@ class getStoriesData{
                 $return = $row;
             }
         }
-        $this->closeConnection();
+        $this->DB_CONNECT->closeConnection();
         return $return;
-    }
-    public function closeConnection()
-    {
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
 }
 ?>

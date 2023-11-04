@@ -53,8 +53,8 @@ class updateDetails{
         }else {
             showMessage(false, "Access Denied No Detail");
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
 
     }
     public function closeConnection(){

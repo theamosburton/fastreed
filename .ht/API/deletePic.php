@@ -57,8 +57,8 @@ class deletePic{
                 showMessage(false, 'Error 5');
             }
         }
-        $this->userData->closeConnection();
-        $this->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
 
     private function reportMedia(){
@@ -213,12 +213,6 @@ class deletePic{
             $return = true;
         }
         return $return;
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
 }
 ?>

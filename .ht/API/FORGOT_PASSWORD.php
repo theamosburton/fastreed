@@ -98,6 +98,8 @@ class forgotPassword{
         }
       }
     }
+    $this->DB_CONNECT->closeConnection();
+    $this->BASIC_FUNC->DB_CONNECT->closeConnection();
   }
 
   private function resetPassword($id, $pass){

@@ -85,6 +85,8 @@ class eSignUpLogin{
         showMessage(false, 'OTP not sent 2');
       }
     }
+    $this->DB_CONNECT->closeConnection();
+    $this->BASIC_FUNC->DB_CONNECT->closeConnection();
   }
 
 

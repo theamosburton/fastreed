@@ -45,7 +45,7 @@ class AdminVisits
         }
       }
     }
-    $this->closeConnection();
+    $this->DB_CONNECT->closeConnection();
   }
 
 

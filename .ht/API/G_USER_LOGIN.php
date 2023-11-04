@@ -35,15 +35,9 @@ class gSignUpLogin{
         $this->createNewAccount();
       }
     }
-    $this->closeConnection();
-    $this->BASIC_FUNC->closeConnection();
-  }
-
-  public function closeConnection(){
-      if ($this->DB) {
-          mysqli_close($this->DB);
-          $this->DB = null; // Set the connection property to null after closing
-      }
+    $this->DB_CONNECT->closeConnection();
+    $this->userData->DB_CONNECT->closeConnection();
+    $this->BASIC_FUNC->DB_CONNECT->closeConnection();
   }
   public function getAdminID(){
       $return = false;

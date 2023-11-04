@@ -86,6 +86,7 @@ class VisitorActivity
     $this->DB = $this->DB_CONNECT->DBConnection();
     $this->metaData();
     $this->handleActivity();
+
   }
 
 

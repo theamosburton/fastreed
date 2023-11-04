@@ -54,9 +54,8 @@ class showWebstories{
           }
         }
 
-
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
       }
 
 

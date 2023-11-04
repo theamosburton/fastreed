@@ -47,18 +47,10 @@ class Webstories{
         }elseif ($data['purpose'] == 'update') {
              $this->updateStory();
         }
-
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
-    }
-
-
+    
     private function adminStoryAction(){
       if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -132,7 +124,6 @@ class Webstories{
      $row = json_encode($row);
      showMessage(true, "$row");
     }
-
     private function getUserName($uid){
       $sql = "SELECT username FROM account_details WHERE personID = '$uid'";
       $result = mysqli_query($this->DB, $sql);
@@ -1211,7 +1202,6 @@ class Webstories{
 
         return $urlError;
     }
-
     private function getStoryWithURL($URL, $other){
       $story  = array();
       $sql = "SELECT * FROM metaData WHERE url = '$URL'";

@@ -27,15 +27,9 @@ class authorReqRes{
         }elseif ($data['purpose'] == 'check') {
             $this->checkCanCreate();
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
 
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
     }
 
     private function creationRequest(){

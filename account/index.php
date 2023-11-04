@@ -28,8 +28,10 @@ class showProfile {
     protected $profileUsername;
     protected $userFullname;
     protected $getStoriesData;
+    private $DB;
     function __construct() {
-        $this->const4Inherited();
+        $this->userData = new getLoggedData();
+        $this->whoAmI = $this->userData->whoAmI();
         if ($this->whoAmI == 'Admin' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             $this->adminIsEditing = true;
             new loggedAdminVother();
@@ -47,6 +49,7 @@ class showProfile {
             header("Location:/?");
             // var_dump($this->whoAmI);
         }
+        $this->userData->DB_CONNECT->closeConnection();
     }
     // This function construct properties and methods for inherited classes
     protected function const4Inherited(){
@@ -61,8 +64,8 @@ class showProfile {
         // Create an instance to create/save activity
         $this->captureVisit = new VisitorActivity();
         $this->FUNC = new BasicFunctions();
-        $DB = new DataBase();
-        $this->DB_CONN = $DB->DBConnection();
+        $this->DB = new DataBase();
+        $this->DB_CONN = $this->DB->DBConnection();
         $this->AUTH = new Auth();
         // Get css,js version from captureVisit
         $this->version = $this->captureVisit->VERSION;
@@ -90,10 +93,10 @@ class showProfile {
           $this->adminLogged = false;
           $this->userLogged = true;
         }else{
-          $this->adminLogged = false;
           $this->userLogged = false;
         }
         $this->getStoriesData = new getStoriesData();
+
     }
     protected function addHead(){
         // *************/ Head Section /**************** //
@@ -203,12 +206,6 @@ class showProfile {
         }
         return $return;
     }
-    public function closeConnection(){
-        if ($this->DB_CONN) {
-            mysqli_close($this->DB_CONN);
-            $this->DB_CONN = null; // Set the connection property to null after closing
-        }
-    }
 
 }
 
@@ -266,7 +263,8 @@ class loggedAdminVother extends showProfile{
         HTML;
     // ********************************************** //
         $this->addFooter();
-        $this->closeConnection();
+        $this->DB->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
    }
 }
 
@@ -337,7 +335,8 @@ class loggedVself extends showProfile{
         HTML;
     // ********************************************** //
         $this->addFooter();
-        $this->closeConnection();
+        $this->DB->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
    }
 }
 
@@ -395,7 +394,8 @@ class loggedVother extends showProfile{
         HTML;
     // ********************************************** //
         $this->addFooter();
-        $this->closeConnection();
+        $this->DB->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
    }
 
 }
@@ -533,7 +533,8 @@ class nonLoggedVother extends showProfile{
         HTML;
     // ********************************************** //
         $this->addFooter();
-        $this->closeConnection();
+        $this->DB->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
    }
 
    private function getWebstories($UID){

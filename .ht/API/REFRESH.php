@@ -31,8 +31,8 @@ class  refreshSite{
         }else{
             showMessage(false, "Not an Admin");
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
 
     }
     public function closeConnection(){
@@ -72,7 +72,7 @@ class  refreshSite{
             showMessage(false, "Not Updated");
         }
     }
-    
+
 }
 
 ?>

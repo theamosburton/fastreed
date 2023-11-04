@@ -19,7 +19,7 @@ class getUploadData{
         }
 
         return $return;
-        $this->closeConnection();
+        $this->DB_CONNECT->closeConnection();
 
     }
     public function documentVerificationFile($id){

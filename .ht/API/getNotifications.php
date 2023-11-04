@@ -9,7 +9,7 @@ class respondNotifications{
     function __construct(){
         $this->userData = new getLoggedData();
         $this->responseNotifications();
-        $this->userData->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
 
     private function responseNotifications(){
@@ -24,7 +24,7 @@ class respondNotifications{
         }else {
             $pNoti[] = array("Purpose"=>"profileCompletion", "title"=>"Hello, <b>\${NAME}!</b> Please complete your profile to enable more options.", "image"=>"/assets/img/favicon2.jpg", "time"=>"$time", "isRead"=>'0', "url"=>"update");
         }
-        
+
         // If notification is broadcasted to all
         if($this->checkBroadcast($DB)['Result']){
             $bNoti = $this->checkBroadcast($DB)['B-Noti'];
@@ -46,18 +46,18 @@ class respondNotifications{
                     "isRead" => $row['markRead'],
                     "image" =>$row['image'],
                     "url" =>$row['url']
-                ); 
+                );
                 array_push($notifications2, $rowArray);
-                
+
             }
             $notifications2 = array_reverse($notifications2);
-            
+
         }
-        // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications 
+        // Merge all the notifications in order Broadcast ==> Profile Completion ==> Other Notifications
         $mergedArray = array_merge($bNoti, $pNoti, $notifications2);
         $dataDecode = json_encode($mergedArray);
         echo "$dataDecode";
-        
+
     }
 
     // Function to check if profile is completed or not
@@ -94,11 +94,11 @@ class respondNotifications{
                     "url" =>$row['url']
                 );
                 array_push($notifications, $rowArray);
-                
+
             }
             $notifications = array_reverse($notifications);
-        
-        
+
+
             $return = array("Result"=>true, "B-Noti"=>$notifications);
         }else {
             $return = array("Result"=>false, "B-Noti"=>null);

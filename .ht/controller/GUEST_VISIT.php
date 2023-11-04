@@ -44,7 +44,7 @@ class GuestsVisits
       }else {
         $this->addNewVisitor();
       }
-      $this->closeConnection();
+      $this->DB_CONNECT->closeConnection();
   }
 
   public function addNewVisitor()

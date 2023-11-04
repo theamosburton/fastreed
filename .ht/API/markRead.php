@@ -35,17 +35,11 @@ class markRead{
                 }
              }else {
                 showMessage(false, "Notification not exists");
-             } 
+             }
         }else {
             showMessage(false, "Access Denied DD");
         }
-        $this->closeConnection();
-    }
-    public function closeConnection(){
-        if ($this->DB) {
-            mysqli_close($this->DB);
-            $this->DB = null; // Set the connection property to null after closing
-        }
+        $this->DB_CONNECT->closeConnection();
     }
 }
 
