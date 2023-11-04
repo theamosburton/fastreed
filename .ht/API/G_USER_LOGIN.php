@@ -36,7 +36,6 @@ class gSignUpLogin{
       }
     }
     $this->DB_CONNECT->closeConnection();
-    $this->userData->DB_CONNECT->closeConnection();
     $this->BASIC_FUNC->DB_CONNECT->closeConnection();
   }
   public function getAdminID(){
