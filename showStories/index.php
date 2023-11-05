@@ -10,6 +10,7 @@ class renderStory{
     public $captureVisit;
     protected $userLogged = false;
     protected $DB;
+    public $DB_CONNECT;
     protected $AUTH;
     protected $FUNC;
     protected $userData;
@@ -20,8 +21,8 @@ class renderStory{
          // Create an instance to create/save activity
          $this->captureVisit = new VisitorActivity();
          $this->BASIC_FUNC = new BasicFunctions();
-         $DB = new DataBase();
-         $this->DB = $DB->DBConnection();
+         $this->DB_CONNECT = new DataBase();
+         $this->DB = $this->DB_CONNECT->DBConnection();
          $this->AUTH = new Auth();
          // Get css,js version from captureVisit
          $this->version = $this->captureVisit->VERSION;
@@ -66,11 +67,9 @@ class renderStory{
 
            include '../.ht/views/webstories/index.html';
          }
-         $this->closeConnection();
-         $this->userData->closeConnection();
-         $this->uploadData->closeConnection();
-         $this->BASIC_FUNC->closeConnection();
-         $this->captureVisit->closeConnection();
+         $this->DB_CONNECT->closeConnection();
+         $this->userData->DB_CONNECT->closeConnection();
+         $this->BASIC_FUNC->DB_CONNECT->closeConnection();
        }
 
        function getWebstoryData($link){

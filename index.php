@@ -130,8 +130,8 @@ class showIndex{
         </body>
         </html>
         HTML."\n";
-        $this->userData->closeConnection();
-        $this->captureVisit->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
+
     }
 // ********************************************** //
 }

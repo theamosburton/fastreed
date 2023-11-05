@@ -65,7 +65,7 @@ class GuestsVisits
 
     // Set cookie
     $avalFor = '.'.DOMAIN_NAME_ALIAS;
-    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/");
+    $cookieSet = setcookie('GID', $encryptedID, time() + (86400 * 30), "/", $avalFor);
     // Add to visiter data to DB
     $sql = "INSERT INTO guests ( tdate, guestID, guestDevice, guestBrowser, guestPlatform, browserInfo ) VALUES ('$date','$guestID','$deviceType', '$browser', '$platform','$browserInfo')";
     mysqli_query($this->DB, $sql);
@@ -178,13 +178,6 @@ class GuestsVisits
     $visitedPage = $_SERVER["REQUEST_URI"];
     $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson, referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
-  }
-
-  public function closeConnection(){
-      if ($this->DB) {
-          mysqli_close($this->DB);
-          $this->DB = null; // Set the connection property to null after closing
-      }
   }
 }
  ?>

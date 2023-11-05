@@ -86,7 +86,7 @@ class VisitorActivity
     $this->DB = $this->DB_CONNECT->DBConnection();
     $this->metaData();
     $this->handleActivity();
-
+    $this->DB_CONNECT->closeConnection();
   }
 
 
@@ -109,6 +109,7 @@ class VisitorActivity
 
     // Fourth should be keywords
     $this->webKeywords = $rows[3]['optionValue'];
+
   }
 
   public function getVersions(){
@@ -171,7 +172,6 @@ class VisitorActivity
       // No Cookie means anonymous user
       $this->GUEST_VISITED->guestVisited();
     }
-    $this->closeConnection();
   }
 
   private function checkAuthVisitor($id, $table, $parameter){
