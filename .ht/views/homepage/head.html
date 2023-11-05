@@ -62,7 +62,6 @@
     if(isset($this->extraStyle)){
         echo $this->extraStyle;
     }
-
     echo '
         <script data-rh="true" type="application/ld+json">
           {
@@ -80,5 +79,12 @@
               }
           }
         </script>';
+        echo <<<HTML
+        <script data-rh="true" type="application/ld+json">
+        HTML;
+        echo $totalStoriesJSON;
+        echo <<<HTML
+        </script>
+        HTML;
         ?>
 </head>
