@@ -481,18 +481,11 @@ class nonLoggedVother extends showProfile{
            "@type": "webSite",
            "url": "'.$this->canonUrl.'",
            "name": "Fastreed Profile",
-           "description": "'.$this->userFullname.' is a user at Fastreed. Check out the latest visual stories written.",
+           "description": "'.$this->userFullname.' is an Author at Fastreed. Check out the latest visual stories written.",
            "author": {
                "@type": "Person",
                "image": "'.$this->userImage.'",
                "name": "'.$this->userFullname.'"
-           },
-           "potentialAction": {
-             "@type": "ReadAction",
-             "target": {
-               "@type": "EntryPoint",
-               "urlTemplate": "'.$this->canonUrl.'"
-             }
            },
            "hasPart": [';
 
