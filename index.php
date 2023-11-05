@@ -39,33 +39,34 @@ class showIndex{
             $lastmod = $this->istToGMT($webstoryDataSE['lastPublished']);
             $firstmod = gmdate("D, d M Y H:i:s", $firstmod) . " GMT";
             $lastmod = gmdate("D, d M Y H:i:s", $lastmod) . " GMT";
-            $totalStoriesJSON[]= '{
-                "@context": "http://schema.org",
-                "@type": "NewsArticle",
-                "headline": "' . $webstoryDataSE['title'] . '",
-                "description": "' . $webstoryDataSE['description'] . '",
-                "datePublished": "' . $firstmod . '",
-                "url": "https://www.fastreed.com/webstories/' . $webstoryDataSE['url'] . '",
-                "dateModified": "' . $lastmod . '",
-                "author": {
-                    "@type": "Person",
-                    "name": "' . $webstoryDataSE['authorName'] . '",
-                    "url": "https://www.fastreed.com/u/' . $webstoryDataSE['authorUsername'] . '",
-                    "image": {
-                        "@type": "ImageObject",
-                        "url": "https://www.fastreed.com' . $webstoryDataSE['authorProfilePic'] . '",
-                        "width": 1,
-                        "height": 1
-                    }
-                },
-                "image": {
-                    "@type": "ImageObject",
-                    "url": "https://www.fastreed.com' . $webstoryDataSE['image'] . '",
-                    "width": 2,
-                    "height": 3
-                }
-            }';
-
+            if ($webstoryDataSE['moniStatus'] == 'true') {
+              $totalStoriesJSON[] = '{
+                  "@context": "http://schema.org",
+                  "@type": "NewsArticle",
+                  "headline": "' . $webstoryDataSE['title'] . '",
+                  "description": "' . $webstoryDataSE['description'] . '",
+                  "datePublished": "' . $firstmod . '",
+                  "url": "https://www.fastreed.com/webstories/' . $webstoryDataSE['url'] . '",
+                  "dateModified": "' . $lastmod . '",
+                  "author": {
+                      "@type": "Person",
+                      "name": "' . $webstoryDataSE['authorName'] . '",
+                      "url": "https://www.fastreed.com/u/' . $webstoryDataSE['authorUsername'] . '",
+                      "image": {
+                          "@type": "ImageObject",
+                          "url": "https://www.fastreed.com' . $webstoryDataSE['authorProfilePic'] . '",
+                          "width": 1,
+                          "height": 1
+                      }
+                  },
+                  "image": {
+                      "@type": "ImageObject",
+                      "url": "https://www.fastreed.com' . $webstoryDataSE['image'] . '",
+                      "width": 2,
+                      "height": 3
+                  }
+              }';
+            }
             if ($webstoryDataSE !== end($showLastesAnon)) {
                 $totalStoriesJSON[] = ', ';
             }
@@ -199,11 +200,12 @@ class showIndex{
         $storiesToRender[$i]['authorName'] = $authorData['fullName'];
         $storiesToRender[$i]['authorProfilePic'] = $authorData['profilePic'];
         $storiesToRender[$i]['authorUsername'] = $authorData['username'];
-        $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
         $storiesToRender[$i]['description'] = $storyMetaData['description'];
         $storiesToRender[$i]['title'] = $storyMetaData['title'];
         $storiesToRender[$i]['category'] = $storyMetaData['category'];
         $storiesToRender[$i]['url'] = $storyMetaData['url'];
+        $moniStatus = json_decode($storyMetaData['moniStatus'], true);
+        $storiesToRender[$i]['moniStatus'] = $moniStatus['status'];
         $storyData = json_decode($row[$i]['storyData'], true);
         $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
         unset($row[$i]['storyData']);
