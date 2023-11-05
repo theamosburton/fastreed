@@ -80,11 +80,13 @@
           }
         </script>';
         echo <<<HTML
-        <script data-rh="true" type="application/ld+json">
+        <script data-rh="true" type="application/ld+json">[
         HTML;
-        echo $totalStoriesJSON;
+        foreach($totalStoriesJSON as $stories){
+          echo $stories;
+        }
         echo <<<HTML
-        </script>
+        ]</script>
         HTML;
         ?>
 </head>

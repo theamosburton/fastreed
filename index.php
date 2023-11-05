@@ -32,14 +32,14 @@ class showIndex{
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
         // var_dump($this->showLatestToAnon());
-        $totalStoriesJSON = ''; // Initialize an array to hold the JSON-LD data for all web stories
+        $totalStoriesJSON = []; // Initialize an array to hold the JSON-LD data for all web stories
         $showLastesAnon = $this->showLatestToAnon();
         foreach ($showLastesAnon as $webstoryDataSE) {
             $firstmod = $this->istToGMT($webstoryDataSE['firstPublished']);
             $lastmod = $this->istToGMT($webstoryDataSE['lastPublished']);
             $firstmod = gmdate("D, d M Y H:i:s", $firstmod) . " GMT";
             $lastmod = gmdate("D, d M Y H:i:s", $lastmod) . " GMT";
-            $totalStoriesJSON .= '{
+            $totalStoriesJSON[]= '{
                 "@context": "http://schema.org",
                 "@type": "NewsArticle",
                 "headline": "' . $webstoryDataSE['title'] . '",
@@ -67,7 +67,7 @@ class showIndex{
             }';
 
             if ($webstoryDataSE !== end($showLastesAnon)) {
-                $totalStoriesJSON .= ', ';
+                $totalStoriesJSON[] = ', ';
             }
         }
 
