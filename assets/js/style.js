@@ -106,8 +106,8 @@ function enableDarkMode() {
     $('.infoDiv').css('color', '#d5d3d3');
     $('#editDetailsButton').css('color', '#d5d3d3');
     $('label').css('color', '#d5d3d3');
-    $('.form-control').css('background', '#202123');
-    $('.form-select').css('background', '#202123');
+    $('.form-control').css('background', 'transparent');
+    $('.form-select').css('background', 'transparent');
     $('.form-select').css('color', '#d5d3d3');
     $('.form-control').css('color', '#d5d3d3');
     $('.expandable').css('color', '#d5d3d3');
