@@ -35,6 +35,10 @@
 
 .homePageFilter .active{
   cursor: pointer;
+  color: #dadada;
+}
+.homePageFilter .active i{
+  color: #007bff;
 }
 .homePageFilter .active i{
   margin-left: 10px;

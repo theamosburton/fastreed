@@ -53,9 +53,6 @@ function styleUpdate() {
     $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
     $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
 }
-
-
-
 function toggleMode(){
     var toggleMode = document.querySelector('#toggleMode');
     // Check if it contains any <style> elements
@@ -64,41 +61,56 @@ function toggleMode(){
         enableDarkMode();
         toggleMode.classList.remove('fa-toggle-off');
         toggleMode.classList.add('fa-toggle-on');
-        location.reload();
+        // location.reload();
     } else {
         // Enable light mode
         toggleMode.classList.remove('fa-toggle-on');
         toggleMode.classList.add('fa-toggle-off');
         enableLightMode();
-        location.reload();
+        // location.reload();
     }
 }
 
 function enableDarkMode() {
     document.cookie = "colorMode=dark; max-age=31104000; path=/";
-    $('body').css('background-color', 'rgb(32,33,35)');
-    $('header .nav, header h1 a').css('color', 'rgb(218,218,218)');
-    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgb(194, 194, 194)');
-    $('.f-card_small .title a').css('color', 'white');
-    $('.dropdowns').css({
-        'background-color': '#353740',
-        'box-shadow': '0px 0px 40px 3px black'
-    });
+    $('body').css('background', '#212529');
+    $('header h1 a').css('color', '#dadada');
+    $('header').css('border-bottom', '1px solid rgb(218, 218, 218)');
+    $('header .nav').css('color', '#dadada');
 
-    $('.notification').css('background-color', '#16161d');
-    $('.profile-info').css('background-color', 'rgb(22, 22, 29)');
-    $('.profile-top .menus').css('background-color', 'rgb(22, 22, 29)');
-    $('.profile-info').css('color', 'aliceblue');
-    $('.homePageFilter .navs').css('color', 'aliceblue');
+    // dropdowns
+    $('.dropdowns').css('background', '#353740');
+    $('.dropdowns').css('box-shadow',' black 0px 0px 40px 3px');
+    $('.dropdowns .menus').css('background', '#202123');
+    $('.dropdowns .menu-head').css('background', '#202123');
+    $('.dropdowns .profile-info').css('background', '#202123');
+    $('.dropdowns .menus').css('color', '#d5d3d3');
+    $('.dropdowns .profile-bottom .menus').css('background', 'transparent');
+    $('.dropdowns .menu-head').css('color', '#d5d3d3');
+    $('.dropdowns .profile-info').css('color', '#d5d3d3');
+    $('.dropdowns .notifications .noti-parts').css('color', '#d5d3d3');
+    // dropdowns
 
-    $('.fading-div').css('background', 'linear-gradient(to left, rgb(51 51 51) 8%, rgb(39 32 36) 18%, rgb(51,51,51) 33%)');
-    $('.dropdowns .menu-head').css('background-color', '#16161d');
-    $('.dropdowns .settings, #advOptions .menus').css('background-color', '#16161d');
-    $('header').css('border-bottom', '1px solid rgb(218,218,218)');
-    $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(231, 231, 231)');
-    $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(231, 231, 231)');
-    $('.dropdowns .menu-head').css('border-color', '#239677');
-    $('.dropdowns .menu-head').css('color', 'rgb(231, 231, 231)');
+    $('.homePageFilter .navs').css('color', '#d5d3d3');
+    $('.f-card .meta .date').css('color', '#d5d3d3');
+    $('.f-card .meta i').css('color', '#d5d3d3');
+    $('.f-card .meta .cat').css('color', '#d5d3d3');
+    $('.f-card .meta .cat a').css('color', '#d5d3d3');
+
+
+    $('.user-details .user-name').css('color', '#d5d3d3');
+    $('.user-details .profileActions').css('color', '#d5d3d3');
+    $('.userContentMenus .menus').css('color', '#d5d3d3');
+    $('.reviewStoriesDiv .buttons').css('color', '#d5d3d3');
+    $('.title').css('color', '#d5d3d3');
+    $('.infoDiv').css('color', '#d5d3d3');
+    $('#editDetailsButton').css('color', '#d5d3d3');
+    $('label').css('color', '#d5d3d3');
+    $('.form-control').css('background', '#202123');
+    $('.form-select').css('background', '#202123');
+    $('.form-select').css('color', '#d5d3d3');
+    $('.form-control').css('color', '#d5d3d3');
+    $('.expandable').css('color', '#d5d3d3');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on');
@@ -106,7 +118,54 @@ function enableDarkMode() {
 
 }
 
+function enableLightMode(){
+    document.cookie = "colorMode=light; max-age=31104000; path=/";
+    // head
+    $('body').css('background', 'white');
+    $('header h1 a').css('color', '#202123');
+    $('header').css('border-bottom', '1px solid rgb(53, 55, 64)');
+    $('header .nav').css('color', '#202123');
+    // head
 
+    // dropdowns
+    $('.dropdowns').css('background', 'white');
+    $('.dropdowns').css('box-shadow',' grey 0px 0px 40px 7px');
+    $('.dropdowns .menus').css('background', '#d5d3d3');
+    $('.dropdowns .profile-bottom .menus').css('background', 'transparent');
+    $('.dropdowns .menu-head').css('background', '#d5d3d3');
+    $('.dropdowns .profile-info').css('background', '#d5d3d3');
+    $('.dropdowns .menus').css('color', '#202123');
+    $('.dropdowns .menu-head').css('color', '#202123');
+    $('.dropdowns .profile-info').css('color', '#202123');
+    $('.dropdowns .notifications .noti-parts').css('color', '#202123');
+    // dropdowns
+
+    $('.homePageFilter .navs').css('color', '#202123');
+    $('.f-card .meta .date').css('color', '#202123');
+    $('.f-card .meta i').css('color', '#202123');
+    $('.f-card .meta .cat').css('color', '#202123');
+    $('.f-card .meta .cat a').css('color', '#202123');
+
+    // account page
+    $('.user-details .user-name').css('color', '#202123');
+    $('.user-details .profileActions').css('color', '#202123');
+    $('.userContentMenus .menus').css('color', '#202123');
+    $('.reviewStoriesDiv .buttons').css('color', '#202123');
+    $('.title').css('color', '#202123');
+    $('label').css('color', '#202123');
+    $('.infoDiv').css('color', '#202123');
+    $('#editDetailsButton').css('color', '#202123');
+    $('.form-control').css('background', 'transparent');
+    $('.form-select').css('background', 'transparent');
+    $('.form-select').css('color', '#202123');
+    $('.form-control').css('color', '#202123');
+    $('.expandable').css('color', '#202123');
+    var toggleMode = document.querySelector('#toggleMode');
+    toggleMode.classList.remove('fa-toggle-on');
+    toggleMode.classList.add('fa-toggle-off');
+    $('#toggleMode').css('color','rgb(32,33,35)');
+
+}
 $('#noti-nav').mouseover(function(){
     document.querySelector('#notifications').classList.add('sc-color');
 });
@@ -117,39 +176,7 @@ $('#noti-nav').mouseout(function(){
 
 
 
-function enableLightMode(){
-    document.cookie = "colorMode=light; max-age=31104000; path=/";
-    $('body').css('background-color', 'rgb(255, 255, 255)');
-    $('header .nav, header h1 a').css('color', 'rgba(32,33,35)');
 
-    $('.cat a, .date, .f-card .fa-ellipsis-v').css('color', 'rgba(32,33,35)');
-
-    $('.f-card_small .title a').css('color', 'rgba(32,33,35)');
-
-    $('.dropdowns').css({
-    'background-color': 'rgb(255, 255, 255)',
-    'box-shadow': '0px 0px 40px 7px grey'
-    });
-    $('.fading-div').css('background', 'linear-gradient(to left, #e7e7e7 8%, #d1d1d1 18%, #e7e7e7 33%)');
-    $('.notification').css('background-color', 'rgb(213,211,211)');
-    $('.dropdowns .menu-head').css('background-color', 'rgb(213, 211 ,211)');
-    $('.profile-info').css('background-color', 'rgb(213, 211 ,211)');
-    $('.homePageFilter .navs').css('color', 'grey');
-    $('.profile-top .menus').css('background-color', 'rgb(213, 211 ,211)');
-    $('.profile-info').css('color', 'rgb(32, 33, 35)');
-    $('.dropdowns .settings, #advOptions .menus').css('background-color', 'rgb(213, 211 ,211)');
-    $('header').css('border-bottom', '1px solid #353740');
-    $('#accounts').css('background-color','white');
-    $('.dropdowns .menus a, .noti-parts').css('color', 'rgb(32, 33, 35)');
-    $('.dropdowns .menu-head span, .dropdowns .menus').css('color', 'rgb(32,33,35)');
-    $('.dropdowns .menu-head').css('border-color', 'rgb(32, 33, 35)');
-    $('.dropdowns .menu-head').css('color', 'rgb(32, 33, 35)');
-    var toggleMode = document.querySelector('#toggleMode');
-    toggleMode.classList.remove('fa-toggle-on');
-    toggleMode.classList.add('fa-toggle-off');
-    $('#toggleMode').css('color','rgb(32,33,35)');
-
-}
 
 
 function disbaleScroll() {

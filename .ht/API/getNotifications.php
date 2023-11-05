@@ -7,10 +7,11 @@ if ($proceedAhead) {
 class respondNotifications{
     private $userData;
     private $DB_CONNECT;
+    private $DB;
     function __construct(){
         $this->userData = new getLoggedData();
         $this->DB_CONNECT = new Database();
-        $DB = $this->DB_CONNECT->DBConnection();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->responseNotifications();
         $this->DB_CONNECT->closeConnection();
         $this->userData->DB_CONNECT->closeConnection();

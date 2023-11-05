@@ -76,16 +76,6 @@ class showProfile {
 
         //Create an instance to get logged data
         // This will check weather user is logged or not
-        include "../.ht/views/account/colorMode.html";
-
-        if (!isset($_COOKIE['colorMode'])) {
-            $this->extraStyle = $this->blackMode;
-        }elseif($_COOKIE['colorMode'] == 'light'){
-            $this->extraStyle = $this->lightMode;
-        }else{
-            $this->extraStyle = $this->blackMode;
-        }
-
 
         $this->uploadData = new getUploadData();
 
