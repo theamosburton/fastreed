@@ -45,6 +45,7 @@ class showIndex{
                 "headline": "' . $webstoryDataSE['title'] . '",
                 "description": "' . $webstoryDataSE['description'] . '",
                 "datePublished": "' . $firstmod . '",
+                "url": "https://www.fastreed.com/webstories/' . $webstoryDataSE['url'] . '",
                 "dateModified": "' . $lastmod . '",
                 "author": {
                     "@type": "Person",
