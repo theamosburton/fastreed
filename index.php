@@ -50,6 +50,7 @@ class showIndex{
                 "author": {
                     "@type": "Person",
                     "name": "' . $webstoryDataSE['authorName'] . '",
+                    "url": "https://www.fastreed.com/u/' . $webstoryDataSE['authorUsername'] . '",
                     "image": {
                         "@type": "ImageObject",
                         "url": "https://www.fastreed.com' . $webstoryDataSE['authorProfilePic'] . '",
