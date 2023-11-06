@@ -31,8 +31,8 @@ class createAuthorsSitemap{
          $this->userData = new getLoggedData();
          $this->uploadData = new getUploadData();
          $storiesList = $this->verifiedStories();
+         $storiesList = array_reverse($storiesList);
          $this->createXML($storiesList);
-
          $this->DB_CONNECT->closeConnection();
          $this->userData->DB_CONNECT->closeConnection();
          $this->uploadData->DB_CONNECT->closeConnection();
