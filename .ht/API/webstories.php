@@ -5,7 +5,7 @@ if ($proceedAhead) {
 }
 
 class Webstories{
-    private $DB_CONNECT;
+    public $DB_CONNECT;
     private $DB;
     private $userData;
     private $AUTH;
@@ -897,60 +897,60 @@ class Webstories{
           showMessage(false, "$checkingRelatedStoryLink");
           return;
       }
-      if ($this->updateMeta($dataArray['metaData'], $storyID)) {
-          if ($this->checkStoryPublished($storyID)) {
-              $url = $dataArray['metaData']['url'];
-              $baseURL = $url;
-              $suffix = 'fastreed';
+      if (!$this->updateMeta($dataArray['metaData'], $storyID)) {
+          showMessage(false, "Problem at our end (x0901");
+          return;
+      }
+      if ($this->checkStoryPublished($storyID)) {
+          $url = $dataArray['metaData']['url'];
+          $baseURL = $url;
+          $suffix = 'fastreed';
 
-              if ($this->checkUrl($url, $storyID)) {
-                  $url = $baseURL . '-' . $suffix;
-              }
-
-              $dataArray['metaData']['url'] = $url;
-              $dataArray['storyStatus'] = 'published';
-              $storyStatus = ['status' => 'published', 'version' => $version];
-              $storyStatus = json_encode($storyStatus, true);
-              $storyData = json_encode($dataArray, true);
-              // Update `stories` table
-              $sql3 = 'UPDATE stories SET storyData = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
-              $stmt3 = mysqli_prepare($this->DB, $sql3);
-              mysqli_stmt_bind_param($stmt3, 'ssss', $storyData, $lastEdit, $storyStatus, $storyID);
-              $result3 = mysqli_stmt_execute($stmt3);
-
-              if (!$result3 || !$this->makePublic($images)) {
-                  showMessage(false, 'Problem at our end with meta');
-                  return;
-              }
-              showMessage(true, "$url");
-          } else {
-              $url = $dataArray['metaData']['url'];
-              $baseURL = $url;
-              $suffix = 'fastreed';
-
-              if ($this->checkUrl($url, $storyID)) {
-                  $url = $baseURL . '-' . $suffix;
-              }
-
-              $dataArray['metaData']['url'] = $url;
-              $dataArray['storyStatus'] = 'published';
-              $storyStatus = ['status' => 'published', 'version' => $dataArray['version']];
-              $storyStatus = json_encode($storyStatus, true);
-              $storyData = json_encode($dataArray, true);
-              // Update `stories` table
-              $sql3 = 'UPDATE stories SET storyData = ?, firstEdit = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
-              $stmt3 = mysqli_prepare($this->DB, $sql3);
-              mysqli_stmt_bind_param($stmt3, 'sssss', $storyData, $lastEdit, $lastEdit, $storyStatus, $storyID);
-              $result3 = mysqli_stmt_execute($stmt3);
-              if (!$result3 || !$this->makePublic($images)) {
-                  showMessage(false, "Problem at our end (x0946)");
-                  return;
-              }
-
-              showMessage(true, "$url");
+          if ($this->checkUrl($url, $storyID)) {
+              $url = $baseURL . '-' . $suffix;
           }
+
+          $dataArray['metaData']['url'] = $url;
+          $dataArray['storyStatus'] = 'published';
+          $storyStatus = ['status' => 'published', 'version' => $version];
+          $storyStatus = json_encode($storyStatus, true);
+          $storyData = json_encode($dataArray, true);
+          // Update `stories` table
+          $sql3 = 'UPDATE stories SET storyData = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
+          $stmt3 = mysqli_prepare($this->DB, $sql3);
+          mysqli_stmt_bind_param($stmt3, 'ssss', $storyData, $lastEdit, $storyStatus, $storyID);
+          $result3 = mysqli_stmt_execute($stmt3);
+
+          if (!$result3 || !$this->makePublic($images)) {
+              showMessage(false, 'Problem at our end with meta');
+              return;
+          }
+          showMessage(true, "$url");
       } else {
-          showMessage(false, "Problem at our end (x0953");
+          $url = $dataArray['metaData']['url'];
+          $baseURL = $url;
+          $suffix = 'fastreed';
+
+          if ($this->checkUrl($url, $storyID)) {
+              $url = $baseURL . '-' . $suffix;
+          }
+
+          $dataArray['metaData']['url'] = $url;
+          $dataArray['storyStatus'] = 'published';
+          $storyStatus = ['status' => 'published', 'version' => $dataArray['version']];
+          $storyStatus = json_encode($storyStatus, true);
+          $storyData = json_encode($dataArray, true);
+          // Update `stories` table
+          $sql3 = 'UPDATE stories SET storyData = ?, firstEdit = ?, lastEdit = ?, storyStatus = ? WHERE storyID = ?';
+          $stmt3 = mysqli_prepare($this->DB, $sql3);
+          mysqli_stmt_bind_param($stmt3, 'sssss', $storyData, $lastEdit, $lastEdit, $storyStatus, $storyID);
+          $result3 = mysqli_stmt_execute($stmt3);
+          if (!$result3 || !$this->makePublic($images)) {
+              showMessage(false, "Problem at our end (x0950)");
+              return;
+          }
+
+          showMessage(true, "$url");
       }
 
     }
