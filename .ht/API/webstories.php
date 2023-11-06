@@ -1072,10 +1072,26 @@ class Webstories{
       $keywords = $metaData['keywords'];
       $url = $metaData['url'];
       $category = $metaData['category'];
-      $sql1 = "UPDATE metaData set `category` = '$category', `title` = '$title', `description` = '$description', `keywords` = '$keywords', `url` = '$url' WHERE `postID` = '$storyID'";
-      $result1 = mysqli_query($this->DB, $sql1);
-      if ($result1) {
+      if ($this->checkStoryMetaExists($storyID)) {
+        // Update `metaData` table
+        $sql1 = "UPDATE metaData SET category = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?";
+        $stmt1 = mysqli_prepare($this->DB, $sql1);
+        mysqli_stmt_bind_param($stmt1, 'sssssss', $category, $title, $description, $keywords, $url, $storyID);
+        $result1 = mysqli_stmt_execute($stmt1);
+
+        if ($result1) {
           $return = true;
+        }
+      }else{
+        // Insert into `metaData` table
+        $sql2 = "INSERT INTO metaData(postID, title, description, keywords, url, category) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt2 = mysqli_prepare($this->DB, $sql2);
+        mysqli_stmt_bind_param($stmt2, 'sssssss', $storyID, $title, $description, $keywords, $url, $category);
+        $result2 = mysqli_stmt_execute($stmt2);
+
+        if ($result2) {
+            $return = true;
+        }
       }
       return $return;
     }
