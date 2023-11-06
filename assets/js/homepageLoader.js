@@ -1,8 +1,7 @@
 class LoadStories {
   constructor() {
     this.showLoading();
-    this.loadLatestStories();
-
+    this.lastStoryTime;
   }
 
   showLoading(){
@@ -31,6 +30,7 @@ class LoadStories {
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
+          this.renderVariable = [];
           this.renderStories(parsedJSON);
         }else{
           alert(data.message);
@@ -44,16 +44,15 @@ class LoadStories {
   renderStories(parsedJSON){
     var storiesDiv = document.getElementById('storiesDiv');
     var storiesView = ['1', '2','2', '1', '1', '1', '2', '2', '2'];
-    console.log(parsedJSON);
-    var renderVariable = [];
     if (parsedJSON.length < 8) {
       document.getElementById('homepageLoader').style.display = 'none';
     }
     for (var i = 0; i < parsedJSON.length; i++) {
+      this.lastStoryTime = parsedJSON[i].lastPublished;
       var whatToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
       if (whatToView == '1') {
-        renderVariable[i] =  `
+        this.renderVariable[i] =  `
         <div class="f-card f-card_large">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -85,7 +84,7 @@ class LoadStories {
             </div>
         </div>`;
       }else{
-          renderVariable[i] = `
+          this.renderVariable[i] = `
         <div class="f-card f-card_medium">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -118,10 +117,10 @@ class LoadStories {
         </div>`;
       }
     }
-    if (renderVariable.length) {
+    if (this.renderVariable.length) {
       storiesDiv.innerHTML = '';
-      for (var j = 0; j < renderVariable.length; j++) {
-        storiesDiv.innerHTML += renderVariable[j];
+      for (var j = 0; j < this.renderVariable.length; j++) {
+        storiesDiv.innerHTML += this.renderVariable[j];
       }
     }
   }
@@ -150,4 +149,11 @@ class LoadStories {
       }
   }
 }
-new LoadStories();
+var loadLatestStories = new LoadStories();
+
+async function loadStoriesAndAccessLastStoryTime() {
+  await loadLatestStories.loadLatestStories(); // Wait for the method to complete
+
+}
+
+loadStoriesAndAccessLastStoryTime();

@@ -35,7 +35,7 @@ function openOptions(x){
       moreInformation.classList.remove('active');
     }
 
-    
+
     layerName.classList.add('active');
     objectOptions.style.display = 'block';
 
@@ -76,5 +76,4 @@ function showPreview(){
 function cancelError(){
   document.getElementById('errorConatiner').style.display = 'none';
    showSection('rightSection', 'righthideMe');
-    window.location.href =  window.location.href;
 }

@@ -100,8 +100,15 @@ class showWebstories{
 
 
       public function showLatestToAnon(){
-        $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
-        $result = mysqli_query($this->DB, $sql);
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['reload']) && !empty($data['reload'])) {
+          $reload = $data['reload'];
+          $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND firstEdit < '$reload";
+          $result = mysqli_query($this->DB, $sql);
+        }else{
+          $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+          $result = mysqli_query($this->DB, $sql);
+        }
         if (!$result) {
           showMessage(false, 'Server Error');
           return;
@@ -137,7 +144,6 @@ class showWebstories{
         $jsonDecodedData = json_encode($storiesToRender);
         showMessage(true, $jsonDecodedData);
       }
-
       public function getStoryMetaData($storyID){
         $return = [];
         $sql = "SELECT * FROM metaData WHERE postID ='$storyID'";
