@@ -77,6 +77,7 @@ class Edits{
       span.innerHTML = 'Enabled';
       this.editor.metaData.selfPromotion = true;
     }
+    this.saveToBrowser();
   }
 
   // Media Editing
@@ -182,7 +183,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      // this.saveToBrowser();
+      this.saveToBrowser();
     }
   deleteMedia(type){
     document.querySelector(`#layer${this.editor.presentLayerIndex} .mediaContent`).remove();
@@ -256,7 +257,7 @@ class Edits{
       if (this.version+1 == editor.version) {
         this.version += 1;
       }
-      // this.saveToBrowser();
+      this.saveToBrowser();
   }
   updateMedia(type){
       var deleteMediaButton = document.getElementById('deleteMedia');
@@ -267,6 +268,7 @@ class Edits{
       }else{
           deleteMediaButton.removeAttribute("onclick");
       }
+      this.saveToBrowser();
   }
   overlayEdit(){
     this.overlayOpacity = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaOverlayOpacity`).value;
@@ -274,7 +276,7 @@ class Edits{
     this.editor.layers['L' + this.editor.presentLayerIndex].media.styles.overlayOpacity = overlayOpacity;
 
     document.querySelector(`#layer${this.editor.presentLayerIndex} .layersTop`).style.backgroundColor = `rgba(0,0,0,${overlayOpacity}%)`;
-    // this.saveToBrowser();
+    this.saveToBrowser();
 
   }
   mediaFit(){
@@ -289,7 +291,7 @@ class Edits{
     if (this.version+1 == editor.version) {
       this.version += 1;
     }
-    // this.saveToBrowser();
+    this.saveToBrowser();
   }
 
   mediaCredit(){
@@ -298,12 +300,14 @@ class Edits{
     var applyto =  document.querySelector(`#layer${this.editor.presentLayerIndex} .imageCredit`);
     applyto.innerHTML = applyFrom.value;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.credit = `${applyFrom.value}`;
+    this.saveToBrowser();
   }
 
   mediaTitle(input){
     var applyto =  document.querySelector(`#styleBox${this.editor.presentLayerIndex} .mediaTitle`);
     applyto.innerHTML = input.value;
     this.editor.layers['L' + this.editor.presentLayerIndex].media.title = `${input.value}`;
+    this.saveToBrowser();
   }
     // Media Editing
 
@@ -339,6 +343,7 @@ class Edits{
        document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`).style.display = 'flex';
        document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`).style.display = 'flex';
      }
+     this.saveToBrowser();
    }
   // Title Editing
   changeFontSize(x){
@@ -372,6 +377,7 @@ class Edits{
     if (this.version+1 == editor.version) {
     this.version += 1;
     }
+    this.saveToBrowser();
   }
   changeFontFamily(x){
     var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .titleText`);
@@ -426,7 +432,6 @@ class Edits{
       applyto.style.fontSize = appliedSize;
       this.editor.layers['L' + this.editor.presentLayerIndex].otherText.fontSize = `${fontSize.value}`;
     }else{
-
       var fontSize = document.querySelector(`#styleBox${this.editor.presentLayerIndex} .customOtherFontSize`);
       var applyto = document.querySelector(`#layer${this.editor.presentLayerIndex} .otherText`);
       var appliedSize = parseFloat(fontSize.value);
