@@ -112,6 +112,8 @@ function enableDarkMode() {
     $('.form-control').css('color', '#d5d3d3');
     $('.expandable').css('color', '#d5d3d3');
     $('.homepageLoadMore span').css('color', '#d5d3d3');
+    // defaults
+    $('.webstory .title').css('color', 'white');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-off');
     toggleMode.classList.add('fa-toggle-on');
@@ -161,7 +163,10 @@ function enableLightMode(){
     $('.form-select').css('color', '#202123');
     $('.form-control').css('color', '#202123');
     $('.expandable').css('color', '#202123');
-      $('.homepageLoadMore span').css('color', '#202123');
+    $('.homepageLoadMore span').css('color', '#202123');
+
+    // defaults
+    $('.webstory .title').css('color', 'white');
     var toggleMode = document.querySelector('#toggleMode');
     toggleMode.classList.remove('fa-toggle-on');
     toggleMode.classList.add('fa-toggle-off');

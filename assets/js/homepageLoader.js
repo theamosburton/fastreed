@@ -124,6 +124,93 @@ class LoadStories {
       }
     }
   }
+
+
+
+  renderNewStories(parsedJSON){
+    var storiesDiv = document.getElementById('storiesDiv');
+    var storiesView = ['1', '2','2', '1', '1', '1', '2', '2', '2'];
+    if (parsedJSON.length < 8) {
+      document.getElementById('homepageLoader').style.display = 'none';
+    }
+    for (var i = 0; i < parsedJSON.length; i++) {
+      this.lastStoryTime = parsedJSON[i].lastPublished;
+      var whatToView = storiesView[i];
+      var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
+      if (whatToView == '1') {
+        this.renderVariable[i] =  `
+        <div class="f-card f-card_large">
+            <div class="image">
+                <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
+                <a href="/webstories/${parsedJSON[i].url}" class="storyLink">
+                    <div class="overlay">
+                        <div class="top-overlay">
+                          <div class="st-logo">
+                            <svg fill="none" viewBox="0 0 22 22">
+                              <path fill="url(#a)" fill-rule="evenodd" d="M11 22c6.075 0 11-4.925 11-11S17.075 0 11 0 0 4.925 0 11s4.925 11 11 11zm.703-12.362l3.83 1.295L8.79 19l2.04-6.638L7 11.067 13.744 3l-2.041 6.638z" clip-rule="evenodd"></path>
+                              <defs>
+                                <linearGradient id="a" x1="11" x2="11" y2="22" gradientUnits="userSpaceOnUse">
+                                  <stop stop-color="#4364FF"></stop>
+                                  <stop offset="1" stop-color="#0037FF"></stop>
+                                </linearGradient>
+                              </defs>
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="title">
+                              <p> ${parsedJSON[i].title}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="meta">
+                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                <span class="date">${timeAgo}</span>
+                <i class="fa fa-ellipsis-v" onclick=""></i>
+            </div>
+        </div>`;
+      }else{
+          this.renderVariable[i] = `
+        <div class="f-card f-card_medium">
+            <div class="image">
+                <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
+                <a href="/webstories/${parsedJSON[i].url}" class="storyLink">
+                    <div class="overlay">
+                      <div class="top-overlay">
+                        <div class="st-logo">
+                          <svg fill="none" viewBox="0 0 22 22">
+                            <path fill="url(#a)" fill-rule="evenodd" d="M11 22c6.075 0 11-4.925 11-11S17.075 0 11 0 0 4.925 0 11s4.925 11 11 11zm.703-12.362l3.83 1.295L8.79 19l2.04-6.638L7 11.067 13.744 3l-2.041 6.638z" clip-rule="evenodd"></path>
+                            <defs>
+                              <linearGradient id="a" x1="11" x2="11" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#4364FF"></stop>
+                                <stop offset="1" stop-color="#0037FF"></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                        <div class="title">
+                            <p> ${parsedJSON[i].title}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="meta">
+                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                <span class="date">${timeAgo}</span>
+                <i class="fa fa-ellipsis-v" onclick=""></i>
+            </div>
+        </div>`;
+      }
+    }
+    if (this.renderVariable.length) {
+      storiesDiv.innerHTML = '';
+      for (var j = 0; j < this.renderVariable.length; j++) {
+        storiesDiv.innerHTML += this.renderVariable[j];
+      }
+    }
+  }
+
   getTimeAgo(unixTime) {
       const currentTime = Date.now(); // Current time in milliseconds
       const timeDiff = currentTime - unixTime; // Calculate the time difference
