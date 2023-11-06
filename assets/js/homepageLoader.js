@@ -162,7 +162,7 @@ class LoadStories {
   renderNewStories(parsedJSON){
     var storiesDiv = document.getElementById('storiesDiv');
     var storiesView = ['1', '2','2', '1', '1', '1', '2', '2', '2'];
-    if (parsedJSON.length < 8) {
+    if (!parsedJSON.length) {
       document.getElementById('homepageLoader').style.display = 'none';
     }
     var renderVariable = [];
@@ -241,6 +241,7 @@ class LoadStories {
         storiesDiv.innerHTML += renderVariable[j];
       }
     }
+      styleUpdate();
   }
 
   getTimeAgo(unixTime) {
@@ -276,7 +277,7 @@ async function loadStoriesAndAccessLastStoryTime() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         loadLatestStories.reloadLatestStories();
-        console.log(loadLatestStories.lastStoryTime);
+        styleUpdate();
       }
     });
   }
