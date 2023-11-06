@@ -18,14 +18,15 @@ new getFastreedContent();
 
 class getFastreedContent {
     private $DB;
+    public $DB_CONNECT;
     private $userData;
     private $AUTH;
     private $_DOCROOT;
     function __construct(){
 
         // Vars
-        $DB_CONNECT = new Database();
-        $this->DB = $DB_CONNECT->DBConnection();
+        $this->DB_CONNECT = new Database();
+        $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
         $this->AUTH = new Auth();
         $this->_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
@@ -88,8 +89,8 @@ class getFastreedContent {
             // flush();
             readfile($filepath);
         }
-        $this->closeConnection();
-        $this->userData->closeConnection();
+        $this->DB_CONNECT->closeConnection();
+        $this->userData->DB_CONNECT->closeConnection();
     }
 
     public function closeConnection(){

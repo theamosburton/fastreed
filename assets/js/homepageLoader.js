@@ -30,13 +30,13 @@ class LoadStories {
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-          this.renderVariable = [];
+          console.log(parsedJSON);
           this.renderStories(parsedJSON);
         }else{
           alert(data.message);
         }
       }else{
-          alert('Problem 2');
+          alert('Problem at our end (x038)');
       }
   }
 
@@ -47,12 +47,13 @@ class LoadStories {
     if (parsedJSON.length < 8) {
       document.getElementById('homepageLoader').style.display = 'none';
     }
+    var renderVariable = [];
     for (var i = 0; i < parsedJSON.length; i++) {
       this.lastStoryTime = parsedJSON[i].lastPublished;
       var whatToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
       if (whatToView == '1') {
-        this.renderVariable[i] =  `
+        renderVariable[i] =  `
         <div class="f-card f-card_large">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -84,7 +85,7 @@ class LoadStories {
             </div>
         </div>`;
       }else{
-          this.renderVariable[i] = `
+          renderVariable[i] = `
         <div class="f-card f-card_medium">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -117,15 +118,46 @@ class LoadStories {
         </div>`;
       }
     }
-    if (this.renderVariable.length) {
+    if (renderVariable.length) {
       storiesDiv.innerHTML = '';
-      for (var j = 0; j < this.renderVariable.length; j++) {
-        storiesDiv.innerHTML += this.renderVariable[j];
+      for (var j = 0; j < renderVariable.length; j++) {
+        storiesDiv.innerHTML += renderVariable[j];
       }
     }
   }
 
 
+
+
+
+  async reloadLatestStories(){
+      const url = '/.ht/API/showWebstories.php';
+      var encyDat = {
+        'type':'lastest',
+        'reload':`${this.lastStoryTime}`
+      };
+      const response = await fetch(url, {
+          method: 'post',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(encyDat)
+      });
+      var data = await response.json();
+      var webstoryDiv = document.getElementById('webstories');
+      if (data) {
+        if (data.Result) {
+          let dataJSON = data.message;
+          let parsedJSON = JSON.parse(dataJSON);
+          console.log(parsedJSON);
+          this.renderNewStories(parsedJSON);
+        }else{
+          alert(data.message);
+        }
+      }else{
+        alert('Problem at our end (x0156)');
+      }
+  }
 
   renderNewStories(parsedJSON){
     var storiesDiv = document.getElementById('storiesDiv');
@@ -133,12 +165,13 @@ class LoadStories {
     if (parsedJSON.length < 8) {
       document.getElementById('homepageLoader').style.display = 'none';
     }
+    var renderVariable = [];
     for (var i = 0; i < parsedJSON.length; i++) {
       this.lastStoryTime = parsedJSON[i].lastPublished;
       var whatToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
       if (whatToView == '1') {
-        this.renderVariable[i] =  `
+        renderVariable[i] =  `
         <div class="f-card f-card_large">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -170,7 +203,7 @@ class LoadStories {
             </div>
         </div>`;
       }else{
-          this.renderVariable[i] = `
+          renderVariable[i] = `
         <div class="f-card f-card_medium">
             <div class="image">
                 <img class="storyMetaImage" src="${parsedJSON[i].image}" alt="">
@@ -203,10 +236,9 @@ class LoadStories {
         </div>`;
       }
     }
-    if (this.renderVariable.length) {
-      storiesDiv.innerHTML = '';
-      for (var j = 0; j < this.renderVariable.length; j++) {
-        storiesDiv.innerHTML += this.renderVariable[j];
+    if (renderVariable.length) {
+      for (var j = 0; j < renderVariable.length; j++) {
+        storiesDiv.innerHTML += renderVariable[j];
       }
     }
   }
@@ -240,7 +272,17 @@ var loadLatestStories = new LoadStories();
 
 async function loadStoriesAndAccessLastStoryTime() {
   await loadLatestStories.loadLatestStories(); // Wait for the method to complete
-
+  function handleIntersection(entries, observer) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadLatestStories.reloadLatestStories();
+        console.log(loadLatestStories.lastStoryTime);
+      }
+    });
+  }
+  const observer = new IntersectionObserver(handleIntersection);
+  var elementToDetect = document.getElementById('homepageLoader');
+  observer.observe(elementToDetect);
 }
 
 loadStoriesAndAccessLastStoryTime();
