@@ -1056,8 +1056,8 @@ class Webstories{
           $metaError[] = 'At least 5 words required in description';
       } elseif (str_word_count($keywords) < 4) {
           $metaError[] = 'At least 5 words required in keywords';
-      }elseif (strlen($keywords) > 100) {
-          $metaError[] = 'Maximum 60 Character allowed in keywords';
+      }elseif (strlen($keywords) > 120) {
+          $metaError[] = 'Maximum 120 Character allowed in keywords';
       }elseif (strlen($description) > 160) {
           $metaError[] = 'Maximum 160 Character allowed in keywords';
       }elseif (empty($category)) {
