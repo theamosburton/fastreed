@@ -50,7 +50,7 @@ class Webstories{
         $this->DB_CONNECT->closeConnection();
         $this->userData->DB_CONNECT->closeConnection();
     }
-    
+
     private function adminStoryAction(){
       if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -943,14 +943,14 @@ class Webstories{
               mysqli_stmt_bind_param($stmt3, 'sssss', $storyData, $lastEdit, $lastEdit, $storyStatus, $storyID);
               $result3 = mysqli_stmt_execute($stmt3);
               if (!$result3 || !$this->makePublic($images)) {
-                  showMessage(false, "Problem at our end");
+                  showMessage(false, "Problem at our end (x0946)");
                   return;
               }
 
               showMessage(true, "$url");
           }
       } else {
-          showMessage(false, "Problem at our end");
+          showMessage(false, "Problem at our end (x0953");
       }
 
     }
