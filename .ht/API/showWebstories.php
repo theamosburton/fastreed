@@ -60,52 +60,91 @@ class showWebstories{
 
 
       public function showLatestToUser(){
-        $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
-        $result = mysqli_query($this->DB, $sql);
-        if (!$result) {
-          showMessage(false, 'Server Error');
-          return;
-        }
-        $row = mysqli_fetch_all($result, true);
-        if (count($row) > 8) {
-          $totalStories = 8;
-        }else{
-          $totalStories = count($row);
-        }
-        $storiesToRender = [];
-        for ($i=0; $i < $totalStories ; $i++) {
-          $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
-          $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
-          $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
-          $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-          $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
-          $storiesToRender[$i]['title'] = $storyMetaData['title'];
-          $storiesToRender[$i]['category'] = $storyMetaData['category'];
-          $storiesToRender[$i]['url'] = $storyMetaData['url'];
-          $storyData = json_decode($row[$i]['storyData'], true);
-          $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
-          unset($row[$i]['storyData']);
-        }
-        usort($storiesToRender, function($a, $b) {
-            $timestampA = $a['lastPublished'] / 1000; // Convert milliseconds to seconds
-            $timestampB = $b['lastPublished'] / 1000; // Convert milliseconds to seconds
-            if ($timestampA == $timestampB) {
-                return 0;
-            }
-            return ($timestampA > $timestampB) ? -1 : 1;
-        });
-        $jsonDecodedData = json_encode($storiesToRender);
-        showMessage(true, $jsonDecodedData);
+          $data = json_decode(file_get_contents('php://input'), true);
+
+          if (isset($data['reload']) && !empty($data['reload'])) {
+              $reload = $data['reload'];
+              $lastStoryTime = intval($reload);
+
+              $sql = "SELECT personID, storyID, firstEdit, storyData
+                      FROM stories
+                      WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND firstEdit < ?";
+
+              if ($stmt = mysqli_prepare($this->DB, $sql)) {
+                  mysqli_stmt_bind_param($stmt, "i", $lastStoryTime); // Bind the integer parameter
+                  mysqli_stmt_execute($stmt);
+                  $result = mysqli_stmt_get_result($stmt);
+              } else {
+                  showMessage(false, 'Server Error');
+                  return;
+              }
+          } else {
+              $sql = "SELECT personID, storyID, firstEdit, storyData
+                      FROM stories
+                      WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
+
+              if ($stmt = mysqli_prepare($this->DB, $sql)) {
+                  mysqli_stmt_execute($stmt);
+                  $result = mysqli_stmt_get_result($stmt);
+              } else {
+                  showMessage(false, 'Server Error');
+                  return;
+              }
+          }
+
+          if (!$result) {
+              showMessage(false, 'Server Error');
+              return;
+          }
+
+          $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+
+          $storiesToRender = [];
+          for ($i = 0; $i < count($row); $i++) {
+              $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
+              $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
+              $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
+              $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
+              $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
+              $storiesToRender[$i]['title'] = $storyMetaData['title'];
+              $storiesToRender[$i]['category'] = $storyMetaData['category'];
+              $storiesToRender[$i]['url'] = $storyMetaData['url'];
+              $storyData = json_decode($row[$i]['storyData'], true);
+              $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+              unset($row[$i]['storyData']);
+          }
+
+          usort($storiesToRender, function ($a, $b) {
+              $timestampA = $a['lastPublished'] / 1000; // Convert milliseconds to seconds
+              $timestampB = $b['lastPublished'] / 1000; // Convert milliseconds to seconds
+              if ($timestampA == $timestampB) {
+                  return 0;
+              }
+              return ($timestampA > $timestampB) ? -1 : 1;
+          });
+
+          if (count($row) > 8) {
+            $index = 7;
+              $storiesToRender = array_splice($storiesToRender,0, $index + 1);
+          }
+
+          $jsonDecodedData = json_encode($storiesToRender);
+          showMessage(true, $jsonDecodedData);
       }
+
 
 
       public function showLatestToAnon(){
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data['reload']) && !empty($data['reload'])) {
+          echo "h";
           $reload = $data['reload'];
           $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND firstEdit < $reload";
           $result = mysqli_query($this->DB, $sql);
         }else{
+            echo "h";
           $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
           $result = mysqli_query($this->DB, $sql);
         }
