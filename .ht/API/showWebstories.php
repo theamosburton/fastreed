@@ -120,7 +120,9 @@ class showWebstories{
                 $storiesToRender[$i]['description'] = $storyMetaData['description'];
                 $storiesToRender[$i]['category'] = $storyMetaData['category'];
                 $storiesToRender[$i]['url'] = $storyMetaData['url'];
-                $storiesToRender[$i]['totalViews'] = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID'] + 1543);
+                $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
+                $views = $views + 1543;
+                $storiesToRender[$i]['totalViews'] = $views;
                 $storyData = json_decode($row[$i]['storyData'], true);
                 $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
                 unset($row[$i]['storyData']);
@@ -206,7 +208,9 @@ class showWebstories{
           $storiesToRender[$i]['url'] = $storyMetaData['url'];
           $storyData = json_decode($row[$i]['storyData'], true);
           $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
-          $storiesToRender[$i]['totalViews'] = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID'] + 1543);
+          $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
+          $views = $views + 1543;
+          $storiesToRender[$i]['totalViews'] = $views;
           unset($row[$i]['storyData']);
         }
         usort($storiesToRender, function($a, $b) {

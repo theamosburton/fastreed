@@ -144,17 +144,15 @@ class LoadStories {
   }
 
 
-  viewsConverter(views){
-  if (views > 999) {
-    views = views / 1000;
-    views = views + 'M';
-  }else if (views > 999999) {
-    views = views / 1000000;
-    views = views + 'M';
+ viewsConverter(views) {
+    if (views >= 1000000) {
+      return (views / 1000000).toFixed(2) + 'M';
+    } else if (views >= 1000) {
+      return (views / 1000).toFixed(2) + 'K';
+    } else {
+      return views.toString();
+    }
   }
-  views = parseFloat(views.toFixed(2)
-  return views;
-}
 
 
   async reloadLatestStories(){
@@ -368,7 +366,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-square-share-nodes"></i>
         </div>
-        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', )">
+        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', '${associatedData.image}')">
           <span>Share this</span>
         </div>
       </div>
@@ -407,7 +405,8 @@ function showDialogueBox(storyID){
 }
 
 
-async function shareSupportedStory(title, text, url, element){
+async function shareSupportedStory(title, text, url, element, image){
+  var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
   if (navigator.share) {
     try {
@@ -415,7 +414,7 @@ async function shareSupportedStory(title, text, url, element){
         title: `${title}`,
         text: `${title}`,
         url: `${url}`,
-        files: [new File(['image'], 'image.jpg', { type: 'image/jpeg' })],
+        files: [new File(['image'], `${image}`, { type: `image/${ext}` })],
       });
     } catch (error) {
       element.innerHTML = "<span style='color:orange;'> Can't share</span>";
