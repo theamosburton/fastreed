@@ -116,6 +116,9 @@
   justify-content: center;
   align-items: center;
 }
+.f-card .meta .metaOptions:hover{
+  cursor: pointer;
+}
 .f-card {
   padding: 1px;
   margin: 11px 8px;
