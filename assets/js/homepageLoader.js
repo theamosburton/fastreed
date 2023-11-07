@@ -393,8 +393,8 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-circle-exclamation"></i>
         </div>
-        <div class="optionName">
-          <span>About Meenakshi Thakur</span>
+        <div class="optionName" onclick="openAuthorProfile('${associatedData.authorUsername}')">
+          <span>About ${associatedData.authorName}</span>
         </div>
       </div>
     </div>
@@ -406,7 +406,6 @@ function showDialogueBox(storyID){
 
 
 async function shareSupportedStory(title, text, url, image){
-  console.log(image);
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
   image = 'locahost' + image;
@@ -425,6 +424,12 @@ async function shareSupportedStory(title, text, url, image){
 
   }
 
+}
+
+function openAuthorProfile(authorUsername){
+  authorUsername = '/u/'+authorUsername;
+  window.open(authorUsername, '_blank');
+  hideAlert();
 }
 function openInNewTab(url){
   url = '/webstories/'+url;
