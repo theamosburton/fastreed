@@ -407,7 +407,7 @@ function showDialogueBox(storyID){
 }
 
 
-async function shareSupportedStory(title, des, url, image){
+async function shareSupportedStory(title, url, image){
   title = decodeURIComponent(title);
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
