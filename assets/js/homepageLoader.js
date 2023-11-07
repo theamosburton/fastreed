@@ -434,8 +434,6 @@ async function shareSupportedStory(title, url, image, element){
 function hideStory(storyNumberIndex){
 
 }
-
-
 function openAuthorProfile(authorUsername){
   authorUsername = '/u/'+authorUsername;
   window.open(authorUsername, '_blank');

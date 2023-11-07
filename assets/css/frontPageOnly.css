@@ -19,6 +19,8 @@
   border-radius: 10px 10px;
   box-shadow: black 0px 0px 40px 7px;
   overflow: hidden;
+  position: absolute;
+  z-index: 9999;
 }
 .alertBox .alertBody{
   padding: 0px 10px 10px ;
