@@ -262,8 +262,8 @@ class Webstories{
                     showMessage(false, 'Username needed');
                 }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
                   $storyID = $data['storyID'];
-                  $otherStories = $this->getStoriesByID($storyID);
-                  $otherStories = json_encode($otherStories);
+                  $otherStories = $this->getRelatedStoriesByID($storyID);
+                  $otherStories = json_encode($otherStories, true);
                   $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                   $result = mysqli_query($this->DB, $sql);
                   if ($result) {
@@ -298,8 +298,8 @@ class Webstories{
             if ($UID = $this->userData->getSelfDetails()['UID']) {
                 if (!isset($data['data']) || empty($data['data'])) {
                     $storyID = $data['storyID'];
-                    $otherStories = $this->getStoriesByID($storyID);
-                    $otherStories = json_encode($otherStories);
+                    $otherStories = $this->getRelatedStoriesByID($storyID);
+                    $otherStories = json_encode($otherStories, true);
                     $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
                     $result = mysqli_query($this->DB, $sql);
                     if ($result) {
@@ -1095,7 +1095,7 @@ class Webstories{
       }
       return $return;
     }
-    private function getStoriesByID($storyID){
+    private function getRelatedStoriesByID($storyID){
       $return = array();
       $sql = "SELECT personID FROM stories WHERE storyID = '$storyID'";
       $result = mysqli_query($this->DB, $sql);

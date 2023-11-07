@@ -335,9 +335,11 @@ loadStoriesAndAccessLastStoryTime();
 function showDialogueBox(storyID){
   var allData = loadLatestStories.allWebstoryData;
   var associatedData = false;
+  var storyNumberIndex;
   for (var i = 0; i < allData.length; i++) {
     if (allData[i].storyID == storyID) {
       associatedData = allData[i];
+      storyNumberIndex = i;
       break;
     }
   }
@@ -359,7 +361,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-circle-xmark"></i>
         </div>
-        <div class="optionName">
+        <div class="optionName" onclick="hideStory('${storyNumberIndex}')">
           <span>Hide this</span>
         </div>
       </div>
@@ -428,6 +430,11 @@ async function shareSupportedStory(title, url, image, element){
     element.innerHTML = "<span style='color:red;'> Not supported</span>";
   }
 }
+
+function hideStory(storyNumberIndex){
+
+}
+
 
 function openAuthorProfile(authorUsername){
   authorUsername = '/u/'+authorUsername;

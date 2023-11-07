@@ -1278,7 +1278,6 @@ class Editor{
         <i class="fa-solid fa-check fa-4x"></i>
       </div>`;
       this.metaData.relatedStory = url;
-
     }
 
     selectRelatedStoryWithLink(input){
