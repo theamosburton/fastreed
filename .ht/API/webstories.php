@@ -256,81 +256,58 @@ class Webstories{
     }
     private function fetchStory(){
         $data = json_decode(file_get_contents('php://input'), true);
+        if ($data['whois'] != 'Admin' && $data['whois'] != 'User') {
+          showMessage(false, 'Specify who are you?');
+          return;
+        }
+
         if ($data['whois'] == 'Admin') {
-            if ($this->userData->getSelfDetails()['userType'] == 'Admin') {
-                if (!isset($data['username']) || empty($data['username'])) {
-                    showMessage(false, 'Username needed');
-                }else if ($UID = $this->userData->getOtherData('username', $data['username'])['UID']) {
-                  $storyID = $data['storyID'];
-                  $otherStories = $this->getRelatedStoriesByID($storyID);
-                  $otherStories = json_encode($otherStories, true);
-                  $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
-                  $result = mysqli_query($this->DB, $sql);
-                  if ($result) {
-                      if ( $row = mysqli_fetch_assoc($result)) {
-                          $storyData = $row['storyData'];
-                          $storyStatus = $row['storyStatus'];
-                          $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
-                          $result1 = mysqli_query($this->DB, $sql1);
-                          $row1 = mysqli_fetch_assoc($result1);
-                          $isVerified = $row1['moniStatus'];
-
-                          $data = json_decode($storyData, true);
-                          $data['storyStatus'] = "$storyStatus";
-                          $data['isVerified'] = "$isVerified";
-                          $data['otherStories'] = "$otherStories";
-                          $newJsonString = json_encode($data);
-
-                          showMessage(true, $newJsonString);
-                      }else{
-                          showMessage(false, 'No story with this id');
-                      }
-                  }else{
-                      showMessage(false, 'Can not find story');
-                  }
-                }else{
-                    showMessage(false, 'Incorrect Username');
-                }
-            }else{
-                showMessage(false, 'Not an admin');
+            if ($this->userData->getSelfDetails()['userType'] != 'Admin') {
+              showMessage(false, 'Not an admin');
+              return;
             }
-        }else if($data['whois'] == 'User'){
-            if ($UID = $this->userData->getSelfDetails()['UID']) {
-                if (!isset($data['data']) || empty($data['data'])) {
-                    $storyID = $data['storyID'];
-                    $otherStories = $this->getRelatedStoriesByID($storyID);
-                    $otherStories = json_encode($otherStories, true);
-                    $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
-                    $result = mysqli_query($this->DB, $sql);
-                    if ($result) {
-                        if ( $row = mysqli_fetch_assoc($result)) {
-                          $storyData = $row['storyData'];
-                          $storyStatus = $row['storyStatus'];
-                          $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
-                          $result1 = mysqli_query($this->DB, $sql1);
-                          $row1 = mysqli_fetch_assoc($result1);
-                          $isVerified = $row1['moniStatus'];
-
-                          $data = json_decode($storyData, true);
-                          $data['storyStatus'] = "$storyStatus";
-                          $data['isVerified'] = "$isVerified";
-                          $data['otherStories'] = "$otherStories";
-                          $newJsonString = json_encode($data);
-                            showMessage(true, $newJsonString);
-                        }else{
-                            showMessage(false, 'No story with this id');
-                        }
-                    }else{
-                        showMessage(false, 'Can not find story');
-                    }
-                }else{
-                    showMessage(false, 'Updated Data malfunctioned');
-                }
+            if (!isset($data['username']) || empty($data['username'])) {
+                showMessage(false, 'Username needed');
+                return;
+            }else if (!$this->userData->getOtherData('username', $data['username'])['UID']) {
+              showMessage(false, 'Incorrect Username');
+              return;
             }else{
-                showMessage(false, 'Incorrect Username');
+              $UID = $this->userData->getOtherData('username', $data['username'])['UID'];
+            }
+        }elseif ($data['whois'] == 'User') {
+          if (!$this->userData->getSelfDetails()['UID']) {
+            showMessage(false, 'Incorrect Username');
+            return;
+          }else{
+            $UID = $this->userData->getSelfDetails()['UID'];
+          }
+        }
+        $storyID = $data['storyID'];
+        $otherStories = $this->getRelatedStoriesByID($storyID);
+  $otherStories = json_encode(array_values($otherStories));
+        $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+            if ( $row = mysqli_fetch_assoc($result)) {
+                $storyData = $row['storyData'];
+                $storyStatus = $row['storyStatus'];
+                $sql1 = "SELECT * FROM metaData WHERE postID = '$storyID'";
+                $result1 = mysqli_query($this->DB, $sql1);
+                $row1 = mysqli_fetch_assoc($result1);
+                $isVerified = $row1['moniStatus'];
+
+                $data = json_decode($storyData, true);
+                $data['storyStatus'] = "$storyStatus";
+                $data['isVerified'] = "$isVerified";
+                $data['otherStories'] = "$otherStories";
+                $newJsonString = json_encode($data);
+                  showMessage(true, $newJsonString);
+            }else{
+                showMessage(false, 'No story with this id');
             }
         }else{
-            showMessage(false, 'Specify who are you?');
+            showMessage(false, 'Can not find story');
         }
     }
     private function deleteStory(){

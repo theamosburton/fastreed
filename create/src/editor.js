@@ -166,6 +166,7 @@ class Editor{
       var jsObject = JSON.parse(jsonString);
       var storyStatus = JSON.parse(jsObject.storyStatus);
       var otherStories = JSON.parse(jsObject.otherStories);
+
       if (storyStatus.status == 'drafted') {
         document.getElementById('publishStory').innerHTML = 'Publish';
       }else if (storyStatus.status == 'published'){
