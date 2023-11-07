@@ -408,7 +408,7 @@ function showDialogueBox(storyID){
 async function shareSupportedStory(title, text, url, image){
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
-  image = 'locahost' + image;
+  image = 'https://www.fastreed.com' + image;
   if (navigator.share) {
     try {
       await navigator.share({
