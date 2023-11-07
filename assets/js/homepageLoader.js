@@ -412,21 +412,21 @@ async function shareSupportedStory(title, url, image){
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
   image = 'https://www.fastreed.com' + image;
+  const imageFile = await fetch(image).then(response => response.blob());
   if (navigator.share) {
     try {
       await navigator.share({
         title: `${title}`,
         text: `${title}`,
         url: `${url}`,
-        files: [new File(['image'], `${image}`, { type: `image/${ext}` })],
+        files: [new File([imageFile], `image.${ext}`, { type: `image/${ext}` })],
       });
     } catch (error) {
-      element.innerHTML = "<span style='color:orange;'> Can't share</span>";
+      element.innerHTML = "<span style='color:red;'> Can't share</span>";
     }
   } else {
-
+    element.innerHTML = "<span style='color:red;'> Not supported</span>";
   }
-
 }
 
 function openAuthorProfile(authorUsername){
