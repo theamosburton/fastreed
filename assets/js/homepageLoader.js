@@ -152,6 +152,7 @@ class LoadStories {
     views = views / 1000000;
     views = views + 'M';
   }
+  views = parseFloat(views.toFixed(2)
   return views;
 }
 
@@ -367,7 +368,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-square-share-nodes"></i>
         </div>
-        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', this)">
+        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', )">
           <span>Share this</span>
         </div>
       </div>
@@ -412,8 +413,9 @@ async function shareSupportedStory(title, text, url, element){
     try {
       await navigator.share({
         title: `${title}`,
-        text: `${text}`,
-        url: `${url}` // Replace with your image URL
+        text: `${title}`,
+        url: `${url}`,
+        files: [new File(['image'], 'image.jpg', { type: 'image/jpeg' })],
       });
     } catch (error) {
       element.innerHTML = "<span style='color:orange;'> Can't share</span>";
