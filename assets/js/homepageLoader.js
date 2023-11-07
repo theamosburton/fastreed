@@ -89,8 +89,8 @@ class LoadStories {
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
-                <div class="metaOptions">
-                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                <div class="metaOptions" onclick="showDialogueBox('${jsonString}')">
+                  <i class="fa fa-ellipsis-v"></i>
                 </div>
             </div>
         </div>`;
@@ -128,8 +128,8 @@ class LoadStories {
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
-                <div class="metaOptions">
-                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                <div class="metaOptions" onclick="showDialogueBox('${jsonString}')">
+                  <i class="fa fa-ellipsis-v"></i>
                 </div>
             </div>
         </div>`;
@@ -235,8 +235,8 @@ class LoadStories {
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
-                <div class="metaOptions">
-                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                <div class="metaOptions" onclick="showDialogueBox('${jsonString}')">
+                  <i class="fa fa-ellipsis-v"></i>
                 </div>
             </div>
         </div>`;
@@ -274,8 +274,8 @@ class LoadStories {
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
-                <div class="metaOptions">
-                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                <div class="metaOptions" onclick="showDialogueBox('${jsonString}')">
+                  <i class="fa fa-ellipsis-v"></i>
                 </div>
             </div>
         </div>`;
