@@ -368,7 +368,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-square-share-nodes"></i>
         </div>
-        <div class="optionName" onclick="shareSupportedStory('${encodeURIComponent(titleToSend)}','${encodeURIComponent(descriptionToSend)}', '${associatedData.url}', '${associatedData.image}')">
+        <div class="optionName" onclick="shareSupportedStory('${encodeURIComponent(titleToSend)}', '${associatedData.url}', '${associatedData.image}')">
           <span>Share this</span>
         </div>
       </div>
@@ -408,6 +408,7 @@ function showDialogueBox(storyID){
 
 
 async function shareSupportedStory(title, des, url, image){
+  title = decodeURIComponent(title);
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
   image = 'https://www.fastreed.com' + image;
