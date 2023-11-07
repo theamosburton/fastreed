@@ -419,7 +419,7 @@ async function shareSupportedStory(title, url, image, element){
         title: `${title}`,
         text: `${title}`,
         url: `${url}`,
-        files: [new File([image], `image.${ext}`, { type: `image/${ext}` })],
+        files: [new File([imageFile], `image.${ext}`, { type: `image/${ext}` })],
       });
     } catch (error) {
       element.innerHTML = `<span style='color:red;'> Can't share</span>`;
