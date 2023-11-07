@@ -80,7 +80,6 @@ class follow{
         }else {
             showMessage(false, "User not exists");
         }
-        $this->userData->closeConnection();
     }
     private function makeEntry($id1, $id2){
         $return = false;
@@ -150,7 +149,6 @@ class follow{
             }else {
                 showMessage(false, "User not exists");
             }
-            $this->userData->closeConnection();
     }
 
     public function notifyUser($UID2, $UID1U){
@@ -168,7 +166,6 @@ class follow{
         if ($result) {
             $return = true;
         }
-        $this->userData->closeConnection();
         return $return;
     }
 

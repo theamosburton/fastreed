@@ -326,6 +326,7 @@
     border-bottom: 3px solid #ec775c;
     background-color: #2e323c;
     cursor: pointer;
+    color: white!important;
 }
 
 .userContent .userContentMenus .active{

@@ -60,8 +60,8 @@ class showWebstories{
 
 
       public function showLatestToUser(){
+          $selfUID = $_SESSION['LOGGED_USER'];
           $data = json_decode(file_get_contents('php://input'), true);
-
           if (isset($data['reload']) && !empty($data['reload'])) {
               $reload = $data['reload'];
               $lastStoryTime = intval($reload);
@@ -104,16 +104,27 @@ class showWebstories{
           $storiesToRender = [];
           for ($i = 0; $i < count($row); $i++) {
               $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
-              $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
-              $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
-              $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-              $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
-              $storiesToRender[$i]['title'] = $storyMetaData['title'];
-              $storiesToRender[$i]['category'] = $storyMetaData['category'];
-              $storiesToRender[$i]['url'] = $storyMetaData['url'];
-              $storyData = json_decode($row[$i]['storyData'], true);
-              $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
-              unset($row[$i]['storyData']);
+              $moniStatus = json_decode($storyMetaData['moniStatus'], true);
+              if ($moniStatus['status'] != 'false') {
+                $storiesToRender[$i]['moniStatus'] = $moniStatus['status'];
+                $authorData = $this->getAuthorData($row[$i]['personID']);
+                $storiesToRender[$i]['authorName'] = $authorData['fullName'];
+                $storiesToRender[$i]['authorProfilePic'] = $authorData['profilePic'];
+                $storiesToRender[$i]['authorUsername'] = $authorData['username'];
+                $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
+                $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
+                $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
+                $storiesToRender[$i]['isMyStory'] = ($selfUID == $row[$i]['personID']);
+                $storiesToRender[$i]['isFollowed'] = $this->userData->isFollowed($selfUID, $row[$i]['personID']);
+                $storiesToRender[$i]['title'] = $storyMetaData['title'];
+                $storiesToRender[$i]['description'] = $storyMetaData['description'];
+                $storiesToRender[$i]['category'] = $storyMetaData['category'];
+                $storiesToRender[$i]['url'] = $storyMetaData['url'];
+                $storiesToRender[$i]['totalViews'] = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
+                $storyData = json_decode($row[$i]['storyData'], true);
+                $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+                unset($row[$i]['storyData']);
+              }
           }
 
           usort($storiesToRender, function ($a, $b) {
@@ -134,17 +145,42 @@ class showWebstories{
           showMessage(true, $jsonDecodedData);
       }
 
+      public function getAuthorData($personID){
+        $return = [];
+        $sql = "SELECT * FROM account_details WHERE personID ='$personID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+          if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+            $return = $row;
+          }
+        }
+        return $return;
+      }
+      public function getTotalViews($storyUrl, $personID) {
+          $sql = "SELECT COUNT(*) AS row_count FROM sessionVisits WHERE personID <> ? AND visitedPage LIKE ?";
+          if ($stmt = mysqli_prepare($this->DB, $sql)) {
+              $storyUrlPattern = "%/webstories/$storyUrl%";
+              mysqli_stmt_bind_param($stmt, "ss", $personID, $storyUrlPattern);
+              mysqli_stmt_execute($stmt);
+              mysqli_stmt_bind_result($stmt, $row_count);
+              mysqli_stmt_fetch($stmt);
+              mysqli_stmt_close($stmt);
+
+              return $row_count;
+          } else {
+              return 0;
+          }
+      }
 
 
       public function showLatestToAnon(){
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data['reload']) && !empty($data['reload'])) {
-          echo "h";
           $reload = $data['reload'];
           $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published' AND firstEdit < $reload";
           $result = mysqli_query($this->DB, $sql);
         }else{
-            echo "h";
           $sql = "SELECT personID, storyID, firstEdit, storyData  FROM stories WHERE JSON_EXTRACT(storyStatus, '$.status') = 'published'";
           $result = mysqli_query($this->DB, $sql);
         }
@@ -170,6 +206,7 @@ class showWebstories{
           $storiesToRender[$i]['url'] = $storyMetaData['url'];
           $storyData = json_decode($row[$i]['storyData'], true);
           $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+          $storiesToRender[$i]['totalViews'] = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
           unset($row[$i]['storyData']);
         }
         usort($storiesToRender, function($a, $b) {

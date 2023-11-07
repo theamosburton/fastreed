@@ -53,6 +53,8 @@ function styleUpdate() {
     $('#RefreshIcon, #refHard, #refStyle, #HPicon').css('color', 'green');
     $('#notifications::-webkit-scrollbar-thumb').css('background-color', 'transparent');
 }
+
+
 function toggleMode(){
     var toggleMode = document.querySelector('#toggleMode');
     // Check if it contains any <style> elements
@@ -77,7 +79,10 @@ function enableDarkMode() {
     $('header h1 a').css('color', '#dadada');
     $('header').css('border-bottom', '1px solid rgb(218, 218, 218)');
     $('header .nav').css('color', '#dadada');
-
+    // alerts
+    $('.alertContainer .alertBox').css('background', '#353740');
+    $('.alertContainer .alertBox').css('box-shadow',' black 0px 0px 40px 3px');
+    $('.alertContainer .alertBox').css('color', 'white');
     // dropdowns
     $('.dropdowns').css('background', '#353740');
     $('.dropdowns').css('box-shadow',' black 0px 0px 40px 3px');
@@ -112,6 +117,8 @@ function enableDarkMode() {
     $('.form-control').css('color', '#d5d3d3');
     $('.expandable').css('color', '#d5d3d3');
     $('.homepageLoadMore span').css('color', '#d5d3d3');
+    $('.noUpload').css('color', '#d5d3d3');
+    $('#shuffleStoryType').css('color', '#d5d3d3');
     // defaults
     $('.webstory .title').css('color', 'white');
     var toggleMode = document.querySelector('#toggleMode');
@@ -129,6 +136,11 @@ function enableLightMode(){
     $('header').css('border-bottom', '1px solid rgb(53, 55, 64)');
     $('header .nav').css('color', '#202123');
     // head
+
+    // alerts
+    $('.alertContainer .alertBox').css('background', 'white');
+    $('.alertContainer .alertBox').css('box-shadow',' grey 0px 0px 40px 7px');
+    $('.alertContainer .alertBox').css('color', '#202123');
 
     // dropdowns
     $('.dropdowns').css('background', 'white');
@@ -164,7 +176,8 @@ function enableLightMode(){
     $('.form-control').css('color', '#202123');
     $('.expandable').css('color', '#202123');
     $('.homepageLoadMore span').css('color', '#202123');
-
+    $('.noUpload').css('color', '#202123');
+    $('#shuffleStoryType').css('color', '#202123');
     // defaults
     $('.webstory .title').css('color', 'white');
     var toggleMode = document.querySelector('#toggleMode');
@@ -182,7 +195,10 @@ $('#noti-nav').mouseout(function(){
 
 
 
-
+function hideAlert(){
+  document.querySelector('.alertContainer').style.display = 'none';
+  document.querySelector('.alertContainer .alertBox').innerHTML = '';
+}
 
 
 

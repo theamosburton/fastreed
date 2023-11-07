@@ -37,7 +37,7 @@ class GuestsVisits
         // check if the session is same or different
         if ($this->sessionExist()["bool"]) {
           $sessionID = $this->sessionExist()["id"];
-          $this->updateVisits($sessionID);
+          $this->updateVisits($sessionID, $guestID['id']);
         }else {
           $this->makeSession($guestID['id']);
         }
@@ -157,12 +157,12 @@ class GuestsVisits
     $guestIP = $this->BASIC_FUNC->getIp();
     $date = date('Y-m-d');
     $dateTime = time();
-    $this->updateVisits($sessionID);
+    $this->updateVisits($sessionID, $guestID);
     $sql2 = "INSERT INTO fast_session (tdate, sessionID, personID, IPADD) VALUES ('$date','$sessionID','$guestID','$guestIP')";
     mysqli_query($this->DB, $sql2);
   }
 
-  public function updateVisits($sessionID){
+  public function updateVisits($sessionID, $guestID){
     $visitTime = time();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $httpRefe = $_SERVER['HTTP_REFERER'];
@@ -176,7 +176,7 @@ class GuestsVisits
       $referedByPerson = "";
     }
     $visitedPage = $_SERVER["REQUEST_URI"];
-    $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson, referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
+    $sql = "INSERT INTO sessionVisits (sessionID, personID,  visitTime, visitedPage, referedByPerson, referedByPage) VALUES ('$sessionID','$guestID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
   }
 }

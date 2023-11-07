@@ -80,6 +80,7 @@ class showIndex{
         HTML."\n".<<<HTML
             <div class="option-overlay" onclick="removeOptions()" id="opt-overlay"></div>
         HTML."\n";
+        include ".ht/views/homepage/alerts.html";
         if ($this->whoAmI != 'Anonymous') {
             if (!isset($this->userData->getSelfDetails()['DOB']) || !isset($this->userData->getSelfDetails['Gender'])) {
                 include ".ht/views/homepage/updateProfile.html";
@@ -125,20 +126,12 @@ class showIndex{
                                 </div>
                               </div>
                               <div class="pin_container" id="storiesDiv">
-        HTML."\n";
-        include ".ht/views/homepage/stories.html";
-        echo <<<HTML
                               </div>
                               <div class="homepageLoadMore" id="homepageLoader">
                                 <span>  Loading.....</span>
                               </div>
                             </div>
                         </div>
-        HTML."\n";
-
-    // ***************************************** //
-
-        echo <<<HTML
                     </div>
                 </div>
             </div>

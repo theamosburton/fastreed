@@ -19,7 +19,7 @@ class UsersVisits
       $decUserID = $this->AUTH->decrypt($encUserID);
     if ($this->sessionExist()["bool"]) {
       $sessionID = $this->sessionExist()["id"];
-      $this->updateVisits($sessionID);
+      $this->updateVisits($sessionID, $decUserID);
     }else {
       $this->makeSession($decUserID);
       if (!isset($_SESSION['LOGGED_USER'])) {
@@ -88,13 +88,13 @@ class UsersVisits
     $sessionID = $this->BASIC_FUNC->createNewID("fast_session" , "USI");
     $_SESSION["USI"] = $sessionID;
 
-    $this->updateVisits($sessionID);
+    $this->updateVisits($sessionID, $userID);
     $sql2 = "INSERT INTO fast_session (tdate, sessionID, personID, IPADD, refID) VALUES ('$date', '$sessionID', '$userID','$userIP','$refByGuestID')";
     mysqli_query($this->DB, $sql2);
   }
 
 
-  public function updateVisits($sessionID){
+  public function updateVisits($sessionID, $userID){
     $visitTime = time();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $httpRefe = $_SERVER['HTTP_REFERER'];
@@ -108,7 +108,7 @@ class UsersVisits
       $referedByPerson = "";
     }
     $visitedPage = $_SERVER["REQUEST_URI"];
-    $sql = "INSERT INTO sessionVisits (sessionID, visitTime, visitedPage, referedByPerson,referedByPage) VALUES ('$sessionID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
+    $sql = "INSERT INTO sessionVisits (sessionID,personID, visitTime, visitedPage, referedByPerson,referedByPage) VALUES ('$sessionID','$userID','$visitTime','$visitedPage', '$referedByPerson', '$referedByPage')";
     $result = mysqli_query($this->DB, $sql);
   }
 

@@ -2,6 +2,7 @@ class LoadStories {
   constructor() {
     this.showLoading();
     this.lastStoryTime;
+    this.allWebstoryData;
   }
 
   showLoading(){
@@ -30,7 +31,7 @@ class LoadStories {
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-          console.log(parsedJSON);
+          this.allWebstoryData = parsedJSON;
           this.renderStories(parsedJSON);
         }else{
           alert(data.message);
@@ -52,6 +53,8 @@ class LoadStories {
       this.lastStoryTime = parsedJSON[i].lastPublished;
       var whatToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
+      var views = this.viewsConverter(parsedJSON[i].totalViews);
+      var jsonString = parsedJSON[i].storyID;
       if (whatToView == '1') {
         renderVariable[i] =  `
         <div class="f-card f-card_large">
@@ -79,9 +82,16 @@ class LoadStories {
                 </a>
             </div>
             <div class="meta">
-                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
-                <span class="date">${timeAgo}</span>
-                <i class="fa fa-ellipsis-v" onclick=""></i>
+                <div class="metaInfo">
+                  <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                  <span class="date">${timeAgo}</span>
+                  <span class="date">${views}
+                  <i class="fa-regular fa-eye"></i>
+                  </span>
+                </div>
+                <div class="metaOptions">
+                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                </div>
             </div>
         </div>`;
       }else{
@@ -111,9 +121,16 @@ class LoadStories {
                 </a>
             </div>
             <div class="meta">
-                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
-                <span class="date">${timeAgo}</span>
-                <i class="fa fa-ellipsis-v" onclick=""></i>
+                <div class="metaInfo">
+                  <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                  <span class="date">${timeAgo}</span>
+                  <span class="date">${views}
+                  <i class="fa-regular fa-eye"></i>
+                  </span>
+                </div>
+                <div class="metaOptions">
+                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                </div>
             </div>
         </div>`;
       }
@@ -127,7 +144,16 @@ class LoadStories {
   }
 
 
-
+  viewsConverter(views){
+  if (views > 999) {
+    views = views / 1000;
+    views = views + 'M';
+  }else if (views > 999999) {
+    views = views / 1000000;
+    views = views + 'M';
+  }
+  return views;
+}
 
 
   async reloadLatestStories(){
@@ -149,7 +175,10 @@ class LoadStories {
         if (data.Result) {
           let dataJSON = data.message;
           let parsedJSON = JSON.parse(dataJSON);
-          console.log(parsedJSON);
+          const concatenatedArray = this.allWebstoryData.slice(); // Create a copy of array1
+
+          Array.prototype.push.apply(concatenatedArray, parsedJSON);
+          this.allWebstoryData = concatenatedArray;
           this.renderNewStories(parsedJSON);
         }else{
           alert(data.message);
@@ -168,9 +197,11 @@ class LoadStories {
     var renderVariable = [];
     for (var i = 0; i < parsedJSON.length; i++) {
       this.lastStoryTime = parsedJSON[i].lastPublished;
-      var whatToView = storiesView[i];
+      var howToView = storiesView[i];
       var timeAgo = this.getTimeAgo(parsedJSON[i].lastPublished);
-      if (whatToView == '1') {
+      var views = this.viewsConverter(parsedJSON[i].totalViews);
+      var jsonString = parsedJSON[i].storyID;
+      if (howToView == '1') {
         renderVariable[i] =  `
         <div class="f-card f-card_large">
             <div class="image">
@@ -197,9 +228,16 @@ class LoadStories {
                 </a>
             </div>
             <div class="meta">
-                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
-                <span class="date">${timeAgo}</span>
-                <i class="fa fa-ellipsis-v" onclick=""></i>
+                <div class="metaInfo">
+                  <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                  <span class="date">${timeAgo}</span>
+                  <span class="date">${views}
+                  <i class="fa-regular fa-eye"></i>
+                  </span>
+                </div>
+                <div class="metaOptions">
+                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                </div>
             </div>
         </div>`;
       }else{
@@ -229,9 +267,16 @@ class LoadStories {
                 </a>
             </div>
             <div class="meta">
-                <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
-                <span class="date">${timeAgo}</span>
-                <i class="fa fa-ellipsis-v" onclick=""></i>
+                <div class="metaInfo">
+                  <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
+                  <span class="date">${timeAgo}</span>
+                  <span class="date">${views}
+                  <i class="fa-regular fa-eye"></i>
+                  </span>
+                </div>
+                <div class="metaOptions">
+                  <i class="fa fa-ellipsis-v" onclick="showDialogueBox('${jsonString}')"></i>
+                </div>
             </div>
         </div>`;
       }
@@ -243,7 +288,6 @@ class LoadStories {
     }
       styleUpdate();
   }
-
   getTimeAgo(unixTime) {
       const currentTime = Date.now(); // Current time in milliseconds
       const timeDiff = currentTime - unixTime; // Calculate the time difference
@@ -267,7 +311,9 @@ class LoadStories {
           const yearsAgo = Math.floor(timeDiff / (365 * 24 * 60 * 60 * 1000));
           return yearsAgo + "Y";
       }
-  }
+    }
+
+
 }
 var loadLatestStories = new LoadStories();
 
@@ -285,5 +331,100 @@ async function loadStoriesAndAccessLastStoryTime() {
   var elementToDetect = document.getElementById('homepageLoader');
   observer.observe(elementToDetect);
 }
-
 loadStoriesAndAccessLastStoryTime();
+
+function showDialogueBox(storyID){
+  var allData = loadLatestStories.allWebstoryData;
+  var associatedData = false;
+  for (var i = 0; i < allData.length; i++) {
+    if (allData[i].storyID == storyID) {
+      associatedData = allData[i];
+      break;
+    }
+  }
+  if (associatedData) {
+    var alertConatiner = document.querySelector('#alertContainerHome');
+    alertConatiner.style.display = 'flex';
+    var alertBox = document.querySelector('#alertBoxHome');
+    alertBox.innerHTML = `
+    <div class="alertHead">
+      <div class="title">${associatedData.title}</div>
+      <div class="cancel" onclick="hideAlert()">
+        <i class="fa-solid fa-circle-xmark fa-xl"></i>
+      </div>
+    </div>
+    <div class="alertBody">
+      <div class="options">
+        <div class="optionIcon">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <div class="optionName">
+          <span>Hide this</span>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="optionIcon">
+          <i class="fa-solid fa-square-share-nodes"></i>
+        </div>
+        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', this)">
+          <span>Share this</span>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="optionIcon">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <div class="optionName">
+          <span>Follow author</span>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="optionIcon">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </div>
+        <div class="optionName" onclick="openInNewTab('${associatedData.url}')">
+          <span>Open in a new tab</span>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="optionIcon">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div class="optionName">
+          <span>About Meenakshi Thakur</span>
+        </div>
+      </div>
+    </div>
+    `;
+  }else{
+
+  }
+}
+
+
+async function shareSupportedStory(title, text, url, element){
+  url = 'https://www.fastreed.com/webstories' + url;
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: `${title}`,
+        text: `${text}`,
+        url: `${url}` // Replace with your image URL
+      });
+    } catch (error) {
+      element.innerHTML = "<span style='color:orange;'> Can't share</span>";
+    }
+  } else {
+
+  }
+
+}
+function openInNewTab(url){
+  url = '/webstories/'+url;
+  window.open(url, '_blank');
+  hideAlert();
+}
