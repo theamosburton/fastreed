@@ -405,9 +405,11 @@ function showDialogueBox(storyID){
 }
 
 
-async function shareSupportedStory(title, text, url, element, image){
+async function shareSupportedStory(title, text, url, image){
+  console.log(image);
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
+  image = 'locahost' + image;
   if (navigator.share) {
     try {
       await navigator.share({
