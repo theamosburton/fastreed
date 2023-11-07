@@ -199,19 +199,29 @@ class showWebstories{
         $storiesToRender = [];
         for ($i=0; $i < $totalStories ; $i++) {
           $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
-          $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
-          $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
-          $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-          $storiesToRender[$i]['moniStatus'] = $storyMetaData['moniStatus'];
-          $storiesToRender[$i]['title'] = $storyMetaData['title'];
-          $storiesToRender[$i]['category'] = $storyMetaData['category'];
-          $storiesToRender[$i]['url'] = $storyMetaData['url'];
-          $storyData = json_decode($row[$i]['storyData'], true);
-          $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
-          $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
-          $views = $views + 1543;
-          $storiesToRender[$i]['totalViews'] = $views;
-          unset($row[$i]['storyData']);
+          $moniStatus = json_decode($storyMetaData['moniStatus'], true);
+          if ($moniStatus['status'] != 'false') {
+            $storiesToRender[$i]['moniStatus'] = $moniStatus['status'];
+            $authorData = $this->getAuthorData($row[$i]['personID']);
+            $storiesToRender[$i]['authorName'] = $authorData['fullName'];
+            $storiesToRender[$i]['authorProfilePic'] = $authorData['profilePic'];
+            $storiesToRender[$i]['authorUsername'] = $authorData['username'];
+            $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
+            $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
+            $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
+            $storiesToRender[$i]['isMyStory'] = false;
+            $storiesToRender[$i]['isFollowed'] = false;
+            $storiesToRender[$i]['title'] = $storyMetaData['title'];
+            $storiesToRender[$i]['description'] = $storyMetaData['description'];
+            $storiesToRender[$i]['category'] = $storyMetaData['category'];
+            $storiesToRender[$i]['url'] = $storyMetaData['url'];
+            $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
+            $views = $views + 1543;
+            $storiesToRender[$i]['totalViews'] = $views;
+            $storyData = json_decode($row[$i]['storyData'], true);
+            $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
+            unset($row[$i]['storyData']);
+          }
         }
         usort($storiesToRender, function($a, $b) {
             $timestampA = $a['lastPublished'] / 1000; // Convert milliseconds to seconds
