@@ -341,6 +341,7 @@ function showDialogueBox(storyID){
       break;
     }
   }
+  var titleToSend = associatedData.title.replace(/'/g, "&#39;");
   if (associatedData) {
     var alertConatiner = document.querySelector('#alertContainerHome');
     alertConatiner.style.display = 'flex';
@@ -366,7 +367,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-square-share-nodes"></i>
         </div>
-        <div class="optionName" onclick="shareSupportedStory('${associatedData.title}', '${associatedData.description}', '${associatedData.url}', '${associatedData.image}')">
+        <div class="optionName" onclick="shareSupportedStory('${titleToSend}', '${associatedData.url}', '${associatedData.image}')">
           <span>Share this</span>
         </div>
       </div>
@@ -405,7 +406,7 @@ function showDialogueBox(storyID){
 }
 
 
-async function shareSupportedStory(title, text, url, image){
+async function shareSupportedStory(title, url, image){
   var ext = image.split('.').pop();
   url = 'https://www.fastreed.com/webstories' + url;
   image = 'https://www.fastreed.com' + image;
