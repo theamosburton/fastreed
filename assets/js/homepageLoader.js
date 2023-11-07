@@ -368,7 +368,7 @@ function showDialogueBox(storyID){
         <div class="optionIcon">
           <i class="fa-solid fa-square-share-nodes"></i>
         </div>
-        <div class="optionName" onclick="shareSupportedStory('${titleToSend}','${descriptionToSend}', '${associatedData.url}', '${associatedData.image}')">
+        <div class="optionName" onclick="shareSupportedStory('${encodeURIComponent(titleToSend)}','${encodeURIComponent(descriptionToSend)}', '${associatedData.url}', '${associatedData.image}')">
           <span>Share this</span>
         </div>
       </div>
