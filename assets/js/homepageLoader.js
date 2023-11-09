@@ -418,11 +418,11 @@ async function shareSupportedStory(title, url, image, element) {
 
     if (navigator.share) {
       await navigator.share({
-        title: 'Check out this AMP story!',
-        text: 'This is an awesome AMP story. Check it out!',
-        url: url,
+        title: `${title}`,
+        text: `${title}`,
+        url: `${url}`,
         // Include the image using the 'icon' property
-        icon: image,
+        icon: `${image}`,
       });
     } else {
       element.innerHTML = "<span style='color:red;'>Web Share API not supported</span>";
@@ -433,10 +433,6 @@ async function shareSupportedStory(title, url, image, element) {
   }
 }
 
-
-function hideStory(storyNumberIndex){
-
-}
 function openAuthorProfile(authorUsername){
   authorUsername = '/u/'+authorUsername;
   window.open(authorUsername, '_blank');
