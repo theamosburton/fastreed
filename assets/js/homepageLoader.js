@@ -311,11 +311,8 @@ class LoadStories {
           return yearsAgo + "Y";
       }
     }
-
-
 }
 var loadLatestStories = new LoadStories();
-
 async function loadStoriesAndAccessLastStoryTime() {
   await loadLatestStories.loadLatestStories(); // Wait for the method to complete
   function handleIntersection(entries, observer) {
@@ -331,7 +328,6 @@ async function loadStoriesAndAccessLastStoryTime() {
   observer.observe(elementToDetect);
 }
 loadStoriesAndAccessLastStoryTime();
-
 function showDialogueBox(storyID){
   var allData = loadLatestStories.allWebstoryData;
   var associatedData = false;
@@ -349,22 +345,22 @@ function showDialogueBox(storyID){
     console.log(associatedData);
     if (associatedData.isFollowed) {
       var isFollowed = `
-        <div class="options">
-          <div class="optionIcon">
+        <div style="color: lime" class="options following" onclick="unfollowAuthor('${associatedData.personID}')">
+          <div class="optionIcon followIcon">
             <i class="fa-solid fa-user-check"></i>
           </div>
-          <div class="optionName">
+          <div class="optionName followMessage">
             <span>Author followed</span>
           </div>
         </div>
       `;
     }else{
       var isFollowed = `
-        <div class="options">
-          <div class="optionIcon">
+        <div class="options following" onclick="followAuthor('${associatedData.personID}')">
+          <div class="optionIcon followIcon">
             <i class="fa-solid fa-user-plus"></i>
           </div>
-          <div class="optionName">
+          <div class="optionName followMessage">
             <span>Follow author</span>
           </div>
         </div>
@@ -434,8 +430,6 @@ function showDialogueBox(storyID){
     `;
   }
 }
-
-
 async function shareSupportedStory(title, url, image, element) {
   try {
     title = decodeURIComponent(title);
@@ -458,7 +452,6 @@ async function shareSupportedStory(title, url, image, element) {
     console.error('Error sharing AMP story:', error);
   }
 }
-
 function openAuthorProfile(authorUsername){
   authorUsername = '/u/'+authorUsername;
   window.open(authorUsername, '_blank');
@@ -469,7 +462,72 @@ function openInNewTab(url){
   window.open(url, '_blank');
   hideAlert();
 }
+async function unfollowAuthor(personID){
+  var followIcon = document.querySelector('.followIcon');
+  var followMessage = document.querySelector('.followMessage');
+  var following = document.querySelector('.following');
+  followIcon.innerHTML = '<div class="spinner"></div>';
+  const url = '/.ht/API/follow.php?unfollowByID';
+  var encyDat = {
+    'personID' : `${personID}`
+  };
+  const response = await fetch(url, {
+      method: 'post',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(encyDat)
+  });
+  var data = await response.json();
+  if (data) {
+    if (data.Result) {
+      followMessage.innerHTML = '<span>Author unfollowed</span>';
+      followIcon.innerHTML = '<i class="fa-solid fa-user-xmark"></i>';
+      following.setAttribute('onclick', `followAuthor('${personID}')`);
+      following.style.color= 'initial';
+    }else{
+      followMessage.innerHTML = '<span>Some problem at our end</span>';
+      followIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+      following.style.color= 'red';
+    }
+  }else{
+    followMessage.innerHTML = '<span>Some problem at our end</span>';
+    followIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+    following.style.color= 'red';
+  }
+}
 
-function followAuthor(personID){
-
+async function followAuthor(personID){
+  var followIcon = document.querySelector('.followIcon');
+  followIcon.innerHTML = '<div class="spinner"></div>';
+  var followMessage = document.querySelector('.followMessage');
+  var following = document.querySelector('.following');
+  const url = '/.ht/API/follow.php?followByID';
+  var encyDat = {
+    'personID' : `${personID}`
+  };
+  const response = await fetch(url, {
+      method: 'post',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(encyDat)
+  });
+  var data = await response.json();
+  if (data) {
+    if (data.Result) {
+      followMessage.innerHTML = '<span>Author followed</span>';
+      followIcon.innerHTML = '<i class="fa-solid fa-user-check"></i>';
+      following.setAttribute('onclick', `unfollowAuthor('${personID}')`);
+      following.style.color= 'lime';
+    }else{
+      followMessage.innerHTML = '<span>Some problem at our end</span>';
+      followIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+      following.style.color= 'red';
+    }
+  }else{
+    followMessage.innerHTML = '<span>Some problem at our end</span>';
+    followIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+    following.style.color= 'red';
+  }
 }
