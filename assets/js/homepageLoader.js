@@ -346,6 +346,7 @@ function showDialogueBox(storyID){
   var titleToSend = associatedData.title.replace(/'/g, "&#39;");
   var descriptionToSend = associatedData.description.replace(/'/g, "&#39;");
   if (associatedData) {
+    console.log(associatedData);
     if (associatedData.isFollowed) {
       var isFollowed = `
         <div class="options">
@@ -420,7 +421,17 @@ function showDialogueBox(storyID){
     </div>
     `;
   }else{
-
+    var alertConatiner = document.querySelector('#alertContainerHome');
+    alertConatiner.style.display = 'flex';
+    var alertBox = document.querySelector('#alertBoxHome');
+    alertBox.innerHTML = `
+    <div class="alertHead">
+      <div class="title">${associatedData.title}</div>
+      <div class="cancel" onclick="hideAlert()">
+        <i class="fa-solid fa-circle-xmark fa-xl"></i>
+      </div>
+    </div>
+    `;
   }
 }
 
@@ -457,4 +468,8 @@ function openInNewTab(url){
   url = '/webstories/'+url;
   window.open(url, '_blank');
   hideAlert();
+}
+
+function followAuthor(personID){
+
 }
