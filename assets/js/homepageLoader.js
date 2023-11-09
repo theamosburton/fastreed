@@ -346,7 +346,7 @@ function showDialogueBox(storyID){
       var isFollowed = `
         <div style="color: lime" class="options following" onclick="signUp()">
           <div class="optionIcon followIcon">
-            <i class="fa-solid fa-user-plus"></i>
+          <i class="fa-solid fa-lock"></i>
           </div>
           <div class="optionName followMessage">
             <span>Login to follow</span>
