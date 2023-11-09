@@ -429,7 +429,6 @@ async function shareSupportedStory(title, url, image, element) {
     }
   } catch (error) {
     console.error('Error sharing AMP story:', error);
-    element.innerHTML = "<span style='color:red;'>Can't share</span>";
   }
 }
 
