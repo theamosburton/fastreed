@@ -343,7 +343,16 @@ function showDialogueBox(storyID){
   var descriptionToSend = associatedData.description.replace(/'/g, "&#39;");
   if (associatedData) {
     if (associatedData.isFollowed == 'none') {
-      var isFollowed = "";
+      var isFollowed = `
+        <div style="color: lime" class="options following" onclick="signUp()">
+          <div class="optionIcon followIcon">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+          <div class="optionName followMessage">
+            <span>Login to follow</span>
+          </div>
+        </div>
+      `;
     }else if (associatedData.isFollowed === true) {
       var isFollowed = `
         <div style="color: lime" class="options following" onclick="unfollowAuthor('${associatedData.personID}')">
@@ -457,6 +466,11 @@ async function shareSupportedStory(title, url, image, element) {
 function openAuthorProfile(authorUsername){
   authorUsername = '/u/'+authorUsername;
   window.open(authorUsername, '_blank');
+  hideAlert();
+}
+function signUp(){
+  var link = '/account/sign/';
+  window.open(link, '_blank');
   hideAlert();
 }
 function openInNewTab(url){
