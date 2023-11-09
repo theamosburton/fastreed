@@ -114,14 +114,18 @@ class showWebstories{
                 $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
                 $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
                 $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-                $storiesToRender[$i]['isMyStory'] = ($selfUID == $row[$i]['personID']);
                 $storiesToRender[$i]['isFollowed'] = $this->userData->isFollowed($selfUID, $row[$i]['personID']);
                 $storiesToRender[$i]['title'] = $storyMetaData['title'];
                 $storiesToRender[$i]['description'] = $storyMetaData['description'];
                 $storiesToRender[$i]['category'] = $storyMetaData['category'];
                 $storiesToRender[$i]['url'] = $storyMetaData['url'];
                 $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
-                $views = $views + 1543;
+                $storiesToRender[$i]['isMyStory'] = ($selfUID == $row[$i]['personID']);
+                if ($storiesToRender[$i]['isMyStory']) {
+                     $views = $views;
+                }else{
+                    $views = $views + 1543;
+                }
                 $storiesToRender[$i]['totalViews'] = $views;
                 $storyData = json_decode($row[$i]['storyData'], true);
                 $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
