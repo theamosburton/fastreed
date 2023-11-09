@@ -409,27 +409,30 @@ function showDialogueBox(storyID){
 }
 
 
-async function shareSupportedStory(title, url, image, element){
-  title = decodeURIComponent(title);
-  var ext = image.split('.').pop();
-  url = 'https://www.fastreed.com/webstories' + url;
-  image = 'https://www.fastreed.com' + image;
-  const imageFile = await fetch(image).then(response => response.blob());
-  if (navigator.share) {
-    try {
+async function shareSupportedStory(title, url, image, element) {
+  try {
+    title = decodeURIComponent(title);
+    const ext = image.split('.').pop();
+    url = 'https://www.fastreed.com/webstories' + url;
+    image = 'https://www.fastreed.com' + image;
+
+    if (navigator.share) {
       await navigator.share({
-        title: `${title}`,
-        text: `${title}`,
-        url: `${url}`,
-        files: [new File([imageFile], `image.${ext}`, { type: `image/${ext}` })],
+        title: 'Check out this AMP story!',
+        text: 'This is an awesome AMP story. Check it out!',
+        url: url,
+        // Include the image using the 'icon' property
+        icon: image,
       });
-    } catch (error) {
-      element.innerHTML = `<span style='color:red;'> Can't share</span>`;
+    } else {
+      element.innerHTML = "<span style='color:red;'>Web Share API not supported</span>";
     }
-  } else {
-    element.innerHTML = "<span style='color:red;'> Not supported</span>";
+  } catch (error) {
+    console.error('Error sharing AMP story:', error);
+    element.innerHTML = "<span style='color:red;'>Can't share</span>";
   }
 }
+
 
 function hideStory(storyNumberIndex){
 
