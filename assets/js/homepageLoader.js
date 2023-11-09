@@ -466,7 +466,7 @@ async function unfollowAuthor(personID){
   var followIcon = document.querySelector('.followIcon');
   var followMessage = document.querySelector('.followMessage');
   var following = document.querySelector('.following');
-  followIcon.innerHTML = '<div class="spinner"></div>';
+  followIcon.innerHTML = '<div class="spinner" style="margin:0px; width: 15px; height: 15px;"></div>';
   const url = '/.ht/API/follow.php?unfollowByID';
   var encyDat = {
     'personID' : `${personID}`
@@ -499,7 +499,7 @@ async function unfollowAuthor(personID){
 
 async function followAuthor(personID){
   var followIcon = document.querySelector('.followIcon');
-  followIcon.innerHTML = '<div class="spinner"></div>';
+  followIcon.innerHTML = '<div class="spinner" style="margin:0px; width: 15px; height: 15px;"></div>';
   var followMessage = document.querySelector('.followMessage');
   var following = document.querySelector('.following');
   const url = '/.ht/API/follow.php?followByID';
