@@ -342,7 +342,6 @@ function showDialogueBox(storyID){
   var titleToSend = associatedData.title.replace(/'/g, "&#39;");
   var descriptionToSend = associatedData.description.replace(/'/g, "&#39;");
   if (associatedData) {
-    console.log(associatedData);
     if (associatedData.isFollowed) {
       var isFollowed = `
         <div style="color: lime" class="options following" onclick="unfollowAuthor('${associatedData.personID}')">
@@ -354,6 +353,8 @@ function showDialogueBox(storyID){
           </div>
         </div>
       `;
+    }else if (associatedData.isFollowed == 'none') {
+      var isFollowed = "";
     }else{
       var isFollowed = `
         <div class="options following" onclick="followAuthor('${associatedData.personID}')">

@@ -195,13 +195,8 @@ class showWebstories{
           return;
         }
         $row = mysqli_fetch_all($result, true);
-        if (count($row) > 8) {
-          $totalStories = 8;
-        }else{
-          $totalStories = count($row);
-        }
         $storiesToRender = [];
-        for ($i=0; $i < $totalStories ; $i++) {
+        for ($i=0; $i < count($row) ; $i++) {
           $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
           $moniStatus = json_decode($storyMetaData['moniStatus'], true);
           if ($moniStatus['status'] != 'false') {
@@ -213,8 +208,8 @@ class showWebstories{
             $storiesToRender[$i]['storyID'] = $row[$i]['storyID'];
             $storiesToRender[$i]['lastPublished'] = $row[$i]['firstEdit'];
             $storiesToRender[$i]['personID'] = $this->AUTH->encrypt($row[$i]['personID']);
-            $storiesToRender[$i]['isMyStory'] = false;
-            $storiesToRender[$i]['isFollowed'] = false;
+            $storiesToRender[$i]['isMyStory'] = 'none';
+            $storiesToRender[$i]['isFollowed'] = 'none';
             $storiesToRender[$i]['title'] = $storyMetaData['title'];
             $storiesToRender[$i]['description'] = $storyMetaData['description'];
             $storiesToRender[$i]['category'] = $storyMetaData['category'];
@@ -235,6 +230,11 @@ class showWebstories{
             }
             return ($timestampA > $timestampB) ? -1 : 1;
         });
+
+        if (count($row) > 8) {
+          $index = 7;
+            $storiesToRender = array_splice($storiesToRender,0, $index + 1);
+        }
         $jsonDecodedData = json_encode($storiesToRender);
         showMessage(true, $jsonDecodedData);
       }
