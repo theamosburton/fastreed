@@ -23,6 +23,15 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ4YQSPFM1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XZ4YQSPFM1');
+    </script>
     <script type="text/javascript">
       let menu = 'privayPolicy';
     </script>
