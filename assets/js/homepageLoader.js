@@ -346,6 +346,29 @@ function showDialogueBox(storyID){
   var titleToSend = associatedData.title.replace(/'/g, "&#39;");
   var descriptionToSend = associatedData.description.replace(/'/g, "&#39;");
   if (associatedData) {
+    if (associatedData.isFollowed) {
+      var isFollowed = `
+        <div class="options">
+          <div class="optionIcon">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div class="optionName">
+            <span>Author followed</span>
+          </div>
+        </div>
+      `;
+    }else{
+      var isFollowed = `
+        <div class="options">
+          <div class="optionIcon">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+          <div class="optionName">
+            <span>Follow author</span>
+          </div>
+        </div>
+      `;
+    }
     var alertConatiner = document.querySelector('#alertContainerHome');
     alertConatiner.style.display = 'flex';
     var alertBox = document.querySelector('#alertBoxHome');
@@ -375,14 +398,7 @@ function showDialogueBox(storyID){
         </div>
       </div>
 
-      <div class="options">
-        <div class="optionIcon">
-          <i class="fa-solid fa-user-plus"></i>
-        </div>
-        <div class="optionName">
-          <span>Follow author</span>
-        </div>
-      </div>
+      ${isFollowed}
 
       <div class="options">
         <div class="optionIcon">
