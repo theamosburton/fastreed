@@ -464,7 +464,7 @@ async function shareSupportedStory(title, url, image, element) {
   try {
     title = decodeURIComponent(title);
     const ext = image.split('.').pop();
-    url = 'https://www.fastreed.com/webstories' + url;
+    url = 'https://www.fastreed.com/webstories/' + url;
     image = 'https://www.fastreed.com' + image;
 
     if (navigator.share) {
