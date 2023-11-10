@@ -350,7 +350,7 @@ function showDialogueBox(storyID){
           <div class="optionIcon">
           <i class="fa-solid fa-check-circle"></i>
           </div>
-          <div class="optionName followMessage">
+          <div class="optionName">
             <span>Verified by Admin</span>
           </div>
         </div>
@@ -361,7 +361,7 @@ function showDialogueBox(storyID){
           <div class="optionIcon">
           <i class="fa-solid fa-circle-exclamation"></i>
           </div>
-          <div class="optionName followMessage">
+          <div class="optionName">
             <span>Not verified</span>
           </div>
         </div>
