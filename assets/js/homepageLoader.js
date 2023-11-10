@@ -330,6 +330,7 @@ async function loadStoriesAndAccessLastStoryTime() {
 loadStoriesAndAccessLastStoryTime();
 function showDialogueBox(storyID){
   var allData = loadLatestStories.allWebstoryData;
+  console.log(allData);
   var associatedData = false;
   var storyNumberIndex;
   for (var i = 0; i < allData.length; i++) {
@@ -341,7 +342,32 @@ function showDialogueBox(storyID){
   }
   var titleToSend = associatedData.title.replace(/'/g, "&#39;");
   var descriptionToSend = associatedData.description.replace(/'/g, "&#39;");
+
   if (associatedData) {
+    if (associatedData.moniStatus == 'true') {
+      var moniStatus = `
+        <div style="color: lime" class="options">
+          <div class="optionIcon">
+          <i class="fa-solid fa-check-circle"></i>
+          </div>
+          <div class="optionName followMessage">
+            <span>Verified by Admin</span>
+          </div>
+        </div>
+      `;
+    }else {
+      var moniStatus = `
+        <div style="color: orange" class="options">
+          <div class="optionIcon">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <div class="optionName followMessage">
+            <span>Not verified</span>
+          </div>
+        </div>
+      `;
+    }
+
     if (associatedData.isFollowed == 'none') {
       var isFollowed = `
         <div style="color: lime" class="options following" onclick="signUp()">
@@ -388,6 +414,7 @@ function showDialogueBox(storyID){
       </div>
     </div>
     <div class="alertBody">
+    ${moniStatus}
       <div class="options">
         <div class="optionIcon">
           <i class="fa-solid fa-circle-xmark"></i>
@@ -512,7 +539,6 @@ async function unfollowAuthor(personID){
     following.style.color= 'red';
   }
 }
-
 async function followAuthor(personID){
   var followIcon = document.querySelector('.followIcon');
   followIcon.innerHTML = '<div class="spinner" style="margin:0px; width: 15px; height: 15px;"></div>';
