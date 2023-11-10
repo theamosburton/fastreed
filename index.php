@@ -32,11 +32,39 @@ class showIndex{
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
         if ($this->userData->whoAmI() != 'Anonymous') {
-          $userDetail = ' <script>
-                var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
-             </script>;';
+          $userDetail = "
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            // Set custom dimension for username
+            gtag('config', 'G-XZ4YQSPFM1', {
+              'custom_map': {
+                'dimension1': 'username'
+              }
+            });
+
+            // Set the username
+            gtag('set', 'username', '".$this->userData->getSelfDetails()['username']."');
+          </script>";
         }else{
-          $userDetail = '';
+          $userDetail = "
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            // Set custom dimension for username
+            gtag('config', 'G-XZ4YQSPFM1', {
+              'custom_map': {
+                'dimension1': 'username'
+              }
+            });
+
+            // Set the username
+            gtag('set', 'username', 'nonLogged');
+          </script>";
         }
 
 
