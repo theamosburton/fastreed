@@ -41,12 +41,12 @@ class showIndex{
             // Set custom dimension for username
             gtag('config', 'G-XZ4YQSPFM1', {
               'custom_map': {
-                'dimension1': 'username'
+                'user_id': 'username'
               }
             });
 
             // Set the username
-            gtag('set', 'username', '".$this->userData->getSelfDetails()['username']."');
+            gtag('set', 'user_id', '".$this->userData->getSelfDetails()['username']."');
           </script>";
         }else{
           $userDetail = "
