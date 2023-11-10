@@ -313,11 +313,6 @@ function showVideo(path, visibility, ID, ext, vidID, time, size, status){
             </div>
           </div>
           <video controls controlsList="nodownload" onclick="showPicOptions('none')"> <source src="${path}" type="video/mp4"></video>`;
-    disbaleScroll();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
     if (visibility == 'none') {
       document.getElementById('earthIcon').remove();
       document.getElementById('deleteImageIcon').remove();
@@ -333,7 +328,6 @@ function removeImage(){
     var showContainer = document.querySelector('#imageShowDiv .imageContainer');
     showContainer.innerHTML = ``;
     showImageDiv.style.display = 'none';
-    enableScroll();
   }
 }
 
