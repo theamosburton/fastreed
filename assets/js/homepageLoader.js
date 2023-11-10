@@ -565,3 +565,11 @@ async function followAuthor(personID){
     following.style.color= 'red';
   }
 }
+
+parent.addEventListener('click', function(event) {
+  if (event.target === child) {
+    return;
+  }else if (event.target === parent) {
+    hideAlert();
+  }
+});

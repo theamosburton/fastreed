@@ -199,13 +199,7 @@ $('#noti-nav').mouseout(function(){
 const parent = document.getElementById('alertContainerHome');
 const child = document.getElementById('alertBoxHome');
 
-parent.addEventListener('click', function(event) {
-  if (event.target === child) {
-    return;
-  }else if (event.target === parent) {
-    hideAlert();
-  }
-});
+
 
 function hideAlert(){
   document.querySelector('.alertContainer').style.display = 'none';
