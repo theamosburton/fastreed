@@ -123,7 +123,7 @@
 .f-card .meta .metaInfo .cat{
     display: -webkit-box;
     color: rgb(213, 211, 211);
-    width: 65%;
+    width: 60%;
     -webkit-line-clamp: 1;
     overflow: hidden;
     -webkit-box-orient: vertical;
