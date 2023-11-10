@@ -31,6 +31,15 @@ class showIndex{
         $this->canonUrl = "https://www.fastreed.com";
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
+        if ($this->userData->whoAmI() != 'Anonymous') {
+          $userDetail = ' <script>
+                var currentUsername = "'.$this->userData->getSelfDetails()['username'].'";
+             </script>;';
+        }else{
+          $userDetail = '';
+        }
+
+
         // var_dump($this->showLatestToAnon());
         $totalStoriesJSON = []; // Initialize an array to hold the JSON-LD data for all web stories
         $showLastesAnon = $this->showLatestToAnon();
@@ -73,7 +82,7 @@ class showIndex{
         }
 
 
-// *************/ Head Section /**************** //
+        // *************/ Head Section /**************** //
         include ".ht/views/homepage/head.html";
         echo "\n".<<<HTML
         <body class="scrollbar-style">
@@ -89,7 +98,7 @@ class showIndex{
         }
 
 
-    //Header Section printer
+        //Header Section printer
         echo <<<HTML
            <header>
         HTML."\n";
