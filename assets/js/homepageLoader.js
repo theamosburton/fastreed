@@ -415,14 +415,6 @@ function showDialogueBox(storyID){
     </div>
     <div class="alertBody">
     ${moniStatus}
-      <div class="options">
-        <div class="optionIcon">
-          <i class="fa-solid fa-circle-xmark"></i>
-        </div>
-        <div class="optionName" onclick="hideStory('${storyNumberIndex}')">
-          <span>Hide this</span>
-        </div>
-      </div>
 
       <div class="options">
         <div class="optionIcon">
