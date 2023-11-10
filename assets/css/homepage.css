@@ -109,6 +109,7 @@
 }
 .f-card .meta .metaInfo{
   width: 95%;
+  display: flex;
 }
 .f-card .meta .metaOptions{
   width: 5%;
@@ -118,6 +119,14 @@
 }
 .f-card .meta .metaOptions:hover{
   cursor: pointer;
+}
+.f-card .meta .metaInfo .cat{
+    display: -webkit-box;
+    color: rgb(213, 211, 211);
+    width: 65%;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 .f-card {
   padding: 1px;
@@ -821,6 +830,7 @@ header #nav #profileImage{
   margin: 0px 10px 0px 0px;
   color: rgb(194, 194, 194);
 }
+
 
 .cat a{
   color: rgb(194, 194, 194);
