@@ -123,10 +123,20 @@
 .f-card .meta .metaInfo .cat{
     display: -webkit-box;
     color: rgb(213, 211, 211);
-    width: 55%;
+    width: 60%;
     -webkit-line-clamp: 1;
     overflow: hidden;
     -webkit-box-orient: vertical;
+}
+.f-card .meta .metaInfo .date{
+    width: 15%;
+}
+.f-card .meta .metaInfo .views{
+    width: 25%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .f-card {
   padding: 1px;

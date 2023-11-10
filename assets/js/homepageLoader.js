@@ -85,7 +85,7 @@ class LoadStories {
                 <div class="metaInfo">
                   <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
                   <span class="date">${timeAgo}</span>
-                  <span class="date">${views}
+                  <span class="date views">${views}
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
@@ -124,7 +124,7 @@ class LoadStories {
                 <div class="metaInfo">
                   <span class="cat"> <a href="">${parsedJSON[i].category}</a> </span>
                   <span class="date">${timeAgo}</span>
-                  <span class="date">${views}
+                  <span class="date views">${views}
                   <i class="fa-regular fa-eye"></i>
                   </span>
                 </div>
