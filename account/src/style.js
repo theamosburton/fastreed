@@ -193,12 +193,6 @@ function showImage(path, visibility, ID, ext, imgID, time, size, status){
             </div>
           </div>
             <img src="${path}" onclick="showPicOptions('none')" alt=""></img>`;
-      disbaleScroll();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-
     }
 
     if (visibility == 'none') {
