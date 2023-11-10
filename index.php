@@ -54,16 +54,14 @@ class showIndex{
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            // Set custom dimension for username
             gtag('config', 'G-XZ4YQSPFM1', {
               'custom_map': {
-                'dimension1': 'username'
+                'user_id': 'username'
               }
             });
 
             // Set the username
-            gtag('set', 'username', 'nonLogged');
+            gtag('set', 'user_id', 'nonLogged');
           </script>";
         }
 
