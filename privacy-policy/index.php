@@ -14,6 +14,7 @@
     <meta data-rh="true" property="og:image" content="https://www.fastreed.com/favicon.ico">
     <meta data-rh="true" property="twitter:image" content="https://www.fastreed.com/favicon.ico">
     <meta data-rh="true" property="og:url" content="https://www.fastreed.com/terms-privacy/privacy/">
+    <meta name="google-adsense-account" content="ca-pub-2950653490323756">
     <meta data-rh="true" property="og:type" content="website">
     <!-- <meta name="author" content=""> -->
     <link data-rh="true" rel="canonical" href="https://www.fastreed.com/terms-privacy/privacy/">
