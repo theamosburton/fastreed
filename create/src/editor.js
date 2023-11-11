@@ -177,7 +177,6 @@ class Editor{
         publish.setAttribute('onclick', 'editor.draftStory()');
         save.setAttribute('onclick', 'editor.publishStory(false)');
       }
-      // console.log(jsObject);
       var browserData = window.localStorage.getItem(`${editor.storyID}`);
       browserData = JSON.parse(browserData);
       if (browserData) {
@@ -1290,13 +1289,15 @@ class Editor{
       });
       this.metaData.relatedStory = input.value;
     }
-    // Publishing
+    // Publishing and updating both
   async publishStory(z){
+    var self = this;
     if (z == true) {
         await this.saveStory();
     }
-      var saving = document.getElementById('publishStory');
-      saving.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
+      var publishButton = document.getElementById('publishStory');
+      var saveButton = document.getElementById('saveStory');
+      publishButton.innerHTML = "<div class='spinner' style='margin:0px 10px' ></div>";
       var alertCont = document.querySelector('.altertContainer');
       alertCont.style.display = 'flex';
       alertCont.id = 'errorConatiner';
@@ -1330,7 +1331,7 @@ class Editor{
             element.style.borderColor = 'grey';
           });
 
-          if (this.storyStatus == 'published') {
+          if (self.storyStatus == 'published') {
               await this.updateStory();
           }else{
               await this.publish();
@@ -1357,8 +1358,12 @@ class Editor{
             </div>
             </div>
           </div>`;
-            document.querySelector('.altertDiv').style.background = 'transparent';
-            saving.innerHTML = "Publish";
+          if (self.storyStatus == 'published') {
+            publishButton.innerHTML = "Update";
+          }else{
+            publishButton.innerHTML = "Publish";
+          }
+          document.querySelector('.altertDiv').style.background = 'transparent';
         }
       }else{
         var alertCont = document.querySelector('.altertContainer');
@@ -1380,14 +1385,20 @@ class Editor{
           </div>
           </div>
         </div>`;
-          document.querySelector('.altertDiv').style.background = 'transparent';
-          saving.innerHTML = "Publish";
+        if (self.storyStatus == 'published') {
+          publishButton.innerHTML = "Update";
+        }else{
+          publishButton.innerHTML = "Publish";
+        }
+        document.querySelector('.altertDiv').style.background = 'transparent';
       }
     }
 
   async publish(){
     let self = this;
     var alertCont = document.querySelector('.altertContainer');
+    var publishButton = document.getElementById('publishStory');
+    var saveButton = document.getElementById('saveStory');
     alertCont.style.display = 'flex';
     alertCont.id = 'errorConatiner';
     document.querySelector('.altertDiv').innerHTML =
@@ -1437,14 +1448,14 @@ class Editor{
    var data = await response.json();
    if (data) {
        if (data.Result) {
-         setTimeout(function(){
            var alertCont = document.querySelector('.altertContainer');
            alertCont.style.display = 'flex';
-           if (self.storyStatus == 'published') {
+           if (this.storyStatus == 'published') {
              var smessage = 'Story Updated';
            }else{
              var smessage = 'Story Published';
            }
+            this.storyStatus = 'published';
            alertCont.id = 'errorConatiner';
            document.querySelector('.altertDiv').innerHTML =
            `<div class="progress">
@@ -1476,7 +1487,10 @@ class Editor{
               </div>
              </div>
            </div>`;
-         }, 1000);
+           publishStory.innerHTML = 'Draft';
+           saveButton.innerHTML = 'Update';
+           saveButton.setAttribute('onclick', 'editor.publishStory(true)');
+           publishStory.setAttribute('onclick', 'editor.draftStory()');
        }else{
          var alertCont = document.querySelector('.altertContainer');
          alertCont.style.display = 'flex';
@@ -1498,6 +1512,7 @@ class Editor{
            </div>
            </div>
          </div>`;
+         publishButton.innerHTML = 'Publish';
        }
    }else{
      var alertCont = document.querySelector('.altertContainer');
@@ -1521,6 +1536,7 @@ class Editor{
        </div>
        </div>
      </div>`;
+     publishButton.innerHTML = 'Publish';
    }
  }
   async checkLayers() {
@@ -1673,24 +1689,18 @@ class Editor{
         var data = await response.json();
         if (data) {
             if (data.Result) {
-                setTimeout(function(){
                     saving.innerHTML = 'Saved';
                     var dat = {
                       layers : editor.layers,
                       metaData : editor.metaData,
                       version : editor.version
                     };
-                      window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
-                }, 500);
+                    window.localStorage.setItem(`${editor.storyID}`, JSON.stringify(dat));
             }else{
-                setTimeout(function(){
-                    saving.innerHTML = 'Not saved';
-                }, 500);
+                saving.innerHTML = 'Error';
             }
         }else{
-            setTimeout(function(){
-                saving.innerHTML = 'Not saved';
-            }, 500);
+            saving.innerHTML = 'Error';
         }
     }
     saveData();
@@ -1727,6 +1737,8 @@ class Editor{
   async updateStory(){
     let self = this;
     var alertCont = document.querySelector('.altertContainer');
+    var publishButton = document.getElementById('publishStory');
+    var updatehButton = document.getElementById('saveStory');
     alertCont.style.display = 'flex';
     alertCont.id = 'errorConatiner';
     document.querySelector('.altertDiv').innerHTML =
@@ -1776,10 +1788,11 @@ class Editor{
    var data = await response.json();
    if (data) {
        if (data.Result) {
-         setTimeout(function(){
            var alertCont = document.querySelector('.altertContainer');
            alertCont.style.display = 'flex';
            alertCont.id = 'errorConatiner';
+           publishButton.innerHTML = 'Draft';
+           updatehButton.innerHTML = 'Update';
            document.querySelector('.altertDiv').innerHTML =
            `<div class="progress">
              <div class="cancelBar">
@@ -1810,12 +1823,11 @@ class Editor{
               </div>
              </div>
            </div>`;
-         }, 1000);
        }else{
          var alertCont = document.querySelector('.altertContainer');
          alertCont.style.display = 'flex';
          alertCont.id = 'errorConatiner';
-
+         publishButton.innerHTML = 'Draft';
          document.querySelector('.altertDiv').innerHTML =
          `<div class="progress">
            <div class="cancelBar">
@@ -1837,6 +1849,7 @@ class Editor{
      var alertCont = document.querySelector('.altertContainer');
      alertCont.style.display = 'flex';
      alertCont.id = 'errorConatiner';
+      publishButton.innerHTML = 'Draft';
      document.querySelector('.altertDiv').innerHTML =
      `<div class="progress">
        <div class="cancelBar">
@@ -1861,6 +1874,8 @@ class Editor{
 
  async draftStory(){
    var alertCont = document.querySelector('.altertContainer');
+  var publishButton = document.getElementById('publishStory');
+  var saveButton = document.getElementById('saveStory');
    alertCont.style.display = 'flex';
    alertCont.id = 'errorConatiner';
    document.querySelector('.altertDiv').innerHTML =
@@ -1902,7 +1917,6 @@ class Editor{
    var data = await response.json();
    if (data) {
        if (data.Result) {
-         setTimeout(function(){
            var alertCont = document.querySelector('.altertContainer');
            alertCont.id = 'errorConatiner';
            document.querySelector('.altertDiv').innerHTML =
@@ -1924,8 +1938,11 @@ class Editor{
              </div>
              </div>
            </div>`;
-         }, 1000);
-
+           publishStory.innerHTML = 'Publish';
+           saveButton.innerHTML = 'Save';
+           saveButton.setAttribute('onclick', 'editor.saveStory()');
+           publishStory.setAttribute('onclick', 'editor.publishStory(true)');
+           self.storyStatus = 'drafted';
        }else{
          var alertCont = document.querySelector('.altertContainer');
          alertCont.style.display = 'flex';

@@ -112,9 +112,12 @@
   margin-left: 10px;
 }
 .storyBox .visibleArea .otherInfoDiv .title span{
-  display: inline;
-  white-space: normal;
-  font-size: 20px;
+    white-space: normal;
+    font-size: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .storyBox .visibleArea .otherInfoDiv .about{
