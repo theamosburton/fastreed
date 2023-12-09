@@ -12,7 +12,7 @@ class  refreshSite{
         $this->DB = $this->DB_CONNECT->DBConnection();
         $this->userData = new getLoggedData();
 
-        if ($this->userData->adminLogged) {
+        if ($this->userData-> whoAmI() == 'Admin') {
             if (!isset($_GET)) {
                 showMessage(false, "Request not Found");
             }elseif (isset($_GET['intent'])) {
