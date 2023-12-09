@@ -448,9 +448,9 @@ class Webstories{
                 $result = mysqli_stmt_execute($stmt);
 
                 // Update `metaData` table
-                $sql1 = "UPDATE metaData SET pViews=?, category = ?, title = ?, description = ?, keywords = ?, url = ?, moniStatus = ? WHERE postID = ?";
+                $sql1 = "UPDATE metaData SET category = ?, title = ?, description = ?, keywords = ?, url = ?, moniStatus = ? WHERE postID = ?";
                 $stmt1 = mysqli_prepare($this->DB, $sql1);
-                mysqli_stmt_bind_param($stmt1, 'ssssssss','0', $category, $title, $description, $keywords, $url, $verifyStatus, $storyID);
+                mysqli_stmt_bind_param($stmt1, 'sssssss', $category, $title, $description, $keywords, $url, $verifyStatus, $storyID);
                 $result1 = mysqli_stmt_execute($stmt1);
 
                 if ($result && $result1) {
@@ -461,9 +461,9 @@ class Webstories{
 
               }else{
                 // Insert into `metaData` table
-                $sql2 = "INSERT INTO metaData(pViews, postID, title, description, keywords, url, moniStatus, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql2 = "INSERT INTO metaData(postID, title, description, keywords, url, moniStatus, category) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt2 = mysqli_prepare($this->DB, $sql2);
-                mysqli_stmt_bind_param($stmt2, 'ssssssss','0', $storyID, $title, $description, $keywords, $url, $verifyStatus, $category);
+                mysqli_stmt_bind_param($stmt2, 'sssssss', $storyID, $title, $description, $keywords, $url, $verifyStatus, $category);
                 $result2 = mysqli_stmt_execute($stmt2);
 
                 // Update `stories` table
@@ -522,9 +522,9 @@ class Webstories{
                     $result = mysqli_stmt_execute($stmt);
 
                     // Update `metaData` table
-                    $sql1 = 'UPDATE metaData SET pViews=?, category = ?, title = ?, description = ?, keywords = ?, url = ?, moniStatus = ? WHERE postID = ?';
+                    $sql1 = 'UPDATE metaData SET category = ?, title = ?, description = ?, keywords = ?, url = ?, moniStatus = ? WHERE postID = ?';
                     $stmt1 = mysqli_prepare($this->DB, $sql1);
-                    mysqli_stmt_bind_param($stmt1, 'ssssssss', '0', $category, $title, $description, $keywords, $url, $verifyStatus, $storyID);
+                    mysqli_stmt_bind_param($stmt1, 'sssssss', $category, $title, $description, $keywords, $url, $verifyStatus, $storyID);
                     $result1 = mysqli_stmt_execute($stmt1);
 
                     if ($result && $result1) {
@@ -534,9 +534,9 @@ class Webstories{
                     }
                 } else {
                     // Insert into `metaData` table
-                    $sql2 = 'INSERT INTO metaData(pViews, category, postID, title, description, keywords, url, moniStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+                    $sql2 = 'INSERT INTO metaData(category, postID, title, description, keywords, url, moniStatus) VALUES (?, ?, ?, ?, ?, ?, ?)';
                     $stmt2 = mysqli_prepare($this->DB, $sql2);
-                    mysqli_stmt_bind_param($stmt2, 'ssssssss', '0', $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
+                    mysqli_stmt_bind_param($stmt2, 'sssssss', $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
                     $result2 = mysqli_stmt_execute($stmt2);
 
                     // Update `stories` table
@@ -674,9 +674,9 @@ class Webstories{
               $result = mysqli_stmt_execute($stmt);
 
               // Update `metaData` table
-              $sql1 = 'UPDATE metaData SET pViews= ?, category = ?, moniStatus = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?';
+              $sql1 = 'UPDATE metaData SET category = ?, moniStatus = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?';
               $stmt1 = mysqli_prepare($this->DB, $sql1);
-              mysqli_stmt_bind_param($stmt1, 'ssssssss', '0', $category, $verifyStatus, $title, $description, $keywords, $url, $storyID);
+              mysqli_stmt_bind_param($stmt1, 'sssssss', $category, $verifyStatus, $title, $description, $keywords, $url, $storyID);
               $result1 = mysqli_stmt_execute($stmt1);
 
               if ($result && $result1) {
@@ -686,9 +686,9 @@ class Webstories{
               }
             }else{
               // Insert into `metaData` table
-              $sql2 = "INSERT INTO metaData(pViews, category, postID, title, description, keywords, url, moniStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+              $sql2 = "INSERT INTO metaData(category, postID, title, description, keywords, url, moniStatus) VALUES(?, ?, ?, ?, ?, ?, ?)";
               $stmt2 = mysqli_prepare($this->DB, $sql2);
-              mysqli_stmt_bind_param($stmt2, 'ssssssss', '0', $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
+              mysqli_stmt_bind_param($stmt2, 'sssssss', $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
               $result2 = mysqli_stmt_execute($stmt2);
 
               // Update `stories` table
@@ -750,9 +750,9 @@ class Webstories{
               mysqli_stmt_bind_param($stmt, "sssss", $storyData, $lastEdit, $storyStatus, $UID, $storyID);
               $result = mysqli_stmt_execute($stmt);
 
-              $sql1 = "UPDATE metaData SET pViews = ?, category = ?, moniStatus = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?";
+              $sql1 = "UPDATE metaData SET category = ?, moniStatus = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?";
               $stmt1 = mysqli_prepare($this->DB, $sql1);
-              mysqli_stmt_bind_param($stmt1, "ssssssss", '0', $category, $verifyStatus, $title, $description, $keywords, $url, $storyID);
+              mysqli_stmt_bind_param($stmt1, "sssssss", $category, $verifyStatus, $title, $description, $keywords, $url, $storyID);
               $result1 = mysqli_stmt_execute($stmt1);
 
               if ($result && $result1) {
@@ -762,9 +762,9 @@ class Webstories{
               }
 
             }else{
-              $sql2 = "INSERT INTO metaData(pViews, category, postID, title, description, keywords, url, moniStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+              $sql2 = "INSERT INTO metaData(category, postID, title, description, keywords, url, moniStatus) VALUES(?, ?, ?, ?, ?, ?, ?)";
               $stmt2 = mysqli_prepare($this->DB, $sql2);
-              mysqli_stmt_bind_param($stmt2, "ssssssss", '0', $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
+              mysqli_stmt_bind_param($stmt2, "sssssss", $category, $storyID, $title, $description, $keywords, $url, $verifyStatus);
               $result2 = mysqli_stmt_execute($stmt2);
 
               $sql3 = "UPDATE stories SET storyData = ?, lastEdit = ?, storyStatus = ? WHERE personID = ? AND storyID = ?";
@@ -1051,9 +1051,9 @@ class Webstories{
       $category = $metaData['category'];
       if ($this->checkStoryMetaExists($storyID)) {
         // Update `metaData` table
-        $sql1 = "UPDATE metaData SET pViews = ?, category = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?";
+        $sql1 = "UPDATE metaData SET category = ?, title = ?, description = ?, keywords = ?, url = ? WHERE postID = ?";
         $stmt1 = mysqli_prepare($this->DB, $sql1);
-        mysqli_stmt_bind_param($stmt1, 'sssssss', '0', $category, $title, $description, $keywords, $url, $storyID);
+        mysqli_stmt_bind_param($stmt1, 'ssssss', $category, $title, $description, $keywords, $url, $storyID);
         $result1 = mysqli_stmt_execute($stmt1);
 
         if ($result1) {
@@ -1061,9 +1061,9 @@ class Webstories{
         }
       }else{
         // Insert into `metaData` table
-        $sql2 = "INSERT INTO metaData(pViews, postID, title, description, keywords, url, category) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql2 = "INSERT INTO metaData(postID, title, description, keywords, url, category) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt2 = mysqli_prepare($this->DB, $sql2);
-        mysqli_stmt_bind_param($stmt2, 'sssssss', '0', $storyID, $title, $description, $keywords, $url, $category);
+        mysqli_stmt_bind_param($stmt2, 'ssssss', $storyID, $title, $description, $keywords, $url, $category);
         $result2 = mysqli_stmt_execute($stmt2);
 
         if ($result2) {
