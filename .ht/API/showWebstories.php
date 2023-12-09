@@ -58,7 +58,6 @@ class showWebstories{
         $this->userData->DB_CONNECT->closeConnection();
       }
 
-
       public function showLatestToUser(){
           $selfUID = $_SESSION['LOGGED_USER'];
           $data = json_decode(file_get_contents('php://input'), true);
@@ -105,6 +104,8 @@ class showWebstories{
           for ($i = 0; $i < count($row); $i++) {
               $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
               $moniStatus = json_decode($storyMetaData['moniStatus'], true);
+              $pViews = $storyMetaData['pViews'];
+              $pViews = intval($pViews);
               if ($moniStatus['status'] != 'false') {
                 $storiesToRender[$i]['moniStatus'] = $moniStatus['status'];
                 $authorData = $this->getAuthorData($row[$i]['personID']);
@@ -121,10 +122,15 @@ class showWebstories{
                 $storiesToRender[$i]['url'] = $storyMetaData['url'];
                 $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
                 $storiesToRender[$i]['isMyStory'] = ($selfUID == $row[$i]['personID']);
+
+                if ($pViews <= 0) {
+                  $pViews = $this->addMoreViews($row[$i]['storyID'], $row[$i]['firstEdit']);
+                }
+
                 if ($storiesToRender[$i]['isMyStory']) {
                      $views = $views;
                 }else{
-                    $views = $views + 1543;
+                    $views = $views + $pViews;
                 }
                 $storiesToRender[$i]['totalViews'] = $views;
                 $storyData = json_decode($row[$i]['storyData'], true);
@@ -151,6 +157,26 @@ class showWebstories{
           showMessage(true, $jsonDecodedData);
       }
 
+      public function addMoreViews($storyID, $storyFirstEdit){
+        $timeInSeconds = $storyFirstEdit / 1000;
+        // echo "tS ".$timeInSeconds;
+        $currentUnixTime = time();
+        // echo "tP ".$currentUnixTime;
+        $fourHoursAgo = $currentUnixTime - (4 * 60 * 60);
+        // echo "ftP ".$fourHoursAgo;
+        $randomNumber = mt_rand(100, 500);
+        if ($timeInSeconds <= $fourHoursAgo) {
+          $sql = "UPDATE metaData SET pViews ='$randomNumber' WHERE postID = '$storyID'";
+          $result = mysqli_query($this->DB, $sql);
+          if ($result) {
+            return $randomNumber;
+          }else{
+            return 0;
+          }
+        }else{
+            return 0;
+        }
+      }
       public function getAuthorData($personID){
         $return = [];
         $sql = "SELECT * FROM account_details WHERE personID ='$personID'";
@@ -178,8 +204,6 @@ class showWebstories{
               return 0;
           }
       }
-
-
       public function showLatestToAnon(){
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data['reload']) && !empty($data['reload'])) {
