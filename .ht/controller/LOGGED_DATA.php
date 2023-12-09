@@ -9,18 +9,6 @@ class getLoggedData{
     function __construct(){
         $this->DB_CONNECT = new Database();
         $this->DB = $this->DB_CONNECT->DBConnection();
-
-        if (isset($_SESSION['GSI'])) {
-            $this->NAME = 'Anonymous';
-            $this->DESIG = 'New User';
-            $this->PROFILE_PIC = '/assets/img/dummy.png';
-        }elseif (isset($_SESSION['LOGGED_USER'])) {
-            $PID = $_SESSION['LOGGED_USER'];
-            if (!$PID === false) {
-                $this->whoVisited($PID);
-            }
-        }
-
     }
 
     public function getAdminID(){

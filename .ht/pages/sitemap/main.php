@@ -1,5 +1,5 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../../';
 include($_SERVROOT.'/secrets/DEV_OPTIONS.php');
 header('Content-Type: application/xml');
 echo '<?xml version="1.0" encoding="UTF-8" ?>

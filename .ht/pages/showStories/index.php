@@ -1,5 +1,5 @@
 <?php
-$_SERVROOT = '../../';
+$_SERVROOT = '../../../../';
 $_DOCROOT = $_SERVER['DOCUMENT_ROOT'];
 include $_DOCROOT."/.ht/controller/VISIT.php";
 
@@ -65,7 +65,7 @@ class renderStory{
            $lastmod = gmdate("D, d M Y H:i:s", $unixLastGMT). " GMT";
            $firstmod = gmdate("D, d M Y H:i:s", $unixFirstGMT) . " GMT";
 
-           include '../.ht/views/webstories/index.html';
+           include '../../views/webstories/index.html';
          }
          $this->DB_CONNECT->closeConnection();
          $this->userData->DB_CONNECT->closeConnection();

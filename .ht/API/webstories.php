@@ -285,7 +285,7 @@ class Webstories{
         }
         $storyID = $data['storyID'];
         $otherStories = $this->getRelatedStoriesByID($storyID);
-  $otherStories = json_encode(array_values($otherStories));
+        $otherStories = json_encode(array_values($otherStories));
         $sql = "SELECT * FROM stories WHERE personID = '$UID' and storyID = '$storyID'";
         $result = mysqli_query($this->DB, $sql);
         if ($result) {

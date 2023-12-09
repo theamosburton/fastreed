@@ -39,14 +39,12 @@ class showProfile {
             new loggedAdminVother();
         }elseif ($this->whoAmI == 'User' && isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new loggedVother();
+        }elseif($this->whoAmI == 'Admin' || $this->whoAmI == 'User') {
+            new loggedVself();
         }elseif (isset($_GET['u']) && $this->checkUserExits($_GET['u'])) {
             new nonLoggedVother();
         }elseif ($this->whoAmI == 'User' && isset($_GET['u']) && !$this->checkUserExits($_GET['u'])) {
             header("Location:/account/sign/");
-        }elseif($this->whoAmI == 'Admin') {
-            new loggedVself();
-        }elseif($this->whoAmI == 'User') {
-            new loggedVself();
         }else{
             header("Location:/?");
             // var_dump($this->whoAmI);
