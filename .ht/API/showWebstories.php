@@ -126,11 +126,8 @@ class showWebstories{
                 if ($pViews <= 0) {
                   $pViews = $this->addMoreViews($row[$i]['storyID'], $row[$i]['firstEdit']);
                 }
-
-                if ($storiesToRender[$i]['isMyStory']) {
-                     $views = $views;
-                }else{
-                    $views = $views + $pViews;
+                if (!$this->checkIfPersonalAccount($selfUID)) {
+                   $views = $views + $pViews;
                 }
                 $storiesToRender[$i]['totalViews'] = $views;
                 $storyData = json_decode($row[$i]['storyData'], true);
@@ -275,6 +272,22 @@ class showWebstories{
           $return = $row;
         }
         return $return;
+      }
+
+      private function checkIfPersonalAccount($selfUID){
+        $sql = "SELECT * FROM accounts WHERE personID ='$selfUID'";
+        $result = mysqli_query($this->DB, $sql);
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $isPersonal = $row['isPersonalAccount'];
+          if ($isPersonal == 'PA') {
+            return true;
+          }else {
+            return false;
+          }
+        }else{
+          return false;
+        }
       }
       public function closeConnection(){
         if ($this->DB) {
