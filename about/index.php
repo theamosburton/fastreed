@@ -18,6 +18,7 @@
     <link data-rh="true" rel="canonical" href="https://www.fastreed.com/about/">
     <title>Fastreed: About Us</title>
     <link rel="stylesheet" href="/assets/css/policy.css">
+    <meta name="google-adsense-account" content="ca-pub-2950653490323756">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +26,8 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ4YQSPFM1"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2950653490323756"
-     crossorigin="anonymous">
-    </script>
+     crossorigin="anonymous"></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

@@ -24,9 +24,9 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
+    <meta name="google-adsense-account" content="ca-pub-2950653490323756">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2950653490323756"
-     crossorigin="anonymous">
-    </script>
+     crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ4YQSPFM1"></script>
     <script>
