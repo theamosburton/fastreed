@@ -223,6 +223,7 @@ class showWebstories{
         for ($i=0; $i < count($row) ; $i++) {
           $storyMetaData = $this->getStoryMetaData($row[$i]['storyID']);
           $moniStatus = json_decode($storyMetaData['moniStatus'], true);
+          $pViews = $storyMetaData['pViews'];
           if ($moniStatus['status'] != 'false') {
             $storiesToRender[$i]['moniStatus'] = $moniStatus['status'];
             $authorData = $this->getAuthorData($row[$i]['personID']);
@@ -239,7 +240,15 @@ class showWebstories{
             $storiesToRender[$i]['category'] = $storyMetaData['category'];
             $storiesToRender[$i]['url'] = $storyMetaData['url'];
             $views = $this->getTotalViews($storyMetaData['url'], $row[$i]['personID']);
-            $views = $views + 1543;
+            if ($pViews <= 0) {
+              $pViews = $this->addMoreViews($row[$i]['storyID'], $row[$i]['firstEdit']);
+            }
+
+            if ($storiesToRender[$i]['isMyStory']) {
+                 $views = $views;
+            }else{
+                $views = $views + $pViews;
+            }
             $storiesToRender[$i]['totalViews'] = $views;
             $storyData = json_decode($row[$i]['storyData'], true);
             $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
