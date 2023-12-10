@@ -243,12 +243,7 @@ class showWebstories{
             if ($pViews <= 0) {
               $pViews = $this->addMoreViews($row[$i]['storyID'], $row[$i]['firstEdit']);
             }
-
-            if ($storiesToRender[$i]['isMyStory']) {
-                 $views = $views;
-            }else{
-                $views = $views + $pViews;
-            }
+            $views = $views + $pViews;
             $storiesToRender[$i]['totalViews'] = $views;
             $storyData = json_decode($row[$i]['storyData'], true);
             $storiesToRender[$i]['image'] = $storyData['layers']['L0']['media']['url'];
