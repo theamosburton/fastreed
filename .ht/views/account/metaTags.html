@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title data-rh="true"><?php echo $this->webTitle;?></title>
+    <meta data-rh="true" name="keywords" content="<?php echo $this->webKeywords;?>">
+    <meta data-rh="true" name="description" content="<?php echo $this->webDescription;?>">
+    <meta data-rh="true" property="og:title" content="<?php echo $this->webTitle;?>">
+    <meta data-rh="true" property="og:description" content="<?php echo $this->webDescription;?>">
+    <meta data-rh="true" property="og:image" content="<?php echo $this->userImage;?>">
+    <meta data-rh="true" property="og:url" content="<?php echo $this->canonUrl;?>">
+    <meta data-rh="true" property="og:type" content="profile">
+    <link data-rh="true" rel="canonical" href="<?php echo $this->canonUrl;?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta itemprop="occupation" content="Webstory Writer">
+    <title><?php echo $this->webTitle;?></title>
+    <meta name="google-adsense-account" content="ca-pub-2950653490323756">
+    <!-- Gobal CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/homepage.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
+    <?php
+    if(isset($this->pageCss)){
+        if(!(count($this->pageCss) <= 0)){
+            for($i =0; $i < count($this->pageCss); $i++){
+                echo '<link href="'.$this->pageCss[$i].'?v='.$this->version.'" rel="stylesheet">';
+            }
+        }
+    }
+    ?>
+    <!--Fonts Css-->
+    <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <?php
+      echo $this->structure;
+    if(isset($this->extraScript)){
+        echo $this->extraScript;
+    }
+    echo '<script>var domainName = "'.DOMAIN.'";
+        </script>';
+
+    if ($this->adminLogged) {
+        echo '<script>var adminLogged = true;
+        var userLogged = false;
+        </script>';
+    }elseif ($this->userLogged) {
+        echo '<script>var userLogged = true;
+        var adminLogged = false;
+        </script>';
+    }else {
+        echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>';
+    }
+    if(isset($this->extraStyle)){
+        echo $this->extraStyle;
+    }
+    ?>
+</head>

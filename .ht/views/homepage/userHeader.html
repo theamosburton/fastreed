@@ -1,0 +1,45 @@
+<?php
+if ($this->whoAmI == 'Admin') {
+    $adminNav = <<<HTML
+    <div>
+        <i id="adminNavIcon" class="fas fa-solid fa-code fa-xl" onclick="toggleAdmin()"></i>
+    </div>
+    HTML;
+}else {
+    $adminNav = '';
+}
+?>
+    <div class="brand"><h1><a href="/">Fastreed</a></h1></div>
+    <div class="rightside">
+        <div class="nav" id="nav">
+
+            <!-- Profile Pic -->
+            <div>
+                <img onclick="toggleProfile()" src="<?php echo $this->userData->getSelfDetails()['profilePic']; ?>" alt="" id="profileImage">
+                <i id="accountIcon" hidden></i>
+            </div>
+            <div class="spinner" id="MenuSpinner" hidden></div>
+            <!-- Profile Pic -->
+               <!-- Admin Nav -->
+               <?php
+               echo $adminNav;
+               ?>
+               <!-- Admin Nav -->
+
+            <!-- Notifications Nav-->
+            <div class="navs">
+                <i id="notificationIcon" class="fa fa-regular fa-bell fa-xl" onclick="toggleNotifications()"></i>
+                <span onclick="toggleNotifications()" class="badge" id="notiCount"></span>
+            </div>
+            <!-- Notifications Nav-->
+
+
+
+            <!-- Settings Nav -->
+            <div class="navs">
+            <i class="fa fa-gear fa-xl" onclick="toggleSetting()"></i>
+            </div>
+            <!-- Settings Nav -->
+
+        </div>
+    </div>

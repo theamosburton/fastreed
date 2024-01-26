@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+  <?php
+  $storyData = json_decode($JSONlayers, true);
+  $mainPoster = '';
+  $date = $storyData['metaData']['date'];
+  $category = $storyData['metaData']['category'];
+  $isPromoted = $storyData['metaData']['selfPromotion'];
+  $relatedStory = $storyData['metaData']['relatedStory'];
+  $relatedStory = json_decode($relatedStory, true);
+  if ($storyData['layers']['L0']['media']['url'] == '' || $storyData['layers']['L0']['media']['url'] == 'default') {
+      $mainPoster = "/assets/img/default.jpeg";
+  } else {
+      $mainPoster = $storyData['layers']['L0']['media']['url'];
+  }
+  $totalLayers = count($storyData['layers']);
+  $isVideo = false;
+  $isImage = false;
+  for ($g = 0; $g < $totalLayers; $g++) {
+    $type = $storyData['layers']['L' . $g]['media']['type'];
+    if($type == 'video'){
+        $isVideo = true;
+        break;
+    }
+  }
+
+  for ($h = 0; $h < $totalLayers; $h++) {
+    $type = $storyData['layers']['L' . $h]['media']['type'];
+    if($type == 'image'){
+        $isImage = true;
+        break;
+    }
+  }
+
+  include 'head.html';
+  include 'style.html';
+
+  if($authorUsername != "fastreed"){
+    $entity = 'entity="'.$authorName.'"';
+    $entity_logo_src = 'entity-logo-src="'.$authorProfilePic.'"';
+    $entity_url = 'entity-url="'.DOMAIN.'/u/'.$authorUsername.'"';
+  }else{
+    $entity = "";
+    $entity_logo_src = "";
+    $entity_url = "";
+  }
+
+    echo '
+    <script data-rh="true" type="application/ld+json">
+      {
+  			"@context":"https://schema.org",
+  			"@type":"Organization",
+  			"name":"Fastreed",
+  			"alternateName":"fastreed",
+  			"description":"Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you are a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.",
+  			"logo":"https://www.fastreed.com/assets/img/logo500x500.jpg",
+  			"url":"https://www.fastreed.com",
+  			"contactPoint": {
+          "@type": "ContactPoint",
+          "email": "support@fastreed.com",
+          "contactType": "customer service"
+          }
+  		}
+    </script>
+    <script data-rh="true" type="application/ld+json">
+      {
+    		"@context":"https://schema.org",
+    		"@type":"NewsArticle",
+    		"headline":"'.$storyTitle.'",
+    		"name":"'.$storyTitle.'",
+    		"datePublished":"'.$firstmod.'",
+    		"dateModified":"'.$lastmod.'",
+    		"inLanguage":"en",
+    		"articleSection":"'.$category.'",
+    		"keywords":"'.$storyKeywords.'",
+        "description":"'.$storyDescription.'",
+    		"author":{
+    			"@type":"Person",
+    			"name":"'.$authorName.'",
+    			"url": "'.DOMAIN.'/u/'.$authorUsername.'"
+    		},
+    		"thumbnailUrl":"'.DOMAIN.'/webstories/'.$storyUrl.'",
+    		"image":{
+    			"@type":"ImageObject",
+    			"url":"'.$mainPoster.'"
+    		},
+    		"publisher":{
+    			"@type":"Organization",
+    			"name":"Fastreed",
+    			"url":"https://www.fastreed.com",
+    			"logo":{"@type":"ImageObject","url":"https://www.fastreed.com/assets/img/logo500x500.jpg","width":565,"height":565}
+    		},
+    		"mainEntityOfPage":{
+    			"@type":"WebPage",
+    			"@id":"'.DOMAIN.'/webstories/'.$storyUrl.'"
+    		}
+    	}
+    </script>';
+  ?>
+  </head>
+<body id="app">
+    <amp-story standalone ="" <?php echo $entity." ".$entity_logo_src." ".$entity_url;?> class="NWSStory" publisher="fastreed" title="<?php echo $storyData['metaData']['title'] ?>" poster-portrait-src="<?php echo $mainPoster ?>" publisher-logo-src="/favicon.ico"  >
+      <amp-story-auto-analytics gtag-id="G-XZ4YQSPFM1"></amp-story-auto-analytics>
+      <?php
+      $ampStory = '';
+      for ($i = 0; $i < $totalLayers; $i++) {
+         $objectFit = $storyData['layers']['L' . $i]['media']['styles']['mediaFit'];
+         $mediaTitle = $storyData['layers']['L' . $i]['media']['title'];
+         $overlayOpacity = $storyData['layers']['L' . $i]['media']['styles']['overlayOpacity'];
+         $titleFontSize = $storyData['layers']['L' . $i]['title']['fontSize'];
+         $titleFontFamily = $storyData['layers']['L' . $i]['title']['fontFamily'];
+         $titleFontWeight = $storyData['layers']['L' . $i]['title']['fontWeight'];
+         $storyTitle = $storyData['metaData']['title'];
+
+         if ($i == 0) {
+           $ampStory .= '
+            <amp-story-page id="Story_page_' . ($i + 1) . '_Template_id_7" class="NWSStory-scene" data-type="standard" data-layout="2">
+                <amp-story-grid-layer class="NWSStory-scene-content" template="fill">
+                    <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+                    <div class="NWSStory-layers NWSStory-layers--unfixed">
+                        <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                            <div class="NWSStory-layer NWSStory-layer--img">
+                                <div class="NWSStory-layer-content">
+                                    <amp-img src="' . $mainPoster . '" width="720" height="1280" layout="flex-item" title="'.$mediaTitle .'" object-fit="' . $objectFit . '">
+                                        <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
+                                    </amp-img>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+                        <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:40px 20px">
+                            <div animate-in="fly-in-top" animate-in-delay="1s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-top:120px">
+                                <p class="fade-in" style="font:18px/1.1 Poppins-regular;font-weight:700;padding-bottom:15px;text-align:center;margin:auto">'.$date.'</p>
+                            </div>
+                            <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                                <h1 class="fade-in" style="font:' . $titleFontSize . ' ' . $titleFontFamily . ';font-weight:' . $titleFontWeight . ';letter-spacing:0.72px;padding-bottom:15px;text-align:center;">' . $storyData['metaData']['title'] . '</h1>
+                            </div>
+                            <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                              <a style="text-decoration:none;" href="/u/'.$authorUsername.'"><p style="font:16px/1.5 helvetica;color:#fff;text-align:center;margin-bottom:3px;opacity:0.7;font-weight:600">By '.$authorName.'</p></a>
+              							</div>
+                            <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
+                                <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: none</p>
+                            </div>
+                        </div>
+                    </div>
+                </amp-story-grid-layer>
+            </amp-story-page>';
+         }elseif ($storyData['layers']['L' . $i]['media']['type'] == 'video') {
+                $textFontSize = $storyData['layers']['L' . $i]['otherText']['fontSize'];
+                $textFontFamily = $storyData['layers']['L' . $i]['otherText']['fontFamily'];
+                $textFontWeight = $storyData['layers']['L' . $i]['otherText']['fontWeight'];
+                $otherText =  $storyData['layers']['L' . $i]['otherText']['text'];
+
+                if ($storyData['layers']['L' . $i]['media']['url'] == '' || $storyData['layers']['L' . $i]['media']['url'] == 'default') {
+                    $backgroundVideo = '';
+                    $poster = '/assets/img/default.jpeg';
+                } else {
+                    $backgroundVideo = $storyData['layers']['L' . $i]['media']['url'];
+                    $poster = $storyData['layers']['L' . $i]['media']['url'];
+                }
+
+                if ($storyData['layers']['L' . $i]['textVisibility'] == '' || $storyData['layers']['L' . $i]['textVisibility'] == 'false') {
+                    $text = '';
+                } else {
+                    $text = '
+                        <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                            <div style="text-align:left;color:#fff;background-color:rgba(47, 79, 79, 0.8);font:' . $storyData['layers']['L' . $i]['title']['fontSize'] . ' ' . $storyData['layers']['L' . $i]['title']['fontFamily'] . ';font-weight:' . $storyData['layers']['L' . $i]['title']['fontWeight'] . ';padding:14px 30px;letter-spacing:1px">' . $storyData['layers']['L' . $i]['title']['text'] . '</div>
+                        </div>
+                        <div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="margin-bottom:50px">
+                            <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:' . $textFontSize. ' ' . $textFontFamily . ';padding:15px 30px 24px; font-weight:' . $textFontWeight. ';" class="description">
+                                <p>' . $otherText . '</p>
+                            </div>
+                        </div>';
+                }
+
+              $ampStory .= '
+                <amp-story-page class="NWSStory-scene" data-layout="7" data-type="standard" id="Story_page_' . ($i + 1) . '_Template_id_5">
+                    <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+                        <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+                        <div class="NWSStory-layers NWSStory-layers--unfixed">
+                            <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                                <div class="NWSStory-layer NWSStory-layer--img">
+                                    <div class="NWSStory-layer-content">
+                                        <amp-video
+                                            autoplay
+                                            width="720"
+                                            height="1280"
+                                            poster="' . $poster . '"
+                                            object-fit="' . $objectFit . '"
+                                            controls
+                                            class="zoom-in"
+                                            title="'.$mediaTitle .'"
+                                            id="storyImage' . $i . '">
+                                          <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
+                                            <source src="' . $backgroundVideo . '" type="video/mp4">
+                                        </amp-video>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="NWSStory-layer NWSStory-layer--overlay">
+                                <div class="NWSStory-layer-content" style="opacity:1;background:linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%)"></div>
+                            </div>
+                            <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:55px 24px 20px;justify-content:flex-end">
+                                ' . $text . '
+                                <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
+                                    <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: ' . $storyData['layers']['L' . $i]['media']['credit'] . '</p>
+                                </div>
+                            </div>
+                        </div>
+                    </amp-story-grid-layer>
+                </amp-story-page>';
+            }else{
+              $textFontSize = $storyData['layers']['L' . $i]['otherText']['fontSize'];
+              $textFontFamily = $storyData['layers']['L' . $i]['otherText']['fontFamily'];
+              $textFontWeight = $storyData['layers']['L' . $i]['otherText']['fontWeight'];
+
+              if ($storyData['layers']['L' . $i]['media']['url'] == '' || $storyData['layers']['L' . $i]['media']['url'] == 'default') {
+                  $backgroundImage = '/assets/img/default.jpeg';
+              } else {
+                  $backgroundImage = $storyData['layers']['L' . $i]['media']['url'];
+              }
+
+              $text = '<div style="padding:15px 30px 24px"></div>';
+              if ($storyData['layers']['L' . $i]['otherText']['text'] != '') {
+                  $text = '
+                  <div animate-in="fade-in" animate-in-delay=".8s" animate-in-duration=".5s" class="NWSStory-layer" style="font-weight:' . $textFontWeight . '; margin-bottom:50px">
+                      <div style="text-align:left;color:#fff;background-color:rgba(0,0,0,0.7);font:' . $textFontSize . ' ' . $textFontFamily . ';padding:15px 30px 24px" class="description">
+                          <p>' . $storyData['layers']['L' . $i]['otherText']['text'] . '</p>
+                      </div>
+                  </div>';
+              }
+
+              $ampStory .= '
+              <amp-story-page class="NWSStory-scene" data-layout="7" data-type="standard" id="Story_page_' . ($i + 1) . '_Template_id_5">
+                  <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+                      <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+                      <div class="NWSStory-layers NWSStory-layers--unfixed">
+                          <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                              <div class="NWSStory-layer NWSStory-layer--img">
+                                  <div class="NWSStory-layer-content">
+                                      <amp-img src="' . $backgroundImage . '" id="storyImage' . $i . '" object-fit="' . $objectFit . '" class=" zoom-in" alt=" " title="'.$mediaTitle .'" layout="flex-item">
+                                          <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 / ' . $overlayOpacity . '%);z-index: 9;"></div>
+                                      </amp-img>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="NWSStory-layer NWSStory-layer--overlay">
+                              <div class="NWSStory-layer-content" style="opacity:1;background:linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%)"></div>
+                          </div>
+                          <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:55px 24px 20px;justify-content:flex-end">
+                              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                                  <div style="text-align:left;color:#fff;background-color:rgba(47, 79, 79, 0.8);font:' . $storyData['layers']['L' . $i]['title']['fontSize'] . ' ' . $storyData['layers']['L' . $i]['title']['fontFamily'] . '; font-weight:' . $storyData['layers']['L' . $i]['title']['fontWeight'] . '; padding:14px 30px; letter-spacing:1px">' . $storyData['layers']['L' . $i]['title']['text'] . '</div>
+                              </div>
+                              ' . $text . '
+                              <div animate-in="fly-in-bottom" animate-in-delay="1.0s" animate-in-duration=".3s" class="NWSStory-layer align-self-center" style="position:absolute;bottom:0">
+                                  <p style="font-family:helvetica;font-size:10px;color:rgba(255, 255, 255, 1);margin-bottom:30px;text-align:center;letter-spacing:1px">Image Courtesy: ' . $storyData['layers']['L' . $i]['media']['credit'] . '</p>
+                              </div>
+                          </div>
+                      </div>
+                  </amp-story-grid-layer>
+              </amp-story-page>';
+            }
+      }
+      if ($relatedStoryData) {
+          $relatedStoryTitle = $relatedStoryData['title'];
+          $relatedStoryDescription = $relatedStoryData['description'];
+          $relatedStoryUrl = $relatedStoryData['url'];
+          $relatedStoryDataInside = json_decode($relatedStoryData['storyData'], true);
+          $relatedStoryImage = $relatedStoryDataInside['layers']['L0']['media']['url'];
+          $relatedStoryUrl = '/webstories/' . $relatedStoryUrl;
+          $relatedStoryMediaTitle = $relatedStoryDataInside['layers']['L0']['media']['title'];
+
+          $ampStory .= '
+          <!-- related story -->
+          <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+              <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+                  <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+                  <div class="NWSStory-layers NWSStory-layers--unfixed">
+                      <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                          <div class="NWSStory-layer NWSStory-layer--img">
+                              <div class="NWSStory-layer-content" animate-in="fade-in" animate-in-delay="1s" animate-in-duration=".5s">
+                                  <div class="NWSStory-layer NWSStory-layer--img">
+                                      <div class="NWSStory-layer-content">
+                                          <amp-img src="' . $relatedStoryImage . '" class="" alt="" title="'.$relatedStoryMediaTitle .'" layout="flex-item"></amp-img>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+                      <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+                          <div style="width:100%;margin:0 auto 3.125rem auto">
+                              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+                                  <div style="background:linear-gradient(to right, #97c445, #319b3f);width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+                                  <h1 class="ipl-story-sub-headline m-b-15" style="font:1.4rem Poppins-medium; font-weight: 1000">' . $relatedStoryTitle . '</h1>
+                              </div>
+                              <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                                  <div style="-webkit-line-clamp: 3;color:#fff;font-weight:400;font: 15px Poppins-medium;display: -webkit-box;overflow: hidden;-webkit-box-orient: vertical;" class="ipl-story-desc m-b-10">' . $relatedStoryDescription . '</div>
+                              </div>
+                              <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                                  <p class="ipl-story-credit"></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </amp-story-grid-layer>
+              <amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+                  <a href="' . $relatedStoryUrl . '" class="cls_shop_buy_button_8"><span>Read Full Story</span></a>
+              </amp-story-page-outlink>
+          </amp-story-page>';
+      }
+
+      if($isPromoted){
+        $promotionalPhrases = array(
+            "Discover the verified expertise of $authorName on FastReed. Dive into their profile for more insights.",
+            "Explore the world of $authorName – a trusted FastReed author. Get to know them better by visiting their profile.",
+            "FastReed proudly presents $authorName, a trusted and verified author. Uncover more about their work on their profile.",
+            "Meet $authorName, a certified author on FastReed. Don't miss the chance to explore their profile and writings.",
+            "Looking for quality content? $authorName is a verified author on FastReed. Check out their profile for a treasure trove of insights."
+        );
+        $randomIndex = array_rand($promotionalPhrases);
+        $randomPhrase = $promotionalPhrases[$randomIndex];
+        $ampStory .= '
+        <!-- self  -->
+         <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+            <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+              <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+              <div class="NWSStory-layers NWSStory-layers--unfixed">
+                <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                  <div class="NWSStory-layer NWSStory-layer--img">
+                    <div class="NWSStory-layer-content">
+                      <div class="NWSStory-layer NWSStory-layer--img">
+                        <div class="NWSStory-layer-content">
+                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="'.$authorName.'" layout="flex-item">
+                          <div class="storyOverlay" style="position:absolute;top:0px;left:0px;width: 720px;height: 1080px;background: rgb(0 0 0 /20%);z-index: 9;"></div></amp-img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+                <div class="NWSStory-layers-group NWSStory-layers-custom-content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+                  <div style="width:100%;margin:0 auto 1rem auto; display:flex;justify-content:center;align-items:center; flex-direction:column">
+                      <amp-img  src="'.$authorProfilePic.'" width="100px" height="100px" layout="flex-item" style="border-radius:50px"></amp-img>
+                  </div>
+                  <div style="width:100%;margin:0 auto 3.125rem auto">
+                    <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:0.2rem">
+                      <h1 class="ipl-story-sub-headline m-b-15" style="font:20px  Poppins-medium; font-weight:1000;">'.$authorName.'</h1>
+                    </div>
+                    <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+                      <h3 class="ipl-story-sub-headline m-b-15" style="font:12px  Poppins-medium; display: inline; background: darkgreen; padding: 3px 15px 2px 15px; border-radius: 5px;font-weight:100;">Verified Author</h3>
+                    </div>
+                    <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                      <div style="color:#fff;font:15px  Poppins-medium; font-weight:1000;" class="ipl-story-desc m-b-10">'.$randomPhrase.'</div>
+                    </div>
+                    <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                      <p class="ipl-story-credit"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </amp-story-grid-layer>
+            <amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+              <a href="/u/'.$authorUsername.'" class="cls_shop_buy_button_8"><span>View Profile</span></a>
+            </amp-story-page-outlink>
+          </amp-story-page>';
+      }else{
+        $ampStory .= '
+        <!-- self  -->
+         <amp-story-page class="NWSStory-scene" data-layout="2" data-type="standard" id="Story_page_9_Template_id_12">
+            <amp-story-grid-layer class="NWSStory-scene-content" template="vertical">
+              <div class="NWSStory-layers NWSStory-layers--fixed"></div>
+              <div class="NWSStory-layers NWSStory-layers--unfixed">
+                <div class="NWSStory-layers-group NWSStory-layers-group--media">
+                  <div class="NWSStory-layer NWSStory-layer--img">
+                    <div class="NWSStory-layer-content">
+                      <div class="NWSStory-layer NWSStory-layer--img">
+                        <div class="NWSStory-layer-content">
+                          <amp-img src="/assets/img/promotionBack.png" class="" alt="" title="publish story on fastreed background" layout="flex-item"></amp-img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="NWSStory-layer NWSStory-layer--overlay story-grd-layer"></div>
+                <div class="NWSStory-layers-group NWSStory-layers-group--content" style="padding:3.3125rem 6.944444444444445% 1.875rem">
+                  <div style="width:100%;margin:0 auto 3.125rem auto">
+                    <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer" style="margin-bottom:1.25rem">
+                      <div style="background:linear-gradient(to right, #97c445, #319b3f);;width:59px;height:6px;margin:0 auto 1.125rem auto"></div>
+                      <h1 class="ipl-story-sub-headline m-b-15" style="font:20px  Poppins-medium; font-weight:1000;">Want to Publish your story on Fastreed?</h1>
+                    </div>
+                    <div animate-in="fly-in-right" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                      <div style="color:#fff;font:15px  Poppins-medium; font-weight:1000;" class="ipl-story-desc m-b-10">The creater access verification is opened you can request to become a creater. Creater can create and publish visual stories like this.</div>
+                    </div>
+                    <div animate-in="fly-in-left" animate-in-delay="0.5s" animate-in-duration=".3s" class="NWSStory-layer">
+                      <p class="ipl-story-credit"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </amp-story-grid-layer>
+            <amp-story-page-outlink class="NWSStory-AMP-CTA is-background--solid" layout="nodisplay" theme="custom" cta-accent-element="background" cta-accent-color="blue">
+              <a href="/account/" class="cls_shop_buy_button_8"><span>Publish Your Story</span></a>
+            </amp-story-page-outlink>
+          </amp-story-page>';
+      }
+
+      echo $ampStory;
+      ?>
+    </amp-story>
+  </body>
+</html>

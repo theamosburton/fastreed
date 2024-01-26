@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="public, max-age=3600">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta data-rh="true" property="og:type" content="website">
+
+    <meta data-rh="true" property="og:title" content="<?php echo $this->webTitle;?>">
+    <meta data-rh="true" property="twitter:title" content="<?php echo $this->webTitle;?>">
+    <meta data-rh="true" property="og:description" content="<?php echo $this->webDescription;?>">
+    <meta data-rh="true" property="twitter:description" content="<?php echo $this->webDescription;?>">
+    <meta name="description" content="<?php echo$this->webDescription;?>">
+    <meta name="keywords" content="<?php echo $this->webKeywords?>">
+    <meta data-rh="true" name="keywords" content="<?php echo $this->webKeywords;?>">
+    <meta name="author" content="MD. Shafiq Malik">
+    <link data-rh="true" rel="canonical" href="<?php echo $this->canonUrl;?>">
+    <meta data-rh="true" property="og:url" content="<?php echo $this->canonUrl;?>">
+
+    <title><?php echo $this->webTitle;?></title>
+    <!-- Gobal CSS -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/homepage.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <link href="/assets/css/frontPageOnly.css?v=<?php echo $this->version;?>" rel="stylesheet">
+    <link href="/assets/css/cropper.min.css?v=1.5.13" rel="stylesheet">
+    <?php
+    if(isset($this->pageCss)){
+        if(!(count($this->pageCss) <= 0)){
+            for($i =0; $i < count($this->pageCss); $i++){
+                echo '<link href="'.$this->pageCss[$i].'?v='.$this->version.'" rel="stylesheet">';
+            }
+        }
+    }
+    ?>
+    <!--Fonts Css-->
+    <meta name="google-adsense-account" content="ca-pub-2950653490323756">
+    <link href="/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/assets/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="/assets/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2950653490323756"
+     crossorigin="anonymous">
+     </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ4YQSPFM1"></script>
+    <?php
+    echo $userDetail;
+    ?>
+
+    <?php
+    if(isset($this->extraScript)){
+        echo $this->extraScript;
+    }
+    echo '<script>var domainName = "'.DOMAIN.'";
+        </script>';
+
+    if ($this->whoAmI == 'Admin') {
+        echo '<script>var adminLogged = true;
+        var userLogged = false;
+        </script>';
+    }elseif ($this->whoAmI == 'User') {
+        echo '<script>var userLogged = true;
+        var adminLogged = false;
+        </script>';
+    }else {
+        echo '<script>var userLogged = false; var adminLogged = false; var gitIsUpdated = false;</script>';
+    }
+    if(isset($this->extraStyle)){
+        echo $this->extraStyle;
+    }
+    echo '
+        <script data-rh="true" type="application/ld+json">
+          {
+            "@context":"https://schema.org",
+            "@type":"Organization",
+            "name":"Fastreed",
+            "alternateName":"fastreed",
+            "description":"Discover the world of web storytelling with Fastreed, the premier platform for creating and sharing captivating webstories. Fastreed empowers individuals to unleash their creativity, share their insights, and engage with a global audience. Whether you are a passionate reader, a budding writer, or an expert in your field, Fastreed welcomes everyone to Read, Write, and Share their ideas and knowledge, making it the ultimate destination for webstory enthusiasts.",
+            "logo":"https://www.fastreed.com/assets/img/logo500x500.jpg",
+            "url":"https://www.fastreed.com",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "support@fastreed.com",
+              "contactType": "customer service"
+              }
+          }
+        </script>';
+        echo <<<HTML
+        <script data-rh="true" type="application/ld+json">[
+        HTML;
+        foreach($totalStoriesJSON as $stories){
+          echo $stories;
+        }
+        echo <<<HTML
+        ]</script>
+        HTML;
+        ?>
+</head>

@@ -1,0 +1,1296 @@
+.fading-div {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    border-radius: 20px;
+    /* animation: fading 2s infinite; */
+}
+
+.storyViewIcon{
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
+.fading-div {
+  -webkit-animation-duration: 1.25s;
+  animation-duration: 1.25s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: placeHolderShimmer;
+  animation-name: placeHolderShimmer;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: linear-gradient(to left, #e7e7e7 8%, #d1d1d1 18%, #e7e7e7 33%);
+  position: relative;
+}
+.webstories .loading{
+  min-height: 340px;
+}
+
+.adminPanelDivInside .title{
+  padding:5px 10px 15px 5px;
+  font-size: 20px;
+}
+.adminPanelDivInside .title select{
+  padding: 2px 10px 2px 0px;
+  border: 0;
+  border-bottom: 3px solid;
+  outline: 0;
+  background: transparent;
+  color: grey;
+}
+.adminPanelDivInside .title select option:checked + select, {
+  border: none;
+  outline: 0;
+  background: yellow;
+}
+.storyBox{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 550px;
+
+
+}
+.storyBox .visibleArea{
+  display: flex;
+  flex-direction: row;
+
+  /* max-height: 100px; */
+}
+.storyBox .visibleArea{
+  display: flex;
+}
+.storyBox .visibleArea .imageDiv{
+  width: 100px;
+  position: relative;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.storyBox .visibleArea .imageDiv img{
+}
+.storyBox .visibleArea .imageDiv .storyStatus{
+  position: absolute;
+  left:0;
+  top: 0;
+  background: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 20px;
+  margin-top: -5px;
+  margin-left: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+}
+.storyBox .visibleArea .imageDiv .storyStatus i{
+  color: black;
+}
+.storyBox .visibleArea .otherInfoDiv{
+  height: fill-available;
+  padding-left: 7px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.storyBox .visibleArea .otherInfoDiv .title, .storyBox .visibleArea .otherInfoDiv .about{
+  width: 100%;
+  height: 65%;
+}
+.storyBox .visibleArea .otherInfoDiv .title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show before ellipsis */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.storyBox .visibleArea .otherInfoDiv .title span{
+    white-space: normal;
+    font-size: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.storyBox .visibleArea .otherInfoDiv .about{
+  display: flex;
+  flex-direction: row;
+  height: 35%;
+}
+.storyBox .visibleArea .otherInfoDiv .about .buttons{
+  /* padding: 0px 15px; */
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  border-radius: 10px;
+  height: auto;
+  height: 30px;
+  width: 30px;
+}
+
+.storyBox .visibleArea .otherInfoDiv .about .buttons:hover{
+  cursor: pointer;
+}
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+
+@keyframes fading {
+    0% {
+        background: #ddd;
+    }
+    25% {
+        background: #ccc;
+    }
+    50% {
+        background: #ccc;
+    }
+    75% {
+        background: #ccc;
+    }
+    100% {
+        background: #ddd;
+    }
+}
+
+
+
+
+
+.container{
+    max-width: 97%;
+    /* max-width: max-content!important; */
+}
+.profileMainDiv{
+    max-width: 1200px;
+}
+.leftSide{
+    border: 1px solid grey;
+    border-radius: 20px;
+    height: 100%;
+    margin-top: 20px;
+}
+.profile{
+    margin: 15px 0px;
+}
+.user-profile .profileActions{
+    cursor: pointer;
+    padding: 6px 25px;
+    border: 1px solid grey;
+    border-radius: 35px;
+    display: inline-block;
+    margin-top: 5px;
+}
+.edit-fields{
+   padding: 0;
+}
+
+.account-settings{
+    max-width: 400px;
+}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.contentTopics .user-avatar {
+    display: flex;
+    margin: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.user-avatar .editPhotos{
+    margin-top: -31px;
+    margin-left: 65px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid grey;
+    padding: 2px 8px;
+    border-radius: 100px;
+    color: #83878f;
+}
+
+.personalInfoTab .infoDiv{
+    margin: 15px 10px;
+}
+.personalInfoTab .infoDiv .infoValue{
+    margin-left: 10px;
+    font-style: italic;
+}
+.personalInfoTab #editDetailsButton{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    border: 1px solid;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+.personalInfoTab #editDetailsButton:hover{
+    cursor: pointer;
+
+}
+.personalInfoTab #editDetailsButton i{
+    margin-left: 10px;
+}
+.password #pErrorDiv{
+    max-width: 300px;
+}
+.user-avatar .editPhotos:hover{
+   cursor: pointer;
+}
+.account-settings .user-profile .user-avatar img , .user-avatar img{
+    width: 180px;
+    height: 180px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    border: 1px solid grey;
+}
+.user-avatar img{
+    width: 80px;
+    height: 80px;
+}
+.account-settings .user-profile h4.user-email {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .user-profile h3.user-name {
+    font-size: 26px;
+}
+
+.form-control {
+    border: 1px solid #cfd1d8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c;
+}
+.user-profile .user-details{
+    margin-top: 10px;
+}
+.card {
+    background: transparent!important;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 0;
+    margin-bottom: 1rem;
+}
+
+.userContent{
+    border-radius: 15px;
+    padding: 20px 20px 0 20px;
+}
+.userContent .userContentMenus{
+    display: flex;
+    overflow: auto;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.607);
+}
+.userContent .userContentMenus .menus{
+    padding: 5px 15px;
+    margin: 0 5px;
+    border-radius: 8px 8px 0 0;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.userContent .userContentMenus .menus:first-child{
+    margin-left: 0;
+}
+
+.userContent .userContentMenus .menus:last-child{
+    margin-right: 0;
+}
+.userContent .userContentMenus .menus:hover{
+    border-bottom: 3px solid #ec775c;
+    background-color: #2e323c;
+    cursor: pointer;
+    color: white!important;
+}
+
+.userContent .userContentMenus .active{
+    border-bottom: 3px solid #ec775c;
+}
+.contentView{
+    margin-top: 20px;
+}
+.contentView .row{
+    margin: 10px 0;
+}
+.contentView .content{
+    border: 1px solid grey;
+    border-radius: 15px;
+    width: 100%;
+    padding: 52.5px 20px;
+    margin: 10px 0;
+}
+.contentView .title{
+    color: #b8bcc5;
+    font-weight: bolder;
+}
+.photosLibrary .uploadsHead{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.photosLibrary .uploadsHead .labelUpload{
+    margin-bottom: 0px;
+    background-color: rgb(92, 201, 216);
+    padding: 8px 20px 10px 20px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+}
+.photosLibrary .uploadsHead .labelUpload:hover{
+    cursor: pointer;
+    color: #3a3d40;
+}
+.contentView .contentTopics{
+    margin: 0;
+    border: 1px solid grey;
+    border-radius: 15px;
+    padding:20px;
+    margin-bottom: 20px;
+}
+.contentView .resCreation{
+  margin-top: 20px;
+}
+.contentView .expandable{
+    display: none;
+}
+.privacySecurity .password{
+    margin-left: 5px;
+}
+.privacySecurity .password .inp{
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid;
+    margin: 0px 0px 25px 0px;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+.privacySecurity .password .inp .eye-logo{
+    margin-left: 15px;
+}
+.privacySecurity .password .inp .eye-logo:hover{
+    cursor: pointer;
+}
+.privacySecurity .password .button span{
+    padding: 5px 10px;
+}
+.privacySecurity .password .button{
+    width: auto;
+    max-width: none;
+}
+
+.privacySecurity .password input{
+    width: 85%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 8px 10px;
+    /* color: aliceblue; */
+    border-radius: 5px 0px 0px 5px;
+    -webkit-user-select: none!important;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+}
+.privacySecurity .password input:-internal-autofill-selected {
+    background-color: transparent!important;
+  }
+.privacySecurity .password input::selection{
+background-color: transparent!important;
+}
+.privacySecurity .password input:hover,.privacySecurity .password input:focus{
+    background-color: transparent;
+}
+.privacySecurity .expandable{
+    transition: all 2s linear 1s;
+    margin-top: 10px;
+    height:0;
+    display: none;
+}
+.setPassword .password{
+    width: 70%;
+}
+.setPassword .googleBinded{
+    /* text-align: center; */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.setPassword .googleBinded i{
+    margin: 10px;
+    color: rgb(127 127 208);
+}
+.setPassword .success{
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #28a745;
+}
+.setPassword .IndError{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+.setPassword .warning{
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgb(181 45 1 / 93%);
+}
+.forgotPassword{
+  margin-left: 10px !important;
+}
+.setPassword .password .pErrorDiv{
+    padding: 0px!important;
+}
+.privacySecurity .password .button{
+    width: auto;
+    max-width: none;
+    display: inline-block;
+    padding: 7px 10px;
+}
+.privacySecurity .password .button:hover{
+    cursor: pointer;
+    background-color: #3a3d40;
+}
+
+.errorMessage{
+    font-size: 12px;
+    margin-left: 15px;
+}
+.errorSpinner{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+}
+
+#updateAlert{
+    padding: 0px 15px;
+    display: none;
+}
+#cancelEditing{
+    margin-right: 10px;
+}
+.gutters .btn-cancel{
+    margin-right: 8px;
+    margin-top: 10px;
+}
+.gutters .btn-update{
+    margin-top: 10px;
+}
+.delete-account .warning{
+    display: block;
+    margin: 5px 0px;
+}
+.delete-account .title{
+    color: #dc3545!important;
+}
+.delete-account .deleting-progress{
+    display: none;
+}
+.delete-account .deleting-progress .deleting{
+    display: block;
+    color: limegreen;
+    margin: 5px;
+    font-style: italic;
+}
+
+
+.uploadDpDiv{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.529);
+    z-index: 99;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+.uploadDpDiv .uploadDpContainer{
+    box-shadow: 0px 1px 2px 0px #050505;
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    height: fit-content;
+    margin-top: 30px;
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.uploadDpDiv .uploadDpContainer .uploadTopBar{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  background-color: #433c3c;
+  padding: 10px;
+  border-radius: 5px 5px 0px 0px;
+}
+.uploadDpDiv .uploadDpContainer .fa-xmark{
+    color: white;
+}
+.uploadDpDiv .uploadDpContainer .fa-xmark:hover{
+    cursor: pointer;
+}
+.uploadDpDiv .uploadDpContainer form{
+  border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 22px 10px;
+    color: white;
+}
+
+.uploadDpDiv .uploadDpContainer form input{
+    background-color: #2e323c;
+    border: 1px solid rgb(31, 29, 29);
+    margin-top: 10px;
+    padding: 4px 10px;
+    color: rgb(0, 0, 0);
+}
+
+#uploadDbButton{
+    display: none;
+    background-color: #2e323c;
+    border: 1px solid rgb(31, 29, 29);
+    margin-top: 10px;
+    padding: 4px 10px;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+.uploadDpDiv .uploadDpContainer form #uploadDbButton:hover{
+    background-color: #18191c;
+    cursor: pointer;
+}
+
+.uploadDpDiv .uploadDpContainer label{
+    color: rgb(20, 19, 19);
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.uploadDpDiv .uploadDpContainer label:hover{
+    cursor: grab;
+}
+#removeImage{
+    display: none;
+    color: rgb(0, 0, 0);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+#removeImage:hover{
+    cursor: pointer;
+}
+
+.noUpload{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    border: 1px solid;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+}
+.noUpload div:first-child{
+    margin-top: 0px;
+}
+.noUpload div{
+margin-top: 10px;
+}
+.uploadDpDiv .uploadDpContainer #errorMessage{
+    color: red;
+    background-color: bisque;
+    padding: 4px 14px;
+    border-radius: 5px;
+    display: none;
+}
+.uploadDpDiv .uploadDpContainer #message{
+    display: none;
+    padding: 4px 8px;
+}
+.contentTopics .title:hover{
+    cursor: pointer;
+}
+
+.mediaDiv .uploadDiv{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.mediaDiv .uploadDiv .uploadFile{
+    width: 190px;
+    height: 150px;
+    border: 1px dashed grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.mediaDiv .uploadDiv .uploadedFile{
+    width: 190px;
+    height: 150px;
+    border: 1px solid grey;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions{
+    position: absolute;
+    top: 30px;
+    right: 8px;
+    min-width: 100px;
+    background-color: #18191c;
+    border: 1px solid;
+}
+.uploadedFile .uploadDivInside .picOptions div{
+    padding: 1px 25px 1px 10px;
+    border-bottom: 1px solid;
+    color: #cfd1d8;
+}
+
+.uploadedFile .uploadDivInside .picOptions .changeVisibility option{
+    background-color: #18191c;
+    color: #cfd1d8;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions div:hover{
+    background-color: #3a3d40;
+    cursor: pointer;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .picOptions div:last-child{
+    border: 0;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .imgDiv{
+    height: 100%;
+    overflow: hidden;
+    background-color: #9fa8b9;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside img, .mediaDiv .uploadDiv .uploadedFile .uploadDivInside video{
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions{
+    position: absolute;
+    top: 5px; /* Adjust the top position as needed */
+    right: 5px; /* Move the element to the right */
+}
+
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileInfo{
+    position: absolute;
+    top: 0px; /* Adjust the top position as needed */
+    right: 5px; /* Move the element to the right */
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3a3d40;
+    color: white;
+}
+
+
+.changeAccess span{
+    color: #9fa8b9;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileInfo .whatIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 21px;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3a3d40;
+    color: white;
+}
+.mediaDiv .uploadDiv .uploadedFile .uploadDivInside .fileOptions .optIcon:hover{
+    cursor: pointer;
+    background-color: #2b2e36;
+}
+.uploadProgressDiv{
+    position: absolute;
+    bottom: 0px;
+    background-color: #28a745;
+    /* border-radius: 40px; */
+    height: 20px;
+    width: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: .8rem;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+.imageShowDiv{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #18191c;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#editMediaOptions{
+    background-color: transparent;
+}
+.imageShowDiv .imageContainer{
+    display: flex;
+    width: auto;
+    max-width: 100vw;
+    height: 100%;
+    max-height: 100vh;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.imageShowDiv .imageContainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.imageShowDiv .imageContainer video{
+    width: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+}
+.imageShowDiv .imageContainer .imgOptions{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: flex-end;
+    z-index: 999;
+    flex-direction: column;
+}
+
+.imageShowDiv .imageContainer .imgOptions .optIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    color: #3a3d40;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 10px 0px;
+    box-shadow: 0 0 10px;
+}
+
+.optionDropdown{
+    display: flex;
+    color: rgb(52, 49, 49);
+    flex-direction: column;
+    margin-right: 40px;
+    margin-top: -39px;
+    box-shadow: 0 0 17px 5px;
+    background-color: transparent;
+    padding: 10px;
+    background-color: #bec0c7;
+    border-radius: 15px;
+}
+#optionDropdownDetails{
+    background-color: white;
+
+}
+#optionDropdownDetails .details{
+    max-width: 200px;
+}
+
+#optionDropdownDetails .details .copylink:hover{
+    cursor:copy;
+}
+#optionDropdownDetails .details .property{
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+
+}
+#optionDropdownDetails .details .value{
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
+    overflow-wrap: break-word;
+}
+.optionDropdown .options{
+    font-size: 20px;
+    padding: 3px 15px;
+    cursor: pointer;
+    margin-top: 5px;
+    background-color: rgb(232, 233, 238);
+    display: flex;
+    align-items: center;
+}
+.optionDropdown .options span{
+    margin-right: 15px;
+    min-width: 130px;
+}
+.optionDropdown .title{
+    margin: 5px;
+    font-weight: bold;
+}
+.optionDropdown .options:nth-child(2){
+    border-radius: 15px 15px 0px 0px;
+}
+.optionDropdown .options:last-child{
+    border-radius: 0px 0px 15px 15px;
+}
+.imageShowDiv .imageContainer .delete{
+    top: 50px;
+}
+.imageShowDiv .imageContainer .privacy{
+    top: 90px;
+}
+.imageShowDiv .imageContainer .imgOptions .optIcons:hover{
+    cursor: pointer;
+    background-color: #adadb4;
+}
+
+
+/* Dashboard */
+.resCreation{
+  padding: 20px 10px!important;
+}
+.infor{
+  margin: 10px 0px 15px 0px;
+}
+.reqCreation span, .resCreation span{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 6px 25px!important;
+}
+.reqCreation .reqCreationButton, .resCreation .reqCreationButton{
+    background-color: gainsboro;
+    padding: 6px 25px;
+    color: #18191c;
+    font-weight: bold;
+    margin:0;
+    margin-left: 30px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#verificationDocumentLabel{
+  max-width: 200px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#reqCreation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    padding: 6px 9px!important;
+    text-align: center;
+    cursor: pointer;
+}
+
+.requestButtons{
+  display: flex;
+  align-items: center;
+  width: auto;
+  flex-wrap: wrap;
+}
+
+
+
+
+
+.reqCreation .reqCreationButton:hover, .resCreation .reqCreationButton:hover{
+    cursor: pointer;
+    background-color: rgb(182, 182, 182);
+}
+
+.responseButton{
+    padding: 8px 20px!important;
+  font-weight: bold;
+  border: 1px solid #c9bfbf;
+  margin-left: 10px;
+  background: #f0ecec;
+  border-radius: 5px !important;
+  color: black;
+}
+.responseButton:hover{
+  cursor: pointer;
+  background: #c9c9c9;
+}
+.responseButton:first-child{
+  margin-left: 0px;
+}
+#requestedUser{
+  background: #c9c9c9;
+  display: flex;
+  align-items: center;
+  padding: 8px 20px!important;
+  border: 1px solid grey;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.webstoriesDiv{
+    padding: 0 5px 0px 5px!important;
+    border: 0!important;
+}
+.webstoriesDiv .mtitle{
+    display: block;
+    flex-direction: row;
+    width: 100%;
+    color: black;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.webstoriesDiv .mtitle div{
+    display: flex;
+    font-weight: bolder;
+    padding:0;
+}
+.webstoriesDiv .mtitle .topBarMenus{
+    overflow: auto;
+}
+.webstoriesDiv .mtitle div #reqCreation{
+    border-radius: 5px;
+}
+.webstoriesDiv .mtitle div #reqCreation:hover{
+    color: #3a3d40;
+}
+
+
+
+.webstoriesDiv .mtitle span{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(92, 201, 216)!important;
+    color: inherit;
+    white-space: nowrap;
+}
+.storiesTypeRightDiv{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: -webkit-fill-available;
+  margin-left: 10px;
+}
+.storiesTypeRightDiv .storiesTypes{
+  padding: 0px 10px;
+  height: 100%;
+  background: #5CC9D8;
+  font-weight: bold;
+  border-radius: 5px;
+  display: flex;
+  outline: 0px;
+  border:0px;
+}
+.webstoriesDiv .webstories{
+    display: flex;
+    flex-direction: row;
+    overflow:auto;
+    height: 100%;
+    margin-top: 20px;
+}
+.webstoriesDiv .webstories .webstory{
+
+    margin: 10px 10px 20px 15px;
+    border-radius: 20px;
+    transition: all .4s;
+    display: flex;
+    flex-direction: column;
+
+    min-width: 210px;
+    min-height: 320px;
+    justify-content: center;
+    align-items: center;
+}
+
+.webstoriesDiv .webstories .webstory:first-child{
+   margin-left: 0px;
+}
+
+.webstoriesDiv .webstories .webstory .background{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 210px;
+    border: 1px solid grey;
+}
+.storyOverlay{
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(85, 83, 83, 0%), rgba(85, 83, 83, 20%), black);
+  border-radius: 20px;
+}
+.webstoriesDiv .webstories .webstory .title{
+  position: absolute;
+    padding: 5px 15px 15px 15px;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 210px;
+    font-size: smaller;
+}
+.webstoriesDiv .webstories .webstory .options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+   color: #050505;
+   background-color: #dddd;
+   border: .5px solid grey;
+   margin-top: 10px;
+   border-radius: 10px;
+}
+.webstoriesDiv .webstories .webstory .options div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px 5px 5px 5px;
+}
+.webstoriesDiv .webstories .webstory .options div i{
+    margin-bottom: 10px;
+}
+.webstoriesDiv .webstories .webstory .options div:hover{
+   color:#28a745;
+   cursor: pointer;
+}
+.guttersInside{
+    background-color: transparent!important;
+}
+.leftSideProfile .account-settings, .leftSideProfile .account-settings .user-profile{
+  background-color: transparent!important;
+}
+
+
+@media (max-width: 990px) {
+    .leftSide{
+        border: none!important;
+    }
+
+    .mediaDiv .uploadDiv .uploadFile{
+        width: 150px;
+        height: 120px;
+    }
+
+    .mediaDiv .uploadDiv .uploadedFile{
+        width: 150px;
+        height: 120px;
+    }
+    .contentView{
+        border: 0;
+        border-radius: 0;
+    }
+
+    .userContent{
+        border-radius: 15px;
+        padding: 20px 0 0 0;
+    }
+    .account-settings .user-profile {
+        margin: 0 0 1rem 0;
+        text-align: unset;
+    }
+    .gutters{
+        margin: 0px;
+    }
+    .account-settings{
+        max-width: none;
+        margin-top: 10px;
+    }
+    .leftSide{
+        margin-top: 15px;
+        margin-bottom: 0px;
+    }
+    .account-settings .user-profile{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0;
+        padding: 0 10px;
+        background-color: aliceblue;
+        border-radius: 10px;
+    }
+    .account-settings .user-profile .user-avatar img{
+        width: 90px;
+        height: 90px;
+    }
+    .user-profile .user-details{
+        overflow-wrap: anywhere;
+        width: 100%;
+        padding-left: 30px;
+    }
+    .card-body{
+        padding: 10px 0px;
+    }
+    .guttersInside{
+        padding: 0;
+    }
+}
+
+@media (max-width: 500px){
+  .webstoriesDiv .webstories {
+    margin-top: 10px;
+  }
+    .mediaDiv .uploadDiv .uploadedFile {
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    .leftSide{
+        border: none!important;
+        margin-top: 5px;
+    }
+    .setPassword{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .contentView .contentTopics{
+        margin-left: 0;
+    }
+    .setPassword .googleBinded{
+        font-size: 13px;
+        text-align:start;
+        width: 90%;
+        padding: 5px 15px;
+        margin-top: 10px;
+        margin-left: 5px;
+        border-radius: 9px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    .setPassword .password{
+        width: 90%;
+    }
+    .privacySecurity .password .inp{
+        max-width: none;
+    }
+    .privacySecurity .password .button{
+        width: auto;
+        max-width: none;
+        display: inline-block;
+        padding: 7px 10px;
+    }
+    .uploadDpDiv{
+        justify-content: center;
+        align-items: center;
+    }
+    .uploadDpDiv .uploadDpContainer{
+        margin: 0;
+    }
+}
+@media (max-width: 990px) {
+    .profileOptions .profileActions{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 350px){
+    .mediaDiv .uploadDiv .uploadedFile {
+        margin-right: 5px;
+        margin-top:5px;
+    }
+    .account-settings .user-profile h3.user-name{
+        font-size: 18px;
+    }
+    .user-profile .profileActions{
+        font-size: 12px;
+    }
+    .account-settings .user-profile .user-avatar img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-avatar .editPhotos {
+        margin-top: -34px;
+        margin-left: 38px;
+    }
+}

@@ -1,0 +1,180 @@
+<div class="privacySecurity contentTopics">
+  <div onclick="exapndAndShrink('accessSettings')" style="margin:0" class="title">Visibility settings &nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
+  <div class="form-group expandable"  id="accessSettings" style="display: none; height:0;">
+    <?php
+    $uEveryone = '';
+    $auEveryone = '';
+    $ufollowers = '';
+    $uself = '';
+    if($canViewUploads == 'anon'){
+      $auEveryone = 'selected';
+    }elseif($canViewUploads == 'users'){
+      $uEveryone = 'selected';
+    }elseif($canViewUploads == 'followers'){
+      $ufollowers = 'selected';
+    }else{
+      $uself = 'selected';
+    }
+    ?>
+    <div class="col-12  pl-1 mt-4">
+      <span class="font-weight-bold d-block">Media Library</span>
+
+      <div class="ml-2 changeAccess">
+        <span>Manage who can view your photos, videos,audios etc. Embedded media in posts or webstories is publicly accessible by default, this settings is limited to the dashboard.</span>
+        <div class="mt-2" id="UploadsSection">
+          <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Uploads')" id="UploadsAccess">
+            <option value="users" <?php echo $uEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $auEveryone; ?> >Anonymous</option>
+            <option value="followers" <?php echo $ufollowers; ?> >Following</option>
+            <option value="self" <?php echo $uself; ?> >Only Me</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <?php
+    $fEveryone = '';
+    $afEveryone = '';
+    $ffollowers = '';
+    $fself = '';
+    if($canViewContent == 'anon'){
+      $afEveryone = 'selected';
+    }elseif($canViewContent == 'users'){
+      $fEveryone = 'selected';
+    }elseif($canViewContent == 'followers'){
+      $ffollowers = 'selected';
+    }
+
+    ?>
+    <div class="col-12  pl-1 mt-4 ">
+      <span class="font-weight-bold d-block">Posts and webstories</span>
+      <div class="ml-2 changeAccess">
+        <span >Posts or webstories are publicly accessible by default, this settings is limited to the dashboard. Manage who can view it on dashboard</span>
+        <div class="mt-2" id="ContentSection">
+          <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Content')" id="ContentAccess">
+            <option value="users" <?php echo $fEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $afEveryone; ?> >Anonymous</option>
+            <option value="followers" <?php echo $ffollowers; ?> >Following</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <?php
+    $eEveryone = '';
+    $efollowers = '';
+    $aeEveryone = '';
+    $eself = '';
+    if($canViewMail == 'anon'){
+      $aeEveryone = 'selected';
+    }elseif($canViewMail == 'users'){
+      $eEveryone = 'selected';
+    }elseif($canViewMail == 'followers'){
+      $efollowers = 'selected';
+    }else{
+      $eself = 'selected';
+    }
+    ?>
+    <div class="col-12  pl-1 mt-4">
+      <span class="font-weight-bold d-block">Email</span>
+
+      <div class="ml-2 changeAccess">
+        <span>Default email visibility: <i>"Only Me"</i> you can manage who can view it</span>
+        <div class=" mt-2" id= "MailSection">
+          <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Mail')" id="MailAccess">
+            <option value="users" <?php echo $eEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $aeEveryone; ?> >Anonymous</option>
+            <option value="followers" <?php echo $efollowers; ?> >Following</option>
+            <option value="self" <?php echo $eself; ?> >Only Me</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+
+    <?php
+    $aEveryone = '';
+    $afollowers = '';
+    $aaEveryone = '';
+    $aself = '';
+    if($canViewAge == 'anon'){
+      $aaEveryone = 'selected';
+    }elseif($canViewAge == 'users'){
+      $aEveryone = 'selected';
+    }elseif($canViewAge == 'followers'){
+      $afollowers = 'selected';
+    }else{
+      $aself = 'selected';
+    }
+    ?>
+    <div class="col-12 pl-1 mt-4">
+      <span class="font-weight-bold d-block">Age</span>
+
+      <div class="ml-2 changeAccess">
+        <span>Manage who can see your Age on dashboard?</span>
+        <div class=" mt-2" id="AgeSection">
+          <select class="form-select form-control-sm" style="width:auto; min-width:200px" onchange="updateAccess('Age')" id="AgeAccess">
+            <option value="users" <?php echo $aEveryone; ?> >All Users</option>
+            <option value="anon" <?php echo $aaEveryone; ?> >Anonymous</option>
+            <option value="followers" <?php echo $afollowers; ?> >Following</option>
+            <option value="self" <?php echo $aself; ?> >Only Me</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Privacy and Security Section -->
+<!-- Password Sub section -->
+<div class="privacySecurity contentTopics">
+  <?php
+  if($this->userData->accountsByAdmin('username', $this->otherUsername)['password'] === null || empty($this->userData->accountsByAdmin('username', $this->otherUsername)['password'])){
+    echo <<<HTML
+      <div class="title" onclick="exapndAndShrink('passwordCU')" style="margin:0">Create password &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="setPassword expandable" style="display: none; height:0;" id="passwordCU">
+        <div class="password">
+          <div id="pErrorDiv" class="col-12" style="display:none">
+            <div id="pErrorMessage" class="alert alert-danger"><span id="peditmessage"> </span>
+            </div>
+          </div>
+          <span class="IndError" id="currentasswordError" style="display:none"></span>
+          <div class="inp" >
+            <input  type="password" name="" id="adminPassword" placeholder="Current admin password" autocomplete="off">
+          </div>
+          <span class="IndError" id="newPasswordError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+          <span class="IndError" id="verifyError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+          <div class="inp button" onclick="update.createNewPassword('admin')"><span>Create Password</span></div>
+          <div class="inp button forgotPassword"><a href="/account/forgottenPassword/">Forgot Password</a></div>
+        </div>
+      </div>
+      HTML."\n";
+  }else{
+    echo <<<HTML
+      <div class="title" onclick="exapndAndShrink('passwordCU')">Update password  &nbsp;&nbsp; <i class="fa fa-caret-down"></i></div>
+      <div class="setPassword expandable" id="passwordCU" style="display: none; height:0;">
+        <div class="password">
+          <div id="pErrorDiv" class="col-12 pErrorDiv" style="display:none">
+            <div id="pErrorMessage" class="pErrorMessage alert alert-danger alert-dismissible fade show"><span id="peditmessage"> </span>
+            </div>
+          </div>
+          <span class="IndError" id="currentasswordError" style="display:none"></span>
+          <div class="inp" >
+            <input  type="password" name="" id="adminPassword" placeholder="Current admin password" autocomplete="off">
+          </div>
+          <span class="IndError" id="newPasswordError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkNewPassword()" type="password" name="" id="newPassword" placeholder="Enter new password" autocomplete="off"> <i id="passEye" class="eye-logo fa fa-eye-slash" onclick="update.shufflePass()" autocomplete="off"></i> </div>
+          <span class="IndError" id="verifyError" style="display:none"></span>
+          <div class="inp" ><input onkeyup="update.checkVerifyPassword()" type="password" name="" id="newPasswordVerify" placeholder="Verify new password" autocomplete="off"> <i id="verifyEye" class="eye-logo fa fa-eye-slash" onclick="update.shuffleVerify()" autocomplete="off"></i></div>
+          <div class="inp button" onclick="update.updatePassword('admin')"><span>Update Password</span></div>
+        </div>
+      </div>
+    HTML."\n";
+  }
+  ?>
+</div>
+<!-- /Password Sub section -->
+<!-- Password Creation and Updation -->

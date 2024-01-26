@@ -1,0 +1,94 @@
+
+<div class="container profileMainDiv">
+    <div class="row gutters profile">
+        <!-- Profile on left side -->
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 guttersInside leftSide">
+            <div class="card h-100">
+                <div class="card-body leftSideProfile" >
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="<?php echo $this->userData->getSelfDetails()['profilePic'];?>">
+                                <div onclick="showMenu.uploadDp()" class="editPhotos" id="editPhotos">
+                                    <i class="fa-solid fa-upload fa-xs"></i>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="user-details">
+                                  <h3 class="user-name"><?php echo  $this->userData->getSelfDetails()['name'];
+                                    if($canCreate == 'ACC'){
+                                      echo '<i class="fa-solid fa-check-circle fa-xs" style="margin-left: 10px; color:#3367d6;"></i>';
+                                    }else{
+                                      echo '<i class="fa-solid fa-check-circle fa-xs" style="margin-left: 10px;"></i>';
+                                    }
+                                    ?>
+                                  </h3>
+                                <a href="/u/<?php echo $this->userData->getSelfDetails()['username'];?>" class="profileActions">Public View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile on left side -->
+
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 guttersInside">
+            <div class="userContent">
+                <!-- Menus section -->
+                <div class="userContentMenus scrollbar-style">
+                    <a id="dashboardMenu" class="menus" onclick="stylePage.updateMenus('')" href="#">Dashboard</a>
+                    <?php
+                        if($this->userData->userLogged && $this->userData->adminLogged){
+                            echo <<<HTML
+                            <a id="adminPanelMenu" class="menus" onclick="stylePage.updateMenus('adminPanel')" href="#adminPanel">Admin Panel</a>
+                            HTML;
+                        }
+                    ?>
+                    <a id="mediaMenu" class="menus" onclick="stylePage.updateMenus('media')" href="#media"> Media Library</a>
+                    <!-- <a id="privacyMenu" class="menus" onclick="new showMenus()" href="?opt=privacy">Privacy & Security</a> -->
+                    <a id="accountMenu" class="menus" onclick="stylePage.updateMenus('account')" href="#account">Account Setting</a>
+
+
+                </div>
+                <!-- Menus section -->
+
+                <!-- Dashboard Section -->
+                <div id="dashboardDiv" class="dashboardDiv contentView" style="display:none">
+                    <?php
+                        include 'dashboard.html';
+                    ?>
+                </div>
+                <!-- Story Review Section -->
+                <?php
+                  if ($this->userData->userLogged && $this->userData->adminLogged) {
+                    echo <<<HTML
+                    <div id="adminPanelDiv" class="adminPanelDiv contentView" style="display:none">
+                      <div id="" class="adminPanelDivInside">
+                    HTML;
+                    include 'webstoryReview.html';
+                    echo <<<HTML
+                      </div>
+                    </div>
+                  HTML;
+                  }
+                  ?>
+                <!-- Media Library Section -->
+                <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
+                    <?php
+                        include 'media-library.html';
+                    ?>
+                </div>
+                <!-- Media Library Section -->
+
+
+                <!-- Accounts Related-->
+                <div id="accountDiv" class="accountDiv contentView" style="display:none">
+                    <?php
+                        include 'account-settings.html';
+                    ?>
+                </div>
+                <!-- Accounts Related-->
+            </div>
+        </div>
+    </div>
+</div>

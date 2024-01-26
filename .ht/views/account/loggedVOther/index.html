@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row gutters profile">
+
+        <!-- Profile on left side -->
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 guttersInside leftSide">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="<?php echo $this->userData->getOtherData('username', $this->otherUsername)['profilePic']?>">
+                            </div>
+                            <br>
+                            <div class="user-details">
+                                  <h3 class="user-name"><?php echo $this->userData->getOtherData('username', $this->otherUsername)['name'];
+                                    if($canCreate == 'ACC'){
+                                      echo '<i class="fa-solid fa-check-circle fa-xs" style="margin-left: 10px; color:#3367d6;"></i>';
+                                    }else{
+                                      echo '<i class="fa-solid fa-check-circle fa-xs" style="margin-left: 10px;"></i>';
+                                    }
+                                    ?>
+                                  </h3>
+                                <?php
+                                if($selfId == $otherID ){
+                                    echo <<<HTML
+                                    <a href="/account/" class="profileActions">Profile</a>
+                                    HTML;
+                                }elseif($this->userData->isFollowed($selfId, $otherID)){
+                                    echo <<<HTML
+                                    <span onclick="unfollow()" class="profileActions" id="followButton">Followed</span>
+                                    HTML;
+                                }else{
+                                    echo <<<HTML
+                                    <span onclick="follow()" class="profileActions" id="followButton">Follow</span>
+                                    HTML;
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile on left side -->
+
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 guttersInside">
+            <div class="userContent">
+                <!-- Menus section -->
+                <div class="userContentMenus scrollbar-style">
+                    <a id="dashboardMenu" class="menus" onclick="stylePage.updateMenus('')" href="#">Dashboard</a>
+                    <a id="detailsMenu" class="menus" onclick="stylePage.updateMenus('details')" href="#details">About</a>
+                    <a id="mediaMenu" class="menus" onclick="stylePage.updateMenus('media')" href="#media"> Media Library</a>
+                </div>
+                <!-- Menus section -->
+
+                <!-- Menus section -->
+
+                <!-- Dashboard Section -->
+                <div id="dashboardDiv" class="dashboardDiv contentView" style="display:none">
+                  <?php
+                  include 'dashboard.html';
+                  ?>
+                </div>
+                <!-- Dashboard Section -->
+
+                <!-- Details Section -->
+                <div id="detailsDiv" class="detailsDiv contentView" style="display:none">
+                    <?php
+                    include 'details.html';
+                    ?>
+                </div>
+                <!-- Details Section -->
+
+                <!-- Media Library Section -->
+                <div id="mediaDiv" class="mediaDiv contentView" style="display:none">
+                    <?php
+                        include 'media-library.html';
+                    ?>
+                </div>
+                <!-- Media Library Section -->
+
+
+            </div>
+        </div>
+    </div>
+</div>

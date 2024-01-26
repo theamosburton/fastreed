@@ -1,0 +1,161 @@
+<?php
+if($canCreate == 'REQ'){
+    echo <<<HTML
+    <div class="contentTopics resCreation row">
+        <div class="title col-12 mb-3">Creator Request</div>
+        <div class="ml-3 col-12 d-inline">
+          <div class="infor">A request been made for contribution to Fastreed by this user. Select any of one from the following</div>
+        </div>
+        <div class="ml-3 col-12 d-inline">
+         <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
+         <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
+        </div>
+
+    </div>
+HTML;
+}elseif($canCreate == 'REJ' || $canCreate == 'NOR'){
+  echo <<<HTML
+  <div class="contentTopics resCreation row">
+      <div class="title col-12 mb-3">Allow to write</div>
+      <div class="ml-3 col-12 d-inline">
+        <div class="infor">Would you like this user to contribute to the website or not</div>
+      </div>
+      <div class="ml-3 col-12 d-inline">
+       <span  id="requested" class="responseButton ACCbutton" onclick="responseCreation('ACC')">Accept</span>
+       <span  id="rejected" class="responseButton REJbutton" onclick="responseCreation('REJ')">Reject</span>
+      </div>
+  </div>
+HTML;
+}
+?>
+
+<div class="contentTopics resCreation row webstoriesDiv">
+    <div class="mtitle mb-3">
+
+        <?php
+        if($canCreate == 'ACC'){
+            echo <<<HTML
+            <div>
+                <span id="reqCreation" class="reqCreationButton" onclick="InitializeWebstory('admin')">Create New Story &nbsp;&nbsp;<i class="ml-1 fa fa-solid fa-square-plus"></i>
+                </span>
+            </div>
+            HTML;
+        }else{
+            echo <<<HTML
+            <div>
+                <span>Web Stories</span>
+            </div>
+            HTML;
+        }
+        ?>
+    </div>
+
+
+
+
+
+        <?php
+    // Title = stories[i][8];
+    // data = stories[i][7]
+    // access = stories[i][6]
+    // status = stories[i][5]
+    // storyID = stories[i][1]
+    // personID = stories[i][0]
+
+    $webstories = array();
+
+    $stories = $this->getStoriesData->getAllData($this->userData->getOtherData('username', $this->otherUsername)['UID']);
+    $length = count($stories);
+    for($i=0; $i<$length; $i++){
+        $webstoryData = json_decode($stories[$i][7], true);
+        $storyStatus = $stories[$i][5];
+        if($storyStatus == 'published'){
+          $URL = $webstoryData['metaData']['url'];
+          $URL = '/webstories/'.$URL;
+          $func = "viewStory('$URL')";
+          $statIcon = '<i class="fa-solid fa-earth-asia" style="color:#13c013;"></i>';
+        }else{
+          $func = "";
+            $statIcon = '<i class="fa-solid fa-floppy-disk"></i>';
+        }
+        if(!isset($webstoryData['layers']['L0']['media']['url']) || empty($webstoryData['layers']['L0']['media']['url']) || $webstoryData['layers']['L0']['media']['url'] == 'default'){
+            $setUrl = '/assets/img/nomedia.png';
+        }else{
+            $setUrl = $webstoryData['layers']['L0']['media']['url'];
+        }
+        if(!empty($webstoryData['metaData']['title'])){
+            $title = $webstoryData['metaData']['title'];
+        }else{
+            $title = $stories[$i][8];
+        }
+        $webstories[$i] = '
+        <div class="webstory" id="webstory'.$i.'">
+            <div class="background" style="background-image: url(' . $setUrl . ');">
+                <div class="storyOverlay"></div>
+                <div class="title">' . $title . '</div>
+
+            </div>
+            <div class="options">
+                <div class="edit" onclick="editStory(\'' . $stories[$i][1] . '\', \'' . $this->otherUsername . '\')"> <i class="fa-solid fa-pen-to-square" style="color:blue;"></i></div>
+                <div class="view" onclick="' . $func . '"> <i class="fa fa-paper-plane" style="color:blue;"></i></div>
+                <div class="delete" onclick="deleteStory(\'' . $stories[$i][1] . '\', \'' . $i . '\')"><i class="fa fa-trash" style="color:#d95a3e;"></i> </div>
+                <div class="storyOptions"> '.$statIcon.'</div>
+            </div>
+        </div>';
+    }
+
+    $webstories = array_reverse($webstories);
+    if(count($webstories) <= 0){
+        echo <<<HTML
+        <div class="noUpload">
+            <div><i class="fa fa-circle-exclamation fa-xl"></i></div>
+            <div> <p>Nothing to display</p></div> </div>
+        HTML;
+    }else{
+        echo <<<HTML
+        <div class="webstories">
+        HTML;
+        for($j=0; $j<count($webstories); $j++){
+            echo $webstories[$j];
+        }
+        echo <<<HTML
+        </div>
+        HTML;
+    }
+
+    ?>
+
+</div>
+
+
+
+
+Title: "7 Lifestyle Tips for Better Health: A Quick Guide"
+
+1. The Power of Daily Rituals
+
+Incorporate daily rituals like morning walks and nutritious breakfasts to boost your energy and start your day positively.
+
+2. From Fast Food to Farm-to-Table
+
+Swap processed foods for locally-sourced, organic produce to enjoy healthier meals and a deeper appreciation for wholesome food.
+
+3. Rediscovering Nature's Healing Touch
+
+Spend time in nature through activities like hiking and gardening to reduce stress and improve your mood.
+
+4. Finding Mindfulness through Meditation
+
+Practice daily meditation to enhance your mental health, reduce stress, and find inner peace.
+
+5. The Joy of Physical Activity
+
+Discover the benefits of regular physical activity, such as dancing or hiking, to improve fitness and boost your mood.
+
+6. The Support of a Healthy Community
+
+Build a supportive health-focused community for motivation and accountability on your wellness journey.
+
+7. The Transformative Power of Sleep
+
+Prioritize quality sleep by creating a relaxing bedtime routine, reducing screen time before sleep, and maintaining a consistent sleep schedule for better physical and mental health.

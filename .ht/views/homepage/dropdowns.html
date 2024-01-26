@@ -1,0 +1,161 @@
+			    <!-- Notifications -->
+				<div class="dropdowns" id="noti-nav" style="display:none">
+					<div class="menu-head noti-head">
+						<span class="name">Notifications</span>
+					</div>
+					<div class="notifications scrollbar-style" id="notifications">
+					    <div  class="spinner" id="notiSpinner">
+						</div>
+					</div>
+				</div>
+				<!-- ******************************************** Notifications ********************************************** -->
+
+				<!-- Accounts -->
+				<div class="dropdowns" id="accounts" style="display:none">
+						<?php
+						// Logged Users
+					if ($this->whoAmI != 'Anonymous') {
+					echo '  <div class="profile-top">
+                                <div class="profile-info">
+                                    <div class="image-div">
+                                        <img id="profile-image" src="'.$this->userData->getSelfDetails()['profilePic'].'">
+                                    </div>
+                                    <div class="info-div">
+                                        <div id="myName">'.$this->userData->getSelfDetails()['name'].'</div>
+                                        <div id="myEmail">'.$this->userData->getSelfDetails()['username'].'</div>
+                                    </div>
+                                </div>
+
+                                <a href="/account/" class="menus">
+									<i class=" left fa fa-table-columns"></i>
+                                    <span>Dashboard</span>
+								</a>
+
+								<a href="/account/#media" class="menus">
+                                    <i class="left fa fa-light fa-photo-film"></i>
+									<span>Media Library</span>
+                                </a>
+
+                                <a href="/account/#account" class="menus">
+                                    <i class="left fa fa-gear"></i>
+                                    <span>Account settings</span>
+								</a>
+                            </div>
+
+							<div class="profile-bottom">
+								<div class="menus" id="logout" onclick="logout()">
+									<i class="left fa fa-right-from-bracket"></i>Log Out
+								</div>
+						    </div>'."\n";
+						}else {
+							echo
+							'<div class="non-logged-account">
+								<div class="menu-head">
+									<span class="name">Login or Create Account</span>
+								</div>
+								<div class="signInWith">
+									<div id="g_id_onload"
+										data-client_id="878548651441-q7db04pmge7g6vlcieepnr21j9mkj2iu.apps.googleusercontent.com"
+										data-context="use"
+										data-ux_mode="popup"
+										data-callback="onGoogleSignIn"
+										data-auto_prompt="false">
+									</div>
+
+									<div id="g_id_signin menus" class="g_id_signin"
+										data-type="standard"
+										data-shape="pill"
+										data-theme="filled_black"
+										data-text="continue_with"
+										data-size="large"
+										data-logo_alignment="left"
+										data-width="290">
+
+									</div>
+
+								<a id="contEmail" class="continueEmail" href="account/sign/index.php"> <i class="left fa fa-envelope"></i> Continue with email</a>
+								</div>
+
+							</div>'."\n";
+						}
+						?>
+				        </div>
+				<!--****************************** Accounts **************************** -->
+
+				<!-- Admin Options -->
+
+				<?php
+				if($this->whoAmI == 'Admin'){
+					$refresh =  <<<HTML
+										<div id="refStyle" class="menus" onclick="refreshCss()">
+											<div  class="spinner" id="RSpinner"></div>
+											<i id="RefreshIcon" class="left fa fa-rotate"></i>
+											<span>Refresh Style </span>
+										</div>
+										<div id="refHard" class="menus" onclick="hardRefresh()">
+											<div  class="spinner" id="HRSpinner"></div>
+											<i id="HPicon" class="left fa fa-code-pull-request" alt="s"></i>
+											<span> Hard Pull</span>
+										</div>
+								HTML."\n";
+				}
+
+				if($this->whoAmI == 'Admin'){
+					echo <<<HTML
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Advance Options</span>
+								</div>
+								$refresh
+								<a href="/account/#adminPanel" class="menus">
+									<i class="left fa fa-gear"></i>
+									<span>Admin Panel</span>
+								</a>
+							</div>
+						HTML."\n";
+				}elseif($this->whoAmI != 'Anonymous'){
+					echo <<<HTML
+							<div class="dropdowns" id="advOptions" style="display:none">
+								<div class="menu-head">
+									<span class="name">Advance Options</span>
+								</div>
+								<a href="" class="menus">
+									<i class="left fa fa-message"></i>
+									<span>Feedbacks</span>
+								</a>
+							</div>
+					HTML."\n";
+				}
+				?>
+				<!-- ********************* Admin Options ************************ -->
+
+
+				<!-- Settings-->
+				<div class="dropdowns" id="settings" style="display:none">
+					<div class="menu-head">
+						<span class="name">Settings</span>
+					</div>
+					<div class="menus settings" onclick="toggleMode()">
+						<i class="left fa fa-circle-half-stroke"></i>
+						<span> Dark Mode </span>
+						<i class="right fa fa-solid fa-toggle-on fa-lg"  id="toggleMode"></i>
+					</div>
+					<a href="/sitemap.xml" class="menus settings">
+						<i class="left fa-solid fa-network-wired"></i>
+						<span>Sitemaps</span>
+					</a>
+					<a href="/about/" class="menus settings">
+						<i class="left fa fa-info-circle"></i>
+						<span>About Fastreed</span>
+					</a>
+
+					<a href="/privacy-policy/" class="menus settings">
+						<i class="left fa fa-file-circle-check"></i>
+						<span>Privacy ploicy</span>
+					</a>
+					<a href="/terms-of-services/" class="menus settings">
+						<i class="left fa fa-file-circle-check"></i>
+						<span>Terms of Services</span>
+					</a>
+				</div>
+				<!-- ************************* Settings ************************** -->

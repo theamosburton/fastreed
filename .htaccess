@@ -1,0 +1,24 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/account/index\.php$
+RewriteRule ^u/([^/]+)/?$ /account/index.php?u=$1 [L,QSA]
+RewriteRule ^uploads/([^/]+)/([^/]+)\.([^/]+)$ /.ht/pages/uploads/?type=$1&ID=$2&EXT=$3 [L]
+
+RewriteRule ^webstories/([^/]+)$ /.ht/pages/showStories/?url=$1 [L]
+RewriteRule ^webstories/([^/]+)/$ /.ht/pages/showStories/?url=$1 [L]
+RewriteRule ^webstories/([^/]+)\.([^/]+)$ /.ht/pages/showStories/?url=$1 [L]
+RewriteRule ^webstories/([^/]+)/([^/]+)$ /.ht/pages/showStories/?url=$1&username=$2 [L]
+
+RewriteRule ^sitemap.xml$ /.ht/pages/sitemap/index.php [L]
+RewriteRule ^sitemap_main.xml$ /.ht/pages/sitemap/main.php [L]
+RewriteRule ^sitemap_webstories.xml$ /.ht/pages/sitemap/stories.php [L]
+RewriteRule ^sitemap_authors.xml$ /.ht/pages/sitemap/authors.php [L]
+RewriteRule ^sitemap_users.xml$ /.ht/pages/sitemap/users.php [L]
+
+RewriteRule ^channel$ /.ht/pages/channels/selfVisited/ [L]
+RewriteRule ^channel/$ /.ht/pages/channels/selfVisited/ [L]
+RewriteRule ^channel/([^/]+)$ /.ht/pages/channels/otherVisitedChannel/?channelUrl=$1 [L]
+
+ErrorDocument 404 /error/404.html

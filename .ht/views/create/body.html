@@ -1,0 +1,241 @@
+<body>
+  <div class="altertContainer" style="display:none;">
+    <div class="altertDiv">
+
+    </div>
+  </div>
+    <div class="editContainer">
+        <!-- Left Section -->
+        <div class="sections leftSection" id="leftSection">
+            <div class="uploadsDiv" id="uploadDiv">
+                <div class="uploadHead">
+                    <div class="top">
+                        <div class="uploadsTitle">Media Library</div>
+                            <div class="lefthideMe" id="lefthideMe" onclick="hideSection('leftSection')">
+                                <i class="fa-solid fa-x whatIcon"></i>
+                            </div>
+                        </div>
+                    <div class="refreshUpload" >
+                        <div class="uploadNew" id="uploadNew">
+                            <div>
+                                <label for="uploadNewMedia">Upload New</label>
+                                <input onchange="new uploadMedia()" type="file" id="uploadNewMedia" hidden="">
+                                <i class="fa fa-plus-square"></i>
+                            </div>
+                        </div>
+                        <div class="refreshDiv">
+                            <i onclick="fetchMultimedia.fetchUploads()" class="fa-solid fa-arrows-rotate" id="rotateRefresh"></i>
+                        </div>
+                    </div>
+                    <div class="uploadingBar" id="uploadingBar" style="display:none">
+                        <div class="uploadMessage" id="uploadMessage"></div>
+                        <div class="uploadProgress" id="uploadProgress" >
+                            <div id="progress" style="display:none"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uploads" id="uploads">
+                    <!-- Uploads will be set here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="hideShow hideShowLeft" id="hsLeft">
+            <i class="fa-solid fa-arrow-up-from-bracket whatIcon" onclick="showSection('leftSection', 'lefthideMe')"></i>
+
+        </div>
+        <!-- Left Section -->
+
+        <!-- Editor Section -->
+        <div class="sections editorSection">
+            <!-- <div class="layersNumber" id="layerCount">1/1</div> -->
+
+            <div class="editorNav">
+                <div class="navs backArrow"  onclick="editor.moveBackward()"> <i id="backwardIcon" class="fa-sharp fa-solid fa-angle-left"></i> </div>
+                <div class="navs minus" id="minusIcon" onclick="editor.deleteLayer()"><i class="fa fa-minus-circle"></i></div>
+                <div class="navs deleteAdd" id="deleteMedia"><i class="fa-regular fa-trash fa-2x"></i></div>
+                <div class="navs frontPlus" id="plusIcon" onclick="editor.createNewLayer()" ><i class="fa fa-plus-circle"></i></div>
+                <div class="navs frontArrow"  onclick="editor.moveForward()"><i id="forwardIcon" class="fa-sharp fa-solid fa-angle-right"></i></div>
+            </div>
+            <div class="navSection" id="navBars">
+             </div>
+            <div class="editorBox" id="editTab">
+            </div>
+        </div>
+        <!-- Editor Section -->
+
+        <!-- Right Section -->
+        <div class="hideShow hideShowRight" id="hsRight" onclick="showSection('rightSection', 'righthideMe')">
+            <i class="fa-solid fa-bars whatIcon"></i>
+        </div>
+        <div class="sections rightSection" id="rightSection">
+            <div class="rightDiv">
+                <div class="rightHead">
+                    <div class="top">
+                        <div class="righthideMe" id="righthideMe" onclick="hideSection('rightSection')">
+                            <i class="fa-solid fa-x whatIcon"></i>
+                        </div>
+                        <div class="buttonsDiv">
+                            <div class="buttons" onclick="showPreview()"> Preview</div>
+                            <div class="buttons" id="saveStory" onclick="editor.saveStory()">Save</div>
+                            <div class="buttons" id="publishStory" onclick="editor.publishStory(true)">Publish</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="selectedObject" class="selectedObject" >
+                  <!-- Navs -->
+                    <div class="objectHead" id="objectHead">
+                        <span class="active" id="layerNumber" onclick="openOptions('layers')" >Layer 1</span>
+                        <span class="" id="metaDataName" onclick="openOptions('metadata')">Metadata</span>
+                        <span class="" id="moreInformation" onclick="openOptions('moreInfo')">More</span>
+                    </div>
+                    <!-- Navs -->
+
+                    <!-- Meta Data -->
+                    <div class="objectOptions" id="metaData" style="display: none;">
+                        <div class="objectOptionsbody">
+                          <div class="optionsDIv" id="">
+                            <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                <span>Story Title</span>
+                                <!-- <i class="upDownIcon fa fa-caret-right"></i> -->
+                            </span>
+                              <div class="options">
+                                  <div>
+                                      <span class="additional" id="titleError">Min 7 words required</span>
+                                      <input onkeyup="edits.updateMetaData('')" class="value inputText text" type="text" id="storyTitle" placeholder="Add Title" value="">
+                                  </div>
+                              </div>
+                          </div>
+                            <div class="optionsDIv" id="">
+                              <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                  <span>URL</span>
+                                  <!-- <i class="upDownIcon fa fa-caret-right"></i> -->
+                              </span>
+                                <div class="options">
+                                    <div>
+                                        <span class="additional" id="urlError">Min 20 chars required</span>
+                                        <input onkeyup="edits.updateMetaData('')" class="value inputText text" type="text" id="storyUrl" placeholder="type-your-webstory-link" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="optionsDIv" id="">
+                              <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                  <span>Description </span>
+                                  <!-- <i class="upDownIcon fa fa-caret-right"></i> -->
+                              </span>
+                                <div class="options">
+                                    <div>
+                                        <span class="additional" id="descriptionError"> Min 5 words required</span>
+                                        <textarea onkeyup="edits.updateMetaData('')" class="value inputText text" name="" id="storyDescription" cols="22" placeholder="Describe your story" value=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="optionsDIv" id="">
+                              <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                    <span>Keywords </span>
+                                  <!-- <i class="upDownIcon fa fa-caret-right"></i> -->
+                              </span>
+                                <div class="options">
+                                    <div>
+                                       <span class="additional" id="keywordsError"> Min 5 words required</span>
+                                        <textarea onkeyup="edits.updateMetaData('')" class="value inputText text" name="" id="storyKeywords" cols="22" placeholder="Keywords" value=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="optionsDIv" id="">
+                              <span class="objectName" onclick="edits.expandStaticOptions('relatedStorySection')">
+                                    <span>Category </span>
+                                  <!-- <i class="upDownIcon fa fa-caret-right"></i> -->
+                              </span>
+                                <div class="options">
+                                    <div>
+                                         <span class="additional" id="categoriesError"> Required</span>
+                                        <br>
+                                        <select class="value inputText" id="storyCategory" onchange="edits.updateMetaData('')">
+                                          <option value="">Select</option>
+                                          <option value="Lifestyle">Lifestyle</option>
+                                          <option value="Sports">Sports</option>
+                                          <option value="Business">Business</option>
+                                          <option value="Travel">Travel</option>
+                                          <option value="Comedy">Comedy</option>
+                                          <option value="Romance">Romance</option>
+                                          <option value="Health">Health</option>
+                                          <option value="Books">Books</option>
+                                          <option value="Fashion">Fashion</option>
+                                          <option value="History">History</option>
+                                          <option value="Finance">Finance</option>
+                                          <option value="Technology">Science</option>
+                                          <option value="Biography">Biography</option>
+                                          <option value="Self Care">Self Care</option>
+                                          <option value="Parenting">Parenting</option>
+                                          <option value="Political">Political</option>
+                                          <option value="Education">Education</option>
+                                          <option value="Investment">Investment</option>
+                                          <option value="Technology">Technology</option>
+                                          <option value="Photography">Photography</option>
+                                          <option value="Social Media">Social Media</option>
+                                          <option value="Entertainment">Entertainment</option>
+                                          <option value="Facts and Guides">Facts and Guides</option>
+                                          <option value="Self Improvement">Self Improvement </option>
+                                          <option value="Space and Astronomy">Space and Astronomy</option>
+                                            <option value="Movies and Webseries">Movies & Webseries</option>
+                                          <option value="Relationships and Dating">Relationships and Dating </option>
+
+                                          <option value="NIL">Not in the list</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:100px;padding:10px;">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Meta Data -->
+
+                    <!-- More Information -->
+                    <div class="objectOptions" id="moreInfo" style="display: none;">
+                        <div class="objectOptionsbody">
+                            <div class="optionsDIv relatedStorySection">
+                              <span class="objectName" onclick="edits.expandMoreOptions('relatedStorySection')">
+                                  <span>Related Story (optional)</span>
+                                  <i class="upDownIcon fa fa-caret-right"></i>
+                              </span>
+                              <div class="options" style="display:none">
+                                  <div>
+                                      <input onkeyup="editor.selectRelatedStoryWithLink(this)" class="value inputText text" type="text" id="relatedStoryLink" placeholder="https://www.fastreed.com/webstories/your-webstory-link" value="">
+                                      <div class="storiesSectionError" id="storiesSectionError" style="display:none;">
+                                        No Related Story Found!
+                                      </div>
+                                      <div id="relatedStoriesSelection" style="display:none;">
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="optionsDIv relatedStorySection">
+                              <span class="objectName">
+                                  <span>Self Promotion</span>
+                                  <i class="upDownIcon fa fa-caret-down"></i>
+                              </span>
+                              <div class="options" id="togglePromotion">
+                                <div class="div"  onclick="edits.togglePromotion(this)">
+                                  <span>Disabled</span>
+                                  <i class="toggleText disabledText fa fa-solid fa-lg fa-toggle-off"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <div style="height:100px;padding:10px;">
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- More Information -->
+
+                    <div class="objectOptions" id="objectOptions">
+                    </div>
+                </div>
+            </div>
+          <!-- Right Section -->
+        </div>
+</body>
